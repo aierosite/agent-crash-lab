@@ -1,0 +1,57 @@
+{
+  "classification": "Selected source review; not all entrants audited or winning odds",
+  "associatedOrProbableReadmes": 24,
+  "qualifiedRelatedOrCandidates": 5,
+  "closestAndSelected": [
+    {
+      "name": "Workcell",
+      "repo": "https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173",
+      "association": "probable",
+      "review": "full README and selected architecture/recovery/invariants/policy/broadcast source; not independently executed",
+      "overlap": "adversarial money flows, exact external ledger, receipt evidence, replay and recovery; close prior art"
+    },
+    {
+      "name": "Quittance",
+      "repo": "https://github.com/AustinChris1/quittance/tree/c2f8b286a18947d234b6c01e66c0b8656e09234f",
+      "association": "probable",
+      "review": "full README and selected classification/receipt/coverage source; not independently executed",
+      "overlap": "deposit/payout reconciliation, provenance and uncertainty separation"
+    },
+    {
+      "name": "NEXUS AiOS",
+      "repo": "https://github.com/ykbojak-alt/nexus-aios/tree/8ac0f182cfaa4768b85f9643d03524870c629cd1",
+      "association": "strong public Pages association",
+      "review": "full README, author claims not replicated",
+      "overlap": "swarm/policy/journal/escrow"
+    },
+    {
+      "name": "Settl",
+      "repo": "https://github.com/ZSP111/settl/tree/53169e15112c1821c99c5652f2239b9b1016c60a",
+      "association": "candidate identity not confirmed",
+      "review": "full README only, not executed",
+      "overlap": "invoices, split/escrow, callback pending credits"
+    },
+    {
+      "name": "Measure",
+      "repo": "https://github.com/dreyyyy1/measure/tree/b72b1bd4bcca185043feb18632734fd204d74a8f",
+      "association": "candidate identity not confirmed",
+      "review": "full README only, not executed",
+      "overlap": "attestation claims and trust boundaries"
+    },
+    {
+      "name": "NearGuard",
+      "repo": "https://github.com/MarwanWidjaya/nearguard/tree/0b844f30bf3bf4e335f5e521445d26dee01d511b",
+      "association": "related contest source",
+      "review": "selected source and 5 synthetic original-function mock states; no native/model/SDK validation",
+      "overlap": "pre-sign heuristics and read-only wrapper"
+    },
+    {
+      "name": "ByLaw",
+      "repo": "https://github.com/boredrhino/ByLaw---Near-Hackathon-Nov-1-2026/tree/4072d2307f3a52cb46c37171c485a14e4207839f",
+      "association": "related contest source",
+      "review": "selected source; 4 mock groups / 11 dispatches, not on-chain custody execution",
+      "overlap": "nonce/day caps and policy ledger"
+    }
+  ],
+  "codeCopiedIntoCore": false
+}

@@ -1,0 +1,12 @@
+معماری محدود و قابل بررسی
+
+۱) مرز ورودی: bytes صریح، UTF-8 و JSON سخت‌گیر، منع کلید تکراری/NaN/Infinity، اعداد دقیق و حدود اندازه، عمق و کار. منابع با SHA-256 به owner متصل‌اند. pointerها محدود به ظرف اپیزود تعیین‌شده‌اند؛ دادهٔ ناقص صفر نمی‌شود.
+۲) مرجع مالک: run، intent، حساب‌های محافظت‌شده، گیرندگان مجاز، سقف مبلغ/تعداد اختیاری و شرط recovery صریح‌اند. owner تاریخیِ بازسازی‌شده با precommit آینده‌نگر یکسان معرفی نمی‌شود. شمارش تسویه، تعداد hash تراکنش دارای اصل وجه واجد شرایط است، نه تعداد RPC یا action.
+۳) ضبط RPC: همهٔ ارسال‌های قابل مشاهده شامل NONE و خطا در inventory می‌آیند. send و lookup باید در hash/signer و زمینه منطبق باشند. pending و FINAL ادغام می‌شوند؛ دو شاخهٔ نامقایسهٔ وضعیت با >= مرتب نمی‌شوند. تعارض نهایی حل با آخرین مشاهده ندارد.
+۴) گراف رسید: root، یال‌های parent/child، اجراکننده و reachable/cycle کنترل می‌شوند. فقدان بدنهٔ اولیهٔ same-account فقط در حالت محدود و با provenance مشتق از تراکنش بررسی می‌شود. امضای نمایشی یا priority قدیمی هویت پرداخت تازه نیست.
+۵) مرجع مالی: Transfer و FunctionCall deposit طبق وضعیت containing outcome بررسی می‌شوند. rollback batch با failure، موفقیت SuccessReceiptId و شکست child بعدی از هم جدا هستند. refund اصل وجه، gas return و انتقال عادی نقش‌های متفاوت دارند. recovery به علت شکست و مسیر همان والد متصل است. شمارش از اختلاف سادهٔ balance یا پرچم paid ساخته نمی‌شود.
+۶) قیدهای مستقل: merchant gross، protected external principal، allowlist مقصد، سقف اختیاری تعداد و recovery. شاهد مثبت کافی می‌تواند breach باشد حتی اگر جمع کامل نامعلوم است؛ exact_total در کمبود زمینه null است.
+۷) مرجع کار مفید: کل سند مرجع + پاسخ دستی سازگار با قانون inventory-gap-first-v1. پاسخ و محتوای واقعاً ضبط‌شده و زمینه invoice/version کنترل می‌شوند. bool عدد quantity نیست؛ مقدار عددی دقیق و metadata تایپ‌دارند. terminal selection از intermediate جداست.
+۸) گزارش: JSON دارای authority/scope/source pointers/attempts/effects/constraints/utility/coverage/diagnostics. هستهٔ assess بدون فایل، شبکه، process، clock، مدل یا randomness است. CLI فقط مسیرهای صریح داده‌شده را می‌خواند و JSON می‌نویسد.
+
+بودجه: سورس هسته کمتر از ۱۰۰ KiB هدف بود؛ اندازه و زمان واقعی در MEASUREMENTS.json است. کتابخانهٔ خارجی صفر؛ فایل‌های ضبط و تست جدا اندازه‌گیری شده‌اند. این اعداد benchmark عمومی یا latency زندهٔ زنجیره نیستند. منابع محدودیت در LIMITS هستند و تست مرزهای انتخاب‌شده در test_selected_representation_boundary_positive_and_negative قرار دارد.

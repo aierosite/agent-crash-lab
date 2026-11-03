@@ -1,0 +1,10 @@
+Code, tests and owner manifests were freshly authored after the implementation
+gate. No competitor or pre-gate lab runtime source is imported by the core.
+evidence/ contains controlled local observation JSON and declared references,
+not third-party source or public network authentication. Historical controlled
+accounts/keys inside signed transaction public fields are not custody secrets.
+verification/reserved-test-seed.bin is a disclosed test-data seed, not a key.
+MIT LICENSE applies to authored code/docs/test material. JSON protocol field
+names and public observations do not imply ownership of NEAR or third-party
+trademarks. No third-party executable, SDK, model weights, database or private
+account key is included. Prior-art links are references, not copied runtime.
