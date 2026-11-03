@@ -1,0 +1,341 @@
+{
+  "agent-leash-artifact": {
+    "intents": {
+      "AL01": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "AL02": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "AL03": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "AL04": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "balance-attribution": {
+    "intents": {
+      "OWNER-A": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "deleted-signer-refund": {
+    "intents": {
+      "DELETE-BOUNDARY": {
+        "merchant_gross": null,
+        "cap": "100000000000000000000000",
+        "merchant_status": "unresolved"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "function-deposit": {
+    "intents": {
+      "D01": {
+        "merchant_gross": "1000000000000000000000000",
+        "cap": "1000000000000000000000000",
+        "merchant_status": "within"
+      },
+      "D02": {
+        "merchant_gross": "0",
+        "cap": "1000000000000000000000000",
+        "merchant_status": "within"
+      },
+      "D03": {
+        "merchant_gross": "1000000000000000000000000",
+        "cap": "1000000000000000000000000",
+        "merchant_status": "within"
+      },
+      "D04": {
+        "merchant_gross": "0",
+        "cap": "2000000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "gas-key-refund": {
+    "intents": {
+      "GK01": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "GK02": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "intent-duplicate-0": {
+    "intents": {
+      "A": {
+        "merchant_gross": "200000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "B": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed",
+      "passed"
+    ]
+  },
+  "intent-duplicate-1": {
+    "intents": {
+      "A": {
+        "merchant_gross": "200000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "B": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed",
+      "passed"
+    ]
+  },
+  "merchant-utility-0": {
+    "intents": {
+      "FREE": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV1": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV2": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV3": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "failed",
+      "failed",
+      "failed",
+      "passed"
+    ]
+  },
+  "merchant-utility-1": {
+    "intents": {
+      "FREE": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV1": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV2": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "INV3": {
+        "merchant_gross": "0",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "failed",
+      "failed",
+      "failed",
+      "passed"
+    ]
+  },
+  "monetary-yield": {
+    "intents": {
+      "MY": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "none-ack": {
+    "intents": {
+      "NB01": {
+        "merchant_gross": null,
+        "cap": "100000000000000000000000",
+        "merchant_status": "unresolved"
+      },
+      "NB02": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "self-function-deposit": {
+    "intents": {
+      "SF01": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      },
+      "SF02": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "split-settlement": {
+    "intents": {
+      "A": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "success-receipt-id": {
+    "intents": {
+      "RETURN-FAILURE": {
+        "merchant_gross": "1000000000000000000000000",
+        "cap": "1000000000000000000000000",
+        "merchant_status": "within"
+      },
+      "RETURN-SUCCESS": {
+        "merchant_gross": "1000000000000000000000000",
+        "cap": "1000000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "zero-principal": {
+    "intents": {
+      "Z01": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      },
+      "Z02": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "failed-refund": {
+    "intents": {
+      "B01": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      },
+      "B02": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "refund-override": {
+    "intents": {
+      "DEFAULT": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      },
+      "OVERRIDE": {
+        "merchant_gross": "0",
+        "cap": "0",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": []
+  },
+  "native-naive": {
+    "intents": {
+      "A": {
+        "merchant_gross": "200000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "B": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "native-durable": {
+    "intents": {
+      "A": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "100000000000000000000000",
+        "cap": "100000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  }
+}

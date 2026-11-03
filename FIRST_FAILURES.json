@@ -1,0 +1,27 @@
+{
+  "classification": "First observed reserved failure preserved, followed by source-informed regression correction; no private-holdout score",
+  "originalBaseline": "26testmethods passed before seed exposure, initial23testmethods also passed; no first baseline failures hidden",
+  "firstReservedRun": "verification/reserved-first-run.json",
+  "firstExpectations": "verification/reserved-expected-before-first-evaluation.json",
+  "initialCoreSha256": "67f10f7ca08e17a87227c4da23b5f2883397a876d20f81734f616a8d10aca37e",
+  "firstReservedInvocations": 8,
+  "firstReservedMatchingInvocations": 7,
+  "failedCondition": "raw-missing-B-body",
+  "expected": "Bmerchantstatusunknown with no exacttotal; unaffectedAfinancialbreach remains",
+  "observed": "Bmerchantstatusunsupported with no exacttotal; unaffectedAbreach remained correct",
+  "cause": "When a system child's parent body was missing, generic unclassified-system handling set unsupported even though the problem was absent causal context, not known unsupported origin semantics",
+  "correction": "Missing parent body/outcome yields missing_system_parent_context andunknown dependentconstraint. Knownunsupported/unclassifiedorigins stillunsupported. No value fabricated andno complete-cleanresult introduced.",
+  "preservedPreFixSources": [
+    "verification/core-before-reserved-fix.py.txt",
+    "verification/tests-before-reserved-fix.py.txt",
+    "verification/verifier-before-reserved-fix.py.txt"
+  ],
+  "laterClassification": "All later reruns after this exposure/correction are regression, not first-pass heldout performance. Original first-run data and original source/test freeze retained.",
+  "historicalResearchFailure": "Separate pre-product research had one original implicit-account fee prediction mismatch outof56nativegroups plus preserved research-reader/checkpoint failures. They are not finalkernelpasses or undisclosed productnative failures.",
+  "workbenchFirstIntegrationFailure": {
+    "report": "verification/workbench-tests-first-run.json",
+    "error": "Windows client connection aborted before reading415error for unread POSTbody",
+    "correction": "Drain only small bounded known rejected bodies before error response; unauthenticated large bodies are not parsed/assessed",
+    "laterRuns": "Source-informed regression, not first-pass holdout"
+  }
+}

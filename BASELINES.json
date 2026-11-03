@@ -1,0 +1,154 @@
+[
+  {
+    "name": "agent-leash-artifact",
+    "task": "tasks/agent-leash-artifact.json",
+    "sources": {
+      "recording": "evidence/agent-leash-artifact-observation.json",
+      "basis": "evidence/agent-leash-artifact-precommit.json"
+    }
+  },
+  {
+    "name": "balance-attribution",
+    "task": "tasks/balance-attribution.json",
+    "sources": {
+      "recording": "evidence/balance-attribution-observation.json",
+      "basis": "evidence/balance-attribution-precommit.json"
+    }
+  },
+  {
+    "name": "deleted-signer-refund",
+    "task": "tasks/deleted-signer-refund.json",
+    "sources": {
+      "recording": "evidence/deleted-signer-refund-observation.json",
+      "basis": "evidence/deleted-signer-refund-precommit.json"
+    }
+  },
+  {
+    "name": "function-deposit",
+    "task": "tasks/function-deposit.json",
+    "sources": {
+      "recording": "evidence/function-deposit-observation.json",
+      "basis": "evidence/function-deposit-precommit.json"
+    }
+  },
+  {
+    "name": "gas-key-refund",
+    "task": "tasks/gas-key-refund.json",
+    "sources": {
+      "recording": "evidence/gas-key-refund-observation.json",
+      "basis": "evidence/gas-key-refund-precommit.json"
+    }
+  },
+  {
+    "name": "intent-duplicate-0",
+    "task": "tasks/intent-duplicate-0.json",
+    "sources": {
+      "recording": "evidence/intent-duplicate-observation.json",
+      "basis": "evidence/intent-duplicate-precommit.json"
+    }
+  },
+  {
+    "name": "intent-duplicate-1",
+    "task": "tasks/intent-duplicate-1.json",
+    "sources": {
+      "recording": "evidence/intent-duplicate-observation.json",
+      "basis": "evidence/intent-duplicate-precommit.json"
+    }
+  },
+  {
+    "name": "merchant-utility-0",
+    "task": "tasks/merchant-utility-0.json",
+    "sources": {
+      "recording": "evidence/merchant-utility-observation.json",
+      "basis": "evidence/merchant-utility-precommit.json"
+    }
+  },
+  {
+    "name": "merchant-utility-1",
+    "task": "tasks/merchant-utility-1.json",
+    "sources": {
+      "recording": "evidence/merchant-utility-observation.json",
+      "basis": "evidence/merchant-utility-precommit.json"
+    }
+  },
+  {
+    "name": "monetary-yield",
+    "task": "tasks/monetary-yield.json",
+    "sources": {
+      "recording": "evidence/monetary-yield-observation.json",
+      "basis": "evidence/monetary-yield-precommit.json"
+    }
+  },
+  {
+    "name": "none-ack",
+    "task": "tasks/none-ack.json",
+    "sources": {
+      "recording": "evidence/none-ack-observation.json",
+      "basis": "evidence/none-ack-precommit.json"
+    }
+  },
+  {
+    "name": "self-function-deposit",
+    "task": "tasks/self-function-deposit.json",
+    "sources": {
+      "recording": "evidence/self-function-deposit-observation.json",
+      "basis": "evidence/self-function-deposit-precommit.json"
+    }
+  },
+  {
+    "name": "split-settlement",
+    "task": "tasks/split-settlement.json",
+    "sources": {
+      "recording": "evidence/split-settlement-observation.json",
+      "basis": "evidence/split-settlement-precommit.json"
+    }
+  },
+  {
+    "name": "success-receipt-id",
+    "task": "tasks/success-receipt-id.json",
+    "sources": {
+      "recording": "evidence/success-receipt-id-observation.json",
+      "basis": "evidence/success-receipt-id-precommit.json"
+    }
+  },
+  {
+    "name": "zero-principal",
+    "task": "tasks/zero-principal.json",
+    "sources": {
+      "recording": "evidence/zero-principal-observation.json",
+      "basis": "evidence/zero-principal-precommit.json"
+    }
+  },
+  {
+    "name": "failed-refund",
+    "task": "tasks/failed-refund.json",
+    "sources": {
+      "recording": "evidence/failed-refund-observation.json",
+      "basis": "evidence/failed-refund-precommit.json"
+    }
+  },
+  {
+    "name": "refund-override",
+    "task": "tasks/refund-override.json",
+    "sources": {
+      "recording": "evidence/refund-override-observation.json",
+      "basis": "evidence/refund-override-precommit.json"
+    }
+  },
+  {
+    "name": "native-naive",
+    "task": "tasks/native-naive.json",
+    "sources": {
+      "recording": "evidence/native-observation.json",
+      "basis": "evidence/native-precommit.json"
+    }
+  },
+  {
+    "name": "native-durable",
+    "task": "tasks/native-durable.json",
+    "sources": {
+      "recording": "evidence/native-observation.json",
+      "basis": "evidence/native-precommit.json"
+    }
+  }
+]

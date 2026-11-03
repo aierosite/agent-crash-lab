@@ -1,0 +1,72 @@
+"""Recheck recorded reserved native values and labelled synthetic variations.
+The seed is a disclosed random test seed, NOT an account/private key. Families
+were known before freeze; first instance exposure happened after actual source
+and baseline tests. No network, models or signing are used by this verifier.
+"""
+from pathlib import Path
+from datetime import datetime,timezone
+import argparse,copy,hashlib,hmac,importlib.util,json,time
+ROOT=Path(__file__).resolve().parent
+spec=importlib.util.spec_from_file_location('reserved_core',ROOT/'agent_crash_lab.py');core=importlib.util.module_from_spec(spec);spec.loader.exec_module(core)
+def rawinputs(taskfile,recordfile,basisfile):
+    return json.loads((ROOT/taskfile).read_text()),{'recording':(ROOT/recordfile).read_bytes(),'basis':(ROOT/basisfile).read_bytes()}
+def make_mutation(owner,sources,edit):
+    o=copy.deepcopy(owner);s=dict(sources);d=json.loads(s['recording']);c=d
+    for p in o['run']['capture']['pointer'].split('/')[1:]:c=c[int(p)] if isinstance(c,list) else c[p]
+    edit(c,o)
+    s['recording']=json.dumps(d,separators=(',',':')).encode();o['sources']['recording']=hashlib.sha256(s['recording']).hexdigest();o['authority']['kind']='counterfactual';o['authority']['note']='Explicit synthetic transform of a recorded source, not a new protocol history/signature or live model.'
+    return o,s
+def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--declare-before');parser.add_argument('--report');args=parser.parse_args()
+    seed=(ROOT/'verification/reserved-test-seed.bin').read_bytes();needhash='d25257243ddc65f32b77b07d0fa6c6ef9b878b691ba430c872c2600f7ff19ff6';assert hashlib.sha256(seed).hexdigest()==needhash
+    derive=lambda x:hmac.new(seed,x.encode(),hashlib.sha256).digest()
+    native=json.loads((ROOT/'evidence/reserved-native-precommit.json').read_text());no,ns=rawinputs('tasks/reserved-native.json','evidence/reserved-native-observation.json','evidence/reserved-native-precommit.json')
+    cases=[{'id':'native-three-intents','stratum':'3actualfreshownednativeTransfers+1repeatedquery, recordedreassessment','owner':no,'sources':ns,'expect':[{'constraint':x['intent']+'-merchant','exact':x['gross'],'lower_excess':x['excess'],'status':'breached' if int(x['excess'])>0 else 'within'} for x in native['expected']]}]
+    o,s=rawinputs('tasks/intent-duplicate-0.json','evidence/intent-duplicate-observation.json','evidence/intent-duplicate-precommit.json')
+    winner=derive('utility-winning-position')[0]%3;gap=1+derive('utility-positive-gap')[0]%50
+    labels=['sku-'+derive('utility-sku-'+str(i)).hex()[:10] for i in range(3)]
+    rows=[]
+    for i in range(3):
+        av=derive('utility-available-'+str(i))[0];rows.append({'sku':labels[i],'available':av,'forecast':av+(gap if i==winner else 0)})
+    invoice='inv-'+derive('utility-invoice').hex()[:12]
+    doc={'resource':'reserved-inventory','version':'reserved-v1','invoice':invoice,'source':'synthetic-declared-reference','rows':rows};answer={'sku':labels[winner],'units':gap}
+    for kind,expected in [('valid','passed'),('wrong-answer','failed'),('missing-answer','unknown'),('wrong-invoice','failed')]:
+        def edit(c,own,kind=kind):
+            own['utility']['required']=own['utility']['required'][:1];item=own['utility']['required'][0];item['expected_document']=copy.deepcopy(doc);item['expected_answer']=copy.deepcopy(answer)
+            actual=copy.deepcopy(doc);ans=copy.deepcopy(answer)
+            if kind=='wrong-invoice':actual['invoice']+='-wrong'
+            if kind=='wrong-answer':ans['units']+=1
+            obs=c['utilityObservations'][0];obs.update(invoice=invoice,requestedVersion='reserved-v1',httpStatus=200,responseUtf8=json.dumps(actual),scriptedAnswer=ans)
+            if kind=='missing-answer':del obs['scriptedAnswer']
+        oo,ss=make_mutation(o,s,edit);cases.append({'id':'utility-'+kind,'stratum':'explicitlysyntheticnewreference/actual-outputinput,noHTTP/model','owner':oo,'sources':ss,'utility_status':expected})
+    def reordered(c,own):
+        c['rpcObservations'].append(copy.deepcopy(c['rpcObservations'][10]))
+        for rec in c['rpcObservations']:
+            v=rec.get('response',{}).get('result')
+            if isinstance(v,dict) and 'receipts' in v:
+                v['receipts'].reverse();v['receipts_outcome'].reverse()
+    oo,ss=make_mutation(o,s,reordered);cases.append({'id':'raw-repeated-reordered','stratum':'syntheticstructurepreservingrecordtransform','owner':oo,'sources':ss,'expect':[{'constraint':'A-merchant','exact':'200000000000000000000000','status':'breached'},{'constraint':'B-merchant','exact':'100000000000000000000000','status':'within'}]})
+    def missing(c,own):
+        v=c['rpcObservations'][23]['response']['result'];v['receipts']=[x for x in v['receipts'] if x['receiver_id']!='receiver.callbacklab.near']
+    oo,ss=make_mutation(o,s,missing);cases.append({'id':'raw-missing-B-body','stratum':'syntheticmissingrequiredrecord','owner':oo,'sources':ss,'expect':[{'constraint':'A-merchant','status':'breached'},{'constraint':'B-merchant','status':'unknown'}]})
+    def conflict(c,own):
+        duplicate=copy.deepcopy(c['rpcObservations'][16]);v=duplicate['response']['result'];v['transaction']['nonce']+=1;c['rpcObservations'].append(duplicate)
+    oo,ss=make_mutation(o,s,conflict);cases.append({'id':'raw-conflicting-final-context','stratum':'syntheticcontradictoryproviderrecord,notauthenticresignedexecution','owner':oo,'sources':ss,'expect':[{'constraint':'A-merchant','status':'conflict'},{'constraint':'B-merchant','status':'within'}]})
+    declaration={'declaredAtUtc':datetime.now(timezone.utc).isoformat(),'classification':'Expected outcomes and input hashes prepared before this verifier invokes kernel; same-agent known-family reserved instances','seedSha256':needhash,'coreSha256':hashlib.sha256((ROOT/'agent_crash_lab.py').read_bytes()).hexdigest(),'winningPosition':winner,'referenceDocument':doc,'independentConstructedExpectedAnswer':answer,'nativeExpectedBeforeExecution':native['expected'],'cases':[{k:v for k,v in c.items() if k not in ['owner','sources']}|{'ownerSha256':hashlib.sha256(json.dumps(c['owner'],sort_keys=True).encode()).hexdigest(),'sourceSha256':{k:hashlib.sha256(b).hexdigest() for k,b in c['sources'].items()}} for c in cases]}
+    if args.declare_before:Path(args.declare_before).write_text(json.dumps(declaration,indent=2)+'\n')
+    results=[];start=time.perf_counter()
+    for c in cases:
+        report=core.assess(json.dumps(c['owner']).encode(),c['sources']);errors=[]
+        if report['invocation']['status']!='assessed':errors.append('invocation '+report['invocation']['status'])
+        else:
+            if 'utility_status' in c and report['utility']['required'][0]['status']!=c['utility_status']:errors.append('utility expected '+c['utility_status'])
+            for e in c.get('expect',[]):
+                actual=next(x for x in report['constraints'] if x.get('id')==e['constraint'])
+                for key,field in [('status','status'),('exact','exact_total'),('lower_excess','lower_excess')]:
+                    if key in e and actual.get(field)!=e[key]:errors.append(e['constraint']+' '+field)
+        results.append({'id':c['id'],'stratum':c['stratum'],'matched':not errors,'errors':errors,'report':report})
+    out={'atUtc':datetime.now(timezone.utc).isoformat(),'classification':'Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance','coreSha256':declaration['coreSha256'],'verifierSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'kernelInvocations':len(cases),'nativeConditions':3,'syntheticConditions':7,'successful':all(x['matched'] for x in results),'elapsedSeconds':time.perf_counter()-start,'results':results,'postExposureCoreChanges':declaration['coreSha256']!=native['sourceFreeze']['coreSha256']}
+    if args.report:Path(args.report).write_text(json.dumps(out,indent=2)+'\n')
+    print(json.dumps({k:out[k] for k in ['successful','kernelInvocations','nativeConditions','syntheticConditions','elapsedSeconds','coreSha256']}))
+    return 0 if out['successful'] else 1
+if __name__=='__main__':raise SystemExit(main())

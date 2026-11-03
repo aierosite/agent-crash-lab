@@ -1,0 +1,2 @@
+# Optional Linux native experiment only. Core/workbench require no packages.
+cryptography>=42,<47
