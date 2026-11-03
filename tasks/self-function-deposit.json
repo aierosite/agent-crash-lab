@@ -1,0 +1,123 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "76bbd2584ad27624324f73af43d657b4492ad1b6573b704063d38beff309679c",
+    "basis": "9f41daf413db91df75443df7d01ffa07c6583b551bccc2631ab27a1e77fbdf56"
+  },
+  "run": {
+    "id": "self-function-deposit",
+    "chain_id": "test-chain-yNtqb",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": ""
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "SF01",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "vault.callbacklab.near"
+    },
+    {
+      "id": "SF02",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "vault.callbacklab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-3",
+      "tx_hash": "2iBqhh9Cp8srpE72Gd8vQYGtthxqpVrb8xV5H9da8L3X",
+      "role": "task",
+      "intent": "SF01",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/rpcObservations/3"
+          },
+          "packet_sha256": "e9c7f3159fc8f5e78f97e57f5aaa3abf481b5d35b27d2004816e169f30e39819"
+        }
+      ]
+    },
+    {
+      "id": "submission-10",
+      "tx_hash": "B4DZBjydbs6CJp45BWQgPUuP42sNvsayXMthznt8kDEj",
+      "role": "task",
+      "intent": "SF02",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/rpcObservations/10"
+          },
+          "packet_sha256": "82888477529634c1281909c58c65c9b788493de1f7b2c472c3f194ad0b2d6660"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "SF01-merchant",
+      "intent": "SF01",
+      "metric": "merchant_gross_principal",
+      "cap": "0"
+    },
+    {
+      "id": "SF01-external",
+      "intent": "SF01",
+      "metric": "protected_external_disbursement",
+      "cap": "0"
+    },
+    {
+      "id": "SF01-destinations",
+      "intent": "SF01",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ]
+    },
+    {
+      "id": "SF02-merchant",
+      "intent": "SF02",
+      "metric": "merchant_gross_principal",
+      "cap": "0"
+    },
+    {
+      "id": "SF02-external",
+      "intent": "SF02",
+      "metric": "protected_external_disbursement",
+      "cap": "0"
+    },
+    {
+      "id": "SF02-destinations",
+      "intent": "SF02",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ]
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

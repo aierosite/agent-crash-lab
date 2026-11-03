@@ -1,0 +1,97 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "d55ed8a5666bebfe395dec26eb30d388ceb6a47fbc00dd4de96b3d1c9e83a789",
+    "basis": "bc3870aa8a13dd52248915cd30a29af7ed5eab4a34c7c04be445d728acea2c85"
+  },
+  "run": {
+    "id": "balance-attribution",
+    "chain_id": "test-chain-P18YS",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": ""
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "OWNER-A",
+      "protected_accounts": [
+        "owner.depositlab.near"
+      ],
+      "merchant": "merchant.repaymentlab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-7",
+      "tx_hash": "9W8cwK7VRBj3REf6aVTxtpSnC3hAZS3Mf6sM7jBp9zDF",
+      "role": "task",
+      "intent": "OWNER-A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/rpcObservations/7"
+          },
+          "packet_sha256": "18b5ac461ab4a7d455ba6cdfc23135574fecec8a116717b65093d2b842c63ce6"
+        }
+      ]
+    },
+    {
+      "id": "submission-16",
+      "tx_hash": "9dtSg4wRJZas13TJiNdpXk2PJdUrQrtbhKEMLeKhQxdx",
+      "role": "unrelated",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/rpcObservations/16"
+          },
+          "packet_sha256": "29966fd686ee8c3dafbcbafa3266f3ec92d4af8ad4ae5f0c54a622b8603a4858"
+        }
+      ],
+      "reason": "Explicit separate donor credit in original plan, unrelated to failed owner invoice"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "OWNER-A-merchant",
+      "intent": "OWNER-A",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "OWNER-A-external",
+      "intent": "OWNER-A",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "OWNER-A-destinations",
+      "intent": "OWNER-A",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "merchant.repaymentlab.near"
+      ]
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

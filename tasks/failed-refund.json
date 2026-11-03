@@ -1,0 +1,159 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "271d460974a48bf71b361132cc52552f34319c4916aa885c5245963fbafff731",
+    "basis": "4f2d035ac803edd3ed2f87be3b270dbe0025b596f230fe0288faffee7853d31b"
+  },
+  "run": {
+    "id": "failed-refund",
+    "chain_id": "test-chain-KRBjo",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "B01",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "absent.refundburn.near"
+    },
+    {
+      "id": "B02",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "absent.refundburn.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-7",
+      "tx_hash": "HXGAk7V6BztuEhvZax9TY5d3W9gs9QJaLRyDMGTywxbc",
+      "role": "task",
+      "intent": "B01",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/7"
+          },
+          "packet_sha256": "f04677f29113f28453ad0372b3764592f0232072333c95b227443ac3c43d1070"
+        }
+      ]
+    },
+    {
+      "id": "submission-14",
+      "tx_hash": "CxSSyDj4UtMAhwp1j4h8eAgVBCGozNnt7KxuJJT2mB7u",
+      "role": "task",
+      "intent": "B02",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/14"
+          },
+          "packet_sha256": "2ccf7d4e7433928f7685dc4717ee853522f190e2882b9e133dcc857b7900fc86"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "B01-merchant",
+      "intent": "B01",
+      "metric": "merchant_gross_principal",
+      "cap": "0"
+    },
+    {
+      "id": "B01-external",
+      "intent": "B01",
+      "metric": "protected_external_disbursement",
+      "cap": "0"
+    },
+    {
+      "id": "B01-destinations",
+      "intent": "B01",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "absent.refundburn.near"
+      ]
+    },
+    {
+      "id": "B01-recovery-destinations",
+      "intent": "B01",
+      "metric": "principal_recovery",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "mode": "destinations"
+    },
+    {
+      "id": "B01-recovery-full",
+      "intent": "B01",
+      "metric": "principal_recovery",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "mode": "full"
+    },
+    {
+      "id": "B02-merchant",
+      "intent": "B02",
+      "metric": "merchant_gross_principal",
+      "cap": "0"
+    },
+    {
+      "id": "B02-external",
+      "intent": "B02",
+      "metric": "protected_external_disbursement",
+      "cap": "0"
+    },
+    {
+      "id": "B02-destinations",
+      "intent": "B02",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "absent.refundburn.near"
+      ]
+    },
+    {
+      "id": "B02-recovery-destinations",
+      "intent": "B02",
+      "metric": "principal_recovery",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "mode": "destinations"
+    },
+    {
+      "id": "B02-recovery-full",
+      "intent": "B02",
+      "metric": "principal_recovery",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "mode": "full"
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

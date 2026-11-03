@@ -1,0 +1,208 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "11f4a493beb8526759eb1d653fbcfeaaf5b10b4ca2f0346f6bcce2be1237e8ce",
+    "basis": "877cff66472502942b9799330871488168edb62cd0965fe11d01a5f625ce0e00"
+  },
+  "run": {
+    "id": "function-deposit",
+    "chain_id": "test-chain-dslA5",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "D01",
+      "protected_accounts": [
+        "owner.depositlab.near"
+      ],
+      "merchant": "vault.callbacklab.near"
+    },
+    {
+      "id": "D02",
+      "protected_accounts": [
+        "owner.depositlab.near"
+      ],
+      "merchant": "vault.callbacklab.near"
+    },
+    {
+      "id": "D03",
+      "protected_accounts": [
+        "owner.depositlab.near",
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    },
+    {
+      "id": "D04",
+      "protected_accounts": [
+        "owner.depositlab.near"
+      ],
+      "merchant": "vault.callbacklab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-7",
+      "tx_hash": "Gm46Eqv7PALcM7jjkNmQtFBAw4q4ZP19uvWDdp4K54jf",
+      "role": "task",
+      "intent": "D01",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/7"
+          },
+          "packet_sha256": "77579399a3837d0078553926d28701747c97fa8f343bab8dab219cec5f411897"
+        }
+      ]
+    },
+    {
+      "id": "submission-18",
+      "tx_hash": "AvRvfqrZ23hd4R4LiT6s5JEAazxf9MFnTJ1fAMzBudxQ",
+      "role": "task",
+      "intent": "D02",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/18"
+          },
+          "packet_sha256": "369de0c9375fc2658120f3fea4b4d9561ad557af090bfbd2a0e5b48cb8db13b5"
+        }
+      ]
+    },
+    {
+      "id": "submission-29",
+      "tx_hash": "GzJYFnycanviHTAscHUYqnGU6vaRTbFQwz4WHmdbSAd1",
+      "role": "task",
+      "intent": "D03",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/29"
+          },
+          "packet_sha256": "30a68ee1d74c2081aab098121c6a61ac49e96245f74e857784469f9c5ec29cf7"
+        }
+      ]
+    },
+    {
+      "id": "submission-40",
+      "tx_hash": "Cvmo2aYviakVrTwWtYa3NQnbupvT8QmXFQrwYHwJjMqs",
+      "role": "task",
+      "intent": "D04",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/40"
+          },
+          "packet_sha256": "5815bff1832c233b32d60fe36208be0dbc1e40eff8b34be257ecd3f969e5e7c9"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "D01-merchant",
+      "intent": "D01",
+      "metric": "merchant_gross_principal",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D01-external",
+      "intent": "D01",
+      "metric": "protected_external_disbursement",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D01-destinations",
+      "intent": "D01",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ]
+    },
+    {
+      "id": "D02-merchant",
+      "intent": "D02",
+      "metric": "merchant_gross_principal",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D02-external",
+      "intent": "D02",
+      "metric": "protected_external_disbursement",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D02-destinations",
+      "intent": "D02",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ]
+    },
+    {
+      "id": "D03-merchant",
+      "intent": "D03",
+      "metric": "merchant_gross_principal",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D03-external",
+      "intent": "D03",
+      "metric": "protected_external_disbursement",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "D03-destinations",
+      "intent": "D03",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "D04-merchant",
+      "intent": "D04",
+      "metric": "merchant_gross_principal",
+      "cap": "2000000000000000000000000"
+    },
+    {
+      "id": "D04-external",
+      "intent": "D04",
+      "metric": "protected_external_disbursement",
+      "cap": "2000000000000000000000000"
+    },
+    {
+      "id": "D04-destinations",
+      "intent": "D04",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "vault.callbacklab.near"
+      ]
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

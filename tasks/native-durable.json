@@ -1,0 +1,180 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "historical_controlled",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Independent expected caps/documents written before these actual local trials. Owner/hash binding follows observed send indices; same operator, scripted workers, not an external holdout."
+  },
+  "sources": {
+    "recording": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f",
+    "basis": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad"
+  },
+  "run": {
+    "id": "native-durable",
+    "chain_id": "test-chain-5eaTJ",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/runs/1"
+    },
+    "closed_horizon": true,
+    "horizon_note": "All controlled sends from crashed/resumed A and independent B are captured, all hashes expanded by independent local observer, owned node stopped; no future process guarantee."
+  },
+  "intents": [
+    {
+      "id": "A",
+      "protected_accounts": [
+        "owner.crashlab.near"
+      ],
+      "merchant": "merchant.crashlab.near"
+    },
+    {
+      "id": "B",
+      "protected_accounts": [
+        "owner.crashlab.near"
+      ],
+      "merchant": "merchant.crashlab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "send-0",
+      "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/rpcObservations/2"
+          },
+          "packet_sha256": "0eb2d9657ff3089d9e2e4ecca1928cc73a4b70ad7c36b80e925b1527d6dec476"
+        }
+      ]
+    },
+    {
+      "id": "send-1",
+      "tx_hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+      "role": "task",
+      "intent": "B",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/rpcObservations/5"
+          },
+          "packet_sha256": "ba5a420d1fa0119b37cf383a16302a84cb32214a0d5b1e1c6dd34b902544491d"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "A-merchant",
+      "intent": "A",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "A-count",
+      "intent": "A",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "B-merchant",
+      "intent": "B",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "B-count",
+      "intent": "B",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    }
+  ],
+  "utility": {
+    "required": [
+      {
+        "id": "A-answer",
+        "intent": "A",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/1/utilityObservations/0"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A01",
+              "available": 7,
+              "forecast": 21
+            },
+            {
+              "sku": "B02",
+              "available": 11,
+              "forecast": 10
+            },
+            {
+              "sku": "C03",
+              "available": 2,
+              "forecast": 19
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "C03",
+          "units": 17
+        }
+      },
+      {
+        "id": "B-answer",
+        "intent": "B",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/1/utilityObservations/1"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A01",
+              "available": 7,
+              "forecast": 21
+            },
+            {
+              "sku": "B02",
+              "available": 11,
+              "forecast": 10
+            },
+            {
+              "sku": "C03",
+              "available": 2,
+              "forecast": 19
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "C03",
+          "units": 17
+        }
+      }
+    ],
+    "intermediate": []
+  }
+}

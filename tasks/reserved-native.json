@@ -1,0 +1,138 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "historical_controlled",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Prospective owned local native amounts/names were declared after actual source freeze and before native execution. Same-agent known-family reserved instances, not external private holdout."
+  },
+  "sources": {
+    "recording": "ad47eee86ebce1d8b13623ef40f6d21cb9fde1d91fd8b075daefb73a83cf7596",
+    "basis": "86b6ca1c0d77c0924d452f74e0894d2e4a884ed4d8cb87c0bd22e7525e9dfadd"
+  },
+  "run": {
+    "id": "reserved-native-values",
+    "chain_id": "test-chain-oLwNw",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Only3declared owned directTransferinvocations plusreadrepeat in fresh isolatedgenesis; node stopped."
+  },
+  "intents": [
+    {
+      "id": "A",
+      "protected_accounts": [
+        "own-8322c538ff46.near"
+      ],
+      "merchant": "shop-e914145cf85a.near"
+    },
+    {
+      "id": "B",
+      "protected_accounts": [
+        "own-8322c538ff46.near"
+      ],
+      "merchant": "shop-e914145cf85a.near"
+    },
+    {
+      "id": "C",
+      "protected_accounts": [
+        "own-8322c538ff46.near"
+      ],
+      "merchant": "shop-e914145cf85a.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "reserved-A",
+      "tx_hash": "F5vVeVUmTTL8vASzcZHLT7tXAYBLhDU7CCXuJUC9TUFg",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/2"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reserved-B",
+      "tx_hash": "uKX6au7S91SxtYpztVpcpEEcigs6yHP3D6qRV5L6uu2",
+      "role": "task",
+      "intent": "B",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reserved-C",
+      "tx_hash": "4oErga1JDHsHPxpv4qwVBEN4EstRsBgKTSwXYKMjLKVQ",
+      "role": "task",
+      "intent": "C",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/13"
+          }
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "A-merchant",
+      "intent": "A",
+      "metric": "merchant_gross_principal",
+      "cap": "62036320424935972248823"
+    },
+    {
+      "id": "A-count",
+      "intent": "A",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "B-merchant",
+      "intent": "B",
+      "metric": "merchant_gross_principal",
+      "cap": "62036320424935972248823"
+    },
+    {
+      "id": "B-count",
+      "intent": "B",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "C-merchant",
+      "intent": "C",
+      "metric": "merchant_gross_principal",
+      "cap": "62036320424935972248823"
+    },
+    {
+      "id": "C-count",
+      "intent": "C",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

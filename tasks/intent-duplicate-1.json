@@ -1,0 +1,291 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "historical_controlled",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "9ba4b2d8d5f1425782cc79bd2fa2a7b8c90f7db46fbaf1684ed395167dc18509",
+    "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+  },
+  "run": {
+    "id": "intent-duplicate-1",
+    "chain_id": "test-chain-9TcM9",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/runs/1/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "A",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    },
+    {
+      "id": "B",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-1",
+      "tx_hash": "BpZiwuXtfpCboyQKuQrsyP6Pwxos83hoEeCcCp1Y4mn9",
+      "role": "ancillary",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/observation/rpcObservations/1"
+          },
+          "packet_sha256": "86abf11e5b9cfd263f9554b1c65183bebecc0cb96d8d1ae5be74c5b58a123b0a"
+        }
+      ],
+      "reason": "Declared original setup/resume context, not a paid task"
+    },
+    {
+      "id": "submission-4",
+      "tx_hash": "AckNNYhnzjb5CktcQWdNFq3KaoMbbWz59JAvP9R475rs",
+      "role": "ancillary",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/observation/rpcObservations/4"
+          },
+          "packet_sha256": "212b44f9c2d20124213fc32807224a9d4dfcfd70cae79453f824efb18df8d332"
+        }
+      ],
+      "reason": "Declared original setup/resume context, not a paid task"
+    },
+    {
+      "id": "submission-9",
+      "tx_hash": "H9yFK1ikrE3BVeHUPL1fpx9oET6p6u6zNatMky5LFBL3",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/observation/rpcObservations/9"
+          },
+          "packet_sha256": "3f9c1cd79bc584f45d037d8fc8ea753e69edd3ff8dc69825397cf2d0b088f8d3"
+        }
+      ]
+    },
+    {
+      "id": "submission-15",
+      "tx_hash": "HRtswpaQqqjDa8SfDgeKGzpExPHwfREtkVNJYpMoedQU",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/observation/rpcObservations/15"
+          },
+          "packet_sha256": "30cfffd1cb387aae8bce6f48f65db68ab01242a8cdb357432c611f8cb6fd4e76"
+        }
+      ]
+    },
+    {
+      "id": "submission-22",
+      "tx_hash": "G3UMi2LRCMwRJf9pgNFTzdixJpsXeafiD5pABZ99qSwg",
+      "role": "task",
+      "intent": "B",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/1/observation/rpcObservations/22"
+          },
+          "packet_sha256": "121336ef073d87cd2ace0e24b877f8d6e306301c8a6b1ad46266415ec927cfb6"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "A-merchant",
+      "intent": "A",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "A-external",
+      "intent": "A",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "A-destinations",
+      "intent": "A",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "A-count",
+      "intent": "A",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "B-merchant",
+      "intent": "B",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "B-external",
+      "intent": "B",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "B-destinations",
+      "intent": "B",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "B-count",
+      "intent": "B",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    }
+  ],
+  "utility": {
+    "required": [
+      {
+        "id": "output-0",
+        "intent": "A",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/1/observation/utilityObservations/0"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v3",
+          "invoice": "spendguard-INTENT-A",
+          "source": "controlled-paid-merchant",
+          "rows": [
+            {
+              "sku": "A01",
+              "available": 7,
+              "forecast": 21
+            },
+            {
+              "sku": "B02",
+              "available": 11,
+              "forecast": 10
+            },
+            {
+              "sku": "C03",
+              "available": 2,
+              "forecast": 19
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "C03",
+          "units": 17
+        }
+      },
+      {
+        "id": "output-1",
+        "intent": "A",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/1/observation/utilityObservations/1"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v3",
+          "invoice": "spendguard-INTENT-A",
+          "source": "controlled-paid-merchant",
+          "rows": [
+            {
+              "sku": "A01",
+              "available": 7,
+              "forecast": 21
+            },
+            {
+              "sku": "B02",
+              "available": 11,
+              "forecast": 10
+            },
+            {
+              "sku": "C03",
+              "available": 2,
+              "forecast": 19
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "C03",
+          "units": 17
+        }
+      },
+      {
+        "id": "output-2",
+        "intent": "B",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/1/observation/utilityObservations/2"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v3",
+          "invoice": "spendguard-INTENT-B",
+          "source": "controlled-paid-merchant",
+          "rows": [
+            {
+              "sku": "A01",
+              "available": 7,
+              "forecast": 21
+            },
+            {
+              "sku": "B02",
+              "available": 11,
+              "forecast": 10
+            },
+            {
+              "sku": "C03",
+              "available": 2,
+              "forecast": 19
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "C03",
+          "units": 17
+        }
+      }
+    ],
+    "intermediate": []
+  }
+}

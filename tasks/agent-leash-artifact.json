@@ -1,0 +1,255 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "710b2d4e44bb0c67bab8778154d8a089b7668fd5195eadba76cf7f4d84827c69",
+    "basis": "f333add999c1d6b3d5f69823226c4935f4074e9e6ff43b7f00c20e35a417c32b"
+  },
+  "run": {
+    "id": "agent-leash-artifact",
+    "chain_id": "test-chain-cM2LS",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "AL01",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    },
+    {
+      "id": "AL02",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "outsider.vetolab.near"
+    },
+    {
+      "id": "AL03",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    },
+    {
+      "id": "AL04",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "absent.agentleashlab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-4",
+      "tx_hash": "DPp4amYCgoFmV3GeHHndDPaKVTWDSUox9c9yAHSTpXsu",
+      "role": "ancillary",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/4"
+          },
+          "packet_sha256": "ddefc45b931ed1d6c8a1677e7c30bfbfcfae956c623b5c7922e328ee6285b3c0"
+        }
+      ],
+      "reason": "Declared original setup/resume context, not a paid task"
+    },
+    {
+      "id": "submission-7",
+      "tx_hash": "Giq1i5EJefwKwZUEAe3XPY8aSeoqpwvnHSHvx37dgyz1",
+      "role": "ancillary",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/7"
+          },
+          "packet_sha256": "e96ad999be68e00c2462f787de93595e4344f9e2094136e292874a6e6c832cc4"
+        }
+      ],
+      "reason": "Declared original setup/resume context, not a paid task"
+    },
+    {
+      "id": "submission-10",
+      "tx_hash": "GoTJwK8NCVo2VV9Dn3MU8LtesMrvfE3XmQPXnQBf76yC",
+      "role": "ancillary",
+      "intent": null,
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/10"
+          },
+          "packet_sha256": "050953b716eea26551ce970aed1f4c624ae1aa7db5ab8ab0ff4dd2dc83446253"
+        }
+      ],
+      "reason": "Declared original setup/resume context, not a paid task"
+    },
+    {
+      "id": "submission-17",
+      "tx_hash": "DJuTSZ7JiRQpv619RTYfffKEwDf3hMKj5KdW7PvcjeL7",
+      "role": "task",
+      "intent": "AL01",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/17"
+          },
+          "packet_sha256": "c5946f1c3a0a4507a949695351d8d9b623cefe11d3d7b7e6c462ee5a1c888469"
+        }
+      ]
+    },
+    {
+      "id": "submission-26",
+      "tx_hash": "7en1q3d5U8xvaYKVGwSzwFEczTUGqfaekQh54XnWxfxB",
+      "role": "task",
+      "intent": "AL02",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/26"
+          },
+          "packet_sha256": "992074bccf97959996ea00f19a33b0b86ebc40280b4a593f1e2f95aab28f2a69"
+        }
+      ]
+    },
+    {
+      "id": "submission-35",
+      "tx_hash": "2iABMPWLLTdEFBk7pr6fiHDLE1e1EPbq3NiqpZJwkae1",
+      "role": "task",
+      "intent": "AL03",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/35"
+          },
+          "packet_sha256": "1d729a197d391a9fbdf444debfd46eec8b9581747b57eecc2a83f1c9f8fdfcfc"
+        }
+      ]
+    },
+    {
+      "id": "submission-43",
+      "tx_hash": "GUQpGF7ukeLg7CCB3s8Jgz53CiLPYvACaX2hzzenFTKv",
+      "role": "task",
+      "intent": "AL04",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/43"
+          },
+          "packet_sha256": "ce99966a86203b9dcf69ff09ce6c567c7e0377414b193c0e68af6bbdc52f21c2"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "AL01-merchant",
+      "intent": "AL01",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL01-external",
+      "intent": "AL01",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL01-destinations",
+      "intent": "AL01",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "AL02-merchant",
+      "intent": "AL02",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL02-external",
+      "intent": "AL02",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL02-destinations",
+      "intent": "AL02",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "outsider.vetolab.near"
+      ]
+    },
+    {
+      "id": "AL03-merchant",
+      "intent": "AL03",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL03-external",
+      "intent": "AL03",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL03-destinations",
+      "intent": "AL03",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "AL04-merchant",
+      "intent": "AL04",
+      "metric": "merchant_gross_principal",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL04-external",
+      "intent": "AL04",
+      "metric": "protected_external_disbursement",
+      "cap": "100000000000000000000000"
+    },
+    {
+      "id": "AL04-destinations",
+      "intent": "AL04",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "absent.agentleashlab.near"
+      ]
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}

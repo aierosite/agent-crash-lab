@@ -1,0 +1,123 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "reconstructed",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Same-operator original plan and explicit reviewed call-order binding. Reconstructed protocol scopes are assessment policies, not historical customer/guard promises. No external authentication."
+  },
+  "sources": {
+    "recording": "12217adb73f26bc9da1474b834fc2c4fe9fc1ed3d3455b7ab98a17c2fb99ba1f",
+    "basis": "e1f7a19b25065839924069438abe0a95d5ae5ff562d484aff85c55eaa62d397e"
+  },
+  "run": {
+    "id": "success-receipt-id",
+    "chain_id": "test-chain-ZxffG",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/observation"
+    },
+    "closed_horizon": true,
+    "horizon_note": "Controlled recorded run; all declared invocations/visible sends in the whole container. No production/future-worker guarantee."
+  },
+  "intents": [
+    {
+      "id": "RETURN-FAILURE",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    },
+    {
+      "id": "RETURN-SUCCESS",
+      "protected_accounts": [
+        "vault.callbacklab.near"
+      ],
+      "merchant": "receiver.callbacklab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "submission-4",
+      "tx_hash": "4BABAciQLhYoAdYsSNkH2sSdgR3pbVzpXZbZVoNzuTTb",
+      "role": "task",
+      "intent": "RETURN-FAILURE",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/4"
+          },
+          "packet_sha256": "06a9f8074574dc661c4dfefbbaa273081ad7ab2674cda7ded0acf4d6a201172d"
+        }
+      ]
+    },
+    {
+      "id": "submission-9",
+      "tx_hash": "Dj3kKHSePfoGY6ws1Hoh2oa95qQEhRnJeEe8g7yBEZZ2",
+      "role": "task",
+      "intent": "RETURN-SUCCESS",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/observation/rpcObservations/9"
+          },
+          "packet_sha256": "4042107c6140f6919a9b6e43b912f61943756512df2f6a1792f73a09a9a9debb"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "RETURN-FAILURE-merchant",
+      "intent": "RETURN-FAILURE",
+      "metric": "merchant_gross_principal",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "RETURN-FAILURE-external",
+      "intent": "RETURN-FAILURE",
+      "metric": "protected_external_disbursement",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "RETURN-FAILURE-destinations",
+      "intent": "RETURN-FAILURE",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    },
+    {
+      "id": "RETURN-SUCCESS-merchant",
+      "intent": "RETURN-SUCCESS",
+      "metric": "merchant_gross_principal",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "RETURN-SUCCESS-external",
+      "intent": "RETURN-SUCCESS",
+      "metric": "protected_external_disbursement",
+      "cap": "1000000000000000000000000"
+    },
+    {
+      "id": "RETURN-SUCCESS-destinations",
+      "intent": "RETURN-SUCCESS",
+      "metric": "ordinary_recipient_allowlist",
+      "allowed_accounts": [
+        "receiver.callbacklab.near"
+      ]
+    }
+  ],
+  "utility": {
+    "required": [],
+    "intermediate": []
+  }
+}
