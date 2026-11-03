@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-03T00:45:24.917254+00:00",
+  "classification": "Research2nativeconditions/1freshownedchain fillsC10pure-gasonlygap, not finalkernel/model/guardtest",
+  "question": "Are actualzero valuesdistinguishedfrommissingprincipal, andcanfailed0depositcallhaveonlygasrefundswithoutprincipalrefund?",
+  "cases": [
+    {
+      "id": "Z01",
+      "operation": "OwnerFullAccesssignedTransfer0toexistingfundedmerchant",
+      "expected": "FINALsuccessfulzeroaction, receiverdelta0,no positiveprincipal,noprincipalrefund; gasrefundpositive/feesonlyownerdebit."
+    },
+    {
+      "id": "Z02",
+      "operation": "OwnerFullAccesssignedFunctionCallpanic_with_message,deposit0,10Tgas,existingofficialfixturevault",
+      "expected": "FINALFailure,receiverdelta0,no positiveprincipal/no principalrefund; actualpositivegasrefundsuccess,ownerdebitfeesonly."
+    }
+  ],
+  "limits": "No arbitraryfree taskutility claimed, no monetarywaiver: principal0canstillincurgasfees. ExistingC10casewithprincipalrefund retainedasdifferentcontext. Preserveunexpectedoutcome, no changeinputs/expectationsafterfailure.",
+  "baseSha256": "f7ab6726d15d1293834950496fd8f3ec025175ef2d7c5841af1be0ee8f5a7ca3",
+  "stepsSha256": "4ddbf61a5a391a1af737118a22f30a1a2d195ec8156dbb8626fefd4b60c2288f",
+  "composedSavedAndStreamedSha256": "d952f0a867979da43012180f9c49ea27a354040461d599bfe986e226dcdf0b81",
+  "boundaries": "Ownedfreshlocalgenesis/temporarykeys/loopback only,nopublic/merchant/model/custody; nodestoppedfinally. Researchlabcode notrelabeledproduct.",
+  "expectedCounts": "2conditiongroups/2signedattempts/1freshchain, status/refundrecordsnotnewpayments."
+}

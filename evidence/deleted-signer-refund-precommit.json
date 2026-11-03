@@ -1,0 +1,20 @@
+{
+  "stage": "Research-only owned native reproduction of a reported receipt pattern, not product support or production bug verification",
+  "motivation": "Publicnearcoreissue16188 describes signer account deleting itself, beneficiary paid and gas refund to deleted signer failing. ExistingX01/X02 have a different surviving agent signer and are not the same pattern.",
+  "source": "https://github.com/near/nearcore/issues/16188",
+  "encodingSource": "Pinnedbc4e9e8 core/primitives/src/action/mod.rs selected60-75/360-397: BorshDeleteAccount tag7 with beneficiary_idAccountId. Existing V0 codec/owned sandbox rig reviewed; no unknown source execution.",
+  "scope": "One fresh owned protocol88 sandbox, genesis-only setup, one direct transaction signed by disposableowner.depositlab.near to itself, DeleteAccount beneficiarymerchant.repaymentlab.near. All accounts synthetic/local, no fixture contract invoked, no public explorer/RPC or real wallet.",
+  "expected": [
+    "FINAL root and initial deletion outcome successful; signed action exactlyDeleteAccount with frozen beneficiary.",
+    "Owner query after deletion returns explicitUNKNOWN_ACCOUNT; do not encode as a fabricated0balance.",
+    "Successful system balance payout to existing beneficiary with signer_idsystem, exact body amount matching beneficiary account increase.",
+    "One or more system gas refund actions with original owner signer/key target deleted owner and fail; distinguish from successful beneficiary principal payout.",
+    "Same-account initial receipt body omitted, actual initial outcome retained; context from signedtransaction.actions is labelledderived, not fabricated observed body.",
+    "Root success and positive beneficiary payout coexist with failed gas-refund receipt. Exact current mainnet regression/onset and total-supply burn are not asserted."
+  ],
+  "counting": "One native boundary group/one directsend/one fresh chain/zero setup transactions. Existing previous deletion cases remain separately labelled. Source-informed owned reproduction, not an independent customer trial or model benchmark.",
+  "boundaries": "Only disposable genesis account deleted, loopback endpoints,90second lifecycle, bootnodes/STUN/telemetry off, in-memory experimental keys, always stop owned node. Research code stayslab, no core code before gate. All native failures retained; do not substitute an easier signer pattern to match report.",
+  "committedAt": "2026-11-02T23:16:03.206331+00:00",
+  "actionSourceSha256": "efb99b98c988c845801f7749ab87b7224fb139314ffbab55c445fc73a6c39934",
+  "stepsSha256": "20960b92d7d7e5a2f721cc69ff2fbd004977144c7ff4968d9564fb675cbda6b1"
+}

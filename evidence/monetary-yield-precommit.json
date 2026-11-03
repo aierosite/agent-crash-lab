@@ -1,0 +1,14 @@
+{
+  "stage": "Research-only owned native episode; no final product or live-model code",
+  "question": "Can a positive FunctionCall deposit be committed in a final canonical receipt block while the whole transaction still reports Started, and remain committed after its separately resumed callback fails?",
+  "design": "One disposable owned sandbox, owner FullAccess V0 key. Attach0.1NEAR to the reviewed official fixture call_yield_create_return_promise. Observe final view_state storing its fresh yield ID, current transaction status, final account amount and exact initial execution block. Confirm the initial outcome block is canonical at its height and no newer than final head. Then resume with intentionally wrong bytes and observe final callback Failure plus retained deposit.",
+  "predictions": [
+    "Pending whole result Started/INCLUDED_FINAL can coexist with initial containing SuccessReceiptId and vault+0.1. Missing yield child keeps whole graph incomplete; array lengths alone cannot establish closure.",
+    "The separate resume transaction can succeed/accept while original callback fails. Final original aggregate Failure does not reverse the earlier successful0.1deposit.",
+    "Before whole FINAL do not claim complete transaction fees/refunds or whole-task success from the observed deposited principal. Source and final canonical block reads are trusted local-node observations, not independent consensus proofs."
+  ],
+  "sources": "Previously reviewed pinned fixture1231-1302/1335-1357 and runtime commitment rules; existing nonmonetary yield experiment and milestone source matrix retained.",
+  "counting": "One new native condition/episode group,2signed send attempts (deposit root and zero-deposit resume),1fresh chain. No new model/task-answer/merchant HTTP trial. This is not a monetary reorg experiment or generic arbitrary pending-effect evaluator.",
+  "bounds": "Only generated disposable keys, reviewed official fixture and isolated loopback RPC. No public transaction, wallet, other-account test, model, publication or reserved seed.90second node alarm/110second launcher, actual cleanup. Preserve first failure; no silent native retry or pre-gate product code.",
+  "timestamp": "2026-11-03T03:17:46.676969+00:00"
+}

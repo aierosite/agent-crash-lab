@@ -1,0 +1,27 @@
+{
+  "stage": "Research-only precommitted experiment, not product code",
+  "question": "Can a failed native principal refund itself fail, leaving zero merchant delivery and zero successful principal recovery despite FINAL completion?",
+  "source": "nearcore bc4e9e8cfb03d9e82f027883055624e18576993e runtime/runtime/src/lib.rs system-refund failure branch lines1047–1056",
+  "fixture": "Official deliberately unrestricted rs_contract WASM in isolated local sandbox2.14.0/protocol88; no business guard or live model",
+  "cases": [
+    {
+      "id": "B01",
+      "transfer_to": "Explicitly absent named merchant",
+      "refund_to": "Default vault",
+      "expected": "Original transfer fails; one successful system principal refund returns1 NEAR to vault."
+    },
+    {
+      "id": "B02",
+      "transfer_to": "Same absent named merchant",
+      "refund_to": "A second explicitly absent named account",
+      "expected": "Original transfer fails; system principal refund also fails; no successful principal refund or merchant payout. Source predicts refund burn rather than another automatic refund."
+    }
+  ],
+  "controls": "Verify both account absences with explicit UNKNOWN_ACCOUNT; capture all raw local RPC outcomes, parent-child references, amount and refund signer markers. Record before/after balances and block total_supply as supporting observations; do not equate account delta to exact principal because gas rewards may contribute.",
+  "interpretation_limits": [
+    "Native no-delivery alone does not establish principal recovered or zero loss.",
+    "A burn attribution combines observed failed system refund with pinned runtime semantics; do not call it a protocol vulnerability.",
+    "No external network, payments, wallets, model or submitted contest action.",
+    "Record failure rather than change protocol/settings to force expected result."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "stage": "Research-only native flow experiment; not final product implementation",
+  "question": "How do positive FunctionCall deposits and multi-hop funding differ from explicit Transfer actions and principal-refund aggregation?",
+  "node": "Existing reviewed isolated near-sandbox2.14.0, protocol88 if reported",
+  "fixture": "Official generic rs_contract WASM sha256a2ad8d2da73576d23f3104c6c5d789569534de517678b8b3842e8668764a5082, no business guard",
+  "authority": "Separate controlled owner full-access key; positive deposits cannot use the existing function-call-only agent key. All keys local/in-memory.",
+  "cases": [
+    {
+      "id": "D01",
+      "action": "Owner calls storage fixture with1NEAR deposit",
+      "expected": "Containing receipt commits; native deposit credited without an explicit Transfer action; storage change observable."
+    },
+    {
+      "id": "D02",
+      "action": "Owner calls panicking fixture with1NEAR deposit",
+      "expected": "Call receipt fails, no receiver principal credit retained, successful1NEAR system refund to owner."
+    },
+    {
+      "id": "D03",
+      "action": "Owner deposits1NEAR into vault call that emits1NEAR Transfer to merchant",
+      "expected": "Committed ingress and outgoing edge; owner's principal debit1, merchant credit1, not a2NEAR purchase."
+    },
+    {
+      "id": "D04",
+      "action": "Owner submits one receipt batch with1NEAR Transfer and1NEAR FunctionCall deposit that panics",
+      "expected": "Both actions roll back; total2NEAR system balance refund to owner; no retained vault principal credit."
+    }
+  ],
+  "measurement": "Raw local RPC, explicit receipt body/outcome identity and finality, before/after balances/state, parent-linked refund. Do not classify positive calls from success text only.",
+  "limits": [
+    "No merchant data, live model or guard comparison.",
+    "Internal/native-edge sums are not automatically external expense totals; role/intent scope remains explicit.",
+    "Contract recipient may route money elsewhere; this experiment does not establish arbitrary-contract semantic ownership.",
+    "No external funding, accounts, payments or wallet operations."
+  ]
+}

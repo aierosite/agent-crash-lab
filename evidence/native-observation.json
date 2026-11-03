@@ -1,0 +1,3677 @@
+{
+  "atUtc": "2026-11-03T18:25:04.462906+00:00",
+  "classification": "Actual source-informed local native crash/restart integration with scripted workers; not a live model or external holdout",
+  "sandboxSha256": "797b9d7a9a23907048d68a427e86a55c94f1de232dbfb8b8a1eec09ecef3bf13",
+  "owner": "owner.crashlab.near",
+  "merchant": "merchant.crashlab.near",
+  "runs": [
+    {
+      "policy": "naive",
+      "rpcObservations": [
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-observer-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_account",
+              "finality": "final",
+              "account_id": "merchant.crashlab.near"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "amount": "10000000000000000000000000",
+              "block_hash": "AqsJFYDfyEAyzZ2uhi7ovE1oBqhAzSe79C8L5nTWRooo",
+              "block_height": 4,
+              "code_hash": "11111111111111111111111111111111",
+              "locked": "0",
+              "storage_paid_at": 0,
+              "storage_usage": 100
+            },
+            "id": "naive-observer-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-0-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_access_key",
+              "finality": "final",
+              "account_id": "owner.crashlab.near",
+              "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "block_hash": "AqsJFYDfyEAyzZ2uhi7ovE1oBqhAzSe79C8L5nTWRooo",
+              "block_height": 4,
+              "nonce": 0,
+              "permission": "FullAccess"
+            },
+            "id": "naive-0-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-0-2",
+            "method": "send_tx",
+            "params": {
+              "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0BAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFykj3uwlQMzMyPg66YWfTLCXfUZ621IQPKKXAEkA/dICIBAAAAAwAAgPZK4ccCLRUAAAAAAAAAOyoqrlgbioAW2iu+YqZyMkBthFOBCNXsR5Nkc4O8x5w/eYTzb3QG5UzHHi2NA1Nmx7Tj2zVLe5pdpQEpC3nsCQ==",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts_outcome": [
+                {
+                  "block_hash": "5jmdpjdm1iBTe6sRCM7Ttma1Xkb9z5ibgFpVXmSWe2cT",
+                  "id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "Bj92EENLNcbVzog9rAMC6QCgp1DHVLo975UbNePjp4Pa",
+                  "id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                "nonce": 1,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:2BcFT4RgzxZ8HrxrRjyTXJU7edgzmi1yL1h6UHdjAt1keiqG5hLLHEUrhQsu2GquGTds5TsedXvfpeM6upkBN5z8",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "4Ln7LfAw92SGCSjfPHqjw3knVAx2kx9CaNmEPsx48yU8",
+                "id": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-0-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-1-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_access_key",
+              "finality": "final",
+              "account_id": "owner.crashlab.near",
+              "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "block_hash": "Bj92EENLNcbVzog9rAMC6QCgp1DHVLo975UbNePjp4Pa",
+              "block_height": 10,
+              "nonce": 1,
+              "permission": "FullAccess"
+            },
+            "id": "naive-1-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-1-2",
+            "method": "send_tx",
+            "params": {
+              "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0CAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyn2BVM2QfSspgKoae9HnypoEHNoVUQuko0dR6fYswXgEBAAAAAwAAgPZK4ccCLRUAAAAAAAAA2AMMC/QEkbbbvWa9yUbrz0zQUavY7TBCJBmi/XU9EiQjiYAQTvpYa4FbCF2JCPtkgqLRYgA4yzmp+phkySa6CQ==",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts_outcome": [
+                {
+                  "block_hash": "9LNhk7Hrcbsdvdr7UBc3mhzGgE3yrdwwktFTXFA4bthh",
+                  "id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                  "id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5KVLpGizpgDS8T8UHFKG2LP42hV6NVrC27fr2DZM7DxDwkSABpMQUC5LfCV3rRv7f6ThPCmHU39NUjQ8KiyXB1ZS",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "Ghx2VgwVHfq37q1fvif3bXg8mLoPK5FrcP632CvQ9LyY",
+                "id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-1-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-1-3",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "9LNhk7Hrcbsdvdr7UBc3mhzGgE3yrdwwktFTXFA4bthh",
+                  "id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                  "id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5KVLpGizpgDS8T8UHFKG2LP42hV6NVrC27fr2DZM7DxDwkSABpMQUC5LfCV3rRv7f6ThPCmHU39NUjQ8KiyXB1ZS",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "Ghx2VgwVHfq37q1fvif3bXg8mLoPK5FrcP632CvQ9LyY",
+                "id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-1-3"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-2-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_access_key",
+              "finality": "final",
+              "account_id": "owner.crashlab.near",
+              "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+              "block_height": 16,
+              "nonce": 2,
+              "permission": "FullAccess"
+            },
+            "id": "naive-2-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-2-2",
+            "method": "send_tx",
+            "params": {
+              "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0DAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyDzu+r7NyS4pgZ42IloCd/RMjpquSPQZtoVhCW02PnvYBAAAAAwAAgPZK4ccCLRUAAAAAAAAAuVSAxK/m1Cxs5nh8sERBTbJRUlIAP4zLEN/KOmlL1H00I4cgXE04gjbUYHnM9zD3Kfdyv9ByFm5pm/mdA79BCg==",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts_outcome": [
+                {
+                  "block_hash": "8tmXy6QVmYTS8WQjzSPo8TDfDZJErJDLY1smzsHzzvvA",
+                  "id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+                  "id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "nonce": 3,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:4humi4Nnmr3S4AyrPWUBaUrj3SiAmZXmCwKggYQ1DXJ3Xbr3ygi7E414DvWfy6UkApnGs93Qg8T4AeKdW8y9MjnH",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "59KJanhAkUJ1XbVUm8Prq7t6mDusRFoL7QGZ5bd43Yzk",
+                "id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-2-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-2-3",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "8tmXy6QVmYTS8WQjzSPo8TDfDZJErJDLY1smzsHzzvvA",
+                  "id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+                  "id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "nonce": 3,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:4humi4Nnmr3S4AyrPWUBaUrj3SiAmZXmCwKggYQ1DXJ3Xbr3ygi7E414DvWfy6UkApnGs93Qg8T4AeKdW8y9MjnH",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "59KJanhAkUJ1XbVUm8Prq7t6mDusRFoL7QGZ5bd43Yzk",
+                "id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-2-3"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-observer-2",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "5jmdpjdm1iBTe6sRCM7Ttma1Xkb9z5ibgFpVXmSWe2cT",
+                  "id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "Bj92EENLNcbVzog9rAMC6QCgp1DHVLo975UbNePjp4Pa",
+                  "id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                "nonce": 1,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:2BcFT4RgzxZ8HrxrRjyTXJU7edgzmi1yL1h6UHdjAt1keiqG5hLLHEUrhQsu2GquGTds5TsedXvfpeM6upkBN5z8",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "4Ln7LfAw92SGCSjfPHqjw3knVAx2kx9CaNmEPsx48yU8",
+                "id": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-observer-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-observer-3",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "9LNhk7Hrcbsdvdr7UBc3mhzGgE3yrdwwktFTXFA4bthh",
+                  "id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                  "id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5KVLpGizpgDS8T8UHFKG2LP42hV6NVrC27fr2DZM7DxDwkSABpMQUC5LfCV3rRv7f6ThPCmHU39NUjQ8KiyXB1ZS",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "Ghx2VgwVHfq37q1fvif3bXg8mLoPK5FrcP632CvQ9LyY",
+                "id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-observer-3"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-observer-4",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "8tmXy6QVmYTS8WQjzSPo8TDfDZJErJDLY1smzsHzzvvA",
+                  "id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+                  "id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "nonce": 3,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:4humi4Nnmr3S4AyrPWUBaUrj3SiAmZXmCwKggYQ1DXJ3Xbr3ygi7E414DvWfy6UkApnGs93Qg8T4AeKdW8y9MjnH",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "59KJanhAkUJ1XbVUm8Prq7t6mDusRFoL7QGZ5bd43Yzk",
+                "id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "naive-observer-4"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "naive-observer-5",
+            "method": "query",
+            "params": {
+              "request_type": "view_account",
+              "finality": "final",
+              "account_id": "merchant.crashlab.near"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "amount": "10300000000000000000000000",
+              "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+              "block_height": 23,
+              "code_hash": "11111111111111111111111111111111",
+              "locked": "0",
+              "storage_paid_at": 0,
+              "storage_usage": 100
+            },
+            "id": "naive-observer-5"
+          }
+        }
+      ],
+      "utilityObservations": [
+        {
+          "invoice": "A",
+          "requestedVersion": "v1",
+          "httpStatus": 200,
+          "responseUtf8": "{\"resource\": \"inventory-snapshot\", \"version\": \"v1\", \"invoice\": \"A\", \"source\": \"owned-local-merchant\", \"rows\": [{\"sku\": \"A01\", \"available\": 7, \"forecast\": 21}, {\"sku\": \"B02\", \"available\": 11, \"forecast\": 10}, {\"sku\": \"C03\", \"available\": 2, \"forecast\": 19}]}",
+          "scriptedAnswer": {
+            "sku": "C03",
+            "units": 17
+          }
+        },
+        {
+          "invoice": "B",
+          "requestedVersion": "v1",
+          "httpStatus": 200,
+          "responseUtf8": "{\"resource\": \"inventory-snapshot\", \"version\": \"v1\", \"invoice\": \"B\", \"source\": \"owned-local-merchant\", \"rows\": [{\"sku\": \"A01\", \"available\": 7, \"forecast\": 21}, {\"sku\": \"B02\", \"available\": 11, \"forecast\": 10}, {\"sku\": \"C03\", \"available\": 2, \"forecast\": 19}]}",
+          "scriptedAnswer": {
+            "sku": "C03",
+            "units": 17
+          }
+        }
+      ],
+      "workers": [
+        {
+          "intent": "A",
+          "crashRequested": true,
+          "exitCode": 77,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-0-1",
+                  "method": "query",
+                  "params": {
+                    "request_type": "view_access_key",
+                    "finality": "final",
+                    "account_id": "owner.crashlab.near",
+                    "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "block_hash": "AqsJFYDfyEAyzZ2uhi7ovE1oBqhAzSe79C8L5nTWRooo",
+                    "block_height": 4,
+                    "nonce": 0,
+                    "permission": "FullAccess"
+                  },
+                  "id": "naive-0-1"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-0-2",
+                  "method": "send_tx",
+                  "params": {
+                    "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0BAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFykj3uwlQMzMyPg66YWfTLCXfUZ621IQPKKXAEkA/dICIBAAAAAwAAgPZK4ccCLRUAAAAAAAAAOyoqrlgbioAW2iu+YqZyMkBthFOBCNXsR5Nkc4O8x5w/eYTzb3QG5UzHHi2NA1Nmx7Tj2zVLe5pdpQEpC3nsCQ==",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "5jmdpjdm1iBTe6sRCM7Ttma1Xkb9z5ibgFpVXmSWe2cT",
+                        "id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "Bj92EENLNcbVzog9rAMC6QCgp1DHVLo975UbNePjp4Pa",
+                        "id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                      "nonce": 1,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:2BcFT4RgzxZ8HrxrRjyTXJU7edgzmi1yL1h6UHdjAt1keiqG5hLLHEUrhQsu2GquGTds5TsedXvfpeM6upkBN5z8",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "4Ln7LfAw92SGCSjfPHqjw3knVAx2kx9CaNmEPsx48yU8",
+                      "id": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "naive-0-2"
+                }
+              }
+            },
+            {
+              "type": "crash",
+              "after": "send_tx returned FINAL",
+              "before": "application acknowledgement / useful output",
+              "tx_hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR"
+            }
+          ]
+        },
+        {
+          "intent": "A",
+          "crashRequested": false,
+          "exitCode": 0,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-1-1",
+                  "method": "query",
+                  "params": {
+                    "request_type": "view_access_key",
+                    "finality": "final",
+                    "account_id": "owner.crashlab.near",
+                    "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "block_hash": "Bj92EENLNcbVzog9rAMC6QCgp1DHVLo975UbNePjp4Pa",
+                    "block_height": 10,
+                    "nonce": 1,
+                    "permission": "FullAccess"
+                  },
+                  "id": "naive-1-1"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-1-2",
+                  "method": "send_tx",
+                  "params": {
+                    "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0CAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyn2BVM2QfSspgKoae9HnypoEHNoVUQuko0dR6fYswXgEBAAAAAwAAgPZK4ccCLRUAAAAAAAAA2AMMC/QEkbbbvWa9yUbrz0zQUavY7TBCJBmi/XU9EiQjiYAQTvpYa4FbCF2JCPtkgqLRYgA4yzmp+phkySa6CQ==",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "9LNhk7Hrcbsdvdr7UBc3mhzGgE3yrdwwktFTXFA4bthh",
+                        "id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                        "id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                      "nonce": 2,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:5KVLpGizpgDS8T8UHFKG2LP42hV6NVrC27fr2DZM7DxDwkSABpMQUC5LfCV3rRv7f6ThPCmHU39NUjQ8KiyXB1ZS",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "Ghx2VgwVHfq37q1fvif3bXg8mLoPK5FrcP632CvQ9LyY",
+                      "id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "naive-1-2"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-1-3",
+                  "method": "tx_status",
+                  "params": {
+                    "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                    "sender_account_id": "owner.crashlab.near",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts": [
+                      {
+                        "predecessor_id": "owner.crashlab.near",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "100000000000000000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "1000000000",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                        "receiver_id": "merchant.crashlab.near"
+                      },
+                      {
+                        "predecessor_id": "system",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "200864306250000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "0",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                        "receiver_id": "owner.crashlab.near"
+                      }
+                    ],
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "9LNhk7Hrcbsdvdr7UBc3mhzGgE3yrdwwktFTXFA4bthh",
+                        "id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                        "id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                      "nonce": 2,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:5KVLpGizpgDS8T8UHFKG2LP42hV6NVrC27fr2DZM7DxDwkSABpMQUC5LfCV3rRv7f6ThPCmHU39NUjQ8KiyXB1ZS",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "Ghx2VgwVHfq37q1fvif3bXg8mLoPK5FrcP632CvQ9LyY",
+                      "id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "naive-1-3"
+                }
+              }
+            },
+            {
+              "type": "ack",
+              "intent": "A",
+              "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+              "recoveredWithoutNewSend": false
+            }
+          ]
+        },
+        {
+          "intent": "B",
+          "crashRequested": false,
+          "exitCode": 0,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-2-1",
+                  "method": "query",
+                  "params": {
+                    "request_type": "view_access_key",
+                    "finality": "final",
+                    "account_id": "owner.crashlab.near",
+                    "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "block_hash": "22TxLhQNE5f6HmRXNKf4BSXg5HsdB5zx8GB4SvmzRUtD",
+                    "block_height": 16,
+                    "nonce": 2,
+                    "permission": "FullAccess"
+                  },
+                  "id": "naive-2-1"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-2-2",
+                  "method": "send_tx",
+                  "params": {
+                    "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0DAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyDzu+r7NyS4pgZ42IloCd/RMjpquSPQZtoVhCW02PnvYBAAAAAwAAgPZK4ccCLRUAAAAAAAAAuVSAxK/m1Cxs5nh8sERBTbJRUlIAP4zLEN/KOmlL1H00I4cgXE04gjbUYHnM9zD3Kfdyv9ByFm5pm/mdA79BCg==",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "8tmXy6QVmYTS8WQjzSPo8TDfDZJErJDLY1smzsHzzvvA",
+                        "id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+                        "id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                      "nonce": 3,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:4humi4Nnmr3S4AyrPWUBaUrj3SiAmZXmCwKggYQ1DXJ3Xbr3ygi7E414DvWfy6UkApnGs93Qg8T4AeKdW8y9MjnH",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "59KJanhAkUJ1XbVUm8Prq7t6mDusRFoL7QGZ5bd43Yzk",
+                      "id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "naive-2-2"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "naive-2-3",
+                  "method": "tx_status",
+                  "params": {
+                    "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                    "sender_account_id": "owner.crashlab.near",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts": [
+                      {
+                        "predecessor_id": "owner.crashlab.near",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "100000000000000000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "1000000000",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                        "receiver_id": "merchant.crashlab.near"
+                      },
+                      {
+                        "predecessor_id": "system",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "200864306250000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "0",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                        "receiver_id": "owner.crashlab.near"
+                      }
+                    ],
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "8tmXy6QVmYTS8WQjzSPo8TDfDZJErJDLY1smzsHzzvvA",
+                        "id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+                        "id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                      "nonce": 3,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:4humi4Nnmr3S4AyrPWUBaUrj3SiAmZXmCwKggYQ1DXJ3Xbr3ygi7E414DvWfy6UkApnGs93Qg8T4AeKdW8y9MjnH",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "59KJanhAkUJ1XbVUm8Prq7t6mDusRFoL7QGZ5bd43Yzk",
+                      "id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "naive-2-3"
+                }
+              }
+            },
+            {
+              "type": "ack",
+              "intent": "B",
+              "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+              "recoveredWithoutNewSend": false
+            }
+          ]
+        }
+      ],
+      "mainnetOrTestnetRequests": 0,
+      "privateKeysExported": false,
+      "chainId": "test-chain-5Yta1",
+      "protocolVersion": 88,
+      "startedAtUtc": "2026-11-03T18:24:59.388654+00:00",
+      "sends": [
+        {
+          "index": 2,
+          "intent": "A",
+          "hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR"
+        },
+        {
+          "index": 4,
+          "intent": "A",
+          "hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di"
+        },
+        {
+          "index": 7,
+          "intent": "B",
+          "hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG"
+        }
+      ],
+      "merchantBefore": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "AqsJFYDfyEAyzZ2uhi7ovE1oBqhAzSe79C8L5nTWRooo",
+        "block_height": 4,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantAfter": {
+        "amount": "10300000000000000000000000",
+        "block_hash": "BZgcdJhESdm3yMW7eXFnqK1w8tn4DXtWmaxMTKAwbUKc",
+        "block_height": 23,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantBalanceIncrease": "300000000000000000000000",
+      "expectedMerchantIncrease": "300000000000000000000000",
+      "ownedNodeStopped": true
+    },
+    {
+      "policy": "durable",
+      "rpcObservations": [
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-observer-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_account",
+              "finality": "final",
+              "account_id": "merchant.crashlab.near"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "amount": "10000000000000000000000000",
+              "block_hash": "8Vi5Siowuewdi9zDe77yoKfF5x7R4WvkesxFWav8kr8Y",
+              "block_height": 4,
+              "code_hash": "11111111111111111111111111111111",
+              "locked": "0",
+              "storage_paid_at": 0,
+              "storage_usage": 100
+            },
+            "id": "durable-observer-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-0-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_access_key",
+              "finality": "final",
+              "account_id": "owner.crashlab.near",
+              "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "block_hash": "8Vi5Siowuewdi9zDe77yoKfF5x7R4WvkesxFWav8kr8Y",
+              "block_height": 4,
+              "nonce": 0,
+              "permission": "FullAccess"
+            },
+            "id": "durable-0-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-0-2",
+            "method": "send_tx",
+            "params": {
+              "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0BAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyb1yEQKFm+MbcGjkyEu2oE9ptgL1oW2GIH39VTIJkAqEBAAAAAwAAgPZK4ccCLRUAAAAAAAAA0+7A1bzvtObR3tmJjCuTCV0GxKU76VH5TywZ1A41obSgCjFwFjUNjkpF+Ua3ofC98lKKySgBa+Z9pr3LhXHPAQ==",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts_outcome": [
+                {
+                  "block_hash": "3imRzGhFnsmdFdT5nDBtu8PzLQS7giK4ono4hS5VnVeZ",
+                  "id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "F66jR4ehsTxRyWoX7wcSoEs8GLyArAmXF3KoskkXubVk",
+                  "id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "nonce": 1,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5EkyvbQ4bGknj7V9nTBagy5nzWnzcRPEXTsNqNwdZrScjRLXtYKmSNzTu3GTkqyLr2Hebekm9d9tqswP1imviS16",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "HCbr9PPXxd2JvEvvpwrBjQkHDuTrMa92czFrkkyscasM",
+                "id": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-0-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-1-1",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "3imRzGhFnsmdFdT5nDBtu8PzLQS7giK4ono4hS5VnVeZ",
+                  "id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "F66jR4ehsTxRyWoX7wcSoEs8GLyArAmXF3KoskkXubVk",
+                  "id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "nonce": 1,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5EkyvbQ4bGknj7V9nTBagy5nzWnzcRPEXTsNqNwdZrScjRLXtYKmSNzTu3GTkqyLr2Hebekm9d9tqswP1imviS16",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "HCbr9PPXxd2JvEvvpwrBjQkHDuTrMa92czFrkkyscasM",
+                "id": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-1-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-2-1",
+            "method": "query",
+            "params": {
+              "request_type": "view_access_key",
+              "finality": "final",
+              "account_id": "owner.crashlab.near",
+              "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "block_hash": "HyTSXfEbX2JwbE36nx78748Nhn4CRFxGbwEx1tjVMMUh",
+              "block_height": 11,
+              "nonce": 1,
+              "permission": "FullAccess"
+            },
+            "id": "durable-2-1"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-2-2",
+            "method": "send_tx",
+            "params": {
+              "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0CAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFy/DFpf3KQpSlAys7gi5dYu3PXBYuCxo6QZ0zcv8KicfYBAAAAAwAAgPZK4ccCLRUAAAAAAAAAY2qWjH+PZ0PI/Gz0ri8jWnl48Yl7XSZF1f5DPdsxL0tmwx0s4iG5jonQMqLRcmiPyx9Hep5YLvY4iDqwVgFJAQ==",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts_outcome": [
+                {
+                  "block_hash": "7txVxTPxEFh65sHHHS8t5jxtepJh5ep9hXiT3WrZQoWM",
+                  "id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+                  "id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:2zHTekyQFoXuKU8qr8Dvp51BZEqPiD4iXjMGrNo8yPY8oNGXGUPXeLs6BJPJA73xHYSR3G2pXxWmP6qK868moRRa",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "CW6QpMpQbQwb5i8w6cD19CxSESgz8ACnNzXHhGJTDNjp",
+                "id": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-2-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-2-3",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "7txVxTPxEFh65sHHHS8t5jxtepJh5ep9hXiT3WrZQoWM",
+                  "id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+                  "id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:2zHTekyQFoXuKU8qr8Dvp51BZEqPiD4iXjMGrNo8yPY8oNGXGUPXeLs6BJPJA73xHYSR3G2pXxWmP6qK868moRRa",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "CW6QpMpQbQwb5i8w6cD19CxSESgz8ACnNzXHhGJTDNjp",
+                "id": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-2-3"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-observer-2",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "3imRzGhFnsmdFdT5nDBtu8PzLQS7giK4ono4hS5VnVeZ",
+                  "id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "F66jR4ehsTxRyWoX7wcSoEs8GLyArAmXF3KoskkXubVk",
+                  "id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "nonce": 1,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:5EkyvbQ4bGknj7V9nTBagy5nzWnzcRPEXTsNqNwdZrScjRLXtYKmSNzTu3GTkqyLr2Hebekm9d9tqswP1imviS16",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "HCbr9PPXxd2JvEvvpwrBjQkHDuTrMa92czFrkkyscasM",
+                "id": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-observer-2"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-observer-3",
+            "method": "tx_status",
+            "params": {
+              "tx_hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+              "sender_account_id": "owner.crashlab.near",
+              "wait_until": "FINAL"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "final_execution_status": "FINAL",
+              "receipts": [
+                {
+                  "predecessor_id": "owner.crashlab.near",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "1000000000",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                  "receiver_id": "merchant.crashlab.near"
+                },
+                {
+                  "predecessor_id": "system",
+                  "priority": 0,
+                  "receipt": {
+                    "Action": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "200864306250000000000"
+                          }
+                        }
+                      ],
+                      "gas_price": "0",
+                      "input_data_ids": [],
+                      "is_promise_yield": false,
+                      "output_data_receivers": [],
+                      "signer_id": "owner.crashlab.near",
+                      "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                    }
+                  },
+                  "receipt_id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                  "receiver_id": "owner.crashlab.near"
+                }
+              ],
+              "receipts_outcome": [
+                {
+                  "block_hash": "7txVxTPxEFh65sHHHS8t5jxtepJh5ep9hXiT3WrZQoWM",
+                  "id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                  "outcome": {
+                    "executor_id": "merchant.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [
+                      "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL"
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "22318256250000000000"
+                  },
+                  "proof": []
+                },
+                {
+                  "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+                  "id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                  "outcome": {
+                    "executor_id": "owner.crashlab.near",
+                    "gas_burnt": 223182562500,
+                    "logs": [],
+                    "metadata": {
+                      "contracts": [
+                        null
+                      ],
+                      "gas_profile": [],
+                      "version": 4
+                    },
+                    "receipt_ids": [],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "tokens_burnt": "0"
+                  },
+                  "proof": []
+                }
+              ],
+              "status": {
+                "SuccessValue": ""
+              },
+              "transaction": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "100000000000000000000000"
+                    }
+                  }
+                ],
+                "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "nonce": 2,
+                "priority_fee": 0,
+                "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                "receiver_id": "merchant.crashlab.near",
+                "signature": "ed25519:2zHTekyQFoXuKU8qr8Dvp51BZEqPiD4iXjMGrNo8yPY8oNGXGUPXeLs6BJPJA73xHYSR3G2pXxWmP6qK868moRRa",
+                "signer_id": "owner.crashlab.near"
+              },
+              "transaction_outcome": {
+                "block_hash": "CW6QpMpQbQwb5i8w6cD19CxSESgz8ACnNzXHhGJTDNjp",
+                "id": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                "outcome": {
+                  "executor_id": "owner.crashlab.near",
+                  "gas_burnt": 223182562500,
+                  "logs": [],
+                  "metadata": {
+                    "gas_profile": null,
+                    "version": 1
+                  },
+                  "receipt_ids": [
+                    "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  ],
+                  "status": {
+                    "SuccessReceiptId": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                  },
+                  "tokens_burnt": "22318256250000000000"
+                },
+                "proof": []
+              }
+            },
+            "id": "durable-observer-3"
+          }
+        },
+        {
+          "request": {
+            "jsonrpc": "2.0",
+            "id": "durable-observer-4",
+            "method": "query",
+            "params": {
+              "request_type": "view_account",
+              "finality": "final",
+              "account_id": "merchant.crashlab.near"
+            }
+          },
+          "response": {
+            "jsonrpc": "2.0",
+            "result": {
+              "amount": "10200000000000000000000000",
+              "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+              "block_height": 17,
+              "code_hash": "11111111111111111111111111111111",
+              "locked": "0",
+              "storage_paid_at": 0,
+              "storage_usage": 100
+            },
+            "id": "durable-observer-4"
+          }
+        }
+      ],
+      "utilityObservations": [
+        {
+          "invoice": "A",
+          "requestedVersion": "v1",
+          "httpStatus": 200,
+          "responseUtf8": "{\"resource\": \"inventory-snapshot\", \"version\": \"v1\", \"invoice\": \"A\", \"source\": \"owned-local-merchant\", \"rows\": [{\"sku\": \"A01\", \"available\": 7, \"forecast\": 21}, {\"sku\": \"B02\", \"available\": 11, \"forecast\": 10}, {\"sku\": \"C03\", \"available\": 2, \"forecast\": 19}]}",
+          "scriptedAnswer": {
+            "sku": "C03",
+            "units": 17
+          }
+        },
+        {
+          "invoice": "B",
+          "requestedVersion": "v1",
+          "httpStatus": 200,
+          "responseUtf8": "{\"resource\": \"inventory-snapshot\", \"version\": \"v1\", \"invoice\": \"B\", \"source\": \"owned-local-merchant\", \"rows\": [{\"sku\": \"A01\", \"available\": 7, \"forecast\": 21}, {\"sku\": \"B02\", \"available\": 11, \"forecast\": 10}, {\"sku\": \"C03\", \"available\": 2, \"forecast\": 19}]}",
+          "scriptedAnswer": {
+            "sku": "C03",
+            "units": 17
+          }
+        }
+      ],
+      "workers": [
+        {
+          "intent": "A",
+          "crashRequested": true,
+          "exitCode": 77,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-0-1",
+                  "method": "query",
+                  "params": {
+                    "request_type": "view_access_key",
+                    "finality": "final",
+                    "account_id": "owner.crashlab.near",
+                    "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "block_hash": "8Vi5Siowuewdi9zDe77yoKfF5x7R4WvkesxFWav8kr8Y",
+                    "block_height": 4,
+                    "nonce": 0,
+                    "permission": "FullAccess"
+                  },
+                  "id": "durable-0-1"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-0-2",
+                  "method": "send_tx",
+                  "params": {
+                    "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0BAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFyb1yEQKFm+MbcGjkyEu2oE9ptgL1oW2GIH39VTIJkAqEBAAAAAwAAgPZK4ccCLRUAAAAAAAAA0+7A1bzvtObR3tmJjCuTCV0GxKU76VH5TywZ1A41obSgCjFwFjUNjkpF+Ua3ofC98lKKySgBa+Z9pr3LhXHPAQ==",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "3imRzGhFnsmdFdT5nDBtu8PzLQS7giK4ono4hS5VnVeZ",
+                        "id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "F66jR4ehsTxRyWoX7wcSoEs8GLyArAmXF3KoskkXubVk",
+                        "id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                      "nonce": 1,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:5EkyvbQ4bGknj7V9nTBagy5nzWnzcRPEXTsNqNwdZrScjRLXtYKmSNzTu3GTkqyLr2Hebekm9d9tqswP1imviS16",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "HCbr9PPXxd2JvEvvpwrBjQkHDuTrMa92czFrkkyscasM",
+                      "id": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "durable-0-2"
+                }
+              }
+            },
+            {
+              "type": "crash",
+              "after": "send_tx returned FINAL",
+              "before": "application acknowledgement / useful output",
+              "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB"
+            }
+          ]
+        },
+        {
+          "intent": "A",
+          "crashRequested": false,
+          "exitCode": 0,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-1-1",
+                  "method": "tx_status",
+                  "params": {
+                    "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                    "sender_account_id": "owner.crashlab.near",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts": [
+                      {
+                        "predecessor_id": "owner.crashlab.near",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "100000000000000000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "1000000000",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                        "receiver_id": "merchant.crashlab.near"
+                      },
+                      {
+                        "predecessor_id": "system",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "200864306250000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "0",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                        "receiver_id": "owner.crashlab.near"
+                      }
+                    ],
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "3imRzGhFnsmdFdT5nDBtu8PzLQS7giK4ono4hS5VnVeZ",
+                        "id": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "F66jR4ehsTxRyWoX7wcSoEs8GLyArAmXF3KoskkXubVk",
+                        "id": "GZp4Zh9Nn28ZH9M1cX7ohkp939bM62sgeUoFQfWCv6UB",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                      "nonce": 1,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:5EkyvbQ4bGknj7V9nTBagy5nzWnzcRPEXTsNqNwdZrScjRLXtYKmSNzTu3GTkqyLr2Hebekm9d9tqswP1imviS16",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "HCbr9PPXxd2JvEvvpwrBjQkHDuTrMa92czFrkkyscasM",
+                      "id": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "9AMZyUayVJgaNmRdFVcWKnGmjCSWHZ6eoma7Cnnifz3r"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "durable-1-1"
+                }
+              }
+            },
+            {
+              "type": "ack",
+              "intent": "A",
+              "tx_hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB",
+              "recoveredWithoutNewSend": true
+            }
+          ]
+        },
+        {
+          "intent": "B",
+          "crashRequested": false,
+          "exitCode": 0,
+          "events": [
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-2-1",
+                  "method": "query",
+                  "params": {
+                    "request_type": "view_access_key",
+                    "finality": "final",
+                    "account_id": "owner.crashlab.near",
+                    "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "block_hash": "HyTSXfEbX2JwbE36nx78748Nhn4CRFxGbwEx1tjVMMUh",
+                    "block_height": 11,
+                    "nonce": 1,
+                    "permission": "FullAccess"
+                  },
+                  "id": "durable-2-1"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-2-2",
+                  "method": "send_tx",
+                  "params": {
+                    "signed_tx_base64": "EwAAAG93bmVyLmNyYXNobGFiLm5lYXIAgooo6gyOWJquQLTs+1ggBCsXk0u2DYs+a+mho5ybvz0CAAAAAAAAABYAAABtZXJjaGFudC5jcmFzaGxhYi5uZWFy/DFpf3KQpSlAys7gi5dYu3PXBYuCxo6QZ0zcv8KicfYBAAAAAwAAgPZK4ccCLRUAAAAAAAAAY2qWjH+PZ0PI/Gz0ri8jWnl48Yl7XSZF1f5DPdsxL0tmwx0s4iG5jonQMqLRcmiPyx9Hep5YLvY4iDqwVgFJAQ==",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "7txVxTPxEFh65sHHHS8t5jxtepJh5ep9hXiT3WrZQoWM",
+                        "id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+                        "id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                      "nonce": 2,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:2zHTekyQFoXuKU8qr8Dvp51BZEqPiD4iXjMGrNo8yPY8oNGXGUPXeLs6BJPJA73xHYSR3G2pXxWmP6qK868moRRa",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "CW6QpMpQbQwb5i8w6cD19CxSESgz8ACnNzXHhGJTDNjp",
+                      "id": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "durable-2-2"
+                }
+              }
+            },
+            {
+              "type": "rpc",
+              "record": {
+                "request": {
+                  "jsonrpc": "2.0",
+                  "id": "durable-2-3",
+                  "method": "tx_status",
+                  "params": {
+                    "tx_hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                    "sender_account_id": "owner.crashlab.near",
+                    "wait_until": "FINAL"
+                  }
+                },
+                "response": {
+                  "jsonrpc": "2.0",
+                  "result": {
+                    "final_execution_status": "FINAL",
+                    "receipts": [
+                      {
+                        "predecessor_id": "owner.crashlab.near",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "100000000000000000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "1000000000",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                        "receiver_id": "merchant.crashlab.near"
+                      },
+                      {
+                        "predecessor_id": "system",
+                        "priority": 0,
+                        "receipt": {
+                          "Action": {
+                            "actions": [
+                              {
+                                "Transfer": {
+                                  "deposit": "200864306250000000000"
+                                }
+                              }
+                            ],
+                            "gas_price": "0",
+                            "input_data_ids": [],
+                            "is_promise_yield": false,
+                            "output_data_receivers": [],
+                            "signer_id": "owner.crashlab.near",
+                            "signer_public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ"
+                          }
+                        },
+                        "receipt_id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                        "receiver_id": "owner.crashlab.near"
+                      }
+                    ],
+                    "receipts_outcome": [
+                      {
+                        "block_hash": "7txVxTPxEFh65sHHHS8t5jxtepJh5ep9hXiT3WrZQoWM",
+                        "id": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE",
+                        "outcome": {
+                          "executor_id": "merchant.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [
+                            "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL"
+                          ],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "22318256250000000000"
+                        },
+                        "proof": []
+                      },
+                      {
+                        "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+                        "id": "DQNqeGVhp64fiV7Mq9kMeg1t9N56qFFENZfzdChd9pjL",
+                        "outcome": {
+                          "executor_id": "owner.crashlab.near",
+                          "gas_burnt": 223182562500,
+                          "logs": [],
+                          "metadata": {
+                            "contracts": [
+                              null
+                            ],
+                            "gas_profile": [],
+                            "version": 4
+                          },
+                          "receipt_ids": [],
+                          "status": {
+                            "SuccessValue": ""
+                          },
+                          "tokens_burnt": "0"
+                        },
+                        "proof": []
+                      }
+                    ],
+                    "status": {
+                      "SuccessValue": ""
+                    },
+                    "transaction": {
+                      "actions": [
+                        {
+                          "Transfer": {
+                            "deposit": "100000000000000000000000"
+                          }
+                        }
+                      ],
+                      "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                      "nonce": 2,
+                      "priority_fee": 0,
+                      "public_key": "ed25519:9naC21ZVisyauYY8FArs1KVr6tcXqvk2nRgxJdUpSUdJ",
+                      "receiver_id": "merchant.crashlab.near",
+                      "signature": "ed25519:2zHTekyQFoXuKU8qr8Dvp51BZEqPiD4iXjMGrNo8yPY8oNGXGUPXeLs6BJPJA73xHYSR3G2pXxWmP6qK868moRRa",
+                      "signer_id": "owner.crashlab.near"
+                    },
+                    "transaction_outcome": {
+                      "block_hash": "CW6QpMpQbQwb5i8w6cD19CxSESgz8ACnNzXHhGJTDNjp",
+                      "id": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+                      "outcome": {
+                        "executor_id": "owner.crashlab.near",
+                        "gas_burnt": 223182562500,
+                        "logs": [],
+                        "metadata": {
+                          "gas_profile": null,
+                          "version": 1
+                        },
+                        "receipt_ids": [
+                          "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                        ],
+                        "status": {
+                          "SuccessReceiptId": "D11L9tbyTFdW7gFvBGVh12davFoFEdpF6hYJaJT2YrtE"
+                        },
+                        "tokens_burnt": "22318256250000000000"
+                      },
+                      "proof": []
+                    }
+                  },
+                  "id": "durable-2-3"
+                }
+              }
+            },
+            {
+              "type": "ack",
+              "intent": "B",
+              "tx_hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk",
+              "recoveredWithoutNewSend": false
+            }
+          ]
+        }
+      ],
+      "mainnetOrTestnetRequests": 0,
+      "privateKeysExported": false,
+      "chainId": "test-chain-5eaTJ",
+      "protocolVersion": 88,
+      "startedAtUtc": "2026-11-03T18:25:02.842824+00:00",
+      "sends": [
+        {
+          "index": 2,
+          "intent": "A",
+          "hash": "CKgUxUE7Kda32wqxukmHkghKcKZx3fyDqWD8WNNstADB"
+        },
+        {
+          "index": 5,
+          "intent": "B",
+          "hash": "6UpFLmPCrvfE9aoo2dPyhC4MQFn1n8s6RL8Mce6D5Rtk"
+        }
+      ],
+      "merchantBefore": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "8Vi5Siowuewdi9zDe77yoKfF5x7R4WvkesxFWav8kr8Y",
+        "block_height": 4,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantAfter": {
+        "amount": "10200000000000000000000000",
+        "block_hash": "6ecWRsWvat8zC7bX5ygxMXHsX27C6qYQSeZ7nrNQfvvr",
+        "block_height": 17,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantBalanceIncrease": "200000000000000000000000",
+      "expectedMerchantIncrease": "200000000000000000000000",
+      "ownedNodeStopped": true
+    }
+  ],
+  "ownedNodeStopped": true,
+  "nativeSendAttempts": 5,
+  "privateKeysExported": false,
+  "temporaryOwnedHome": "/tmp/acl-owned-native-xojy4seu"
+}

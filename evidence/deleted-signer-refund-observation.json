@@ -1,0 +1,776 @@
+{
+  "startedAt": "2026-11-02T23:16:07.111575+00:00",
+  "mode": "isolated_local_sandbox",
+  "experiment": "Research direct owned signer deletion, successful beneficiary payout and failed gas refund",
+  "officialFixtureSha256": "a2ad8d2da73576d23f3104c6c5d789569534de517678b8b3842e8668764a5082",
+  "home": "/tmp/agent-crash-lab-20261102/deleted-signer-refund-0330bdd05699",
+  "mainnetOrTestnetRequests": 0,
+  "walletConnected": false,
+  "privateKeysExported": false,
+  "fixtureWarning": "Reusable genesis contains official fixture, but no contract method is invoked: One direct disposable owner self-deletion only, no fixture contract invoked.",
+  "rpcObservations": [
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-1",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "owner.depositlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "100000000000000000000000000",
+          "block_hash": "BcEVKkkJShgEFCcAgMRXkWS4mptSgJYAr9NgXYq3nz7N",
+          "block_height": 4,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "callback-research-1"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-2",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "merchant.repaymentlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "10000000000000000000000000",
+          "block_hash": "BcEVKkkJShgEFCcAgMRXkWS4mptSgJYAr9NgXYq3nz7N",
+          "block_height": 4,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 100
+        },
+        "id": "callback-research-2"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-3",
+        "method": "query",
+        "params": {
+          "request_type": "view_access_key",
+          "finality": "final",
+          "account_id": "owner.depositlab.near",
+          "public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "block_hash": "BcEVKkkJShgEFCcAgMRXkWS4mptSgJYAr9NgXYq3nz7N",
+          "block_height": 4,
+          "nonce": 0,
+          "permission": "FullAccess"
+        },
+        "id": "callback-research-3"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-4",
+        "method": "send_tx",
+        "params": {
+          "signed_tx_base64": "FQAAAG93bmVyLmRlcG9zaXRsYWIubmVhcgBrAuxt8TDYnhhQ4CKC3UEr0PUrUKg5tCTnPJOmxZaE9AEAAAAAAAAAFQAAAG93bmVyLmRlcG9zaXRsYWIubmVhcp2bcupcrWRQc/ILvJcEVrX/am/+8D9EERilN8ltf+1dAQAAAAcaAAAAbWVyY2hhbnQucmVwYXltZW50bGFiLm5lYXIAW4b4Lb0Um+AoTlSpz3OCLwnMhbhjUO3LfgQPOH0R+hMx203HaTixQHgE/JIDDuQnYsVEBQBxPpDd6R9iXjpCBA==",
+          "wait_until": "FINAL"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "FINAL",
+          "receipts_outcome": [
+            {
+              "block_hash": "52nazk1thCacnChowK75qWJR11kHPbD7M3gttCf2qkxZ",
+              "id": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt",
+              "outcome": {
+                "executor_id": "owner.depositlab.near",
+                "gas_burnt": 255548500000,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [
+                  "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+                  "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi"
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "25554850000000000000"
+              },
+              "proof": [
+                {
+                  "direction": "Left",
+                  "hash": "24wju2HYpKrdCyY7s1d9Q123m3KxajbSr9QwsbEbXyxc"
+                }
+              ]
+            },
+            {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "id": "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+              "outcome": {
+                "executor_id": "merchant.repaymentlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "0"
+              },
+              "proof": [
+                {
+                  "direction": "Right",
+                  "hash": "Fr1MLccRoJ378tirEAzP6porAzQVySuPx5vFZKcdVSXu"
+                }
+              ]
+            },
+            {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "id": "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi",
+              "outcome": {
+                "executor_id": "owner.depositlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [],
+                "status": {
+                  "Failure": {
+                    "ActionError": {
+                      "index": 0,
+                      "kind": {
+                        "AccountDoesNotExist": {
+                          "account_id": "owner.depositlab.near"
+                        }
+                      }
+                    }
+                  }
+                },
+                "tokens_burnt": "0"
+              },
+              "proof": [
+                {
+                  "direction": "Left",
+                  "hash": "2vNc3KgKzxbqnbzY67jgN5m5N2zvyHHPAM7Y7xf8tsHa"
+                }
+              ]
+            }
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "transaction": {
+            "actions": [
+              {
+                "DeleteAccount": {
+                  "beneficiary_id": "merchant.repaymentlab.near"
+                }
+              }
+            ],
+            "hash": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+            "nonce": 1,
+            "priority_fee": 0,
+            "public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q",
+            "receiver_id": "owner.depositlab.near",
+            "signature": "ed25519:2q8rpDsUBtMaeWQjEZ9EFFb9iWqMr2M3d6UN3FsccaLQP1hQ9SmAbNnJDeCgtUC7bpYZxFcsKhfudGSPfKokaSnw",
+            "signer_id": "owner.depositlab.near"
+          },
+          "transaction_outcome": {
+            "block_hash": "52nazk1thCacnChowK75qWJR11kHPbD7M3gttCf2qkxZ",
+            "id": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+            "outcome": {
+              "executor_id": "owner.depositlab.near",
+              "gas_burnt": 255548500000,
+              "logs": [],
+              "metadata": {
+                "gas_profile": null,
+                "version": 1
+              },
+              "receipt_ids": [
+                "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt"
+              ],
+              "status": {
+                "SuccessReceiptId": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt"
+              },
+              "tokens_burnt": "25554850000000000000"
+            },
+            "proof": [
+              {
+                "direction": "Right",
+                "hash": "Fw4DRZmAFgUa5Vu6pQzq2HAfC3p7mk1qJekfbavDfKip"
+              }
+            ]
+          }
+        },
+        "id": "callback-research-4"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-5",
+        "method": "tx_status",
+        "params": {
+          "tx_hash": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+          "sender_account_id": "owner.depositlab.near",
+          "wait_until": "FINAL"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "FINAL",
+          "receipts": [
+            {
+              "predecessor_id": "system",
+              "priority": 0,
+              "receipt": {
+                "Action": {
+                  "actions": [
+                    {
+                      "Transfer": {
+                        "deposit": "99999718896650000000000000"
+                      }
+                    }
+                  ],
+                  "gas_price": "0",
+                  "input_data_ids": [],
+                  "is_promise_yield": false,
+                  "output_data_receivers": [],
+                  "signer_id": "system",
+                  "signer_public_key": "ed25519:11111111111111111111111111111111"
+                }
+              },
+              "receipt_id": "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+              "receiver_id": "merchant.repaymentlab.near"
+            },
+            {
+              "predecessor_id": "system",
+              "priority": 0,
+              "receipt": {
+                "Action": {
+                  "actions": [
+                    {
+                      "Transfer": {
+                        "deposit": "229993650000000000000"
+                      }
+                    }
+                  ],
+                  "gas_price": "0",
+                  "input_data_ids": [],
+                  "is_promise_yield": false,
+                  "output_data_receivers": [],
+                  "signer_id": "owner.depositlab.near",
+                  "signer_public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q"
+                }
+              },
+              "receipt_id": "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi",
+              "receiver_id": "owner.depositlab.near"
+            }
+          ],
+          "receipts_outcome": [
+            {
+              "block_hash": "52nazk1thCacnChowK75qWJR11kHPbD7M3gttCf2qkxZ",
+              "id": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt",
+              "outcome": {
+                "executor_id": "owner.depositlab.near",
+                "gas_burnt": 255548500000,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [
+                  "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+                  "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi"
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "25554850000000000000"
+              },
+              "proof": [
+                {
+                  "direction": "Left",
+                  "hash": "24wju2HYpKrdCyY7s1d9Q123m3KxajbSr9QwsbEbXyxc"
+                }
+              ]
+            },
+            {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "id": "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+              "outcome": {
+                "executor_id": "merchant.repaymentlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "0"
+              },
+              "proof": [
+                {
+                  "direction": "Right",
+                  "hash": "Fr1MLccRoJ378tirEAzP6porAzQVySuPx5vFZKcdVSXu"
+                }
+              ]
+            },
+            {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "id": "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi",
+              "outcome": {
+                "executor_id": "owner.depositlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [],
+                "status": {
+                  "Failure": {
+                    "ActionError": {
+                      "index": 0,
+                      "kind": {
+                        "AccountDoesNotExist": {
+                          "account_id": "owner.depositlab.near"
+                        }
+                      }
+                    }
+                  }
+                },
+                "tokens_burnt": "0"
+              },
+              "proof": [
+                {
+                  "direction": "Left",
+                  "hash": "2vNc3KgKzxbqnbzY67jgN5m5N2zvyHHPAM7Y7xf8tsHa"
+                }
+              ]
+            }
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "transaction": {
+            "actions": [
+              {
+                "DeleteAccount": {
+                  "beneficiary_id": "merchant.repaymentlab.near"
+                }
+              }
+            ],
+            "hash": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+            "nonce": 1,
+            "priority_fee": 0,
+            "public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q",
+            "receiver_id": "owner.depositlab.near",
+            "signature": "ed25519:2q8rpDsUBtMaeWQjEZ9EFFb9iWqMr2M3d6UN3FsccaLQP1hQ9SmAbNnJDeCgtUC7bpYZxFcsKhfudGSPfKokaSnw",
+            "signer_id": "owner.depositlab.near"
+          },
+          "transaction_outcome": {
+            "block_hash": "52nazk1thCacnChowK75qWJR11kHPbD7M3gttCf2qkxZ",
+            "id": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+            "outcome": {
+              "executor_id": "owner.depositlab.near",
+              "gas_burnt": 255548500000,
+              "logs": [],
+              "metadata": {
+                "gas_profile": null,
+                "version": 1
+              },
+              "receipt_ids": [
+                "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt"
+              ],
+              "status": {
+                "SuccessReceiptId": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt"
+              },
+              "tokens_burnt": "25554850000000000000"
+            },
+            "proof": [
+              {
+                "direction": "Right",
+                "hash": "Fw4DRZmAFgUa5Vu6pQzq2HAfC3p7mk1qJekfbavDfKip"
+              }
+            ]
+          }
+        },
+        "id": "callback-research-5"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-6",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "merchant.repaymentlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "109999718896650000000000000",
+          "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+          "block_height": 9,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 100
+        },
+        "id": "callback-research-6"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-7",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "owner.depositlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "block_height": 9,
+              "requested_account_id": "owner.depositlab.near"
+            },
+            "name": "UNKNOWN_ACCOUNT"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "account owner.depositlab.near does not exist while viewing"
+        },
+        "id": "callback-research-7"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "DS01",
+      "txHash": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+      "checks": {
+        "final": true,
+        "rootSuccess": true,
+        "signedDeletionMatches": true,
+        "initialOutcomeSuccess": true,
+        "initialBodyOmission": true,
+        "ownerExplicitlyAbsent": true,
+        "oneSuccessfulBeneficiaryPayout": true,
+        "beneficiaryDeltaExactPayout": true,
+        "gasRefundsObserved": true,
+        "allGasRefundsFailAtDeletedSigner": true
+      },
+      "ownerBefore": {
+        "amount": "100000000000000000000000000",
+        "block_hash": "BcEVKkkJShgEFCcAgMRXkWS4mptSgJYAr9NgXYq3nz7N",
+        "block_height": 4,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "ownerAfterAbsenceResponse": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+              "block_height": 9,
+              "requested_account_id": "owner.depositlab.near"
+            },
+            "name": "UNKNOWN_ACCOUNT"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "account owner.depositlab.near does not exist while viewing"
+        },
+        "id": "callback-research-7"
+      },
+      "beneficiaryBefore": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "BcEVKkkJShgEFCcAgMRXkWS4mptSgJYAr9NgXYq3nz7N",
+        "block_height": 4,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "beneficiaryAfter": {
+        "amount": "109999718896650000000000000",
+        "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+        "block_height": 9,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "beneficiaryDelta": "99999718896650000000000000",
+      "signedTransaction": {
+        "actions": [
+          {
+            "DeleteAccount": {
+              "beneficiary_id": "merchant.repaymentlab.near"
+            }
+          }
+        ],
+        "hash": "HJKdCMAnAKGJakY49Bsw1CqAUCzqXjTjuRSLP5fCdQWp",
+        "nonce": 1,
+        "priority_fee": 0,
+        "public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q",
+        "receiver_id": "owner.depositlab.near",
+        "signature": "ed25519:2q8rpDsUBtMaeWQjEZ9EFFb9iWqMr2M3d6UN3FsccaLQP1hQ9SmAbNnJDeCgtUC7bpYZxFcsKhfudGSPfKokaSnw",
+        "signer_id": "owner.depositlab.near"
+      },
+      "initialReceiptId": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt",
+      "initialObservedBodies": [],
+      "initialObservedOutcomes": [
+        {
+          "block_hash": "52nazk1thCacnChowK75qWJR11kHPbD7M3gttCf2qkxZ",
+          "id": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt",
+          "outcome": {
+            "executor_id": "owner.depositlab.near",
+            "gas_burnt": 255548500000,
+            "logs": [],
+            "metadata": {
+              "contracts": [
+                null
+              ],
+              "gas_profile": [],
+              "version": 4
+            },
+            "receipt_ids": [
+              "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+              "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi"
+            ],
+            "status": {
+              "SuccessValue": ""
+            },
+            "tokens_burnt": "25554850000000000000"
+          },
+          "proof": [
+            {
+              "direction": "Left",
+              "hash": "24wju2HYpKrdCyY7s1d9Q123m3KxajbSr9QwsbEbXyxc"
+            }
+          ]
+        }
+      ],
+      "derivedInitialContext": {
+        "provenance": "Signed transaction actions plus actual initial receipt id/outcome; NOT an observed receipt body",
+        "actions": [
+          {
+            "DeleteAccount": {
+              "beneficiary_id": "merchant.repaymentlab.near"
+            }
+          }
+        ],
+        "receiptId": "9k9i5rNDKYPEAT4nDvCYVST8L1z68HGxxTZ78iXD6vvt"
+      },
+      "beneficiaryPayouts": [
+        {
+          "body": {
+            "predecessor_id": "system",
+            "priority": 0,
+            "receipt": {
+              "Action": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "99999718896650000000000000"
+                    }
+                  }
+                ],
+                "gas_price": "0",
+                "input_data_ids": [],
+                "is_promise_yield": false,
+                "output_data_receivers": [],
+                "signer_id": "system",
+                "signer_public_key": "ed25519:11111111111111111111111111111111"
+              }
+            },
+            "receipt_id": "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+            "receiver_id": "merchant.repaymentlab.near"
+          },
+          "outcome": {
+            "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+            "id": "4VTsy7YBKtEyPfxsdPTyLAtv1Sq1z7RwjdzbJziZi3uv",
+            "outcome": {
+              "executor_id": "merchant.repaymentlab.near",
+              "gas_burnt": 223182562500,
+              "logs": [],
+              "metadata": {
+                "contracts": [
+                  null
+                ],
+                "gas_profile": [],
+                "version": 4
+              },
+              "receipt_ids": [],
+              "status": {
+                "SuccessValue": ""
+              },
+              "tokens_burnt": "0"
+            },
+            "proof": [
+              {
+                "direction": "Right",
+                "hash": "Fr1MLccRoJ378tirEAzP6porAzQVySuPx5vFZKcdVSXu"
+              }
+            ]
+          },
+          "amount": "99999718896650000000000000"
+        }
+      ],
+      "originalSignerGasRefunds": [
+        {
+          "body": {
+            "predecessor_id": "system",
+            "priority": 0,
+            "receipt": {
+              "Action": {
+                "actions": [
+                  {
+                    "Transfer": {
+                      "deposit": "229993650000000000000"
+                    }
+                  }
+                ],
+                "gas_price": "0",
+                "input_data_ids": [],
+                "is_promise_yield": false,
+                "output_data_receivers": [],
+                "signer_id": "owner.depositlab.near",
+                "signer_public_key": "ed25519:8CjD8y9ZtzGeZTdNdQSMNJdEBURAQSaRqHXTm8VUox5q"
+              }
+            },
+            "receipt_id": "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi",
+            "receiver_id": "owner.depositlab.near"
+          },
+          "outcome": {
+            "block_hash": "Ezv5cAKSDi93nLWKhJdxP8mykw9GiQeziokCTeqD2SLn",
+            "id": "9RDdtpXb6ce8p6vTZEm793MPWtaMp1JgvZmnW2XbQTpi",
+            "outcome": {
+              "executor_id": "owner.depositlab.near",
+              "gas_burnt": 223182562500,
+              "logs": [],
+              "metadata": {
+                "contracts": [
+                  null
+                ],
+                "gas_profile": [],
+                "version": 4
+              },
+              "receipt_ids": [],
+              "status": {
+                "Failure": {
+                  "ActionError": {
+                    "index": 0,
+                    "kind": {
+                      "AccountDoesNotExist": {
+                        "account_id": "owner.depositlab.near"
+                      }
+                    }
+                  }
+                }
+              },
+              "tokens_burnt": "0"
+            },
+            "proof": [
+              {
+                "direction": "Left",
+                "hash": "2vNc3KgKzxbqnbzY67jgN5m5N2zvyHHPAM7Y7xf8tsHa"
+              }
+            ]
+          },
+          "amount": "229993650000000000000"
+        }
+      ],
+      "rawGraphUnmodified": true,
+      "interpretation": "Successful deletion and principal payout, failed gas return to deleted signer. No measured total-supply burn or current production regression claim."
+    }
+  ],
+  "ownedNodePid": 12,
+  "rpcEndpoint": "http://127.0.0.1:38287",
+  "chainId": "test-chain-3N46S",
+  "protocolVersion": 88,
+  "authority": {
+    "operation": "delete owned disposable signer",
+    "owner": "owner.depositlab.near",
+    "receiver": "owner.depositlab.near",
+    "beneficiary": "merchant.repaymentlab.near",
+    "noTaskInvoice": true
+  },
+  "allAssertionsPassed": true,
+  "outcome": "deleted_signer_refund_pattern_observed",
+  "ownedNodeStopped": true,
+  "nodeExitCodeAfterCleanup": 0,
+  "finishedAt": "2026-11-02T23:16:09.327619+00:00",
+  "derivation": {
+    "at": "2026-11-02T23:16:03.528660+00:00",
+    "baseSavedSha256": "f7ab6726d15d1293834950496fd8f3ec025175ef2d7c5841af1be0ee8f5a7ca3",
+    "stepsSha256": "20960b92d7d7e5a2f721cc69ff2fbd004977144c7ff4968d9564fb675cbda6b1",
+    "composedSavedAndStreamedSha256": "ea71ce74f7a8cd7ea093af23963d281976e1c8635a360b785b06c40f815a7eeb",
+    "planSha256": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca"
+  },
+  "launcherExitCode": 0
+}

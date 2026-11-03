@@ -1,0 +1,7 @@
+{
+  "kind": "Research-only plan fixed before run",
+  "question": "Does a receipt containing a native Transfer commit that transfer when its own status is SuccessReceiptId, even if the returned child later fails?",
+  "cases": ["Transfer1 NEAR plus call_promise returning a child that panics", "Same outer batch and amount, child returns a successful value"],
+  "expected": "Containing transfer receipt succeeds with SuccessReceiptId in both cases; recipient keeps1 NEAR each. Only final returned child result differs.",
+  "limits": "Official unrestricted fixture on isolated local node. No production guard, model or external payment. Source-grounded hypothesis, not a claimed new protocol feature."
+}

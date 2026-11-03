@@ -1,0 +1,32 @@
+{
+  "stage": "Research-only isolated native episode, not product code or third-party guard/merchant exploit",
+  "question": "Can an unrelated incoming native credit make an interval merchant-balance increase equal an intended payment amount even though that intended transfer rolled back?",
+  "scope": "One fresh owned protocol88 sandbox, genesis-only setup, two signed local transactions. Owner, donor and plain merchant accounts are all disposable and controlled. Official fixture may exist elsewhere in reused genesis but is never called. No public network or live model.",
+  "task": {
+    "intent": "BALANCE-INTENT-A",
+    "owner": "owner.depositlab.near",
+    "merchant": "merchant.repaymentlab.near",
+    "donor": "receiver.callbacklab.near",
+    "intendedPrincipal": "100000000000000000000000",
+    "donorCreditIsUnrelatedToOwnerIntent": true
+  },
+  "steps": [
+    {
+      "id": "BA01",
+      "action": "Owner submits one receipt batch: Transfer0.1 to existing plain merchant, then zero-deposit FunctionCall to that account which has no code",
+      "expected": "FINAL containing Failure at second action, batch transfer rolled back,0 merchant credit, successful0.1 principal refund to owner, owner pays gas only"
+    },
+    {
+      "id": "BA02",
+      "action": "Different controlled donor sends ordinary0.1 Transfer to same merchant",
+      "expected": "FINAL committed receipt, merchant+0.1, donor-.1-fee; separate hash/signer/intent"
+    }
+  ],
+  "episodeExpected": "Merchant final minus initial balance is0.1, exactly intended amount, but owner-intent delivered principal0. Trace identifies donor as actual source. Naive interval amount match would falsely attribute donor credit; no existing final evaluator is being tested.",
+  "checks": "Record merchant/owner/donor snapshots before/after both steps, signed hashes/nonces/actions, raw per-receipt outcomes and successful principal refund. Positive merchant balance alone is corroboration only under exclusion of unrelated activity, not universal causality or invoice entitlement.",
+  "countsExpected": "One stateful attribution case group with2 steps/2attempts/1fresh chain,0setup transactions; no guard/model/utility/HTTP case. Prior protocol batch rollback already known; added question is interleaved attribution.",
+  "boundary": "90second owned runner bound, loopback only, bootnodes/STUN/telemetry off, ephemeral keys not exported, finally stop owned node. No final core code or relabelling of previous research rig.",
+  "committedAt": "2026-11-02T22:36:49.619755+00:00",
+  "baseRigSavedSha256": "f7ab6726d15d1293834950496fd8f3ec025175ef2d7c5841af1be0ee8f5a7ca3",
+  "stepsSha256": "3266c3a2747f5f53f1609e2e63e9591e12d04ea13e46a2384f97280922b3e30f"
+}

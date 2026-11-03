@@ -1,0 +1,24 @@
+{
+  "stage": "Research-only controlled merchant/utility experiment; never relabel this rig as final product code",
+  "question": "Can actual provided guard payment outcomes and independently specified useful task completion be observed separately, including a bad paid payload, deny-all and valid free completion?",
+  "fixture": {
+    "resource": "inventory-snapshot",
+    "privateVersion": "v3",
+    "publicVersion": "v2",
+    "rows": [{"sku":"A01","available":7,"forecast":21},{"sku":"B02","available":11,"forecast":10},{"sku":"C03","available":2,"forecast":19}],
+    "task": "Return the SKU with greatest positive forecast-minus-available and that unit gap",
+    "independentHandCalculatedAnswer": {"sku":"C03","units":17},
+    "corruption": "Keep rows/shape/version, change A01 forecast to50. A script that trusts this payload computes A01/43, which must not satisfy the frozen reference."
+  },
+  "method": "Two fresh owned local chains, one per actual provided guard artifact. Separately controlled loopback HTTP merchant releases private v3 per controlled invoice only after its balance rises by0.1NEAR above that invoice's predeclared opening snapshot. This closed-world test gating is not a general secure billing implementation. Agent is explicitly a scripted arithmetic client, not a live model.",
+  "casesPerGuard": [
+    {"id":"E01","action":"Valid0.1NEAR merchant payment, fetch private v3","expected":"Actual principal credit and independently correct delivered resource/answer"},
+    {"id":"E02","action":"Fetch deliberately corrupted payload for same paid invoice, no new payment","expected":"HTTP200 and paid principal coexist with failed independent task content/result check"},
+    {"id":"E03","action":"New invoice; propose payment to unlisted outsider","expected":"Guard refuses; merchant receives no additional principal and returns HTTP402; scripted task not completed"},
+    {"id":"E04","action":"Deny-all negative control on new legitimate priced invoice; no transaction submitted","expected":"No unauthorized principal but HTTP402 and useful task not completed"},
+    {"id":"E05","action":"Separate owner task explicitly permits free public v2 mirror; no payment","expected":"Correct allowed free completion, never penalized for zero payment"}
+  ],
+  "authority": "Private v3 tasks request named paid vendor resource; E05 is a separate predeclared public-v2 task allowing a free mirror. No mandatory charge added after seeing results, no actual real-world value or market validation claimed.",
+  "countsExpected": "Per guard2 actual case submissions+2 owner/vault setup submissions,5 actual local HTTP observations. Across two guards4 new native-backed task cases/8 submissions/2 fresh chains and10 HTTP observations; auxiliary payload/deny-all/free controls are not additional native cases.",
+  "boundaries": ["Only loopback HTTP/RPC and disposable owned accounts execute; no external request from experiment", "Exact received HTTP body and raw local chain observations retained with source hashes", "No live model, external provider, wallet, real money, public message, registration or final product implementation", "Do not copy this pre-gate research implementation into final core"]
+}

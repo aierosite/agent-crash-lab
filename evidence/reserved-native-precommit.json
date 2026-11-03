@@ -1,0 +1,41 @@
+{
+  "classification": "Reserved instances of known directTransfer family, same-agent prospective owned local native research after actual product freeze; not private/external holdout",
+  "declaredAtUtc": "2026-11-03T14:24:55.177816+00:00",
+  "owner": "own-8322c538ff46.near",
+  "merchant": "shop-e914145cf85a.near",
+  "capP": "62036320424935972248823",
+  "positiveDelta": "845870806680",
+  "expected": [
+    {
+      "intent": "A",
+      "sent": "62036320424935972248823",
+      "gross": "62036320424935972248823",
+      "excess": "0"
+    },
+    {
+      "intent": "B",
+      "sent": "62036320425781843055503",
+      "gross": "62036320425781843055503",
+      "excess": "845870806680"
+    },
+    {
+      "intent": "C",
+      "sent": "62036320424935972248823",
+      "gross": "62036320424935972248823",
+      "excess": "0"
+    }
+  ],
+  "repeatFirstHashQueryNotNewSend": true,
+  "expectedNewNativeSends": 3,
+  "expectedFreshOwnedChains": 1,
+  "expectedLiveModels": 0,
+  "sourceFreeze": {
+    "atUtc": "2026-11-03T14:23:37.663046+00:00",
+    "path": "research/reserved-variants/actual-source-baseline-freeze-v1.json",
+    "sha256": "264e86ff545f97950848bffca25ff864ca37bd6e57c1038dadd0fb6efe7d9101",
+    "coreSha256": "67f10f7ca08e17a87227c4da23b5f2883397a876d20f81734f616a8d10aca37e",
+    "testsSha256": "64608df5128a9267bbbe4a94b4f736e1532b736c27f8fc4ebd70efda75d4ddd9",
+    "baselineTestsRun": 26,
+    "baselineSuccessful": true
+  }
+}

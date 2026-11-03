@@ -1,0 +1,14 @@
+{
+  "stage": "Research-only owned native matched pair; no product code or guard exploit",
+  "question": "Does a positive same-account FunctionCall deposit represent external principal expense, and what does its failed-call refund mean when the RPC omits the initial receipt body?",
+  "design": "One fresh isolated protocol88 sandbox. Add a regular FullAccess key to owned vault genesis. Sign two0.1NEAR self FunctionCalls on official fixture: log_something then panic_after_logging. Record exact final vault/controlled external account states, root view, initial outcome/body presence, generated gas/principal refund records and scoped charged fields.",
+  "frozenScope": "Protected account set contains vault, external principal cap0, ordinary gas explicitly separate. No external principal action is authorized or scheduled; generic fixture log is not a useful purchased task. Existing SELF01/02 covered direct Transfer only, not this positive same-account FunctionCall.",
+  "predictions": [
+    "Success case: positive0.1 action amount, initial committed success with omitted initial body, external principal0, vault loses only its scoped fees, no principal refund.",
+    "Failure case: same positive deposit requested but containingFailure; ordinary principal refund0.1 succeeds to same vault, external principal0 and vault still loses only scoped fees. Refund is not profit or negative owner expense.",
+    "Both remain actual recorded RPC graphs; any derived initial context is separately labelled from signed transaction view and bound outcome, never inserted as observed receipt body."
+  ],
+  "counting": "One matched native research group/two conditions/two send attempts/one fresh chain. No new HTTP/model/customer-task/guard-binary case. Preserve first failure, no silent native retry.",
+  "bounds": "Reviewed baseline lab scaffolding/official fixture only, generated disposable keys, loopback node, no public network/signup/message/wallet/other-account test/reserved seed.90second owned-node alarm/110second launcher and actual cleanup. All new code remains lab research, no pre-gate product source.",
+  "timestamp": "2026-11-03T04:03:12.169340+00:00"
+}

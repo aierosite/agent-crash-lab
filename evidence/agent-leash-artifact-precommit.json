@@ -1,0 +1,35 @@
+{
+  "committedAt": "2026-11-02T20:31:28.767580+00:00",
+  "classification": "Research-only planned local execution; no product source",
+  "artifact": "lab/third-party-fixtures/agent-leash-a35ab23/artifact.json",
+  "sha256": "0de5ea2b68a3a9e51266e9201aa8f83fba4db6abe63662973b8dc33a65cc2872",
+  "provenance": "Public deployed binary captured by two static read-only queries at one finalized testnet block. Source pin supplies ABI hypotheses only; no author hash/build/source equivalence established.",
+  "newEvidenceQuestion": "Same-account restricted-key calls may return committed contract-level Blocked or Paid claims without matching principal delivery, and omit the initial receipt body while retaining its outcome.",
+  "setup": "Fresh disposable owned genesis, binary installed only in owned local vault; agent FCK on same vault, receiver same vault and only method request_payment; separate owner key. Constructor per-payment0.2/daily0.3/auto-approval0.2 NEAR, request cap10; allow existing recipient and confirmed absent name.3 owner setup calls.",
+  "cases": [
+    {
+      "id": "AL01",
+      "input": "allowed existing recipient0.1",
+      "hypothesis": "Root SuccessValue JSON Paid; successful native Transfer and recipient delta0.1; spent0.1; initial same-account body absent but outcome present."
+    },
+    {
+      "id": "AL02",
+      "input": "unlisted existing outsider0.1",
+      "hypothesis": "Root SuccessValue JSON Blocked, zero outgoing principal and unchanged spent; requests increments."
+    },
+    {
+      "id": "AL03",
+      "input": "allowed recipient0.2 plus1yocto",
+      "hypothesis": "Root SuccessValue JSON Blocked per-payment limit, zero outgoing principal and unchanged spent; requests increments."
+    },
+    {
+      "id": "AL04",
+      "input": "allowlisted confirmed absent name0.1",
+      "hypothesis": "Root SuccessValue JSON Paid, child Transfer Failure, successful principal refund to vault, spent increments despite zero delivered principal; no claim of irreversible loss or policy bypass."
+    }
+  ],
+  "assertions": "Preserve all RPC, request/response ids, signed transaction hashes, initial receipt ids/outcomes, native transfer statuses, before/after amounts and summaries. Fail visibly on ABI mismatch rather than assuming source equivalence.",
+  "bounds": "Only local loopback execution; fresh generated keys never exported.90-second alarm, cleanup finally. No original public contract method, external transaction, model, merchant or wallet.",
+  "counting": "4 provided-artifact case groups plus3 setup attempts if all completed. Not4 more native protocol groups; this would be third guard binary, not a rebuilt source.",
+  "reuse": "Existing explicitly research-only sandbox harness reused; never relabel as final-hour product core."
+}

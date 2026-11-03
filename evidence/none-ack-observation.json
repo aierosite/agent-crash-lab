@@ -1,0 +1,659 @@
+{
+  "startedAt": "2026-11-03T01:28:28.531308+00:00",
+  "mode": "isolated_local_sandbox",
+  "experiment": "Research NONE acknowledgement versus invalid/valid signed transaction admission",
+  "officialFixtureSha256": "a2ad8d2da73576d23f3104c6c5d789569534de517678b8b3842e8668764a5082",
+  "home": "/tmp/agent-crash-lab-20261102/none-ack-f78e81b09b2c",
+  "mainnetOrTestnetRequests": 0,
+  "walletConnected": false,
+  "privateKeysExported": false,
+  "fixtureWarning": "Reusable genesis contains official fixture, but no contract method is invoked: invalid-nonce and valid direct Transfer send_tx NONE acknowledgements only.",
+  "rpcObservations": [
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-1",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "owner.depositlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "100000000000000000000000000",
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "callback-research-1"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-2",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "merchant.repaymentlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "10000000000000000000000000",
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 100
+        },
+        "id": "callback-research-2"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-3",
+        "method": "query",
+        "params": {
+          "request_type": "view_access_key",
+          "finality": "final",
+          "account_id": "owner.depositlab.near",
+          "public_key": "ed25519:ntUKnCGvTnkrov7waaSDJTwrgDTsnuymqnRwuftMLmH"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "nonce": 0,
+          "permission": "FullAccess"
+        },
+        "id": "callback-research-3"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "none-ack-4",
+        "method": "send_tx",
+        "params": {
+          "signed_tx_base64": "FQAAAG93bmVyLmRlcG9zaXRsYWIubmVhcgALwVXAWcSwenkflKyFRgq8Wmiv7E8VtmSY0pWHayMkxAAAAAAAAAAAGgAAAG1lcmNoYW50LnJlcGF5bWVudGxhYi5uZWFyYCJKdtTRcvv/JT1VeDdxuAasXhBwixke2dJDkxDjEbsBAAAAAwAAgPZK4ccCLRUAAAAAAAAA8esMyktLFT1s8NhL7ZcTCq9Qo/YCYyWhIRkNOWKQ9cCRffUgS06tEBRRQcisZOdmwggyqtqXUUKlICPs+wcoCA==",
+          "wait_until": "NONE"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "NONE"
+        },
+        "id": "none-ack-4"
+      },
+      "httpStatus": 200
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "none-ack-5",
+        "method": "tx_status",
+        "params": {
+          "tx_hash": "FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m",
+          "sender_account_id": "owner.depositlab.near",
+          "wait_until": "NONE"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "requested_transaction_hash": "FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m"
+            },
+            "name": "UNKNOWN_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "Transaction FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m doesn't exist"
+        },
+        "id": "none-ack-5"
+      },
+      "httpStatus": 200
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "none-ack-6",
+        "method": "tx_status",
+        "params": {
+          "signed_tx_base64": "FQAAAG93bmVyLmRlcG9zaXRsYWIubmVhcgALwVXAWcSwenkflKyFRgq8Wmiv7E8VtmSY0pWHayMkxAAAAAAAAAAAGgAAAG1lcmNoYW50LnJlcGF5bWVudGxhYi5uZWFyYCJKdtTRcvv/JT1VeDdxuAasXhBwixke2dJDkxDjEbsBAAAAAwAAgPZK4ccCLRUAAAAAAAAA8esMyktLFT1s8NhL7ZcTCq9Qo/YCYyWhIRkNOWKQ9cCRffUgS06tEBRRQcisZOdmwggyqtqXUUKlICPs+wcoCA==",
+          "wait_until": "NONE"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {},
+            "name": "INVALID_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": {
+            "TxExecutionError": {
+              "InvalidTxError": {
+                "InvalidNonce": {
+                  "ak_nonce": 0,
+                  "tx_nonce": 0
+                }
+              }
+            }
+          }
+        },
+        "id": "none-ack-6"
+      },
+      "httpStatus": 200
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-7",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "owner.depositlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "100000000000000000000000000",
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "callback-research-7"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-8",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "merchant.repaymentlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "10000000000000000000000000",
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 100
+        },
+        "id": "callback-research-8"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-9",
+        "method": "query",
+        "params": {
+          "request_type": "view_access_key",
+          "finality": "final",
+          "account_id": "owner.depositlab.near",
+          "public_key": "ed25519:ntUKnCGvTnkrov7waaSDJTwrgDTsnuymqnRwuftMLmH"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+          "block_height": 3,
+          "nonce": 0,
+          "permission": "FullAccess"
+        },
+        "id": "callback-research-9"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "none-ack-10",
+        "method": "send_tx",
+        "params": {
+          "signed_tx_base64": "FQAAAG93bmVyLmRlcG9zaXRsYWIubmVhcgALwVXAWcSwenkflKyFRgq8Wmiv7E8VtmSY0pWHayMkxAEAAAAAAAAAGgAAAG1lcmNoYW50LnJlcGF5bWVudGxhYi5uZWFyYCJKdtTRcvv/JT1VeDdxuAasXhBwixke2dJDkxDjEbsBAAAAAwAAgPZK4ccCLRUAAAAAAAAA0Q2YrHuG+qVROq/bSw5ok9+fzwaYjNsqHUZmdOQQtheIL74qhys5JqEq9fFWRmwEo2Nhv2ueCfdkskgbExEaDQ==",
+          "wait_until": "NONE"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "NONE"
+        },
+        "id": "none-ack-10"
+      },
+      "httpStatus": 200
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-11",
+        "method": "tx_status",
+        "params": {
+          "tx_hash": "3dbHNvBtvC1yuHwBAvHMP9dxYQJetC21R2X9gj1NvkJ1",
+          "sender_account_id": "owner.depositlab.near",
+          "wait_until": "FINAL"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "FINAL",
+          "receipts": [
+            {
+              "predecessor_id": "owner.depositlab.near",
+              "priority": 0,
+              "receipt": {
+                "Action": {
+                  "actions": [
+                    {
+                      "Transfer": {
+                        "deposit": "100000000000000000000000"
+                      }
+                    }
+                  ],
+                  "gas_price": "1000000000",
+                  "input_data_ids": [],
+                  "is_promise_yield": false,
+                  "output_data_receivers": [],
+                  "signer_id": "owner.depositlab.near",
+                  "signer_public_key": "ed25519:ntUKnCGvTnkrov7waaSDJTwrgDTsnuymqnRwuftMLmH"
+                }
+              },
+              "receipt_id": "21LHsjRZx6gk9TCch8smtzHt6t4NeUkUNmyqtEEtuBG6",
+              "receiver_id": "merchant.repaymentlab.near"
+            },
+            {
+              "predecessor_id": "system",
+              "priority": 0,
+              "receipt": {
+                "Action": {
+                  "actions": [
+                    {
+                      "Transfer": {
+                        "deposit": "200864306250000000000"
+                      }
+                    }
+                  ],
+                  "gas_price": "0",
+                  "input_data_ids": [],
+                  "is_promise_yield": false,
+                  "output_data_receivers": [],
+                  "signer_id": "owner.depositlab.near",
+                  "signer_public_key": "ed25519:ntUKnCGvTnkrov7waaSDJTwrgDTsnuymqnRwuftMLmH"
+                }
+              },
+              "receipt_id": "7HstYXnWMWbBu5yrEFRkm64DjAsA9LH3JDGAgUACBqr5",
+              "receiver_id": "owner.depositlab.near"
+            }
+          ],
+          "receipts_outcome": [
+            {
+              "block_hash": "ALi1aEn8DCUm3ECkeQHzX2P5gfuvvMew2yN9GK9kfNRd",
+              "id": "21LHsjRZx6gk9TCch8smtzHt6t4NeUkUNmyqtEEtuBG6",
+              "outcome": {
+                "executor_id": "merchant.repaymentlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [
+                  "7HstYXnWMWbBu5yrEFRkm64DjAsA9LH3JDGAgUACBqr5"
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "22318256250000000000"
+              },
+              "proof": []
+            },
+            {
+              "block_hash": "EBpd1bPCaq13nETbRQwHjN2RqbbmnMcBXAzv9fApP57i",
+              "id": "7HstYXnWMWbBu5yrEFRkm64DjAsA9LH3JDGAgUACBqr5",
+              "outcome": {
+                "executor_id": "owner.depositlab.near",
+                "gas_burnt": 223182562500,
+                "logs": [],
+                "metadata": {
+                  "contracts": [
+                    null
+                  ],
+                  "gas_profile": [],
+                  "version": 4
+                },
+                "receipt_ids": [],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "tokens_burnt": "0"
+              },
+              "proof": []
+            }
+          ],
+          "status": {
+            "SuccessValue": ""
+          },
+          "transaction": {
+            "actions": [
+              {
+                "Transfer": {
+                  "deposit": "100000000000000000000000"
+                }
+              }
+            ],
+            "hash": "3dbHNvBtvC1yuHwBAvHMP9dxYQJetC21R2X9gj1NvkJ1",
+            "nonce": 1,
+            "priority_fee": 0,
+            "public_key": "ed25519:ntUKnCGvTnkrov7waaSDJTwrgDTsnuymqnRwuftMLmH",
+            "receiver_id": "merchant.repaymentlab.near",
+            "signature": "ed25519:5BRKAmGpfdPxWT5TJAYSfTpDLrXoRVWymQe3iPAyA4fhvE14edohGeGErHQpGWaFQGwpPST6dZ5BkPQe7G3Dr6Xe",
+            "signer_id": "owner.depositlab.near"
+          },
+          "transaction_outcome": {
+            "block_hash": "Df3RcYQjYjGyHc2adBE9HYimsnA71r2Q77CoQX1535DU",
+            "id": "3dbHNvBtvC1yuHwBAvHMP9dxYQJetC21R2X9gj1NvkJ1",
+            "outcome": {
+              "executor_id": "owner.depositlab.near",
+              "gas_burnt": 223182562500,
+              "logs": [],
+              "metadata": {
+                "gas_profile": null,
+                "version": 1
+              },
+              "receipt_ids": [
+                "21LHsjRZx6gk9TCch8smtzHt6t4NeUkUNmyqtEEtuBG6"
+              ],
+              "status": {
+                "SuccessReceiptId": "21LHsjRZx6gk9TCch8smtzHt6t4NeUkUNmyqtEEtuBG6"
+              },
+              "tokens_burnt": "22318256250000000000"
+            },
+            "proof": []
+          }
+        },
+        "id": "callback-research-11"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-12",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "owner.depositlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "99899955363487500000000000",
+          "block_hash": "EBpd1bPCaq13nETbRQwHjN2RqbbmnMcBXAzv9fApP57i",
+          "block_height": 9,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 182
+        },
+        "id": "callback-research-12"
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": "callback-research-13",
+        "method": "query",
+        "params": {
+          "request_type": "view_account",
+          "finality": "final",
+          "account_id": "merchant.repaymentlab.near"
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "result": {
+          "amount": "10100000000000000000000000",
+          "block_hash": "EBpd1bPCaq13nETbRQwHjN2RqbbmnMcBXAzv9fApP57i",
+          "block_height": 9,
+          "code_hash": "11111111111111111111111111111111",
+          "locked": "0",
+          "storage_paid_at": 0,
+          "storage_usage": 100
+        },
+        "id": "callback-research-13"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "NB01",
+      "txHash": "FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m",
+      "signedNonce": 0,
+      "acknowledgement": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "NONE"
+        },
+        "id": "none-ack-4"
+      },
+      "hashOnlyStatus": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {
+              "requested_transaction_hash": "FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m"
+            },
+            "name": "UNKNOWN_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": "Transaction FLqBfQuDMVw8UW39Gc6Ws8sGw11H9MmewZCCiZ8W8j9m doesn't exist"
+        },
+        "id": "none-ack-5"
+      },
+      "signedStatus": {
+        "jsonrpc": "2.0",
+        "error": {
+          "name": "HANDLER_ERROR",
+          "cause": {
+            "info": {},
+            "name": "INVALID_TRANSACTION"
+          },
+          "code": -32000,
+          "message": "Server error",
+          "data": {
+            "TxExecutionError": {
+              "InvalidTxError": {
+                "InvalidNonce": {
+                  "ak_nonce": 0,
+                  "tx_nonce": 0
+                }
+              }
+            }
+          }
+        },
+        "id": "none-ack-6"
+      },
+      "ownerBefore": {
+        "amount": "100000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "ownerAfter": {
+        "amount": "100000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "merchantBefore": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantAfter": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "keyAfter": {
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "nonce": 0,
+        "permission": "FullAccess"
+      },
+      "checks": {
+        "ackNoneOnly": true,
+        "hashOnlyUnknown": true,
+        "signedStatusInvalid": true,
+        "invalidNonceContext": true,
+        "ownerUnchanged": true,
+        "merchantUnchanged": true,
+        "nonceUnchanged": true
+      }
+    },
+    {
+      "id": "NB02",
+      "txHash": "3dbHNvBtvC1yuHwBAvHMP9dxYQJetC21R2X9gj1NvkJ1",
+      "signedNonce": 1,
+      "acknowledgement": {
+        "jsonrpc": "2.0",
+        "result": {
+          "final_execution_status": "NONE"
+        },
+        "id": "none-ack-10"
+      },
+      "ownerBefore": {
+        "amount": "100000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "ownerAfter": {
+        "amount": "99899955363487500000000000",
+        "block_hash": "EBpd1bPCaq13nETbRQwHjN2RqbbmnMcBXAzv9fApP57i",
+        "block_height": 9,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      },
+      "merchantBefore": {
+        "amount": "10000000000000000000000000",
+        "block_hash": "7UGU2f2XtPMKzogHaZTQ6L9eFU4fKYc7iPWZJbWaHjva",
+        "block_height": 3,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "merchantAfter": {
+        "amount": "10100000000000000000000000",
+        "block_hash": "EBpd1bPCaq13nETbRQwHjN2RqbbmnMcBXAzv9fApP57i",
+        "block_height": 9,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 100
+      },
+      "initialReceiptId": "21LHsjRZx6gk9TCch8smtzHt6t4NeUkUNmyqtEEtuBG6",
+      "chargedFee": "44636512500000000000",
+      "checks": {
+        "ackNoneOnly": true,
+        "sameAcknowledgementShape": true,
+        "hashMatches": true,
+        "finalSuccess": true,
+        "containingCommitted": true,
+        "bodyMatches": true,
+        "merchantPrincipal": true,
+        "ownerPrincipalAndFee": true,
+        "positiveFee": true
+      }
+    }
+  ],
+  "ownedNodePid": 12,
+  "rpcEndpoint": "http://127.0.0.1:51201",
+  "chainId": "test-chain-IfV0f",
+  "protocolVersion": 88,
+  "caseGrouping": "One source-informed matched acknowledgement/admission pair;2 send_tx attempts,1 fresh chain",
+  "taskAuthority": {
+    "intent": "NONE-ACK-CONTROL",
+    "owner": "owner.depositlab.near",
+    "merchant": "merchant.repaymentlab.near",
+    "maxPrincipal": "100000000000000000000000"
+  },
+  "allAssertionsPassed": true,
+  "outcome": "none_acknowledgement_admission_distinction_observed",
+  "interpretation": "NONE acknowledgement is neither validation/admission nor executed success; full-signed and hash-only status carry different available evidence. Source check_only status validation is not a new broadcast.",
+  "ownedNodeStopped": true,
+  "nodeExitCodeAfterCleanup": 0,
+  "finishedAt": "2026-11-03T01:28:30.624945+00:00",
+  "derivation": {
+    "at": "2026-11-03T01:28:24.654379+00:00",
+    "classification": "Research-only rig derivation, not final core",
+    "baseSha256": "f7ab6726d15d1293834950496fd8f3ec025175ef2d7c5841af1be0ee8f5a7ca3",
+    "baseCRLFNormalizedForComposition": true,
+    "planSha256": "9072fe3e0b505c008e65a89612b32289402e2b38c496ce21cd2c0681001cd165",
+    "stepsSha256": "9284d91d794475002adcf5e3b6865a0e335175d24bd5557cddae2c42a1d953af",
+    "composedSha256": "fbecd2a85b290e1a52b09a9a68ce344bf0e07200b75b6df4c4c850fa5dd02827",
+    "preexecutionCorrection": "Launcher expected-hash typo corrected against actual reviewed base hash before any execution; no native retry."
+  },
+  "launcherExitCode": 0
+}

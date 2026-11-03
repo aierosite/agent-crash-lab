@@ -1,0 +1,49 @@
+{
+  "stage": "Research-only legitimate split-settlement controls; not product source, classifier or real merchant billing",
+  "question": "Can legitimate equal-total authorized settlements have different native action/receipt/attempt counts while useful completion depends on the separately declared invoice price?",
+  "authority": "New task declaration made before this experiment: intents A and B each authorize total merchant principal0.1NEAR. A permits one atomic receipt with two0.05Transfer actions. B explicitly permits two0.05 instalments in two signed attempts. There is no one-attempt/action count restriction. Do not retroactively change earlier intent-duplicate experiment's distinct task declaration.",
+  "conditions": [
+    {
+      "id": "SS01",
+      "intent": "A",
+      "native": "One signed transaction containing two0.05NEAR Transfer actions to the same existing merchant; both commit in one receipt",
+      "utility": "Fetch after settlement: actual owned HTTP merchant serves fixed report, observed scripted answer must be C03/17"
+    },
+    {
+      "id": "SS02",
+      "intent": "B",
+      "native": "Two signed0.05NEAR Transfers; same explicit intent with instalments allowed",
+      "utility": "After first half price HTTP402/no answer; after second half cumulative0.1 HTTP200 and correct observed answer"
+    }
+  ],
+  "fixture": {
+    "resource": "inventory-snapshot",
+    "version": "v3",
+    "rows": [
+      {
+        "sku": "A01",
+        "available": 7,
+        "forecast": 21
+      },
+      {
+        "sku": "B02",
+        "available": 11,
+        "forecast": 10
+      },
+      {
+        "sku": "C03",
+        "available": 2,
+        "forecast": 19
+      }
+    ],
+    "expectedAnswer": {
+      "sku": "C03",
+      "units": 17
+    }
+  },
+  "merchantProfile": "Owned loopback server; separately frozen opening merchant balance per invoice, releases report when controlled increment reaches0.1NEAR. Only declared sequential transactions execute. This is a closed-world research convenience, not secure general invoice gating/causal attribution or a production payment protocol.",
+  "expectedUnits": "A:1signed attempt/1principal receipt/2principal actions/0.1merchant ingress. B:2signed attempts/2principal receipts/2principal actions/0.1merchant ingress. Both amount caps satisfied; no generic purchase count inferred. Repeated RPC reads add no payments.",
+  "countsExpected": "2native condition/episode groups sharing1fresh owned chain,3send_tx attempts,3actual loopback HTTP responses. No provided guard binary case, live model or public request. Scripted client/data remain labelled.",
+  "bounds": "Only existing pinned sandbox/official genesis fixture, owned disposable accounts and loopback addresses. No contract method invoked, wallet, public network, model/API budget, secrets export, final core or reserved seed. Always stop merchant and node.",
+  "timestamp": "2026-11-03T01:37:12.877676+00:00"
+}

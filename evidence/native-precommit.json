@@ -1,0 +1,69 @@
+{
+  "atUtc": "2026-11-03T18:24:58.137568+00:00",
+  "mode": "owned-local-only",
+  "cap": "100000000000000000000000",
+  "expectedAnswer": {
+    "sku": "C03",
+    "units": 17
+  },
+  "expectedDocuments": {
+    "A": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "A",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A01",
+          "available": 7,
+          "forecast": 21
+        },
+        {
+          "sku": "B02",
+          "available": 11,
+          "forecast": 10
+        },
+        {
+          "sku": "C03",
+          "available": 2,
+          "forecast": 19
+        }
+      ]
+    },
+    "B": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "B",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A01",
+          "available": 7,
+          "forecast": 21
+        },
+        {
+          "sku": "B02",
+          "available": 11,
+          "forecast": 10
+        },
+        {
+          "sku": "C03",
+          "available": 2,
+          "forecast": 19
+        }
+      ]
+    }
+  },
+  "expectedPolicies": {
+    "naive": {
+      "A": "200000000000000000000000",
+      "B": "100000000000000000000000"
+    },
+    "durable": {
+      "A": "100000000000000000000000",
+      "B": "100000000000000000000000"
+    }
+  },
+  "fault": "Actual worker process exit77 after FINAL before ack",
+  "limitations": "Known-family source-informed integration exercise, same operator; scripted workers, not live-model or independent holdout; precommit is written before executing trials"
+}

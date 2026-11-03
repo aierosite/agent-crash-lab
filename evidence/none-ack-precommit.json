@@ -1,0 +1,21 @@
+{
+  "stage": "Research-only matched RPC acknowledgement/admission experiment, not product code or a final evaluator test",
+  "question": "Can the same successful wait_until NONE response be returned for a valid transfer and a correctly signed but invalid-nonce transfer?",
+  "profile": "One fresh isolated owned near-sandbox 2.14.0/protocol88 chain; existing funded named owner and merchant; owner full-access key starts at nonce0. Native transfers only, no contract method or external API.",
+  "conditions": [
+    {
+      "id": "NB01",
+      "signedNonce": 0,
+      "expected": "send_tx wait NONE acknowledges NONE without receipt/outcome; hash-only lookup NONE is UNKNOWN_TRANSACTION; signed-transaction lookup NONE detects INVALID_TRANSACTION/InvalidNonce. Owner/merchant balances and key nonce unchanged."
+    },
+    {
+      "id": "NB02",
+      "signedNonce": 1,
+      "expected": "send_tx wait NONE also acknowledges NONE; same hash subsequently FINAL with committed0.1NEAR merchant credit and one owner fee. No automatic new-nonce retry."
+    }
+  ],
+  "sourcePrediction": "Pinned jsonrpc/lib.rs 960-968 and1198-1205 dispatch asynchronously and immediately return NONE.1098-1110/1147-1155 distinguish full signed transaction validation from hash-only unknown;1176-1185 preserves idempotence by checking existing hashes after InvalidNonce.",
+  "countsExpected": "One matched native group,2 external send_tx attempts,1 fresh owned chain. Signed tx_status uses check_only source path, not another broadcast. One actual committed payment expected; not2 payments.",
+  "limits": "Source-informed selected conditions, not independent heldout/model trials. No expiry/garbage-collection replay, public chain, model, guard, payment, wallet or secret export. Keep raw RPC errors and HTTP status; no default error-to-zero rule in final product. No core code before14:06:08Z.",
+  "preexecutionTimestamp": "2026-11-03T01:28:24.654379+00:00"
+}

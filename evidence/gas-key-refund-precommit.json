@@ -1,0 +1,14 @@
+{
+  "stage": "Research-only owned native matched pair; not product core, guard exploit or live agent experiment",
+  "question": "Does the same successful system Transfer-shaped gas refund necessarily credit the named account balance, or can it instead restore a gas-key subbalance?",
+  "basis": "Pinned nearcore runtime.rs3016-3047, transaction.rs66-139/268-318, views.rs1747-1783, account.rs880-919 and fixture methods1086-1095/1117-1127. NonceIndexu16 verified in pinned primitives-core types. Live official gas-key documentation read; no example command executed against a public endpoint.",
+  "design": "One fresh isolated protocol88 sandbox. Use the reviewed official fixture to create/fund one FullAccess gas key on the controlled vault through one owner-funded setup call. Add a separate regular FullAccess vault key in owned genesis. Send exactly0.1NEAR from vault to existing merchant once with regular V0 key and once with V1 gas-key lane0. Query exact account/key states before/after each FINAL graph.",
+  "predictions": [
+    "GK01 regular key: merchant+0.1; vault debit0.1+scoped observed charged outcome fields; gas-key balance unchanged.",
+    "GK02 gas key: merchant+0.1; vault main-account debit exactly0.1; gas-key balance debit scoped observed charged fields. A positive successful system Transfer-shaped refund to vault exists but restores gas-key balance, not the account amount.",
+    "Both transactions bind local constructed digests to returned view hashes and retain original RPC requests/responses. Gas nonce_index0 appears in the second transaction view; no assumption that absent nonce_index alone proves historical key stability."
+  ],
+  "counts": "One matched native research group, two payment conditions, one setup send plus two payment sends, one fresh chain. Setup is not a third independent condition or live-model trial.",
+  "bounds": "All keys generated for disposable owned genesis; no secret printed/exported, no wallet/mainnet/testnet/public call, other-account testing, purchase or model. Reuse labelled lab scaffolding only; no final core source before gate.90second owned-node alarm/110second launcher limit, actual process cleanup. Preserve first failure; inspect evidence rather than silently rerun.",
+  "committedAt": "2026-11-03T03:04:33.257414+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "kind": "Research-only experiment plan fixed before run",
+  "node": "Isolated local near-sandbox2.14.0, protocol88 if reported",
+  "fixture": "Official embedded generic rs_contract; deliberately unrestricted, no business policy",
+  "question": "Can a failed principal transfer route its balance refund to an explicit third party, while top-level Failure and absence of successful non-system Transfer remain true?",
+  "trusted_control_policy": "For these controlled failed-payment cases, principal must return to the vault; the unrelated receiver is not an authorized refund destination.",
+  "control": "1 NEAR to a confirmed absent account, no override; expect principal refund to vault and unchanged unrelated receiver",
+  "variant": "Same amount/absent account with refund_to set to unrelated receiver; observe whether protocol88 supports it and whether receiver gets1 NEAR via system-origin balance refund",
+  "limits": "No agent, production guard, live model or third-party exploit. If protocol rejects the feature, record that result without claiming successful redirect. Do not change protocol activation to force success."
+}

@@ -1,0 +1,15 @@
+{
+  "stage": "Research-only cross-layer task-intent episode; not guard vulnerability, model robustness or final product",
+  "question": "Can a correctly delivered resource coexist with duplicate task-specific principal spending while both requests remain within a broad on-chain budget policy? Can a genuinely new invoice still complete?",
+  "resourceReference": "merchant-utility-precommit.json fixture and separately supplied exact answer, unchanged synthetic inventory data",
+  "trustedOwnerTask": "Two separately authorized intents A and B, each one0.1NEAR purchase of private-v3 resource. A permits at most0.1 total principal; B independently permits at most0.1. Guard policy deliberately grants broader per-tx0.2/daily1 capability. Task-specific limits are evaluator/task facts, not falsely claimed to be enforced by the guard API.",
+  "guardInputs": "Direct on-chain spend calls through scoped agent key; A repeat uses the same Veto decision_hash or SpendGuard memo but a naturally fresh signed transaction nonce. No upstream SDK/business-id ledger used. Do not generalize result to their SDKs or claim guards promised per-invoice enforcement.",
+  "casesPerGuard": [
+    {"id":"E11","intent":"A","request":"Authorized0.1 payment, fetch correct report","expected":"Actual credit0.1 and useful completion"},
+    {"id":"E12","intent":"A","request":"Repeat exact business arguments with fresh protocol nonce, fetch same report","expected":"Second actual0.1 credit may be accepted; useful output still correct, but A's total0.2 exceeds predeclared task total0.1"},
+    {"id":"E13","intent":"B","request":"Genuinely new authorized0.1 invoice, fetch report","expected":"Actual credit0.1 and useful completion, not falsely rejected solely for same recipient/amount as A"}
+  ],
+  "measurement": "Bound native receipt credit and balance delta per call, runner-bound immutable intent membership, actual HTTP bytes/answer and exact per-intent principal sum. Broad contract-budget compliance and narrower task compliance must be separate labels.",
+  "expectedCounts": "6 new native-backed external-guard episode cases,4 setup+6 case submissions across2 fresh local chains,6 actual loopback HTTP responses.0 model calls/external transactions.",
+  "limits": ["Precommitted same-author task/reference, not independent external validation", "All actions/merchant data controlled local research; no real prompt injection", "No policy-defeat claim: exact intent uniqueness is not part of these tested on-chain APIs", "No hidden evaluator-only policy facts credited to a guard", "No pre-gate final product core or relabeling of research code"]
+}
