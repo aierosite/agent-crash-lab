@@ -18,7 +18,7 @@ Agent Crash Lab checks whether an agent both obeyed its task-level payment autho
 
 ## Owner-dependent publication steps
 
-The owner authorized publication of the public repository and demo video. The public repository is https://github.com/aierosite/agent-crash-lab. An actual public X demo-post URL and the owner's confirmed payout/contact fields are needed for final entry. Publication does not itself submit the project.
+The owner authorized publication of the public repository and demo video. The public repository is https://github.com/aierosite/agent-crash-lab and the public demo post is https://x.com/Amiinjalili/status/2117754340073230518. The owner's confirmed payout/contact fields and complete final JSON approval are still needed for entry. Publication does not itself submit the project.
 
 The owner must confirm the exact repository/account and public push, provide/confirm payout account and contact fields, publish the X demo (or give specific authorization consistent with the applicable workflow), and approve the complete final JSON once those actual URLs exist. The contact notice is:
 

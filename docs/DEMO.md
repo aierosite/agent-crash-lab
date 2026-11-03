@@ -10,8 +10,8 @@ The attached walkthrough uses actual UI captures of the running local workbench.
 4. **Useful work (40–53s)** — Paid, wrong answer: financial scope can be within while actual output fails. This is why a payment receipt is not a task-completion oracle.
 5. **Reproduction (53–70s)** — Native comparison lists actual crash exits, five sends, the stopped nodes and evidence hash. Export/import bundles or run the three test commands. No wallet or API key needed.
 
-Short X draft (owner publishes it):
+Published X demo: https://x.com/Amiinjalili/status/2117754340073230518
 
-> An agent can finish the task and still pay twice. We built Agent Crash Lab at NEAR HACKATHON to inspect payment authority AND useful output. Actual local NEAR crash/restart receipts, an independent task reference, and a one-command workbench. @NEARProtocol #NEARHackathon
+> An agent can finish the task and still pay twice. We built Agent Crash Lab at NEAR HACKATHON: actual local NEAR crash/restart receipts, payment limits AND useful-output checks. Try it: https://github.com/aierosite/agent-crash-lab @NEARProtocol #NEARHackathon
 
-Attach the video, then add the actual public repository URL. No placeholder URL is a submission URL. The draft does not claim a production audit or live-model benchmark.
+The actual 72-second video is attached to that post. The owner authorized publication through this account. Neither the post nor the video claims a production audit or live-model benchmark.
