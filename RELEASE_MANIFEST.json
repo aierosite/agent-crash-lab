@@ -1,9 +1,13 @@
 {
   "format": "agent-crash-lab/release-v1",
   "version": "0.2.0",
-  "atUtc": "2026-11-03T22:55:58.880004+00:00",
+  "atUtc": "2026-11-03T23:04:49.194301+00:00",
   "meaning": "All release files except this manifest; consistency hashes, not signed authenticity",
   "files": {
+    ".gitattributes": {
+      "bytes": 86,
+      "sha256": "41b5dc68e322fdcfa95b353664ee376431bb9da10127563f2d97f26dd92e7722"
+    },
     ".github/workflows/test.yml": {
       "bytes": 537,
       "sha256": "b418b51a659fdd63ca5e5244dc959edcb9a4d8ac1f9e3edecd1794e1ac019b4f"
@@ -37,8 +41,8 @@
       "sha256": "c680ccadf645e6c6075681d0b6392e763663e7efdc3437cdae88a1db899d52f8"
     },
     "docs/DEMO.md": {
-      "bytes": 1837,
-      "sha256": "871e83a54c3d1d89e58e7b2389465eb3c2a7161fdd2d4d8d71ad6b98c497aba0"
+      "bytes": 1879,
+      "sha256": "9c52cd06f6c7e87e9264d1ca4f84f96f97b12f92c73979741ed1d06d0e13d49e"
     },
     "docs/HANDOVER.fa.txt": {
       "bytes": 3140,
@@ -57,8 +61,8 @@
       "sha256": "89014579ad91cf7711bcf7a8e307e0e3c70d1f4bb88f66837058ee4f64007aa9"
     },
     "docs/SUBMISSION.md": {
-      "bytes": 3497,
-      "sha256": "1c7e190a12d5a5e076d4bd1861400e8c44a6636798d450996009789e6f3a1d10"
+      "bytes": 3574,
+      "sha256": "e1a742036981635fc41e1bad04b6a45cd3ee00ba7b9de2e47f042bc704dfa9bf"
     },
     "docs/THREAT_MODEL.fa.txt": {
       "bytes": 2814,
@@ -245,8 +249,8 @@
       "sha256": "c369fbc9c624647019db079af47ae85d854b118cf73afee031a38e0cb1bc8e40"
     },
     "README.md": {
-      "bytes": 10478,
-      "sha256": "3ab5cd0db19333aefdbd2dee12851b54d6832431fcc1b33c7262c2d091f3ee8c"
+      "bytes": 10673,
+      "sha256": "58fa1b54d02516ca96a96ffc5f6c9e24e33ebaf5b2de7179d68fd18274e877c3"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -430,7 +434,7 @@
     },
     "verification/release-measurements.json": {
       "bytes": 853,
-      "sha256": "7f32b33626e4b0fcf77180c99ccdfc583d722d49b6202ab6d0a84e4e3082216a"
+      "sha256": "f7ef4d92f6dee6c0b11bd48e84c3c3f0cdc8b9f9307733d6eef6e9ab6fe65ef2"
     },
     "verification/release-reproduction.json": {
       "bytes": 9729,
