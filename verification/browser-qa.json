@@ -1,0 +1,42 @@
+{
+  "atUtc": "2026-11-03T18:42:03.860753+00:00",
+  "classification": "Actual manual browser QA through CUA, separate from automated HTTP tests",
+  "browser": "in-app browser",
+  "visuallyInspected": [
+    "fresh native double-payment, financialbreach+correctoutput",
+    "fresh durable recovery, both0.1+correctoutputs",
+    "paid wronganswer, financialwithin+failedoutput",
+    "allowedinstallments, within+passed",
+    "syntheticmissingbody,Abreach+Bunknown",
+    "expanded causal receipt / tx hash / source pointers",
+    "native comparison actual5sends/stoppednodes"
+  ],
+  "bundleExport": "Actual download fromUI",
+  "bundleImport": "Downloaded bundle reimported through filechooser, renderedwithin+passed",
+  "corruptedBundleImport": "Source byte changed without updatingowner hash, renderedrejected+notassessed and nofinancialconclusion",
+  "responsive": {
+    "viewport": [
+      390,
+      844
+    ],
+    "documentWidth": 375,
+    "horizontalBodyOverflow": false,
+    "temporaryOverrideReset": true,
+    "mobileImportAndNativeControlsVisible": true
+  },
+  "consoleErrorEntriesObserved": 0,
+  "screenshots": {
+    "native-comparison.png": "06cc0c247abd1a004f8013c648510a9de8798b8f42d0b03c967e7dfc339b4ac2",
+    "workbench-desktop.png": "ebe63c7d47abba50957c40f6e5dd501f0a5ae98bfb593c367eb23956be7d161e",
+    "workbench-evidence.png": "199671d33e7c0571fc379ca94aa1309801159ce756ad3d4a3897e8d69c4d626f",
+    "workbench-mobile.png": "2cd43494922ca8cb13d7b155b47e965419b9d5702724357cb88cab14a782c216",
+    "workbench-paid-output.png": "38931afe3b3497c086875e79290edb03c0af6229b003ae77154753135ba1de0f",
+    "workbench-recovery.png": "eb9c921c64d5380d3c3602dd7812f546c972cfafe7413e427e3bf664bb86c0b0"
+  },
+  "limits": "Not a browser automation test runner or accessibility audit; HTTP suite covers all8curated scenarios. Screenshots and video are actual captures, not generated mockups.",
+  "defaultBrowserFullPageScreenshotSize": [
+    65536,
+    4293001688
+  ],
+  "finalScreenshotRefreshedAtUtc": "2026-11-03T18:47:50.614618+00:00"
+}

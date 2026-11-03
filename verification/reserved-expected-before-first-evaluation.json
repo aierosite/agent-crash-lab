@@ -1,0 +1,184 @@
+{
+  "declaredAtUtc": "2026-11-03T14:27:27.389267+00:00",
+  "classification": "Expected outcomes and input hashes prepared before this verifier invokes kernel; same-agent known-family reserved instances",
+  "seedSha256": "d25257243ddc65f32b77b07d0fa6c6ef9b878b691ba430c872c2600f7ff19ff6",
+  "coreSha256": "67f10f7ca08e17a87227c4da23b5f2883397a876d20f81734f616a8d10aca37e",
+  "winningPosition": 2,
+  "referenceDocument": {
+    "resource": "reserved-inventory",
+    "version": "reserved-v1",
+    "invoice": "inv-0c1fda75ded6",
+    "source": "synthetic-declared-reference",
+    "rows": [
+      {
+        "sku": "sku-bf89bf0c5d",
+        "available": 151,
+        "forecast": 151
+      },
+      {
+        "sku": "sku-4febcec902",
+        "available": 192,
+        "forecast": 192
+      },
+      {
+        "sku": "sku-3e1b795039",
+        "available": 237,
+        "forecast": 253
+      }
+    ]
+  },
+  "independentConstructedExpectedAnswer": {
+    "sku": "sku-3e1b795039",
+    "units": 16
+  },
+  "nativeExpectedBeforeExecution": [
+    {
+      "intent": "A",
+      "sent": "62036320424935972248823",
+      "gross": "62036320424935972248823",
+      "excess": "0"
+    },
+    {
+      "intent": "B",
+      "sent": "62036320425781843055503",
+      "gross": "62036320425781843055503",
+      "excess": "845870806680"
+    },
+    {
+      "intent": "C",
+      "sent": "62036320424935972248823",
+      "gross": "62036320424935972248823",
+      "excess": "0"
+    }
+  ],
+  "cases": [
+    {
+      "id": "native-three-intents",
+      "stratum": "3actualfreshownednativeTransfers+1repeatedquery, recordedreassessment",
+      "expect": [
+        {
+          "constraint": "A-merchant",
+          "exact": "62036320424935972248823",
+          "lower_excess": "0",
+          "status": "within"
+        },
+        {
+          "constraint": "B-merchant",
+          "exact": "62036320425781843055503",
+          "lower_excess": "845870806680",
+          "status": "breached"
+        },
+        {
+          "constraint": "C-merchant",
+          "exact": "62036320424935972248823",
+          "lower_excess": "0",
+          "status": "within"
+        }
+      ],
+      "ownerSha256": "7ab8d91f2e355d01e48f923b95321c6b89b04501cbff8eec4fb624a2f43ffca2",
+      "sourceSha256": {
+        "recording": "ad47eee86ebce1d8b13623ef40f6d21cb9fde1d91fd8b075daefb73a83cf7596",
+        "basis": "86b6ca1c0d77c0924d452f74e0894d2e4a884ed4d8cb87c0bd22e7525e9dfadd"
+      }
+    },
+    {
+      "id": "utility-valid",
+      "stratum": "explicitlysyntheticnewreference/actual-outputinput,noHTTP/model",
+      "utility_status": "passed",
+      "ownerSha256": "7e5aa1a94c9f7b9649ff1cca80a803e272ae21db48f2ecc9e472c711694510c2",
+      "sourceSha256": {
+        "recording": "3491b3eb4b6bb7e14213e7ae9abafc9eb84950e54d30f5c492b7bf3f924d5c6f",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "utility-wrong-answer",
+      "stratum": "explicitlysyntheticnewreference/actual-outputinput,noHTTP/model",
+      "utility_status": "failed",
+      "ownerSha256": "d1f38e40f9a1d56a7b66ebe977c7cfb2a8848c0b8f62259528b52eb6ac5a0d76",
+      "sourceSha256": {
+        "recording": "5705e99d9bce94d43b96aadfbbc65b5721103c5a3e104e0a71055e0a4c8aa510",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "utility-missing-answer",
+      "stratum": "explicitlysyntheticnewreference/actual-outputinput,noHTTP/model",
+      "utility_status": "unknown",
+      "ownerSha256": "eb0e51db4e92568d57a60809e0d1dc238bb7b2bfec7be959f71cb6a9cb74ce0d",
+      "sourceSha256": {
+        "recording": "d60b0a8756a512594a3648e42b1a98591a1d3a8918a9f3139a986c8e4feabfaa",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "utility-wrong-invoice",
+      "stratum": "explicitlysyntheticnewreference/actual-outputinput,noHTTP/model",
+      "utility_status": "failed",
+      "ownerSha256": "e399bf4cc7274ad98e94ecb15a2e48e29f6da9eec931f567284177c18f735bb2",
+      "sourceSha256": {
+        "recording": "dc93c0c5211c7f12751453b56867bd0843dbc9bd35d8ee43e4bc9fc38274e126",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "raw-repeated-reordered",
+      "stratum": "syntheticstructurepreservingrecordtransform",
+      "expect": [
+        {
+          "constraint": "A-merchant",
+          "exact": "200000000000000000000000",
+          "status": "breached"
+        },
+        {
+          "constraint": "B-merchant",
+          "exact": "100000000000000000000000",
+          "status": "within"
+        }
+      ],
+      "ownerSha256": "73b67a534f954d57e1c41b23a29eb5bc4a29c2676cd707a2fa85b468e5bcbc0b",
+      "sourceSha256": {
+        "recording": "3d47ba206bc3da39f9c46bd794d8eace73b69edb18363c65b5e6a3c8e122da72",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "raw-missing-B-body",
+      "stratum": "syntheticmissingrequiredrecord",
+      "expect": [
+        {
+          "constraint": "A-merchant",
+          "status": "breached"
+        },
+        {
+          "constraint": "B-merchant",
+          "status": "unknown"
+        }
+      ],
+      "ownerSha256": "12320f510879c4ddc1d3ca0ab0f711a1524aa1faa7d957be624e7d3ec4f8e36e",
+      "sourceSha256": {
+        "recording": "5f1917e6197db5dc31501653c15cb77db19c1117aeca0e2d8459a6c474a4df4b",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    },
+    {
+      "id": "raw-conflicting-final-context",
+      "stratum": "syntheticcontradictoryproviderrecord,notauthenticresignedexecution",
+      "expect": [
+        {
+          "constraint": "A-merchant",
+          "status": "conflict"
+        },
+        {
+          "constraint": "B-merchant",
+          "status": "within"
+        }
+      ],
+      "ownerSha256": "95a86b9793725ee0843c3b77485a771e83871b978787cc5e745b107b52dc65d5",
+      "sourceSha256": {
+        "recording": "bf153d187dc6fdab4ff981aca7f96beec732909465abb785ff3f17188e31237c",
+        "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+      }
+    }
+  ]
+}

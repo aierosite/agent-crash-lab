@@ -1,0 +1,215 @@
+{
+  "atUtc": "2026-11-03T14:37:15.313908+00:00",
+  "classification": "Actual execution of final core/tests from newly extracted product-only archive in paths with spaces; no lab runtime import",
+  "successful": true,
+  "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+  "inputArchiveSha256": "857e710dc93eddb8e4afa3df5efb5124a31327d6db59da1ed6c5f5114ffd9f12",
+  "archiveNote": "Pre-delivery source/evidence/docs snapshot; this report and final manifest are added afterward, executable source unchanged",
+  "windows": {
+    "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+    "freshProductOnlyPath": "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Clean Package x1_itw9_",
+    "isolatedFlags": [
+      "-I",
+      "-S"
+    ],
+    "runs": [
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Clean Package x1_itw9_\\test_agent_crash_lab.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Clean Package x1_itw9_\\baseline-clean.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.9742231999989599,
+        "stderr": "test_01_all_original_baselines_exact_gross_and_actual_utility (__main__.KernelTests.test_01_all_original_baselines_exact_gross_and_actual_utility) ... ok\ntest_02_primary_useful_excess_legitimate_equal_price_and_units (__main__.KernelTests.test_02_primary_useful_excess_legitimate_equal_price_and_units) ... ok\ntest_03_observation_repetition_and_array_order_do_not_multiply_money (__main__.KernelTests.test_03_observation_repetition_and_array_order_do_not_multiply_money) ... ok\ntest_04_claim_rollback_successreceiptid_and_refund_roles (__main__.KernelTests.test_04_claim_rollback_successreceiptid_and_refund_roles) ... ok\ntest_05_function_deposit_and_protected_internal_hop (__main__.KernelTests.test_05_function_deposit_and_protected_internal_hop) ... ok\ntest_06_third_guard_and_self_initial_derivation (__main__.KernelTests.test_06_third_guard_and_self_initial_derivation) ... ok\ntest_07_paid_corruption_free_completion_and_inert_flags (__main__.KernelTests.test_07_paid_corruption_free_completion_and_inert_flags) ... ok\ntest_08_unrelated_donor_not_failed_owner_invoice (__main__.KernelTests.test_08_unrelated_donor_not_failed_owner_invoice) ... ok\ntest_09_missing_other_scope_preserves_unaffected_breach (__main__.KernelTests.test_09_missing_other_scope_preserves_unaffected_breach) ... ok\ntest_09b_conflicting_same_final_identity_not_last_wins (__main__.KernelTests.test_09b_conflicting_same_final_identity_not_last_wins) ... ok\ntest_10_zero_none_and_unsupported_lifecycle (__main__.KernelTests.test_10_zero_none_and_unsupported_lifecycle) ... ok\ntest_11_actual_pending_to_final_one_effect (__main__.KernelTests.test_11_actual_pending_to_final_one_effect) ... ok\ntest_11b_partial_positive_requires_actual_final_anchor (__main__.KernelTests.test_11b_partial_positive_requires_actual_final_anchor) ... ok\ntest_12_real_cli_and_library_determinism_input_immutability (__main__.KernelTests.test_12_real_cli_and_library_determinism_input_immutability) ... ok\ntest_13_authorized_splits_and_optional_count_unit (__main__.KernelTests.test_13_authorized_splits_and_optional_count_unit) ... ok\ntest_14_required_terminal_and_allowed_intermediate (__main__.KernelTests.test_14_required_terminal_and_allowed_intermediate) ... ok\ntest_actual_wrong_missing_answer_and_nonwinning_content (__main__.KernelTests.test_actual_wrong_missing_answer_and_nonwinning_content) ... ok\ntest_exact_utility_numbers_and_bool_not_number (__main__.KernelTests.test_exact_utility_numbers_and_bool_not_number) ... ok\ntest_initial_body_must_match_transaction_context (__main__.KernelTests.test_initial_body_must_match_transaction_context) ... ok\ntest_invalid_utility_collection_does_not_destroy_finance (__main__.KernelTests.test_invalid_utility_collection_does_not_destroy_finance) ... ok\ntest_owner_typo_unknown_metric_open_horizon_and_unassigned (__main__.KernelTests.test_owner_typo_unknown_metric_open_horizon_and_unassigned) ... ok\ntest_pointer_array_and_cross_run_containment (__main__.KernelTests.test_pointer_array_and_cross_run_containment) ... ok\ntest_recovery_full_route_diversion_and_known_failure_distinct (__main__.KernelTests.test_recovery_full_route_diversion_and_known_failure_distinct) ... ok\ntest_selected_representation_boundary_positive_and_negative (__main__.KernelTests.test_selected_representation_boundary_positive_and_negative) ... ok\ntest_signature_and_deprecated_display_are_not_payment_identity (__main__.KernelTests.test_signature_and_deprecated_display_are_not_payment_identity) ... ok\ntest_strict_outer_hash_encoding_duplicate_and_numeric_limits (__main__.KernelTests.test_strict_outer_hash_encoding_duplicate_and_numeric_limits) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 0.776s\n\nOK\n",
+        "report": {
+          "at": "2026-11-03T14:37:10.781166+00:00",
+          "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
+          "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
+          "testsRun": 26,
+          "successful": true,
+          "failures": [],
+          "errors": [],
+          "elapsedSeconds": 0.7766836000082549
+        }
+      },
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Clean Package x1_itw9_\\verify_reserved.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Clean Package x1_itw9_\\reserved-clean.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.2117525000066962,
+        "stderr": "",
+        "report": {
+          "atUtc": "2026-11-03T14:37:10.990186+00:00",
+          "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
+          "kernelInvocations": 8,
+          "nativeConditions": 3,
+          "syntheticConditions": 7,
+          "successful": true,
+          "elapsedSeconds": 0.06637779998709448,
+          "postExposureCoreChanges": true,
+          "resultSummary": [
+            {
+              "id": "native-three-intents",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-valid",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-wrong-answer",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-missing-answer",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-wrong-invoice",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-repeated-reordered",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-missing-B-body",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-conflicting-final-context",
+              "matched": true,
+              "errors": []
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "linux": {
+    "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
+    "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "freshProductOnlyPath": "/tmp/agent-crash-lab-delivery-gqt6hz9a/Clean Package",
+    "archiveSha256": "857e710dc93eddb8e4afa3df5efb5124a31327d6db59da1ed6c5f5114ffd9f12",
+    "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+    "runs": [
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/agent-crash-lab-delivery-gqt6hz9a/Clean Package/test_agent_crash_lab.py",
+          "--report",
+          "/tmp/agent-crash-lab-delivery-gqt6hz9a/Clean Package/baseline-clean.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.5789711,
+        "stderr": "test_01_all_original_baselines_exact_gross_and_actual_utility (__main__.KernelTests.test_01_all_original_baselines_exact_gross_and_actual_utility) ... ok\ntest_02_primary_useful_excess_legitimate_equal_price_and_units (__main__.KernelTests.test_02_primary_useful_excess_legitimate_equal_price_and_units) ... ok\ntest_03_observation_repetition_and_array_order_do_not_multiply_money (__main__.KernelTests.test_03_observation_repetition_and_array_order_do_not_multiply_money) ... ok\ntest_04_claim_rollback_successreceiptid_and_refund_roles (__main__.KernelTests.test_04_claim_rollback_successreceiptid_and_refund_roles) ... ok\ntest_05_function_deposit_and_protected_internal_hop (__main__.KernelTests.test_05_function_deposit_and_protected_internal_hop) ... ok\ntest_06_third_guard_and_self_initial_derivation (__main__.KernelTests.test_06_third_guard_and_self_initial_derivation) ... ok\ntest_07_paid_corruption_free_completion_and_inert_flags (__main__.KernelTests.test_07_paid_corruption_free_completion_and_inert_flags) ... ok\ntest_08_unrelated_donor_not_failed_owner_invoice (__main__.KernelTests.test_08_unrelated_donor_not_failed_owner_invoice) ... ok\ntest_09_missing_other_scope_preserves_unaffected_breach (__main__.KernelTests.test_09_missing_other_scope_preserves_unaffected_breach) ... ok\ntest_09b_conflicting_same_final_identity_not_last_wins (__main__.KernelTests.test_09b_conflicting_same_final_identity_not_last_wins) ... ok\ntest_10_zero_none_and_unsupported_lifecycle (__main__.KernelTests.test_10_zero_none_and_unsupported_lifecycle) ... ok\ntest_11_actual_pending_to_final_one_effect (__main__.KernelTests.test_11_actual_pending_to_final_one_effect) ... ok\ntest_11b_partial_positive_requires_actual_final_anchor (__main__.KernelTests.test_11b_partial_positive_requires_actual_final_anchor) ... ok\ntest_12_real_cli_and_library_determinism_input_immutability (__main__.KernelTests.test_12_real_cli_and_library_determinism_input_immutability) ... ok\ntest_13_authorized_splits_and_optional_count_unit (__main__.KernelTests.test_13_authorized_splits_and_optional_count_unit) ... ok\ntest_14_required_terminal_and_allowed_intermediate (__main__.KernelTests.test_14_required_terminal_and_allowed_intermediate) ... ok\ntest_actual_wrong_missing_answer_and_nonwinning_content (__main__.KernelTests.test_actual_wrong_missing_answer_and_nonwinning_content) ... ok\ntest_exact_utility_numbers_and_bool_not_number (__main__.KernelTests.test_exact_utility_numbers_and_bool_not_number) ... ok\ntest_initial_body_must_match_transaction_context (__main__.KernelTests.test_initial_body_must_match_transaction_context) ... ok\ntest_invalid_utility_collection_does_not_destroy_finance (__main__.KernelTests.test_invalid_utility_collection_does_not_destroy_finance) ... ok\ntest_owner_typo_unknown_metric_open_horizon_and_unassigned (__main__.KernelTests.test_owner_typo_unknown_metric_open_horizon_and_unassigned) ... ok\ntest_pointer_array_and_cross_run_containment (__main__.KernelTests.test_pointer_array_and_cross_run_containment) ... ok\ntest_recovery_full_route_diversion_and_known_failure_distinct (__main__.KernelTests.test_recovery_full_route_diversion_and_known_failure_distinct) ... ok\ntest_selected_representation_boundary_positive_and_negative (__main__.KernelTests.test_selected_representation_boundary_positive_and_negative) ... ok\ntest_signature_and_deprecated_display_are_not_payment_identity (__main__.KernelTests.test_signature_and_deprecated_display_are_not_payment_identity) ... ok\ntest_strict_outer_hash_encoding_duplicate_and_numeric_limits (__main__.KernelTests.test_strict_outer_hash_encoding_duplicate_and_numeric_limits) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 0.492s\n\nOK\n",
+        "report": {
+          "at": "2026-11-03T14:37:15.186654+00:00",
+          "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
+          "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
+          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
+          "testsRun": 26,
+          "successful": true,
+          "failures": [],
+          "errors": [],
+          "elapsedSeconds": 0.4927163000000001
+        }
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/agent-crash-lab-delivery-gqt6hz9a/Clean Package/verify_reserved.py",
+          "--report",
+          "/tmp/agent-crash-lab-delivery-gqt6hz9a/Clean Package/reserved-clean.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.10578980000000016,
+        "stderr": "",
+        "report": {
+          "atUtc": "2026-11-03T14:37:15.289440+00:00",
+          "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
+          "kernelInvocations": 8,
+          "nativeConditions": 3,
+          "syntheticConditions": 7,
+          "successful": true,
+          "elapsedSeconds": 0.04919820000000019,
+          "postExposureCoreChanges": true,
+          "resultSummary": [
+            {
+              "id": "native-three-intents",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-valid",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-wrong-answer",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-missing-answer",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "utility-wrong-invoice",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-repeated-reordered",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-missing-B-body",
+              "matched": true,
+              "errors": []
+            },
+            {
+              "id": "raw-conflicting-final-context",
+              "matched": true,
+              "errors": []
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "wslWallSeconds": 4.275498900009552,
+  "dependencyInstalls": 0,
+  "networkOrModelOrSigningCalls": 0,
+  "limitations": "Replays controlled recordings, not generation of a new chain or independent model performance. OS process startup is included in command durations; core-loop timing excludes file IO/startup."
+}

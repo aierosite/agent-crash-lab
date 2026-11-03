@@ -1,0 +1,12 @@
+{
+  "atUtc": "2026-11-03T18:43:37.871130+00:00",
+  "classification": "Bounded structural release check, not a comprehensive secret-scanner/security audit",
+  "sensitiveValueFieldMatches": [],
+  "booleanPrivateKeyExportAnnotations": 21,
+  "allBooleanExportAnnotationsFalse": true,
+  "standaloneSecretNamedFiles": [],
+  "explicitPublicTestSeed": "verification/reserved-test-seed.bin is disclosed test-data seed, not an account key",
+  "nativeRunner": "Ephemeral seed only in parent/child memory via stdin, not in capture/config files inside product",
+  "optionalBinaryIncluded": false,
+  "publicPublicationPerformed": false
+}

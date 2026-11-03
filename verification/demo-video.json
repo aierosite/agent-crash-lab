@@ -1,0 +1,23 @@
+{
+  "atUtc": "2026-11-03T18:38:21.991075+00:00",
+  "video": "D:\\Upwork\\agent-crash-lab\\product\\docs\\agent-crash-lab-demo.mp4",
+  "sha256": "0a430fe809fd1af58b88741437ebbb4d9bf87e493d40e045c467a41346b7a59f",
+  "bytes": 1200302,
+  "durationSeconds": 72,
+  "resolution": [
+    1280,
+    820
+  ],
+  "method": "Frame-based captioned walkthrough from actual local browser captures; not continuous screen recording, no live LLM or recreated UI",
+  "frames": {
+    "01-problem.png": "b26f9e928336932a666e3250100ad23e8c04cc3d51af5a9889c7fbddd28d7723",
+    "02-payment.png": "193e4e5341531204db4bbd3dda17f290b3cd1b0248fed59795bc48a71b5e748c",
+    "03-recovery.png": "80e4ef5cb65c7bcc0fa2e74e4059881cb43b21f0534443c9b2e50883a47d5b3d",
+    "04-evidence.png": "f302996eb25e0ee4001eb1a61c2b0a7582818608fd39e0273811b53d6c99bc42",
+    "05-output.png": "0f1ec295ed02e932b84db7616320391d6ab12896ed4397997e3b682ba85ff6df",
+    "06-native.png": "2aca3f3edeb291b22da1bfb0870cf1f99554eb383e672154836dacb088aca772"
+  },
+  "decodeValidationExitCode": 0,
+  "encoder": "ffmpeg.exe",
+  "encodingToolNotBundled": true
+}

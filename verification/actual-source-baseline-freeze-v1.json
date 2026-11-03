@@ -1,0 +1,273 @@
+{
+  "atUtc": "2026-11-03T14:23:37.663046+00:00",
+  "classification": "Actual fresh product source/tests/owner/evidence and executed baseline freeze, before first reserved seed exposure",
+  "implementationStartedAtUtc": "2026-11-03T14:06:30.454461+00:00",
+  "baselineCommand": "python -I -S delivery/test_agent_crash_lab.py --report build_support/baseline-freeze-run.json",
+  "baselineTestsRun": 26,
+  "baselineSuccessful": true,
+  "baselineReportSha256": "73b0cf1ee6f3dc284df25f1720f4d0fa3e576761ac10295b0b336ef326aca891",
+  "files": [
+    {
+      "path": "delivery/agent_crash_lab.py",
+      "bytes": 56421,
+      "sha256": "67f10f7ca08e17a87227c4da23b5f2883397a876d20f81734f616a8d10aca37e"
+    },
+    {
+      "path": "delivery/BASELINES.json",
+      "bytes": 4071,
+      "sha256": "6331b5a99d59c5124c3e709fbb17ba796988af6b70f71d5b06efcd933fc8d3af"
+    },
+    {
+      "path": "delivery/evidence/agent-leash-artifact-observation.json",
+      "bytes": 336480,
+      "sha256": "710b2d4e44bb0c67bab8778154d8a089b7668fd5195eadba76cf7f4d84827c69"
+    },
+    {
+      "path": "delivery/evidence/agent-leash-artifact-precommit.json",
+      "bytes": 2816,
+      "sha256": "f333add999c1d6b3d5f69823226c4935f4074e9e6ff43b7f00c20e35a417c32b"
+    },
+    {
+      "path": "delivery/evidence/balance-attribution-observation.json",
+      "bytes": 50060,
+      "sha256": "d55ed8a5666bebfe395dec26eb30d388ceb6a47fbc00dd4de96b3d1c9e83a789"
+    },
+    {
+      "path": "delivery/evidence/balance-attribution-precommit.json",
+      "bytes": 2750,
+      "sha256": "bc3870aa8a13dd52248915cd30a29af7ed5eab4a34c7c04be445d728acea2c85"
+    },
+    {
+      "path": "delivery/evidence/deleted-signer-refund-observation.json",
+      "bytes": 26859,
+      "sha256": "db6669e98f42630ff82d85eb4e26e58615c8619e423085db28e444a76d30a186"
+    },
+    {
+      "path": "delivery/evidence/deleted-signer-refund-precommit.json",
+      "bytes": 2667,
+      "sha256": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca"
+    },
+    {
+      "path": "delivery/evidence/failed-refund-observation.json",
+      "bytes": 99188,
+      "sha256": "271d460974a48bf71b361132cc52552f34319c4916aa885c5245963fbafff731"
+    },
+    {
+      "path": "delivery/evidence/failed-refund-precommit.json",
+      "bytes": 1869,
+      "sha256": "4f2d035ac803edd3ed2f87be3b270dbe0025b596f230fe0288faffee7853d31b"
+    },
+    {
+      "path": "delivery/evidence/function-deposit-observation.json",
+      "bytes": 142983,
+      "sha256": "11f4a493beb8526759eb1d653fbcfeaaf5b10b4ca2f0346f6bcce2be1237e8ce"
+    },
+    {
+      "path": "delivery/evidence/function-deposit-precommit.json",
+      "bytes": 2181,
+      "sha256": "877cff66472502942b9799330871488168edb62cd0965fe11d01a5f625ce0e00"
+    },
+    {
+      "path": "delivery/evidence/gas-key-refund-observation.json",
+      "bytes": 65423,
+      "sha256": "a69119f3581550443e57b3ffd218c25ae3d15a4fe4600341efa3140b47c81801"
+    },
+    {
+      "path": "delivery/evidence/gas-key-refund-precommit.json",
+      "bytes": 2315,
+      "sha256": "d6dfdac5e70135147de9a4262be89f7e13aa90ba05fe3e7984b3a143b8421e78"
+    },
+    {
+      "path": "delivery/evidence/intent-duplicate-observation.json",
+      "bytes": 408616,
+      "sha256": "9ba4b2d8d5f1425782cc79bd2fa2a7b8c90f7db46fbaf1684ed395167dc18509"
+    },
+    {
+      "path": "delivery/evidence/intent-duplicate-precommit.json",
+      "bytes": 2633,
+      "sha256": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+    },
+    {
+      "path": "delivery/evidence/merchant-utility-observation.json",
+      "bytes": 276543,
+      "sha256": "a59429b4ebcbd684c0d39b7b669e78a0ad98376434952f1a60cf03d3c39328c0"
+    },
+    {
+      "path": "delivery/evidence/merchant-utility-precommit.json",
+      "bytes": 3216,
+      "sha256": "5180970d2dc565574edb51b85f21b6886e0b3748f07ddc3bb91346c131625313"
+    },
+    {
+      "path": "delivery/evidence/monetary-yield-observation.json",
+      "bytes": 68559,
+      "sha256": "0f842b61503df7f9bb57254adc9878996b6eb361c58f6ca92c6f75eab5da0c80"
+    },
+    {
+      "path": "delivery/evidence/monetary-yield-precommit.json",
+      "bytes": 2263,
+      "sha256": "46b4565c77555b9052eed066f8f4b2f244d7339790e1ab6d0d8ec982310b7cd2"
+    },
+    {
+      "path": "delivery/evidence/none-ack-observation.json",
+      "bytes": 22119,
+      "sha256": "7fd27783ed26a5a7d1ac056e62d62971ed146efea2a39db3e307624b123da02b"
+    },
+    {
+      "path": "delivery/evidence/none-ack-precommit.json",
+      "bytes": 1955,
+      "sha256": "9072fe3e0b505c008e65a89612b32289402e2b38c496ce21cd2c0681001cd165"
+    },
+    {
+      "path": "delivery/evidence/refund-override-observation.json",
+      "bytes": 80862,
+      "sha256": "6c8cc8c2c7779f8668b124e4bc45e82b7819d5fbed9933506c87cc0df6b8cb3c"
+    },
+    {
+      "path": "delivery/evidence/refund-override-precommit.json",
+      "bytes": 1136,
+      "sha256": "60ca504bebf8ac64b7f7b08f248b8fc8b2d6f2c7d3e3a6070f8413a01cf6c10a"
+    },
+    {
+      "path": "delivery/evidence/self-function-deposit-observation.json",
+      "bytes": 47823,
+      "sha256": "76bbd2584ad27624324f73af43d657b4492ad1b6573b704063d38beff309679c"
+    },
+    {
+      "path": "delivery/evidence/self-function-deposit-precommit.json",
+      "bytes": 2179,
+      "sha256": "9f41daf413db91df75443df7d01ffa07c6583b551bccc2631ab27a1e77fbdf56"
+    },
+    {
+      "path": "delivery/evidence/split-settlement-observation.json",
+      "bytes": 57781,
+      "sha256": "c82d62aeb8b47b336a1170b6b1a39bca4ec0b53c7e555e2fb49f83c986192b87"
+    },
+    {
+      "path": "delivery/evidence/split-settlement-precommit.json",
+      "bytes": 2984,
+      "sha256": "37f57da33c9cad0a78be4e294fb227c0960af6ce1121254d1f5f4854858bccf1"
+    },
+    {
+      "path": "delivery/evidence/success-receipt-id-observation.json",
+      "bytes": 110825,
+      "sha256": "12217adb73f26bc9da1474b834fc2c4fe9fc1ed3d3455b7ab98a17c2fb99ba1f"
+    },
+    {
+      "path": "delivery/evidence/success-receipt-id-precommit.json",
+      "bytes": 701,
+      "sha256": "e1f7a19b25065839924069438abe0a95d5ae5ff562d484aff85c55eaa62d397e"
+    },
+    {
+      "path": "delivery/evidence/zero-principal-observation.json",
+      "bytes": 45032,
+      "sha256": "c5b5ecf91ec8706aba8d88e028dd29751b54b45a3c4b025db0183edb798e2ca1"
+    },
+    {
+      "path": "delivery/evidence/zero-principal-precommit.json",
+      "bytes": 1663,
+      "sha256": "f37377dd65113c442f5312355d94068c388d49d6af6fe9a14db5c28876eed710"
+    },
+    {
+      "path": "delivery/EXPECTED.json",
+      "bytes": 7630,
+      "sha256": "e09b3a644fbab7eee0d4666eb5b110e88f3821d71af487895a26d1b80b53b194"
+    },
+    {
+      "path": "delivery/SOURCES.json",
+      "bytes": 3870,
+      "sha256": "c5f263831e64e7df265b08a017b023c03d885fd5f5da7d88825a1306bc3ba771"
+    },
+    {
+      "path": "delivery/tasks/agent-leash-artifact.json",
+      "bytes": 7140,
+      "sha256": "8259b543871df5663366d72f9dd097c53cd2eac0099d8ce46e9970a51816eceb"
+    },
+    {
+      "path": "delivery/tasks/balance-attribution.json",
+      "bytes": 2797,
+      "sha256": "2b86a2c0151826a61cab75bd38d35f70069514bf8d7b1ec6aeacad5fbfa47e42"
+    },
+    {
+      "path": "delivery/tasks/deleted-signer-refund.json",
+      "bytes": 2332,
+      "sha256": "e199dcfe32018ed8441eb2b662c74cecac9ce8c8064a9090c55a6f76e2c195cd"
+    },
+    {
+      "path": "delivery/tasks/failed-refund.json",
+      "bytes": 4111,
+      "sha256": "d78e09a85541cb667ad543718ec580902b7b19ff81813b7d3470347ef5f090f6"
+    },
+    {
+      "path": "delivery/tasks/function-deposit.json",
+      "bytes": 5587,
+      "sha256": "55002f48c25ca87e61bb88e81ee2632cc113afa2ba77380e3684a5bf04ae784a"
+    },
+    {
+      "path": "delivery/tasks/gas-key-refund.json",
+      "bytes": 3842,
+      "sha256": "9ce2ae69563821f0a99337c4bebd4f77d812301c5e5c1f20c4bf3c6c0b63410d"
+    },
+    {
+      "path": "delivery/tasks/intent-duplicate-0.json",
+      "bytes": 7938,
+      "sha256": "963273bc4b3127767b8f26be68222afab0dbdf56010915de0f78af98788a1b33"
+    },
+    {
+      "path": "delivery/tasks/intent-duplicate-1.json",
+      "bytes": 7956,
+      "sha256": "43232af3115036702d06c67aa67329f72fa3b7c5cc225a95b2f47e2a1506a35e"
+    },
+    {
+      "path": "delivery/tasks/merchant-utility-0.json",
+      "bytes": 10519,
+      "sha256": "f7a3fcec49ed66d87c070507b709a652aaa4b9dd3f8a3f3572e88476c5f2f00f"
+    },
+    {
+      "path": "delivery/tasks/merchant-utility-1.json",
+      "bytes": 10548,
+      "sha256": "f43d94afbe3dff50fb166c88d9300616d071a39fbbcd3d746022e0cae74cafb1"
+    },
+    {
+      "path": "delivery/tasks/monetary-yield.json",
+      "bytes": 2844,
+      "sha256": "22f204b705f119b71aa169833168fa22312a1d27dc722f7b296ddca9f967fa85"
+    },
+    {
+      "path": "delivery/tasks/none-ack.json",
+      "bytes": 3330,
+      "sha256": "b963da76d4b14e798b7d41b8cdf1267ee6a59a94cc1a2dde20676543f27cfa5f"
+    },
+    {
+      "path": "delivery/tasks/refund-override.json",
+      "bytes": 4245,
+      "sha256": "bf6cd1caf53af228c949681bb394c4dc4acf1c78fec96ac3c0e5c9a947c12d5c"
+    },
+    {
+      "path": "delivery/tasks/self-function-deposit.json",
+      "bytes": 3239,
+      "sha256": "60bdb07173e328d0c1940aa02b719d7438c3d1b9dcad06f9ad625dbdad7dcf01"
+    },
+    {
+      "path": "delivery/tasks/split-settlement.json",
+      "bytes": 5658,
+      "sha256": "87c1f90af62764d238e83c73bb77123bd121f1bf600dbab9927388d3536bdf75"
+    },
+    {
+      "path": "delivery/tasks/success-receipt-id.json",
+      "bytes": 3538,
+      "sha256": "d2430733716505819ad2af91a643f8e7e4a83f9e71c8417b725d6bf108935bfc"
+    },
+    {
+      "path": "delivery/tasks/zero-principal.json",
+      "bytes": 3222,
+      "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
+    },
+    {
+      "path": "delivery/test_agent_crash_lab.py",
+      "bytes": 21039,
+      "sha256": "64608df5128a9267bbbe4a94b4f736e1532b736c27f8fc4ebd70efda75d4ddd9"
+    }
+  ],
+  "seedWasUnopenedAtFreeze": true,
+  "notExternalPrivateHoldout": true
+}

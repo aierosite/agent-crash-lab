@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-03T14:20:49.691017+00:00",
+  "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "core_sha256": "26642fa04a421de1020a53df61494eee2364f7c2dbc3035c698d6b9683fb0fce",
+  "tests_sha256": "477f53c198a70d56d5a330d7fc17cfa47af236c169194995aa0fe9bc7998128d",
+  "testsRun": 23,
+  "successful": true,
+  "failures": [],
+  "errors": [],
+  "elapsedSeconds": 0.6005248999863397
+}

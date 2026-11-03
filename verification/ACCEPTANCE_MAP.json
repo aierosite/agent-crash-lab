@@ -1,0 +1,76 @@
+{
+  "classification": "Observable finite acceptance floor routing, not exhaustive correctness proof",
+  "floors": [
+    {
+      "floor": 1,
+      "requirement": "Accept at least one complete legitimate native/task case as no observed task breach with verified useful completion, with specific exact amounts and receipt references.",
+      "test": "test_01_all_original_baselines_exact_gross_and_actual_utility"
+    },
+    {
+      "floor": 2,
+      "requirement": "Detect the actual useful-completion plus narrower task-excess episode from bound distinct native attempts, without blaming a guard for an unrequested invoice feature.",
+      "test": "test_02_primary_useful_excess_legitimate_equal_price_and_units"
+    },
+    {
+      "floor": 3,
+      "requirement": "Accept legitimate separate intentB with equal amount/recipient, and deduplicate repeated observation of one signed attempt. Counts must name their unit.",
+      "test": "test_03_observation_repetition_and_array_order_do_not_multiply_money"
+    },
+    {
+      "floor": 4,
+      "requirement": "Differentiate native committed credit from rootPaid/counter claim, containing-batch rollback and later callback failure. PreserveSuccessReceiptId committed semantics.",
+      "test": "test_04_claim_rollback_successreceiptid_and_refund_roles"
+    },
+    {
+      "floor": 5,
+      "requirement": "Treat positiveFunctionCall deposit and controlled routed funding according to explicit native/economic roles; do not silently implementTransfer-only completeness.",
+      "test": "test_05_function_deposit_and_protected_internal_hop"
+    },
+    {
+      "floor": 6,
+      "requirement": "Handle raw current same-account initial omission with derived provenance or explicitly scoped unsupported output; do not claim support for third guard if all its cases are unsupported.",
+      "test": "test_06_third_guard_and_self_initial_derivation"
+    },
+    {
+      "floor": 7,
+      "requirement": "Keep actual allowed free utility and invalid paid-content controls distinct, enforcing declared source/content obligations rather than completed boolean or HTTP200.",
+      "test": "test_07_paid_corruption_free_completion_and_inert_flags"
+    },
+    {
+      "floor": 8,
+      "requirement": "Do not attribute unrelated same-amount credit to failed owner intent inC32. Account balance is corroboration under assumptions, not the causal identity key.",
+      "test": "test_08_unrelated_donor_not_failed_owner_invoice"
+    },
+    {
+      "floor": 9,
+      "requirement": "Deliberately incomplete, contradictory and unsupported financial evidence must not return complete-clean. Independently positive facts and scoped breach remain visible when other axes lack evidence.",
+      "test": "test_09_missing_other_scope_preserves_unaffected_breach; test_09b_conflicting_same_final_identity_not_last_wins"
+    },
+    {
+      "floor": 10,
+      "requirement": "Missing input, invalid representation, resource limit, unsupported profile and ordinary paid/refunded zero outcomes are distinct diagnostics; exact zero cannot become an absent default.",
+      "test": "test_10_zero_none_and_unsupported_lifecycle"
+    },
+    {
+      "floor": 11,
+      "requirement": "Preserve actual pending-to-final progression without duplicate effects/false immutable conflicts; never use scalar>= for the two incomparable status branches.",
+      "test": "test_11_actual_pending_to_final_one_effect; test_11b_partial_positive_requires_actual_final_anchor"
+    },
+    {
+      "floor": 12,
+      "requirement": "Run actual final code from documented commands on the intended Windows environment and at least one clean isolated reproduction path when feasible; measure source/runtime/evidence footprint separately and report tested limits.",
+      "test": "test_12_real_cli_and_library_determinism_input_immutability + verification/clean-reproduction.json"
+    },
+    {
+      "floor": 13,
+      "requirement": "Retain legitimate authorized multi-action and instalment controls: explicitly amount-compliant settlement cannot be called duplicate solely because it has two action indices or signed hashes; counts must use the declared unit.",
+      "test": "test_13_authorized_splits_and_optional_count_unit"
+    },
+    {
+      "floor": 14,
+      "requirement": "Distinguish permitted intermediate delivery failure from designated terminal task utility. SS02 intermediate402 followed by valid terminal response/observed answer can complete its predeclared eventual task; wrong required final answer cannot be replaced by a favorable earlier or recomputed answer.",
+      "test": "test_14_required_terminal_and_allowed_intermediate"
+    }
+  ],
+  "scopeLimitations": "See THREAT_MODEL.fa.txt and FIRST_FAILURES.json; clean reproduction result is a separate actual execution report."
+}

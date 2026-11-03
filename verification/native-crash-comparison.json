@@ -1,0 +1,44 @@
+{
+  "atUtc": "2026-11-03T18:25:04.462906+00:00",
+  "classification": "Actual fresh owned local NEAR sandbox execution with scripted workers, process crash77 and restart; known-family source-informed integration, not live-model performance",
+  "successful": true,
+  "ownedNodeStopped": true,
+  "nativeSendAttempts": 5,
+  "evidenceSha256": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f",
+  "precommitSha256": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad",
+  "runnerSha256": "b5247d296abbf9086a5cf4fee832e02b36ef0abcf0c0330f43b6d1194a708a1c",
+  "policies": [
+    {
+      "id": "naive",
+      "name": "Naive retry",
+      "intentAGross": "200000000000000000000000",
+      "intentBGross": "100000000000000000000000",
+      "answer": {
+        "sku": "C03",
+        "units": 17
+      },
+      "crashExitCode": 77,
+      "recovery": "new transaction sent",
+      "merchantBalanceIncrease": "300000000000000000000000",
+      "financialStatus": "breached",
+      "requiredOutputsPassed": 2,
+      "baseline": "native-naive"
+    },
+    {
+      "id": "durable",
+      "name": "Durable hash journal",
+      "intentAGross": "100000000000000000000000",
+      "intentBGross": "100000000000000000000000",
+      "answer": {
+        "sku": "C03",
+        "units": 17
+      },
+      "crashExitCode": 77,
+      "recovery": "known transaction re-fetched; no new A send",
+      "merchantBalanceIncrease": "200000000000000000000000",
+      "financialStatus": "within",
+      "requiredOutputsPassed": 2,
+      "baseline": "native-durable"
+    }
+  ]
+}

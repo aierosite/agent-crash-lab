@@ -1,0 +1,17 @@
+{
+  "atUtc": "2026-11-03T18:28:09.238920+00:00",
+  "testsRun": 8,
+  "successful": false,
+  "elapsedSeconds": 1.1840297000017017,
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+  "workbenchSha256": "edef6eb95fa6ab4cb9a8ac080d64c0b18872a3e65a047054356082eba4e421f9",
+  "failures": [],
+  "errors": [
+    [
+      "test_cross_origin_host_token_and_content_type_rejected (__main__.WorkbenchTests.test_cross_origin_host_token_and_content_type_rejected)",
+      "Traceback (most recent call last):\n  File \"D:\\Upwork\\agent-crash-lab\\product\\test_workbench.py\", line 48, in test_cross_origin_host_token_and_content_type_rejected\n    self.assertEqual(self.json('/api/run',{'id':'double-payment'},{'Content-Type':'text/plain'})[0],415)\n                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Upwork\\agent-crash-lab\\product\\test_workbench.py\", line 22, in json\n    code,h,b=self.fetch(path,body,headers);return code,json.loads(b)\n             ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Upwork\\agent-crash-lab\\product\\test_workbench.py\", line 18, in fetch\n    try:r=urllib.request.urlopen(req,timeout=10)\n          ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 187, in urlopen\n    return opener.open(url, data, timeout)\n           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 487, in open\n    response = self._open(req, data)\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 504, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n                              '_open', req)\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 464, in _call_chain\n    result = func(*args)\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 1349, in http_open\n    return self.do_open(http.client.HTTPConnection, req)\n           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\urllib\\request.py\", line 1324, in do_open\n    r = h.getresponse()\n  File \"C:\\Python314\\Lib\\http\\client.py\", line 1478, in getresponse\n    response.begin()\n    ~~~~~~~~~~~~~~^^\n  File \"C:\\Python314\\Lib\\http\\client.py\", line 343, in begin\n    version, status, reason = self._read_status()\n                              ~~~~~~~~~~~~~~~~~^^\n  File \"C:\\Python314\\Lib\\http\\client.py\", line 304, in _read_status\n    line = str(self.fp.readline(_MAXLINE + 1), \"iso-8859-1\")\n               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\n  File \"C:\\Python314\\Lib\\socket.py\", line 729, in readinto\n    return self._sock.recv_into(b)\n           ~~~~~~~~~~~~~~~~~~~~^^^\nConnectionAbortedError: [WinError 10053] An established connection was aborted by the software in your host machine\n"
+    ]
+  ],
+  "classification": "Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite"
+}

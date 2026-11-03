@@ -1,0 +1,197 @@
+{
+  "atUtc": "2026-11-03T18:43:03.563836+00:00",
+  "successful": true,
+  "classification": "Actual product-only fresh archive extraction and execution in paths with spaces. Replays captures and exercises local HTTP/process launcher; no new native node or LLM",
+  "snapshotZipSha256": "98865b251e8ce678710babcdc032adf4e335587fd96d2cbcdbb5c2604be98b94",
+  "sourceHashes": {
+    ".github/workflows/test.yml": "b418b51a659fdd63ca5e5244dc959edcb9a4d8ac1f9e3edecd1794e1ac019b4f",
+    "agent_crash_lab.py": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+    "gate.py": "0b5bfe2e947a76c2b7ef51d4ffff1c3784e7af59efb7acb96396037e7270d36d",
+    "launch.py": "d984789ec169c1a7d8c79c80f0882aa40af0ac63b6fdae32e6a1fdbd280e7011",
+    "pyproject.toml": "c369fbc9c624647019db079af47ae85d854b118cf73afee031a38e0cb1bc8e40",
+    "Start Crash Lab.cmd": "2ae8af384d6393c8e0f50d08fe6efbf0ff432cd2ce85f16a512ee7d822b777e7",
+    "test_agent_crash_lab.py": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
+    "test_workbench.py": "d24d102daef13d620a15b66a3a2c07ad9117e60d5fccc7db4094b3c7ec04b9b8",
+    "tools/bind_native.py": "eeddddfd41583b180f7b36ba1d7cf3c51bfbf93e50659d09b6688a99f5700799",
+    "tools/export_bundle.py": "bae9ea52e9786a6f5e2fbdd6813fd095f83f90c6bc9e2ca968a4fd52d60cd17e",
+    "tools/native_crash.py": "b5247d296abbf9086a5cf4fee832e02b36ef0abcf0c0330f43b6d1194a708a1c",
+    "tools/run_native_wsl.py": "bd3f91b3a5e9766a8dfbb67de5960a5da34e739d0cb520c792ac6859d5b3e7d4",
+    "tools/verify_release.py": "1c94f325b29de3521dce18837e8a5b7becf3aef15b77baf0fcb0b5cff5bc4dec",
+    "verify_reserved.py": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
+    "web/app.js": "74e1a99335d76a317191fefcd0d74f39955db7d1bbc9a88e812c8263f13dd300",
+    "web/icon.svg": "ca1b709abad1eecb746de1639cdeb83fd0d12f020977deaa82c9ed56969d685d",
+    "web/index.html": "0752e02f54af00c96200447b9752c0c99cba9fb1685f491af1abcef389862f43",
+    "web/style.css": "b815f4f520aaa69412d35ef42d4ea4f477bf07ae71a682ad9d53dd685811f48b",
+    "workbench.py": "9b8f64547657393f7e9b34516eb4e01b26d7837d87525ae361fe3a65a28c56c8"
+  },
+  "windows": {
+    "pythonExecutable": "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+    "freshProductOnlyPath": "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x",
+    "runs": [
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\test_agent_crash_lab.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\core.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.031404899986228,
+        "report": {
+          "at": "2026-11-03T18:42:54.839917+00:00",
+          "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
+          "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
+          "testsRun": 26,
+          "successful": true,
+          "failures": [],
+          "errors": [],
+          "elapsedSeconds": 0.8227026000095066
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\test_workbench.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\workbench.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 3.602809799980605,
+        "report": {
+          "atUtc": "2026-11-03T18:42:58.437349+00:00",
+          "testsRun": 9,
+          "successful": true,
+          "elapsedSeconds": 3.3759127000230365,
+          "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "workbenchSha256": "9b8f64547657393f7e9b34516eb4e01b26d7837d87525ae361fe3a65a28c56c8",
+          "failures": [],
+          "errors": [],
+          "classification": "Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite"
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\verify_reserved.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean pr74wj9x\\reserved.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.21182639998733066,
+        "report": {
+          "atUtc": "2026-11-03T18:42:58.649623+00:00",
+          "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
+          "kernelInvocations": 8,
+          "nativeConditions": 3,
+          "syntheticConditions": 7,
+          "successful": true,
+          "elapsedSeconds": 0.06755619999603368,
+          "postExposureCoreChanges": true,
+          "matchedInvocations": 8,
+          "invocations": 8
+        },
+        "errorTail": ""
+      }
+    ]
+  },
+  "linux": {
+    "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
+    "freshProductOnlyPath": "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces",
+    "runs": [
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/test_agent_crash_lab.py",
+          "--report",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/core.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.5742364000000002,
+        "report": {
+          "at": "2026-11-03T18:43:02.551328+00:00",
+          "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
+          "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
+          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
+          "testsRun": 26,
+          "successful": true,
+          "failures": [],
+          "errors": [],
+          "elapsedSeconds": 0.49241120000000027
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/test_workbench.py",
+          "--report",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/workbench.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.8777127000000005,
+        "report": {
+          "atUtc": "2026-11-03T18:43:03.422022+00:00",
+          "testsRun": 9,
+          "successful": true,
+          "elapsedSeconds": 0.7928057000000002,
+          "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "workbenchSha256": "9b8f64547657393f7e9b34516eb4e01b26d7837d87525ae361fe3a65a28c56c8",
+          "failures": [],
+          "errors": [],
+          "classification": "Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite"
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/verify_reserved.py",
+          "--report",
+          "/tmp/acl-product-clean-kwb6nkrl/Clean Product With Spaces/reserved.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.1119116,
+        "report": {
+          "atUtc": "2026-11-03T18:43:03.536751+00:00",
+          "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
+          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
+          "kernelInvocations": 8,
+          "nativeConditions": 3,
+          "syntheticConditions": 7,
+          "successful": true,
+          "elapsedSeconds": 0.05189930000000054,
+          "postExposureCoreChanges": true,
+          "matchedInvocations": 8,
+          "invocations": 8
+        },
+        "errorTail": ""
+      }
+    ]
+  },
+  "externalDependencyInstalls": 0,
+  "newNativeSendAttempts": 0,
+  "liveModels": 0,
+  "reportNote": "This report and final release manifest are added after tested snapshot; executable source must remain unchanged through packaging."
+}

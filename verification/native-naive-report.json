@@ -1,0 +1,573 @@
+{
+  "format": "agent-crash-lab/report-v1",
+  "invocation": {
+    "status": "assessed",
+    "profile": "near-sandbox-2.14/native-v1",
+    "version": "0.1.0"
+  },
+  "authority": {
+    "kind": "historical_controlled",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Independent expected caps/documents written before these actual local trials. Owner/hash binding follows observed send indices; same operator, scripted workers, not an external holdout."
+  },
+  "scope": {
+    "run_id": "native-naive",
+    "chain_id": "test-chain-5Yta1",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/runs/0"
+    },
+    "closed_horizon": true,
+    "horizon_note": "All controlled sends from crashed/resumed A and independent B are captured, all hashes expanded by independent local observer, owned node stopped; no future process guarantee."
+  },
+  "sources": {
+    "recording": {
+      "sha256": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f",
+      "bytes": 145171
+    },
+    "basis": {
+      "sha256": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad",
+      "bytes": 1598
+    }
+  },
+  "inventory": {
+    "rpc_records": 13,
+    "send_observations": 3,
+    "declared_attempts": 3,
+    "observed_transaction_hashes": 3,
+    "unassigned_submissions": [],
+    "unassigned_transactions": [],
+    "utility_observations": 2,
+    "selected_required_utility": 2,
+    "selected_intermediate_utility": 0
+  },
+  "attempts": [
+    {
+      "id": "send-0",
+      "tx_hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/2"
+          },
+          "packet_sha256": "77d181994439d99b78365163fbcd4889844fbded6e6e5e70b9fe792a8a9fada0"
+        }
+      ],
+      "observations": [
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/2/response/result"
+        },
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/9/response/result"
+        }
+      ],
+      "milestones": [
+        "FINAL"
+      ],
+      "principal_scope_complete": true,
+      "profile_complete": true,
+      "conflict": false,
+      "unsupported": false,
+      "diagnostic_ids": [],
+      "derived_initial_receipts": [],
+      "missing_or_pending_context": [],
+      "recovery_obligations": []
+    },
+    {
+      "id": "send-1",
+      "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/4"
+          },
+          "packet_sha256": "e925561f25986e9ce469dfa9bb581c55a4be7f1ce65dcccea5f285befd3b1878"
+        }
+      ],
+      "observations": [
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/4/response/result"
+        },
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/5/response/result"
+        },
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/10/response/result"
+        }
+      ],
+      "milestones": [
+        "FINAL"
+      ],
+      "principal_scope_complete": true,
+      "profile_complete": true,
+      "conflict": false,
+      "unsupported": false,
+      "diagnostic_ids": [],
+      "derived_initial_receipts": [],
+      "missing_or_pending_context": [],
+      "recovery_obligations": []
+    },
+    {
+      "id": "send-2",
+      "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+      "role": "task",
+      "intent": "B",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/7"
+          },
+          "packet_sha256": "c0ba0f287e7d4332dcd8fdb0c0b81583d1c589b76a0acdad9603786f67229162"
+        }
+      ],
+      "observations": [
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/7/response/result"
+        },
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/8/response/result"
+        },
+        {
+          "source": "recording",
+          "pointer": "/runs/0/rpcObservations/11/response/result"
+        }
+      ],
+      "milestones": [
+        "FINAL"
+      ],
+      "principal_scope_complete": true,
+      "profile_complete": true,
+      "conflict": false,
+      "unsupported": false,
+      "diagnostic_ids": [],
+      "derived_initial_receipts": [],
+      "missing_or_pending_context": [],
+      "recovery_obligations": []
+    }
+  ],
+  "native_facts": [
+    {
+      "id": "send-0:9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr:0",
+      "attempt_id": "send-0",
+      "tx_hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+      "intent": "A",
+      "receipt_id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "owner.crashlab.near",
+      "to": "merchant.crashlab.near",
+      "requested_yocto": "100000000000000000000000",
+      "committed_yocto": "100000000000000000000000",
+      "execution_state": "committed",
+      "role": "ordinary_principal",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts/0"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts_outcome/0"
+      },
+      "protected_internal": false,
+      "protected_external": true
+    },
+    {
+      "id": "send-0:FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa:0",
+      "attempt_id": "send-0",
+      "tx_hash": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+      "intent": "A",
+      "receipt_id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "system",
+      "to": "owner.crashlab.near",
+      "requested_yocto": "200864306250000000000",
+      "committed_yocto": "200864306250000000000",
+      "execution_state": "committed",
+      "role": "gas_return",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts/1"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts_outcome/1"
+      },
+      "protected_internal": false,
+      "protected_external": false
+    },
+    {
+      "id": "send-1:4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a:0",
+      "attempt_id": "send-1",
+      "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+      "intent": "A",
+      "receipt_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "owner.crashlab.near",
+      "to": "merchant.crashlab.near",
+      "requested_yocto": "100000000000000000000000",
+      "committed_yocto": "100000000000000000000000",
+      "execution_state": "committed",
+      "role": "ordinary_principal",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts/0"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts_outcome/0"
+      },
+      "protected_internal": false,
+      "protected_external": true
+    },
+    {
+      "id": "send-1:C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs:0",
+      "attempt_id": "send-1",
+      "tx_hash": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+      "intent": "A",
+      "receipt_id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "system",
+      "to": "owner.crashlab.near",
+      "requested_yocto": "200864306250000000000",
+      "committed_yocto": "200864306250000000000",
+      "execution_state": "committed",
+      "role": "gas_return",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts/1"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts_outcome/1"
+      },
+      "protected_internal": false,
+      "protected_external": false
+    },
+    {
+      "id": "send-2:4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw:0",
+      "attempt_id": "send-2",
+      "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+      "intent": "B",
+      "receipt_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "owner.crashlab.near",
+      "to": "merchant.crashlab.near",
+      "requested_yocto": "100000000000000000000000",
+      "committed_yocto": "100000000000000000000000",
+      "execution_state": "committed",
+      "role": "ordinary_principal",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts/0"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts_outcome/0"
+      },
+      "protected_internal": false,
+      "protected_external": true
+    },
+    {
+      "id": "send-2:9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi:0",
+      "attempt_id": "send-2",
+      "tx_hash": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+      "intent": "B",
+      "receipt_id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+      "action_index": 0,
+      "action_type": "Transfer",
+      "from": "system",
+      "to": "owner.crashlab.near",
+      "requested_yocto": "200864306250000000000",
+      "committed_yocto": "200864306250000000000",
+      "execution_state": "committed",
+      "role": "gas_return",
+      "self": false,
+      "finality": "whole_final",
+      "parent_receipt_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+      "provenance": "observed",
+      "action_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts/1"
+      },
+      "outcome_ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts_outcome/1"
+      },
+      "protected_internal": false,
+      "protected_external": false
+    }
+  ],
+  "outcome_costs": [
+    {
+      "attempt_id": "send-0",
+      "outcome_id": "2FK2ZswEjUqtsbasxfWTWJrvmcv8QuUWBKXuQiMGfYFR",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/transaction_outcome"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-0",
+      "outcome_id": "9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts_outcome/0"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-0",
+      "outcome_id": "FNaxArKgQutrXTWYYEtyGDhE5uxPi27WN494g4qgMdHa",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "0",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/9/response/result/receipts_outcome/1"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-1",
+      "outcome_id": "6WQY9hUkRL5BgVNsJip8oSi9ihDDP7eunG7kdMWeK5Di",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/transaction_outcome"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-1",
+      "outcome_id": "4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts_outcome/0"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-1",
+      "outcome_id": "C3Bsq6RC3AfGiLqaf1EEeWiH4DCN8njtcmgVX9HJ6bgs",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "0",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/5/response/result/receipts_outcome/1"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-2",
+      "outcome_id": "AQ2gPp67NxzvFKSogrrT5zDJ1ixz3zBTCRt4oxdBVitG",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/transaction_outcome"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-2",
+      "outcome_id": "4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "22318256250000000000",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts_outcome/0"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    },
+    {
+      "attempt_id": "send-2",
+      "outcome_id": "9LX7HVwRXE377FBd7mvEQYyVayKrSZVoZbkpH4tVNooi",
+      "gas_burnt": 223182562500,
+      "tokens_burnt": "0",
+      "ref": {
+        "source": "recording",
+        "pointer": "/runs/0/rpcObservations/8/response/result/receipts_outcome/1"
+      },
+      "meaning": "observed outcome fields, not universal owner loss"
+    }
+  ],
+  "constraints": [
+    {
+      "id": "A-merchant",
+      "intent": "A",
+      "metric": "merchant_gross_principal",
+      "status": "breached",
+      "witnesses": [
+        "send-0:9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr:0",
+        "send-1:4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a:0"
+      ],
+      "diagnostic_ids": [],
+      "complete": true,
+      "unit": "yoctoNEAR",
+      "cap": "100000000000000000000000",
+      "known_subtotal": "200000000000000000000000",
+      "exact_total": "200000000000000000000000",
+      "lower_excess": "100000000000000000000000",
+      "exact_excess": "100000000000000000000000"
+    },
+    {
+      "id": "A-count",
+      "intent": "A",
+      "metric": "committed_settlement_attempts",
+      "status": "breached",
+      "witnesses": [
+        "send-0:9rNSvNAhvwkyffh4P4ehNnJm5zAcEDBYrsAyhSM7yHjr:0",
+        "send-1:4bpdvVfF1anQQcTXws4UCxWb7KhRHqXvMR8S9pAMkA1a:0"
+      ],
+      "diagnostic_ids": [],
+      "complete": true,
+      "unit": "distinct transaction hashes with qualifying merchant principal",
+      "cap": "1",
+      "known_subtotal": "2",
+      "exact_total": "2",
+      "lower_excess": "1",
+      "exact_excess": "1"
+    },
+    {
+      "id": "B-merchant",
+      "intent": "B",
+      "metric": "merchant_gross_principal",
+      "status": "within",
+      "witnesses": [
+        "send-2:4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw:0"
+      ],
+      "diagnostic_ids": [],
+      "complete": true,
+      "unit": "yoctoNEAR",
+      "cap": "100000000000000000000000",
+      "known_subtotal": "100000000000000000000000",
+      "exact_total": "100000000000000000000000",
+      "lower_excess": "0",
+      "exact_excess": "0"
+    },
+    {
+      "id": "B-count",
+      "intent": "B",
+      "metric": "committed_settlement_attempts",
+      "status": "within",
+      "witnesses": [
+        "send-2:4wxdSPHLUSeayxrt7wutKy2Cyhj5yfegk9SryUwybwaw:0"
+      ],
+      "diagnostic_ids": [],
+      "complete": true,
+      "unit": "distinct transaction hashes with qualifying merchant principal",
+      "cap": "1",
+      "known_subtotal": "1",
+      "exact_total": "1",
+      "lower_excess": "0",
+      "exact_excess": "0"
+    }
+  ],
+  "utility": {
+    "required": [
+      {
+        "id": "A-answer",
+        "status": "passed",
+        "intent": "A",
+        "profile": "inventory-gap-first-v1",
+        "observation_ref": {
+          "source": "recording",
+          "pointer": "/runs/0/utilityObservations/0"
+        },
+        "reference_check": "consistent",
+        "observed_status_present": true,
+        "observed_status": 200,
+        "observed_answer_present": true,
+        "observed_answer": {
+          "sku": "C03",
+          "units": 17
+        },
+        "content_check": true,
+        "answer_check": true,
+        "context_check": true,
+        "response_sha256": "e8f179b81ee7ec882b947c33d8cebcd0ed438c47ead55dfaf8d2fcb5e2456246"
+      },
+      {
+        "id": "B-answer",
+        "status": "passed",
+        "intent": "B",
+        "profile": "inventory-gap-first-v1",
+        "observation_ref": {
+          "source": "recording",
+          "pointer": "/runs/0/utilityObservations/1"
+        },
+        "reference_check": "consistent",
+        "observed_status_present": true,
+        "observed_status": 200,
+        "observed_answer_present": true,
+        "observed_answer": {
+          "sku": "C03",
+          "units": 17
+        },
+        "content_check": true,
+        "answer_check": true,
+        "context_check": true,
+        "response_sha256": "a3a7e394c50f8eb19c2777c9a60584f80f79f3abd1ece9e594ddaad9bb4f15f4"
+      }
+    ],
+    "intermediate": [],
+    "meaning": "Finite declared content and actually recorded scripted answer; not live-agent or source authentication"
+  },
+  "coverage": {
+    "financial_scope_complete": true,
+    "all_required_utility_assessed": true,
+    "trust": "Owner scope/reference/horizon and controlled RPC recordings trusted; hashes are consistency, not consensus/authenticity; no live model"
+  },
+  "diagnostics": []
+}
