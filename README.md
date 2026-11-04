@@ -6,6 +6,25 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![The actual local workbench](docs/workbench-desktop.png)
 
+## Reproduce the judge checks
+
+Requires **Python 3.12+**, with no third-party packages or credentials. From the repository root:
+
+```sh
+python -I -S tools/verify_release.py --judge
+```
+
+Expected: exit **0**, `verified: true`, and three entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 26 core tests, nine workbench/HTTP/CLI tests and eight reserved verifier invocations. A changed or missing release file prevents suite execution; `verified` is consistency, not signed authenticity. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+
+**Why task-level verification?** A payment can settle correctly while violating the task's total spending authority, and a correctly priced purchase can return the wrong answer. Crash Lab binds the declared task to native effects and recorded output. It is a regression inspector for developers integrating agents, not a new wallet or an enforcement contract.
+
+| Judge action | Observable result | Evidence boundary |
+|---|---|---|
+| Open Double payment | A commits 0.2 against a 0.1 cap; independent B commits 0.1; both task outputs pass | Fresh recorded local native process experiment |
+| Open Recover without repaying | A and B each commit 0.1 after the same crash window | Reference journal control, not general exactly-once settlement |
+| Open Paid, wrong answer | Financial checks can be within scope while output fails | Declared reference and actually recorded answer |
+| Open Missing evidence | A's breach survives; B's dependent total is Unknown | Explicit synthetic receipt-body removal |
+
 ## Run it in one command
 
 Requires **Python 3.12+**. The assessor, browser workbench, tests and recorded demonstrations use only the standard library. No installation, API key, wallet or funding is needed.
@@ -21,11 +40,19 @@ python -I -S workbench.py --port 8765
 # open http://127.0.0.1:8765/
 ```
 
-### Receipt workbench · v0.2.3
+### Receipt workbench · v0.3.0
 
 The interface uses a quiet report layout with an [optional dark theme](docs/workbench-dark.png). A semantic intent ledger places allowed and committed principal beside the **independently checked** task output. Missing exact totals remain **Unknown**, with any known subtotal shown separately. Report and bundle exports are available on mobile as well. [Observed browser regression checks](verification/browser-qa.json) cover all eight examples, rejected input, theme persistence, keyboard tabs and desktop/tablet/mobile widths.
 
-The published 72-second video records the original v0.2.0 appearance. Current screenshots and source show v0.2.3; the recorded payment experiment and assessment rules are unchanged.
+The published 72-second video records the original v0.2.0 appearance. Current screenshots and source show v0.3.0; the recorded payment experiment and assessment rules are unchanged.
+
+### Reproducibility and review · v0.3.0
+
+The HTTP and CI routes now use one bundle validator: unknown fields and malformed source maps cannot be accepted by one route and rejected by the other. Invalid scenario-ID types produce an input error. Receipt details, like raw JSON, are built when their tab opens. The packaged catalog names all eight required recordings directly instead of silently falling back to an older catalog when a native task file is absent.
+
+CI now runs the same `--judge` command documented above, including release hashes. The verifier rejects empty/invalid manifests and paths outside the release root. Additional development checks matched all 19 previous reports and eight exact input-byte sets, compared 82 gate-status combinations, rejected seven malformed bundle shapes, and exercised six manifest boundary cases. These source-informed checks are not an external holdout or a security audit.
+
+The same 19 code files total **179,065 bytes**, compared with **179,346** in v0.2.3; the pure 56,644-byte assessor and native experiment runner remain unchanged. Physical source lines are **1,971** versus **1,959**, reflecting named shared validation and explicit judge checks; this is not a claim that every file or line count decreased. No default dependencies were added. The previous ten-refinement record below is retained as release history.
 
 ### Ten bounded refinements · v0.2.3
 

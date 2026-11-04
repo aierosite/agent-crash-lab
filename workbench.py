@@ -11,17 +11,15 @@ MAX_BODY=9*1024*1024
 SLOTS=threading.BoundedSemaphore(4)
 BASELINES={r['name']:r for r in json.loads((ROOT/'BASELINES.json').read_text())}
 CURATED=[
- {'id':'double-payment','baseline':'intent-duplicate-0','title':'Duplicate payment after restart','short':'Double payment','group':'Payment integrity','kind':'recorded','description':'Intent A gets the right inventory answer, but two distinct transactions settle twice. Equal-price intent B is legitimate.','question':'Did the agent finish the task within its own payment authority?'},
- {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Paid output that failed its task','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Compare valid paid content, corrupted paid content, denied delivery and a permitted free source. A 200 response is not useful completion.','question':'Did the purchased output actually satisfy the declared task?'},
- {'id':'legitimate-installments','baseline':'split-settlement','title':'An allowed split payment','short':'Allowed installments','group':'Negative control','kind':'recorded','description':'An explicit amount budget allows a split payment. Multiple action indices or transaction hashes do not imply duplicate intent.','question':'Can the evaluator accept legitimate multi-payment work?'},
- {'id':'failed-recovery','baseline':'failed-refund','title':'Refunds that did not settle','short':'Failed recovery','group':'Recovery','kind':'recorded','description':'A failed payment can create a refund obligation. Check the destination and committed recovery, not just a refund label.','question':'Did the failed intent actually recover its principal?'},
- {'id':'unrelated-credit','baseline':'balance-attribution','title':'An unrelated credit','short':'Unrelated credit','group':'Causal attribution','kind':'recorded','description':'An unrelated same-amount credit is not proof that the failed owner intent settled. Follow transaction and receipt identity.','question':'Can a donation accidentally look like a successful task payment?'},
- {'id':'missing-evidence','baseline':'intent-duplicate-0','title':'An incomplete receipt record','short':'Missing evidence','group':'Uncertainty','kind':'synthetic','description':'A clearly labelled mutation removes a B receipt body. The independent A breach remains visible, while the dependent B claim becomes unknown.','question':'Does missing context become a false clean result?'},
- {'id':'terminal-output','baseline':'split-settlement','title':'Successful final delivery','short':'Eventual completion','group':'Useful completion','kind':'recorded','description':'A permitted intermediate 402 is distinct from the designated terminal delivery and recorded answer.','question':'Was the final required output correct?'}
+ {'id':'double-payment','baseline':'native-naive','title':'Duplicate payment after restart','short':'Double payment','group':'Fresh native crash','kind':'recorded','description':'A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.','question':'Did A spend twice while both tasks succeeded?'},
+ {'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.','question':'Can recovery finish without a second A payment?'},
+ {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Paid output that failed its task','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Valid, corrupted, denied and free deliveries share an independent task reference. HTTP 200 alone is insufficient.','question':'Did the recorded output satisfy its task?'},
+ {'id':'legitimate-installments','baseline':'split-settlement','title':'An allowed split payment','short':'Allowed installments','group':'Negative control','kind':'recorded','description':'The declared budget permits split payments. Distinct hashes do not alone prove duplicate intent.','question':'Are these installments within the declared budget?'},
+ {'id':'failed-recovery','baseline':'failed-refund','title':'Refunds that did not settle','short':'Failed recovery','group':'Recovery','kind':'recorded','description':'A failed payment creates a recovery obligation. Only committed recovery to its declared destination counts.','question':'Was the failed intent actually refunded?'},
+ {'id':'unrelated-credit','baseline':'balance-attribution','title':'An unrelated credit','short':'Unrelated credit','group':'Causal attribution','kind':'recorded','description':'An unrelated same-amount credit cannot settle an owner intent. Follow native transaction and receipt identity.','question':'Does this credit belong to the failed intent?'},
+ {'id':'missing-evidence','baseline':'intent-duplicate-0','title':'An incomplete receipt record','short':'Missing evidence','group':'Uncertainty','kind':'synthetic','description':'Synthetic mutation: a B receipt body is removed. A remains breached; B becomes unknown.','question':'Does missing context cause a false clean result?'},
+ {'id':'terminal-output','baseline':'split-settlement','title':'Successful final delivery','short':'Eventual completion','group':'Useful completion','kind':'recorded','description':'An allowed intermediate 402 is separate from the final delivery and recorded answer.','question':'Was the final required output correct?'}
 ]
-if (ROOT/'tasks/native-naive.json').exists():
-    CURATED[0].update(baseline='native-naive',group='Fresh native crash',description='A scripted worker crashes after FINAL, before its acknowledgement. On restart it pays intent A again. The separate same-price intent B is valid.')
-    CURATED.insert(1,{'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'The same actual crash window, with a transaction-hash journal written before broadcast. Recovery re-fetches the known transaction; independent B still pays.','question':'Does the reference recovery finish useful work without paying A again?'})
 CATALOG={r['id']:r for r in CURATED}
 
 def data_for(scenario):
@@ -45,13 +43,20 @@ def evaluate(task,sources,scenario=None):
     started=time.perf_counter();report=core.assess(task,sources)
     return {'scenario':scenario,'report':report,'execution':{'mode':'actual-local-assessment','elapsedMs':round((time.perf_counter()-started)*1000,3),'coreSha256':CORE_SHA256,'coreVersion':core.VERSION,'liveModel':False,'networkTransactions':0}}
 
+def assess_bundle(b):
+    if type(b) is not dict or set(b)-{'format','task_utf8','sources_utf8','classification'}:raise ValueError('Unexpected bundle fields')
+    if b.get('format')!='agent-crash-lab/bundle-v1' or type(b.get('task_utf8')) is not str or type(b.get('sources_utf8')) is not dict:raise ValueError('Expected bundle-v1 with UTF-8 task and sources')
+    sources=b['sources_utf8']
+    if len(sources)>core.LIMITS['source_count'] or any(type(k) is not str or type(v) is not str for k,v in sources.items()):raise ValueError('Invalid source map')
+    return evaluate(b['task_utf8'].encode(),{k:v.encode() for k,v in sources.items()})
+
 def gate(report):
-    """A CI gate is strict without relabelling the core's scoped conclusions."""
-    if report.get('invocation',{}).get('status')!='assessed':return 2
-    if not report['constraints']:return 2
-    if any(c['status']=='breached' for c in report['constraints']) or any(u['status']=='failed' for u in report['utility']['required']):return 1
-    if not report['coverage']['financial_scope_complete'] or any(c['status']!='within' for c in report['constraints']) or any(u['status']!='passed' for u in report['utility']['required']):return 2
-    return 0
+    """Failure takes precedence; missing authority or evidence never passes."""
+    if report.get('invocation',{}).get('status')!='assessed' or not report['constraints']:return 2
+    cs={c['status'] for c in report['constraints']};us={u['status'] for u in report['utility']['required']}
+    if 'breached' in cs or 'failed' in us:return 1
+    return 0 if report['coverage']['financial_scope_complete'] and cs=={'within'} and us<={'passed'} else 2
+
 
 class Server(ThreadingHTTPServer):
     daemon_threads=True
@@ -82,7 +87,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/native-result':
             file=ROOT/'verification/native-crash-comparison.json'
             return self.send(200,json.loads(file.read_text())) if file.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.2.3','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.3.0','coreVersion':core.VERSION})
         files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/icon.svg':'icon.svg'}
         if path not in files:return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/files[path]
@@ -117,16 +122,13 @@ class Handler(BaseHTTPRequestHandler):
             if type(body) is not dict:raise ValueError('Request must be an object')
             path=urlsplit(self.path).path
             if path in ['/api/run','/api/bundle']:
-                scenario=CATALOG.get(body.get('id'))
+                sid=body.get('id');scenario=CATALOG.get(sid) if type(sid) is str else None
                 if scenario is None:raise ValueError('Unknown scenario')
                 task,sources=data_for(scenario)
                 if path=='/api/bundle':return self.send(200,{'format':'agent-crash-lab/bundle-v1','task_utf8':task.decode(),'sources_utf8':{k:v.decode() for k,v in sources.items()},'classification':scenario['kind']})
                 return self.send(200,evaluate(task,sources,scenario))
             if path=='/api/assess':
-                if set(body)-{'format','task_utf8','sources_utf8','classification'}:raise ValueError('Unknown bundle field')
-                if body.get('format')!='agent-crash-lab/bundle-v1' or type(body.get('task_utf8')) is not str or type(body.get('sources_utf8')) is not dict:raise ValueError('Expected a Crash Lab bundle with exact UTF-8 text sources')
-                if len(body['sources_utf8'])>16 or any(type(k) is not str or type(v) is not str for k,v in body['sources_utf8'].items()):raise ValueError('Invalid source map')
-                return self.send(200,evaluate(body['task_utf8'].encode(),{k:v.encode() for k,v in body['sources_utf8'].items()}))
+                return self.send(200,assess_bundle(body))
             self.send(404,{'error':'Not found'})
         except (ValueError,UnicodeError,TimeoutError,RecursionError) as e:self.send(400,{'error':str(e)[:200]})
         except Exception:self.send(500,{'error':'Workbench failed; no financial conclusion'})

@@ -9,8 +9,7 @@ def main():
         with open(a.bundle,'rb') as f:raw=f.read(app.MAX_BODY+1)
         if len(raw)>app.MAX_BODY:raise ValueError('Bundle too large')
         b=json.loads(raw)
-        if b.get('format')!='agent-crash-lab/bundle-v1':raise ValueError('Invalid bundle')
-        out=app.evaluate(b['task_utf8'].encode(),{k:v.encode() for k,v in b['sources_utf8'].items()})
+        out=app.assess_bundle(b)
         code=app.gate(out['report']);out['gate']={'exitCode':code,'meaning':{0:'within-declared-scope-and-required-output-passed',1:'observed-breach-or-required-output-failed',2:'inconclusive-or-rejected'}[code]}
         sys.stdout.buffer.write(json.dumps(out,ensure_ascii=False,separators=(',',':')).encode()+b'\n');return code
     except (OSError,ValueError,KeyError,AttributeError,TypeError,RecursionError):

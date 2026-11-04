@@ -48,6 +48,8 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(self.json('/api/run',{'id':'double-payment'},{'Content-Type':'text/plain'})[0],415)
     def test_input_routes_are_bounded_and_no_file_path_execution(self):
         self.assertEqual(self.json('/api/run',{'id':'../../session'})[0],400)
+        self.assertEqual(self.json('/api/run',{'id':[]})[0],400)
+        b=self.json('/api/bundle',{'id':'durable-recovery'})[1];b['unexpected']=True;self.assertEqual(self.json('/api/assess',b)[0],400)
         self.assertEqual(self.json('/api/assess',{'format':'wrong','path':'../../session.json'})[0],400)
         self.assertEqual(self.fetch('/api/run',{'id':'double-payment'},{'Content-Length':str(app.MAX_BODY+1)})[0],413)
     def test_gate_cli_observed_failure_pass_and_uncertainty(self):
@@ -55,6 +57,7 @@ class WorkbenchTests(unittest.TestCase):
         for name,code in [('double-payment',1),('durable-recovery',0)]:bundles.append((self.json('/api/bundle',{'id':name})[1],code))
         b=copy.deepcopy(bundles[1][0]);owner=json.loads(b['task_utf8']);owner['run']['closed_horizon']=False;owner['authority']['kind']='counterfactual';b['task_utf8']=json.dumps(owner);bundles.append((b,2))
         b=copy.deepcopy(bundles[1][0]);owner=json.loads(b['task_utf8']);owner['constraints']=[];owner['authority']['kind']='counterfactual';b['task_utf8']=json.dumps(owner);bundles.append((b,2))
+        bundles.append(({**bundles[1][0],'unexpected':True},2))
         temp=Path(tempfile.mkdtemp(prefix='Crash Lab CLI With Spaces '))
         for i,(bundle,code) in enumerate(bundles):
             file=temp/(str(i)+'.json');file.write_text(json.dumps(bundle))
