@@ -1,15 +1,15 @@
 {
-  "atUtc": "2026-11-04T00:48:31.651998+00:00",
+  "atUtc": "2026-11-04T23:43:36.156725+00:00",
   "coreBytes": 56644,
-  "runtimeSourceBytes": 117890,
+  "runtimeSourceBytes": 116497,
   "runtimeFiles": {
     "agent_crash_lab.py": 56644,
-    "workbench.py": 12261,
-    "gate.py": 1390,
+    "workbench.py": 11618,
+    "gate.py": 1230,
     "launch.py": 1484,
-    "web/app.js": 16947,
+    "web/app.js": 16506,
     "web/style.css": 21251,
-    "web/index.html": 7594,
+    "web/index.html": 7445,
     "web/icon.svg": 319
   },
   "externalDefaultDependencies": 0,
@@ -125,6 +125,51 @@
       "decodedJSONAndSecurityHeadersUnchanged": true,
       "loadedCodeHashBinding": true
     },
-    "benchmarkScope": "Synthetic offline equivalence checks and decoded HTTP JSON equality; not an end-to-end throughput or live-model benchmark"
-  }
+    "benchmarkScope": "Synthetic offline equivalence checks and decoded HTTP JSON equality; not an end-to-end throughput or live-model benchmark",
+    "historical": true
+  },
+  "reviewReadiness": {
+    "atUtc": "2026-11-04T23:43:36.062776+00:00",
+    "successful": true,
+    "referenceRelease": "0.2.3",
+    "identicalBaselineReports": 19,
+    "identicalCuratedInputByteSets": 8,
+    "gateStatusCombinations": 82,
+    "rejectedMalformedBundleShapes": 7,
+    "verifierBoundaryCases": [
+      {
+        "case": "valid",
+        "exitCode": 0
+      },
+      {
+        "case": "empty",
+        "exitCode": 2
+      },
+      {
+        "case": "missing",
+        "exitCode": 1
+      },
+      {
+        "case": "changed",
+        "exitCode": 1
+      },
+      {
+        "case": "escape",
+        "exitCode": 2
+      },
+      {
+        "case": "invalid-files-type",
+        "exitCode": 2
+      }
+    ],
+    "codeFiles": 19,
+    "codeBytesBefore": 179346,
+    "codeBytesAfter": 179065,
+    "physicalLinesBefore": 1959,
+    "physicalLinesAfter": 1971,
+    "coreUnchanged": true,
+    "classification": "Actual local differential and synthetic contract boundary checks; not native sends or model evaluation"
+  },
+  "newNativeSendAttemptsInThisUpgrade": 0,
+  "judgeCommand": "python -I -S tools/verify_release.py --judge"
 }
