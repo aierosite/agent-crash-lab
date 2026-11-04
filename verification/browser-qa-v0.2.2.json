@@ -1,0 +1,156 @@
+{
+  "atUtc": "2026-11-04T00:26:06.932Z",
+  "version": "0.2.2",
+  "classification": "Actual browser regression over known controlled recordings; no live model or new chain trial",
+  "cases": [
+    {
+      "id": "double-payment",
+      "title": "Duplicate payment after restart",
+      "money": "Policy breached",
+      "work": "Useful work verified",
+      "rows": [
+        "ALimit exceeded0.1NEAR0.2NEAR0.1 NEAR over the limitPassed1 required output",
+        "BWithin scope0.1NEAR0.1NEARPassed1 required output"
+      ]
+    },
+    {
+      "id": "durable-recovery",
+      "title": "Recovering a settled payment",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "rows": [
+        "AWithin scope0.1NEAR0.1NEARPassed1 required output",
+        "BWithin scope0.1NEAR0.1NEARPassed1 required output"
+      ]
+    },
+    {
+      "id": "paid-wrong-answer",
+      "title": "Paid output that failed its task",
+      "money": "Within declared limits",
+      "work": "Output failed",
+      "rows": [
+        "FREEWithin scope0.1NEAR0NEARPassed1 required output",
+        "INV1Within scope0.1NEAR0.1NEARFailed2 required outputs",
+        "INV2Within scope0.1NEAR0NEARFailed1 required output",
+        "INV3Within scope0.1NEAR0NEARFailed1 required output"
+      ]
+    },
+    {
+      "id": "legitimate-installments",
+      "title": "An allowed split payment",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "rows": [
+        "AWithin scope0.1NEAR0.1NEARPassed1 required output",
+        "BWithin scope0.1NEAR0.1NEARPassed1 required output"
+      ]
+    },
+    {
+      "id": "failed-recovery",
+      "title": "Refunds that did not settle",
+      "money": "Policy breached",
+      "work": "Not required",
+      "rows": [
+        "B01Within scope0NEAR0NEARNot required",
+        "B02Within scope0NEAR0NEARNot required"
+      ]
+    },
+    {
+      "id": "unrelated-credit",
+      "title": "An unrelated credit",
+      "money": "Within declared limits",
+      "work": "Not required",
+      "rows": [
+        "OWNER-AWithin scope0.1NEAR0NEARNot required"
+      ]
+    },
+    {
+      "id": "missing-evidence",
+      "title": "An incomplete receipt record",
+      "money": "Policy breached",
+      "work": "Useful work verified",
+      "rows": [
+        "ALimit exceeded0.1NEAR0.2NEAR0.1 NEAR over the limitPassed2 required outputs",
+        "BUnresolved0.1NEARUnknownKnown subtotal: 0 NEARPassed1 required output"
+      ]
+    },
+    {
+      "id": "terminal-output",
+      "title": "Successful final delivery",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "rows": [
+        "AWithin scope0.1NEAR0.1NEARPassed1 required output",
+        "BWithin scope0.1NEAR0.1NEARPassed1 required output"
+      ]
+    }
+  ],
+  "responsive": [
+    {
+      "id": "desktop",
+      "documentWidth": 1425,
+      "viewport": 1440
+    },
+    {
+      "id": "double-payment",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "durable-recovery",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "paid-wrong-answer",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "legitimate-installments",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "failed-recovery",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "unrelated-credit",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "missing-evidence",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "terminal-output",
+      "documentWidth": 375,
+      "viewport": 390
+    },
+    {
+      "id": "tablet",
+      "documentWidth": 753,
+      "viewport": 768
+    }
+  ],
+  "semanticIntentLedger": true,
+  "missingAmountStaysUnknown": true,
+  "themePersistence": "dark",
+  "keyboardSelectedTab": "tab-evidence",
+  "exportImport": {
+    "title": "Imported recording",
+    "money": "Policy breached",
+    "rows": 2
+  },
+  "rejected": {
+    "money": "Input rejected",
+    "work": "Not assessed",
+    "rows": 0
+  },
+  "consoleErrors": [],
+  "scope": "Restrained presentation and case labels; exact assessor and evidence rules unchanged."
+}

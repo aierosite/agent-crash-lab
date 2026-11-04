@@ -1,16 +1,16 @@
 {
-  "atUtc": "2026-11-04T00:04:06.658457+00:00",
+  "atUtc": "2026-11-04T00:27:19.656737+00:00",
   "coreBytes": 56644,
-  "runtimeSourceBytes": 124653,
+  "runtimeSourceBytes": 118149,
   "runtimeFiles": {
     "agent_crash_lab.py": 56644,
     "workbench.py": 12300,
     "gate.py": 1390,
     "launch.py": 1484,
-    "web/app.js": 16507,
-    "web/style.css": 26336,
-    "web/index.html": 9721,
-    "web/icon.svg": 271
+    "web/app.js": 17167,
+    "web/style.css": 21251,
+    "web/index.html": 7594,
+    "web/icon.svg": 319
   },
   "externalDefaultDependencies": 0,
   "baselineContainers": 19,
