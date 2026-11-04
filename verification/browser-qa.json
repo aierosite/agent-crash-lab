@@ -1,42 +1,174 @@
 {
-  "atUtc": "2026-11-03T18:42:03.860753+00:00",
-  "classification": "Actual manual browser QA through CUA, separate from automated HTTP tests",
-  "browser": "in-app browser",
-  "visuallyInspected": [
-    "fresh native double-payment, financialbreach+correctoutput",
-    "fresh durable recovery, both0.1+correctoutputs",
-    "paid wronganswer, financialwithin+failedoutput",
-    "allowedinstallments, within+passed",
-    "syntheticmissingbody,Abreach+Bunknown",
-    "expanded causal receipt / tx hash / source pointers",
-    "native comparison actual5sends/stoppednodes"
+  "atUtc": "2026-11-04T00:46:31.420Z",
+  "classification": "Actual browser QA through CUA; separate from offline regression checks",
+  "scenarios": [
+    {
+      "case": "1 Double payment Fresh native crash",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Policy breached",
+        "work": "Useful work verified",
+        "title": "Duplicate payment after restart"
+      },
+      "observed": {
+        "finance": "Policy breached",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nA\nLimit exceeded\n\t0.1NEAR\t0.2NEAR\n0.1 NEAR over the limit\n\t\nPassed\n1 required output\n\n\nB\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output",
+        "rawBytes": 0,
+        "title": "Duplicate payment after restart",
+        "work": "Useful work verified"
+      },
+      "matched": true
+    },
+    {
+      "case": "2 Recover without repaying Fresh native control",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Within declared limits",
+        "work": "Useful work verified",
+        "title": "Recovering a settled payment"
+      },
+      "observed": {
+        "finance": "Within declared limits",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nA\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output\n\n\nB\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output",
+        "rawBytes": 0,
+        "title": "Recovering a settled payment",
+        "work": "Useful work verified"
+      },
+      "matched": true
+    },
+    {
+      "case": "3 Paid, wrong answer Useful completion",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Within declared limits",
+        "work": "Output failed",
+        "title": "Paid output that failed its task"
+      },
+      "observed": {
+        "finance": "Within declared limits",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nFREE\nWithin scope\n\t0.1NEAR\t0NEAR\t\nPassed\n1 required output\n\n\nINV1\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nFailed\n2 required outputs\n\n\nINV2\nWithin scope\n\t0.1NEAR\t0NEAR\t\nFailed\n1 required output\n\n\nINV3\nWithin scope\n\t0.1NEAR\t0NEAR\t\nFailed\n1 required output",
+        "rawBytes": 0,
+        "title": "Paid output that failed its task",
+        "work": "Output failed"
+      },
+      "matched": true
+    },
+    {
+      "case": "4 Allowed installments Negative control",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Within declared limits",
+        "work": "Useful work verified",
+        "title": "An allowed split payment"
+      },
+      "observed": {
+        "finance": "Within declared limits",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nA\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output\n\n\nB\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output",
+        "rawBytes": 0,
+        "title": "An allowed split payment",
+        "work": "Useful work verified"
+      },
+      "matched": true
+    },
+    {
+      "case": "5 Failed recovery Recovery",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Policy breached",
+        "work": "Not required",
+        "title": "Refunds that did not settle"
+      },
+      "observed": {
+        "finance": "Policy breached",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nB01\nWithin scope\n\t0NEAR\t0NEAR\t\nNot required\n\n\nB02\nWithin scope\n\t0NEAR\t0NEAR\t\nNot required",
+        "rawBytes": 0,
+        "title": "Refunds that did not settle",
+        "work": "Not required"
+      },
+      "matched": true
+    },
+    {
+      "case": "6 Unrelated credit Causal attribution",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Within declared limits",
+        "work": "Not required",
+        "title": "An unrelated credit"
+      },
+      "observed": {
+        "finance": "Within declared limits",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nOWNER-A\nWithin scope\n\t0.1NEAR\t0NEAR\t\nNot required",
+        "rawBytes": 0,
+        "title": "An unrelated credit",
+        "work": "Not required"
+      },
+      "matched": true
+    },
+    {
+      "case": "7 Missing evidence Uncertainty / SYNTHETIC",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Policy breached",
+        "work": "Useful work verified",
+        "title": "An incomplete receipt record"
+      },
+      "observed": {
+        "finance": "Policy breached",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nA\nLimit exceeded\n\t0.1NEAR\t0.2NEAR\n0.1 NEAR over the limit\n\t\nPassed\n2 required outputs\n\n\nB\nUnresolved\n\t0.1NEAR\tUnknown\nKnown subtotal: 0 NEAR\n\t\nPassed\n1 required output",
+        "rawBytes": 0,
+        "title": "An incomplete receipt record",
+        "work": "Useful work verified"
+      },
+      "matched": true
+    },
+    {
+      "case": "8 Eventual completion Useful completion",
+      "expectedFromPriorBrowserReport": {
+        "finance": "Within declared limits",
+        "work": "Useful work verified",
+        "title": "Successful final delivery"
+      },
+      "observed": {
+        "finance": "Within declared limits",
+        "ledger": "Declared intent limits, observed principal and independently checked task outputs.\nIntent\tAllowed\tCommitted\tUseful output\nIndependent check\n\n\nA\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output\n\n\nB\nWithin scope\n\t0.1NEAR\t0.1NEAR\t\nPassed\n1 required output",
+        "rawBytes": 0,
+        "title": "Successful final delivery",
+        "work": "Useful work verified"
+      },
+      "matched": true
+    }
   ],
-  "bundleExport": "Actual download fromUI",
-  "bundleImport": "Downloaded bundle reimported through filechooser, renderedwithin+passed",
-  "corruptedBundleImport": "Source byte changed without updatingowner hash, renderedrejected+notassessed and nofinancialconclusion",
-  "responsive": {
-    "viewport": [
-      390,
-      844
-    ],
+  "rawOpened": {
+    "coreSha": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+    "length": 22797,
+    "visible": true
+  },
+  "rawRerun": {
+    "status": "assessed",
+    "title": "Successful final delivery"
+  },
+  "keyboardEnd": "true",
+  "keyboardHome": "true",
+  "imported": {
+    "finance": "Within declared limits",
+    "importEnabled": true,
+    "runEnabled": true,
+    "title": "Imported recording",
+    "work": "Useful work verified"
+  },
+  "rejected": {
+    "finance": "Input rejected",
+    "rows": 0,
+    "work": "Not assessed"
+  },
+  "defaultViewport": {
+    "documentWidth": 1265,
+    "viewport": 1280
+  },
+  "themeAfterReload": "dark",
+  "mobile": {
     "documentWidth": 375,
-    "horizontalBodyOverflow": false,
-    "temporaryOverrideReset": true,
-    "mobileImportAndNativeControlsVisible": true
+    "rows": 2,
+    "viewport": 390
   },
-  "consoleErrorEntriesObserved": 0,
-  "screenshots": {
-    "native-comparison.png": "06cc0c247abd1a004f8013c648510a9de8798b8f42d0b03c967e7dfc339b4ac2",
-    "workbench-desktop.png": "ebe63c7d47abba50957c40f6e5dd501f0a5ae98bfb593c367eb23956be7d161e",
-    "workbench-evidence.png": "199671d33e7c0571fc379ca94aa1309801159ce756ad3d4a3897e8d69c4d626f",
-    "workbench-mobile.png": "2cd43494922ca8cb13d7b155b47e965419b9d5702724357cb88cab14a782c216",
-    "workbench-paid-output.png": "38931afe3b3497c086875e79290edb03c0af6229b003ae77154753135ba1de0f",
-    "workbench-recovery.png": "eb9c921c64d5380d3c3602dd7812f546c972cfafe7413e427e3bf664bb86c0b0"
+  "tablet": {
+    "documentWidth": 753,
+    "viewport": 768
   },
-  "limits": "Not a browser automation test runner or accessibility audit; HTTP suite covers all8curated scenarios. Screenshots and video are actual captures, not generated mockups.",
-  "defaultBrowserFullPageScreenshotSize": [
-    65536,
-    4293001688
-  ],
-  "finalScreenshotRefreshedAtUtc": "2026-11-03T18:47:50.614618+00:00"
+  "consoleErrors": [],
+  "version": "0.2.3",
+  "successful": true
 }

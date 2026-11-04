@@ -1,13 +1,13 @@
 {
-  "atUtc": "2026-11-04T00:27:19.656737+00:00",
+  "atUtc": "2026-11-04T00:48:31.651998+00:00",
   "coreBytes": 56644,
-  "runtimeSourceBytes": 118149,
+  "runtimeSourceBytes": 117890,
   "runtimeFiles": {
     "agent_crash_lab.py": 56644,
-    "workbench.py": 12300,
+    "workbench.py": 12261,
     "gate.py": 1390,
     "launch.py": 1484,
-    "web/app.js": 17167,
+    "web/app.js": 16947,
     "web/style.css": 21251,
     "web/index.html": 7594,
     "web/icon.svg": 319
@@ -24,5 +24,107 @@
   "liveModels": 0,
   "defaultReplaySendsTransactions": false,
   "optionalHeavyBinaryNotBundled": true,
-  "scope": "Observed release size and count units; not a universal performance or security score"
+  "scope": "Observed release size and count units; not a universal performance or security score",
+  "boundedOptimization": {
+    "version": "0.2.3",
+    "rounds": [
+      {
+        "number": 1,
+        "title": "Canonical scenario catalog",
+        "validation": "8 displayed titles; 19 identical reports; 8 exact input bundles; JS amount/ledger/keyboard checks passed",
+        "bytes": 179008,
+        "lines": 1955
+      },
+      {
+        "number": 2,
+        "title": "Reuse exact yocto scale",
+        "validation": "1007 exact BigInt formatting comparisons",
+        "bytes": 179025,
+        "lines": 1956
+      },
+      {
+        "number": 3,
+        "title": "Reuse static tab nodes",
+        "validation": "Keyboard End/Home/left/right and stable query count",
+        "bytes": 178988,
+        "lines": 1957
+      },
+      {
+        "number": 4,
+        "title": "Group output obligations by intent",
+        "validation": "Exact ledger HTML for 500 intents and 1500 outputs",
+        "bytes": 179088,
+        "lines": 1957
+      },
+      {
+        "number": 5,
+        "title": "Stable linear native-fact partition",
+        "validation": "5000 facts exactly match stable baseline order",
+        "bytes": 179139,
+        "lines": 1958
+      },
+      {
+        "number": 6,
+        "title": "Serialize raw report on demand",
+        "validation": "Hidden raw panel stays empty and selected panel matches exact JSON",
+        "bytes": 179220,
+        "lines": 1958
+      },
+      {
+        "number": 7,
+        "title": "Compact lossless HTTP JSON",
+        "validation": "19 decoded JSON payloads and security headers identical; real byte totals recorded",
+        "bytes": 179241,
+        "lines": 1958
+      },
+      {
+        "number": 8,
+        "title": "Own the asynchronous file import",
+        "validation": "Deferred file read locks run/upload; second event cannot unlock; invalid JSON releases lock",
+        "bytes": 179258,
+        "lines": 1958
+      },
+      {
+        "number": 9,
+        "title": "Invalidate stale report before rerun",
+        "validation": "Controlled request failure clears prior report and releases busy state",
+        "bytes": 179268,
+        "lines": 1958
+      },
+      {
+        "number": 10,
+        "title": "Bind provenance to exact loaded code",
+        "validation": "Temporary-copy mutation cannot relabel already-loaded core; 19 baseline reports identical",
+        "bytes": 179346,
+        "lines": 1959
+      }
+    ],
+    "codeBefore": {
+      "totalBytes": 179605,
+      "totalLines": 1966,
+      "totalNonblankLines": 1881
+    },
+    "codeAfter": {
+      "totalBytes": 179346,
+      "totalLines": 1959,
+      "totalNonblankLines": 1874
+    },
+    "codeFilesBefore": 19,
+    "codeFilesAfter": 19,
+    "everyCodeFileWithinInitialBudget": true,
+    "noNewScopeOrDependencies": true,
+    "coreUnchanged": true,
+    "minificationOrRelocatedRuntimeCode": false,
+    "checks": {
+      "successful": true,
+      "identicalBaselineReports": 19,
+      "identicalCuratedInputBytes": 8,
+      "canonicalTitles": 8,
+      "HTTPJSONBytesBefore": 381555,
+      "HTTPJSONBytesAfter": 360929,
+      "decodedJSONAndSecurityHeadersUnchanged": true,
+      "loadedCodeHashBinding": true
+    },
+    "benchmarkScope": "Synthetic offline equivalence checks and decoded HTTP JSON equality; not an end-to-end throughput or live-model benchmark"
+  }
 }
