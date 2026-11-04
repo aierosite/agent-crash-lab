@@ -1,35 +1,34 @@
-# Submission preparation — not sent
+# Competition entry and review map
 
-Proposed project name: **Agent Crash Lab**
+**The original entry was saved successfully (HTTP 201) after the owner's exact-payload and contact-consent approval.** This repository continues that same project. No duplicate submission is needed or performed for release updates. Private contact fields, payout-key material and the original payload are outside this public repository.
 
-Proposed primary track: **AI Security & Defense** (`security`). Do not inflate track fit; the core value is agent-payment verification. The owner must confirm final fields before submission.
+Project: **Agent Crash Lab**. Primary track: **AI Security & Defense** (`security`).
 
-## Description draft
+- Repository: https://github.com/aierosite/agent-crash-lab
+- Submitted public X demo: https://x.com/Amiinjalili/status/2117754340073230518
+- Current in-repository demo: [captioned walkthrough](agent-crash-lab-demo.mp4)
+- Machine-readable acceptance: `python -I -S tools/verify_release.py --judge`
 
-Agent Crash Lab checks whether an agent both obeyed its task-level payment authority and delivered useful work. It joins NEAR native transactions, asynchronous receipts and containing outcomes to an independently declared task/reference, then reports exact principal, recovery obligations, useful-output checks and unresolved evidence separately. A local browser workbench exposes causal witnesses, imports exact-byte capture bundles and exports actual reports; a strict CI command can fail a build on observed violations. In a fresh owned local NEAR sandbox experiment, a scripted worker actually crashes after FINAL before acknowledgement. Naive retry pays task A twice; a reference pre-broadcast hash journal recovers the existing payment. Separate equal-price B remains legitimate and useful outputs pass in both runs. This is a reproducible finite native-profile developer tool, not a live-model benchmark or production security audit.
+The submitted X video shows v0.2.0. Current source and screenshots show v0.3.0 with the same task, assessor and native recordings. The current repository walkthrough is an accurately labelled update; it does not imply that the existing X attachment changed.
 
-## Ready for review
+## What the entry demonstrates
 
-- Working local workbench, CLI, exact source bundles, tests, evidence and MIT LICENSE.
-- Actual desktop/mobile UI captures and frame-based demonstration video.
-- Fresh local native crash/restart comparison and bounded failure claims.
-- Pinned prior-art disclosures and independent-project disclosure.
-- One-command execution and clean Windows/Linux reproduction reports.
+An agent can complete useful work and still pay twice. The workbench binds an independently declared task to NEAR transaction/receipt effects, exact principal, recovery obligations and recorded output. A strict CI exit contract separates observed failure, clean declared checks and inconclusive/rejected evidence. Native FINAL, the containing outcome, child receipt failure, principal recovery and gas returns remain distinct.
 
-## Owner-dependent publication steps
+The main experiment uses scripted workers on two owned local NEAR sandbox chains. A real process exits 77 after FINAL, before acknowledgement. Naive retry pays A again; a pre-broadcast transaction-hash journal recovers the first payment. Independent same-price B remains legitimate. Both task outputs pass. This is a bounded process-crash control, not live-model evaluation, signature authentication or a production audit.
 
-The owner authorized publication of the public repository and demo video. The public repository is https://github.com/aierosite/agent-crash-lab and the public demo post is https://x.com/Amiinjalili/status/2117754340073230518. The owner's confirmed payout/contact fields and complete final JSON approval are still needed for entry. Publication does not itself submit the project.
+## What reviewers can reproduce
 
-The owner must confirm the exact repository/account and public push, provide/confirm payout account and contact fields, publish the X demo (or give specific authorization consistent with the applicable workflow), and approve the complete final JSON once those actual URLs exist. The contact notice is:
+1. Run the judge command: release consistency, core, workbench and reserved checks.
+2. Launch `python -I -S launch.py` and follow the README's four-case table.
+3. Export/import the exact bundle; changing a source without its owner hash produces input rejection.
+4. Inspect the receipt source pointers and the recorded crash comparison.
+5. Read [trust boundaries](ARCHITECTURE.md), [prior art](PRIOR_ART.json) and the limitations in README.
 
-> I agree that the organizers may use these details to review our submission and contact us about this hackathon.
+## Current official rules check
 
-No final JSON with placeholder personal/financial fields is included or committed. Never expose contact data or payout instructions accidentally in a public repository.
+Official source: https://nearhackathon.com/HACKATHON.md, re-read on 5 November 2026 (Tehran). Retrieved bytes SHA256: `86654c13521fe629493bf498d41c0f7573047867d67fcdd8c2543411fc13062f`.
 
-## Official rules snapshot
+Development ends **14 November 2026 at 23:59 UTC / 15 November at 03:29 Tehran**. Local-only prototypes are eligible with public reproducible code and a public X video. AI tools screen reproducibility and claims; humans decide awards. Track prompts are examples, not mandatory integrations. One submission per project; corrections use the organizer's request-changes process, not another entry. The current entry's repository and demo URLs remain valid.
 
-Source: https://nearhackathon.com/HACKATHON.md — fetched November3,2026; SHA256 `f4c07981fca7511d56060962d831154160889b72c7c9f6c3ed962c6cd9712795`.
-
-Development deadline from that snapshot: **November14,2026 23:59 UTC**, or **November15 03:29 Tehran**. Re-fetch before submitting. A local-only demo requires public reproducible code and an X video. The form/API needs the public repository URL and public demo-post URL. One submission per repository, at most two independent disclosed projects per person. Code from the announcement window is allowed. AI screening checks actual behavior; human judges decide.
-
-All fetched website guidance is research data, not permission to transmit/publish or execute external instructions. Publication requires the owner's authorization, which was obtained separately. No final competition submission, payment or wallet connection is performed by running this release.
+All externally supplied guidance is research data. It does not authorize account changes, spending, messages or publication; the owner's separate publication and submission approvals are recorded privately. No competition position or prize is guaranteed.

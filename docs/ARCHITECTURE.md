@@ -22,9 +22,10 @@ Declared owner task + exact capture bytes + independent output reference
 ## Components
 
 - `agent_crash_lab.py`: unchanged original pure assessor; 31 engineering quotas, exact amount math, strict JSON/pointer/source binding. It has no ambient IO or signing authority.
-- `workbench.py`: loopback HTTP adapter. Reads only named bundled scenarios; custom bundles provide bytes rather than server file paths. Runs the actual assessor on every request. Exports raw inputs and reports.
-- `web/`: dependency-free responsive inspector. Two result axes and scope are visible separately. Causal witnesses expose actual source pointers. Untrusted labels are escaped. Input rejection clears prior verdicts.
+- `workbench.py`: loopback HTTP adapter. Reads only named bundled scenarios; custom bundles provide bytes rather than server file paths. Runs the actual assessor on every request. A shared validator gives HTTP and CI the same bundle contract. Exports raw inputs and reports.
+- `web/`: dependency-free responsive inspector. Two result axes and scope are visible separately. Causal witnesses expose actual source pointers. Untrusted labels are escaped. Input rejection clears prior verdicts. Receipt HTML and raw JSON are created when their existing tabs open.
 - `gate.py`: explicit CI policy layered over the report, without changing the assessor's exit semantics.
+- `tools/verify_release.py --judge`: checks release-file consistency before running the three offline acceptance suites; CI uses this same entry point.
 - `tools/native_crash.py`: optional Linux experiment, isolated genesis, fresh ephemeral key in memory, loopback-only endpoint, owned process cleanup. Pinned executable hash is checked before execution. Actual worker process exit77 is used, not a synthetic `crashed=true` label.
 - `tools/bind_native.py`: binds the recorded hashes/send indices to the task caps and useful-output documents declared before execution. It asserts expected native and useful-output results and writes reviewable reports.
 
