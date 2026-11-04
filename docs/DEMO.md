@@ -2,7 +2,7 @@
 
 [Watch the 72-second captioned walkthrough](agent-crash-lab-demo.mp4)
 
-This published video shows the original v0.2.0 appearance. The current v0.2.2 report interface and refreshed screenshots present the same recorded experiments and unchanged assessor.
+This published video shows the original v0.2.0 appearance. The current v0.2.3 report interface and refreshed screenshots present the same recorded experiments and unchanged assessor.
 
 The attached walkthrough uses actual UI captures of the running local workbench. It is a frame-based walkthrough, not a continuous screen recording and not a live-model execution. Every numerical result is from an actual local assessment or the documented fresh native experiment.
 
