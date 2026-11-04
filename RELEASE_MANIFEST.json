@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.2.0",
-  "atUtc": "2026-11-03T23:04:49.194301+00:00",
+  "version": "0.2.1",
+  "atUtc": "2026-11-04T00:04:06.660605+00:00",
   "meaning": "All release files except this manifest; consistency hashes, not signed authenticity",
   "files": {
     ".gitattributes": {
@@ -41,16 +41,16 @@
       "sha256": "c680ccadf645e6c6075681d0b6392e763663e7efdc3437cdae88a1db899d52f8"
     },
     "docs/DEMO.md": {
-      "bytes": 1879,
-      "sha256": "9c52cd06f6c7e87e9264d1ca4f84f96f97b12f92c73979741ed1d06d0e13d49e"
+      "bytes": 2069,
+      "sha256": "cbc4e68c1d972b33fbf40fc24f281759640a2597fcd81005a507ce4c4035d06e"
     },
     "docs/HANDOVER.fa.txt": {
       "bytes": 3140,
       "sha256": "682a5f8fc2d07fab0dcf3680109f9d9a0d39dcb76cb996e2d33d62050e892861"
     },
     "docs/native-comparison.png": {
-      "bytes": 61686,
-      "sha256": "06cc0c247abd1a004f8013c648510a9de8798b8f42d0b03c967e7dfc339b4ac2"
+      "bytes": 58474,
+      "sha256": "dcc7aeee0ad6b0659ffd82d245ebc99d4740f83ddc51a08027461cc893762e69"
     },
     "docs/NATIVE_EXPERIMENT.md": {
       "bytes": 3008,
@@ -69,24 +69,28 @@
       "sha256": "0f94a4aebd4bef30bd597b5e8040d1b9ca890a3ea8eb621e0362ffc6e274d243"
     },
     "docs/workbench-desktop.png": {
-      "bytes": 126402,
-      "sha256": "ebe63c7d47abba50957c40f6e5dd501f0a5ae98bfb593c367eb23956be7d161e"
+      "bytes": 145179,
+      "sha256": "4d934c7e37a0c9e448081a85f7323966016dcccc5dce94843d41e0bb43bd2cb0"
     },
     "docs/workbench-evidence.png": {
-      "bytes": 145935,
-      "sha256": "199671d33e7c0571fc379ca94aa1309801159ce756ad3d4a3897e8d69c4d626f"
+      "bytes": 162806,
+      "sha256": "7a8f20a21f4df4c7602b879d0319d1add3486e9833a96c7f8d2a45f76241fd53"
+    },
+    "docs/workbench-light.png": {
+      "bytes": 145531,
+      "sha256": "c69b26ff9cca1f57e49eaa5253a5934e3dd24ceac26b5f4bc3f040165947d51c"
     },
     "docs/workbench-mobile.png": {
-      "bytes": 83799,
-      "sha256": "2cd43494922ca8cb13d7b155b47e965419b9d5702724357cb88cab14a782c216"
+      "bytes": 92032,
+      "sha256": "e26f30c37c577bb5438efc794e8544e00d0bb90bc618b34cad304af8f374e689"
     },
     "docs/workbench-paid-output.png": {
-      "bytes": 151255,
-      "sha256": "38931afe3b3497c086875e79290edb03c0af6229b003ae77154753135ba1de0f"
+      "bytes": 177540,
+      "sha256": "efdddbdd4ad9ce48ffb4a91e22c905ce82caa37722d36612c7673b72aa92325b"
     },
     "docs/workbench-recovery.png": {
-      "bytes": 129618,
-      "sha256": "eb9c921c64d5380d3c3602dd7812f546c972cfafe7413e427e3bf664bb86c0b0"
+      "bytes": 147034,
+      "sha256": "587aa3b3311ae3b2dfa04104546c29a4ba517fcc49022b0495235900e27f53a2"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -249,8 +253,8 @@
       "sha256": "c369fbc9c624647019db079af47ae85d854b118cf73afee031a38e0cb1bc8e40"
     },
     "README.md": {
-      "bytes": 10673,
-      "sha256": "58fa1b54d02516ca96a96ffc5f6c9e24e33ebaf5b2de7179d68fd18274e877c3"
+      "bytes": 11432,
+      "sha256": "7ee522abc236df0f972db783c3b746ce5ad24997bcd9e982dba983cf9c935982"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -396,6 +400,10 @@
       "bytes": 565,
       "sha256": "4facf6532129f8ea9f050a8caff0cc09c61f5656511f1ae75800b92730c5b78a"
     },
+    "verification/browser-qa-v0.2.1.json": {
+      "bytes": 5454,
+      "sha256": "9ff2ce342661b86057bce5a3972088dec79b256ea65f6e1a246a10ea8578bbab"
+    },
     "verification/browser-qa.json": {
       "bytes": 2081,
       "sha256": "a174156065a7eeae3a0d6cafe87527a738830a5da8292d302d8fb6f149b9a158"
@@ -434,11 +442,11 @@
     },
     "verification/release-measurements.json": {
       "bytes": 853,
-      "sha256": "f7ef4d92f6dee6c0b11bd48e84c3c3f0cdc8b9f9307733d6eef6e9ab6fe65ef2"
+      "sha256": "0537f13ba52153c35f664ad2efbe451a2eb7b0ca2e0ea86c74e287a8a3b05823"
     },
     "verification/release-reproduction.json": {
-      "bytes": 9729,
-      "sha256": "1c97a309ddfbaf6e44a6e74e664ecc33ffe79df7106c6dcc7e46f5fdde2cac65"
+      "bytes": 9740,
+      "sha256": "4c3f2b3d527c682cc42476445e96022b3686d1b1292536cf1ff83f8a84518768"
     },
     "verification/reserved-expected-before-first-evaluation.json": {
       "bytes": 6408,
@@ -477,24 +485,24 @@
       "sha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa"
     },
     "web/app.js": {
-      "bytes": 14585,
-      "sha256": "74e1a99335d76a317191fefcd0d74f39955db7d1bbc9a88e812c8263f13dd300"
+      "bytes": 16507,
+      "sha256": "da74e6727c7f2ffab368ffe0885ea23c8b553c2f60b5c3635f85cefe74721be5"
     },
     "web/icon.svg": {
-      "bytes": 198,
-      "sha256": "ca1b709abad1eecb746de1639cdeb83fd0d12f020977deaa82c9ed56969d685d"
+      "bytes": 271,
+      "sha256": "f7f384a9d0bebef66caed5199519195b1ba2d66258175408de0e1ac6db101b15"
     },
     "web/index.html": {
-      "bytes": 7136,
-      "sha256": "0752e02f54af00c96200447b9752c0c99cba9fb1685f491af1abcef389862f43"
+      "bytes": 9721,
+      "sha256": "72f180a90297de6cc21e0566e13a427a4249289ac83f377af79bbd0490d27066"
     },
     "web/style.css": {
-      "bytes": 14019,
-      "sha256": "b815f4f520aaa69412d35ef42d4ea4f477bf07ae71a682ad9d53dd685811f48b"
+      "bytes": 26336,
+      "sha256": "04eb210ce93f100ac7ad3cfe2f916e5ed60721de33aeb636ac422411736c6ce4"
     },
     "workbench.py": {
       "bytes": 12300,
-      "sha256": "9b8f64547657393f7e9b34516eb4e01b26d7837d87525ae361fe3a65a28c56c8"
+      "sha256": "fb2c6fa1c565b92bd1844d6fcc48effa155e7e2aaaed3ccdb2519dce16b93527"
     }
   }
 }

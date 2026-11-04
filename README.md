@@ -21,11 +21,17 @@ python -I -S workbench.py --port 8765
 # open http://127.0.0.1:8765/
 ```
 
+### Visual workbench · v0.2.1
+
+A redesigned inspection console with dark and [light mode](docs/workbench-light.png), a responsive experiment library, and a per-intent view of allowed principal, committed principal and the **independent** useful-output check. Import/export is available on mobile as well. Both themes call the same unchanged assessor; a visual connection is not proof that payment produced useful work. [Actual browser checks](verification/browser-qa-v0.2.1.json) cover all eight experiments, rejected input, keyboard tabs and mobile/tablet widths.
+
+The published 72-second video records the v0.2.0 appearance. Current screenshots and source show the v0.2.1 presentation; the recorded payment experiment and assessment rules are unchanged.
+
 ### Do X → see Y
 
 1. Select **Double payment** and click **Run inspection**. See A commit **0.2 NEAR** against **0.1**, while B independently commits its allowed **0.1**. Both required answers are correct.
 2. Select **Recover without repaying**. The actual reference worker also crashed after FINAL, but its pre-broadcast hash journal lets it re-fetch A's receipt. A and B each commit **0.1 NEAR** and useful work passes.
-3. Open **View native crash / restart run**. Inspect the recorded process exit codes, two policy outcomes, balance corroboration and capture hash.
+3. Open **Native crash / restart run**. Inspect the recorded process exit codes, two policy outcomes, balance corroboration and capture hash.
 4. Open **Causal evidence** and expand a receipt. The transaction, containing outcome, action index and source JSON pointers are inspectable. A repeated RPC read is not another payment.
 5. Select **Paid, wrong answer**. Financial constraints can be within scope while required output fails. A permitted free source can still pass.
 6. Select **Missing evidence**. This explicitly synthetic mutation keeps A's known breach and marks B's dependent claims unknown.
