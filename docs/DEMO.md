@@ -2,6 +2,8 @@
 
 [Watch the 72-second captioned walkthrough](agent-crash-lab-demo.mp4)
 
+This published video shows the original v0.2.0 appearance. The current v0.2.1 dark/light interface and refreshed screenshots present the same recorded experiments and unchanged assessor.
+
 The attached walkthrough uses actual UI captures of the running local workbench. It is a frame-based walkthrough, not a continuous screen recording and not a live-model execution. Every numerical result is from an actual local assessment or the documented fresh native experiment.
 
 1. **Problem (0–12s)** — “Your agent finished the task. Did it pay twice?” Open the first scenario. Its correct answer is C03 / 17 units. A actually paid0.2 against0.1; independent B paid its allowed0.1.
