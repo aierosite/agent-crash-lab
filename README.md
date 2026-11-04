@@ -21,11 +21,28 @@ python -I -S workbench.py --port 8765
 # open http://127.0.0.1:8765/
 ```
 
-### Receipt workbench · v0.2.2
+### Receipt workbench · v0.2.3
 
-The interface uses a quiet report layout with an [optional dark theme](docs/workbench-dark.png). A semantic intent ledger places allowed and committed principal beside the **independently checked** task output. Missing exact totals remain **Unknown**, with any known subtotal shown separately. Report and bundle exports are available on mobile as well. [Observed browser regression checks](verification/browser-qa-v0.2.2.json) cover all eight examples, rejected input, theme persistence, keyboard tabs and desktop/tablet/mobile widths.
+The interface uses a quiet report layout with an [optional dark theme](docs/workbench-dark.png). A semantic intent ledger places allowed and committed principal beside the **independently checked** task output. Missing exact totals remain **Unknown**, with any known subtotal shown separately. Report and bundle exports are available on mobile as well. [Observed browser regression checks](verification/browser-qa.json) cover all eight examples, rejected input, theme persistence, keyboard tabs and desktop/tablet/mobile widths.
 
-The published 72-second video records the original v0.2.0 appearance. Current screenshots and source show v0.2.2; the recorded payment experiment and assessment rules are unchanged.
+The published 72-second video records the original v0.2.0 appearance. Current screenshots and source show v0.2.3; the recorded payment experiment and assessment rules are unchanged.
+
+### Ten bounded refinements · v0.2.3
+
+This release keeps the same code files, features and dependencies. Every refinement checkpoint stayed below v0.2.2 in bytes, physical lines and nonblank lines, for each code file individually. Shipped code (including tools/tests/config): **179,605 → 179,346 bytes; 1,966 → 1,959 lines; 19 → 19 files**. Runtime source: **118,149 → 117,890 bytes**. No minification, generated replacement or relocated runtime code was used to meet the budget.
+
+1. One authoritative scenario-title catalog replaces frontend/backend duplication.
+2. Reuse one exact yoctoNEAR scale for formatting; amounts remain BigInt.
+3. Reuse fixed tab nodes, preserving keyboard navigation and ARIA state.
+4. Group useful-output obligations once per intent instead of scanning every output for every row.
+5. Stable native-fact partition visits each fact once instead of repeated BigInt sort comparisons.
+6. Format the complete raw report only when its tab is visible.
+7. Send compact, lossless HTTP JSON; 19 observed response bodies saved 20,626 bytes in aggregate (5.4%).
+8. Own the asynchronous file-read interval, disabling conflicting actions until import/assessment finishes.
+9. Retire the previous report before a new run; failed requests cannot leave a stale report as the current result.
+10. Hash exactly the core bytes compiled into this process once; an on-disk edit cannot relabel already-loaded code.
+
+[Release measurements](verification/release-measurements.json) separate these observed checks from performance claims. All 19 baseline reports and eight curated input byte sets matched the previous version. Development checks also compared 1,007 exact amount strings, ledger HTML for 500 intents/1,500 outputs, stable ordering of 5,000 facts, deferred import ownership, and controlled request failure. These are synthetic regression checks, not a live-model benchmark, a claim of 10× speed, or a production audit. The pure assessor is byte-for-byte unchanged.
 
 ### Do X → see Y
 

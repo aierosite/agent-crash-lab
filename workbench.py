@@ -5,24 +5,24 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parent
 _spec=importlib.util.spec_from_file_location('acl_core',ROOT/'agent_crash_lab.py')
-core=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(core)
+core=importlib.util.module_from_spec(_spec);_source=(ROOT/'agent_crash_lab.py').read_bytes()
+exec(compile(_source,_spec.origin,'exec'),core.__dict__);CORE_SHA256=hashlib.sha256(_source).hexdigest();del _source
 MAX_BODY=9*1024*1024
 SLOTS=threading.BoundedSemaphore(4)
 BASELINES={r['name']:r for r in json.loads((ROOT/'BASELINES.json').read_text())}
 CURATED=[
- {'id':'double-payment','baseline':'intent-duplicate-0','title':'A correct answer. An extra payment.','short':'Double payment','group':'Payment integrity','kind':'recorded','description':'Intent A gets the right inventory answer, but two distinct transactions settle twice. Equal-price intent B is legitimate.','question':'Did the agent finish the task within its own payment authority?'},
- {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Payment succeeded. The answer did not.','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Compare valid paid content, corrupted paid content, denied delivery and a permitted free source. A 200 response is not useful completion.','question':'Did the purchased output actually satisfy the declared task?'},
- {'id':'legitimate-installments','baseline':'split-settlement','title':'Two installments can be legitimate.','short':'Allowed installments','group':'Negative control','kind':'recorded','description':'An explicit amount budget allows a split payment. Multiple action indices or transaction hashes do not imply duplicate intent.','question':'Can the evaluator accept legitimate multi-payment work?'},
- {'id':'failed-recovery','baseline':'failed-refund','title':'A refund attempt is not recovered principal.','short':'Failed recovery','group':'Recovery','kind':'recorded','description':'A failed payment can create a refund obligation. Check the destination and committed recovery, not just a refund label.','question':'Did the failed intent actually recover its principal?'},
- {'id':'unrelated-credit','baseline':'balance-attribution','title':'A matching balance increase can mislead.','short':'Unrelated credit','group':'Causal attribution','kind':'recorded','description':'An unrelated same-amount credit is not proof that the failed owner intent settled. Follow transaction and receipt identity.','question':'Can a donation accidentally look like a successful task payment?'},
- {'id':'missing-evidence','baseline':'intent-duplicate-0','title':'Missing evidence must remain unknown.','short':'Missing evidence','group':'Uncertainty','kind':'synthetic','description':'A clearly labelled mutation removes a B receipt body. The independent A breach remains visible, while the dependent B claim becomes unknown.','question':'Does missing context become a false clean result?'},
- {'id':'terminal-output','baseline':'split-settlement','title':'An intermediate failure need not fail the task.','short':'Eventual completion','group':'Useful completion','kind':'recorded','description':'A permitted intermediate 402 is distinct from the designated terminal delivery and recorded answer.','question':'Was the final required output correct?'}
+ {'id':'double-payment','baseline':'intent-duplicate-0','title':'Duplicate payment after restart','short':'Double payment','group':'Payment integrity','kind':'recorded','description':'Intent A gets the right inventory answer, but two distinct transactions settle twice. Equal-price intent B is legitimate.','question':'Did the agent finish the task within its own payment authority?'},
+ {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Paid output that failed its task','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Compare valid paid content, corrupted paid content, denied delivery and a permitted free source. A 200 response is not useful completion.','question':'Did the purchased output actually satisfy the declared task?'},
+ {'id':'legitimate-installments','baseline':'split-settlement','title':'An allowed split payment','short':'Allowed installments','group':'Negative control','kind':'recorded','description':'An explicit amount budget allows a split payment. Multiple action indices or transaction hashes do not imply duplicate intent.','question':'Can the evaluator accept legitimate multi-payment work?'},
+ {'id':'failed-recovery','baseline':'failed-refund','title':'Refunds that did not settle','short':'Failed recovery','group':'Recovery','kind':'recorded','description':'A failed payment can create a refund obligation. Check the destination and committed recovery, not just a refund label.','question':'Did the failed intent actually recover its principal?'},
+ {'id':'unrelated-credit','baseline':'balance-attribution','title':'An unrelated credit','short':'Unrelated credit','group':'Causal attribution','kind':'recorded','description':'An unrelated same-amount credit is not proof that the failed owner intent settled. Follow transaction and receipt identity.','question':'Can a donation accidentally look like a successful task payment?'},
+ {'id':'missing-evidence','baseline':'intent-duplicate-0','title':'An incomplete receipt record','short':'Missing evidence','group':'Uncertainty','kind':'synthetic','description':'A clearly labelled mutation removes a B receipt body. The independent A breach remains visible, while the dependent B claim becomes unknown.','question':'Does missing context become a false clean result?'},
+ {'id':'terminal-output','baseline':'split-settlement','title':'Successful final delivery','short':'Eventual completion','group':'Useful completion','kind':'recorded','description':'A permitted intermediate 402 is distinct from the designated terminal delivery and recorded answer.','question':'Was the final required output correct?'}
 ]
-CATALOG={r['id']:r for r in CURATED}
 if (ROOT/'tasks/native-naive.json').exists():
     CURATED[0].update(baseline='native-naive',group='Fresh native crash',description='A scripted worker crashes after FINAL, before its acknowledgement. On restart it pays intent A again. The separate same-price intent B is valid.')
-    CURATED.insert(1,{'id':'durable-recovery','baseline':'native-durable','title':'Restart the task. Keep the payment.','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'The same actual crash window, with a transaction-hash journal written before broadcast. Recovery re-fetches the known transaction; independent B still pays.','question':'Does the reference recovery finish useful work without paying A again?'})
-    CATALOG={r['id']:r for r in CURATED}
+    CURATED.insert(1,{'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'The same actual crash window, with a transaction-hash journal written before broadcast. Recovery re-fetches the known transaction; independent B still pays.','question':'Does the reference recovery finish useful work without paying A again?'})
+CATALOG={r['id']:r for r in CURATED}
 
 def data_for(scenario):
     row=BASELINES[scenario['baseline']]
@@ -43,7 +43,7 @@ def data_for(scenario):
 
 def evaluate(task,sources,scenario=None):
     started=time.perf_counter();report=core.assess(task,sources)
-    return {'scenario':scenario,'report':report,'execution':{'mode':'actual-local-assessment','elapsedMs':round((time.perf_counter()-started)*1000,3),'coreSha256':hashlib.sha256((ROOT/'agent_crash_lab.py').read_bytes()).hexdigest(),'coreVersion':core.VERSION,'liveModel':False,'networkTransactions':0}}
+    return {'scenario':scenario,'report':report,'execution':{'mode':'actual-local-assessment','elapsedMs':round((time.perf_counter()-started)*1000,3),'coreSha256':CORE_SHA256,'coreVersion':core.VERSION,'liveModel':False,'networkTransactions':0}}
 
 def gate(report):
     """A CI gate is strict without relabelling the core's scoped conclusions."""
@@ -63,7 +63,7 @@ class Handler(BaseHTTPRequestHandler):
     server_version='CrashLab/1.0'
     def log_message(self,*_):pass
     def send(self,status,body,kind='application/json; charset=utf-8'):
-        if not isinstance(body,bytes):body=json.dumps(body,ensure_ascii=False).encode()
+        if not isinstance(body,bytes):body=json.dumps(body,ensure_ascii=False,separators=(',',':')).encode()
         self.send_response(status)
         for key,value in {'Content-Type':kind,'Content-Length':str(len(body)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'"}.items():self.send_header(key,value)
         self.end_headers()
@@ -82,7 +82,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/native-result':
             file=ROOT/'verification/native-crash-comparison.json'
             return self.send(200,json.loads(file.read_text())) if file.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.2.2','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.2.3','coreVersion':core.VERSION})
         files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/icon.svg':'icon.svg'}
         if path not in files:return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/files[path]
