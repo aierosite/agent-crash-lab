@@ -1,0 +1,126 @@
+{
+  "atUtc": "2026-11-04T00:02:51.924Z",
+  "classification": "Actual Chromium browser UI observations; no live chain/model trials",
+  "cases": [
+    {
+      "id": "double-payment",
+      "money": "Policy breached",
+      "work": "Useful work verified",
+      "evidence": "Scoped evidence complete",
+      "intents": "A\nIntent A\nBREACHED\n+0.1 NEAR excess\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.2NEAR\n✓\nOUTPUT CHECK\nPassed\nB\nIntent B\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed"
+    },
+    {
+      "id": "durable-recovery",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "evidence": "Scoped evidence complete",
+      "intents": "A\nIntent A\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed\nB\nIntent B\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed"
+    },
+    {
+      "id": "paid-wrong-answer",
+      "money": "Within declared limits",
+      "work": "Output failed",
+      "evidence": "Scoped evidence complete",
+      "intents": "FREE\nIntent FREE\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n✓\nOUTPUT CHECK\nPassed\nINV1\nIntent INV1\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n×\nOUTPUT CHECK\nFailed\nINV2\nIntent INV2\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n×\nOUTPUT CHECK\nFailed\nINV3\nIntent INV3\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n×\nOUTPUT CHECK\nFailed"
+    },
+    {
+      "id": "legitimate-installments",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "evidence": "Scoped evidence complete",
+      "intents": "A\nIntent A\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed\nB\nIntent B\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed"
+    },
+    {
+      "id": "failed-recovery",
+      "money": "Policy breached",
+      "work": "Not required",
+      "evidence": "Scoped evidence complete",
+      "intents": "B01\nIntent B01\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n·\nOUTPUT CHECK\nNot required\nB02\nIntent B02\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n·\nOUTPUT CHECK\nNot required"
+    },
+    {
+      "id": "unrelated-credit",
+      "money": "Within declared limits",
+      "work": "Not required",
+      "evidence": "Scoped evidence complete",
+      "intents": "OWNER-A\nIntent OWNER-A\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0NEAR\n·\nOUTPUT CHECK\nNot required"
+    },
+    {
+      "id": "missing-evidence",
+      "money": "Policy breached",
+      "work": "Useful work verified",
+      "evidence": "Evidence incomplete",
+      "intents": "A\nIntent A\nBREACHED\n+0.1 NEAR excess\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.2NEAR\n✓\nOUTPUT CHECK\nPassed\nB\nIntent B\nUNKNOWN\nexact total unknown\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nKNOWN SUBTOTAL\n0NEAR\n✓\nOUTPUT CHECK\nPassed"
+    },
+    {
+      "id": "terminal-output",
+      "money": "Within declared limits",
+      "work": "Useful work verified",
+      "evidence": "Scoped evidence complete",
+      "intents": "A\nIntent A\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed\nB\nIntent B\nWITHIN\nin this financial scope\n⌑\nALLOWED PRINCIPAL\n0.1NEAR\n↗\nCOMMITTED PRINCIPAL\n0.1NEAR\n✓\nOUTPUT CHECK\nPassed"
+    }
+  ],
+  "responsiveChecks": [
+    {
+      "id": "double-payment",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "durable-recovery",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "paid-wrong-answer",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "legitimate-installments",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "failed-recovery",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "unrelated-credit",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "missing-evidence",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "terminal-output",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "rejected-bundle",
+      "documentWidth": 375,
+      "width": 390
+    },
+    {
+      "id": "tablet",
+      "documentWidth": 753,
+      "width": 768
+    }
+  ],
+  "themeToggleAndReloadPersistence": true,
+  "keyboardArrowTabPassed": true,
+  "mobileExactBundleExportAndReimportPassed": true,
+  "rejectedBundle": {
+    "money": "Input rejected",
+    "work": "Not assessed",
+    "intentNodes": 0,
+    "coverage": "source_hash_mismatch"
+  },
+  "nativeDialogOpenedAndClosed": true,
+  "consoleErrors": [],
+  "scope": "Payment path renders original constraint amounts and independently assessed required-output statuses. No core assessment rule changed."
+}
