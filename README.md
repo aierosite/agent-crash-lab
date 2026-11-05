@@ -14,7 +14,7 @@ The browser edition runs the **same unchanged Python core**, not precomputed ver
 
 First use downloads pinned Pyodide 0.29.5 (Python 3.13.2) from jsDelivr into a Web Worker. Our code sends no assessment inputs to a server and needs no wallet, account or model key. This optional path adds a CDN/runtime trust dependency; the desktop route below remains fully local with **zero third-party Python packages**. Browser checks matched all 19 bundles and eight curated reports against desktop. [Observed checks](verification/browser-python.json) are regression evidence, not a security audit or an unseen benchmark.
 
-The optional adapter adds one code file: **19 → 20 files**, **179,065 → 185,335 bytes** (+6,270 bytes); the 56,644-byte pure assessor and native runner are unchanged. This is an explicit, small scope addition, not another claim of unchanged code size.
+The optional adapter adds one code file: **19 → 20 files**, **179,065 → 185,328 bytes** (+6,263 bytes); the 56,644-byte pure assessor and native runner are unchanged. This is an explicit, small scope addition, not another claim of unchanged code size.
 
 For developers: [capture-to-CI integration](docs/INTEGRATION.md). For reviewers: [five relevant competitors, fixes and remaining gaps](docs/COMPETITIVE_REVIEW.md). We do not claim superiority from test counts: live-agent evaluation, external adoption and authenticated public-network evidence remain gaps.
 

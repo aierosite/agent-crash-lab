@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
   "version": "0.4.0",
-  "atUtc": "2026-11-05T00:29:08.444831+00:00",
+  "atUtc": "2026-11-05T00:32:30.777986+00:00",
   "meaning": "All release files except this manifest; consistency hashes, not signed authenticity",
   "files": {
     ".gitattributes": {
@@ -274,7 +274,7 @@
     },
     "README.md": {
       "bytes": 18238,
-      "sha256": "b67bf006a5546034da8b996b5aab6106c315ca69212ceffac8a94af20beab319"
+      "sha256": "6c7b745bc0548c101d3edeb5935417d0858bf0a38b777a029154a07223cafc14"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -470,11 +470,11 @@
     },
     "verification/release-measurements.json": {
       "bytes": 15566,
-      "sha256": "0f41ef7a41e40f44d8678d5df42fca2eede813cef5440a5a898f2412424fdf45"
+      "sha256": "1e686aa225e0dcedf99ed8fc72cbee20da2f304a400a3614c1922515df297fd0"
     },
     "verification/release-reproduction.json": {
-      "bytes": 9839,
-      "sha256": "0ff46be6f7bdb46dc1a9d5d3012ebfd8d47432095325f93bb4f39a4adb3e9b49"
+      "bytes": 9835,
+      "sha256": "a7e07df124650adb7eb59ed38a95f2d3262c4a87a448bba9a17c23c17813cdb8"
     },
     "verification/reserved-expected-before-first-evaluation.json": {
       "bytes": 6408,
@@ -529,8 +529,8 @@
       "sha256": "3d5142460056d2273de8284f38ae5a9513fba0326b9eeaef81f92f1f70f5edc6"
     },
     "web/index.html": {
-      "bytes": 7776,
-      "sha256": "9611bd0524a317710520122315997b85e4ca133a64133c238a9d0791ab0cf87b"
+      "bytes": 7769,
+      "sha256": "cc636d1df261bf433736da101d608829fa129dcbf2d9225f5c35eaf0caa19b16"
     },
     "web/style.css": {
       "bytes": 21251,
