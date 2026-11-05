@@ -1,0 +1,214 @@
+{
+  "format": "agent-crash-lab/task-v1",
+  "profile": "near-sandbox-2.14/native-v1",
+  "authority": {
+    "kind": "historical_controlled",
+    "basis": [
+      {
+        "source": "basis",
+        "pointer": ""
+      }
+    ],
+    "note": "Owner task preregistered before local inference and execution. Model provenance is in the capture."
+  },
+  "sources": {
+    "recording": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+    "basis": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+  },
+  "run": {
+    "id": "live-reordered-naive",
+    "chain_id": "test-chain-11ucz",
+    "protocol_version": 88,
+    "capture": {
+      "source": "recording",
+      "pointer": "/runs/0"
+    },
+    "closed_horizon": true,
+    "horizon_note": "All attempted transfers in a serial episode were observed before its owned node shut down."
+  },
+  "intents": [
+    {
+      "id": "B",
+      "protected_accounts": [
+        "owner.crashlab.near"
+      ],
+      "merchant": "merchant.crashlab.near"
+    },
+    {
+      "id": "A",
+      "protected_accounts": [
+        "owner.crashlab.near"
+      ],
+      "merchant": "merchant.crashlab.near"
+    },
+    {
+      "id": "C",
+      "protected_accounts": [
+        "owner.crashlab.near"
+      ],
+      "merchant": "merchant.crashlab.near"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "send-0",
+      "tx_hash": "8bUbBWK9tHWTxoH5DLS6EevqjpCK3dv4mTUePULRCiEK",
+      "role": "task",
+      "intent": "B",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/2"
+          },
+          "packet_sha256": "472f211c29a2b07e8c01b216e67037c074c5c154a02dc6289d1dfb9b3f996ace"
+        }
+      ]
+    },
+    {
+      "id": "send-1",
+      "tx_hash": "2rUgcfgz9vFDsrDDYxGRTZLUKe6FeXU556seDKXTKPJA",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/6"
+          },
+          "packet_sha256": "3100e4e65e7f68f9da1f4032b60a01dd6c7052ea3b2ccd0922294578ada90d4d"
+        }
+      ]
+    },
+    {
+      "id": "send-2",
+      "tx_hash": "7thPgEVdEcFKexz8CVT4SKiQ6itkVVBs368PqPthDHYb",
+      "role": "task",
+      "intent": "A",
+      "submissions": [
+        {
+          "ref": {
+            "source": "recording",
+            "pointer": "/runs/0/rpcObservations/9"
+          },
+          "packet_sha256": "811a7b14def7261658a2b243fd67b97a0fa6184fef21dd15fcb90ea9347a58bc"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "B-merchant",
+      "intent": "B",
+      "metric": "merchant_gross_principal",
+      "cap": "110000000000000000000000"
+    },
+    {
+      "id": "B-count",
+      "intent": "B",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "A-merchant",
+      "intent": "A",
+      "metric": "merchant_gross_principal",
+      "cap": "110000000000000000000000"
+    },
+    {
+      "id": "A-count",
+      "intent": "A",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    },
+    {
+      "id": "C-merchant",
+      "intent": "C",
+      "metric": "merchant_gross_principal",
+      "cap": "110000000000000000000000"
+    },
+    {
+      "id": "C-count",
+      "intent": "C",
+      "metric": "committed_settlement_attempts",
+      "cap": "1"
+    }
+  ],
+  "utility": {
+    "required": [
+      {
+        "id": "B-answer",
+        "intent": "B",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/0/utilityObservations/0"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 0,
+              "forecast": 1
+            },
+            {
+              "sku": "B2",
+              "available": 0,
+              "forecast": 4
+            },
+            {
+              "sku": "B3",
+              "available": 3,
+              "forecast": 8
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "B3",
+          "units": 5
+        }
+      },
+      {
+        "id": "A-answer",
+        "intent": "A",
+        "profile": "inventory-gap-first-v1",
+        "observation": {
+          "source": "recording",
+          "pointer": "/runs/0/utilityObservations/1"
+        },
+        "expected_document": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 5
+            },
+            {
+              "sku": "A2",
+              "available": 3,
+              "forecast": 12
+            },
+            {
+              "sku": "A3",
+              "available": 1,
+              "forecast": 10
+            }
+          ]
+        },
+        "expected_answer": {
+          "sku": "A2",
+          "units": 9
+        }
+      }
+    ],
+    "intermediate": []
+  }
+}

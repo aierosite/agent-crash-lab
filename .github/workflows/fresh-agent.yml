@@ -1,0 +1,53 @@
+name: Fresh live-agent trials
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  fresh:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Obtain pinned public artifacts
+        working-directory: ${{ runner.temp }}
+        run: |
+          curl --fail --location --retry 2 --max-time 180 -o llama.tar.gz https://github.com/ggml-org/llama.cpp/releases/download/b12110/llama-b12110-bin-ubuntu-x64.tar.gz
+          curl --fail --location --retry 2 --max-time 180 -o model.gguf 'https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/91cad51170dc346986eccefdc2dd33a9da36ead9/qwen2.5-1.5b-instruct-q4_k_m.gguf?download=true'
+          curl --fail --location --retry 2 --max-time 180 -o sandbox.tar.gz https://s3-us-west-1.amazonaws.com/build.nearprotocol.com/nearcore/Linux-x86_64/2.14.0/near-sandbox.tar.gz
+          echo 'a0ba004218b218bd74351795e7ce2eda4a2b6af5cd3e252bd5e8bfe3c8f2e691  sandbox.tar.gz' | sha256sum --check
+          tar -xOf sandbox.tar.gz Linux-x86_64/near-sandbox > near-sandbox
+          chmod u+x near-sandbox
+      - name: Sample fresh cases and run inference and sandbox transfers
+        run: |
+          python -m pip install cryptography==46.0.5
+          python - <<'PY'
+          import os, secrets, subprocess, sys
+          from pathlib import Path
+          root = Path(os.environ["RUNNER_TEMP"])
+          command = [sys.executable, "tools/live_agent.py", "--runtime", str(root/"llama.tar.gz"),
+                     "--model", str(root/"model.gguf"), "--binary", str(root/"near-sandbox"),
+                     "--output", str(root/"fresh-trials")]
+          seeds = [secrets.randbelow(2**31) for _ in range(3)]
+          print("Fresh seeds:", *seeds, flush=True)
+          for seed in seeds:
+              command += ["--seed", str(seed)]
+          subprocess.run(command, check=True, timeout=300)
+          PY
+      - name: Compare the separate oracle with Crash Lab
+        run: |
+          python -I -S tools/verify_live_agent.py --run-dir "$RUNNER_TEMP/fresh-trials" --report "$RUNNER_TEMP/fresh-report.json"
+          cat "$RUNNER_TEMP/fresh-report.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads((Path(os.environ["RUNNER_TEMP"])/"fresh-report.json").read_bytes())
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as summary:
+              summary.write(f'## Fresh trials\n\n{report["ownedChains"]} owned chains, {report["inferenceCalls"]} inference calls, '
+                            f'{report["referenceMatches"]}/{report["referenceChecks"]} oracle comparisons, '
+                            f'{report["utilityPassed"]}/{report["utilityTotal"]} required outputs passed.\n')
+          PY

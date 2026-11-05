@@ -15,9 +15,9 @@ This updated video uses actual UI captures from the running v0.3.0 workbench. It
 
 The journal is a reference for the tested post-FINAL process crash, not an exactly-once production protocol. Receipt hashes establish local consistency, not authenticated consensus. See README and ARCHITECTURE.md for full trust boundaries.
 
-## Interactive browser edition · v0.4.0
+## Interactive browser edition · v0.5.0
 
-[Run the same Python core without installing it locally](https://aierosite.github.io/agent-crash-lab/web/?browser=1). The runtime download and optional CDN trust are explained in README. The 60-second video above remains the accurately labelled v0.3.0 UI walkthrough; the underlying recordings/core are unchanged.
+[Run the same Python core without installing it locally](https://aierosite.github.io/agent-crash-lab/web/?browser=1). The runtime download and optional CDN trust are explained in README. The first three cases inspect recordings from the new live-agent trials. The video above documents the v0.3.0 scripted run. [Live-agent trial design](LIVE_AGENT.md)
 
 ## Submitted public demo
 

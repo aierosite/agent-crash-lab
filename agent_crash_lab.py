@@ -9,7 +9,7 @@ import json
 import re
 from decimal import Decimal
 
-VERSION = '0.1.0'
+VERSION = '0.1.1'
 PROFILE = 'near-sandbox-2.14/native-v1'
 LIMITS = {
     'owner_bytes': 262144, 'source_count': 16, 'source_file_bytes': 4194304,
@@ -808,8 +808,10 @@ class Assessment:
                 out['reference_check'] = 'consistent'
                 out['observed_status_present'] = 'httpStatus' in obs
                 out['observed_status'] = projection(obs.get('httpStatus'))
-                out['observed_answer_present'] = 'scriptedAnswer' in obs
-                out['observed_answer'] = projection(obs.get('scriptedAnswer'))
+                need(not {'recordedAnswer', 'scriptedAnswer'} <= obs.keys(), 'conflicting_answer_fields')
+                answer_field = 'recordedAnswer' if 'recordedAnswer' in obs else 'scriptedAnswer'
+                out['observed_answer_present'] = answer_field in obs
+                out['observed_answer'] = projection(obs.get(answer_field))
                 expected = item['expected_document']
                 context = all(k not in obs or equal(obs[k], expected[dk]) for k, dk in [('invoice', 'invoice'), ('requestedVersion', 'version')])
                 if 'httpStatus' in obs and (type(obs['httpStatus']) is not int or obs['httpStatus'] != 200):
@@ -824,11 +826,11 @@ class Assessment:
                         b = obs['responseUtf8'].encode('utf-8')
                         doc = self.budget.decode(b, True)
                         content = equal(doc, expected)
-                        answer = 'scriptedAnswer' in obs and equal(obs['scriptedAnswer'], item['expected_answer'])
+                        answer = answer_field in obs and equal(obs[answer_field], item['expected_answer'])
                         out.update(content_check=content, answer_check=answer, context_check=True, response_sha256=hashlib.sha256(b).hexdigest())
                         if not content:
                             out['status'] = 'failed'
-                        elif 'scriptedAnswer' not in obs:
+                        elif answer_field not in obs:
                             out['diagnostic_ids'] = [self.diag('missing_observed_answer', item['id'])]
                         else:
                             out['status'] = 'passed' if answer else 'failed'
@@ -850,7 +852,7 @@ class Assessment:
                 out['diagnostic_ids'] = [self.diag(e.code, 'intermediate_utility')]
             intermediate.append(out)
         return {'required': required, 'intermediate': intermediate,
-                'meaning': 'Finite declared content and actually recorded scripted answer; not live-agent or source authentication'}
+                'meaning': 'Finite comparison of declared content and the recorded answer. Capture and model provenance are separate.'}
 
 def assess(task_bytes, source_bytes):
     """Pure bytes-to-dict assessment. No implicit IO; runtime/caller trusted."""

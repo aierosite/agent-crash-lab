@@ -57,21 +57,24 @@ def worker():
     if expanded.get('final_execution_status')!='FINAL':raise ValueError('Recovery is not final')
     emit({'type':'ack','intent':intent,'tx_hash':txhash,'recoveredWithoutNewSend':recovered})
 
-def experiment(binary,output):
+def experiment(binary,output,live=None):
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
     from cryptography.hazmat.primitives.serialization import Encoding,PublicFormat,PrivateFormat,NoEncryption
     if sys.platform!='linux':raise ValueError('Run optional native experiment in Linux / WSL')
     if hashlib.sha256(binary.read_bytes()).hexdigest()!=PIN:raise ValueError('Expected pinned official sandbox2.14binary; no unverified executable is run')
     output.mkdir(parents=True,exist_ok=True)
-    cap=10**23;root=Path(tempfile.mkdtemp(prefix='acl-owned-native-'));os.chmod(root,0o700)
+    cap=10**23;temporary=tempfile.TemporaryDirectory(prefix='acl-owned-native-');root=Path(temporary.name);os.chmod(root,0o700)
     key=Ed25519PrivateKey.generate();pub=key.public_key().public_bytes(Encoding.Raw,PublicFormat.Raw);seed=key.private_bytes(Encoding.Raw,PrivateFormat.Raw,NoEncryption()).hex()
     public='ed25519:'+b58(pub);owner='owner.crashlab.near';merchant='merchant.crashlab.near'
     expected_doc=lambda i:{'resource':'inventory-snapshot','version':'v1','invoice':i,'source':'owned-local-merchant','rows':[{'sku':'A01','available':7,'forecast':21},{'sku':'B02','available':11,'forecast':10},{'sku':'C03','available':2,'forecast':19}]}
     precommit={'atUtc':datetime.now(timezone.utc).isoformat(),'mode':'owned-local-only','cap':str(cap),'expectedAnswer':{'sku':'C03','units':17},'expectedDocuments':{i:expected_doc(i) for i in ['A','B']},'expectedPolicies':{'naive':{'A':str(2*cap),'B':str(cap)},'durable':{'A':str(cap),'B':str(cap)}},'fault':'Actual worker process exit77 after FINAL before ack','limitations':'Known-family source-informed integration exercise, same operator; scripted workers, not live-model or independent holdout; precommit is written before executing trials'}
+    if live is not None:
+        precommit=live.plan
     (output/'native-precommit.json').write_text(json.dumps(precommit,indent=2))
     env=os.environ.copy();env.update(RUST_LOG='error',RAYON_NUM_THREADS='2')
     combined=[];all_stopped=True
-    for policy in ['naive','durable']:
+    policies=['naive','durable'] if live is None else precommit['policies']
+    for policy in policies:
         home=root/policy;home.mkdir(mode=0o700);node=None;log=None;records=[];seq=0
         run={'policy':policy,'rpcObservations':records,'utilityObservations':[],'workers':[],'mainnetOrTestnetRequests':0,'privateKeysExported':False}
         def rpc(method,params):
@@ -106,22 +109,40 @@ def experiment(binary,output):
             run.update(chainId=status['chain_id'],protocolVersion=status['protocol_version'],startedAtUtc=datetime.now(timezone.utc).isoformat())
             before=rpc('query',{'request_type':'view_account','finality':'final','account_id':merchant})
             sends=[]
-            for intent,crash in [('A',True),('A',False),('B',False)]:
-                cfg={'invocation':policy+'-'+str(len(run['workers'])),'endpoint':endpoint,'journal':str(home/'journal.json'),'policy':policy,'owner':owner,'merchant':merchant,'public':public,'seed':seed,'amount':str(cap),'intent':intent,'crash':crash}
-                proc=subprocess.run([sys.executable,str(Path(__file__).resolve()),'--worker'],input=json.dumps(cfg).encode(),capture_output=True,timeout=25)
-                events=[json.loads(line) for line in proc.stdout.splitlines() if line]
-                run['workers'].append({'intent':intent,'crashRequested':crash,'exitCode':proc.returncode,'events':events})
-                assert proc.returncode==(77 if crash else 0),(policy,intent,proc.stderr.decode()[:1000])
+            account_query={'request_type':'view_account','finality':'final','account_id':merchant}
+            steps=[('A',True),('A',False),('B',False)]
+            if live is not None:
+                steps=live.plan['steps']
+                run['balanceCheckpoints']=[len(records)-1]
+            for intent,crash in steps:
+                attempt={'intent':intent,'crashRequested':crash,'exitCode':None,'events':[]}
+                run['workers'].append(attempt)
+                amount=cap
+                admitted=True
+                if live is not None:
+                    admitted,amount,trace=live.decide(intent)
+                    attempt.update(admitted=admitted,decision=trace,quotedPrincipal=str(amount))
+                if admitted:
+                    cfg={'invocation':policy+'-'+str(len(run['workers'])-1),'endpoint':endpoint,'journal':str(home/'journal.json'),'policy':policy,'owner':owner,'merchant':merchant,'public':public,'seed':seed,'amount':str(amount),'intent':intent,'crash':crash}
+                    proc=subprocess.run([sys.executable,str(Path(__file__).resolve()),'--worker'],input=json.dumps(cfg).encode(),capture_output=True,timeout=25)
+                    attempt['exitCode']=proc.returncode
+                    attempt['events']=[json.loads(line) for line in proc.stdout.splitlines() if line]
+                    if proc.returncode!=(77 if crash else 0):
+                        raise ValueError(f'Owned worker failed in {policy}/{intent} (exit {proc.returncode})')
+                events=attempt['events']
                 for event in events:
                     if event['type']=='rpc':
                         idx=len(records);records.append(event['record'])
                         if event['record']['request']['method']=='send_tx':
                             txhash=event['record']['response']['result']['transaction']['hash'];sends.append({'index':idx,'intent':intent,'hash':txhash})
-                if not crash:
+                if live is not None:
+                    rpc('query',account_query)
+                    run['balanceCheckpoints'].append(len(records)-1)
+                if not crash and admitted:
                     # Actual controlled merchant HTTP delivery follows the recovered payment.
                     from http.server import BaseHTTPRequestHandler,HTTPServer
                     import threading
-                    document=expected_doc(intent)
+                    document=expected_doc(intent) if live is None else live.plan['deliveries'][intent]
                     class Merchant(BaseHTTPRequestHandler):
                         def do_GET(self):
                             data=json.dumps(document).encode();self.send_response(200);self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
@@ -130,13 +151,22 @@ def experiment(binary,output):
                     try:
                         with urllib.request.urlopen('http://127.0.0.1:'+str(service.server_port)+'/inventory',timeout=5) as response:body=response.read().decode();httpstatus=response.status
                     finally:thread.join(timeout=5);service.server_close()
-                    received=json.loads(body);answer=max(received['rows'],key=lambda row:max(0,row['forecast']-row['available']));actual_answer={'sku':answer['sku'],'units':max(0,answer['forecast']-answer['available'])}
-                    run['utilityObservations'].append({'invoice':intent,'requestedVersion':'v1','httpStatus':httpstatus,'responseUtf8':body,'scriptedAnswer':actual_answer})
+                    obs={'invoice':intent,'requestedVersion':'v1','httpStatus':httpstatus,'responseUtf8':body}
+                    if live is None:
+                        received=json.loads(body);answer=max(received['rows'],key=lambda row:max(0,row['forecast']-row['available']));obs['scriptedAnswer']={'sku':answer['sku'],'units':max(0,answer['forecast']-answer['available'])}
+                    else:
+                        obs['recordedAnswer'],obs['inference']=live.answer(body)
+                    run['utilityObservations'].append(obs)
+                elif live is not None and not crash and intent in live.plan['expectedDocuments']:
+                    run['utilityObservations'].append({'invoice':intent,'requestedVersion':'v1','reason':'payment_not_admitted'})
             # Independent observer expands ALL hashes, including the crashed worker's first send.
             for send in sends:rpc('tx_status',{'tx_hash':send['hash'],'sender_account_id':owner,'wait_until':'FINAL'})
             after=rpc('query',{'request_type':'view_account','finality':'final','account_id':merchant})
             run.update(sends=sends,merchantBefore=before,merchantAfter=after,merchantBalanceIncrease=str(int(after['amount'])-int(before['amount'])),expectedMerchantIncrease=str((3 if policy=='naive' else 2)*cap))
-            assert run['merchantBalanceIncrease']==run['expectedMerchantIncrease']
+            if live is None:
+                assert run['merchantBalanceIncrease']==run['expectedMerchantIncrease']
+            else:
+                del run['expectedMerchantIncrease']
         finally:
             if node is not None:
                 if node.poll() is None:
@@ -147,8 +177,11 @@ def experiment(binary,output):
             if log:log.close()
         combined.append(run)
     evidence={'atUtc':datetime.now(timezone.utc).isoformat(),'classification':'Actual source-informed local native crash/restart integration with scripted workers; not a live model or external holdout','sandboxSha256':PIN,'owner':owner,'merchant':merchant,'runs':combined,'ownedNodeStopped':all_stopped,'nativeSendAttempts':sum(len(r['sends']) for r in combined),'privateKeysExported':False,'temporaryOwnedHome':str(root)}
+    if live is not None:
+        evidence['classification']='Live local model decisions and answers with actual owned sandbox transfers and process fault injection'
     (output/'native-observation.json').write_text(json.dumps(evidence,indent=2))
     print(json.dumps({'successful':True,'ownedNodeStopped':all_stopped,'nativeSendAttempts':evidence['nativeSendAttempts'],'output':str(output)}))
+    temporary.cleanup()
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--worker',action='store_true');p.add_argument('--binary',type=Path);p.add_argument('--output',type=Path);a=p.parse_args()

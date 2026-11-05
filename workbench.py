@@ -11,6 +11,9 @@ MAX_BODY=9*1024*1024
 SLOTS=threading.BoundedSemaphore(4)
 BASELINES={r['name']:r for r in json.loads((ROOT/'BASELINES.json').read_text())}
 CURATED=[
+ {'id':'model-retry','baseline':'live-normal-naive','title':'A model agent pays twice','short':'Live agent retry','group':'Recorded model run','kind':'live-model','description':'Local Qwen selects the purchase and the inventory answer. A worker crashes after FINAL and the naive retry sends a new payment.','question':'Which task exceeded its authority, and did the recorded answer pass?'},
+ {'id':'model-recovery','baseline':'live-normal-durable','title':'The same agent recovers its payment','short':'Live agent recovery','group':'Recorded model control','kind':'live-model','description':'The same model and task run with a durable transaction hash. Recovery checks that hash and the independent same-price task still pays.','question':'Did recovery preserve both the payment limit and useful work?'},
+ {'id':'model-corrupt','baseline':'live-corrupt-durable','title':'A correct payment buys corrupted data','short':'Live agent, altered data','group':'Recorded model control','kind':'live-model','description':'The merchant served an altered inventory document over local HTTP. The agent selected an answer from the data it actually received.','question':'Do both the native settlement and the original data requirement pass?'},
  {'id':'double-payment','baseline':'native-naive','title':'Duplicate payment after restart','short':'Double payment','group':'Fresh native crash','kind':'recorded','description':'A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.','question':'Did A spend twice while both tasks succeeded?'},
  {'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.','question':'Can recovery finish without a second A payment?'},
  {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Paid output that failed its task','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Valid, corrupted, denied and free deliveries share an independent task reference. HTTP 200 alone is insufficient.','question':'Did the recorded output satisfy its task?'},
@@ -87,7 +90,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/native-result':
             file=ROOT/'verification/native-crash-comparison.json'
             return self.send(200,json.loads(file.read_text())) if file.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.4.0','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.5.0','coreVersion':core.VERSION})
         files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/icon.svg':'icon.svg'}
         if path not in files:return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/files[path]

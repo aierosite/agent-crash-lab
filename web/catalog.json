@@ -2,6 +2,36 @@
   "format": "agent-crash-lab/browser-v1",
   "scenarios": [
     {
+      "id": "model-retry",
+      "baseline": "live-normal-naive",
+      "title": "A model agent pays twice",
+      "short": "Live agent retry",
+      "group": "Recorded model run",
+      "kind": "live-model",
+      "description": "Local Qwen selects the purchase and the inventory answer. A worker crashes after FINAL and the naive retry sends a new payment.",
+      "question": "Which task exceeded its authority, and did the recorded answer pass?"
+    },
+    {
+      "id": "model-recovery",
+      "baseline": "live-normal-durable",
+      "title": "The same agent recovers its payment",
+      "short": "Live agent recovery",
+      "group": "Recorded model control",
+      "kind": "live-model",
+      "description": "The same model and task run with a durable transaction hash. Recovery checks that hash and the independent same-price task still pays.",
+      "question": "Did recovery preserve both the payment limit and useful work?"
+    },
+    {
+      "id": "model-corrupt",
+      "baseline": "live-corrupt-durable",
+      "title": "A correct payment buys corrupted data",
+      "short": "Live agent, altered data",
+      "group": "Recorded model control",
+      "kind": "live-model",
+      "description": "The merchant served an altered inventory document over local HTTP. The agent selected an answer from the data it actually received.",
+      "question": "Do both the native settlement and the original data requirement pass?"
+    },
+    {
       "id": "double-payment",
       "baseline": "native-naive",
       "title": "Duplicate payment after restart",
@@ -234,16 +264,80 @@
         "recording": "evidence/native-observation.json",
         "basis": "evidence/native-precommit.json"
       }
+    },
+    {
+      "name": "live-normal-naive",
+      "task": "tasks/live-normal-naive.json",
+      "sources": {
+        "recording": "evidence/live-agent/normal/native-observation.json",
+        "basis": "evidence/live-agent/normal/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-normal-durable",
+      "task": "tasks/live-normal-durable.json",
+      "sources": {
+        "recording": "evidence/live-agent/normal/native-observation.json",
+        "basis": "evidence/live-agent/normal/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-reordered-naive",
+      "task": "tasks/live-reordered-naive.json",
+      "sources": {
+        "recording": "evidence/live-agent/reordered/native-observation.json",
+        "basis": "evidence/live-agent/reordered/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-reordered-durable",
+      "task": "tasks/live-reordered-durable.json",
+      "sources": {
+        "recording": "evidence/live-agent/reordered/native-observation.json",
+        "basis": "evidence/live-agent/reordered/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-corrupt-naive",
+      "task": "tasks/live-corrupt-naive.json",
+      "sources": {
+        "recording": "evidence/live-agent/corrupt/native-observation.json",
+        "basis": "evidence/live-agent/corrupt/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-corrupt-durable",
+      "task": "tasks/live-corrupt-durable.json",
+      "sources": {
+        "recording": "evidence/live-agent/corrupt/native-observation.json",
+        "basis": "evidence/live-agent/corrupt/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-reduced-naive",
+      "task": "tasks/live-reduced-naive.json",
+      "sources": {
+        "recording": "evidence/live-agent/reduced/native-observation.json",
+        "basis": "evidence/live-agent/reduced/native-precommit.json"
+      }
+    },
+    {
+      "name": "live-single-naive",
+      "task": "tasks/live-single-naive.json",
+      "sources": {
+        "recording": "evidence/live-agent/single/native-observation.json",
+        "basis": "evidence/live-agent/single/native-precommit.json"
+      }
     }
   ],
   "files": {
     "BASELINES.json": {
-      "bytes": 4495,
-      "sha256": "2fb3c02b1fd5b49f0094c7eb5944f8b6be2b75a750890d1a71e41aa9abd16122"
+      "bytes": 6591,
+      "sha256": "8d26e97f5e8c2b5fa143ba9aab0d2c1be6cff77357307c369956fcf1b37a067b"
     },
     "agent_crash_lab.py": {
-      "bytes": 56644,
-      "sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2"
+      "bytes": 56830,
+      "sha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -300,6 +394,46 @@
     "evidence/intent-duplicate-precommit.json": {
       "bytes": 2633,
       "sha256": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+    },
+    "evidence/live-agent/corrupt/native-observation.json": {
+      "bytes": 163713,
+      "sha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8"
+    },
+    "evidence/live-agent/corrupt/native-precommit.json": {
+      "bytes": 2177,
+      "sha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+    },
+    "evidence/live-agent/normal/native-observation.json": {
+      "bytes": 163686,
+      "sha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36"
+    },
+    "evidence/live-agent/normal/native-precommit.json": {
+      "bytes": 2173,
+      "sha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+    },
+    "evidence/live-agent/reduced/native-observation.json": {
+      "bytes": 55236,
+      "sha256": "e7186f235a3daa48093b982dbc51f471c52ae69944d86984862a01e758764a6f"
+    },
+    "evidence/live-agent/reduced/native-precommit.json": {
+      "bytes": 1191,
+      "sha256": "8db6cc6a1f756023a7b4510afc00ba4ecfdf4310d2984cd2d3b320634697c234"
+    },
+    "evidence/live-agent/reordered/native-observation.json": {
+      "bytes": 163780,
+      "sha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541"
+    },
+    "evidence/live-agent/reordered/native-precommit.json": {
+      "bytes": 2184,
+      "sha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+    },
+    "evidence/live-agent/single/native-observation.json": {
+      "bytes": 36462,
+      "sha256": "a0aca90b45d33697b6688210b5f9093c1fbf7cc8abf7f5d1963a1f81ee693ae0"
+    },
+    "evidence/live-agent/single/native-precommit.json": {
+      "bytes": 1155,
+      "sha256": "6090d1cd99aec63d0489b8b6fbc537cc6e160c24db1cd12e4781f2ea59f07f6c"
     },
     "evidence/merchant-utility-observation.json": {
       "bytes": 276543,
@@ -405,6 +539,38 @@
       "bytes": 7956,
       "sha256": "43232af3115036702d06c67aa67329f72fa3b7c5cc225a95b2f47e2a1506a35e"
     },
+    "tasks/live-corrupt-durable.json": {
+      "bytes": 4777,
+      "sha256": "0b375deeed5443ea2b505f408d0ce985d0da3fc2b9d7e4c842528ff1bc12bfa1"
+    },
+    "tasks/live-corrupt-naive.json": {
+      "bytes": 5181,
+      "sha256": "8052c31ac818be14380f8b9706de9a6ec5258f2b648df64f46b803a0d6a45f32"
+    },
+    "tasks/live-normal-durable.json": {
+      "bytes": 4773,
+      "sha256": "ab8557db0b4347969944d28502b0a2754063b8c80764fabe4d7c4b94784671ec"
+    },
+    "tasks/live-normal-naive.json": {
+      "bytes": 5177,
+      "sha256": "a5ace98f40328d640bcd944648e1001bf0669a1213fee5d903aec194ac2be75d"
+    },
+    "tasks/live-reduced-naive.json": {
+      "bytes": 3083,
+      "sha256": "2f810a9106400a9265f1c1531b37d3881f5972fe08fdb5d373c4234d9156a460"
+    },
+    "tasks/live-reordered-durable.json": {
+      "bytes": 4781,
+      "sha256": "5533c99c323016289399d108055723e84c6057f0dfeb2463313e9f48251c8094"
+    },
+    "tasks/live-reordered-naive.json": {
+      "bytes": 5185,
+      "sha256": "82198e43df60b7d18d9f68272752b673df469a72643dc4f8266b46d482b61773"
+    },
+    "tasks/live-single-naive.json": {
+      "bytes": 2677,
+      "sha256": "0b8d3e1b113610742cc2680f8f556f731f63d1e9b4ecc81c4e5128387b5c4d8d"
+    },
     "tasks/merchant-utility-0.json": {
       "bytes": 10519,
       "sha256": "f7a3fcec49ed66d87c070507b709a652aaa4b9dd3f8a3f3572e88476c5f2f00f"
@@ -454,8 +620,8 @@
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
     "workbench.py": {
-      "bytes": 11618,
-      "sha256": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7"
+      "bytes": 12849,
+      "sha256": "52a62fce241757ef204ebb3ddcb85779ae624ccd1b89ddc766700c2afd629ab4"
     }
   }
 }

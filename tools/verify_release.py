@@ -1,4 +1,4 @@
-"""Verify release bytes; --judge also runs all three offline acceptance suites."""
+"""Verify release bytes. --judge also runs the offline acceptance suites."""
 from pathlib import Path
 import hashlib,json,subprocess,sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -14,7 +14,7 @@ def main():
             raw=path.read_bytes()
             if len(raw)!=expected['bytes'] or hashlib.sha256(raw).hexdigest()!=expected['sha256']:bad.append({'file':name,'error':'hash-or-size'})
         if '--judge' in sys.argv and not bad:
-            for script in ['test_agent_crash_lab.py','test_workbench.py','verify_reserved.py']:
+            for script in ['test_agent_crash_lab.py','test_workbench.py','verify_reserved.py','tools/verify_live_agent.py']:
                 r=subprocess.run([sys.executable,'-I','-S',str(ROOT/script)],cwd=ROOT,capture_output=True,timeout=60)
                 runs.append({'suite':script,'exitCode':r.returncode,'error':r.stderr.decode(errors='replace')[-1200:] if r.returncode else ''})
         ok=not bad and all(r['exitCode']==0 for r in runs)

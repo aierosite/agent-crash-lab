@@ -1,0 +1,7 @@
+{
+  "finishedAtUtc": "2026-11-05T18:01:27.545117+00:00",
+  "modelServerStopped": true,
+  "inferenceTransport": "127.0.0.1 only",
+  "network": "owned local sandbox",
+  "variants": 5
+}

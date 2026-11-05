@@ -1,0 +1,128 @@
+{
+  "seed": 1641293917,
+  "variant": "reordered",
+  "steps": [
+    [
+      "B",
+      false
+    ],
+    [
+      "A",
+      true
+    ],
+    [
+      "A",
+      false
+    ],
+    [
+      "C",
+      false
+    ]
+  ],
+  "policies": [
+    "naive",
+    "durable"
+  ],
+  "capCents": 11,
+  "quoteCents": {
+    "A": 11,
+    "B": 11,
+    "C": 12
+  },
+  "expectedDocuments": {
+    "A": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "A",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A1",
+          "available": 3,
+          "forecast": 5
+        },
+        {
+          "sku": "A2",
+          "available": 3,
+          "forecast": 12
+        },
+        {
+          "sku": "A3",
+          "available": 1,
+          "forecast": 10
+        }
+      ]
+    },
+    "B": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "B",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "B1",
+          "available": 0,
+          "forecast": 1
+        },
+        {
+          "sku": "B2",
+          "available": 0,
+          "forecast": 4
+        },
+        {
+          "sku": "B3",
+          "available": 3,
+          "forecast": 8
+        }
+      ]
+    }
+  },
+  "deliveries": {
+    "A": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "A",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A1",
+          "available": 3,
+          "forecast": 5
+        },
+        {
+          "sku": "A2",
+          "available": 3,
+          "forecast": 12
+        },
+        {
+          "sku": "A3",
+          "available": 1,
+          "forecast": 10
+        }
+      ]
+    },
+    "B": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "B",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "B1",
+          "available": 0,
+          "forecast": 1
+        },
+        {
+          "sku": "B2",
+          "available": 0,
+          "forecast": 4
+        },
+        {
+          "sku": "B3",
+          "available": 3,
+          "forecast": 8
+        }
+      ]
+    }
+  }
+}

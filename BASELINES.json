@@ -150,5 +150,69 @@
       "recording": "evidence/native-observation.json",
       "basis": "evidence/native-precommit.json"
     }
+  },
+  {
+    "name": "live-normal-naive",
+    "task": "tasks/live-normal-naive.json",
+    "sources": {
+      "recording": "evidence/live-agent/normal/native-observation.json",
+      "basis": "evidence/live-agent/normal/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-normal-durable",
+    "task": "tasks/live-normal-durable.json",
+    "sources": {
+      "recording": "evidence/live-agent/normal/native-observation.json",
+      "basis": "evidence/live-agent/normal/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-reordered-naive",
+    "task": "tasks/live-reordered-naive.json",
+    "sources": {
+      "recording": "evidence/live-agent/reordered/native-observation.json",
+      "basis": "evidence/live-agent/reordered/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-reordered-durable",
+    "task": "tasks/live-reordered-durable.json",
+    "sources": {
+      "recording": "evidence/live-agent/reordered/native-observation.json",
+      "basis": "evidence/live-agent/reordered/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-corrupt-naive",
+    "task": "tasks/live-corrupt-naive.json",
+    "sources": {
+      "recording": "evidence/live-agent/corrupt/native-observation.json",
+      "basis": "evidence/live-agent/corrupt/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-corrupt-durable",
+    "task": "tasks/live-corrupt-durable.json",
+    "sources": {
+      "recording": "evidence/live-agent/corrupt/native-observation.json",
+      "basis": "evidence/live-agent/corrupt/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-reduced-naive",
+    "task": "tasks/live-reduced-naive.json",
+    "sources": {
+      "recording": "evidence/live-agent/reduced/native-observation.json",
+      "basis": "evidence/live-agent/reduced/native-precommit.json"
+    }
+  },
+  {
+    "name": "live-single-naive",
+    "task": "tasks/live-single-naive.json",
+    "sources": {
+      "recording": "evidence/live-agent/single/native-observation.json",
+      "basis": "evidence/live-agent/single/native-precommit.json"
+    }
   }
 ]

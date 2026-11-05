@@ -10,17 +10,17 @@ Project: **Agent Crash Lab**. Primary track: **AI Security & Defense** (`securit
 - Current in-repository demo: [captioned walkthrough](agent-crash-lab-demo.mp4)
 - Machine-readable acceptance: `python -I -S tools/verify_release.py --judge`
 
-The submitted X video shows v0.2.0. The current source is v0.4.0; the retained v0.3.0 video shows the same interface, task, assessor and native recordings. The browser edition adds actual Python execution without local installation. The current repository walkthrough is an accurately labelled update; it does not imply that the existing X attachment changed.
+The submitted X video shows v0.2.0. The v0.3.0 repository video documents the scripted experiment. The v0.5.0 browser edition adds three cases recorded with live local inference. [Live-agent trial evidence](LIVE_AGENT.md)
 
 ## What the entry demonstrates
 
 An agent can complete useful work and still pay twice. The workbench binds an independently declared task to NEAR transaction/receipt effects, exact principal, recovery obligations and recorded output. A strict CI exit contract separates observed failure, clean declared checks and inconclusive/rejected evidence. Native FINAL, the containing outcome, child receipt failure, principal recovery and gas returns remain distinct.
 
-The main experiment uses scripted workers on two owned local NEAR sandbox chains. A real process exits 77 after FINAL, before acknowledgement. Naive retry pays A again; a pre-broadcast transaction-hash journal recovers the first payment. Independent same-price B remains legitimate. Both task outputs pass. This is a bounded process-crash control, not live-model evaluation, signature authentication or a production audit.
+The original experiment uses scripted workers on two owned local NEAR sandbox chains. A real process exits 77 after FINAL, before acknowledgement. Naive retry pays A again; a pre-broadcast transaction-hash journal recovers the first payment. Independent same-price B remains legitimate. Both task outputs pass. This is a bounded process-crash control, not live-model evaluation, signature authentication or a production audit.
 
 ## What reviewers can reproduce
 
-1. Run the judge command: release consistency, core, workbench and reserved checks.
+1. Run the judge command to check release consistency, core behavior, workbench integration, reserved cases and the separate oracle replay.
 2. Open the browser edition or launch `python -I -S launch.py` and follow the README's four-case table.
 3. Export/import the exact bundle; changing a source without its owner hash produces input rejection.
 4. Inspect the receipt source pointers and the recorded crash comparison.

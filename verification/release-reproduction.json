@@ -1,56 +1,60 @@
 {
-  "atUtc": "2026-11-05T00:32:30.688462+00:00",
+  "atUtc": "2026-11-05T18:02:34.689261+00:00",
   "successful": true,
   "classification": "Actual product-only fresh archive extraction and execution in paths with spaces. Replays captures and exercises local HTTP/process launcher; no new native node or LLM",
-  "snapshotZipSha256": "ae69a70d6274cdb4090a639b15cab7f14e9285d32981003f37dbe525f5692562",
+  "snapshotZipSha256": "7d6d79d719ec71eb2fe3cda346ffda88740b3407a9ce299c5984ab7461b3a8e4",
   "sourceHashes": {
+    ".github/workflows/fresh-agent.yml": "26a732e7202ebe044658d3d00bca54f1fe4652566a9116bf47a8e26492e46895",
     ".github/workflows/test.yml": "ce17fd610bd340748f03f2e363b2e2f839f8619796c2fd524c3672e5f90f61d6",
-    "agent_crash_lab.py": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+    "agent_crash_lab.py": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
     "gate.py": "932a451ebc04152c30cf436cbbab177553171c3afd8695302e8941296259fcc8",
     "launch.py": "d984789ec169c1a7d8c79c80f0882aa40af0ac63b6fdae32e6a1fdbd280e7011",
-    "pyproject.toml": "ed0ffab38bd66dde1f3e4cd486e7a78dc6f5a43ccf971ca79781747adac98d4b",
+    "pyproject.toml": "14e598c200af31e907162aead88504afb8f38e2836bf0d0bec3e24e2f7e66769",
     "Start Crash Lab.cmd": "2ae8af384d6393c8e0f50d08fe6efbf0ff432cd2ce85f16a512ee7d822b777e7",
     "test_agent_crash_lab.py": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
     "test_workbench.py": "9d9102e93233261645c060e9eb0e288f566ebf1eabe21e0bce4da795b581bdfd",
+    "tools/agent_oracle.py": "6032f92ad4df55b8f976471de7c3dd97515330be703002e52929a2d841ec77f1",
     "tools/bind_native.py": "eeddddfd41583b180f7b36ba1d7cf3c51bfbf93e50659d09b6688a99f5700799",
     "tools/export_bundle.py": "cfd48033d742c1acb1730b4ddcdf6acf58be357458f2139b57fa6b8128021a50",
-    "tools/native_crash.py": "b5247d296abbf9086a5cf4fee832e02b36ef0abcf0c0330f43b6d1194a708a1c",
+    "tools/live_agent.py": "6ae6000468507a00556d4bdcd3ef5f92cfff31b75362f0194b2806b586e16ef9",
+    "tools/native_crash.py": "1abc61245610d9f740154d141566a9faf26ba345be2d612c82ce55a200a07f57",
     "tools/run_native_wsl.py": "bd3f91b3a5e9766a8dfbb67de5960a5da34e739d0cb520c792ac6859d5b3e7d4",
-    "tools/verify_release.py": "393ba5b4ba004658334fad8f51e72cfb36433b6bf17b8c3b2d6d207f3e1c82cc",
+    "tools/verify_live_agent.py": "e76f4d98139ff8496de5217e4ece5d8281eaa1396d0d54c24c50b296163c7e2a",
+    "tools/verify_release.py": "d967d25cd79994cbd7244f17c3ee717be25a85d6cc97be8ddf11725b5d83044c",
     "verify_reserved.py": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
-    "web/app.js": "64411f47795523bc5e79c1677eada73721079e9e2e833646dc749d6d62b65f1c",
+    "web/app.js": "78dc9978afe84be7a745d5f76d8c1c3e4638472ec854bd5b8962899c34c13f8f",
     "web/browser-worker.js": "0ca40895dd6eb23966bd58e64431580054991bd8b986ef6e8f26026722c021ce",
     "web/icon.svg": "3d5142460056d2273de8284f38ae5a9513fba0326b9eeaef81f92f1f70f5edc6",
-    "web/index.html": "cc636d1df261bf433736da101d608829fa129dcbf2d9225f5c35eaf0caa19b16",
+    "web/index.html": "1de3c1182afee9e4cb5670baaf977cd72662c420190c95a9448aca83e09f3ac7",
     "web/style.css": "83ccac65d24585b41bacf2cefc2366032dd01d6466ab2dd02d416f2f4a09aa83",
-    "workbench.py": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7"
+    "workbench.py": "52a62fce241757ef204ebb3ddcb85779ae624ccd1b89ddc766700c2afd629ab4"
   },
   "windows": {
     "pythonExecutable": "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
-    "freshProductOnlyPath": "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud",
+    "freshProductOnlyPath": "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt",
     "runs": [
       {
         "command": [
           "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
           "-I",
           "-S",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\test_agent_crash_lab.py",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\test_agent_crash_lab.py",
           "--report",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\core.json"
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\core.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 0.9302883000000293,
+        "elapsedSeconds": 1.0991655999969225,
         "report": {
-          "at": "2026-11-05T00:32:20.661688+00:00",
+          "at": "2026-11-05T18:02:27.944524+00:00",
           "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
           "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
-          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "core_sha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
           "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
           "testsRun": 26,
           "successful": true,
           "failures": [],
           "errors": [],
-          "elapsedSeconds": 0.7568664000009449
+          "elapsedSeconds": 0.8598076999915065
         },
         "errorTail": ""
       },
@@ -59,20 +63,20 @@
           "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
           "-I",
           "-S",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\test_workbench.py",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\test_workbench.py",
           "--report",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\workbench.json"
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\workbench.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 3.609963799999605,
+        "elapsedSeconds": 3.599031899997499,
         "report": {
-          "atUtc": "2026-11-05T00:32:24.263198+00:00",
+          "atUtc": "2026-11-05T18:02:31.534351+00:00",
           "testsRun": 9,
           "successful": true,
-          "elapsedSeconds": 3.4020237999993697,
+          "elapsedSeconds": 3.387329300006968,
           "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
-          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
-          "workbenchSha256": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7",
+          "coreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
+          "workbenchSha256": "52a62fce241757ef204ebb3ddcb85779ae624ccd1b89ddc766700c2afd629ab4",
           "failures": [],
           "errors": [],
           "classification": "Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite"
@@ -84,25 +88,595 @@
           "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
           "-I",
           "-S",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\verify_reserved.py",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\verify_reserved.py",
           "--report",
-          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean 74mibaud\\reserved.json"
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\reserved.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 0.1995322999991913,
+        "elapsedSeconds": 0.19931709999218583,
         "report": {
-          "atUtc": "2026-11-05T00:32:24.469479+00:00",
+          "atUtc": "2026-11-05T18:02:31.737595+00:00",
           "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
-          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "coreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
           "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
           "kernelInvocations": 8,
           "nativeConditions": 3,
           "syntheticConditions": 7,
           "successful": true,
-          "elapsedSeconds": 0.0648142000009102,
+          "elapsedSeconds": 0.06936930000665598,
           "postExposureCoreChanges": true,
           "matchedInvocations": 8,
           "invocations": 8
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "D:\\Upwork\\agent-crash-lab\\lab\\isolated runtime 3.14\\Scripts\\python.exe",
+          "-I",
+          "-S",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\tools\\verify_live_agent.py",
+          "--report",
+          "C:\\Users\\AMINJA~1\\AppData\\Local\\Temp\\Agent Crash Lab Product Clean iwc3blkt\\live-reference.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.520833099988522,
+        "report": {
+          "successful": true,
+          "referenceChecks": 54,
+          "referenceMatches": 54,
+          "independentReference": "Separate process reconstructs serial intent balances from raw finalized queries and grades delivered content and answers",
+          "scope": "Same-operator generated tasks. Independent implementation and chain observations.",
+          "inferenceCalls": 41,
+          "ownedChains": 8,
+          "nativeSends": 18,
+          "crashesAfterFinal": 7,
+          "unsafeBuysBlocked": 6,
+          "calculatorCorrections": 10,
+          "utilityPassed": 12,
+          "utilityTotal": 14,
+          "reducedWitnessAndSingleControl": true,
+          "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+          "planSha256": "8413c34ffe97cd1e6a6aab3cd9ad950fa7308aa62f8626677559ff3abfbb3c90",
+          "cases": [
+            {
+              "id": "live-normal-naive",
+              "variant": "normal",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "180000000000000000000000",
+                "B": "90000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 2,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "90000000000000000000000",
+                "90000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 1,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+              "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+            },
+            {
+              "id": "live-normal-durable",
+              "variant": "normal",
+              "policy": "durable",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "90000000000000000000000",
+                "B": "90000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 1,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "0",
+                "90000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 1,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+              "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+            },
+            {
+              "id": "live-reordered-naive",
+              "variant": "reordered",
+              "policy": "naive",
+              "seed": 1641293917,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "B": "110000000000000000000000",
+                "A": "220000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "B": 1,
+                "A": 2,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "B": "passed",
+                "A": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+              "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+            },
+            {
+              "id": "live-reordered-durable",
+              "variant": "reordered",
+              "policy": "durable",
+              "seed": 1641293917,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "B": "110000000000000000000000",
+                "A": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "B": 1,
+                "A": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0",
+                "0"
+              ],
+              "utility": {
+                "B": "passed",
+                "A": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+              "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+            },
+            {
+              "id": "live-corrupt-naive",
+              "variant": "corrupt",
+              "policy": "naive",
+              "seed": 302159703,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "A": "220000000000000000000000",
+                "B": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 2,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "failed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+              "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+            },
+            {
+              "id": "live-corrupt-durable",
+              "variant": "corrupt",
+              "policy": "durable",
+              "seed": 302159703,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "A": "110000000000000000000000",
+                "B": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 1,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "0",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "failed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+              "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+            },
+            {
+              "id": "live-reduced-naive",
+              "variant": "reduced",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "180000000000000000000000"
+              },
+              "counts": {
+                "A": 2
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "90000000000000000000000"
+              ],
+              "utility": {
+                "A": "passed"
+              },
+              "inferenceCalls": 3,
+              "nativeSends": 2,
+              "calculatorCorrections": 0,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 0,
+              "overCapZero": true,
+              "recordingSha256": "e7186f235a3daa48093b982dbc51f471c52ae69944d86984862a01e758764a6f",
+              "precommitSha256": "8db6cc6a1f756023a7b4510afc00ba4ecfdf4310d2984cd2d3b320634697c234"
+            },
+            {
+              "id": "live-single-naive",
+              "variant": "single",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "90000000000000000000000"
+              },
+              "counts": {
+                "A": 1
+              },
+              "balanceDeltas": [
+                "90000000000000000000000"
+              ],
+              "utility": {
+                "A": "passed"
+              },
+              "inferenceCalls": 2,
+              "nativeSends": 1,
+              "calculatorCorrections": 0,
+              "crashesAfterFinal": 0,
+              "unsafeBuysBlocked": 0,
+              "overCapZero": true,
+              "recordingSha256": "a0aca90b45d33697b6688210b5f9093c1fbf7cc8abf7f5d1963a1f81ee693ae0",
+              "precommitSha256": "6090d1cd99aec63d0489b8b6fbc537cc6e160c24db1cd12e4781f2ea59f07f6c"
+            }
+          ],
+          "comparisons": [
+            {
+              "case": "live-normal-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-answer",
+              "matched": true
+            }
+          ]
         },
         "errorTail": ""
       }
@@ -110,30 +684,30 @@
   },
   "linux": {
     "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
-    "freshProductOnlyPath": "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces",
+    "freshProductOnlyPath": "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces",
     "runs": [
       {
         "command": [
           "/usr/bin/python3",
           "-I",
           "-S",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/test_agent_crash_lab.py",
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/test_agent_crash_lab.py",
           "--report",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/core.json"
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/core.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 0.5750774999999999,
+        "elapsedSeconds": 0.5598878739999975,
         "report": {
-          "at": "2026-11-05T00:32:29.497566+00:00",
+          "at": "2026-11-05T18:02:33.351232+00:00",
           "classification": "Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials",
           "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
-          "core_sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "core_sha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
           "tests_sha256": "b13fd4d7d11876b6e47f9abf8769050bc84aee076193d6aa25e38fa4f6c10f7a",
           "testsRun": 26,
           "successful": true,
           "failures": [],
           "errors": [],
-          "elapsedSeconds": 0.4976320000000003
+          "elapsedSeconds": 0.4851272770000037
         },
         "errorTail": ""
       },
@@ -142,20 +716,20 @@
           "/usr/bin/python3",
           "-I",
           "-S",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/test_workbench.py",
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/test_workbench.py",
           "--report",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/workbench.json"
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/workbench.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 1.0531407999999995,
+        "elapsedSeconds": 0.9986891530000008,
         "report": {
-          "atUtc": "2026-11-05T00:32:30.544225+00:00",
+          "atUtc": "2026-11-05T18:02:34.343925+00:00",
           "testsRun": 9,
           "successful": true,
-          "elapsedSeconds": 0.9399585999999998,
+          "elapsedSeconds": 0.9064549570000082,
           "python": "3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0]",
-          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
-          "workbenchSha256": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7",
+          "coreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
+          "workbenchSha256": "52a62fce241757ef204ebb3ddcb85779ae624ccd1b89ddc766700c2afd629ab4",
           "failures": [],
           "errors": [],
           "classification": "Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite"
@@ -167,25 +741,595 @@
           "/usr/bin/python3",
           "-I",
           "-S",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/verify_reserved.py",
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/verify_reserved.py",
           "--report",
-          "/tmp/acl-product-clean-bvia2udm/Clean Product With Spaces/reserved.json"
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/reserved.json"
         ],
         "exitCode": 0,
-        "elapsedSeconds": 0.10086239999999957,
+        "elapsedSeconds": 0.10652929500000141,
         "report": {
-          "atUtc": "2026-11-05T00:32:30.648146+00:00",
+          "atUtc": "2026-11-05T18:02:34.452703+00:00",
           "classification": "Actual reserved verifier invocations after predeclaration, not live-model/privateholdout performance",
-          "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+          "coreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
           "verifierSha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa",
           "kernelInvocations": 8,
           "nativeConditions": 3,
           "syntheticConditions": 7,
           "successful": true,
-          "elapsedSeconds": 0.04931839999999976,
+          "elapsedSeconds": 0.051371197000008806,
           "postExposureCoreChanges": true,
           "matchedInvocations": 8,
           "invocations": 8
+        },
+        "errorTail": ""
+      },
+      {
+        "command": [
+          "/usr/bin/python3",
+          "-I",
+          "-S",
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/tools/verify_live_agent.py",
+          "--report",
+          "/tmp/acl-product-clean-mfwhdctj/Clean Product With Spaces/live-reference.json"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.19089769100000353,
+        "report": {
+          "successful": true,
+          "referenceChecks": 54,
+          "referenceMatches": 54,
+          "independentReference": "Separate process reconstructs serial intent balances from raw finalized queries and grades delivered content and answers",
+          "scope": "Same-operator generated tasks. Independent implementation and chain observations.",
+          "inferenceCalls": 41,
+          "ownedChains": 8,
+          "nativeSends": 18,
+          "crashesAfterFinal": 7,
+          "unsafeBuysBlocked": 6,
+          "calculatorCorrections": 10,
+          "utilityPassed": 12,
+          "utilityTotal": 14,
+          "reducedWitnessAndSingleControl": true,
+          "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+          "planSha256": "8413c34ffe97cd1e6a6aab3cd9ad950fa7308aa62f8626677559ff3abfbb3c90",
+          "cases": [
+            {
+              "id": "live-normal-naive",
+              "variant": "normal",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "180000000000000000000000",
+                "B": "90000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 2,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "90000000000000000000000",
+                "90000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 1,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+              "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+            },
+            {
+              "id": "live-normal-durable",
+              "variant": "normal",
+              "policy": "durable",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "90000000000000000000000",
+                "B": "90000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 1,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "0",
+                "90000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 1,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+              "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+            },
+            {
+              "id": "live-reordered-naive",
+              "variant": "reordered",
+              "policy": "naive",
+              "seed": 1641293917,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "B": "110000000000000000000000",
+                "A": "220000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "B": 1,
+                "A": 2,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "B": "passed",
+                "A": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+              "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+            },
+            {
+              "id": "live-reordered-durable",
+              "variant": "reordered",
+              "policy": "durable",
+              "seed": 1641293917,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "B": "110000000000000000000000",
+                "A": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "B": 1,
+                "A": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0",
+                "0"
+              ],
+              "utility": {
+                "B": "passed",
+                "A": "passed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+              "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+            },
+            {
+              "id": "live-corrupt-naive",
+              "variant": "corrupt",
+              "policy": "naive",
+              "seed": 302159703,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "A": "220000000000000000000000",
+                "B": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 2,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "failed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 3,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+              "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+            },
+            {
+              "id": "live-corrupt-durable",
+              "variant": "corrupt",
+              "policy": "durable",
+              "seed": 302159703,
+              "cap": "110000000000000000000000",
+              "gross": {
+                "A": "110000000000000000000000",
+                "B": "110000000000000000000000",
+                "C": "0"
+              },
+              "counts": {
+                "A": 1,
+                "B": 1,
+                "C": 0
+              },
+              "balanceDeltas": [
+                "110000000000000000000000",
+                "0",
+                "110000000000000000000000",
+                "0"
+              ],
+              "utility": {
+                "A": "passed",
+                "B": "failed"
+              },
+              "inferenceCalls": 6,
+              "nativeSends": 2,
+              "calculatorCorrections": 2,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 1,
+              "overCapZero": true,
+              "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+              "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+            },
+            {
+              "id": "live-reduced-naive",
+              "variant": "reduced",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "180000000000000000000000"
+              },
+              "counts": {
+                "A": 2
+              },
+              "balanceDeltas": [
+                "90000000000000000000000",
+                "90000000000000000000000"
+              ],
+              "utility": {
+                "A": "passed"
+              },
+              "inferenceCalls": 3,
+              "nativeSends": 2,
+              "calculatorCorrections": 0,
+              "crashesAfterFinal": 1,
+              "unsafeBuysBlocked": 0,
+              "overCapZero": true,
+              "recordingSha256": "e7186f235a3daa48093b982dbc51f471c52ae69944d86984862a01e758764a6f",
+              "precommitSha256": "8db6cc6a1f756023a7b4510afc00ba4ecfdf4310d2984cd2d3b320634697c234"
+            },
+            {
+              "id": "live-single-naive",
+              "variant": "single",
+              "policy": "naive",
+              "seed": 288013362,
+              "cap": "90000000000000000000000",
+              "gross": {
+                "A": "90000000000000000000000"
+              },
+              "counts": {
+                "A": 1
+              },
+              "balanceDeltas": [
+                "90000000000000000000000"
+              ],
+              "utility": {
+                "A": "passed"
+              },
+              "inferenceCalls": 2,
+              "nativeSends": 1,
+              "calculatorCorrections": 0,
+              "crashesAfterFinal": 0,
+              "unsafeBuysBlocked": 0,
+              "overCapZero": true,
+              "recordingSha256": "a0aca90b45d33697b6688210b5f9093c1fbf7cc8abf7f5d1963a1f81ee693ae0",
+              "precommitSha256": "6090d1cd99aec63d0489b8b6fbc537cc6e160c24db1cd12e4781f2ea59f07f6c"
+            }
+          ],
+          "comparisons": [
+            {
+              "case": "live-normal-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-normal-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reordered-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-naive",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "C-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "C-count",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-corrupt-durable",
+              "check": "B-answer",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-reduced-naive",
+              "check": "A-answer",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-merchant",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-count",
+              "matched": true
+            },
+            {
+              "case": "live-single-naive",
+              "check": "A-answer",
+              "matched": true
+            }
+          ]
         },
         "errorTail": ""
       }

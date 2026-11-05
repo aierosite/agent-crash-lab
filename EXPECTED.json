@@ -337,5 +337,167 @@
       "passed",
       "passed"
     ]
+  },
+  "live-normal-naive": {
+    "intents": {
+      "A": {
+        "merchant_gross": "180000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "B": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "live-normal-durable": {
+    "intents": {
+      "A": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "live-reordered-naive": {
+    "intents": {
+      "B": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "A": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "live-reordered-durable": {
+    "intents": {
+      "B": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "A": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "live-corrupt-naive": {
+    "intents": {
+      "A": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "breached"
+      },
+      "B": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "failed"
+    ]
+  },
+  "live-corrupt-durable": {
+    "intents": {
+      "A": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "110000000000000000000000",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      },
+      "C": {
+        "merchant_gross": "0",
+        "cap": "110000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "failed"
+    ]
+  },
+  "live-reduced-naive": {
+    "intents": {
+      "A": {
+        "merchant_gross": "180000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "breached"
+      }
+    },
+    "required_utility_statuses": [
+      "passed"
+    ]
+  },
+  "live-single-naive": {
+    "intents": {
+      "A": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed"
+    ]
   }
 }

@@ -1,0 +1,73 @@
+{
+  "seed": 288013362,
+  "variant": "reduced",
+  "steps": [
+    [
+      "A",
+      true
+    ],
+    [
+      "A",
+      false
+    ]
+  ],
+  "policies": [
+    "naive"
+  ],
+  "capCents": 9,
+  "quoteCents": {
+    "A": 9,
+    "B": 9,
+    "C": 10
+  },
+  "expectedDocuments": {
+    "A": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "A",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A1",
+          "available": 3,
+          "forecast": 4
+        },
+        {
+          "sku": "A2",
+          "available": 0,
+          "forecast": 7
+        },
+        {
+          "sku": "A3",
+          "available": 3,
+          "forecast": 6
+        }
+      ]
+    }
+  },
+  "deliveries": {
+    "A": {
+      "resource": "inventory-snapshot",
+      "version": "v1",
+      "invoice": "A",
+      "source": "owned-local-merchant",
+      "rows": [
+        {
+          "sku": "A1",
+          "available": 3,
+          "forecast": 4
+        },
+        {
+          "sku": "A2",
+          "available": 0,
+          "forecast": 7
+        },
+        {
+          "sku": "A3",
+          "available": 3,
+          "forecast": 6
+        }
+      ]
+    }
+  }
+}

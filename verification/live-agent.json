@@ -1,0 +1,557 @@
+{
+  "successful": true,
+  "referenceChecks": 54,
+  "referenceMatches": 54,
+  "independentReference": "Separate process reconstructs serial intent balances from raw finalized queries and grades delivered content and answers",
+  "scope": "Same-operator generated tasks. Independent implementation and chain observations.",
+  "inferenceCalls": 41,
+  "ownedChains": 8,
+  "nativeSends": 18,
+  "crashesAfterFinal": 7,
+  "unsafeBuysBlocked": 6,
+  "calculatorCorrections": 10,
+  "utilityPassed": 12,
+  "utilityTotal": 14,
+  "reducedWitnessAndSingleControl": true,
+  "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+  "planSha256": "8413c34ffe97cd1e6a6aab3cd9ad950fa7308aa62f8626677559ff3abfbb3c90",
+  "cases": [
+    {
+      "id": "live-normal-naive",
+      "variant": "normal",
+      "policy": "naive",
+      "seed": 288013362,
+      "cap": "90000000000000000000000",
+      "gross": {
+        "A": "180000000000000000000000",
+        "B": "90000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "A": 2,
+        "B": 1,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "90000000000000000000000",
+        "90000000000000000000000",
+        "90000000000000000000000",
+        "0"
+      ],
+      "utility": {
+        "A": "passed",
+        "B": "passed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 3,
+      "calculatorCorrections": 1,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+      "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+    },
+    {
+      "id": "live-normal-durable",
+      "variant": "normal",
+      "policy": "durable",
+      "seed": 288013362,
+      "cap": "90000000000000000000000",
+      "gross": {
+        "A": "90000000000000000000000",
+        "B": "90000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "A": 1,
+        "B": 1,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "90000000000000000000000",
+        "0",
+        "90000000000000000000000",
+        "0"
+      ],
+      "utility": {
+        "A": "passed",
+        "B": "passed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 2,
+      "calculatorCorrections": 1,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36",
+      "precommitSha256": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59"
+    },
+    {
+      "id": "live-reordered-naive",
+      "variant": "reordered",
+      "policy": "naive",
+      "seed": 1641293917,
+      "cap": "110000000000000000000000",
+      "gross": {
+        "B": "110000000000000000000000",
+        "A": "220000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "B": 1,
+        "A": 2,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "110000000000000000000000",
+        "110000000000000000000000",
+        "110000000000000000000000",
+        "0"
+      ],
+      "utility": {
+        "B": "passed",
+        "A": "passed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 3,
+      "calculatorCorrections": 2,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+      "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+    },
+    {
+      "id": "live-reordered-durable",
+      "variant": "reordered",
+      "policy": "durable",
+      "seed": 1641293917,
+      "cap": "110000000000000000000000",
+      "gross": {
+        "B": "110000000000000000000000",
+        "A": "110000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "B": 1,
+        "A": 1,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "110000000000000000000000",
+        "110000000000000000000000",
+        "0",
+        "0"
+      ],
+      "utility": {
+        "B": "passed",
+        "A": "passed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 2,
+      "calculatorCorrections": 2,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541",
+      "precommitSha256": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4"
+    },
+    {
+      "id": "live-corrupt-naive",
+      "variant": "corrupt",
+      "policy": "naive",
+      "seed": 302159703,
+      "cap": "110000000000000000000000",
+      "gross": {
+        "A": "220000000000000000000000",
+        "B": "110000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "A": 2,
+        "B": 1,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "110000000000000000000000",
+        "110000000000000000000000",
+        "110000000000000000000000",
+        "0"
+      ],
+      "utility": {
+        "A": "passed",
+        "B": "failed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 3,
+      "calculatorCorrections": 2,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+      "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+    },
+    {
+      "id": "live-corrupt-durable",
+      "variant": "corrupt",
+      "policy": "durable",
+      "seed": 302159703,
+      "cap": "110000000000000000000000",
+      "gross": {
+        "A": "110000000000000000000000",
+        "B": "110000000000000000000000",
+        "C": "0"
+      },
+      "counts": {
+        "A": 1,
+        "B": 1,
+        "C": 0
+      },
+      "balanceDeltas": [
+        "110000000000000000000000",
+        "0",
+        "110000000000000000000000",
+        "0"
+      ],
+      "utility": {
+        "A": "passed",
+        "B": "failed"
+      },
+      "inferenceCalls": 6,
+      "nativeSends": 2,
+      "calculatorCorrections": 2,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 1,
+      "overCapZero": true,
+      "recordingSha256": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8",
+      "precommitSha256": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789"
+    },
+    {
+      "id": "live-reduced-naive",
+      "variant": "reduced",
+      "policy": "naive",
+      "seed": 288013362,
+      "cap": "90000000000000000000000",
+      "gross": {
+        "A": "180000000000000000000000"
+      },
+      "counts": {
+        "A": 2
+      },
+      "balanceDeltas": [
+        "90000000000000000000000",
+        "90000000000000000000000"
+      ],
+      "utility": {
+        "A": "passed"
+      },
+      "inferenceCalls": 3,
+      "nativeSends": 2,
+      "calculatorCorrections": 0,
+      "crashesAfterFinal": 1,
+      "unsafeBuysBlocked": 0,
+      "overCapZero": true,
+      "recordingSha256": "e7186f235a3daa48093b982dbc51f471c52ae69944d86984862a01e758764a6f",
+      "precommitSha256": "8db6cc6a1f756023a7b4510afc00ba4ecfdf4310d2984cd2d3b320634697c234"
+    },
+    {
+      "id": "live-single-naive",
+      "variant": "single",
+      "policy": "naive",
+      "seed": 288013362,
+      "cap": "90000000000000000000000",
+      "gross": {
+        "A": "90000000000000000000000"
+      },
+      "counts": {
+        "A": 1
+      },
+      "balanceDeltas": [
+        "90000000000000000000000"
+      ],
+      "utility": {
+        "A": "passed"
+      },
+      "inferenceCalls": 2,
+      "nativeSends": 1,
+      "calculatorCorrections": 0,
+      "crashesAfterFinal": 0,
+      "unsafeBuysBlocked": 0,
+      "overCapZero": true,
+      "recordingSha256": "a0aca90b45d33697b6688210b5f9093c1fbf7cc8abf7f5d1963a1f81ee693ae0",
+      "precommitSha256": "6090d1cd99aec63d0489b8b6fbc537cc6e160c24db1cd12e4781f2ea59f07f6c"
+    }
+  ],
+  "comparisons": [
+    {
+      "case": "live-normal-naive",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-normal-naive",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-normal-durable",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-naive",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-reordered-durable",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-naive",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "B-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "B-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "C-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "C-count",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-corrupt-durable",
+      "check": "B-answer",
+      "matched": true
+    },
+    {
+      "case": "live-reduced-naive",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-reduced-naive",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-reduced-naive",
+      "check": "A-answer",
+      "matched": true
+    },
+    {
+      "case": "live-single-naive",
+      "check": "A-merchant",
+      "matched": true
+    },
+    {
+      "case": "live-single-naive",
+      "check": "A-count",
+      "matched": true
+    },
+    {
+      "case": "live-single-naive",
+      "check": "A-answer",
+      "matched": true
+    }
+  ]
+}

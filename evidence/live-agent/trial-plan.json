@@ -1,0 +1,543 @@
+{
+  "atUtc": "2026-11-05T18:00:41.547993+00:00",
+  "model": "Qwen2.5-1.5B-Instruct Q4_K_M",
+  "modelSha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+  "llamaRelease": "b12110",
+  "runtimeArchiveSha256": "368227edcc229be5f9bed16a2223d79b5e41d0ac2e19bcf5825e82291c060e55",
+  "sandboxSha256": "797b9d7a9a23907048d68a427e86a55c94f1de232dbfb8b8a1eec09ecef3bf13",
+  "sources": {
+    "live_agent.py": "6ae6000468507a00556d4bdcd3ef5f92cfff31b75362f0194b2806b586e16ef9",
+    "agent_oracle.py": "6032f92ad4df55b8f976471de7c3dd97515330be703002e52929a2d841ec77f1",
+    "native_crash.py": "1abc61245610d9f740154d141566a9faf26ba345be2d612c82ce55a200a07f57"
+  },
+  "coreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b",
+  "cases": [
+    {
+      "seed": 288013362,
+      "variant": "normal",
+      "steps": [
+        [
+          "A",
+          true
+        ],
+        [
+          "A",
+          false
+        ],
+        [
+          "B",
+          false
+        ],
+        [
+          "C",
+          false
+        ]
+      ],
+      "policies": [
+        "naive",
+        "durable"
+      ],
+      "capCents": 9,
+      "quoteCents": {
+        "A": 9,
+        "B": 9,
+        "C": 10
+      },
+      "expectedDocuments": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 0,
+              "forecast": 9
+            },
+            {
+              "sku": "B2",
+              "available": 0,
+              "forecast": 3
+            },
+            {
+              "sku": "B3",
+              "available": 2,
+              "forecast": 4
+            }
+          ]
+        }
+      },
+      "deliveries": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 0,
+              "forecast": 9
+            },
+            {
+              "sku": "B2",
+              "available": 0,
+              "forecast": 3
+            },
+            {
+              "sku": "B3",
+              "available": 2,
+              "forecast": 4
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 1641293917,
+      "variant": "reordered",
+      "steps": [
+        [
+          "B",
+          false
+        ],
+        [
+          "A",
+          true
+        ],
+        [
+          "A",
+          false
+        ],
+        [
+          "C",
+          false
+        ]
+      ],
+      "policies": [
+        "naive",
+        "durable"
+      ],
+      "capCents": 11,
+      "quoteCents": {
+        "A": 11,
+        "B": 11,
+        "C": 12
+      },
+      "expectedDocuments": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 5
+            },
+            {
+              "sku": "A2",
+              "available": 3,
+              "forecast": 12
+            },
+            {
+              "sku": "A3",
+              "available": 1,
+              "forecast": 10
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 0,
+              "forecast": 1
+            },
+            {
+              "sku": "B2",
+              "available": 0,
+              "forecast": 4
+            },
+            {
+              "sku": "B3",
+              "available": 3,
+              "forecast": 8
+            }
+          ]
+        }
+      },
+      "deliveries": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 5
+            },
+            {
+              "sku": "A2",
+              "available": 3,
+              "forecast": 12
+            },
+            {
+              "sku": "A3",
+              "available": 1,
+              "forecast": 10
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 0,
+              "forecast": 1
+            },
+            {
+              "sku": "B2",
+              "available": 0,
+              "forecast": 4
+            },
+            {
+              "sku": "B3",
+              "available": 3,
+              "forecast": 8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 302159703,
+      "variant": "corrupt",
+      "steps": [
+        [
+          "A",
+          true
+        ],
+        [
+          "A",
+          false
+        ],
+        [
+          "B",
+          false
+        ],
+        [
+          "C",
+          false
+        ]
+      ],
+      "policies": [
+        "naive",
+        "durable"
+      ],
+      "capCents": 11,
+      "quoteCents": {
+        "A": 11,
+        "B": 11,
+        "C": 12
+      },
+      "expectedDocuments": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 2,
+              "forecast": 7
+            },
+            {
+              "sku": "A2",
+              "available": 1,
+              "forecast": 4
+            },
+            {
+              "sku": "A3",
+              "available": 2,
+              "forecast": 2
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 1,
+              "forecast": 6
+            },
+            {
+              "sku": "B2",
+              "available": 2,
+              "forecast": 5
+            },
+            {
+              "sku": "B3",
+              "available": 3,
+              "forecast": 5
+            }
+          ]
+        }
+      },
+      "deliveries": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 2,
+              "forecast": 7
+            },
+            {
+              "sku": "A2",
+              "available": 1,
+              "forecast": 4
+            },
+            {
+              "sku": "A3",
+              "available": 2,
+              "forecast": 2
+            }
+          ]
+        },
+        "B": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "B",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "B1",
+              "available": 1,
+              "forecast": 7
+            },
+            {
+              "sku": "B2",
+              "available": 2,
+              "forecast": 5
+            },
+            {
+              "sku": "B3",
+              "available": 3,
+              "forecast": 5
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 288013362,
+      "variant": "reduced",
+      "steps": [
+        [
+          "A",
+          true
+        ],
+        [
+          "A",
+          false
+        ]
+      ],
+      "policies": [
+        "naive"
+      ],
+      "capCents": 9,
+      "quoteCents": {
+        "A": 9,
+        "B": 9,
+        "C": 10
+      },
+      "expectedDocuments": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        }
+      },
+      "deliveries": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "seed": 288013362,
+      "variant": "single",
+      "steps": [
+        [
+          "A",
+          false
+        ]
+      ],
+      "policies": [
+        "naive"
+      ],
+      "capCents": 9,
+      "quoteCents": {
+        "A": 9,
+        "B": 9,
+        "C": 10
+      },
+      "expectedDocuments": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        }
+      },
+      "deliveries": {
+        "A": {
+          "resource": "inventory-snapshot",
+          "version": "v1",
+          "invoice": "A",
+          "source": "owned-local-merchant",
+          "rows": [
+            {
+              "sku": "A1",
+              "available": 3,
+              "forecast": 4
+            },
+            {
+              "sku": "A2",
+              "available": 0,
+              "forecast": 7
+            },
+            {
+              "sku": "A3",
+              "available": 3,
+              "forecast": 6
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "scope": "Same-operator generated cases with a separate balance and utility reference"
+}

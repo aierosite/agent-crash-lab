@@ -6,17 +6,17 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![The actual Python-in-browser workbench](docs/workbench-browser.png)
 
-## Try it without installing anything · v0.4.0
+## Live-agent evidence · v0.5.0
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.4.0)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.5.0)
 
-The browser edition runs the **same unchanged Python core**, not precomputed verdicts. Select Double payment: A spent 0.2 against its 0.1 authority while useful work passed. Then select Recover without repaying and Paid, wrong answer to distinguish money safety from useful completion. Export a bundle and import it again to inspect the exact inputs.
+Open **Live agent retry**. Qwen approved an authorized 0.09 NEAR quote, the payment settled, and the worker crashed before acknowledgement. Retrying sent another 0.09 NEAR for the same task. **Live agent recovery** reuses the saved hash. In both runs the same-price task B settles independently.
 
-First use downloads pinned Pyodide 0.29.5 (Python 3.13.2) from jsDelivr into a Web Worker. Our code sends no assessment inputs to a server and needs no wallet, account or model key. This optional path adds a CDN/runtime trust dependency; the desktop route below remains fully local with **zero third-party Python packages**. Browser checks matched all 19 bundles and eight curated reports against desktop. [Observed checks](verification/browser-python.json) are regression evidence, not a security audit or an unseen benchmark.
+Across eight owned sandbox chains, Qwen 1.5B made 41 inference calls. The experiment recorded 18 transfers and seven post-FINAL process exits. A deterministic quote check blocked six over-budget BUY proposals. A calculator corrected ten model selections using the delivered rows. With that correction, 12 of 14 required outputs passed. The other two were the predeclared altered-document deliveries.
 
-The optional adapter adds one code file: **19 → 20 files**, **179,065 → 185,328 bytes** (+6,263 bytes); the 56,644-byte pure assessor and native runner are unchanged. This is an explicit, small scope addition, not another claim of unchanged code size.
+A separate process measured finalized merchant balance changes in each serial attempt window and graded the delivered content and answer. Crash Lab agreed on **54 of 54** per-intent principal, settlement-count and utility comparisons. See the [trial design and replay instructions](docs/LIVE_AGENT.md) and [recorded results](verification/live-agent.json).
 
-For developers: [capture-to-CI integration](docs/INTEGRATION.md). For reviewers: [five relevant competitors, fixes and remaining gaps](docs/COMPETITIVE_REVIEW.md). We do not claim superiority from test counts: live-agent evaluation, external adoption and authenticated public-network evidence remain gaps.
+The browser runs Python through pinned Pyodide 0.29.5 and replays captured evidence. The optional model runner uses separate Linux dependencies. The desktop replay and judge checks use standard-library Python.
 
 ## Reproduce the judge checks
 
@@ -26,7 +26,7 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and three entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 26 core tests, nine workbench/HTTP/CLI tests and eight reserved verifier invocations. A changed or missing release file prevents suite execution; `verified` is consistency, not signed authenticity. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and four entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 26 core tests, nine workbench/HTTP/CLI tests eight reserved verifier invocations and the separate live-agent oracle replay. A changed or missing release file prevents suite execution; `verified` is consistency, not signed authenticity. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
 
 **Why task-level verification?** A payment can settle correctly while violating the task's total spending authority, and a correctly priced purchase can return the wrong answer. Crash Lab binds the declared task to native effects and recorded output. It is a regression inspector for developers integrating agents, not a new wallet or an enforcement contract.
 
@@ -93,7 +93,7 @@ This release keeps the same code files, features and dependencies. Every refinem
 6. Select **Missing evidence**. This explicitly synthetic mutation keeps A's known breach and marks B's dependent claims unknown.
 7. **Export input bundle**, import it again, then download the actual engine report. Sources retain their exact UTF-8 bytes and hashes. A modified source without an updated owner binding is rejected.
 
-Eight curated experiments also cover allowed installments, failed principal recovery, unrelated same-amount credit and terminal vs. permitted intermediate delivery.
+The original eight curated experiments also cover allowed installments, failed principal recovery, unrelated same-amount credit and terminal vs. permitted intermediate delivery.
 
 ## What ran, and what did not
 
@@ -102,10 +102,10 @@ Eight curated experiments also cover allowed installments, failed principal reco
 | Fresh crash/restart comparison | Two newly owned isolated NEAR sandbox chains; five native sends; each worker actually exits 77 after `send_tx` returns FINAL and before app acknowledgement; each is restarted. Both nodes stopped afterward. |
 | Native payment facts | Signed direct Transfers, expanded receipts/outcomes, separate same-price B intent and merchant balance changes. Exact principal uses yoctoNEAR integers. |
 | Useful output | Four actual local HTTP deliveries in the fresh comparison, compared with documents/hand answers declared before execution. Workers/orchestrator are scripted. |
-| Core regression | 26 test methods, covering 19 owner containers: 17 original + two fresh native runs. Expected bad cases must be diagnosed as bad. |
+| Core regression | 26 test methods, covering 27 owner containers: 19 prior cases and eight recorded live-agent runs. Expected bad cases must be diagnosed as bad. |
 | Workbench integration | Nine test methods exercising real local HTTP, exact-byte bundle round trips, corrupted input, local-origin/token checks, strict CLI exit codes and native process/capture assertions. |
 | Reserved verification | Eight invocations over known families; first run had one unknown-vs-unsupported mismatch, preserved and fixed. Subsequent runs are post-exposure regression. See `FIRST_FAILURES.json`. |
-| Live LLM / public network | **Zero live model trials. No mainnet/testnet transactions.** Opening this UI or replaying tests sends no native transactions. |
+| Live model | 41 recorded local inference calls over eight owned sandbox chains. See [the live-agent experiment](docs/LIVE_AGENT.md). |
 
 See `verification/native-crash-comparison.json`, `verification/product-baselines.json`, `verification/workbench-tests.json` and `verification/release-reproduction.json` for observed results. [Public CI history](https://github.com/aierosite/agent-crash-lab/actions) records the actual remote results. `.gitattributes` preserves exact captured bytes on Windows and Linux; Git must not rewrite line endings in hash-bound evidence.
 

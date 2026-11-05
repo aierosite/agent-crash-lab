@@ -1,4 +1,6 @@
-# Competitive review · 5 November 2026
+# Competitive review · v0.4.0 snapshot
+
+[The v0.5.0 live-agent experiment and separate reference address the model and evidence gaps documented below.](LIVE_AGENT.md)
 
 The closest overlap is **Workcell**, followed by **HoldUp**, **Quittance**, **Tripwire** and **NEXUS AiOS** for different parts of the problem. This is our evidence-based selection, not an official shortlist or ranking. The directory snapshot contained 128 public projects, 75 tagged Security; tags overlap and the event is still accepting entries.
 
