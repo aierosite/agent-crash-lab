@@ -1,0 +1,243 @@
+{
+  "successful": true,
+  "elapsedMs": 1717.9000000003725,
+  "checks": 31,
+  "results": [
+    {
+      "name": "agent-leash-artifact",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "balance-attribution",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "deleted-signer-refund",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "function-deposit",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "gas-key-refund",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "intent-duplicate-0",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "intent-duplicate-1",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "merchant-utility-0",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "merchant-utility-1",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "monetary-yield",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "none-ack",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "self-function-deposit",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "split-settlement",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "success-receipt-id",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "zero-principal",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "failed-refund",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "refund-override",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "native-naive",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "native-durable",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "double-payment",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "durable-recovery",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "paid-wrong-answer",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "legitimate-installments",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "failed-recovery",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "unrelated-credit",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "missing-evidence",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "terminal-output",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "unknown-outer-field",
+      "matched": true,
+      "error": "ValueError: Unexpected bundle fields"
+    },
+    {
+      "name": "changed-source-byte",
+      "matched": true,
+      "mode": "actual-browser-python-assessment",
+      "coreSha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2",
+      "python": "3.13.2"
+    },
+    {
+      "name": "curated-export-reimport",
+      "matched": true
+    },
+    {
+      "name": "recorded-native-comparison",
+      "matched": true
+    }
+  ],
+  "atUtc": "2026-11-05T00:28:21.675571+00:00",
+  "classification": "Actual Pyodide browser execution, compared with desktop Python reports; source-informed regression, not a holdout",
+  "runtime": "Pyodide 0.29.5 / Python 3.13.2 / Web Worker",
+  "runtimeSource": "https://cdn.jsdelivr.net/pyodide/v0.29.5/full/",
+  "comparison": "Whole report object, recursively sorted keys; execution timings/mode are outside report",
+  "units": {
+    "existingBaselineBundles": 19,
+    "curatedScenarios": 8,
+    "malformedOuterShape": 1,
+    "changedSourceByte": 1,
+    "exportReimport": 1,
+    "recordedNativeComparison": 1
+  },
+  "uiObserved": {
+    "malformedInputRejected": "ValueError: Unexpected bundle fields",
+    "previousResultHiddenOnRejection": true,
+    "selectingValidCaseAfterRejectionRecovered": true,
+    "doublePayment": "breach + useful work passed",
+    "durableRecovery": "within + useful work passed",
+    "paidWrongAnswer": "within + output failed",
+    "missingEvidence": "known A breach retained, B exact total Unknown"
+  },
+  "mobileOverride": "Requested 390px but backend retained 1265/1280px; no fresh mobile pass claimed. Earlier v0.3.0 responsive checks remain historical. Temporary override reset.",
+  "browserAssessmentPostsInputsToServer": false,
+  "newNativeSends": 0,
+  "liveModelCalls": 0,
+  "upstreamCompetitorSuitesExecuted": 0
+}
