@@ -87,7 +87,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/native-result':
             file=ROOT/'verification/native-crash-comparison.json'
             return self.send(200,json.loads(file.read_text())) if file.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.3.0','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.4.0','coreVersion':core.VERSION})
         files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/icon.svg':'icon.svg'}
         if path not in files:return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/files[path]

@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.3.0",
-  "atUtc": "2026-11-04T23:43:36.179839+00:00",
+  "version": "0.4.0",
+  "atUtc": "2026-11-05T00:29:08.444831+00:00",
   "meaning": "All release files except this manifest; consistency hashes, not signed authenticity",
   "files": {
     ".gitattributes": {
@@ -15,6 +15,10 @@
     ".gitignore": {
       "bytes": 83,
       "sha256": "9262624b341d20a2f3101554433fcbbbe126ec8315c7e22d0d814fedbed1f2fa"
+    },
+    ".nojekyll": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     "agent_crash_lab.py": {
       "bytes": 56644,
@@ -36,17 +40,25 @@
       "bytes": 4377,
       "sha256": "e2823f2a39023c42a58b0103d9544604a81e2edb9caf6b9f6b37516f2e9b69f8"
     },
+    "docs/COMPETITIVE_REVIEW.md": {
+      "bytes": 7083,
+      "sha256": "b910102295b49dba38934e4f034ff79a0b518855e1cd58ed41ea1615f6bfd414"
+    },
     "docs/DATA_PROVENANCE.txt": {
       "bytes": 788,
       "sha256": "c680ccadf645e6c6075681d0b6392e763663e7efdc3437cdae88a1db899d52f8"
     },
     "docs/DEMO.md": {
-      "bytes": 2012,
-      "sha256": "0a6b5318e7fe915a615565a34dbace89328edf3dccb25505d1984a026b716523"
+      "bytes": 2373,
+      "sha256": "42caaa72c8a2a75c0238c6b1fa850c35aed5788c3bf291265d9a6c9cedcb8a11"
     },
     "docs/HANDOVER.fa.txt": {
       "bytes": 4739,
       "sha256": "c6a15c17163d7b125018736b1bba7dc1ea4adb448892ffbc78eafe1d2e26bc17"
+    },
+    "docs/INTEGRATION.md": {
+      "bytes": 2979,
+      "sha256": "a9239af510035ea58d9adf833b7a93e330843aea9c841608e08d78d53904b295"
     },
     "docs/native-comparison.png": {
       "bytes": 61575,
@@ -61,12 +73,16 @@
       "sha256": "89014579ad91cf7711bcf7a8e307e0e3c70d1f4bb88f66837058ee4f64007aa9"
     },
     "docs/SUBMISSION.md": {
-      "bytes": 3305,
-      "sha256": "1534129cc1ffc5a2d231f1c46021f32812105287231a9f9acfe971b6e4595bbc"
+      "bytes": 3515,
+      "sha256": "53c8bee9ca993907a1c6df44d6f6dbc2e7298d0ebd487ade6d6f029b40d81a63"
     },
     "docs/THREAT_MODEL.fa.txt": {
       "bytes": 2814,
       "sha256": "0f94a4aebd4bef30bd597b5e8040d1b9ca890a3ea8eb621e0362ffc6e274d243"
+    },
+    "docs/workbench-browser.png": {
+      "bytes": 138435,
+      "sha256": "04835c01b33061a9a53fd4642b375919b14352282021a49c45a67142138141e8"
     },
     "docs/workbench-dark.png": {
       "bytes": 63300,
@@ -254,11 +270,11 @@
     },
     "pyproject.toml": {
       "bytes": 192,
-      "sha256": "895655da9740bed584deb26d06d97e1267c3b88deca875f705b9636b5dadb4a9"
+      "sha256": "ed0ffab38bd66dde1f3e4cd486e7a78dc6f5a43ccf971ca79781747adac98d4b"
     },
     "README.md": {
-      "bytes": 16528,
-      "sha256": "d2fbf2be6d7159fef5aa473db98f515ce7ed602546d8d7a6e8683e0f4971e9fe"
+      "bytes": 18238,
+      "sha256": "b67bf006a5546034da8b996b5aab6106c315ca69212ceffac8a94af20beab319"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -365,8 +381,8 @@
       "sha256": "eeddddfd41583b180f7b36ba1d7cf3c51bfbf93e50659d09b6688a99f5700799"
     },
     "tools/export_bundle.py": {
-      "bytes": 872,
-      "sha256": "bae9ea52e9786a6f5e2fbdd6813fd095f83f90c6bc9e2ca968a4fd52d60cd17e"
+      "bytes": 1503,
+      "sha256": "cfd48033d742c1acb1730b4ddcdf6acf58be357458f2139b57fa6b8128021a50"
     },
     "tools/native_crash.py": {
       "bytes": 13741,
@@ -403,6 +419,10 @@
     "verification/baseline-second-run.json": {
       "bytes": 565,
       "sha256": "4facf6532129f8ea9f050a8caff0cc09c61f5656511f1ae75800b92730c5b78a"
+    },
+    "verification/browser-python.json": {
+      "bytes": 8508,
+      "sha256": "e2413ef9cc0faf53ad27c29797d10c364d5ba4a59b673f23d92fc88ddade0294"
     },
     "verification/browser-qa-v0.2.1.json": {
       "bytes": 5454,
@@ -449,12 +469,12 @@
       "sha256": "ee89a461a3039729ec4296fde8f70b30bdb7c7fe89fcf026768e386e9b3f8d4c"
     },
     "verification/release-measurements.json": {
-      "bytes": 5448,
-      "sha256": "c412c23ae9f58fda7f7a074e3e25002b15105e3312d463fcfe6c8d824323c9b5"
+      "bytes": 15566,
+      "sha256": "0f41ef7a41e40f44d8678d5df42fca2eede813cef5440a5a898f2412424fdf45"
     },
     "verification/release-reproduction.json": {
-      "bytes": 9729,
-      "sha256": "5c1f53178152f5b20926b913a82b70688aa8ba6a89f55891b2c8f010c5eec4e0"
+      "bytes": 9839,
+      "sha256": "0ff46be6f7bdb46dc1a9d5d3012ebfd8d47432095325f93bb4f39a4adb3e9b49"
     },
     "verification/reserved-expected-before-first-evaluation.json": {
       "bytes": 6408,
@@ -493,16 +513,24 @@
       "sha256": "668240f4eaba539b700dc9ddea1514a2954ff460896e2918cc99caaecf90d6aa"
     },
     "web/app.js": {
-      "bytes": 16506,
-      "sha256": "bad1aa3a8f5eb79ce8be4dbd6b9645ff02206a4163df11fba9d5960009652d03"
+      "bytes": 17966,
+      "sha256": "64411f47795523bc5e79c1677eada73721079e9e2e833646dc749d6d62b65f1c"
+    },
+    "web/browser-worker.js": {
+      "bytes": 3848,
+      "sha256": "0ca40895dd6eb23966bd58e64431580054991bd8b986ef6e8f26026722c021ce"
+    },
+    "web/catalog.json": {
+      "bytes": 17124,
+      "sha256": "6239ee54c38ef37d99011e11ad4718ac715718ac283d5ad6fca70e08a5fcf117"
     },
     "web/icon.svg": {
       "bytes": 319,
       "sha256": "3d5142460056d2273de8284f38ae5a9513fba0326b9eeaef81f92f1f70f5edc6"
     },
     "web/index.html": {
-      "bytes": 7445,
-      "sha256": "1190e2ade244fe4a0614d91f1fa38c76ec4ff5b5cea17a8196fe289e3a6a2d59"
+      "bytes": 7776,
+      "sha256": "9611bd0524a317710520122315997b85e4ca133a64133c238a9d0791ab0cf87b"
     },
     "web/style.css": {
       "bytes": 21251,
@@ -510,7 +538,7 @@
     },
     "workbench.py": {
       "bytes": 11618,
-      "sha256": "d1298140b28bf53432ee6947c7f32427db1c7a9997d08c60d62d0fc9456f5c21"
+      "sha256": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7"
     }
   }
 }

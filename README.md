@@ -4,7 +4,19 @@
 
 An agent can return the correct answer and still pay twice for the same task. A successful payment can also buy an incorrect answer. Crash Lab checks both questions independently, using the actual native receipt graph and a separately declared task reference.
 
-![The actual local workbench](docs/workbench-desktop.png)
+![The actual Python-in-browser workbench](docs/workbench-browser.png)
+
+## Try it without installing anything · v0.4.0
+
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.4.0)
+
+The browser edition runs the **same unchanged Python core**, not precomputed verdicts. Select Double payment: A spent 0.2 against its 0.1 authority while useful work passed. Then select Recover without repaying and Paid, wrong answer to distinguish money safety from useful completion. Export a bundle and import it again to inspect the exact inputs.
+
+First use downloads pinned Pyodide 0.29.5 (Python 3.13.2) from jsDelivr into a Web Worker. Our code sends no assessment inputs to a server and needs no wallet, account or model key. This optional path adds a CDN/runtime trust dependency; the desktop route below remains fully local with **zero third-party Python packages**. Browser checks matched all 19 bundles and eight curated reports against desktop. [Observed checks](verification/browser-python.json) are regression evidence, not a security audit or an unseen benchmark.
+
+The optional adapter adds one code file: **19 → 20 files**, **179,065 → 185,335 bytes** (+6,270 bytes); the 56,644-byte pure assessor and native runner are unchanged. This is an explicit, small scope addition, not another claim of unchanged code size.
+
+For developers: [capture-to-CI integration](docs/INTEGRATION.md). For reviewers: [five relevant competitors, fixes and remaining gaps](docs/COMPETITIVE_REVIEW.md). We do not claim superiority from test counts: live-agent evaluation, external adoption and authenticated public-network evidence remain gaps.
 
 ## Reproduce the judge checks
 
