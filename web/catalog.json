@@ -1,0 +1,461 @@
+{
+  "format": "agent-crash-lab/browser-v1",
+  "scenarios": [
+    {
+      "id": "double-payment",
+      "baseline": "native-naive",
+      "title": "Duplicate payment after restart",
+      "short": "Double payment",
+      "group": "Fresh native crash",
+      "kind": "recorded",
+      "description": "A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.",
+      "question": "Did A spend twice while both tasks succeeded?"
+    },
+    {
+      "id": "durable-recovery",
+      "baseline": "native-durable",
+      "title": "Recovering a settled payment",
+      "short": "Recover without repaying",
+      "group": "Fresh native control",
+      "kind": "recorded",
+      "description": "After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.",
+      "question": "Can recovery finish without a second A payment?"
+    },
+    {
+      "id": "paid-wrong-answer",
+      "baseline": "merchant-utility-0",
+      "title": "Paid output that failed its task",
+      "short": "Paid, wrong answer",
+      "group": "Useful completion",
+      "kind": "recorded",
+      "description": "Valid, corrupted, denied and free deliveries share an independent task reference. HTTP 200 alone is insufficient.",
+      "question": "Did the recorded output satisfy its task?"
+    },
+    {
+      "id": "legitimate-installments",
+      "baseline": "split-settlement",
+      "title": "An allowed split payment",
+      "short": "Allowed installments",
+      "group": "Negative control",
+      "kind": "recorded",
+      "description": "The declared budget permits split payments. Distinct hashes do not alone prove duplicate intent.",
+      "question": "Are these installments within the declared budget?"
+    },
+    {
+      "id": "failed-recovery",
+      "baseline": "failed-refund",
+      "title": "Refunds that did not settle",
+      "short": "Failed recovery",
+      "group": "Recovery",
+      "kind": "recorded",
+      "description": "A failed payment creates a recovery obligation. Only committed recovery to its declared destination counts.",
+      "question": "Was the failed intent actually refunded?"
+    },
+    {
+      "id": "unrelated-credit",
+      "baseline": "balance-attribution",
+      "title": "An unrelated credit",
+      "short": "Unrelated credit",
+      "group": "Causal attribution",
+      "kind": "recorded",
+      "description": "An unrelated same-amount credit cannot settle an owner intent. Follow native transaction and receipt identity.",
+      "question": "Does this credit belong to the failed intent?"
+    },
+    {
+      "id": "missing-evidence",
+      "baseline": "intent-duplicate-0",
+      "title": "An incomplete receipt record",
+      "short": "Missing evidence",
+      "group": "Uncertainty",
+      "kind": "synthetic",
+      "description": "Synthetic mutation: a B receipt body is removed. A remains breached; B becomes unknown.",
+      "question": "Does missing context cause a false clean result?"
+    },
+    {
+      "id": "terminal-output",
+      "baseline": "split-settlement",
+      "title": "Successful final delivery",
+      "short": "Eventual completion",
+      "group": "Useful completion",
+      "kind": "recorded",
+      "description": "An allowed intermediate 402 is separate from the final delivery and recorded answer.",
+      "question": "Was the final required output correct?"
+    }
+  ],
+  "baselines": [
+    {
+      "name": "agent-leash-artifact",
+      "task": "tasks/agent-leash-artifact.json",
+      "sources": {
+        "recording": "evidence/agent-leash-artifact-observation.json",
+        "basis": "evidence/agent-leash-artifact-precommit.json"
+      }
+    },
+    {
+      "name": "balance-attribution",
+      "task": "tasks/balance-attribution.json",
+      "sources": {
+        "recording": "evidence/balance-attribution-observation.json",
+        "basis": "evidence/balance-attribution-precommit.json"
+      }
+    },
+    {
+      "name": "deleted-signer-refund",
+      "task": "tasks/deleted-signer-refund.json",
+      "sources": {
+        "recording": "evidence/deleted-signer-refund-observation.json",
+        "basis": "evidence/deleted-signer-refund-precommit.json"
+      }
+    },
+    {
+      "name": "function-deposit",
+      "task": "tasks/function-deposit.json",
+      "sources": {
+        "recording": "evidence/function-deposit-observation.json",
+        "basis": "evidence/function-deposit-precommit.json"
+      }
+    },
+    {
+      "name": "gas-key-refund",
+      "task": "tasks/gas-key-refund.json",
+      "sources": {
+        "recording": "evidence/gas-key-refund-observation.json",
+        "basis": "evidence/gas-key-refund-precommit.json"
+      }
+    },
+    {
+      "name": "intent-duplicate-0",
+      "task": "tasks/intent-duplicate-0.json",
+      "sources": {
+        "recording": "evidence/intent-duplicate-observation.json",
+        "basis": "evidence/intent-duplicate-precommit.json"
+      }
+    },
+    {
+      "name": "intent-duplicate-1",
+      "task": "tasks/intent-duplicate-1.json",
+      "sources": {
+        "recording": "evidence/intent-duplicate-observation.json",
+        "basis": "evidence/intent-duplicate-precommit.json"
+      }
+    },
+    {
+      "name": "merchant-utility-0",
+      "task": "tasks/merchant-utility-0.json",
+      "sources": {
+        "recording": "evidence/merchant-utility-observation.json",
+        "basis": "evidence/merchant-utility-precommit.json"
+      }
+    },
+    {
+      "name": "merchant-utility-1",
+      "task": "tasks/merchant-utility-1.json",
+      "sources": {
+        "recording": "evidence/merchant-utility-observation.json",
+        "basis": "evidence/merchant-utility-precommit.json"
+      }
+    },
+    {
+      "name": "monetary-yield",
+      "task": "tasks/monetary-yield.json",
+      "sources": {
+        "recording": "evidence/monetary-yield-observation.json",
+        "basis": "evidence/monetary-yield-precommit.json"
+      }
+    },
+    {
+      "name": "none-ack",
+      "task": "tasks/none-ack.json",
+      "sources": {
+        "recording": "evidence/none-ack-observation.json",
+        "basis": "evidence/none-ack-precommit.json"
+      }
+    },
+    {
+      "name": "self-function-deposit",
+      "task": "tasks/self-function-deposit.json",
+      "sources": {
+        "recording": "evidence/self-function-deposit-observation.json",
+        "basis": "evidence/self-function-deposit-precommit.json"
+      }
+    },
+    {
+      "name": "split-settlement",
+      "task": "tasks/split-settlement.json",
+      "sources": {
+        "recording": "evidence/split-settlement-observation.json",
+        "basis": "evidence/split-settlement-precommit.json"
+      }
+    },
+    {
+      "name": "success-receipt-id",
+      "task": "tasks/success-receipt-id.json",
+      "sources": {
+        "recording": "evidence/success-receipt-id-observation.json",
+        "basis": "evidence/success-receipt-id-precommit.json"
+      }
+    },
+    {
+      "name": "zero-principal",
+      "task": "tasks/zero-principal.json",
+      "sources": {
+        "recording": "evidence/zero-principal-observation.json",
+        "basis": "evidence/zero-principal-precommit.json"
+      }
+    },
+    {
+      "name": "failed-refund",
+      "task": "tasks/failed-refund.json",
+      "sources": {
+        "recording": "evidence/failed-refund-observation.json",
+        "basis": "evidence/failed-refund-precommit.json"
+      }
+    },
+    {
+      "name": "refund-override",
+      "task": "tasks/refund-override.json",
+      "sources": {
+        "recording": "evidence/refund-override-observation.json",
+        "basis": "evidence/refund-override-precommit.json"
+      }
+    },
+    {
+      "name": "native-naive",
+      "task": "tasks/native-naive.json",
+      "sources": {
+        "recording": "evidence/native-observation.json",
+        "basis": "evidence/native-precommit.json"
+      }
+    },
+    {
+      "name": "native-durable",
+      "task": "tasks/native-durable.json",
+      "sources": {
+        "recording": "evidence/native-observation.json",
+        "basis": "evidence/native-precommit.json"
+      }
+    }
+  ],
+  "files": {
+    "BASELINES.json": {
+      "bytes": 4495,
+      "sha256": "2fb3c02b1fd5b49f0094c7eb5944f8b6be2b75a750890d1a71e41aa9abd16122"
+    },
+    "agent_crash_lab.py": {
+      "bytes": 56644,
+      "sha256": "f1f0f16fd3d630b92034c00af370850691534b8aba726a42d77ae5379d3131e2"
+    },
+    "evidence/agent-leash-artifact-observation.json": {
+      "bytes": 336480,
+      "sha256": "710b2d4e44bb0c67bab8778154d8a089b7668fd5195eadba76cf7f4d84827c69"
+    },
+    "evidence/agent-leash-artifact-precommit.json": {
+      "bytes": 2816,
+      "sha256": "f333add999c1d6b3d5f69823226c4935f4074e9e6ff43b7f00c20e35a417c32b"
+    },
+    "evidence/balance-attribution-observation.json": {
+      "bytes": 50060,
+      "sha256": "d55ed8a5666bebfe395dec26eb30d388ceb6a47fbc00dd4de96b3d1c9e83a789"
+    },
+    "evidence/balance-attribution-precommit.json": {
+      "bytes": 2750,
+      "sha256": "bc3870aa8a13dd52248915cd30a29af7ed5eab4a34c7c04be445d728acea2c85"
+    },
+    "evidence/deleted-signer-refund-observation.json": {
+      "bytes": 26859,
+      "sha256": "db6669e98f42630ff82d85eb4e26e58615c8619e423085db28e444a76d30a186"
+    },
+    "evidence/deleted-signer-refund-precommit.json": {
+      "bytes": 2667,
+      "sha256": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca"
+    },
+    "evidence/failed-refund-observation.json": {
+      "bytes": 99188,
+      "sha256": "271d460974a48bf71b361132cc52552f34319c4916aa885c5245963fbafff731"
+    },
+    "evidence/failed-refund-precommit.json": {
+      "bytes": 1869,
+      "sha256": "4f2d035ac803edd3ed2f87be3b270dbe0025b596f230fe0288faffee7853d31b"
+    },
+    "evidence/function-deposit-observation.json": {
+      "bytes": 142983,
+      "sha256": "11f4a493beb8526759eb1d653fbcfeaaf5b10b4ca2f0346f6bcce2be1237e8ce"
+    },
+    "evidence/function-deposit-precommit.json": {
+      "bytes": 2181,
+      "sha256": "877cff66472502942b9799330871488168edb62cd0965fe11d01a5f625ce0e00"
+    },
+    "evidence/gas-key-refund-observation.json": {
+      "bytes": 65423,
+      "sha256": "a69119f3581550443e57b3ffd218c25ae3d15a4fe4600341efa3140b47c81801"
+    },
+    "evidence/gas-key-refund-precommit.json": {
+      "bytes": 2315,
+      "sha256": "d6dfdac5e70135147de9a4262be89f7e13aa90ba05fe3e7984b3a143b8421e78"
+    },
+    "evidence/intent-duplicate-observation.json": {
+      "bytes": 408616,
+      "sha256": "9ba4b2d8d5f1425782cc79bd2fa2a7b8c90f7db46fbaf1684ed395167dc18509"
+    },
+    "evidence/intent-duplicate-precommit.json": {
+      "bytes": 2633,
+      "sha256": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7"
+    },
+    "evidence/merchant-utility-observation.json": {
+      "bytes": 276543,
+      "sha256": "a59429b4ebcbd684c0d39b7b669e78a0ad98376434952f1a60cf03d3c39328c0"
+    },
+    "evidence/merchant-utility-precommit.json": {
+      "bytes": 3216,
+      "sha256": "5180970d2dc565574edb51b85f21b6886e0b3748f07ddc3bb91346c131625313"
+    },
+    "evidence/monetary-yield-observation.json": {
+      "bytes": 68559,
+      "sha256": "0f842b61503df7f9bb57254adc9878996b6eb361c58f6ca92c6f75eab5da0c80"
+    },
+    "evidence/monetary-yield-precommit.json": {
+      "bytes": 2263,
+      "sha256": "46b4565c77555b9052eed066f8f4b2f244d7339790e1ab6d0d8ec982310b7cd2"
+    },
+    "evidence/native-observation.json": {
+      "bytes": 145171,
+      "sha256": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f"
+    },
+    "evidence/native-precommit.json": {
+      "bytes": 1598,
+      "sha256": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad"
+    },
+    "evidence/none-ack-observation.json": {
+      "bytes": 22119,
+      "sha256": "7fd27783ed26a5a7d1ac056e62d62971ed146efea2a39db3e307624b123da02b"
+    },
+    "evidence/none-ack-precommit.json": {
+      "bytes": 1955,
+      "sha256": "9072fe3e0b505c008e65a89612b32289402e2b38c496ce21cd2c0681001cd165"
+    },
+    "evidence/refund-override-observation.json": {
+      "bytes": 80862,
+      "sha256": "6c8cc8c2c7779f8668b124e4bc45e82b7819d5fbed9933506c87cc0df6b8cb3c"
+    },
+    "evidence/refund-override-precommit.json": {
+      "bytes": 1136,
+      "sha256": "60ca504bebf8ac64b7f7b08f248b8fc8b2d6f2c7d3e3a6070f8413a01cf6c10a"
+    },
+    "evidence/self-function-deposit-observation.json": {
+      "bytes": 47823,
+      "sha256": "76bbd2584ad27624324f73af43d657b4492ad1b6573b704063d38beff309679c"
+    },
+    "evidence/self-function-deposit-precommit.json": {
+      "bytes": 2179,
+      "sha256": "9f41daf413db91df75443df7d01ffa07c6583b551bccc2631ab27a1e77fbdf56"
+    },
+    "evidence/split-settlement-observation.json": {
+      "bytes": 57781,
+      "sha256": "c82d62aeb8b47b336a1170b6b1a39bca4ec0b53c7e555e2fb49f83c986192b87"
+    },
+    "evidence/split-settlement-precommit.json": {
+      "bytes": 2984,
+      "sha256": "37f57da33c9cad0a78be4e294fb227c0960af6ce1121254d1f5f4854858bccf1"
+    },
+    "evidence/success-receipt-id-observation.json": {
+      "bytes": 110825,
+      "sha256": "12217adb73f26bc9da1474b834fc2c4fe9fc1ed3d3455b7ab98a17c2fb99ba1f"
+    },
+    "evidence/success-receipt-id-precommit.json": {
+      "bytes": 701,
+      "sha256": "e1f7a19b25065839924069438abe0a95d5ae5ff562d484aff85c55eaa62d397e"
+    },
+    "evidence/zero-principal-observation.json": {
+      "bytes": 45032,
+      "sha256": "c5b5ecf91ec8706aba8d88e028dd29751b54b45a3c4b025db0183edb798e2ca1"
+    },
+    "evidence/zero-principal-precommit.json": {
+      "bytes": 1663,
+      "sha256": "f37377dd65113c442f5312355d94068c388d49d6af6fe9a14db5c28876eed710"
+    },
+    "tasks/agent-leash-artifact.json": {
+      "bytes": 7140,
+      "sha256": "8259b543871df5663366d72f9dd097c53cd2eac0099d8ce46e9970a51816eceb"
+    },
+    "tasks/balance-attribution.json": {
+      "bytes": 2797,
+      "sha256": "2b86a2c0151826a61cab75bd38d35f70069514bf8d7b1ec6aeacad5fbfa47e42"
+    },
+    "tasks/deleted-signer-refund.json": {
+      "bytes": 2332,
+      "sha256": "e199dcfe32018ed8441eb2b662c74cecac9ce8c8064a9090c55a6f76e2c195cd"
+    },
+    "tasks/failed-refund.json": {
+      "bytes": 4111,
+      "sha256": "d78e09a85541cb667ad543718ec580902b7b19ff81813b7d3470347ef5f090f6"
+    },
+    "tasks/function-deposit.json": {
+      "bytes": 5587,
+      "sha256": "55002f48c25ca87e61bb88e81ee2632cc113afa2ba77380e3684a5bf04ae784a"
+    },
+    "tasks/gas-key-refund.json": {
+      "bytes": 3842,
+      "sha256": "9ce2ae69563821f0a99337c4bebd4f77d812301c5e5c1f20c4bf3c6c0b63410d"
+    },
+    "tasks/intent-duplicate-0.json": {
+      "bytes": 7938,
+      "sha256": "963273bc4b3127767b8f26be68222afab0dbdf56010915de0f78af98788a1b33"
+    },
+    "tasks/intent-duplicate-1.json": {
+      "bytes": 7956,
+      "sha256": "43232af3115036702d06c67aa67329f72fa3b7c5cc225a95b2f47e2a1506a35e"
+    },
+    "tasks/merchant-utility-0.json": {
+      "bytes": 10519,
+      "sha256": "f7a3fcec49ed66d87c070507b709a652aaa4b9dd3f8a3f3572e88476c5f2f00f"
+    },
+    "tasks/merchant-utility-1.json": {
+      "bytes": 10548,
+      "sha256": "f43d94afbe3dff50fb166c88d9300616d071a39fbbcd3d746022e0cae74cafb1"
+    },
+    "tasks/monetary-yield.json": {
+      "bytes": 2844,
+      "sha256": "22f204b705f119b71aa169833168fa22312a1d27dc722f7b296ddca9f967fa85"
+    },
+    "tasks/native-durable.json": {
+      "bytes": 4552,
+      "sha256": "b5dc24bda7f66e5c3c23e5a0ebb5ed6e3635f2ca5afa56f497941268e7520e9c"
+    },
+    "tasks/native-naive.json": {
+      "bytes": 4956,
+      "sha256": "867aa71f83c0310e67b85358db0963dfda87344c5a153315f63e21fea48c3ba5"
+    },
+    "tasks/none-ack.json": {
+      "bytes": 3330,
+      "sha256": "b963da76d4b14e798b7d41b8cdf1267ee6a59a94cc1a2dde20676543f27cfa5f"
+    },
+    "tasks/refund-override.json": {
+      "bytes": 4245,
+      "sha256": "bf6cd1caf53af228c949681bb394c4dc4acf1c78fec96ac3c0e5c9a947c12d5c"
+    },
+    "tasks/self-function-deposit.json": {
+      "bytes": 3239,
+      "sha256": "60bdb07173e328d0c1940aa02b719d7438c3d1b9dcad06f9ad625dbdad7dcf01"
+    },
+    "tasks/split-settlement.json": {
+      "bytes": 5658,
+      "sha256": "87c1f90af62764d238e83c73bb77123bd121f1bf600dbab9927388d3536bdf75"
+    },
+    "tasks/success-receipt-id.json": {
+      "bytes": 3538,
+      "sha256": "d2430733716505819ad2af91a643f8e7e4a83f9e71c8417b725d6bf108935bfc"
+    },
+    "tasks/zero-principal.json": {
+      "bytes": 3222,
+      "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
+    },
+    "verification/native-crash-comparison.json": {
+      "bytes": 1612,
+      "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
+    },
+    "workbench.py": {
+      "bytes": 11618,
+      "sha256": "cb87a1febb22d892ca2f42a1d66207e08cc8332dd80c922a1efa0080c3ec9be7"
+    }
+  }
+}
