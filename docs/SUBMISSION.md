@@ -6,10 +6,11 @@ Project: **Agent Crash Lab**. Primary track: **AI Security & Defense** (`securit
 
 - Repository: https://github.com/aierosite/agent-crash-lab
 - Submitted public X demo: https://x.com/Amiinjalili/status/2117754340073230518
+- Browser workbench: https://aierosite.github.io/agent-crash-lab/web/?browser=1
 - Current in-repository demo: [captioned walkthrough](agent-crash-lab-demo.mp4)
 - Machine-readable acceptance: `python -I -S tools/verify_release.py --judge`
 
-The submitted X video shows v0.2.0. Current source and screenshots show v0.3.0 with the same task, assessor and native recordings. The current repository walkthrough is an accurately labelled update; it does not imply that the existing X attachment changed.
+The submitted X video shows v0.2.0. The current source is v0.4.0; the retained v0.3.0 video shows the same interface, task, assessor and native recordings. The browser edition adds actual Python execution without local installation. The current repository walkthrough is an accurately labelled update; it does not imply that the existing X attachment changed.
 
 ## What the entry demonstrates
 
@@ -20,7 +21,7 @@ The main experiment uses scripted workers on two owned local NEAR sandbox chains
 ## What reviewers can reproduce
 
 1. Run the judge command: release consistency, core, workbench and reserved checks.
-2. Launch `python -I -S launch.py` and follow the README's four-case table.
+2. Open the browser edition or launch `python -I -S launch.py` and follow the README's four-case table.
 3. Export/import the exact bundle; changing a source without its owner hash produces input rejection.
 4. Inspect the receipt source pointers and the recorded crash comparison.
 5. Read [trust boundaries](ARCHITECTURE.md), [prior art](PRIOR_ART.json) and the limitations in README.
