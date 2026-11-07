@@ -1,0 +1,1 @@
+{"constraints":{"A-count":{"exact_total":"1","status":"within"},"A-merchant":{"exact_total":"8","status":"breached"},"B-count":{"exact_total":"3","status":"within"},"B-merchant":{"exact_total":"4714391578802473965","status":"within"}},"financial_scope_complete":true,"gate":1,"utility":{"A-output":"passed","B-output":"passed"}}

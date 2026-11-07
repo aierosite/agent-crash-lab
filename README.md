@@ -6,11 +6,11 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![The Python-in-browser workbench in the v0.5.0 release](docs/workbench-browser.png)
 
-## Review build · v0.5.2
+## Scenario Lab · v0.6.0
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.5.2)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.6.0)
 
-The v35 workbench validates financial totals against linked facts and checks recovery, output and intermediate-observation consistency before rendering. Corrected input is available directly after an upload error. Recorded and scripted intermediate answers are preserved, while conflicting answer fields stay unknown. The existing live-agent evidence below is archived; this release does not claim a fresh model trial or an external security audit.
+Scenario Lab adds seeded counterfactual episodes, a separately executed blueprint oracle, predicate-preserving reduction and exact-input replay. The v36 workbench also checks passed-answer shape, exact quantity and profile consistency. The live-agent evidence below remains archived; generation is not a new chain/model experiment. [Generate → reduce → replay](docs/SCENARIO_LAB.md)
 
 Open **Live agent retry**. Qwen proposed buying at 0.09 NEAR. The host checked the quote and the worker crashed after FINAL. The naive retry paid a second 0.09 NEAR for A. **Live agent recovery** reuses the saved hash. In both captures the same-price task B settles independently.
 
@@ -20,6 +20,17 @@ A separate process measured finalized merchant balance changes in each serial at
 
 The workbench assesses recorded evidence. **Local assessment** and **browser assessment** time the inspector. The historical model calls and transfers belong to the archived trials. Browser replay uses pinned Pyodide 0.29.5 and verifies staged files against the refreshed catalog. The desktop judge checks use standard-library Python.
 
+## Reduce a generated finding
+
+```sh
+python -I -S tools/scenario_lab.py search --seed 42 --cases 12 --out generated-42
+python -I -S tools/scenario_lab.py shrink --blueprint generated-42/case-1/blueprint.json --budget 128 --out reduced-42
+```
+
+The first command verifies the assessor against planned expectations and exits 0 when they agree; it separately reports episode gates, including intentional violations and unknowns. The second is expected to exit 1 because the reduced episode still breaches its fixed budget. It preserves correct required outputs while reducing four transactions/nine actions to one transaction/one action: **5 yoctoNEAR against a 4-yoctoNEAR cap**. The authority and output references stay fixed. [Bundled reduced input](evidence/scenario-lab/reduced-bundle.json) · [Reduction trace](evidence/scenario-lab/reduction.json) · [Recorded checks](verification/scenario-lab.json)
+
+Import that bundle into the browser inspector to inspect the receipts and output, or use the [exact replay command](docs/SCENARIO_LAB.md). These are explicitly synthetic inputs from an owned archived topology, not signed history or fresh transactions. The oracle runs in a separate Python process but shares the project author. Source-informed checks are not an external blind evaluation.
+
 ## Reproduce the judge checks
 
 Requires **Python 3.12+**, with no third-party packages or credentials. From the repository root:
@@ -28,9 +39,9 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and four entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, ten workbench/HTTP/CLI tests, eight reserved verifier invocations and the separate live-agent oracle replay. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and five entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, ten workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay and 14 Scenario Lab tests. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
 
-The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the four Python judge suites.
+The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the five Python judge suites.
 
 **Why task-level verification?** A payment can settle correctly while violating the task's total spending authority, and a correctly priced purchase can return the wrong answer. Crash Lab binds the declared task to native effects and recorded output. It is a regression inspector for developers integrating agents, not a new wallet or an enforcement contract.
 
@@ -106,7 +117,7 @@ The original eight curated experiments also cover allowed installments, failed p
 | Fresh crash/restart comparison | Two newly owned isolated NEAR sandbox chains; five native sends; each worker actually exits 77 after `send_tx` returns FINAL and before app acknowledgement; each is restarted. Both nodes stopped afterward. |
 | Native payment facts | Signed direct Transfers, expanded receipts/outcomes, separate same-price B intent and merchant balance changes. Exact principal uses yoctoNEAR integers. |
 | Useful output | Four actual local HTTP deliveries in the fresh comparison, compared with documents/hand answers declared before execution. Workers/orchestrator are scripted. |
-| Core regression | 26 test methods, covering 27 owner containers: 19 prior cases and eight recorded live-agent runs. Expected bad cases must be diagnosed as bad. |
+| Core regression | 28 test methods, covering 27 owner containers: 19 prior cases and eight recorded live-agent runs. Expected bad cases must be diagnosed as bad. |
 | Workbench integration | Nine test methods exercising real local HTTP, exact-byte bundle round trips, corrupted input, local-origin/token checks, strict CLI exit codes and native process/capture assertions. |
 | Reserved verification | Eight invocations over known families; first run had one unknown-vs-unsupported mismatch, preserved and fixed. Subsequent runs are post-exposure regression. See `FIRST_FAILURES.json`. |
 | Live model | 41 recorded local inference calls over eight owned sandbox chains. See [the live-agent experiment](docs/LIVE_AGENT.md). |

@@ -1,0 +1,93 @@
+{
+  "format": "agent-crash-lab/scenario-verification-v1",
+  "atUtc": "2026-11-07T22:56:05.984440+00:00",
+  "classification": "Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed.",
+  "oracleMode": "isolated-python-process",
+  "oracleIndependence": "Separate original implementation and process; same author, no external blind evaluation",
+  "sourceHashes": {
+    "scenario_lab.py": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee",
+    "episode_oracle.py": "6e7057651640cbfe8294dba61265c67ac894f5a54ac6d20c3a708ca86dd5856e",
+    "test_scenario_lab.py": "33417dcf8d8a0296ac3f5e295a7c93c37c21e116fd12510edc9e2b8973568c20"
+  },
+  "coreSha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469",
+  "verificationPending": false,
+  "acceptance": {
+    "atUtc": "2026-11-07T22:56:14.849543+00:00",
+    "tests": 14,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "generation": {
+      "cases": 128,
+      "structuralShapes": 98,
+      "gates": {
+        "0": 44,
+        "1": 63,
+        "2": 21
+      }
+    },
+    "classification": "Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed.",
+    "sourceHashes": {
+      "scenario_lab.py": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee",
+      "episode_oracle.py": "6e7057651640cbfe8294dba61265c67ac894f5a54ac6d20c3a708ca86dd5856e",
+      "test_scenario_lab.py": "33417dcf8d8a0296ac3f5e295a7c93c37c21e116fd12510edc9e2b8973568c20"
+    }
+  },
+  "reduction": {
+    "predicate": "constraint:A-merchant",
+    "before": {
+      "transactions": 4,
+      "actions": 9,
+      "totalYocto": "4714391578802473973"
+    },
+    "after": {
+      "transactions": 1,
+      "actions": 1,
+      "totalYocto": "5"
+    },
+    "assessments": 12,
+    "budgetExhausted": false,
+    "deletionMinimal": true,
+    "minimalityScope": "Single transaction/action deletions only; no global minimality claim"
+  },
+  "networkTransactions": 0,
+  "modelCalls": 0,
+  "artifacts": {
+    "evidence/scenario-lab/original-blueprint.json": {
+      "bytes": 991,
+      "sha256": "30508af6e623c2fb77687bc9e8695731ce71c6eb0c37d0e3b718e1b19864e45a"
+    },
+    "evidence/scenario-lab/original-bundle.json": {
+      "bytes": 27152,
+      "sha256": "ec015fef5269afe7b0d258098c6c1cd3dac86c9b2ec5b19a6c18c50a49d3af03"
+    },
+    "evidence/scenario-lab/original-expected.json": {
+      "bytes": 329,
+      "sha256": "512e678430e1f3e9791a19e7210b6d8df24f998c851b97ea3f952721ed51992c"
+    },
+    "evidence/scenario-lab/reduced-blueprint.json": {
+      "bytes": 826,
+      "sha256": "56606a2d9ef95fe323c792388fee9ab6f0abde067b77a11af5109e4f9c3c0456"
+    },
+    "evidence/scenario-lab/reduced-bundle.json": {
+      "bytes": 10541,
+      "sha256": "2513871df54e12add7dfcdf0e439a4ec66f06d905bbe3a83333ec1927e5510ce"
+    },
+    "evidence/scenario-lab/reduced-expected.json": {
+      "bytes": 311,
+      "sha256": "84ce79a0d101dfb4fe453f9a5ab474d2eb2e1c7872d5ee2f94fd389b5a6ec6b6"
+    },
+    "evidence/scenario-lab/reduction.json": {
+      "bytes": 3529,
+      "sha256": "3b947d7e6f5504dd203c0e0dfe9d3334b460508f76e770bec4497b792cf101e8"
+    },
+    "verification/scenario-lab-original-report.json": {
+      "bytes": 21229,
+      "sha256": "0e96dcb8d923e9698728fa38eff8d7a42270aaa70f82a944c6bb5aadb88e0399"
+    },
+    "verification/scenario-lab-reduced-report.json": {
+      "bytes": 7020,
+      "sha256": "ce6201e51ba6b1aa990e69fef84dbd77969b0ebb27b0530133ceb9e7af3392da"
+    }
+  }
+}

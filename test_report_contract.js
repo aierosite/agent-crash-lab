@@ -29,6 +29,22 @@ for name,change in [('invalid-constraint',lambda t:t['constraints'].append(None)
                     ('bad-output-reference',lambda t:t['utility']['required'][0].update(observation={'source':'missing','pointer':'/0'}))]:
     owner=json.loads(task);change(owner)
     rows.append({'name':name,'response':w['evaluate'](w['compact'](owner,True),sources)})
+# Genuine passes at the exact quantity boundary, including decimal wire forms.
+import hashlib
+for index,quantity in enumerate([0,17.0,-0.0,2**53-1,2**53,2**64-1]):
+    owner=json.loads(task);source={key:json.loads(value) for key,value in sources.items()}
+    item=owner['utility']['required'][0];doc=item['expected_document']
+    doc['rows']=[{'sku':'quantity-control','available':0,'forecast':quantity}]
+    answer={'sku':'quantity-control','units':quantity};item['expected_answer']=answer
+    ref=item['observation'];observation=source[ref['source']]
+    for part in ref['pointer'].split('/')[1:]:observation=observation[int(part)] if isinstance(observation,list) else observation[part]
+    observation.pop('recordedAnswer',None);observation.pop('scriptedAnswer',None)
+    observation.update(responseUtf8=json.dumps(doc),recordedAnswer=answer)
+    updated={key:w['compact'](value,True) for key,value in source.items()}
+    owner['sources']={key:hashlib.sha256(value).hexdigest() for key,value in updated.items()}
+    response=w['evaluate'](w['compact'](owner,True),updated)
+    assert response['report']['utility']['required'][0]['status']=='passed'
+    rows.append({'name':'exact-quantity-'+str(index),'response':response})
 for status in ['failed','rejected']:
     response=w['evaluate'](task,sources)
     response['report']={'format':'agent-crash-lab/report-v1','invocation':{'status':status,'code':'test','message':'No financial conclusion'}}
@@ -104,6 +120,18 @@ rejects('unknown diagnostic link',d=>{d.report.utility.required[0].diagnostic_id
 for(const key of ['observed_answer_present','observed_answer','observed_status_present','observed_status','reference_check','response_sha256','content_check','answer_check','context_check','observation_ref'])
  rejects('unsupported passed output '+key,d=>{delete d.report.utility.required[0][key];});
 rejects('wrong passed answer',d=>{d.report.utility.required[0].answer_check=false;});
+rejects('wrong passed profile',d=>{d.report.utility.required[0].profile='future';});
+rejects('contradictory passed HTTP check',d=>{d.report.utility.required[0].status_check=false;});
+for(const answer of [null,true,7,'answer',[],{}, {sku:'C03'}, {units:17}, {sku:'',units:17},
+ {sku:'C03',units:true}, {sku:'C03',units:-1}, {sku:'C03',units:1.5},
+ {sku:'C03',units:Number.MAX_SAFE_INTEGER+1}, {sku:'C03',units:'17'}, {sku:'C03',units:17,extra:true}])
+ rejects('invalid passed answer '+JSON.stringify(answer),d=>{d.report.utility.required[0].observed_answer=answer;});
+const exact=(sign,digits,exponent)=>({exact_json_number:{sign,digits,exponent}});
+for(const units of [exact(true,'17',0),exact(0,'',0),exact(0,'17','0'),exact(0,'17',0.5),
+ exact(0,'17',-1),exact(1,'17',0),exact(0,'18446744073709551616',0),exact(0,'1',1025),
+ {exact_json_number:{sign:0,digits:'17',exponent:0,extra:0}},
+ {exact_json_number:{sign:0,digits:'17',exponent:0},extra:0}])
+ rejects('invalid exact quantity '+JSON.stringify(units),d=>{d.report.utility.required[0].observed_answer={sku:'C03',units};});
 rejects('duplicate resolved output',d=>{
  d.report.utility.required.push(clone(d.report.utility.required[0]));d.report.inventory.selected_required_utility++;
 });

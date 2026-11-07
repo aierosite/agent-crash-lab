@@ -1,5 +1,7 @@
 # Competitive review · v0.4.0 snapshot
 
+**Historical comparison.** The statements below describe the v0.4.0 review. v0.5.0 subsequently added the bounded live-agent experiment; v0.6.0 adds [Scenario Lab](SCENARIO_LAB.md), an original offline search/reduction/replay workflow for task-level native payment and useful-output checks. Workcell still covers broader contract adapters and fresh testnet execution. The pinned heads of Workcell, HoldUp, Quittance and Tripwire were rechecked on 8 November 2026 (Tehran) and matched the revisions below. No competitor suite was executed.
+
 [The v0.5.0 live-agent experiment and separate reference address the model and evidence gaps documented below.](LIVE_AGENT.md)
 
 The closest overlap is **Workcell**, followed by **HoldUp**, **Quittance**, **Tripwire** and **NEXUS AiOS** for different parts of the problem. This is our evidence-based selection, not an official shortlist or ranking. The directory snapshot contained 128 public projects, 75 tagged Security; tags overlap and the event is still accepting entries.

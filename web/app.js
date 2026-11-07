@@ -635,6 +635,26 @@ function validateInspection(data){
   }else require(c.status==='unsupported'&&!c.complete,'unsupported constraint');
  }
  const checks=['status_check','context_check','content_check','answer_check'];
+ // The core projects exact JSON quantities into decimal descriptors. Check
+ // integrality without rounding, including decimal forms and negative zero.
+ const quantity=value=>{
+  if(typeof value==='number')return Number.isSafeInteger(value)&&value>=0;
+  if(!object(value)||Object.keys(value).length!==1||!own(value,'exact_json_number'))return false;
+  const n=value.exact_json_number;
+  if(!object(n)||Object.keys(n).length!==3||![0,1].includes(n.sign)
+   ||typeof n.digits!=='string'||n.digits.length>128||!/^\d+$/.test(n.digits)
+   ||!Number.isSafeInteger(n.exponent)||Math.abs(n.exponent)>1024)return false;
+  let units=BigInt(n.digits);
+  if(n.sign&&units!==0n)return false;
+  if(n.exponent<0){
+   const divisor=10n**BigInt(-n.exponent);
+   if(units%divisor!==0n)return false;
+   units/=divisor;
+  }else units*=10n**BigInt(n.exponent);
+  return units<2n**64n;
+ };
+ const passedAnswer=answer=>object(answer)&&Object.keys(answer).length===2
+  &&own(answer,'sku')&&text(answer.sku)&&own(answer,'units')&&quantity(answer.units);
  const assessedOutputs=new Set();
  for(const u of r.utility.required){
   require(object(u)&&['passed','failed','unknown','unsupported','invalid_reference'].includes(u.status),'required output');
@@ -651,10 +671,11 @@ function validateInspection(data){
    &&(u.observed_status_present||u.observed_status===null),'recorded HTTP status');
   if(own(u,'reference_check'))require(u.reference_check==='consistent','reference check');
   if(own(u,'response_sha256'))require(sha(u.response_sha256),'response digest');
-  if(u.status==='passed')require(text(u.id)&&text(u.intent)&&text(u.profile)&&sourceRef(u.observation_ref)
+  if(u.status==='passed')require(text(u.id)&&text(u.intent)&&u.profile==='inventory-gap-first-v1'&&sourceRef(u.observation_ref)
    &&u.reference_check==='consistent'&&u.observed_status_present&&u.observed_status===200
    &&u.observed_answer_present&&u.context_check===true&&u.content_check===true&&u.answer_check===true
-   &&sha(u.response_sha256),'passed output evidence');
+   &&!checks.some(key=>u[key]===false)&&!u.diagnostic_ids?.length
+   &&passedAnswer(u.observed_answer)&&sha(u.response_sha256),'passed output evidence');
   else if(u.status==='failed')require(checks.some(key=>u[key]===false)||u.diagnostic_ids?.length>0,'failed output evidence');
   else reasons(u,true);
  }

@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.5.2",
-  "atUtc": "2026-11-07T20:57:31.534700+00:00",
+  "version": "0.6.0",
+  "atUtc": "2026-11-07T22:56:57.370230+00:00",
   "meaning": "Size and SHA256 of each release file except this manifest",
   "files": {
     ".gitattributes": {
@@ -41,8 +41,8 @@
       "sha256": "d711de520245f4b44e42a9da30df0ab5759a1353daed6626eca42c64b00dbdc8"
     },
     "README.md": {
-      "bytes": 20632,
-      "sha256": "f3fc0594993bcae6b012a10a2a6f40bf7d32a6cfd20ae2e19a468eff2a90e3a1"
+      "bytes": 21899,
+      "sha256": "610abc692f5fd416c2ae1aa7c158bfa34cb7e88bb0b5d9fbed54685c83995f7b"
     },
     "SOURCES.json": {
       "bytes": 4682,
@@ -61,12 +61,12 @@
       "sha256": "a9eff44b08d2282a8f5087fbcc146674c4d3d05ba51600d26ace530bfad1dd06"
     },
     "docs/ARCHITECTURE.md": {
-      "bytes": 5294,
-      "sha256": "a5cc76aa05c405ac3915b59239e9404a4b48cd694809e3043758834070e4d6c9"
+      "bytes": 5639,
+      "sha256": "ae17cf4a3f1775db9f52890a5bd5e94ffa3c05f4afbaad40eb5755cddad855fb"
     },
     "docs/COMPETITIVE_REVIEW.md": {
-      "bytes": 7211,
-      "sha256": "54da8bb6ad334fb87577716f54de6b4208497dbd0d2ea3bda3cd6a9f0c296a62"
+      "bytes": 7751,
+      "sha256": "17745d0d3e5a9f48f1c7eb0384208e272a51b81e1a1cefe6dd66f39b7f90f1c5"
     },
     "docs/DATA_PROVENANCE.txt": {
       "bytes": 788,
@@ -95,6 +95,10 @@
     "docs/PRIOR_ART.json": {
       "bytes": 2732,
       "sha256": "89014579ad91cf7711bcf7a8e307e0e3c70d1f4bb88f66837058ee4f64007aa9"
+    },
+    "docs/SCENARIO_LAB.md": {
+      "bytes": 5460,
+      "sha256": "ec97615eaad7455633c6ab3a364298f6fe3230153dea59ddc87810c4c70331ee"
     },
     "docs/SUBMISSION.md": {
       "bytes": 3552,
@@ -143,6 +147,10 @@
     "docs/workbench-recovery.png": {
       "bytes": 55653,
       "sha256": "cd83d3c74956e41a1f704c6c788718bc4d498af952f41a4200af3cd60f1d03e0"
+    },
+    "episode_oracle.py": {
+      "bytes": 5043,
+      "sha256": "6e7057651640cbfe8294dba61265c67ac894f5a54ac6d20c3a708ca86dd5856e"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -296,6 +304,34 @@
       "bytes": 1473,
       "sha256": "86b6ca1c0d77c0924d452f74e0894d2e4a884ed4d8cb87c0bd22e7525e9dfadd"
     },
+    "evidence/scenario-lab/original-blueprint.json": {
+      "bytes": 991,
+      "sha256": "30508af6e623c2fb77687bc9e8695731ce71c6eb0c37d0e3b718e1b19864e45a"
+    },
+    "evidence/scenario-lab/original-bundle.json": {
+      "bytes": 27152,
+      "sha256": "ec015fef5269afe7b0d258098c6c1cd3dac86c9b2ec5b19a6c18c50a49d3af03"
+    },
+    "evidence/scenario-lab/original-expected.json": {
+      "bytes": 329,
+      "sha256": "512e678430e1f3e9791a19e7210b6d8df24f998c851b97ea3f952721ed51992c"
+    },
+    "evidence/scenario-lab/reduced-blueprint.json": {
+      "bytes": 826,
+      "sha256": "56606a2d9ef95fe323c792388fee9ab6f0abde067b77a11af5109e4f9c3c0456"
+    },
+    "evidence/scenario-lab/reduced-bundle.json": {
+      "bytes": 10541,
+      "sha256": "2513871df54e12add7dfcdf0e439a4ec66f06d905bbe3a83333ec1927e5510ce"
+    },
+    "evidence/scenario-lab/reduced-expected.json": {
+      "bytes": 311,
+      "sha256": "84ce79a0d101dfb4fe453f9a5ab474d2eb2e1c7872d5ee2f94fd389b5a6ec6b6"
+    },
+    "evidence/scenario-lab/reduction.json": {
+      "bytes": 3529,
+      "sha256": "3b947d7e6f5504dd203c0e0dfe9d3334b460508f76e770bec4497b792cf101e8"
+    },
     "evidence/self-function-deposit-observation.json": {
       "bytes": 47823,
       "sha256": "76bbd2584ad27624324f73af43d657b4492ad1b6573b704063d38beff309679c"
@@ -338,7 +374,7 @@
     },
     "pyproject.toml": {
       "bytes": 192,
-      "sha256": "6b044d09d07d8888c04ec8aa2a10b92327827b4566af9ca589accb7f6cf97967"
+      "sha256": "286f14c64eb5c8b5b9a134318881d750dc6290073cd71d4653aca0ed502511d4"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -461,8 +497,12 @@
       "sha256": "6fa5b76ead304f9b9b44103d4ac7e5dcfcaa27302d1f321f96272f9766dff9bc"
     },
     "test_report_contract.js": {
-      "bytes": 9265,
-      "sha256": "73872d25ff346741d73c1c1363cdbf3e879be01ed0355bf67151b1f8d15798d1"
+      "bytes": 11571,
+      "sha256": "d39015e6ed11ebc1fc26f53957b7d2460ff87763f14c121d5decc0dd4af2c6b1"
+    },
+    "test_scenario_lab.py": {
+      "bytes": 13651,
+      "sha256": "33417dcf8d8a0296ac3f5e295a7c93c37c21e116fd12510edc9e2b8973568c20"
     },
     "test_workbench.py": {
       "bytes": 9756,
@@ -492,13 +532,17 @@
       "bytes": 1988,
       "sha256": "bd3f91b3a5e9766a8dfbb67de5960a5da34e739d0cb520c792ac6859d5b3e7d4"
     },
+    "tools/scenario_lab.py": {
+      "bytes": 24395,
+      "sha256": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee"
+    },
     "tools/verify_live_agent.py": {
       "bytes": 12701,
       "sha256": "c2e0ce934dd70a86b1122cfb759d4f52a30036ad15a31ae667acaa19e21b7aa4"
     },
     "tools/verify_release.py": {
-      "bytes": 2260,
-      "sha256": "9bd6a00dcbebf83f9eb1ed6f7334080cb00ffaf1fcbbae562e248b6969f158d9"
+      "bytes": 2286,
+      "sha256": "22c71442a0b6da4272073503b1c32722a5abd106dcbadf3fe63a008b15da190d"
     },
     "verification/ACCEPTANCE_MAP.json": {
       "bytes": 4870,
@@ -600,6 +644,18 @@
       "bytes": 32,
       "sha256": "d25257243ddc65f32b77b07d0fa6c6ef9b878b691ba430c872c2600f7ff19ff6"
     },
+    "verification/scenario-lab-original-report.json": {
+      "bytes": 21229,
+      "sha256": "0e96dcb8d923e9698728fa38eff8d7a42270aaa70f82a944c6bb5aadb88e0399"
+    },
+    "verification/scenario-lab-reduced-report.json": {
+      "bytes": 7020,
+      "sha256": "ce6201e51ba6b1aa990e69fef84dbd77969b0ebb27b0530133ceb9e7af3392da"
+    },
+    "verification/scenario-lab.json": {
+      "bytes": 3814,
+      "sha256": "d16f5a66936ca691dccbcf29d1d4ec81f3f64c7606358dee6c7dd3d543a81119"
+    },
     "verification/tests-before-reserved-fix.py.txt": {
       "bytes": 21039,
       "sha256": "64608df5128a9267bbbe4a94b4f736e1532b736c27f8fc4ebd70efda75d4ddd9"
@@ -621,8 +677,8 @@
       "sha256": "c4ce19729d83fc5a415dcd28ed8d2db79774f7a0ca33e988e43045ce6ff9e0b0"
     },
     "web/app.js": {
-      "bytes": 46878,
-      "sha256": "bfb115cd76df97eb74ba500f25b929be47816cbb7d6c29a1f15bb587896eb49d"
+      "bytes": 48049,
+      "sha256": "46521299d8ed4c0153be9bc2dac05cdefe92cd791757db08aeb7f64b188abf8e"
     },
     "web/browser-worker.js": {
       "bytes": 3689,
@@ -630,7 +686,7 @@
     },
     "web/catalog.json": {
       "bytes": 23716,
-      "sha256": "b6bbddefe350f844266805bc86d969bf3669305a885c03bf87dd835865f3e912"
+      "sha256": "21780649137d8a1e1d754ceb9833f1b0e516b18df06dae519301ce355dbc9d6e"
     },
     "web/icon.svg": {
       "bytes": 341,
@@ -638,7 +694,7 @@
     },
     "web/index.html": {
       "bytes": 5147,
-      "sha256": "31a039746f4a0f43aa863ac5a8cbae42d5dd927389057dd8b4f211c3619d0864"
+      "sha256": "dd941d3612734b576047ba663133de05eadd4f5caef8f003a099e5725b1a7c29"
     },
     "web/style.css": {
       "bytes": 18570,
@@ -646,7 +702,7 @@
     },
     "workbench.py": {
       "bytes": 13649,
-      "sha256": "b4d20694ecbd09f3c23c122516521c7b5fd499d61d17f8535ce5ca9a9bb0da0d"
+      "sha256": "8bc154d0fdf72acaae79c79d0e7da507ef517643e90fba37d48db04a4453be33"
     }
   }
 }
