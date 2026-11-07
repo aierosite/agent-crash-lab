@@ -1,7 +1,7 @@
 """Local workbench for bounded evidence assessment."""
 from pathlib import Path
 from types import ModuleType
-import argparse, hashlib, json, re, secrets, socket, threading, time
+import argparse, hashlib, json, re, runpy, secrets, socket, threading, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parent
@@ -87,6 +87,11 @@ def gate(report):
     return 0 if report['coverage']['financial_scope_complete'] and cs=={'within'} and us<={'passed'} else 2
 
 
+def lab_operation(operation,body,isolated=True):
+    module=runpy.run_path(str(ROOT/'tools/scenario_lab.py'))
+    return module['interactive'](operation,body,globals(),isolated=isolated)
+
+
 class Server(ThreadingHTTPServer):
     daemon_threads=True
     def __init__(self,address):
@@ -113,7 +118,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.6.1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.7.0','coreVersion':core.VERSION})
         if path not in ('/','/app.js','/style.css','/icon.svg'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
@@ -158,6 +163,8 @@ class Handler(BaseHTTPRequestHandler):
                 result=bundle if path=='/api/bundle' else evaluate
                 return self.send(200,result(task,sources,scenario))
             if path=='/api/assess':return self.send(200,assess_bundle(body))
+            if path in ('/api/lab/search','/api/lab/shrink'):
+                return self.send(200,lab_operation(path.rsplit('/',1)[1],body))
             self.send(404,{'error':'Not found'})
         except (ValueError,TimeoutError,RecursionError) as e:self.send(400,{'error':str(e)[:200]})
         except Exception:self.send(500,{'error':'Workbench failed; no financial conclusion'})

@@ -339,6 +339,10 @@
       "bytes": 56893,
       "sha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469"
     },
+    "episode_oracle.py": {
+      "bytes": 5337,
+      "sha256": "e81d16a10933642d48ecb139abe4f6a30c7846e4bc98b786bd30cdd955f7a365"
+    },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
       "sha256": "710b2d4e44bb0c67bab8778154d8a089b7668fd5195eadba76cf7f4d84827c69"
@@ -615,13 +619,17 @@
       "bytes": 3222,
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
+    "tools/scenario_lab.py": {
+      "bytes": 27224,
+      "sha256": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6"
+    },
     "verification/native-crash-comparison.json": {
       "bytes": 1612,
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
     "workbench.py": {
-      "bytes": 13649,
-      "sha256": "71a994cf4af58b53f23249b10da5fa9f391f10f2d30af8a25a113f16076ff88e"
+      "bytes": 13987,
+      "sha256": "67e55d03afe6f64a15bad4c8bd354f359e47fbbcf5ba9feaca54d3b13cc2f796"
     }
   }
 }

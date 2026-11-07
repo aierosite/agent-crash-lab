@@ -20,7 +20,7 @@ Each case includes `blueprint.json`, an importable `bundle.json`, the oracle's `
 
 ## The reference
 
-`episode_oracle.py` reads the versioned blueprint, never an assessor report. It imports neither the assessor nor the workbench. Each comparison launches it in a separate Python process with `-I -S`, checks its source digest and uses bounded input and a timeout. It calculates principal per intent, the number of distinct positive-settlement transactions, and the declared output-fault expectation independently of receipt traversal.
+`episode_oracle.py` reads the versioned blueprint, never an assessor report. It imports neither the assessor nor the workbench. CLI and local-workbench comparisons launch it in a separate Python process with `-I -S`, checks its source digest and uses bounded input and a timeout. It calculates principal per intent, the number of distinct positive-settlement transactions, and the declared output-fault expectation independently of receipt traversal.
 
 The generator and oracle were written by the same project author. Separate implementation/process execution is not independent authorship, a blind benchmark or an external audit. The same-author, source-informed acceptance tests include hand-calculated controls that distinguish multiple actions in one transaction, separate equal-price intentions, permitted installments, zero/free work and positive payments with wrong or absent output.
 
@@ -41,3 +41,5 @@ The reducer tries deleting transactions/actions, then lowering amounts within a 
 The fifth offline judge suite, `test_scenario_lab.py`, checks generation determinism and variation, a separately executed oracle, allowed-work controls, reduction preservation/budget, exact replay, input errors and no-overwrite behavior.
 
 The oracle uses 1-256 UTF-8 bytes for document identity markers and 1-128 bytes for SKU text, rejecting invalid Unicode scalar text. The finite Lab profile allows 1-8 rows. [Reproduce the evaluation and deliberate-defect checks](EVALUATION.md).
+
+The [interactive workflow](WORKFLOW.md) also generates and reduces fresh inputs in the browser. Its reference runs as a separate oracle module in the same WebAssembly runtime, with no process isolation; the interface states this difference. The same-author and counterfactual limitations apply to both modes.

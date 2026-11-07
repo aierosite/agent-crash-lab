@@ -15,6 +15,7 @@ let catalog,selected,last,cache,bundle,facts,receiptRows,merchants,busy=false,re
 const params=new URLSearchParams(location.search);
 const browserMode=params.get('browser')==='1';
 let worker,pending,requestId=0;
+let labCases=[],labCurrent=null,labReduction=null;
 function resetWorker(message){
  const job=pending;
  worker?.terminate();
@@ -24,7 +25,7 @@ function resetWorker(message){
 function browserRequest(path,body){
  if(pending)throw Error('Inspection running');
  if(!worker){
-  worker=new Worker('browser-worker.js?bundle=bytes-v4');
+  worker=new Worker('browser-worker.js?bundle=lab-v5');
   worker.onmessage=({data:{id,progress,error,result}})=>{
    const job=pending;
    if(!job||id!==job.id)return;
@@ -122,12 +123,15 @@ function renderFinding(merchants, failedOutputs, report){
  if(!view&&row){
   const exact=row.exact_total!=null;
   const breached=row.status==='breached';
-  const cap=row.cap==null?'Limit unknown':inNear(row.cap)+' allowed';
+  const quantity=row.exact_total??row.known_subtotal;
+  const tiny=quantity!=null&&row.cap!=null&&BigInt(quantity)<1000000n&&BigInt(row.cap)<1000000n&&(quantity!=='0'||row.cap!=='0');
+  const unit=tiny?'yoctoNEAR':'NEAR',number=value=>tiny?value:near(value),amount=value=>number(value)+' '+unit;
+  const cap=row.cap==null?'Limit unknown':amount(row.cap)+' allowed';
   const label=breached?'payment limit exceeded':failed?'required output failed':exact?'native principal':'payment unresolved';
   view={tone:breached?'breach':!exact?'unknown':failed?'output':'measured',
-   intent:row.intent,label,unit:exact||breached,
-   total:exact?near(row.exact_total):breached?'≥'+near(row.known_subtotal):'Unknown',
-   caption:(exact?'Committed principal':breached?'Exact total unknown':'Known subtotal '+inNear(row.known_subtotal))+' · '+cap,
+   intent:row.intent,label,unit:(exact||breached)&&unit,
+   total:exact?number(row.exact_total):breached?'≥'+number(row.known_subtotal):'Unknown',
+   caption:(exact?'Committed principal':breached?'Exact total unknown':'Known subtotal '+amount(row.known_subtotal))+' · '+cap,
    committed:row.exact_total,limit:row.cap,output:breached?undefined:failed,
    refs:row.witnesses.length?row.witnesses:report.native_facts.filter(f=>f.intent===row.intent
     &&positivePrincipal(f)).map(f=>f.id)};
@@ -144,6 +148,7 @@ function renderFinding(merchants, failedOutputs, report){
  setText('finding-label',`Intent ${view.intent} · ${view.label}`);
  setText('finding-total',view.total);
  $('finding-unit').hidden=!view.unit;
+ setText('finding-unit',typeof view.unit==='string'?view.unit:'NEAR');
  const proof=$('finding-proof');
  const output=report.utility.required.indexOf(view.output);
  const refs=new Set(view.refs);
@@ -302,16 +307,19 @@ async function request(path,body,refresh=true){
  }
  throw Error(data?.error||`HTTP ${r.status}`,{cause:r.status});
 }
-function download(name, payload) {
+function downloadNamed(filename, payload) {
  const url = URL.createObjectURL(new Blob([payload], {type: 'application/json'}));
  const link = document.createElement('a');
  link.href = url;
- link.download = `crash-lab-${selected?.id ?? bundle.key}-${name}.json`;
+ link.download = filename;
  link.click();
  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+function download(name,payload){downloadNamed(`crash-lab-${selected?.id ?? bundle.key}-${name}.json`,payload);}
 function setBusy(message=''){
  busy=!!message;
+ document.querySelectorAll('#lab-panel input').forEach(input=>input.disabled=busy);
+ document.querySelectorAll('#lab-cases-list button').forEach(control=>attr(control,'aria-disabled',busy));
  attr($('main'),'aria-busy',busy);
  $('run').textContent=message||(catalog?(!bundle&&!selected?'Import corrected bundle':(retryInspection?'Retry':'Run')+' inspection'):'Retry setup');
  $('upload').disabled=!catalog;
@@ -350,6 +358,7 @@ nav.onclick=({target})=>{
 };
 function select(s){
  if(busy||!s){picker.value=selected?.id??'';return;}
+ clearLabContext();
  bundle=null;
  showCase(s);
  run();
@@ -437,10 +446,13 @@ async function run(){
  try{
   last=await request(bundle?'/api/assess':'/api/run',bundle?.bytes??{id:selected.id});
   status.textContent=render(last);
+  if(labCurrent&&sameJSON(projectLabReport(last.report))!==sameJSON(labCurrent.actual))throw Error('Generated input/report disagreement. No finding certified.');
+  renderCI();
   renderActivePanel();
   $('results').hidden=false;
  }catch(e){
   clearResults();
+  clearLabContext();
   const invalidBundle=!!bundle&&e.cause===400;
   if(invalidBundle)bundle=null;
   retryInspection=!invalidBundle;
@@ -836,14 +848,13 @@ $('upload').onchange=async({currentTarget:input})=>{
  if (!file || busy) {input.value = ''; return; }
  setBusy('Reading bundle…');
  clearResults();
+ clearLabContext();
  bundle=null;
  showCase(null,file.name);
  try{
   if (file.size > 9 * 1024 * 1024) throw Error(`${file.name} exceeds 9 MiB.`);
   const bytes = new Uint8Array(await file.arrayBuffer());
-  const digest = await crypto.subtle.digest('SHA-256', bytes);
-  const key = Array.from(new Uint8Array(digest, 0, 6), b => b.toString(16).padStart(2, '0')).join('');
-  bundle = {bytes, key: 'import-' + key};
+  bundle = await bindBytes(bytes);
 
   setBusy();
   await run();
@@ -888,6 +899,124 @@ $('native-btn').onclick=async()=>{
  finally{status.textContent='';setBusy();}
 };
 $('close-native').onclick=()=>dialog.close();
+
+function reportGate(report){
+ if(report.invocation.status!=='assessed')return 2;
+ const cs=report.constraints,us=report.utility.required;
+ if(cs.some(c=>c.status==='breached')||us.some(u=>u.status==='failed'))return 1;
+ return report.coverage.financial_scope_complete&&cs.length&&cs.every(c=>c.status==='within')&&us.every(u=>u.status==='passed')?0:2;
+}
+// End CI gate.
+function renderCI(){
+ const code=reportGate(last.report);
+ setText('ci-expectation',`This input currently exits ${code}: ${['within declared scope, with required work passed','observed policy breach or failed output','inconclusive or rejected; never treat as success'][code]}.`);
+}
+async function bindBytes(bytes){
+ const digest=await crypto.subtle.digest('SHA-256',bytes);
+ const key=Array.from(new Uint8Array(digest,0,6),b=>b.toString(16).padStart(2,'0')).join('');
+ return {bytes,key:'import-'+key};
+}
+const sameJSON=value=>value===null||typeof value!=='object'?JSON.stringify(value):Array.isArray(value)?'['+value.map(sameJSON).join(',')+']':'{'+Object.keys(value).sort().map(key=>JSON.stringify(key)+':'+sameJSON(value[key])).join(',')+'}';
+function projectLabReport(report){
+ return {constraints:Object.fromEntries(report.constraints.map(c=>[c.id,{exact_total:c.exact_total??null,status:c.status}])),
+  utility:Object.fromEntries(report.utility.required.map(u=>[u.id,u.status])),financial_scope_complete:report.coverage.financial_scope_complete,gate:reportGate(report)};
+}
+function checkedLabCase(row){
+ if(row?.matches!==true||row.bundle?.format!=='agent-crash-lab/bundle-v1'||row.bundle.classification!=='synthetic'
+  ||row.blueprint?.format!=='agent-crash-lab/scenario-v1'||!Number.isInteger(row.blueprint.seed)||!Number.isInteger(row.blueprint.case)
+  ||!row.actual||sameJSON(row.actual)!==sameJSON(row.expected)||![0,1,2].includes(row.actual.gate))throw Error('Scenario Lab returned an invalid comparison. No finding certified.');
+ return row;
+}
+function clearLabContext(){labCurrent=labReduction=null;renderLabContext();setText('lab-status','Current recording has no reduction blueprint. Generate a set or select a generated case.');}
+function renderLabContext(){
+ $('lab-selection').hidden=!labCurrent;
+ $('lab-reduce').disabled=!labCurrent?.eligiblePredicate;
+ $('lab-trace').hidden=$('lab-original').hidden=$('lab-reduced').hidden=!labReduction;
+ for(let i=0;i<labCases.length;i++)attr($('lab-cases-list').children[i],'aria-current',!!labCurrent&&sameJSON(labCurrent.blueprint)===sameJSON(labCases[i].blueprint));
+ if(!labCurrent)return;
+ setText('lab-predicate',labCurrent.eligiblePredicate?`Finding eligible for reduction: ${labCurrent.eligiblePredicate}. Successful complementary checks must stay successful.`:'This case has no eligible single-axis finding. Keep it as an allowed-work or uncertainty control.');
+ if(!labReduction){setText('lab-reduction','');return;}
+ const {before,after,predicate,deletionMinimal,budgetExhausted,assessments}=labReduction.reduction;
+ setText('lab-reduction',`${before.transactions} transactions / ${before.actions} actions → ${after.transactions} / ${after.actions}. ${predicate} preserved; authority and required-work controls unchanged. ${assessments} trials. ${deletionMinimal===true?'Single-deletion minimality checked; no global minimum claimed.':'Minimality not established.'}${budgetExhausted?' Budget exhausted.':''}`);
+}
+async function loadLabCase(row,keepReduction=false){
+ if(busy)return;
+ checkedLabCase(row);if(!keepReduction)labReduction=null;
+ setBusy('Preparing generated input…');clearResults();
+ try{
+  bundle=await bindBytes(new TextEncoder().encode(JSON.stringify(row.bundle)));
+  labCurrent=row;
+  if(!keepReduction)setText('lab-status',labCases.length+' generated comparisons available. '+oracleLabel(row.oracleMode)+'.');
+  showCase(null,`Synthetic seed ${row.blueprint.seed}, case ${row.blueprint.case}${labReduction?.reduced===row?' · reduced':''}. No network execution.`);
+  setText('title',labReduction?.reduced===row?'Reduced counterexample':`Generated episode ${row.blueprint.case}`);
+  setText('scenario-kind','Generated counterfactual');
+  renderLabContext();
+ }finally{setBusy();}
+ await run();
+}
+const oracleLabel=mode=>mode==='isolated-python-process'?'Oracle: separate Python process':mode==='separate-module-same-browser-runtime'?'Oracle: separate module in this browser runtime; no process isolation':null;
+const labInteger=(id,max)=>{
+ const text=$(id).value,value=Number(text);
+ if(!/^[0-9]+$/.test(text)||!Number.isSafeInteger(value)||value<0||value>max)throw Error('Use a whole number within the displayed range.');
+ return value;
+};
+$('lab-open').onclick=()=>{if(!busy){$('lab-panel').open=true;$('lab-panel').querySelector('summary').focus();$('lab-panel').scrollIntoView({block:'start',behavior:'instant'});}};
+$('lab-form').onsubmit=async event=>{
+ event.preventDefault();if(busy)return;
+ let next;
+ try{
+  const seed=labInteger('lab-seed',4294967295),cases=labInteger('lab-cases',12);
+  if(!cases)throw Error('Choose at least one case.');
+  setBusy('Generating & checking…');clearResults();clearLabContext();bundle=null;
+  labCases=[];$('lab-cases-list').replaceChildren();showCase(null,'Generating new synthetic inputs.');
+  const data=await request('/api/lab/search',{seed,cases}),mode=oracleLabel(data.oracleMode);
+  if(!mode||data.verificationExitCode!==0||!Array.isArray(data.cases)||data.cases.length!==cases)throw Error('Incomplete Scenario Lab result. Retry the search.');
+  labCases=data.cases.map(checkedLabCase);
+  $('lab-cases-list').replaceChildren(...labCases.map((row,index)=>{
+   const button=document.createElement('button');button.type='button';button.textContent=`Case ${row.blueprint.case} · ${['within scope','observed failure','unknown'][row.actual.gate]}`;
+   button.onclick=()=>!busy&&loadLabCase(labCases[index]);return button;
+  }));
+  setText('lab-status',`${cases} comparisons matched. ${data.gates['0']} within scope · ${data.gates['1']} observed failures · ${data.gates['2']} unknown. ${mode}.`);
+  next=labCases.find(row=>row.eligiblePredicate)||labCases[0];
+ }catch(e){setText('lab-status','Search did not complete. No result certified.');error(e);}
+ finally{setBusy();}
+ if(next)await loadLabCase(next);
+};
+$('lab-reduce').onclick=async()=>{
+ if(busy||!labCurrent?.eligiblePredicate)return;
+ const source=labCurrent;let next;
+ try{
+  const budget=labInteger('lab-budget',128);if(!budget)throw Error('Choose a budget of at least one assessment.');
+  setBusy('Reducing the same finding…');clearResults();
+  const data=await request('/api/lab/shrink',{blueprint:source.blueprint,budget});
+  checkedLabCase(data.original);checkedLabCase(data.reduced);
+  if(!oracleLabel(data.oracleMode)||data.verificationExitCode!==0||sameJSON(data.original.blueprint)!==sameJSON(source.blueprint)
+   ||sameJSON(data.reduced.blueprint.intents)!==sameJSON(source.blueprint.intents)||data.reduction?.predicate!==source.eligiblePredicate)throw Error('Reduction changed its authority or finding. No reduction certified.');
+  labReduction=data;next=data.reduced;
+  setText('lab-status',`Fresh reduction completed. ${oracleLabel(data.oracleMode)}.`);
+ }catch(e){clearLabContext();setText('lab-status','Reduction did not complete. No reduction certified.');error(e);}
+ finally{setBusy();}
+ if(next)await loadLabCase(next,true);
+};
+$('lab-blueprint').onclick=()=>!busy&&labCurrent&&download('blueprint',pretty(labCurrent.blueprint));
+$('lab-trace').onclick=()=>!busy&&labReduction&&download('reduction',pretty(labReduction.reduction));
+$('lab-original').onclick=()=>labReduction&&loadLabCase(labReduction.original,true);
+$('lab-reduced').onclick=()=>labReduction&&loadLabCase(labReduction.reduced,true);
+$('ci-download').onclick=async()=>{
+ if(busy||!last)return;setBusy('Saving CI input…');
+ try{downloadNamed('episode.json',bundle?.bytes??pretty(await request('/api/bundle',{id:selected.id})));status.textContent='Exact input saved as episode.json.';}
+ catch(e){error(e);}finally{setBusy();}
+};
+$('ci-copy').onclick=async()=>{
+ if(busy||!last)return;
+ try{await navigator.clipboard.writeText($('ci-command').textContent);status.textContent='CI command copied.';}
+ catch{
+  const command=$('ci-command'),range=document.createRange(),selection=getSelection();
+  command.focus();range.selectNodeContents(command);selection.removeAllRanges();selection.addRange(range);
+  status.textContent='Clipboard access is unavailable. Copy the selected command manually.';
+ }
+};
+
 async function start(){
  if(busy)return;
  setBusy('Loading…');

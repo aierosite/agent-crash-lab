@@ -6,7 +6,7 @@ import argparse,hashlib,json
 ROOT=Path(__file__).resolve().parents[1]
 app=SimpleNamespace(**run_path(str(ROOT/'workbench.py')))
 def browser_catalog():
-    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json'}
+    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json','tools/scenario_lab.py','episode_oracle.py'}
     for row in app.BASELINES.values():names.update([row['task'],*row['sources'].values()])
     return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 

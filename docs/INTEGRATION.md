@@ -1,5 +1,7 @@
 # From an agent episode to a CI decision
 
+For the concise interactive path, see [Inspect → reduce → CI](WORKFLOW.md). The CI panel exports the exact current input as `episode.json`; the displayed gate matches the CLI. A saved episode tests that recording, not a new agent build.
+
 Use Crash Lab when a retry can spend twice or when a paid API can return a wrong answer. Capture and evaluate one episode in a test environment before promoting an agent change. It is an inspector, not a payment gateway.
 
 ## Try the complete contract first

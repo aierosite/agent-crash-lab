@@ -2,7 +2,7 @@
 from pathlib import Path
 from copy import deepcopy
 from hashlib import sha256
-import argparse,base64,json,runpy,subprocess,sys
+import argparse,base64,json,runpy,subprocess,sys,time
 from types import SimpleNamespace
 PRODUCT=Path(__file__).resolve().parents[1]
 oracle=SimpleNamespace(**runpy.run_path(str(PRODUCT/'episode_oracle.py')))
@@ -76,9 +76,12 @@ def replace_ids(value,mapping):
     return value
 
 class Lab:
-    def __init__(self,product=PRODUCT):
+    def __init__(self,product=PRODUCT,app=None,isolated=True):
         self.product=Path(product)
-        self.app=runpy.run_path(str(self.product/'workbench.py'))
+        oracle.need(type(isolated) is bool,'Choose an explicit oracle execution mode')
+        self.isolated=isolated
+        self.oracle_mode='isolated-python-process' if isolated else 'separate-module-same-browser-runtime'
+        self.app=app if app is not None else runpy.run_path(str(self.product/'workbench.py'))
         scenario=self.app['CATALOG']['legitimate-installments']
         task,sources=self.app['data_for'](scenario);owner=json.loads(task)
         recording=json.loads(sources['recording']);capture=recording
@@ -170,10 +173,12 @@ class Lab:
         oracle.need(notes.get('blueprintSha256')==oracle.digest(plan),'Bundle/blueprint binding mismatch')
         oracle.need(sha256(Path(oracle.__file__).read_bytes()).hexdigest()==self.provenance['oracleSha256'],
                     'Oracle source changed during evaluation')
-        reference=subprocess.run([sys.executable,'-I','-S',oracle.__file__],input=oracle.canonical(plan),
-            capture_output=True,timeout=5)
-        oracle.need(reference.returncode==0,'Isolated oracle rejected the blueprint')
-        expected=json.loads(reference.stdout)
+        if self.isolated:
+            reference=subprocess.run([sys.executable,'-I','-S',oracle.__file__],input=oracle.canonical(plan),
+                capture_output=True,timeout=5)
+            oracle.need(reference.returncode==0,'Isolated oracle rejected the blueprint')
+            expected=json.loads(reference.stdout)
+        else:expected=oracle.reference(plan)
         response=self.app['assess_bundle'](bundle);report=response['report']
         assessed=report['invocation']['status']=='assessed'
         actual={'constraints':{c['id']:{'exact_total':c.get('exact_total'),'status':c['status']} for c in report.get('constraints',[])},
@@ -182,7 +187,7 @@ class Lab:
                 'gate':self.app['gate'](report)}
         return {'blueprint':deepcopy(plan),'expected':expected,'actual':actual,'matches':assessed and expected==actual,
                 'bundle':bundle,'response':response,'classification':CLASSIFICATION,
-                'capturedProvenance':notes['provenance'],'oracleMode':'isolated-python-process'}
+                'capturedProvenance':notes['provenance'],'oracleMode':self.oracle_mode}
 
 def size(plan):
     return {'transactions':len(plan['transactions']),
@@ -282,6 +287,42 @@ def shrink(lab,plan,budget=128,predicate=None):
             'budget':budget,'budgetExhausted':exhausted,'deletionMinimal':deletion_minimal,
             'minimalityScope':'Single transaction/action deletions only; no global minimality claim',
             'trace':trace,'classification':CLASSIFICATION}
+
+
+def interactive(operation,body,app,isolated=True):
+    """Bounded in-memory workbench operation; never accepts output paths or code."""
+    oracle.need(operation in ('search','shrink'),'Unknown Scenario Lab operation')
+    expected_fields={'seed','cases'} if operation=='search' else {'blueprint','budget'}
+    oracle.need(type(body) is dict and set(body)==expected_fields,'Use only seed/cases for generation or blueprint/budget for reduction')
+    if operation=='search':
+        oracle.need(type(body['cases']) is int and 1<=body['cases']<=12,'Choose 1-12 generated cases')
+        plans=[generate(body['seed'],index) for index in range(body['cases'])]
+    else:
+        oracle.need(type(body['budget']) is int and 1<=body['budget']<=128,'Choose a reduction budget of 1-128')
+        oracle.need(len(oracle.canonical(body['blueprint']))<=262144,'Blueprint exceeds 256 KiB')
+        plans=[oracle.validate(body['blueprint'])]
+    runner=Lab(app=app,isolated=isolated);deadline=time.monotonic()+15
+    class Bounded:
+        def run(self,plan):
+            oracle.need(time.monotonic()<deadline,'Scenario Lab reached its time limit. Use the offline CLI for a longer run.')
+            try:return runner.run(plan)
+            except subprocess.TimeoutExpired:raise ValueError('The oracle did not respond within five seconds. Retry or use the offline CLI; no finding certified.') from None
+    bounded=Bounded()
+    def case(result):
+        oracle.need(result['matches'],'Evaluator/reference disagreement; no finding certified')
+        try:predicate=choose_predicate(result)
+        except ValueError:predicate=None
+        return {key:result[key] for key in ['blueprint','bundle','actual','expected','matches','oracleMode']}|{
+            'size':size(result['blueprint']),'eligiblePredicate':predicate}
+    common={'classification':CLASSIFICATION,'oracleMode':runner.oracle_mode,'verificationExitCode':0,
+            'sourceHashes':runner.provenance,'execution':'fresh-counterfactual-generation-no-network'}
+    if operation=='search':
+        rows=[case(bounded.run(plan)) for plan in plans]
+        return common|{'cases':rows,'gates':{str(code):sum(row['actual']['gate']==code for row in rows) for code in [0,1,2]}}
+    reduced=shrink(bounded,plans[0],body['budget'])
+    original=case(reduced.pop('original'));final=case(reduced.pop('reduced'))
+    return common|{'original':original,'reduced':final,'reduction':reduced}
+
 
 def load_plan(path):
     with Path(path).open('rb') as stream:raw=stream.read(262145)

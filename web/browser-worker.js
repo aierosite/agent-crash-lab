@@ -31,6 +31,14 @@ async function boot(id){
 async function route(path,body){
  if(path==='/api/catalog')return {scenarios:catalog.scenarios,baselines:catalog.baselines.map(r=>r.name)};
  if(path==='/api/native-result')return JSON.parse(decoder.decode(await read('verification/native-crash-comparison.json')));
+ if(['/api/lab/search','/api/lab/shrink'].includes(path)){
+  const template=catalog.baselines.find(r=>r.name==='split-settlement');
+  for(const file of ['tools/scenario_lab.py','episode_oracle.py',template.task,...Object.values(template.sources)])await stage(file);
+  python.globals.set('lab_operation_name',path.slice('/api/lab/'.length));
+  python.globals.set('lab_body_json',JSON.stringify(body));
+  try{return JSON.parse(python.runPython("json.dumps(app.lab_operation(lab_operation_name,json.loads(lab_body_json),isolated=False))"));}
+  finally{python.globals.delete('lab_operation_name');python.globals.delete('lab_body_json');}
+ }
  if(!['/api/run','/api/bundle','/api/assess'].includes(path))throw Error('Unknown browser operation');
  if(path!=='/api/assess'){
   const scenario=catalog.scenarios.find(s=>s.id===body?.id);if(!scenario)throw Error('Unknown scenario');

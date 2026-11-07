@@ -1,0 +1,169 @@
+{
+  "format": "agent-crash-lab/workflow-verification-v1",
+  "atUtc": "2026-11-07T23:48:21.498935+00:00",
+  "classification": "Actual local UI and WebAssembly interactions on synthetic generations and an archived owned model capture; source-informed, same author",
+  "oracleModes": [
+    "isolated-python-process",
+    "separate-module-same-browser-runtime"
+  ],
+  "browserReportComparisons": {
+    "generatedCasesPerMode": 6,
+    "reductionBudgetsPerMode": [
+      1,
+      128
+    ],
+    "modes": [
+      "actual-local-assessment",
+      "actual-browser-python-assessment"
+    ],
+    "fullCanonicalReportHashesMatched": true,
+    "expectedReports": [
+      {
+        "id": "case-0",
+        "sha": "a747d75118b4e7d3df0875444f33f7e76d03024d2167a15f1691aef577680228",
+        "bytes": 9623,
+        "gate": 0
+      },
+      {
+        "id": "case-1",
+        "sha": "9002e731c24ea8f50e4b7c88d8cd5e035ddee32b69a8148d6f7776f736698780",
+        "bytes": 20992,
+        "gate": 1
+      },
+      {
+        "id": "case-2",
+        "sha": "a70785f49d534a1f8c97c86f6ee394e8d809257b38fe91b49d5b53329a51e23f",
+        "bytes": 20979,
+        "gate": 1
+      },
+      {
+        "id": "case-3",
+        "sha": "e972d28a55c4a3f0eafbfeb29c91218212c3ddd18eb357279ff099101479a07f",
+        "bytes": 18066,
+        "gate": 2
+      },
+      {
+        "id": "case-4",
+        "sha": "1e7304666becdc4731c8c9fd5cad94c9d925ce23536045a303311b5e958a5fb6",
+        "bytes": 15926,
+        "gate": 0
+      },
+      {
+        "id": "case-5",
+        "sha": "b6a09a3a39a8c74abef3684f1e0030d7070fc0f81b9d26ef272fcd2eeeb259ee",
+        "bytes": 31755,
+        "gate": 1
+      },
+      {
+        "id": "reduced",
+        "sha": "feeda356be8c7ba2ec186decd33113cd06c19dc4c0055fe455283a937d202b9b",
+        "bytes": 6783,
+        "gate": 1
+      },
+      {
+        "id": "budget-1",
+        "sha": "7199da061f9ac8e821d959f31763c12401cc13cc2308b5981597e07e7fd04cc1",
+        "bytes": 17685,
+        "gate": 1
+      }
+    ],
+    "phase": "Browser report comparisons before final label/spacing/clipboard-fallback polish; generator/core unchanged by those UI edits"
+  },
+  "downloadedActualCliChecks": {
+    "local-allowed-check": {
+      "label": "local-allowed",
+      "bytes": 10987,
+      "inputSha256": "3cde6a469bcbc774e068d69c73cb4e2c7c72c08c9fe0f55e22a613a7c006fb3d",
+      "actualCliExit": 0,
+      "reportSha256": "a747d75118b4e7d3df0875444f33f7e76d03024d2167a15f1691aef577680228"
+    },
+    "local-archived-bom-check": {
+      "label": "local-archived-bom",
+      "bytes": 185370,
+      "inputSha256": "2634ebc722d84b7676f5eeca8d37981b67750cf67b0a05b1b0f371b14a9b1a8c",
+      "actualCliExit": 1,
+      "reportSha256": "3332c6a4fc58c0229abfdd952d685b0a92fff082f1b8c37301045da9cdbebc82"
+    },
+    "local-reduced-check": {
+      "label": "local-reduced",
+      "bytes": 10540,
+      "inputSha256": "f44a683a33cf0c967f7bc5780352841e167c607800129a9b82b688063628759a",
+      "actualCliExit": 1,
+      "reportSha256": "feeda356be8c7ba2ec186decd33113cd06c19dc4c0055fe455283a937d202b9b"
+    },
+    "local-unknown-check": {
+      "label": "local-unknown",
+      "bytes": 22300,
+      "inputSha256": "1600cefd8aeb34c36f8aa0949087e73d7c642ed2c1de9b4900d594211c890310",
+      "actualCliExit": 2,
+      "reportSha256": "e972d28a55c4a3f0eafbfeb29c91218212c3ddd18eb357279ff099101479a07f"
+    },
+    "wasm-allowed-check": {
+      "label": "wasm-allowed",
+      "bytes": 10987,
+      "inputSha256": "3cde6a469bcbc774e068d69c73cb4e2c7c72c08c9fe0f55e22a613a7c006fb3d",
+      "actualCliExit": 0,
+      "reportSha256": "a747d75118b4e7d3df0875444f33f7e76d03024d2167a15f1691aef577680228"
+    },
+    "wasm-archived-bom-check": {
+      "label": "wasm-archived-bom",
+      "bytes": 185370,
+      "inputSha256": "2634ebc722d84b7676f5eeca8d37981b67750cf67b0a05b1b0f371b14a9b1a8c",
+      "actualCliExit": 1,
+      "reportSha256": "3332c6a4fc58c0229abfdd952d685b0a92fff082f1b8c37301045da9cdbebc82"
+    },
+    "wasm-reduced-check": {
+      "label": "wasm-reduced",
+      "bytes": 10540,
+      "inputSha256": "f44a683a33cf0c967f7bc5780352841e167c607800129a9b82b688063628759a",
+      "actualCliExit": 1,
+      "reportSha256": "feeda356be8c7ba2ec186decd33113cd06c19dc4c0055fe455283a937d202b9b"
+    },
+    "wasm-unknown-check": {
+      "label": "wasm-unknown",
+      "bytes": 22300,
+      "inputSha256": "1600cefd8aeb34c36f8aa0949087e73d7c642ed2c1de9b4900d594211c890310",
+      "actualCliExit": 2,
+      "reportSha256": "e972d28a55c4a3f0eafbfeb29c91218212c3ddd18eb357279ff099101479a07f"
+    }
+  },
+  "exactOriginalBomCrlfEnvelopePreserved": true,
+  "originalEnvelopeSha256": "2634ebc722d84b7676f5eeca8d37981b67750cf67b0a05b1b0f371b14a9b1a8c",
+  "keyboardAndRecovery": {
+    "seedTabToCases": true,
+    "enterSubmitted": true,
+    "busyFieldDisabledObserved": true,
+    "invalidScientificNotationRejected": true,
+    "correctionRecovered": true,
+    "contextClearedOnImport": true,
+    "copiedCommandReadBack": "python -I -S gate.py --bundle episode.json",
+    "clipboardDenialFallbackAddedButNotForcedAfterFix": true
+  },
+  "responsive": {
+    "width": 390,
+    "height": 844,
+    "noDocumentHorizontalOverflow": true,
+    "reductionControlVisible": true,
+    "viewportOverrideReset": true,
+    "desktopTinyAmount": {
+      "number": "5",
+      "unit": "yoctoNEAR",
+      "cap": "4"
+    }
+  },
+  "testHarnessCorrections": [
+    "Initial numeric regex was mistyped in the local draft and corrected before release.",
+    "A test toggled an already-open CI details panel closed, then tried to click its hidden download button. The tool timed out and reset; the completed first download was inspected without repeating it. Remaining tests checked open state first.",
+    "A local shell-quoting typo in a UI text edit was caught by node --check and corrected before browser reload/publication.",
+    "A temporary clipboard-bridge failure was distinguished from a product financial error; after recovery the copied command was read back successfully."
+  ],
+  "networkTransactions": 0,
+  "modelCalls": 0,
+  "newDependencies": [],
+  "limits": [
+    "Counterfactual native-transfer family only; no fresh agent/contract execution.",
+    "Arbitrary real recordings cannot be reduced without a supported blueprint; import clears reduction context.",
+    "Browser mode has no oracle subprocess isolation; neither mode provides independent authorship or an external audit.",
+    "A saved fixture does not evaluate changed agent code until a new capture is supplied."
+  ]
+}

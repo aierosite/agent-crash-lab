@@ -143,6 +143,19 @@ class PrototypeTests(unittest.TestCase):
                 cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=5)
             self.assertEqual(repeated.returncode,2);self.assertEqual(marker.read_bytes(),before)
 
+    def test_interactive_deadline_does_not_certify_a_partial_run(self):
+        from unittest.mock import patch
+        clock=iter([0,16])
+        with patch.dict(labcode.interactive.__globals__,{'time':SimpleNamespace(monotonic=lambda:next(clock))}):
+            with self.assertRaisesRegex(ValueError,'time limit'):
+                labcode.interactive('search',{'seed':42,'cases':1},self.lab.app)
+        from subprocess import TimeoutExpired
+        with patch.dict(labcode.interactive.__globals__,{'Lab':lambda **kwargs:SimpleNamespace(
+            run=lambda plan:(_ for _ in ()).throw(TimeoutExpired('oracle',5)),
+            oracle_mode='isolated-python-process',provenance={})}):
+            with self.assertRaisesRegex(ValueError,'five seconds'):
+                labcode.interactive('search',{'seed':42,'cases':1},self.lab.app)
+
     def test_parser_and_domain_bounds(self):
         values=[True,None,-1,2**32]
         for seed in values:

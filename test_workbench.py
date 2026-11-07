@@ -87,6 +87,44 @@ class WorkbenchTests(unittest.TestCase):
             file=temp/(str(i)+'.json');file.write_text(json.dumps(bundle))
             r=subprocess.run([sys.executable,'-I','-S',str(ROOT/'gate.py'),'--bundle',str(file)],cwd=temp,capture_output=True,timeout=10)
             self.assertEqual(r.returncode,code,r.stderr.decode());self.assertEqual(json.loads(r.stdout)['gate']['exitCode'],code)
+    def test_interactive_search_and_reduction_keep_authority_and_useful_work(self):
+        code,data=self.json('/api/lab/search',{'seed':42,'cases':6})
+        self.assertEqual(code,200);self.assertEqual(data['oracleMode'],'isolated-python-process')
+        self.assertEqual(data['gates'],{'0':2,'1':3,'2':1});self.assertEqual(len(data['cases']),6)
+        local=app.lab_operation('search',{'seed':42,'cases':6},isolated=False)
+        self.assertEqual(local['oracleMode'],'separate-module-same-browser-runtime')
+        for a,b in zip(data['cases'],local['cases']):
+            self.assertTrue(a['matches']);self.assertEqual(a['actual'],a['expected'])
+            self.assertEqual({k:v for k,v in a.items() if k!='oracleMode'},{k:v for k,v in b.items() if k!='oracleMode'})
+        original=data['cases'][1]
+        code,reduced=self.json('/api/lab/shrink',{'blueprint':original['blueprint'],'budget':128})
+        self.assertEqual(code,200);self.assertTrue(reduced['reduced']['matches'])
+        self.assertEqual(reduced['reduced']['blueprint']['intents'],original['blueprint']['intents'])
+        self.assertEqual(reduced['reduction']['predicate'],'constraint:A-merchant')
+        self.assertEqual(reduced['reduction']['after'],{'transactions':1,'actions':1,'totalYocto':'5'})
+        self.assertTrue(reduced['reduction']['deletionMinimal'])
+        self.assertTrue(all(x=='passed' for x in reduced['reduced']['actual']['utility'].values()))
+        for row in [original,reduced['reduced']]:
+            code,result=self.json('/api/assess',row['bundle']);self.assertEqual(code,200)
+            self.assertEqual(app.gate(result['report']),1)
+            self.assertEqual(result['report'],app.assess_bundle(row['bundle'])['report'])
+        code,short=self.json('/api/lab/shrink',{'blueprint':original['blueprint'],'budget':1})
+        self.assertEqual(code,200);self.assertTrue(short['reduction']['budgetExhausted'])
+        self.assertIsNone(short['reduction']['deletionMinimal'])
+
+    def test_interactive_routes_reject_paths_invalid_types_and_cross_origin(self):
+        for body in [{'seed':True,'cases':1},{'seed':-1,'cases':1},{'seed':2**32,'cases':1},
+                     {'seed':42,'cases':True},{'seed':42,'cases':0},{'seed':42,'cases':13},
+                     {'seed':42,'cases':1,'out':'../../outside'}, {'path':'workbench.py'}]:
+            with self.subTest(body=body):self.assertEqual(self.json('/api/lab/search',body)[0],400)
+        for body in [{'blueprint':{},'budget':128},{'blueprint':{},'budget':True},
+                     {'blueprint':{},'budget':0},{'blueprint':{},'budget':129},
+                     {'blueprint':{},'budget':1,'command':'anything'}]:
+            self.assertEqual(self.json('/api/lab/shrink',body)[0],400)
+        self.assertEqual(self.json('/api/lab/search',{'seed':42,'cases':1},{'Origin':'https://attacker.example'})[0],403)
+        self.assertEqual(self.json('/api/lab/shrink',{}, {'X-CrashLab-Token':'wrong'})[0],403)
+        self.assertEqual(self.json('/api/lab/search',{'seed':42,'cases':1},{'Content-Type':'text/plain'})[0],415)
+
     def test_archived_native_receipts_and_process_evidence(self):
         raw=(ROOT/'evidence/native-observation.json').read_bytes();data=json.loads(raw);pre=json.loads((ROOT/'evidence/native-precommit.json').read_text());summary=self.json('/api/native-result')[1]
         self.assertEqual(summary['evidenceSha256'],hashlib.sha256(raw).hexdigest());self.assertEqual(data['nativeSendAttempts'],5);self.assertTrue(data['ownedNodeStopped']);self.assertTrue(summary['successful'])

@@ -1,19 +1,19 @@
 {
   "format": "agent-crash-lab/scenario-verification-v1",
-  "atUtc": "2026-11-07T23:17:03.094307+00:00",
+  "atUtc": "2026-11-07T23:49:32.545661+00:00",
   "classification": "Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed.",
   "oracleMode": "isolated-python-process",
   "oracleIndependence": "Separate original implementation and process; same author, no external blind evaluation",
   "sourceHashes": {
-    "scenario_lab.py": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee",
+    "scenario_lab.py": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6",
     "episode_oracle.py": "e81d16a10933642d48ecb139abe4f6a30c7846e4bc98b786bd30cdd955f7a365",
-    "test_scenario_lab.py": "3c7f39cce8a9d02b22d40acf596753628be7a5be220c60f3ca0a1abb944bafed"
+    "test_scenario_lab.py": "88343972b92df3a693791efea1605e2ca9fb34542e1456faf6abf1616fa72f28"
   },
   "coreSha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469",
   "verificationPending": false,
   "acceptance": {
-    "atUtc": "2026-11-07T23:17:21.918311+00:00",
-    "tests": 16,
+    "atUtc": "2026-11-07T23:49:52.746877+00:00",
+    "tests": 17,
     "successful": true,
     "failures": 0,
     "errors": 0,
@@ -28,9 +28,9 @@
     },
     "classification": "Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed.",
     "sourceHashes": {
-      "scenario_lab.py": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee",
+      "scenario_lab.py": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6",
       "episode_oracle.py": "e81d16a10933642d48ecb139abe4f6a30c7846e4bc98b786bd30cdd955f7a365",
-      "test_scenario_lab.py": "3c7f39cce8a9d02b22d40acf596753628be7a5be220c60f3ca0a1abb944bafed"
+      "test_scenario_lab.py": "88343972b92df3a693791efea1605e2ca9fb34542e1456faf6abf1616fa72f28"
     }
   },
   "reduction": {
@@ -59,7 +59,7 @@
     },
     "evidence/scenario-lab/original-bundle.json": {
       "bytes": 27152,
-      "sha256": "e37a40e52d67c069519bb56708839cc2fc360a54268c066d2e574f6cabcbc76a"
+      "sha256": "3314ab88821b7e2b3079de63936e2dc72d382327f5458370b3c0afd588a1ac5d"
     },
     "evidence/scenario-lab/original-expected.json": {
       "bytes": 329,
@@ -71,7 +71,7 @@
     },
     "evidence/scenario-lab/reduced-bundle.json": {
       "bytes": 10541,
-      "sha256": "88f4f642315cac62451ece61cf7126857b27838eef1f7908efece336cd35d586"
+      "sha256": "ea27b3eac4e09f4a9effa0ebccbcca3b0b54e6f58acda66193cbcb8196a0d7c9"
     },
     "evidence/scenario-lab/reduced-expected.json": {
       "bytes": 311,
@@ -83,11 +83,11 @@
     },
     "verification/scenario-lab-original-report.json": {
       "bytes": 21229,
-      "sha256": "6b51743f02535348968540ea9a01b6b43d64fc01aefe9d5f624c35e51632f685"
+      "sha256": "484fb20ef50cfc31db66f542c71c5f720bec0db162db56eae5fc4be56a121615"
     },
     "verification/scenario-lab-reduced-report.json": {
       "bytes": 7020,
-      "sha256": "08d4d9aebf0342c726d278ce2da370756b8c3afd84217f3733df07a91a61c9a1"
+      "sha256": "410a340b49903bf26e9933e48cbadac10e572ca9810829ffb9555f85904fbf6c"
     }
   }
 }

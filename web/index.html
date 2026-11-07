@@ -5,8 +5,8 @@
 <meta name="description" content="Inspect recorded NEAR payments and responses.">
 <title>Agent Crash Lab · NEAR receipt workbench</title>
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="style.css?v=24">
-<script defer src="app.js?v=36"></script>
+<link rel="stylesheet" href="style.css?v=25">
+<script defer src="app.js?v=37"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to inspection</a>
@@ -19,9 +19,17 @@
 <div class="side-heading"><span id="case-file-label">Case file</span><span id="case-count"></span></div>
 <select id="case-select" aria-labelledby="case-file-label" aria-controls="main"><option value="" disabled selected>Choose a case</option></select>
 <nav id="scenarios" aria-label="Experiment cases"></nav>
-<div class="side-bottom"><label class="upload-btn">Import bundle<input id="upload" type="file" accept=".json,application/json"></label><button id="native-btn">Crash &amp; restart</button></div>
+<div class="side-bottom"><label class="upload-btn">Import bundle<input id="upload" type="file" accept=".json,application/json"></label><button id="lab-open">Scenario Lab</button><button id="native-btn">Crash &amp; restart</button></div>
 </aside>
 <main id="main" tabindex="-1">
+<details id="lab-panel" class="lab-panel">
+<summary>Generate, inspect, reduce</summary>
+<p>Explore synthetic payment episodes. No agent, wallet or contract is executed.</p>
+<form id="lab-form"><label>Seed<input id="lab-seed" type="number" min="0" max="4294967295" step="1" value="42" required></label><label>Cases<input id="lab-cases" type="number" min="1" max="12" step="1" value="6" required></label><button id="lab-search">Generate &amp; check</button></form>
+<p id="lab-status" role="status">Allowed work, violations and unknowns stay separate.</p>
+<div id="lab-cases-list" aria-label="Generated episodes"></div>
+<div id="lab-selection" hidden><p id="lab-predicate"></p><div class="lab-actions"><label>Reduction budget<input id="lab-budget" type="number" min="1" max="128" step="1" value="128" required></label><button id="lab-reduce" disabled>Reduce finding</button><button id="lab-blueprint">Save blueprint</button><button id="lab-trace" hidden>Save reduction trace</button></div><p id="lab-reduction"></p><div class="lab-actions"><button id="lab-original" hidden>Inspect original</button><button id="lab-reduced" hidden>Inspect reduced</button></div></div>
+</details>
 <section aria-labelledby="title">
 <div class="folio"><span class="eyebrow"><span id="scenario-number">Case file</span><span aria-hidden="true">/</span><span id="scenario-kind">Local capture</span></span></div>
 <div class="case-lead">
@@ -43,7 +51,7 @@
 <p id="browser-note" hidden>Python via jsDelivr.</p>
 <section id="results" hidden>
 <div class="results-bar"><div class="results-meta"><span id="run-state"></span><span id="timing"></span></div><div class="results-actions"><button id="download">Download report</button><button id="export">Export bundle</button></div></div>
-<div class="verdict-grid" id="verdicts"></div>
+<div class="verdict-grid" id="verdicts"></div><details id="ci-guide" class="ci-guide"><summary>Keep this run in CI</summary><p>Place episode.json beside gate.py in the Crash Lab release directory, then run this command there.</p><div class="lab-actions"><button id="ci-download">Download episode.json</button><button id="ci-copy">Copy command</button></div><pre id="ci-command" tabindex="0" aria-label="CI command">python -I -S gate.py --bundle episode.json</pre><p id="ci-expectation"></p><p>Exit 0: within declared scope and required work passed. Exit 1: observed breach or failed output. Exit 2: inconclusive or rejected. A saved bundle verifies only that recorded episode; capture a changed agent again. Hashes bind bytes; they do not authenticate a recording.</p></details>
 <div class="tab-row" role="tablist" aria-label="Inspection details"><button class="tab" id="tab-overview">Overview</button><button class="tab" id="tab-evidence">Causal evidence <span id="evidence-count"></span></button><button class="tab" id="tab-raw">Raw report</button><button class="tab" id="tab-scope">Trust &amp; scope</button></div>
 <section id="panel-overview">
 <header><h2>Payments by intent</h2><span>Native NEAR · gas excluded</span></header>

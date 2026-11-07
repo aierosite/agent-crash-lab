@@ -49,6 +49,7 @@ for status in ['failed','rejected']:
     response=w['evaluate'](task,sources)
     response['report']={'format':'agent-crash-lab/report-v1','invocation':{'status':status,'code':'test','message':'No financial conclusion'}}
     rows.append({'name':status,'response':response})
+for row in rows: row['gate']=w['gate'](row['response']['report'])
 print(json.dumps(rows))
 `;
 const python=spawnSync(process.env.PYTHON||'python',['-I','-S','-c',corpusProgram],
@@ -152,4 +153,13 @@ for(let i=1;i<=128;i++){
   c.lower_excess=c.exact_excess=excess.toString();c.status=excess?'breached':'within';
  });
 }
-console.log(JSON.stringify({genuineAndUnknownControls:corpus.length,rejectedMutations:rejected,unchanged:true}));
+
+
+// The downloadable input and displayed CI expectation must use the CLI's gate.
+const gateStart=source.indexOf('function reportGate(report){');
+const gateEnd=source.indexOf('// End CI gate.',gateStart);
+assert(gateStart>=0&&gateEnd>gateStart);
+const uiGate=vm.runInNewContext('('+source.slice(gateStart,gateEnd)+')');
+const gateCases=JSON.parse(python.stdout);
+for(const row of gateCases)assert.equal(uiGate(row.response.report),row.gate,row.name);
+console.log(JSON.stringify({genuineAndUnknownControls:corpus.length,rejectedMutations:rejected,unchanged:true,ciGateComparisons:gateCases.length}));
