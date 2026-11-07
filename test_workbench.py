@@ -1,9 +1,9 @@
-"""Actual HTTP, bundle, CI and fresh-native-recording integration tests."""
+"""HTTP, bundle, CI and archived native evidence tests."""
 from pathlib import Path
 from datetime import datetime,timezone
-import argparse,copy,hashlib,importlib.util,json,subprocess,sys,tempfile,threading,time,unittest,urllib.request,urllib.error
+import argparse,hashlib,json,runpy,subprocess,sys,tempfile,threading,time,unittest,urllib.request,urllib.error
 ROOT=Path(__file__).resolve().parent
-s=importlib.util.spec_from_file_location('bench_tests',ROOT/'workbench.py');app=importlib.util.module_from_spec(s);s.loader.exec_module(app)
+exports=runpy.run_path(str(ROOT/'tools/export_bundle.py'));app=exports['app']
 
 class WorkbenchTests(unittest.TestCase):
     @classmethod
@@ -24,15 +24,17 @@ class WorkbenchTests(unittest.TestCase):
         code,h,html=self.fetch('/');self.assertEqual(code,200);self.assertIn(b'Agent Crash Lab',html);self.assertIn("frame-ancestors 'none'",h['Content-Security-Policy'])
         self.assertEqual(self.json('/api/health')[1]['ok'],True)
         self.assertEqual(self.fetch('/../../session.json')[0],404)
-    def test_all_curated_cases_assess_expected_distinct_axes(self):
+    def test_catalog_and_curated_case_outcomes(self):
+        self.assertTrue(json.loads((ROOT/'web/catalog.json').read_bytes()) == exports['browser_catalog'](),
+                        'Catalog drift')
         results={}
         for c in app.CURATED:
             code,out=self.json('/api/run',{'id':c['id']});self.assertEqual(code,200);self.assertEqual(out['report']['invocation']['status'],'assessed');self.assertFalse(out['execution']['liveModel']);results[c['id']]=out['report']
         self.assertTrue(any(c['status']=='breached' for c in results['double-payment']['constraints']))
         self.assertTrue(all(u['status']=='passed' for u in results['double-payment']['utility']['required']))
-        self.assertTrue(all(c['status']=='within' for c in results['durable-recovery']['constraints']))
+        for name in ('durable-recovery','legitimate-installments'):
+            self.assertTrue(all(c['status']=='within' for c in results[name]['constraints']))
         self.assertTrue(any(u['status']=='failed' for u in results['paid-wrong-answer']['utility']['required']))
-        self.assertTrue(all(c['status']=='within' for c in results['legitimate-installments']['constraints']))
         self.assertTrue(any(c['intent']=='B' and c['status']=='unknown' for c in results['missing-evidence']['constraints']))
     def test_bundle_roundtrip_preserves_exact_bytes_and_result(self):
         code,b=self.json('/api/bundle',{'id':'double-payment'});self.assertEqual(code,200)
@@ -53,23 +55,30 @@ class WorkbenchTests(unittest.TestCase):
         self.assertEqual(self.json('/api/assess',{'format':'wrong','path':'../../session.json'})[0],400)
         self.assertEqual(self.fetch('/api/run',{'id':'double-payment'},{'Content-Length':str(app.MAX_BODY+1)})[0],413)
     def test_gate_cli_observed_failure_pass_and_uncertainty(self):
-        bundles=[]
-        for name,code in [('double-payment',1),('durable-recovery',0)]:bundles.append((self.json('/api/bundle',{'id':name})[1],code))
-        b=copy.deepcopy(bundles[1][0]);owner=json.loads(b['task_utf8']);owner['run']['closed_horizon']=False;owner['authority']['kind']='counterfactual';b['task_utf8']=json.dumps(owner);bundles.append((b,2))
-        b=copy.deepcopy(bundles[1][0]);owner=json.loads(b['task_utf8']);owner['constraints']=[];owner['authority']['kind']='counterfactual';b['task_utf8']=json.dumps(owner);bundles.append((b,2))
-        bundles.append(({**bundles[1][0],'unexpected':True},2))
+        cases=[('double-payment','',1),('durable-recovery','',0),
+               ('durable-recovery','open',2),('durable-recovery','none',2),
+               ('model-corrupt','none',1),('durable-recovery','extra',2)]
         temp=Path(tempfile.mkdtemp(prefix='Crash Lab CLI With Spaces '))
-        for i,(bundle,code) in enumerate(bundles):
+        for i,(name,mode,code) in enumerate(cases):
+            bundle=self.json('/api/bundle',{'id':name})[1]
+            if mode=='extra':
+                bundle['unexpected']=True
+            elif mode:
+                owner=json.loads(bundle['task_utf8']);owner['authority']['kind']='counterfactual'
+                if mode=='open':owner['run']['closed_horizon']=False
+                else:owner['constraints']=[]
+                bundle['task_utf8']=json.dumps(owner)
             file=temp/(str(i)+'.json');file.write_text(json.dumps(bundle))
             r=subprocess.run([sys.executable,'-I','-S',str(ROOT/'gate.py'),'--bundle',str(file)],cwd=temp,capture_output=True,timeout=10)
             self.assertEqual(r.returncode,code,r.stderr.decode());self.assertEqual(json.loads(r.stdout)['gate']['exitCode'],code)
-    def test_fresh_native_execution_receipts_and_process_evidence(self):
+    def test_archived_native_receipts_and_process_evidence(self):
         raw=(ROOT/'evidence/native-observation.json').read_bytes();data=json.loads(raw);pre=json.loads((ROOT/'evidence/native-precommit.json').read_text());summary=self.json('/api/native-result')[1]
         self.assertEqual(summary['evidenceSha256'],hashlib.sha256(raw).hexdigest());self.assertEqual(data['nativeSendAttempts'],5);self.assertTrue(data['ownedNodeStopped']);self.assertTrue(summary['successful'])
         for run in data['runs']:
             self.assertEqual([w['exitCode'] for w in run['workers']],[77,0,0]);self.assertTrue(run['ownedNodeStopped']);self.assertEqual(run['merchantBalanceIncrease'],run['expectedMerchantIncrease'])
             recover=run['workers'][1]['events'][-1];self.assertEqual(recover['recoveredWithoutNewSend'],run['policy']=='durable')
-            row=app.BASELINES['native-'+run['policy']];report=app.core.assess((ROOT/row['task']).read_bytes(),{k:(ROOT/v).read_bytes() for k,v in row['sources'].items()})
+            scenario={'id':'native','baseline':'native-'+run['policy']}
+            report=app.core.assess(*app.data_for(scenario))
             self.assertEqual(report['invocation']['status'],'assessed')
             for c in report['constraints']:
                 if c['metric']=='merchant_gross_principal':self.assertEqual(c['exact_total'],pre['expectedPolicies'][run['policy']][c['intent']])
@@ -83,6 +92,6 @@ class WorkbenchTests(unittest.TestCase):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--report');a=p.parse_args();start=time.perf_counter();suite=unittest.defaultTestLoader.loadTestsFromTestCase(WorkbenchTests);r=unittest.TextTestRunner(verbosity=2).run(suite)
-    doc={'atUtc':datetime.now(timezone.utc).isoformat(),'testsRun':r.testsRun,'successful':r.wasSuccessful(),'elapsedSeconds':time.perf_counter()-start,'python':sys.version,'coreSha256':hashlib.sha256((ROOT/'agent_crash_lab.py').read_bytes()).hexdigest(),'workbenchSha256':hashlib.sha256((ROOT/'workbench.py').read_bytes()).hexdigest(),'failures':[(str(t),s) for t,s in r.failures],'errors':[(str(t),s) for t,s in r.errors],'classification':'Executed local HTTP/CLI and recorded native causal assertions; no new chain/model trials in this test suite'}
+    doc={'atUtc':datetime.now(timezone.utc).isoformat(),'testsRun':r.testsRun,'successful':r.wasSuccessful(),'elapsedSeconds':time.perf_counter()-start,'python':sys.version,'coreSha256':app.CORE_SHA256,'workbenchSha256':hashlib.sha256((ROOT/'workbench.py').read_bytes()).hexdigest(),'failures':[(str(t),s) for t,s in r.failures],'errors':[(str(t),s) for t,s in r.errors],'classification':'Local HTTP/CLI and archived native evidence checks'}
     if a.report:Path(a.report).write_text(json.dumps(doc,indent=2)+'\n')
     raise SystemExit(0 if r.wasSuccessful() else 1)

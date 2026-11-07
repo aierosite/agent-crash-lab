@@ -1,26 +1,27 @@
 'use strict';
-// Optional WebAssembly host. All assessment rules remain in the exact Python core.
 const RUNTIME='https://cdn.jsdelivr.net/pyodide/v0.29.5/full/';
 const root=new URL('../',self.location.href),decoder=new TextDecoder('utf-8',{fatal:true}),loaded=new Set();
 let python,catalog,active=false;
 const digest=async bytes=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(x=>x.toString(16).padStart(2,'0')).join('');
 async function read(path){
  const expected=catalog.files[path];
- if(!expected||path.startsWith('/')||path.split('/').some(p=>p==='..'||p===''))throw Error('Unlisted release path');
- const response=await fetch(new URL(path,root));if(!response.ok)throw Error(`Release file unavailable: ${path}`);
+ if(!expected||path.split('/').some(p=>p==='..'||p===''))throw Error('Unlisted release path');
+ const url=new URL(path,root);url.searchParams.set('sha',expected.sha256);
+ const response=await fetch(url);if(!response.ok)throw Error(`Release file unavailable: ${path}`);
  const bytes=new Uint8Array(await response.arrayBuffer());
  if(bytes.byteLength!==expected.bytes||await digest(bytes)!==expected.sha256)throw Error(`Release file changed: ${path}. Reload after deployment finishes.`);
  return bytes;
 }
 async function stage(path){
  if(loaded.has(path))return;
- const bytes=await read(path),parts=path.split('/');parts.pop();if(parts.length)python.FS.mkdirTree('/app/'+parts.join('/'));
+ const bytes=await read(path),dir=path.slice(0,path.lastIndexOf('/')+1);
+ if(dir)python.FS.mkdirTree('/app/'+dir);
  python.FS.writeFile('/app/'+path,bytes);loaded.add(path);
 }
 async function boot(id){
  if(python)return;
- postMessage({id,progress:'Downloading Python 3.13 for this browser. First load may take a minute…'});
- const response=await fetch(new URL('catalog.json',self.location.href));if(!response.ok)throw Error('Browser catalog unavailable');
+ postMessage({id,progress:'Starting browser Python…'});
+ const response=await fetch(new URL('catalog.json',self.location.href),{cache:'reload'});if(!response.ok)throw Error('Browser catalog unavailable');
  catalog=await response.json();if(catalog.format!=='agent-crash-lab/browser-v1')throw Error('Unsupported browser catalog');
  importScripts(RUNTIME+'pyodide.js');
  python=await loadPyodide({indexURL:RUNTIME});python.FS.mkdir('/app');
@@ -37,25 +38,28 @@ async function route(path,body){
   for(const file of [row.task,...Object.values(row.sources)])await stage(file);
  }
  // User inputs are JSON data, never interpolated into executable Python.
- python.globals.set('request_json',JSON.stringify({path,body}));
- const result=python.runPython(`req=json.loads(request_json)
-if req['path']=='/api/assess':
-    value=app.assess_bundle(req['body'])
+ python.globals.set('path',path);
+ python.globals.set('body',body);
+ try{
+  return JSON.parse(python.runPython(`if path=='/api/assess':
+    try:
+        value=app.assess_bundle(app.decode(body.to_bytes()))
+    except (ValueError, RecursionError) as e:
+        value={'error':str(e)[:200] or 'Invalid bundle'}
 else:
-    scenario=app.CATALOG[req['body']['id']]
+    scenario=app.CATALOG[body.id]
     task,sources=app.data_for(scenario)
-    value=app.evaluate(task,sources,scenario) if req['path']=='/api/run' else {'format':'agent-crash-lab/bundle-v1','task_utf8':task.decode(),'sources_utf8':{k:v.decode() for k,v in sources.items()},'classification':scenario['kind']}
+    value=app.evaluate(task,sources,scenario) if path=='/api/run' else app.bundle(task,sources,scenario)
 if 'execution' in value:
-    value['execution']['mode']='actual-browser-python-assessment'
-    value['execution']['pythonVersion']=sys.version.split()[0]
-json.dumps(value)`);
- return JSON.parse(result);
+    value['execution'].update(mode='actual-browser-python-assessment',pythonVersion=sys.version.split()[0])
+json.dumps(value)`));
+ }finally{python.globals.delete('body');}
 }
 onmessage=async({data:{id,path,body}})=>{
  if(active){postMessage({id,error:'A browser inspection is already running'});return;}
  active=true;
  try{
-  if(body!==undefined&&new TextEncoder().encode(JSON.stringify(body)).byteLength>9*1024*1024)throw Error('Bundle exceeds 9 MiB');
+  if(path==='/api/assess'&&body.byteLength>9*1024*1024)throw Error('Bundle exceeds 9 MiB');
   await boot(id);const result=await route(path,body);postMessage({id,result});
  }catch(e){postMessage({id,error:String(e.message||e).trim().split('\n').pop().slice(0,300)});}
  finally{active=false;}

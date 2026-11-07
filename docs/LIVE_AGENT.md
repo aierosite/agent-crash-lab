@@ -15,9 +15,11 @@ In the final local batch, the independent reference agreed on **54 of 54** check
 Replay all recorded comparisons with standard-library Python 3.12 or newer.
 
 ```sh
-python -I -S tools/verify_live_agent.py
+python -I -S tools/verify_live_agent.py --replay
 python -I -S tools/verify_release.py --judge
 ```
+
+Replay evaluates the captured inputs with the current assessor and reports both its hash and the preregistered hash. Paired runs can share one archive digest. Their chain IDs and capture pointers identify the two records within that archive. The verifier requires a completed, nonempty batch. Recorded chain IDs and first finalized merchant-balance block hashes must be distinct. It rejects a nonzero external request count or a key export flag in the capture. Fresh trial verification requires an exact preregistered assessor match.
 
 Use the **Fresh live-agent trials** workflow in your own public fork for fresh seeds on a separate runner. It fetches the pinned Qwen GGUF, llama.cpp CPU runtime and NEAR sandbox and uses an isolated local chain for each trial. The job reports both oracle agreement and successful useful outputs. [Workflow and exact artifact URLs](../.github/workflows/fresh-agent.yml)
 

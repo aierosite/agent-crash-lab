@@ -1,55 +1,63 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Follow the money. Verify the work. A local NEAR agent payment and useful-output workbench.">
-<meta name="color-scheme" content="dark light">
-<title>Agent Crash Lab · Follow the money. Verify the work.</title>
-<link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script defer src="app.js"></script>
+<meta name="description" content="Inspect recorded NEAR payments and responses.">
+<title>Agent Crash Lab · NEAR receipt workbench</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="style.css?v=24">
+<script defer src="app.js?v=34"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to inspection</a>
 <header class="topbar">
-<a class="brand" href="" aria-label="Agent Crash Lab home"><span class="brand-icon" aria-hidden="true">ac</span><span>Agent Crash Lab</span></a>
-<div class="header-center"><span class="header-caption">Receipt analysis</span></div>
-<div class="topright"><span class="local-status">Runs locally</span><button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark theme"><span class="theme-swatch" aria-hidden="true"></span><span id="theme-label">Dark theme</span></button></div>
+<a class="brand" href="" aria-label="Agent Crash Lab home"><img src="icon.svg" alt="" width="32" height="32">Agent Crash Lab</a>
+<span class="local-status">Local replay</span><button id="theme-toggle">Use light theme</button>
 </header>
 <div class="app-shell">
 <aside class="sidebar">
-<div class="side-heading"><span>Example cases</span><span id="case-count">11</span></div>
-<nav id="scenarios" aria-label="Experiment scenarios"></nav>
-<div class="side-bottom"><p>Your recordings</p><p class="muted">Inspect your own exported JSON recording.</p><label class="upload-btn" for="upload">Import bundle<input id="upload" type="file" accept=".json,application/json"></label><button id="native-btn" class="text-button">Crash / restart comparison</button></div>
-<div class="side-foot">No wallet or API key needed.<br><a href="https://github.com/aierosite/agent-crash-lab/releases">Offline ZIP &amp; source</a></div>
+<div class="side-heading"><span id="case-file-label">Case file</span><span id="case-count"></span></div>
+<select id="case-select" aria-labelledby="case-file-label" aria-controls="main"><option value="" disabled selected>Choose a case</option></select>
+<nav id="scenarios" aria-label="Experiment cases"></nav>
+<div class="side-bottom"><label class="upload-btn">Import bundle<input id="upload" type="file" accept=".json,application/json"></label><button id="native-btn">Crash &amp; restart</button></div>
 </aside>
 <main id="main" tabindex="-1">
-<div class="page-context"><span>Examples <span class="context-slash">/</span> <strong>Inspection</strong></span><span>NEAR native receipts</span></div>
-<div class="eyebrow"><span id="scenario-kind">CONTROLLED RECORDING</span><span class="eyebrow-line" aria-hidden="true">/</span><span id="scenario-number">EXPERIMENT 01</span></div>
-<div class="intro-row"><h1 id="title">Duplicate payment after restart</h1><p id="description" class="description">Inspect the outcome of a task, not just the success of a transaction.</p></div>
-<section class="control-bar" aria-label="Run controls"><div class="control-question"><div><span class="control-label">Inspection question</span><p id="question">Did the agent finish within its payment authority?</p></div></div><button id="run" class="run-button"><span>Run inspection</span></button></section>
-<div id="error" class="error-box" role="alert" hidden></div>
-<div id="progress" class="progress" role="status" aria-live="polite">Preparing the local engine…</div>
-<p id="browser-note" class="muted" hidden>Inputs are assessed in this tab. The browser edition downloads Python from jsDelivr; it sends no inputs to an assessment server. Use the offline ZIP if you prefer a local-only runtime.</p>
-<section id="results" hidden>
-<div class="results-bar"><div><span id="run-state">Inspection complete</span><span id="timing" class="muted"></span></div><div class="results-actions"><button id="download" class="text-button">Download report</button><button id="export" class="text-button export">Export bundle</button></div></div>
-<div class="verdict-grid">
-<article class="verdict" id="finance-card"><div class="card-top"><span class="card-kicker">Payment authority</span></div><div class="verdict-value" id="finance-value">—</div><p id="finance-note"></p><div class="card-foot">Intent-bound, exact principal</div></article>
-<article class="verdict" id="utility-card"><div class="card-top"><span class="card-kicker">Useful work</span></div><div class="verdict-value" id="utility-value">—</div><p id="utility-note"></p><div class="card-foot">Recorded output vs. declared reference</div></article>
-<article class="verdict context-card"><div class="card-top"><span class="card-kicker">Evidence coverage</span></div><div class="verdict-value" id="coverage-value">—</div><p id="coverage-note"></p><div class="card-foot"><span id="source-label">Local capture / finite profile</span></div></article>
+<section aria-labelledby="title">
+<div class="folio"><span class="eyebrow"><span id="scenario-number">Case file</span><span aria-hidden="true">/</span><span id="scenario-kind">Local capture</span></span></div>
+<div class="case-lead">
+<div><h1 id="title">Inspect a recorded run</h1><p id="description" class="description"></p></div>
+<figure id="finding" tabindex="-1" hidden>
+<figcaption id="finding-label"></figcaption>
+<p class="finding-amount"><strong id="finding-total"></strong><span id="finding-unit">NEAR</span></p>
+<p id="finding-caption"></p>
+<div id="finding-scale" aria-hidden="true" hidden>
+<svg viewBox="0 0 1000 12" preserveAspectRatio="none"><rect class="finding-track" width="1000" height="8" y="2"/><path id="finding-fill"/><path id="finding-excess"/><g stroke="var(--paper)" stroke-width="5"><path id="finding-cap" vector-effect="non-scaling-stroke"/></g><use href="#finding-cap" stroke="var(--ink)" stroke-width="2"/></svg>
+<div class="finding-key"><span>Committed</span><span>Limit</span><span id="finding-over-key" hidden>Above limit</span></div>
 </div>
-<div class="tab-row" role="tablist" aria-label="Inspection details"><button class="tab active" role="tab" aria-selected="true" id="tab-overview" aria-controls="panel-overview" data-tab="overview">Overview</button><button class="tab" role="tab" aria-selected="false" id="tab-evidence" aria-controls="panel-evidence" data-tab="evidence">Causal evidence <span id="evidence-count"></span></button><button class="tab" role="tab" aria-selected="false" id="tab-raw" aria-controls="panel-raw" data-tab="raw">Raw report</button><button class="tab" role="tab" aria-selected="false" id="tab-scope" aria-controls="panel-scope" data-tab="scope">Trust &amp; scope</button></div>
-<section id="panel-overview" class="tab-panel" role="tabpanel" aria-labelledby="tab-overview">
-<div class="section-heading"><div><h2>Payments by intent</h2></div><span>Native NEAR · gas excluded</span></div>
+<button id="finding-proof" hidden></button>
+</figure>
+</div>
+<section class="control-bar" aria-label="Run controls"><p id="question">Choose a case.</p><button id="run">Run inspection</button></section>
+</section>
+<div id="error" role="alert" hidden></div>
+<p id="browser-note" hidden>Python via jsDelivr.</p>
+<section id="results" hidden>
+<div class="results-bar"><div class="results-meta"><span id="run-state"></span><span id="timing"></span></div><div class="results-actions"><button id="download">Download report</button><button id="export">Export bundle</button></div></div>
+<div class="verdict-grid" id="verdicts"></div>
+<div class="tab-row" role="tablist" aria-label="Inspection details"><button class="tab" id="tab-overview">Overview</button><button class="tab" id="tab-evidence">Causal evidence <span id="evidence-count"></span></button><button class="tab" id="tab-raw">Raw report</button><button class="tab" id="tab-scope">Trust &amp; scope</button></div>
+<section id="panel-overview">
+<header><h2>Payments by intent</h2><span>Native NEAR · gas excluded</span></header>
 <div id="intents"></div>
-<div class="insight"><div><strong id="insight-title"></strong><p id="insight-body"></p></div></div>
-<div class="section-heading"><div><h2>Recorded task outputs</h2></div><span>Checked against the declared reference</span></div><div id="utility-list"></div>
-<details class="constraints"><summary>Inspect all declared constraints</summary><div id="constraint-list"></div></details>
+<header><h2>Task outputs</h2><a href="#finding">Back to finding</a></header><div id="utility-list"></div>
+<details class="constraints"><summary>Declared constraints</summary><div id="constraint-list"></div></details>
 </section>
-<section id="panel-evidence" class="tab-panel" role="tabpanel" aria-labelledby="tab-evidence" hidden><div class="section-heading"><h2>Receipt details</h2><span>Native execution facts</span></div><p class="muted evidence-intro">Ordinary nonzero native principal is shown first. Expand a fact for its bound source pointers. Repeated RPC observations are not new payments.</p><div id="evidence-list"></div></section>
-<section id="panel-raw" class="tab-panel" role="tabpanel" aria-labelledby="tab-raw" hidden><div class="section-heading"><h2>The actual engine response</h2><button id="copy" class="text-button">Copy JSON</button></div><pre id="raw"></pre></section>
-<section id="panel-scope" class="tab-panel" role="tabpanel" aria-labelledby="tab-scope" hidden><div class="scope-grid"><article><span class="card-kicker">Assessment</span><h2>What is being verified</h2><p>Committed native principal, task intent, recipient/count limits, recovery obligations and recorded useful output.</p><p>A task can pass while payment rules fail. Missing evidence stays unknown; equal-price intents remain independent.</p></article><article><span class="card-kicker">Assumptions</span><h2>What is trusted</h2><p>The declared task owner, task reference, closed recording horizon and authenticity of the controlled local capture. File hashes establish consistency, not a consensus proof.</p><p>This finite sandbox profile does not authenticate signatures, run models, prove net loss or prevent payments.</p></article></div><dl class="scope-facts" id="scope-facts"></dl><p class="scope-warning">Conclusions are scoped. Unknown, conflict and unsupported remain distinct. This is not a production security audit.</p></section>
+<section id="panel-evidence" aria-describedby="evidence-intro" hidden><header><h2>Receipt actions</h2><a id="evidence-back"></a></header><p id="evidence-intro"></p><div id="evidence-list"></div></section>
+<section id="panel-raw" hidden><header><h2>Report JSON</h2><button id="copy">Copy JSON</button></header><form id="raw-find"><input name="query" type="search" aria-label="Find in report" placeholder="Case-sensitive" required> <button>Find next</button> <output id="raw-match"></output></form><pre id="raw" tabindex="0" aria-label="Engine report JSON"></pre></section>
+<section id="panel-scope" hidden><h2>Checks and trust</h2><p>Trusts owner scope, reference and capture. Hashes bind bytes. No wallet, API key, model calls, transfers, signature checks, loss estimates or blocking.</p><dl id="scope-facts"></dl></section>
 </section>
-<footer><span>Agent Crash Lab · reports generated locally.</span><span>Assessment engine <span id="version">0.1.0</span></span></footer>
+<footer><a href="https://github.com/aierosite/agent-crash-lab/releases">Offline ZIP &amp; source</a> · Engine <span id="version"></span></footer>
 </main></div>
-<dialog id="native-dialog"><div class="dialog-head"><div><span class="card-kicker">Recorded local experiment</span><h2>Two ways to recover a payment</h2></div><button id="close-native" aria-label="Close native run">×</button></div><div id="native-content"></div></dialog>
+<p id="inspection-status" class="sr-only" role="status"></p>
+<dialog id="native-dialog" aria-labelledby="native-title"><div class="dialog-head"><div><span class="card-kicker">Local test</span><h2 id="native-title">Recovery after a crash</h2></div><button id="close-native" aria-label="Close">×</button></div><div id="native-content"></div></dialog>
 </body>
 </html>

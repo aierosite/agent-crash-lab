@@ -1,1 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="2" fill="#faf9f6"/><rect x="4" y="4" width="32" height="32" fill="none" stroke="#85523d"/><text x="20" y="27" text-anchor="middle" font-family="Georgia,serif" font-size="23" font-style="italic" fill="#85523d">ac</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-20 -20 40 40">
+  <circle r="15" fill="#252135" stroke="#aca0c6" stroke-width="1.4"/>
+  <ellipse rx="19" ry="6.5" transform="rotate(-38)" fill="none" stroke="#d6c6ff" stroke-width="1.6"/>
+  <circle r="4.5" fill="#d6c6ff"/>
+  <circle cx="13.2" cy="-11.6" r="2.5" fill="#a7e4cb"/>
+</svg>

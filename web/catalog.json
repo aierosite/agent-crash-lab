@@ -6,9 +6,9 @@
       "baseline": "live-normal-naive",
       "title": "A model agent pays twice",
       "short": "Live agent retry",
-      "group": "Recorded model run",
+      "group": "Recorded Qwen run",
       "kind": "live-model",
-      "description": "Local Qwen selects the purchase and the inventory answer. A worker crashes after FINAL and the naive retry sends a new payment.",
+      "description": "Qwen proposed the purchase and answer. After a post-FINAL worker crash, a naive retry paid again.",
       "question": "Which task exceeded its authority, and did the recorded answer pass?"
     },
     {
@@ -16,9 +16,9 @@
       "baseline": "live-normal-durable",
       "title": "The same agent recovers its payment",
       "short": "Live agent recovery",
-      "group": "Recorded model control",
+      "group": "Recorded Qwen control",
       "kind": "live-model",
-      "description": "The same model and task run with a durable transaction hash. Recovery checks that hash and the independent same-price task still pays.",
+      "description": "The host recovered A from its saved transaction hash. Independent same-price B still paid.",
       "question": "Did recovery preserve both the payment limit and useful work?"
     },
     {
@@ -26,9 +26,9 @@
       "baseline": "live-corrupt-durable",
       "title": "A correct payment buys corrupted data",
       "short": "Live agent, altered data",
-      "group": "Recorded model control",
+      "group": "Recorded Qwen control",
       "kind": "live-model",
-      "description": "The merchant served an altered inventory document over local HTTP. The agent selected an answer from the data it actually received.",
+      "description": "The local merchant served altered inventory data. Qwen proposed an answer from the delivered rows.",
       "question": "Do both the native settlement and the original data requirement pass?"
     },
     {
@@ -36,7 +36,7 @@
       "baseline": "native-naive",
       "title": "Duplicate payment after restart",
       "short": "Double payment",
-      "group": "Fresh native crash",
+      "group": "Sandbox crash replay",
       "kind": "recorded",
       "description": "A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.",
       "question": "Did A spend twice while both tasks succeeded?"
@@ -46,7 +46,7 @@
       "baseline": "native-durable",
       "title": "Recovering a settled payment",
       "short": "Recover without repaying",
-      "group": "Fresh native control",
+      "group": "Sandbox control replay",
       "kind": "recorded",
       "description": "After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.",
       "question": "Can recovery finish without a second A payment?"
@@ -336,8 +336,8 @@
       "sha256": "8d26e97f5e8c2b5fa143ba9aab0d2c1be6cff77357307c369956fcf1b37a067b"
     },
     "agent_crash_lab.py": {
-      "bytes": 56830,
-      "sha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b"
+      "bytes": 56698,
+      "sha256": "fe1bfd13911e0db2cf414560ad2c8fd64a2acce915b6687ede6c7a2a0553e55a"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -620,8 +620,8 @@
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
     "workbench.py": {
-      "bytes": 12849,
-      "sha256": "52a62fce241757ef204ebb3ddcb85779ae624ccd1b89ddc766700c2afd629ab4"
+      "bytes": 13234,
+      "sha256": "c2a7765f043e2fa94fd9b87caa279b912e10b2b6765ae4283796ec727de15072"
     }
   }
 }

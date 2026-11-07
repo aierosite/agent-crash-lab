@@ -4,19 +4,21 @@
 
 An agent can return the correct answer and still pay twice for the same task. A successful payment can also buy an incorrect answer. Crash Lab checks both questions independently, using the actual native receipt graph and a separately declared task reference.
 
-![The actual Python-in-browser workbench](docs/workbench-browser.png)
+![The Python-in-browser workbench in the v0.5.0 release](docs/workbench-browser.png)
 
-## Live-agent evidence · v0.5.0
+## Review build · v0.5.1
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.5.0)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.5.1)
 
-Open **Live agent retry**. Qwen approved an authorized 0.09 NEAR quote, the payment settled, and the worker crashed before acknowledgement. Retrying sent another 0.09 NEAR for the same task. **Live agent recovery** reuses the saved hash. In both runs the same-price task B settles independently.
+This update publishes the v34 workbench. Malformed diagnostic links show an actionable error and a valid retry restores the report. The browser UI is 57,904 bytes within the 57,907-byte budget. The release includes the current receipt citations, raw-report navigation and independently replayable evidence.
+
+Open **Live agent retry**. Qwen proposed buying at 0.09 NEAR. The host checked the quote and the worker crashed after FINAL. The naive retry paid a second 0.09 NEAR for A. **Live agent recovery** reuses the saved hash. In both captures the same-price task B settles independently.
 
 Across eight owned sandbox chains, Qwen 1.5B made 41 inference calls. The experiment recorded 18 transfers and seven post-FINAL process exits. A deterministic quote check blocked six over-budget BUY proposals. A calculator corrected ten model selections using the delivered rows. With that correction, 12 of 14 required outputs passed. The other two were the predeclared altered-document deliveries.
 
 A separate process measured finalized merchant balance changes in each serial attempt window and graded the delivered content and answer. Crash Lab agreed on **54 of 54** per-intent principal, settlement-count and utility comparisons. See the [trial design and replay instructions](docs/LIVE_AGENT.md) and [recorded results](verification/live-agent.json).
 
-The browser runs Python through pinned Pyodide 0.29.5 and replays captured evidence. The optional model runner uses separate Linux dependencies. The desktop replay and judge checks use standard-library Python.
+The workbench assesses recorded evidence. **Local assessment** and **browser assessment** time the inspector. The historical model calls and transfers belong to the archived trials. Browser replay uses pinned Pyodide 0.29.5 and verifies staged files against the refreshed catalog. The desktop judge checks use standard-library Python.
 
 ## Reproduce the judge checks
 
@@ -26,16 +28,16 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and four entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 26 core tests, nine workbench/HTTP/CLI tests eight reserved verifier invocations and the separate live-agent oracle replay. A changed or missing release file prevents suite execution; `verified` is consistency, not signed authenticity. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and four entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 26 core tests, nine workbench/HTTP/CLI tests, eight reserved verifier invocations and the separate live-agent oracle replay. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
 
 **Why task-level verification?** A payment can settle correctly while violating the task's total spending authority, and a correctly priced purchase can return the wrong answer. Crash Lab binds the declared task to native effects and recorded output. It is a regression inspector for developers integrating agents, not a new wallet or an enforcement contract.
 
 | Judge action | Observable result | Evidence boundary |
 |---|---|---|
-| Open Double payment | A commits 0.2 against a 0.1 cap; independent B commits 0.1; both task outputs pass | Fresh recorded local native process experiment |
-| Open Recover without repaying | A and B each commit 0.1 after the same crash window | Reference journal control, not general exactly-once settlement |
-| Open Paid, wrong answer | Financial checks can be within scope while output fails | Declared reference and actually recorded answer |
-| Open Missing evidence | A's breach survives; B's dependent total is Unknown | Explicit synthetic receipt-body removal |
+| Open Live agent retry, then Review 2 linked actions | A commits 0.18 NEAR against a 0.09 limit and both outputs pass | Two distinct A transactions in an owned sandbox capture |
+| Open Live agent recovery | A and B each commit 0.09 NEAR and both outputs pass | Recorded journal control on its own sandbox chain |
+| Open Live agent, altered data, then Review recorded output | B commits its allowed 0.11 NEAR while its document and answer fail | Receipt and task-reference checks use separate evidence |
+| Open Missing evidence | A remains in breach and B’s dependent total is Unknown | Synthetic removal of a receipt body |
 
 ## Run it in one command
 
@@ -45,7 +47,7 @@ Requires **Python 3.12+**. The assessor, browser workbench, tests and recorded d
 python -I -S launch.py
 ```
 
-Windows: double-click **Start Crash Lab.cmd**. The launcher chooses a free loopback port and opens the browser. Ctrl+C stops its own server. For a fixed port or headless environment:
+On Linux, use `python3` if the interpreter is installed under that name. On Windows, double-click **Start Crash Lab.cmd**. The launcher chooses a free loopback port and opens the browser. Ctrl+C stops its own server. For a fixed port or headless environment:
 
 ```sh
 python -I -S workbench.py --port 8765
@@ -54,7 +56,7 @@ python -I -S workbench.py --port 8765
 
 ### Receipt workbench · v0.3.0
 
-The interface uses a quiet report layout with an [optional dark theme](docs/workbench-dark.png). A semantic intent ledger places allowed and committed principal beside the **independently checked** task output. Missing exact totals remain **Unknown**, with any known subtotal shown separately. Report and bundle exports are available on mobile as well. [Observed browser regression checks](verification/browser-qa.json) cover all eight examples, rejected input, theme persistence, keyboard tabs and desktop/tablet/mobile widths.
+The case header highlights the primary finding for a named intent, with links to the recorded receipts or task output when available. Exact committed amounts and known subtotals are labeled separately. The workbench remembers your light or dark theme preference. A semantic intent ledger places allowed and committed principal beside the **independently checked** task output. Missing exact totals remain **Unknown**, with any known subtotal shown separately. Report and bundle exports are available on mobile as well. [Observed browser regression checks](verification/browser-qa.json) cover all eight examples, rejected input, theme persistence, keyboard tabs and desktop/tablet/mobile widths.
 
 The published 72-second video records the original v0.2.0 appearance. Current screenshots and source show v0.3.0; the recorded payment experiment and assessment rules are unchanged.
 
@@ -88,7 +90,7 @@ This release keeps the same code files, features and dependencies. Every refinem
 1. Select **Double payment** and click **Run inspection**. See A commit **0.2 NEAR** against **0.1**, while B independently commits its allowed **0.1**. Both required answers are correct.
 2. Select **Recover without repaying**. The actual reference worker also crashed after FINAL, but its pre-broadcast hash journal lets it re-fetch A's receipt. A and B each commit **0.1 NEAR** and useful work passes.
 3. Open **Crash / restart comparison**. Inspect the recorded process exit codes, two policy outcomes, balance corroboration and capture hash.
-4. Open **Causal evidence** and expand a receipt. The transaction, containing outcome, action index and source JSON pointers are inspectable. A repeated RPC read is not another payment.
+4. Open **Causal evidence** and expand a receipt. Use **Save citation** to export the exact action index, source pointers and hashes. [Resolve the citation offline](docs/INTEGRATION.md#verify-a-receipt-citation-offline).
 5. Select **Paid, wrong answer**. Financial constraints can be within scope while required output fails. A permitted free source can still pass.
 6. Select **Missing evidence**. This explicitly synthetic mutation keeps A's known breach and marks B's dependent claims unknown.
 7. **Export input bundle**, import it again, then download the actual engine report. Sources retain their exact UTF-8 bytes and hashes. A modified source without an updated owner binding is rejected.
@@ -123,7 +125,7 @@ python -I -S gate.py --bundle recovered-task.json
 # exit 0: all declared constraints within scope, required outputs passed
 ```
 
-`gate.py`: **0** = all declared checks concluded within/passed; **1** = at least one observed breach or required-output failure; **2** = no financial constraints, rejected input, or inconclusive checks and no observed failure. Undeclared useful-output obligations are not invented. An observed breach takes precedence over other unresolved constraints.
+`gate.py` returns **0** when declared payment constraints are within scope, financial evidence is complete and any required outputs pass. It returns **1** for an observed breach or required-output failure, including an output failure without declared payment limits. Rejected inputs, missing payment constraints and unresolved checks without an observed failure return **2**. Only declared output obligations are assessed.
 
 The lower-level assessor has a different exit contract: **0 means assessment ran**, not financial success; 2 rejected input, 1 unexpected internal failure.
 
@@ -160,7 +162,7 @@ No universal security score, production audit, independent model benchmark, firs
 
 ## Originality, provenance and hackathon disclosure
 
-This project was developed in November 2026. The passive core was freshly authored after the original research gate on Nov 3. This version adopts that unchanged 56,644-byte core, the original controlled recordings/tests, and adds the workbench, CI interface and newly authored native process experiment. The older lab runner is not imported by the product.
+This project was developed in November 2026. The passive core was authored after the original research gate on Nov 3. The workbench, CI interface and native process experiment build on that core. The receipt index accelerates repeated observations in the current assessor. The replay verifier reports both the current and preregistered assessor hashes. [Replay procedure](docs/LIVE_AGENT.md)
 
 Exact math, receipt reconciliation, replay and recovery testing have substantial prior art. **Workcell** is particularly close in adversarial money-flow/replay/oracle design; **Quittance** has reconciliation and uncertainty prior art. Our narrow contribution is the small developer workflow that binds **owner intent + native effects + actually useful recorded output**, accepting legitimate controls alongside failures. [Pinned reviewed sources and review limits](docs/PRIOR_ART.json) are included; no competitor runtime source is copied into this core.
 

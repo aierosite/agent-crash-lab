@@ -21,14 +21,14 @@ The original experiment uses scripted workers on two owned local NEAR sandbox ch
 ## What reviewers can reproduce
 
 1. Run the judge command to check release consistency, core behavior, workbench integration, reserved cases and the separate oracle replay.
-2. Open the browser edition or launch `python -I -S launch.py` and follow the README's four-case table.
+2. Open the workbench and follow Live agent retry to its two linked receipts. Open Live agent, altered data to its failed document and answer checks. The README also includes the recovery and missing-evidence controls.
 3. Export/import the exact bundle; changing a source without its owner hash produces input rejection.
 4. Inspect the receipt source pointers and the recorded crash comparison.
 5. Read [trust boundaries](ARCHITECTURE.md), [prior art](PRIOR_ART.json) and the limitations in README.
 
 ## Current official rules check
 
-Official source: https://nearhackathon.com/HACKATHON.md, re-read on 5 November 2026 (Tehran). Retrieved bytes SHA256: `86654c13521fe629493bf498d41c0f7573047867d67fcdd8c2543411fc13062f`.
+Official source: https://nearhackathon.com/HACKATHON.md, re-read on 6 November 2026 (Tehran). Retrieved bytes SHA256: `86654c13521fe629493bf498d41c0f7573047867d67fcdd8c2543411fc13062f`.
 
 Development ends **14 November 2026 at 23:59 UTC / 15 November at 03:29 Tehran**. Local-only prototypes are eligible with public reproducible code and a public X video. AI tools screen reproducibility and claims; humans decide awards. Track prompts are examples, not mandatory integrations. One submission per project; corrections use the organizer's request-changes process, not another entry. The current entry's repository and demo URLs remain valid.
 

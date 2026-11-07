@@ -1,21 +1,24 @@
-"""Local, bounded workbench. It assesses bytes; it never signs or sends funds."""
+"""Local workbench for bounded evidence assessment."""
 from pathlib import Path
-import argparse, hashlib, importlib.util, json, secrets, threading, time
+from types import ModuleType
+import argparse, hashlib, json, re, secrets, socket, threading, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 ROOT=Path(__file__).resolve().parent
-_spec=importlib.util.spec_from_file_location('acl_core',ROOT/'agent_crash_lab.py')
-core=importlib.util.module_from_spec(_spec);_source=(ROOT/'agent_crash_lab.py').read_bytes()
-exec(compile(_source,_spec.origin,'exec'),core.__dict__);CORE_SHA256=hashlib.sha256(_source).hexdigest();del _source
+NATIVE_RESULT=ROOT/'verification/native-crash-comparison.json'
+_path=ROOT/'agent_crash_lab.py'
+core=ModuleType('acl_core');_source=_path.read_bytes()
+exec(compile(_source,str(_path),'exec'),core.__dict__);CORE_SHA256=hashlib.sha256(_source).hexdigest();del _source
 MAX_BODY=9*1024*1024
 SLOTS=threading.BoundedSemaphore(4)
+DRAINS=threading.BoundedSemaphore(4)
 BASELINES={r['name']:r for r in json.loads((ROOT/'BASELINES.json').read_text())}
 CURATED=[
- {'id':'model-retry','baseline':'live-normal-naive','title':'A model agent pays twice','short':'Live agent retry','group':'Recorded model run','kind':'live-model','description':'Local Qwen selects the purchase and the inventory answer. A worker crashes after FINAL and the naive retry sends a new payment.','question':'Which task exceeded its authority, and did the recorded answer pass?'},
- {'id':'model-recovery','baseline':'live-normal-durable','title':'The same agent recovers its payment','short':'Live agent recovery','group':'Recorded model control','kind':'live-model','description':'The same model and task run with a durable transaction hash. Recovery checks that hash and the independent same-price task still pays.','question':'Did recovery preserve both the payment limit and useful work?'},
- {'id':'model-corrupt','baseline':'live-corrupt-durable','title':'A correct payment buys corrupted data','short':'Live agent, altered data','group':'Recorded model control','kind':'live-model','description':'The merchant served an altered inventory document over local HTTP. The agent selected an answer from the data it actually received.','question':'Do both the native settlement and the original data requirement pass?'},
- {'id':'double-payment','baseline':'native-naive','title':'Duplicate payment after restart','short':'Double payment','group':'Fresh native crash','kind':'recorded','description':'A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.','question':'Did A spend twice while both tasks succeeded?'},
- {'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Fresh native control','kind':'recorded','description':'After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.','question':'Can recovery finish without a second A payment?'},
+ {'id':'model-retry','baseline':'live-normal-naive','title':'A model agent pays twice','short':'Live agent retry','group':'Recorded Qwen run','kind':'live-model','description':'Qwen proposed the purchase and answer. After a post-FINAL worker crash, a naive retry paid again.','question':'Which task exceeded its authority, and did the recorded answer pass?'},
+ {'id':'model-recovery','baseline':'live-normal-durable','title':'The same agent recovers its payment','short':'Live agent recovery','group':'Recorded Qwen control','kind':'live-model','description':'The host recovered A from its saved transaction hash. Independent same-price B still paid.','question':'Did recovery preserve both the payment limit and useful work?'},
+ {'id':'model-corrupt','baseline':'live-corrupt-durable','title':'A correct payment buys corrupted data','short':'Live agent, altered data','group':'Recorded Qwen control','kind':'live-model','description':'The local merchant served altered inventory data. Qwen proposed an answer from the delivered rows.','question':'Do both the native settlement and the original data requirement pass?'},
+ {'id':'double-payment','baseline':'native-naive','title':'Duplicate payment after restart','short':'Double payment','group':'Sandbox crash replay','kind':'recorded','description':'A scripted worker crashes after FINAL, before acknowledgement. Retry pays A twice; equal-price B is independent.','question':'Did A spend twice while both tasks succeeded?'},
+ {'id':'durable-recovery','baseline':'native-durable','title':'Recovering a settled payment','short':'Recover without repaying','group':'Sandbox control replay','kind':'recorded','description':'After the same crash, a pre-broadcast journal recovers the known payment. Independent B still pays.','question':'Can recovery finish without a second A payment?'},
  {'id':'paid-wrong-answer','baseline':'merchant-utility-0','title':'Paid output that failed its task','short':'Paid, wrong answer','group':'Useful completion','kind':'recorded','description':'Valid, corrupted, denied and free deliveries share an independent task reference. HTTP 200 alone is insufficient.','question':'Did the recorded output satisfy its task?'},
  {'id':'legitimate-installments','baseline':'split-settlement','title':'An allowed split payment','short':'Allowed installments','group':'Negative control','kind':'recorded','description':'The declared budget permits split payments. Distinct hashes do not alone prove duplicate intent.','question':'Are these installments within the declared budget?'},
  {'id':'failed-recovery','baseline':'failed-refund','title':'Refunds that did not settle','short':'Failed recovery','group':'Recovery','kind':'recorded','description':'A failed payment creates a recovery obligation. Only committed recovery to its declared destination counts.','question':'Was the failed intent actually refunded?'},
@@ -24,6 +27,9 @@ CURATED=[
  {'id':'terminal-output','baseline':'split-settlement','title':'Successful final delivery','short':'Eventual completion','group':'Useful completion','kind':'recorded','description':'An allowed intermediate 402 is separate from the final delivery and recorded answer.','question':'Was the final required output correct?'}
 ]
 CATALOG={r['id']:r for r in CURATED}
+
+def compact(value, ensure_ascii=False):
+    return json.dumps(value,ensure_ascii=ensure_ascii,separators=(',',':')).encode()
 
 def data_for(scenario):
     row=BASELINES[scenario['baseline']]
@@ -35,16 +41,32 @@ def data_for(scenario):
         view=capture['rpcObservations'][23]['response']['result']
         initial=view['transaction_outcome']['outcome']['status']['SuccessReceiptId']
         view['receipts']=[r for r in view['receipts'] if r['receipt_id']!=initial]
-        sources['recording']=json.dumps(rec,separators=(',',':')).encode()
+        sources['recording']=compact(rec, True)
         owner['sources']['recording']=hashlib.sha256(sources['recording']).hexdigest()
         owner['authority']['kind']='counterfactual'
         owner['authority']['note']='Synthetic missing-body mutation of controlled recording; not a fresh native history.'
-        task=json.dumps(owner,separators=(',',':')).encode()
+        task=compact(owner, True)
     return task,sources
 
 def evaluate(task,sources,scenario=None):
     started=time.perf_counter();report=core.assess(task,sources)
     return {'scenario':scenario,'report':report,'execution':{'mode':'actual-local-assessment','elapsedMs':round((time.perf_counter()-started)*1000,3),'coreSha256':CORE_SHA256,'coreVersion':core.VERSION,'liveModel':False,'networkTransactions':0}}
+
+def bundle(task,sources,scenario):
+    return {'format':'agent-crash-lab/bundle-v1','task_utf8':task.decode(),'sources_utf8':{k:v.decode() for k,v in sources.items()},'classification':scenario['kind']}
+
+
+def decode(raw):
+    def unique(pairs):
+        value=dict(pairs)
+        if len(value)!=len(pairs):raise ValueError('Duplicate JSON member')
+        return value
+    def constant(token):raise ValueError('Invalid JSON number: '+token)
+    text=raw.decode(json.detect_encoding(raw))
+    quoted=r'"(?:[^"\\]++|\\.)*+(?:"|\\?\Z)'
+    if re.match(r'(?:[^"\[\]{},]*+(?:'+quoted+r'|[\[\]{},])){4097}',text,re.S):
+        raise ValueError('Bundle structure exceeds 4096 tokens')
+    return json.loads(text,object_pairs_hook=unique,parse_constant=constant)
 
 def assess_bundle(b):
     if type(b) is not dict or set(b)-{'format','task_utf8','sources_utf8','classification'}:raise ValueError('Unexpected bundle fields')
@@ -55,7 +77,7 @@ def assess_bundle(b):
 
 def gate(report):
     """Failure takes precedence; missing authority or evidence never passes."""
-    if report.get('invocation',{}).get('status')!='assessed' or not report['constraints']:return 2
+    if report.get('invocation',{}).get('status')!='assessed':return 2
     cs={c['status'] for c in report['constraints']};us={u['status'] for u in report['utility']['required']}
     if 'breached' in cs or 'failed' in us:return 1
     return 0 if report['coverage']['financial_scope_complete'] and cs=={'within'} and us<={'passed'} else 2
@@ -71,69 +93,69 @@ class Handler(BaseHTTPRequestHandler):
     server_version='CrashLab/1.0'
     def log_message(self,*_):pass
     def send(self,status,body,kind='application/json; charset=utf-8'):
-        if not isinstance(body,bytes):body=json.dumps(body,ensure_ascii=False,separators=(',',':')).encode()
+        if not isinstance(body,bytes):body=compact(body)
         self.send_response(status)
-        for key,value in {'Content-Type':kind,'Content-Length':str(len(body)),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'"}.items():self.send_header(key,value)
-        self.end_headers()
-        try:self.wfile.write(body)
-        except (BrokenPipeError,ConnectionResetError):pass
+        for key,value in {'Content-Type':kind,'Content-Length':str(len(body)),'Cache-Control':'no-store','Connection':'close','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'"}.items():self.send_header(key,value)
+        try:self.end_headers();self.wfile.write(body)
+        except ConnectionError:pass
     def origin_ok(self):
         port=self.server.server_port
         valid={f'127.0.0.1:{port}',f'localhost:{port}'}
-        if self.headers.get('Host') not in valid:return False
         origin=self.headers.get('Origin')
-        return not origin or origin in {'http://'+x for x in valid}
+        return self.headers.get('Host') in valid and (not origin or origin in {'http://'+x for x in valid})
     def do_GET(self):
         if not self.origin_ok():return self.send(403,{'error':'Local origin required'})
         path=urlsplit(self.path).path
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
-            file=ROOT/'verification/native-crash-comparison.json'
-            return self.send(200,json.loads(file.read_text())) if file.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
+            return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
         if path=='/api/health':return self.send(200,{'ok':True,'version':'0.5.0','coreVersion':core.VERSION})
-        files={'/':'index.html','/app.js':'app.js','/style.css':'style.css','/icon.svg':'icon.svg'}
-        if path not in files:return self.send(404,{'error':'Not found'})
-        file=ROOT/'web'/files[path]
-        kind={'html':'text/html; charset=utf-8','js':'text/javascript; charset=utf-8','css':'text/css; charset=utf-8','svg':'image/svg+xml'}[file.suffix[1:]]
-        self.send(200,file.read_bytes(),kind)
+        if path not in ('/','/app.js','/style.css','/icon.svg'):return self.send(404,{'error':'Not found'})
+        file=ROOT/'web'/(path[1:] or 'index.html')
+        mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
+        self.send(200,file.read_bytes(),mime+'; charset=utf-8')
     def native_status(self):
-        file=ROOT/'verification/native-crash-comparison.json'
-        if not file.exists():return {'available':False}
-        r=json.loads(file.read_text());return {'available':True,'atUtc':r.get('atUtc'),'successful':r.get('successful'),'classification':r.get('classification')}
+        if not NATIVE_RESULT.exists():return {'available':False}
+        result=json.loads(NATIVE_RESULT.read_bytes())
+        return {'available':True,**{key:result.get(key) for key in ('atUtc','successful','classification')}}
     def do_POST(self):
         def reject(status,message):
-            # Drain only a small known body so an unread TCP payload does not
-            # reset the connection before the client receives the error on Windows.
+            self.send(status,{'error':message})
+            if not DRAINS.acquire(blocking=False):return
             try:
-                n=int(self.headers.get('Content-Length','0'))
-                if 0<n<=65536:
-                    self.connection.settimeout(.5);self.rfile.read(n)
-            except (ValueError,OSError):pass
-            return self.send(status,{'error':message})
+                self.connection.shutdown(socket.SHUT_WR)
+                deadline=time.monotonic()+.25
+                remaining=MAX_BODY
+                while remaining and (left:=deadline-time.monotonic())>0:
+                    self.connection.settimeout(left)
+                    chunk=self.rfile.read1(min(65536,remaining))
+                    if not chunk:break
+                    remaining-=len(chunk)
+            except OSError:pass
+            finally:DRAINS.release()
         if not self.origin_ok() or self.headers.get('X-CrashLab-Token')!=self.server.token:return reject(403,'Local session token required')
         if self.headers.get('Content-Type','').split(';')[0]!='application/json':return reject(415,'application/json required')
         try:
             length=int(self.headers.get('Content-Length','0'))
-            if not 0<length<=MAX_BODY:return self.send(413,{'error':'Request exceeds 9 MiB bound or is empty'})
+            if not 0<length<=MAX_BODY:return reject(413,'Request exceeds 9 MiB bound or is empty')
         except ValueError:return self.send(400,{'error':'Invalid Content-Length'})
-        if not SLOTS.acquire(blocking=False):return self.send(429,{'error':'Four assessments already in progress'})
+        if not SLOTS.acquire(blocking=False):return reject(429,'Four assessments already in progress')
         try:
             self.connection.settimeout(10)
             raw=self.rfile.read(length)
             if len(raw)!=length:raise ValueError('Incomplete request')
-            body=json.loads(raw)
+            body=decode(raw)
             if type(body) is not dict:raise ValueError('Request must be an object')
             path=urlsplit(self.path).path
-            if path in ['/api/run','/api/bundle']:
+            if path in ('/api/run','/api/bundle'):
                 sid=body.get('id');scenario=CATALOG.get(sid) if type(sid) is str else None
                 if scenario is None:raise ValueError('Unknown scenario')
                 task,sources=data_for(scenario)
-                if path=='/api/bundle':return self.send(200,{'format':'agent-crash-lab/bundle-v1','task_utf8':task.decode(),'sources_utf8':{k:v.decode() for k,v in sources.items()},'classification':scenario['kind']})
-                return self.send(200,evaluate(task,sources,scenario))
-            if path=='/api/assess':
-                return self.send(200,assess_bundle(body))
+                result=bundle if path=='/api/bundle' else evaluate
+                return self.send(200,result(task,sources,scenario))
+            if path=='/api/assess':return self.send(200,assess_bundle(body))
             self.send(404,{'error':'Not found'})
-        except (ValueError,UnicodeError,TimeoutError,RecursionError) as e:self.send(400,{'error':str(e)[:200]})
+        except (ValueError,TimeoutError,RecursionError) as e:self.send(400,{'error':str(e)[:200]})
         except Exception:self.send(500,{'error':'Workbench failed; no financial conclusion'})
         finally:SLOTS.release()
 

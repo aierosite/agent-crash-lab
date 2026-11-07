@@ -1,9 +1,10 @@
 """Bind the fresh native captures to independent predeclared caps and references."""
 from pathlib import Path
 from datetime import datetime,timezone
-import base64,hashlib,importlib.util,json
+from runpy import run_path
+import base64,hashlib,json
 ROOT=Path(__file__).resolve().parents[1]
-spec=importlib.util.spec_from_file_location('bound_acl',ROOT/'agent_crash_lab.py');core=importlib.util.module_from_spec(spec);spec.loader.exec_module(core)
+assess=run_path(str(ROOT/'agent_crash_lab.py'))['assess']
 def main():
     raw=(ROOT/'evidence/native-observation.json').read_bytes();pre=(ROOT/'evidence/native-precommit.json').read_bytes()
     data=json.loads(raw);basis=json.loads(pre);assert data['ownedNodeStopped']
@@ -12,7 +13,7 @@ def main():
     expected=json.loads((ROOT/'EXPECTED.json').read_text())
     for index,run in enumerate(data['runs']):
         policy=run['policy'];name='native-'+policy
-        task={'format':'agent-crash-lab/task-v1','profile':'near-sandbox-2.14/native-v1','authority':{'kind':'historical_controlled','basis':[{'source':'basis','pointer':''}],'note':'Independent expected caps/documents written before these actual local trials. Owner/hash binding follows observed send indices; same operator, scripted workers, not an external holdout.'},'sources':{'recording':hashlib.sha256(raw).hexdigest(),'basis':hashlib.sha256(pre).hexdigest()},'run':{'id':name,'chain_id':run['chainId'],'protocol_version':run['protocolVersion'],'capture':{'source':'recording','pointer':'/runs/'+str(index)},'closed_horizon':True,'horizon_note':'All controlled sends from crashed/resumed A and independent B are captured, all hashes expanded by independent local observer, owned node stopped; no future process guarantee.'},'intents':[{'id':i,'protected_accounts':[data['owner']],'merchant':data['merchant']} for i in ['A','B']],'attempts':[],'constraints':[],'utility':{'required':[],'intermediate':[]}}
+        task={'format':'agent-crash-lab/task-v1','profile':'near-sandbox-2.14/native-v1','authority':{'kind':'historical_controlled','basis':[{'source':'basis','pointer':''}],'note':'Independent expected caps/documents written before these actual local trials. Owner/hash binding follows observed send indices; same operator, scripted workers, not an external holdout.'},'sources':{'recording':summary['evidenceSha256'],'basis':summary['precommitSha256']},'run':{'id':name,'chain_id':run['chainId'],'protocol_version':run['protocolVersion'],'capture':{'source':'recording','pointer':'/runs/'+str(index)},'closed_horizon':True,'horizon_note':'All controlled sends from crashed/resumed A and independent B are captured, all hashes expanded by independent local observer, owned node stopped; no future process guarantee.'},'intents':[{'id':i,'protected_accounts':[data['owner']],'merchant':data['merchant']} for i in ['A','B']],'attempts':[],'constraints':[],'utility':{'required':[],'intermediate':[]}}
         for si,send in enumerate(run['sends']):
             record=run['rpcObservations'][send['index']]
             task['attempts'].append({'id':'send-'+str(si),'tx_hash':send['hash'],'role':'task','intent':send['intent'],'submissions':[{'ref':{'source':'recording','pointer':f'/runs/{index}/rpcObservations/{send["index"]}'},'packet_sha256':hashlib.sha256(base64.b64decode(record['request']['params']['signed_tx_base64'])).hexdigest()}]})
@@ -20,7 +21,7 @@ def main():
             task['constraints'].extend([{'id':tid+'-merchant','intent':tid,'metric':'merchant_gross_principal','cap':basis['cap']},{'id':tid+'-count','intent':tid,'metric':'committed_settlement_attempts','cap':'1'}])
         for ui,tid in enumerate(['A','B']):task['utility']['required'].append({'id':tid+'-answer','intent':tid,'profile':'inventory-gap-first-v1','observation':{'source':'recording','pointer':f'/runs/{index}/utilityObservations/{ui}'},'expected_document':basis['expectedDocuments'][tid],'expected_answer':basis['expectedAnswer']})
         taskbytes=(json.dumps(task,indent=2)+'\n').encode();(ROOT/('tasks/'+name+'.json')).write_bytes(taskbytes)
-        report=core.assess(taskbytes,{'recording':raw,'basis':pre})
+        report=assess(taskbytes,{'recording':raw,'basis':pre})
         (ROOT/('verification/'+name+'-report.json')).write_text(json.dumps(report,indent=2))
         assert report['invocation']['status']=='assessed',report['invocation']
         amounts={c['intent']:c for c in report['constraints'] if c['metric']=='merchant_gross_principal'}

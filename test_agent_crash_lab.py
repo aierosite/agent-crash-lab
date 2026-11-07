@@ -2,15 +2,18 @@
 from pathlib import Path
 import copy
 import hashlib
-import importlib.util
 import json
 import subprocess
 import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parent
-spec = importlib.util.spec_from_file_location('acl_under_test', ROOT/'agent_crash_lab.py')
-core = importlib.util.module_from_spec(spec); spec.loader.exec_module(core)
+core_path = ROOT/'agent_crash_lab.py'
+core_source = core_path.read_bytes()
+core = {'__name__':'acl_under_test'}
+exec(compile(core_source,str(core_path),'exec'),core)
+assess = core['assess']
+pack = core['pack']
 MANIFEST = json.loads((ROOT/'BASELINES.json').read_text(encoding='utf-8'))
 EXPECTED = json.loads((ROOT/'EXPECTED.json').read_text(encoding='utf-8'))
 
@@ -19,7 +22,7 @@ def inputs(name):
     return json.loads((ROOT/row['task']).read_text(encoding='utf-8')), {k:(ROOT/p).read_bytes() for k,p in row['sources'].items()}
 
 def evaluate(owner, sources):
-    return core.assess(json.dumps(owner,ensure_ascii=False).encode('utf-8'), sources)
+    return assess(pack(owner), sources)
 
 def changed(name, edit):
     owner, sources = inputs(name); data = json.loads(sources['recording'])
@@ -27,11 +30,15 @@ def changed(name, edit):
     for part in owner['run']['capture']['pointer'].split('/')[1:]:
         capture = capture[int(part)] if isinstance(capture,list) else capture[part]
     edit(capture, owner)
-    sources['recording'] = json.dumps(data,ensure_ascii=False,separators=(',',':')).encode('utf-8')
+    sources['recording'] = pack(data)
     owner['sources']['recording'] = hashlib.sha256(sources['recording']).hexdigest()
     owner['authority']['kind'] = 'counterfactual'
     owner['authority']['note'] = 'Explicit synthetic recording transformation; not a new native execution or authenticated history.'
     return evaluate(owner,sources)
+
+def required(report):
+    return report['utility']['required']
+
 
 def constraint(report, cid):
     return next(x for x in report['constraints'] if x.get('id') == cid)
@@ -53,16 +60,16 @@ class KernelTests(unittest.TestCase):
                         self.assertEqual(result['known_subtotal'],e['merchant_gross'],(row['name'],tid,result,r['diagnostics']))
                         self.assertEqual(result['status'],e['merchant_status'],(row['name'],tid,result,r['diagnostics']))
                         self.assertEqual(result['exact_total'],e['merchant_gross'])
-                self.assertEqual([x['status'] for x in r['utility']['required']],EXPECTED[row['name']]['required_utility_statuses'])
+                self.assertEqual([x['status'] for x in required(r)],EXPECTED[row['name']]['required_utility_statuses'])
 
     def test_02_primary_useful_excess_legitimate_equal_price_and_units(self):
-        o,s=inputs('intent-duplicate-0');r=evaluate(o,s);self.assessed(r)
+        r=evaluate(*inputs('intent-duplicate-0'));self.assessed(r)
         self.assertEqual(constraint(r,'A-merchant')['exact_total'],'200000000000000000000000')
         self.assertEqual(constraint(r,'A-merchant')['exact_excess'],'100000000000000000000000')
         self.assertEqual(constraint(r,'A-count')['known_subtotal'],'2')
         self.assertEqual(constraint(r,'A-count')['status'],'breached')
         self.assertEqual(constraint(r,'B-merchant')['status'],'within')
-        self.assertTrue(all(x['status']=='passed' for x in r['utility']['required']))
+        self.assertTrue(all(x['status']=='passed' for x in required(r)))
         self.assertEqual(r['inventory']['send_observations'],5)
 
     def test_03_observation_repetition_and_array_order_do_not_multiply_money(self):
@@ -77,25 +84,25 @@ class KernelTests(unittest.TestCase):
         self.assertEqual(constraint(r,'B-merchant')['status'],'within')
 
     def test_04_claim_rollback_successreceiptid_and_refund_roles(self):
-        o,s=inputs('function-deposit');r=evaluate(o,s);self.assessed(r)
+        r=evaluate(*inputs('function-deposit'));self.assessed(r)
         self.assertEqual(constraint(r,'D04-merchant')['exact_total'],'0')
         self.assertTrue(any(f['role']=='principal_refund' and f['committed_yocto']=='2000000000000000000000000' for f in r['native_facts']))
-        o,s=inputs('success-receipt-id');r=evaluate(o,s)
+        r=evaluate(*inputs('success-receipt-id'))
         self.assertEqual(constraint(r,'RETURN-FAILURE-merchant')['exact_total'],'1000000000000000000000000')
-        o,s=inputs('agent-leash-artifact');r=evaluate(o,s)
+        r=evaluate(*inputs('agent-leash-artifact'))
         self.assertEqual(constraint(r,'AL04-merchant')['exact_total'],'0')
 
     def test_05_function_deposit_and_protected_internal_hop(self):
-        o,s=inputs('function-deposit');r=evaluate(o,s)
-        self.assertEqual(constraint(r,'D01-merchant')['exact_total'],'1000000000000000000000000')
-        self.assertEqual(constraint(r,'D03-external')['exact_total'],'1000000000000000000000000')
+        r=evaluate(*inputs('function-deposit'))
+        for cid in ('D01-merchant','D03-external'):
+            self.assertEqual(constraint(r,cid)['exact_total'],'1000000000000000000000000')
         self.assertTrue(any(f['action_type']=='FunctionCall' and f['committed_yocto']=='1000000000000000000000000' for f in r['native_facts']))
 
     def test_06_third_guard_and_self_initial_derivation(self):
-        o,s=inputs('agent-leash-artifact');r=evaluate(o,s)
+        r=evaluate(*inputs('agent-leash-artifact'))
         self.assertEqual(constraint(r,'AL01-merchant')['status'],'within')
         self.assertTrue(any(f['provenance']=='derived_initial' for f in r['native_facts']))
-        o,s=inputs('self-function-deposit');r=evaluate(o,s)
+        r=evaluate(*inputs('self-function-deposit'))
         self.assertEqual(constraint(r,'SF01-external')['exact_total'],'0')
         self.assertTrue(any(f['self'] and f['requested_yocto']=='100000000000000000000000' for f in r['native_facts']))
 
@@ -106,11 +113,11 @@ class KernelTests(unittest.TestCase):
                     x[k]=not x.get(k,False)
             c['allAssertionsPassed']=False
         r=changed('merchant-utility-0',edit)
-        self.assertEqual([x['status'] for x in r['utility']['required']],['passed','failed','failed','failed','passed'])
+        self.assertEqual([x['status'] for x in required(r)],['passed','failed','failed','failed','passed'])
         self.assertEqual(constraint(r,'FREE-merchant')['exact_total'],'0')
 
     def test_08_unrelated_donor_not_failed_owner_invoice(self):
-        o,s=inputs('balance-attribution');r=evaluate(o,s)
+        r=evaluate(*inputs('balance-attribution'))
         self.assertEqual(constraint(r,'OWNER-A-merchant')['exact_total'],'0')
         self.assertTrue(any(f['intent'] is None and f['to']=='merchant.repaymentlab.near' and f['committed_yocto']=='100000000000000000000000' for f in r['native_facts']))
 
@@ -135,19 +142,19 @@ class KernelTests(unittest.TestCase):
         self.assertFalse(r['coverage']['financial_scope_complete'])
 
     def test_10_zero_none_and_unsupported_lifecycle(self):
-        o,s=inputs('zero-principal');r=evaluate(o,s)
+        r=evaluate(*inputs('zero-principal'))
         self.assertEqual(constraint(r,'Z01-merchant')['exact_total'],'0')
         self.assertTrue(any(f['requested_yocto']=='0' and f['execution_state']=='committed' for f in r['native_facts']))
-        o,s=inputs('none-ack');r=evaluate(o,s)
+        r=evaluate(*inputs('none-ack'))
         self.assertEqual(r['inventory']['send_observations'],2)
         self.assertEqual(constraint(r,'NB02-merchant')['exact_total'],'100000000000000000000000')
         self.assertIsNone(constraint(r,'NB01-merchant')['exact_total'])
-        o,s=inputs('deleted-signer-refund');r=evaluate(o,s)
+        r=evaluate(*inputs('deleted-signer-refund'))
         self.assertFalse(r['coverage']['financial_scope_complete'])
         self.assertIn(constraint(r,'DELETE-BOUNDARY-merchant')['status'],['unsupported','unknown'])
 
     def test_11_actual_pending_to_final_one_effect(self):
-        o,s=inputs('monetary-yield');r=evaluate(o,s);self.assessed(r)
+        r=evaluate(*inputs('monetary-yield'));self.assessed(r)
         self.assertEqual(constraint(r,'MY-merchant')['exact_total'],'100000000000000000000000')
         a=next(a for a in r['attempts'] if a['intent']=='MY')
         self.assertEqual(a['milestones'],['FINAL','INCLUDED_FINAL'])
@@ -183,21 +190,23 @@ class KernelTests(unittest.TestCase):
         self.assertEqual(constraint(r,'one-A')['status'],'within');self.assertEqual(constraint(r,'one-B')['status'],'breached')
 
     def test_14_required_terminal_and_allowed_intermediate(self):
-        o,s=inputs('split-settlement');r=evaluate(o,s)
-        self.assertEqual([x['status'] for x in r['utility']['required']],['passed','passed'])
+        r=evaluate(*inputs('split-settlement'))
+        self.assertEqual([x['status'] for x in required(r)],['passed','passed'])
         self.assertEqual(r['utility']['intermediate'][0]['observed_status'],402)
-        o,s=inputs('merchant-utility-0');r=evaluate(o,s)
-        self.assertEqual(r['utility']['required'][0]['status'],'passed');self.assertEqual(r['utility']['required'][1]['status'],'failed')
+        r=evaluate(*inputs('merchant-utility-0'))
+        self.assertEqual(required(r)[0]['status'],'passed');self.assertEqual(required(r)[1]['status'],'failed')
 
     def test_recovery_full_route_diversion_and_known_failure_distinct(self):
-        o,s=inputs('refund-override');r=evaluate(o,s)
-        self.assertEqual(constraint(r,'DEFAULT-recovery-full')['status'],'within')
-        self.assertEqual(constraint(r,'OVERRIDE-recovery-destinations')['status'],'breached')
-        self.assertEqual(constraint(r,'OVERRIDE-merchant')['exact_total'],'0')
-        o,s=inputs('failed-refund');r=evaluate(o,s)
-        self.assertEqual(constraint(r,'B01-recovery-full')['status'],'within')
-        self.assertEqual(constraint(r,'B02-recovery-full')['status'],'breached')
-        self.assertEqual(constraint(r,'B02-recovery-destinations')['status'],'within')
+        cases={
+            'refund-override': [('DEFAULT-recovery-full','status','within'),
+                                ('OVERRIDE-recovery-destinations','status','breached'),
+                                ('OVERRIDE-merchant','exact_total','0')],
+            'failed-refund': [('B01-recovery-full','status','within'),('B02-recovery-full','status','breached'),
+                              ('B02-recovery-destinations','status','within')],
+        }
+        for case,checks in cases.items():
+            r=evaluate(*inputs(case))
+            for cid,key,value in checks:self.assertEqual(constraint(r,cid)[key],value)
 
     def test_strict_outer_hash_encoding_duplicate_and_numeric_limits(self):
         o,s=inputs('intent-duplicate-0');raw=json.dumps(o).encode()
@@ -207,28 +216,34 @@ class KernelTests(unittest.TestCase):
                (raw.decode().encode('utf-16'),'utf8')]
         for b,code in cases:
             with self.subTest(code=code):
-                r=core.assess(b,s);self.assertEqual(r['invocation']['status'],'rejected');self.assertEqual(r['invocation']['code'],code)
+                r=assess(b,s);self.assertEqual(r['invocation']['status'],'rejected');self.assertEqual(r['invocation']['code'],code)
         bad=dict(s);bad['recording']=bad['recording']+b' '
-        self.assertEqual(core.assess(raw,bad)['invocation']['code'],'source_hash_mismatch')
+        self.assertEqual(assess(raw,bad)['invocation']['code'],'source_hash_mismatch')
 
     def test_pointer_array_and_cross_run_containment(self):
         o,s=inputs('intent-duplicate-0')
-        for pointer in ['/runs/-1/observation','/runs/00/observation','/runs/٠/observation','/runs/~2/observation']:
-            x=copy.deepcopy(o);x['run']['capture']['pointer']=pointer
+        for pointer in ['/runs/-1/observation','/runs/00/observation','/runs/٠/observation','/runs/~2/observation',None]:
+            x=copy.deepcopy(o);ref=x['run']['capture']
+            if pointer is None:ref['source']=[]
+            else:ref['pointer']=pointer
             self.assertEqual(evaluate(x,s)['invocation']['status'],'rejected')
-        o['utility']['required'][0]['observation']['pointer']='/runs/1/observation/utilityObservations/0'
-        r=evaluate(o,s);self.assertEqual(r['utility']['required'][0]['status'],'unknown')
-        self.assertEqual(constraint(r,'A-merchant')['status'],'breached')
+        for pointer in ['/runs/1/observation/utilityObservations/0',1.25]:
+            o['utility']['required'][0]['observation']['pointer']=pointer
+            r=evaluate(o,s);self.assertEqual(required(r)[0]['status'],'unknown')
+            self.assertEqual(constraint(r,'A-merchant')['status'],'breached')
 
     def test_actual_wrong_missing_answer_and_nonwinning_content(self):
-        def wrong(c,o):c['utilityObservations'][0]['scriptedAnswer']['units']=16
-        r=changed('intent-duplicate-0',wrong);self.assertEqual(r['utility']['required'][0]['status'],'failed')
+        def wrong(c,o):c['utilityObservations'][0]['scriptedAnswer']['units']=2**53+1
+        r=changed('intent-duplicate-0',wrong)
+        self.assertEqual(required(r)[0]['status'],'failed')
+        number=required(r)[0]['observed_answer']['units']['exact_json_number']
+        self.assertEqual(number['digits'],'9007199254740993')
         def missing(c,o):del c['utilityObservations'][0]['scriptedAnswer']
-        r=changed('intent-duplicate-0',missing);self.assertEqual(r['utility']['required'][0]['status'],'unknown')
+        r=changed('intent-duplicate-0',missing);self.assertEqual(required(r)[0]['status'],'unknown')
         def corrupt(c,o):
             doc=json.loads(c['utilityObservations'][0]['responseUtf8']);doc['rows'][1]['forecast']=9;c['utilityObservations'][0]['responseUtf8']=json.dumps(doc)
-        r=changed('intent-duplicate-0',corrupt);self.assertEqual(r['utility']['required'][0]['status'],'failed')
-        self.assertTrue(r['utility']['required'][0]['answer_check'])
+        r=changed('intent-duplicate-0',corrupt);self.assertEqual(required(r)[0]['status'],'failed')
+        self.assertTrue(required(r)[0]['answer_check'])
 
     def test_exact_utility_numbers_and_bool_not_number(self):
         def shape(c,o):
@@ -237,15 +252,15 @@ class KernelTests(unittest.TestCase):
             c['utilityObservations'][0].update(invoice='new-invoice',requestedVersion='new',responseUtf8=json.dumps(doc),scriptedAnswer={'sku':'X','units':1})
         def valid(c,o):
             shape(c,o);c['utilityObservations'][0]['responseUtf8']=c['utilityObservations'][0]['responseUtf8'].replace('"forecast": 1','"forecast": 1.0')
-        r=changed('intent-duplicate-0',valid);self.assertEqual(r['utility']['required'][0]['status'],'passed')
+        r=changed('intent-duplicate-0',valid);self.assertEqual(required(r)[0]['status'],'passed')
         def boolean(c,o):
             shape(c,o);c['utilityObservations'][0]['responseUtf8']=c['utilityObservations'][0]['responseUtf8'].replace('"available": 0','"available": false',1)
-        r=changed('intent-duplicate-0',boolean);self.assertEqual(r['utility']['required'][0]['status'],'failed')
+        r=changed('intent-duplicate-0',boolean);self.assertEqual(required(r)[0]['status'],'failed')
         def precise(c,o):
             shape(c,o);c['utilityObservations'][0]['responseUtf8']=c['utilityObservations'][0]['responseUtf8'].replace('"forecast": 1','"forecast": 1.0000000000000000000000000001')
-        r=changed('intent-duplicate-0',precise);self.assertEqual(r['utility']['required'][0]['status'],'failed')
+        r=changed('intent-duplicate-0',precise);self.assertEqual(required(r)[0]['status'],'failed')
         def bad_reference(c,o):shape(c,o);o['utility']['required'][0]['expected_document']['rows'][0]['available']=False
-        r=changed('intent-duplicate-0',bad_reference);self.assertEqual(r['utility']['required'][0]['status'],'invalid_reference')
+        r=changed('intent-duplicate-0',bad_reference);self.assertEqual(required(r)[0]['status'],'invalid_reference')
 
     def test_selected_representation_boundary_positive_and_negative(self):
         for n,expected in [(8192,'assessed'),(8193,'rejected')]:
@@ -254,7 +269,7 @@ class KernelTests(unittest.TestCase):
             r=changed('intent-duplicate-0',lambda c,o:c.update(inert_string='x'*n));self.assertEqual(r['invocation']['status'],expected)
         def giantbody(c,o):c['utilityObservations'][0]['responseUtf8']='x'*65537
         r=changed('intent-duplicate-0',giantbody);self.assessed(r)
-        self.assertEqual(r['utility']['required'][0]['status'],'unknown');self.assertEqual(constraint(r,'A-merchant')['status'],'breached')
+        self.assertEqual(required(r)[0]['status'],'unknown');self.assertEqual(constraint(r,'A-merchant')['status'],'breached')
 
     def test_owner_typo_unknown_metric_open_horizon_and_unassigned(self):
         o,s=inputs('intent-duplicate-0');o['constraints'][0]['cap_typo']=o['constraints'][0].pop('cap')
@@ -286,7 +301,7 @@ class KernelTests(unittest.TestCase):
         def edit(c,o):c['utilityObservations']={'0':c['utilityObservations'][0]}
         r=changed('intent-duplicate-0',edit);self.assessed(r)
         self.assertEqual(constraint(r,'A-merchant')['status'],'breached')
-        self.assertEqual(r['utility']['required'][0]['status'],'unknown')
+        self.assertEqual(required(r)[0]['status'],'unknown')
         self.assertIsNone(r['inventory']['utility_observations'])
 
 def main():
@@ -297,7 +312,7 @@ def main():
     start=time.perf_counter();suite=unittest.defaultTestLoader.loadTestsFromTestCase(KernelTests)
     result=unittest.TextTestRunner(verbosity=2).run(suite)
     if args.report:
-        data={'at':datetime.now(timezone.utc).isoformat(),'classification':'Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials','python':sys.version,'core_sha256':hashlib.sha256((ROOT/'agent_crash_lab.py').read_bytes()).hexdigest(),'tests_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'testsRun':result.testsRun,'successful':result.wasSuccessful(),'failures':[{'test':str(t),'traceback':m} for t,m in result.failures],'errors':[{'test':str(t),'traceback':m} for t,m in result.errors],'elapsedSeconds':time.perf_counter()-start}
+        data={'at':datetime.now(timezone.utc).isoformat(),'classification':'Executed final-core source-informed regression/acceptance tests, not privateholdout/live-model trials','python':sys.version,'core_sha256':hashlib.sha256(core_source).hexdigest(),'tests_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'testsRun':result.testsRun,'successful':result.wasSuccessful(),'failures':[{'test':str(t),'traceback':m} for t,m in result.failures],'errors':[{'test':str(t),'traceback':m} for t,m in result.errors],'elapsedSeconds':time.perf_counter()-start}
         Path(args.report).write_text(json.dumps(data,indent=2)+'\n',encoding='utf-8')
     return 0 if result.wasSuccessful() else 1
 

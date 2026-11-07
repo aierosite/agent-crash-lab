@@ -5,9 +5,13 @@ and baseline tests. No network, models or signing are used by this verifier.
 """
 from pathlib import Path
 from datetime import datetime,timezone
-import argparse,copy,hashlib,hmac,importlib.util,json,time
+import argparse,copy,hashlib,hmac,json,time
 ROOT=Path(__file__).resolve().parent
-spec=importlib.util.spec_from_file_location('reserved_core',ROOT/'agent_crash_lab.py');core=importlib.util.module_from_spec(spec);spec.loader.exec_module(core)
+core_path=ROOT/'agent_crash_lab.py'
+core_source=core_path.read_bytes()
+core={'__name__':'reserved_core'}
+exec(compile(core_source,str(core_path),'exec'),core)
+assess=core['assess']
 def rawinputs(taskfile,recordfile,basisfile):
     return json.loads((ROOT/taskfile).read_text()),{'recording':(ROOT/recordfile).read_bytes(),'basis':(ROOT/basisfile).read_bytes()}
 def make_mutation(owner,sources,edit):
@@ -52,11 +56,11 @@ def main():
     def conflict(c,own):
         duplicate=copy.deepcopy(c['rpcObservations'][16]);v=duplicate['response']['result'];v['transaction']['nonce']+=1;c['rpcObservations'].append(duplicate)
     oo,ss=make_mutation(o,s,conflict);cases.append({'id':'raw-conflicting-final-context','stratum':'syntheticcontradictoryproviderrecord,notauthenticresignedexecution','owner':oo,'sources':ss,'expect':[{'constraint':'A-merchant','status':'conflict'},{'constraint':'B-merchant','status':'within'}]})
-    declaration={'declaredAtUtc':datetime.now(timezone.utc).isoformat(),'classification':'Expected outcomes and input hashes prepared before this verifier invokes kernel; same-agent known-family reserved instances','seedSha256':needhash,'coreSha256':hashlib.sha256((ROOT/'agent_crash_lab.py').read_bytes()).hexdigest(),'winningPosition':winner,'referenceDocument':doc,'independentConstructedExpectedAnswer':answer,'nativeExpectedBeforeExecution':native['expected'],'cases':[{k:v for k,v in c.items() if k not in ['owner','sources']}|{'ownerSha256':hashlib.sha256(json.dumps(c['owner'],sort_keys=True).encode()).hexdigest(),'sourceSha256':{k:hashlib.sha256(b).hexdigest() for k,b in c['sources'].items()}} for c in cases]}
+    declaration={'declaredAtUtc':datetime.now(timezone.utc).isoformat(),'classification':'Expected outcomes and input hashes prepared before this verifier invokes kernel; same-agent known-family reserved instances','seedSha256':needhash,'coreSha256':hashlib.sha256(core_source).hexdigest(),'winningPosition':winner,'referenceDocument':doc,'independentConstructedExpectedAnswer':answer,'nativeExpectedBeforeExecution':native['expected'],'cases':[{k:v for k,v in c.items() if k not in ['owner','sources']}|{'ownerSha256':hashlib.sha256(json.dumps(c['owner'],sort_keys=True).encode()).hexdigest(),'sourceSha256':{k:hashlib.sha256(b).hexdigest() for k,b in c['sources'].items()}} for c in cases]}
     if args.declare_before:Path(args.declare_before).write_text(json.dumps(declaration,indent=2)+'\n')
     results=[];start=time.perf_counter()
     for c in cases:
-        report=core.assess(json.dumps(c['owner']).encode(),c['sources']);errors=[]
+        report=assess(json.dumps(c['owner']).encode(),c['sources']);errors=[]
         if report['invocation']['status']!='assessed':errors.append('invocation '+report['invocation']['status'])
         else:
             if 'utility_status' in c and report['utility']['required'][0]['status']!=c['utility_status']:errors.append('utility expected '+c['utility_status'])

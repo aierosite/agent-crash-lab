@@ -11,6 +11,7 @@ from decimal import Decimal
 
 VERSION = '0.1.1'
 PROFILE = 'near-sandbox-2.14/native-v1'
+REPORT = 'agent-crash-lab/report-v1'
 LIMITS = {
     'owner_bytes': 262144, 'source_count': 16, 'source_file_bytes': 4194304,
     'outer_input_bytes_total': 8388608, 'decoded_depth': 64,
@@ -86,17 +87,22 @@ def equal(a, b):
         return len(a) == len(b) and all(equal(x, y) for x, y in zip(a, b))
     return a == b
 
-def projection(v):
-    """Explicit exact-number report projection, never JSON default=str."""
-    if type(v) is Decimal:
-        t = v.as_tuple()
-        return {'exact_json_number': {'sign': t.sign, 'digits': ''.join(map(str, t.digits)),
-                                      'exponent': t.exponent}}
-    if type(v) is dict:
-        return {k: projection(x) for k, x in v.items()}
-    if type(v) is list:
-        return [projection(x) for x in v]
-    return v
+def projection(v, budget):
+    kind = type(v)
+    if kind is dict:
+        return {k: projection(x, budget) for k, x in v.items()}
+    if kind is list:
+        return [projection(x, budget) for x in v]
+    if kind is int and v.bit_length() > 53:
+        v = Decimal(v)
+    elif kind is not Decimal:
+        return v
+    sign, digits, exponent = v.as_tuple()
+    # Minimum compact JSON bytes for the descriptor and digits.
+    budget[0] -= 57 + len(digits)
+    need(budget[0] >= 0, 'resource_report')
+    return {'exact_json_number': {'sign': sign, 'digits': ''.join(map(str, digits)), 'exponent': exponent}}
+
 
 def pack(v):
     return json.dumps(v, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
@@ -143,9 +149,7 @@ class Budget:
         try:
             v = json.loads(s, object_pairs_hook=pairs, parse_int=numeric,
                            parse_float=lambda x: numeric(x, True), parse_constant=constant)
-        except (json.JSONDecodeError, RecursionError, ValueError, OverflowError) as e:
-            if isinstance(e, InputError):
-                raise
+        except (RecursionError, ValueError, OverflowError):
             raise InputError('json_decode') from None
         todo = [(v, 1)]
         while todo:
@@ -253,8 +257,9 @@ class Assessment:
 
     def ref(self, ref):
         fields(ref, ['source', 'pointer'])
-        need(ref['source'] in self.sources, 'reference_source')
-        cur = self.sources[ref['source']]
+        sid = ref['source']
+        need(type(sid) is str and sid in self.sources, 'reference_source')
+        cur = self.sources[sid]
         for token in pointer_tokens(ref['pointer']):
             if type(cur) is list:
                 need(re.fullmatch(r'0|[1-9][0-9]*', token) is not None, 'pointer_array_index')
@@ -273,7 +278,6 @@ class Assessment:
         ts = pointer_tokens(ref['pointer'])
         prefix = self.cap_tokens + [collection]
         need(ref['source'] == self.cap_sid and len(ts) == len(prefix) + 1 and ts[:-1] == prefix, 'reference_containment')
-        need(re.fullmatch(r'0|[1-9][0-9]*', ts[-1]) is not None, 'pointer_array_index')
         return int(ts[-1])
 
     def rpc_ref(self, i, suffix=''):
@@ -463,31 +467,35 @@ class Assessment:
                 errors.append(self.diag(e.code, scope, ref))
                 unsupported = unsupported or e.code.startswith('unsupported') or e.code == 'fields'
         conflict = False
+        bodies, outcomes = {}, {}
+
+        def matches(seen, rid, context):
+            previous = seen.setdefault(rid, context)
+            return previous is context or equal(previous, context)
+
+        display = [(g['tx'].get('signature'), g['tx'].get('priority_fee')) for g in graphs]
+        varied_display = display and display.count(display[0]) != len(display)
         for i, g in enumerate(graphs):
-            for h in graphs[:i]:
-                if not equal(g['context'], h['context']):
-                    conflict = True
-                for rid in set(g['outcomes']) & set(h['outcomes']):
-                    x, y = g['outcomes'][rid], h['outcomes'][rid]
-                    if x['outcome']['status'] == 'Unknown' or y['outcome']['status'] == 'Unknown':
-                        continue
-                    px = {'block_hash': x['block_hash'], **{k: x['outcome'][k] for k in ['executor_id', 'receipt_ids', 'status']}}
-                    py = {'block_hash': y['block_hash'], **{k: y['outcome'][k] for k in ['executor_id', 'receipt_ids', 'status']}}
-                    if not equal(px, py):
-                        conflict = True
-                for rid in set(g['bodies']) & set(h['bodies']) - g['derived'] - h['derived']:
-                    x, y = g['bodies'][rid], h['bodies'][rid]
-                    def body_context(b):
-                        ac = b['receipt']['Action']
-                        return {'predecessor_id': b['predecessor_id'], 'receiver_id': b['receiver_id'],
-                                **{k: ac[k] for k in ['signer_id', 'signer_public_key', 'gas_price', 'actions', 'input_data_ids', 'output_data_receivers']},
-                                'is_promise_yield': ac.get('is_promise_yield', False), 'refund_to': ac.get('refund_to')}
-                    if not equal(body_context(x), body_context(y)):
-                        conflict = True
-                if g['tx'].get('signature') != h['tx'].get('signature'):
-                    ids.append(self.diag('signature_observation_difference', scope, g['ref']))
-                if g['tx'].get('priority_fee') != h['tx'].get('priority_fee'):
-                    ids.append(self.diag('deprecated_display_priority_difference', scope, g['ref']))
+            conflict |= not equal(g['context'], graphs[0]['context'])
+            for rid, x in g['outcomes'].items():
+                o = x['outcome']
+                if o['status'] != 'Unknown':
+                    conflict |= not matches(outcomes, rid, [x['block_hash'], o['executor_id'], o['receipt_ids'], o['status']])
+            for rid, x in g['bodies'].items():
+                if rid in g['derived']:
+                    continue
+                ac = x['receipt']['Action']
+                context = [x['predecessor_id'], x['receiver_id'], ac['signer_id'], ac['signer_public_key'],
+                           ac['gas_price'], ac['actions'], ac['input_data_ids'], ac['output_data_receivers'],
+                           ac.get('is_promise_yield', False), ac.get('refund_to')]
+                conflict |= not matches(bodies, rid, context)
+            if varied_display:
+                signature, fee = display[i]
+                for old_signature, old_fee in display[:i]:
+                    if signature != old_signature:
+                        ids.append(self.diag('signature_observation_difference', scope, g['ref']))
+                    if fee != old_fee:
+                        ids.append(self.diag('deprecated_display_priority_difference', scope, g['ref']))
         if conflict:
             errors.append(self.diag('conflicting_native_identity', scope))
         result = {'id': a['id'], 'tx_hash': a['tx_hash'], 'role': a['role'], 'intent': a['intent'],
@@ -749,20 +757,23 @@ class Assessment:
                 did = self.diag(code, 'owner_constraints')
                 constraints.append({'id': x.get('id') if type(x) is dict else None, 'status': 'unknown', 'complete': False, 'diagnostic_ids': [did]})
         utility = self.utility(intents)
-        report = {'format': 'agent-crash-lab/report-v1', 'invocation': {'status': 'assessed', 'profile': PROFILE, 'version': VERSION},
+        limit = LIMITS['serialized_report_bytes']
+        report = projection({'format': REPORT, 'invocation': {'status': 'assessed', 'profile': PROFILE, 'version': VERSION},
                   'authority': t['authority'], 'scope': {'run_id': t['run']['id'], **{k: v for k, v in t['run'].items() if k != 'id'}},
                   'sources': self.source_meta,
                   'inventory': {'rpc_records': len(self.rpcs), 'send_observations': send_count, 'declared_attempts': len(attempts),
                                 'observed_transaction_hashes': len(observed_hashes), 'unassigned_submissions': unassigned_sends,
                                 'unassigned_transactions': unassigned_txs, 'utility_observations': len(self.capture['utilityObservations']) if type(self.capture.get('utilityObservations')) is list else None,
                                 'selected_required_utility': len(utility['required']), 'selected_intermediate_utility': len(utility['intermediate'])},
-                  'attempts': self.attempt_results, 'native_facts': self.facts, 'outcome_costs': self.costs,
+                  'attempts': self.attempt_results, 'native_facts': [], 'outcome_costs': self.costs,
                   'constraints': constraints, 'utility': utility,
                   'coverage': {'financial_scope_complete': not self.global_gap and t['run']['closed_horizon'] and all(a['profile_complete'] for a in self.attempt_results),
                                'all_required_utility_assessed': all(x['status'] in ['passed', 'failed'] for x in utility['required']),
                                'trust': 'Owner scope/reference/horizon and controlled RPC recordings trusted; hashes are consistency, not consensus/authenticity; no live model'},
-                  'diagnostics': self.diagnostics}
-        need(len(pack(report)) <= LIMITS['serialized_report_bytes'], 'resource_report')
+                  'diagnostics': self.diagnostics}, [limit])
+        # Fact indexes are bounded and amounts are already strings.
+        report['native_facts'] = self.facts
+        need(len(pack(report)) <= limit, 'resource_report')
         return report
 
     def allowed(self, xs):
@@ -807,11 +818,11 @@ class Assessment:
                 obs = self.ref(item['observation']); need(type(obs) is dict, 'utility_observation')
                 out['reference_check'] = 'consistent'
                 out['observed_status_present'] = 'httpStatus' in obs
-                out['observed_status'] = projection(obs.get('httpStatus'))
+                out['observed_status'] = obs.get('httpStatus')
                 need(not {'recordedAnswer', 'scriptedAnswer'} <= obs.keys(), 'conflicting_answer_fields')
                 answer_field = 'recordedAnswer' if 'recordedAnswer' in obs else 'scriptedAnswer'
                 out['observed_answer_present'] = answer_field in obs
-                out['observed_answer'] = projection(obs.get(answer_field))
+                out['observed_answer'] = obs.get(answer_field)
                 expected = item['expected_document']
                 context = all(k not in obs or equal(obs[k], expected[dk]) for k, dk in [('invoice', 'invoice'), ('requestedVersion', 'version')])
                 if 'httpStatus' in obs and (type(obs['httpStatus']) is not int or obs['httpStatus'] != 200):
@@ -846,22 +857,26 @@ class Assessment:
             try:
                 self.selected_index(ref, 'utilityObservations'); obs = self.ref(ref)
                 need(type(obs) is dict, 'utility_observation')
-                out.update(status='observed', observed_status=projection(obs.get('httpStatus')),
-                           observed_answer_present='scriptedAnswer' in obs, observed_answer=projection(obs.get('scriptedAnswer')))
+                out.update(status='observed', observed_status=obs.get('httpStatus'),
+                           observed_answer_present='scriptedAnswer' in obs, observed_answer=obs.get('scriptedAnswer'))
             except InputError as e:
                 out['diagnostic_ids'] = [self.diag(e.code, 'intermediate_utility')]
             intermediate.append(out)
         return {'required': required, 'intermediate': intermediate,
                 'meaning': 'Finite comparison of declared content and the recorded answer. Capture and model provenance are separate.'}
 
+def rejected(code, message):
+    return {'format': REPORT, 'invocation': {'status': 'rejected', 'code': code, 'message': message}}
+
+
 def assess(task_bytes, source_bytes):
     """Pure bytes-to-dict assessment. No implicit IO; runtime/caller trusted."""
     try:
         return Assessment(task_bytes, source_bytes).run()
     except InputError as e:
-        return {'format': 'agent-crash-lab/report-v1', 'invocation': {'status': 'rejected', 'code': e.code, 'message': e.message}}
+        return rejected(e.code, e.message)
     except Exception as e:
-        return {'format': 'agent-crash-lab/report-v1', 'invocation': {'status': 'failed', 'code': type(e).__name__,
+        return {'format': REPORT, 'invocation': {'status': 'failed', 'code': type(e).__name__,
                                                                     'message': 'Unexpected implementation failure; no financial conclusion'}}
 
 def main():
@@ -890,7 +905,7 @@ def main():
             sources[sid] = b
         report = assess(tb, sources)
     except (OSError, InputError) as e:
-        report = {'format': 'agent-crash-lab/report-v1', 'invocation': {'status': 'rejected', 'code': e.code if isinstance(e, InputError) else 'io', 'message': 'Explicit input could not be read within declared limits'}}
+        report = rejected(e.code if isinstance(e, InputError) else 'io', 'Explicit input could not be read within declared limits')
     sys.stdout.buffer.write(pack(report) + b'\n')
     return {'assessed': 0, 'rejected': 2, 'failed': 1}[report['invocation']['status']]
 

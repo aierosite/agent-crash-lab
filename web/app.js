@@ -1,74 +1,694 @@
 'use strict';
 const $=id=>document.getElementById(id);
-const tabs=[...document.querySelectorAll('.tab')],panels=[...document.querySelectorAll('.tab-panel')];
-let catalog,selected,last,bundle,busy=false;
-const browserMode=new URLSearchParams(location.search).get('browser')==='1';
+const visible=(value,json)=>String(value??'').replace(/[\\\p{Cc}\p{Bidi_Control}]/gu,c=>{
+ if(json&&(c==='\\'||c<' '))return c;
+ return c==='\\'?'\\\\':'\\u'+c.charCodeAt().toString(16).padStart(4,'0');
+});
+const attr=(node,name,value)=>node.setAttribute(name,value);
+const setText=(id,value)=>$(id).textContent=visible(value);
+const tabs=[...document.querySelectorAll('.tab')];
+const panelFor=tab=>$('panel-'+tab.id.slice(4));
+const status=$('inspection-status');
+const nav=$('scenarios'),picker=$('case-select');
+const evidence=$('evidence-list'),raw=$('raw'),find=$('raw-find'),match=$('raw-match');
+let catalog,selected,last,cache,bundle,facts,receiptRows,merchants,busy=false,retryInspection=false;
+const params=new URLSearchParams(location.search);
+const browserMode=params.get('browser')==='1';
 let worker,pending,requestId=0;
+function resetWorker(message){
+ const job=pending;
+ worker?.terminate();
+ worker=pending=null;
+ if(job){clearTimeout(job.timer);job.reject(Error(message));}
+}
 function browserRequest(path,body){
- if(pending)return Promise.reject(Error('An inspection is already running'));
- if(!worker){worker=new Worker('browser-worker.js');worker.onmessage=({data})=>{if(!pending||data.id!==pending.id)return;if(data.progress){$('progress').textContent=data.progress;return;}const job=pending;pending=null;clearTimeout(job.timer);if(data.error){worker.terminate();worker=null;job.reject(Error(data.error));}else job.resolve(data.result);};worker.onerror=()=>{worker.terminate();worker=null;if(pending){clearTimeout(pending.timer);pending.reject(Error('Browser Python could not start. Check the connection or use the offline ZIP.'));pending=null;}};}
- return new Promise((resolve,reject)=>{const id=++requestId,timer=setTimeout(()=>{worker.terminate();worker=null;pending=null;reject(Error('Browser runtime timed out. Try again or use the offline ZIP.'));},path==='/api/catalog'?90000:30000);pending={id,timer,resolve,reject};worker.postMessage({id,path,body});});
+ if(pending)throw Error('Inspection running');
+ if(!worker){
+  worker=new Worker('browser-worker.js?bundle=bytes-v4');
+  worker.onmessage=({data:{id,progress,error,result}})=>{
+   const job=pending;
+   if(!job||id!==job.id)return;
+   if(progress)return setBusy(progress);
+   if(error!==undefined)return resetWorker(error);
+   pending=null;
+   clearTimeout(job.timer);
+   if(result?.error!==undefined)job.reject(Error(result.error,{cause:400}));
+   else job.resolve(result);
+  };
+  worker.onerror=()=>resetWorker('Python failed. Use ZIP.');
+ }
+ return new Promise((resolve,reject)=>{
+  const id=++requestId;
+  const timer=setTimeout(()=>resetWorker('Browser timeout. Use ZIP.'),path==='/api/catalog'?90000:30000);
+  pending={id,timer,resolve,reject};
+  try{worker.postMessage({id,path,body});}
+  catch(error){resetWorker(error.message);}
+ });
 }
-if(browserMode){document.querySelector('.local-status').textContent='Runs in your browser';$('browser-note').hidden=false;$('progress').textContent='Preparing browser Python…';}
-const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function near(x){if(x==null)return 'unknown';const n=BigInt(x),s=(n%YOCTO).toString().padStart(24,'0').replace(/0+$/,'');return(n/YOCTO).toString()+(s?'.'+s:'');}
-const YOCTO=10n**24n;
+if(browserMode){document.querySelector('.local-status').textContent='Browser replay';$('browser-note').hidden=false;}
+const esc=(x,json)=>visible(x,json).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function formatYocto(value){
+ const digits=value.padStart(25,'0');
+ return (digits.slice(0,-24)+'.'+digits.slice(-24)).replace(/\.?0+$/,'');
+}
+const fitsYocto=(value,digits,bits)=>isText(value)&&value.length<=digits
+ &&/^(0|[1-9]\d*)$/.test(value)&&(value.length<digits||BigInt(value)<2n**bits);
+function near(value){
+ if(value==null)return 'unknown';
+ if(!fitsYocto(value,78,256n))throw Error('Invalid NEAR amount field.');
+ return formatYocto(value);
+}
+const inNear=value=>near(value)+' NEAR';
 const pretty=x=>JSON.stringify(x,null,2);
+const reportJson=()=>cache ??= pretty(last);
+const definitionRows=fields=>fields.map(([label,value,ref])=>`<dt>${esc(label)}</dt><dd>${esc(value)}${sourceHtml(ref)}</dd>`).join('');
 
-function intentRow(c,required){
- const state=!required.length?'not-declared':required.some(u=>u.status==='failed')?'failed':required.some(u=>u.status!=='passed')?'unknown':'passed';
- const outputLabel={'not-declared':'Not required',failed:'Failed',unknown:'Unknown',passed:'Passed'}[state];
- const policyLabel={within:'Within scope',breached:'Limit exceeded',unknown:'Unresolved',unsupported:'Unsupported',conflict:'Conflicting evidence'}[c.status]||c.status;
+const isPrincipal=f=>f.role==='ordinary_principal';
+const positivePrincipal=f=>isPrincipal(f)&&/^[1-9]\d*$/.test(f.requested_yocto);
+const amount=(value, excess='')=>`<span class="amount-figure${excess?' breached':''}">${near(value)}</span><span class="amount-unit">NEAR</span>${excess}`;
+const policyLabels={within:'Within scope',breached:'Limit exceeded',unknown:'Unresolved',unsupported:'Unsupported',conflict:'Evidence conflict'};
+function intentRow(c,[count=0,rank=0]=[],hasReceipt){
+ const outputLabel=!count?'Not required':rank===4?'Failed':rank?'Unknown':'Passed';
+ const state=count?outputLabel.toLowerCase():'not-declared';
  const known=c.exact_total!=null;
- const extra=c.lower_excess&&BigInt(c.lower_excess)>0n?`<span class="cell-note excess">${esc(near(c.lower_excess))} NEAR over the limit</span>`:'';
- const committed=known?`<span class="amount-figure ${extra?'amount-over':''}">${esc(near(c.exact_total))}</span><span class="amount-unit">NEAR</span>${extra}`:`<span class="amount-unresolved">Unknown</span><span class="cell-note">Known subtotal: ${esc(near(c.known_subtotal))} NEAR</span>`;
- return `<tr class="intent-row" data-intent="${esc(c.intent)}"><th scope="row"><span class="intent-id">${esc(c.intent)}</span><span class="policy-state ${esc(c.status)}">${esc(policyLabel)}</span></th><td><span class="amount-figure">${esc(near(c.cap))}</span><span class="amount-unit">NEAR</span></td><td>${committed}</td><td><span class="output-state ${esc(state)}">${esc(outputLabel)}</span>${required.length?`<span class="cell-note">${required.length} required output${required.length===1?'':'s'}</span>`:''}</td></tr>`;
+ const excess=c.lower_excess;
+ const extra=excess!=null&&excess!=='0'?`<span class="cell-note breached">${known?'':'At least '}${inNear(excess)} over the limit</span>`:'';
+ const committed=known?amount(c.exact_total,extra):`<span class="amount-unresolved">Unknown</span><span class="cell-note">Known subtotal: ${inNear(c.known_subtotal)}</span>${extra}`;
+ const id=esc(c.intent);
+ const intent=hasReceipt
+  ?`<button class="intent-id" aria-label="Payment receipts for intent ${id}">${id} →</button>`
+  :`<span class="intent-id">${id}</span>`;
+ return `<tr><th scope="row">${intent}<span class="policy-state ${c.status}">${policyLabels[c.status]}</span></th><td>${amount(c.cap)}</td><td>${committed}</td><td><span class="output-state ${state}">${outputLabel}</span>${count?`<span class="cell-note">${count} output${count===1?'':'s'}</span>`:''}</td></tr>`;
 }
-function intentLedger(merchants,outputs){
- if(!merchants.length)return '<p class="empty">No merchant-gross constraint declared.</p>';
- const byIntent=new Map();for(const u of outputs){if(!byIntent.has(u.intent))byIntent.set(u.intent,[]);byIntent.get(u.intent).push(u);}
- return `<div class="ledger-scroll"><table class="payment-ledger"><caption class="sr-only">Declared intent limits, observed principal and independently checked task outputs.</caption><thead><tr><th scope="col">Intent</th><th scope="col">Allowed</th><th scope="col">Committed</th><th scope="col">Useful output<small>Independent check</small></th></tr></thead><tbody>${merchants.map(c=>intentRow(c,byIntent.get(c.intent)||[])).join('')}</tbody></table></div>`;
+function intentLedger(merchants,byIntent,facts){
+ if(!merchants.length)return '<p class="empty">No principal limits.</p>';
+ const withReceipts=new Set(facts.filter(isPrincipal).map(f=>f.intent));
+ const rows=merchants.map(c=>intentRow(c,byIntent.get(c.intent),withReceipts.has(c.intent))).join('');
+ return reportTable('<caption class="sr-only">Payment and output by intent.</caption>',
+  ['Intent','Allowed','Committed','Useful output<small>Against reference</small>'],rows);
 }
-function orderFacts(facts){const principal=[],other=[];for(const f of facts)(f.role==='ordinary_principal'&&BigInt(f.requested_yocto||0)>0n?principal:other).push(f);return principal.concat(other);}
-function renderEvidence(r){const facts=orderFacts(r.native_facts);
-$('evidence-list').innerHTML=facts.map(f=>`<details class="fact"><summary><span class="fact-route">${esc(f.from)} → ${esc(f.to)}</span><span class="fact-amount">${esc(near(f.committed_yocto))} NEAR</span></summary><dl class="fact-meta"><dt>Intent / role</dt><dd>${esc(f.intent??'ancillary')} / ${esc(f.role)}</dd><dt>Execution</dt><dd>${esc(f.execution_state)} · ${esc(f.finality)}</dd><dt>Transaction</dt><dd>${esc(f.tx_hash)}</dd><dt>Receipt</dt><dd>${esc(f.receipt_id)}</dd><dt>Action index</dt><dd>${esc(f.action_index)} / ${esc(f.action_type)}</dd><dt>Provenance</dt><dd>${esc(f.provenance)}</dd></dl><pre>${esc(pretty({action_ref:f.action_ref,outcome_ref:f.outcome_ref}))}</pre></details>`).join('')||'<p class="empty">No established native facts.</p>';
+function reportTable(caption,headers,rows){
+ return `<table>${caption}<thead><tr>${headers.map(text=>`<th scope="col">${text}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
 }
-function applyTheme(theme){
- document.documentElement.dataset.theme=theme;
- $('theme-toggle').setAttribute('aria-label',theme==='dark'?'Switch to light theme':'Switch to dark theme');
- $('theme-label').textContent=theme==='dark'?'Light theme':'Dark theme';
-}
-let savedTheme='light';try{const saved=localStorage.getItem('crash-lab-theme');if(saved==='light'||saved==='dark')savedTheme=saved;}catch{}
-applyTheme(savedTheme);
-$('theme-toggle').addEventListener('click',()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';applyTheme(next);try{localStorage.setItem('crash-lab-theme',next);}catch{}});
 
-
-async function request(path,body){if(browserMode)return browserRequest(path,body);const r=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json','X-CrashLab-Token':catalog.sessionToken}:{},body:body?JSON.stringify(body):undefined});const data=await r.json();if(!r.ok)throw Error(data.error||`HTTP ${r.status}`);return data;}
-function download(name,data){const u=URL.createObjectURL(new Blob([pretty(data)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
-function setBusy(value){busy=value;$('main').setAttribute('aria-busy',String(value));$('run').firstElementChild.textContent=value?'Inspecting…':'Run inspection';document.querySelectorAll('#run,#upload,#export,#download,#copy,#native-btn,.scenario').forEach(b=>b.disabled=value);$('progress').hidden=!value;}
-function error(e){$('error').hidden=false;$('error').textContent=e.message||String(e);}
-function select(s){if(busy)return;selected=s;bundle=null;last=null;$('results').hidden=true;$('error').hidden=true;$('title').textContent=s.title;$('description').textContent=s.description;$('question').textContent=s.question;$('scenario-kind').textContent=s.kind==='synthetic'?'Synthetic mutation':s.kind==='live-model'?'Recorded live model':'Recorded local execution';$('scenario-number').textContent='Case '+String(catalog.scenarios.indexOf(s)+1);document.querySelectorAll('.scenario').forEach(b=>{b.classList.toggle('selected',b.dataset.id===s.id);b.setAttribute('aria-current',b.dataset.id===s.id?'true':'false');});setTab('overview');run();}
-function setTab(id){tabs.forEach(b=>{const active=b.dataset.tab===id;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});panels.forEach(p=>p.hidden=p.id!=='panel-'+id);if(id==='raw')$('raw').textContent=last?pretty(last):'';if(id==='evidence'&&last?.report.invocation.status==='assessed'&&!$('evidence-list').childElementCount)renderEvidence(last.report);}
-async function run(){if(busy)return;setBusy(true);last=null;$('results').hidden=true;$('error').hidden=true;$('progress').textContent=browserMode?'Inspecting inputs in browser Python…':'Inspecting local inputs…';try{last=await request(bundle?'/api/assess':'/api/run',bundle||{id:selected.id});render(last);}catch(e){error(e);}finally{setBusy(false);}}
-function render(data){const r=data.report;$('results').hidden=false;$('raw').textContent=$('panel-raw').hidden?'':pretty(data);$('timing').textContent=`${data.execution.elapsedMs} ms · actual ${browserMode?'browser Python':'local'} run`;$('version').textContent=data.execution.coreVersion;$('run-state').textContent=r.invocation.status==='assessed'?'Inspection complete':'Input not assessed';
- if(r.invocation.status!=='assessed'){$('finance-card').className='verdict unknown';$('utility-card').className='verdict unknown';$('finance-value').textContent='Input rejected';$('finance-note').textContent=r.invocation.message;$('utility-value').textContent='Not assessed';$('utility-note').textContent='No conclusion from rejected inputs.';$('coverage-value').textContent=r.invocation.code;$('coverage-note').textContent='Inspect raw report for the input diagnostic.';$('source-label').textContent='Rejected input / no capture assessed';$('insight-title').textContent='No financial or utility conclusion.';$('insight-body').textContent='Correct the rejected input before assessing this episode.';['intents','utility-list','constraint-list','evidence-list','scope-facts'].forEach(id=>$(id).replaceChildren());$('evidence-count').textContent='0';return;}
- const cs=r.constraints,us=r.utility.required,breaches=cs.filter(c=>c.status==='breached'),uncertain=cs.filter(c=>!['within','breached'].includes(c.status)),bad=us.filter(u=>u.status==='failed'),unknown=us.filter(u=>u.status!=='passed'&&u.status!=='failed');
- $('finance-card').className='verdict '+(!cs.length?'':breaches.length?'breach':uncertain.length?'unknown':'good');$('finance-value').textContent=!cs.length?'Not declared':breaches.length?'Policy breached':uncertain.length?'Evidence incomplete':'Within declared limits';$('finance-note').textContent=!cs.length?'No financial constraint was declared. No policy conclusion is made.':breaches.length?`${breaches.length} constraint${breaches.length===1?'':'s'} breached${uncertain.length?`; ${uncertain.length} unresolved`:''}. Inspect the affected intent below.`:uncertain.length?`${uncertain.length} constraint${uncertain.length===1?'':'s'} cannot be concluded. Missing context is not zero.`:'No observed breach of the declared financial constraints.';
- $('utility-card').className='verdict '+(!us.length?'':bad.length?'breach':unknown.length?'unknown':'good');$('utility-value').textContent=!us.length?'Not required':bad.length?'Output failed':unknown.length?'Output unknown':'Useful work verified';$('utility-note').textContent=!us.length?'No required task-output obligation was declared for this episode.':`${us.filter(u=>u.status==='passed').length} / ${us.length} required outputs passed${bad.length?`; ${bad.length} failed`:''}${unknown.length?`; ${unknown.length} unknown`:''}. Labels alone do not prove completion.`;
- $('coverage-value').textContent=r.coverage.financial_scope_complete?'Scoped evidence complete':'Evidence incomplete';$('coverage-note').textContent=`${r.inventory.observed_transaction_hashes} observed transaction hashes · ${r.inventory.rpc_records} RPC records. Capture authenticity is trusted.`;$('source-label').textContent=!selected?'User-supplied capture / not authenticated':selected.kind==='synthetic'?'Synthetic mutation / labelled':selected.kind==='live-model'?'Local Qwen inference and NEAR capture':'Controlled local NEAR capture';
- const merchants=cs.filter(c=>c.metric==='merchant_gross_principal');$('intents').innerHTML=intentLedger(merchants,us);
- const both=breaches.length&&us.length&&!bad.length&&!unknown.length;
- const insight=uncertain.length?['Some effects remain unresolved.','Known breaches remain visible; unknown is not zero.']:bad.length?['Payment is not useful completion.','Recorded content or answer failed its declared reference.']:breaches.length?[both?'Useful work does not authorize extra spending.':'A declared payment rule was breached.','Inspect the breached constraints and their causal receipts; output and payment are separate checks.']:selected?.id==='durable-recovery'?['Recovery reused the settled payment.','The journal recovered the stored transaction hash in this tested crash window; it is not a general exactly-once guarantee.']:selected?.id==='unrelated-credit'?['The credit belongs to another transaction.','A matching balance change cannot prove that this owner intent settled.']:['The declared checks are within scope.','Allowed installments remain valid; repeated RPC reads are not payments.'];
- $('insight-title').textContent=insight[0];$('insight-body').textContent=insight[1];
- $('utility-list').innerHTML=us.map(u=>`<div class="utility-row"><div>Intent ${esc(u.intent)} · ${esc(u.id)}<div class="utility-answer">${u.observed_answer_present?'Recorded answer: '+esc(JSON.stringify(u.observed_answer)):'Recorded answer unavailable'}</div></div><span class="status ${esc(u.status)}">${esc(u.status)}</span></div>`).join('')||'<div class="empty">No required utility assertions in this task.</div>';
- if(r.utility.intermediate.length)$('utility-list').insertAdjacentHTML('beforeend',`<div class="empty">${r.utility.intermediate.length} permitted intermediate observation(s), assessed separately from required outputs.</div>`);
- $('constraint-list').innerHTML=cs.map(c=>`<div class="constraint-row"><div>${esc(c.id)}<div class="constraint-detail">${esc(c.metric)} · ${esc(c.unit||'declared policy')}</div></div><span class="row-state ${esc(c.status)}">${esc(c.status)}</span></div>`).join('');
- $('evidence-count').textContent=r.native_facts.length;$('evidence-list').replaceChildren();if(!$('panel-evidence').hidden)renderEvidence(r);
- const scope={'Engine SHA256':data.execution.coreSha256,'Run ID':r.scope.run_id,'Chain / protocol':r.scope.chain_id+' / '+r.scope.protocol_version,'Authority':r.authority.kind,'Capture pointer':JSON.stringify(r.scope.capture),'Model calls by this inspection':'0','Transactions sent by this inspection':'0'};$('scope-facts').innerHTML=Object.entries(scope).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+function recoveryFinding(report){
+ const row=report.constraints.find(c=>c.metric==='principal_recovery'&&c.status==='breached');
+ if(!row)return null;
+ const forbidden=row.parents.find(p=>p.forbidden_refund_facts.length);
+ if(forbidden){
+  return {tone:'exception',intent:row.intent,label:'refund destination breach',total:'Wrong recipient',
+   caption:'Disallowed refund recipient.',refs:forbidden.forbidden_refund_facts};
+ }
+ const failed=row.parents.find(p=>p.failed_refund_facts.length&&p.expected_yocto!=null
+  &&p.finalized&&p.expected_yocto!==p.successful_allowed_yocto);
+ return failed&&{tone:'breach',intent:row.intent,label:'principal recovery failed',
+  total:near(failed.successful_allowed_yocto),unit:true,
+  caption:'Recovered to allowed recipients · '+inNear(failed.expected_yocto)+' required',
+  refs:failed.failed_refund_facts};
 }
-$('run').addEventListener('click',run);tabs.forEach(b=>{b.addEventListener('click',()=>setTab(b.dataset.tab));b.addEventListener('keydown',e=>{if(['ArrowRight','ArrowLeft','Home','End'].includes(e.key)){e.preventDefault();let i=tabs.indexOf(b);i=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;setTab(tabs[i].dataset.tab);tabs[i].focus();}});});
-$('download').addEventListener('click',()=>last&&download('crash-lab-report.json',last));$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(pretty(last));$('copy').textContent='Copied ✓';setTimeout(()=>$('copy').textContent='Copy JSON',1500);}catch(e){error(e);}});
-$('export').addEventListener('click',async()=>{try{download('crash-lab-input-bundle.json',bundle||await request('/api/bundle',{id:selected.id}));}catch(e){error(e);}});
-$('upload').addEventListener('change',async e=>{const file=e.target.files[0];if(!file||busy){e.target.value='';return;}setBusy(true);try{if(file.size>9*1024*1024)throw Error('Bundle exceeds 9 MiB.');const b=JSON.parse(await file.text());if(b.format!=='agent-crash-lab/bundle-v1')throw Error('Choose an exported Crash Lab input bundle.');bundle=b;selected=null;$('title').textContent='Imported recording';$('description').textContent='Imported '+file.name+'. The same Python core checks source hashes and task scope.';$('question').textContent='Do these exact inputs support the declared conclusions?';$('scenario-kind').textContent='Imported recording';$('scenario-number').textContent='Custom case';document.querySelectorAll('.scenario').forEach(n=>{n.classList.remove('selected');n.setAttribute('aria-current','false');});setTab('overview');setBusy(false);await run();}catch(err){error(err);}finally{setBusy(false);e.target.value='';}});
-$('native-btn').addEventListener('click',async()=>{$('native-dialog').showModal();$('native-content').textContent='Loading recorded fresh native experiment…';try{const r=await request('/api/native-result');const rows=r.policies||[];$('native-content').innerHTML=`<p class="native-note">Two scripted recovery policies on owned local NEAR chains. Both workers crashed after FINAL and restarted. Recorded evidence; no live model or public-network transaction.</p><div class="native-grid">${rows.map(p=>`<article class="native-card"><h3>${esc(p.name)}</h3><p>Intent A: <strong>${esc(near(p.intentAGross))} NEAR</strong></p><p>Intent B: ${esc(near(p.intentBGross))} NEAR</p><p>Worker crash exit: ${esc(p.crashExitCode)}<br>Recovery: ${esc(p.recovery)}</p><p>Task answer: ${esc(JSON.stringify(p.answer))}</p></article>`).join('')}</div><div class="native-proof">Run: ${esc(r.atUtc)}<br>Recorded assertions: ${r.successful?'All matched':'Some failed'}<br>Local nodes: ${r.ownedNodeStopped===true?'Stopped':'Shutdown not confirmed'}<br>Native send attempts: ${esc(r.nativeSendAttempts)}<br>Evidence SHA256: ${esc(r.evidenceSha256)}</div><p class="native-note">The journal controls one process-crash window, not production exactly-once settlement. Each run is assessed independently.</p>`;}catch(e){$('native-content').textContent=e.message;}});$('close-native').addEventListener('click',()=>$('native-dialog').close());
-(async()=>{setBusy(true);try{catalog=await request('/api/catalog');$('case-count').textContent=String(catalog.scenarios.length);$('scenarios').innerHTML=catalog.scenarios.map((s,i)=>`<button class="scenario" data-id="${esc(s.id)}"><span class="scenario-index">${String(i+1)}</span><span><span class="scenario-name">${esc(s.short)}</span><span class="scenario-group">${esc(s.group)}${s.kind==='synthetic'?' / SYNTHETIC':''}</span></span></button>`).join('');document.querySelectorAll('.scenario').forEach(b=>b.addEventListener('click',()=>select(catalog.scenarios.find(s=>s.id===b.dataset.id))));setBusy(false);select(catalog.scenarios[0]);}catch(e){setBusy(false);error(e);}})();
+
+function renderFinding(merchants, failedOutputs, report){
+ const row=merchants.find(c=>c.status==='breached')
+  ??merchants.find(c=>c.intent===failedOutputs[0]?.intent)
+  ??merchants.find(c=>c.exact_total==null)
+  ??merchants.find(c=>c.exact_total!=='0')
+  ??merchants[0];
+ const failed=row?failedOutputs.find(u=>u.intent===row.intent):failedOutputs[0];
+ const otherBreach=row?.status!=='breached'&&report.constraints.find(c=>c.status==='breached');
+ let view=otherBreach&&(recoveryFinding(report)??{
+  tone:'exception',intent:otherBreach.intent,label:otherBreach.metric.replaceAll('_',' '),
+  total:'Policy breach',caption:'See the constraint below.',refs:otherBreach.witnesses
+ });
+ if(!view&&row){
+  const exact=row.exact_total!=null;
+  const breached=row.status==='breached';
+  const cap=row.cap==null?'Limit unknown':inNear(row.cap)+' allowed';
+  const label=breached?'payment limit exceeded':failed?'required output failed':exact?'native principal':'payment unresolved';
+  view={tone:breached?'breach':!exact?'unknown':failed?'output':'measured',
+   intent:row.intent,label,unit:exact||breached,
+   total:exact?near(row.exact_total):breached?'≥'+near(row.known_subtotal):'Unknown',
+   caption:(exact?'Committed principal':breached?'Exact total unknown':'Known subtotal '+inNear(row.known_subtotal))+' · '+cap,
+   committed:row.exact_total,limit:row.cap,output:breached?undefined:failed,
+   refs:row.witnesses.length?row.witnesses:report.native_facts.filter(f=>f.intent===row.intent
+    &&positivePrincipal(f)).map(f=>f.id)};
+ }
+ if(!view&&failed){
+  view={tone:'exception',intent:failed.intent,label:'required output failed',total:'Output failed',
+   caption:'Output check failed.',output:failed};
+ }
+ const finding=$('finding');
+ finding.hidden=!view;
+ if(!view)return;
+
+ finding.dataset.tone=view.tone;
+ setText('finding-label',`Intent ${view.intent} · ${view.label}`);
+ setText('finding-total',view.total);
+ $('finding-unit').hidden=!view.unit;
+ const proof=$('finding-proof');
+ const output=report.utility.required.indexOf(view.output);
+ const refs=new Set(view.refs);
+ const count=refs.size?report.native_facts.filter(f=>refs.has(f.id)).length:0;
+ setText('finding-caption',view.caption+(count<refs.size?' · Witness rows unavailable':''));
+ proof.hidden=output<0&&!count;
+ proof.textContent=output>=0?'Review recorded output':'Review '+count+' linked action'+(count===1?'':'s');
+ proof.onclick=()=>{
+  if(busy||finding.hidden||proof.hidden)return;
+  if(output<0)showEvidence(refs);
+  else focusResult($('utility-'+output),'overview');
+ };
+ renderFindingScale(view.committed,view.limit);
+}
+
+function renderFindingScale(total,cap){
+ const scale=$('finding-scale');
+ scale.hidden=total==null||cap==null||total==='0'&&cap==='0';
+ if(scale.hidden)return;
+ const committed=BigInt(total),allowed=BigInt(cap);
+ const breached=committed>allowed;
+ const max=breached?committed:allowed;
+ const width=value=>Number(value*1000n/max);
+ const capWidth=width(allowed),fill=breached?capWidth:width(committed);
+ const capMark=Math.min(998,Math.max(2,capWidth));
+ attr($('finding-fill'),'d',`M0 2H${fill}v8H0Z`);
+ attr($('finding-excess'),'d',`M${capWidth} 4H1000v4H${capWidth}Z`);
+ $('finding-over-key').hidden=!breached;
+ attr($('finding-cap'),'d','M '+capMark+' 0 V 12');
+}
+
+function focusResult(target,tab){
+ if(tab)setTab(tab);
+ target?.focus({preventScroll:true});
+ target?.scrollIntoView({behavior:'instant'});
+}
+function setEvidenceOrigin(origin){
+ const back=$('evidence-back');
+ back.href=origin?'#intents':'#finding';
+ back.textContent=origin?'Back to payment row':'Back to finding';
+ back.onclick=event=>{
+  event.preventDefault();
+  focusResult(origin??$('finding'),origin&&'overview');
+ };
+}
+function showEvidence(refs,origin=null){
+ setEvidenceOrigin(origin);
+ setTab('evidence');
+ let first,next=null;
+ for(let i=receiptRows.length;i--;){
+  const row=receiptRows[i],wasLinked=row.classList.contains('linked-fact');
+  if(row.classList.toggle('linked-fact',refs.has(facts[i].id))){
+   evidence.prepend(row);
+   first=row;
+  }else{
+   if(wasLinked&&row.nextElementSibling!==next)evidence.insertBefore(row,next);
+   next=row;
+  }
+ }
+ if(first)first.open=true;
+ focusResult(first?.firstElementChild??$('tab-evidence'));
+}
+function receiptOutcome({execution_state:state,finality,committed_yocto}){
+ if(state==='unsupported')return 'Unsupported action';
+ if(state==='unfinalized'||finality!=='whole_final'&&finality!=='bound_final_head')return 'Finality unknown';
+ if(state==='committed')return evidenceAmount(committed_yocto);
+ return state==='rolled_back'?'Rolled back':'Outcome unknown';
+}
+function evidenceAmount(value){
+ return fitsYocto(value,39,128n)
+  ?formatYocto(value)+' NEAR':'Amount unavailable';
+}
+function renderEvidence(report){
+ const principal=[],other=[];
+ for(const fact of report.native_facts)(positivePrincipal(fact)?principal:other).push(fact);
+ facts=principal.concat(other);
+ evidence.innerHTML=facts.map((fact,i)=>{
+  const intent=fact.intent==null?'Ancillary':'Intent '+esc(fact.intent);
+  const role={ordinary_principal:'Principal',principal_refund:'Principal refund',gas_return:'Gas return'}[fact.role]??'Unclassified';
+  const amount=receiptOutcome(fact);
+  return `<details class="fact" data-row="${i+1}"><summary><span><strong>Row ${i+1} · ${intent}</strong>${esc(fact.from)} → ${esc(fact.to)}</span><span><strong>${role}</strong>${amount}</span></summary></details>`;
+ }).join('');
+ receiptRows=[...evidence.children];
+}
+
+const isCount=n=>Number.isSafeInteger(n)&&n>=0;
+const isText=value=>typeof value==='string'&&!!value;
+const isSha256=value=>isText(value)&&/^[0-9a-f]{64}$/.test(value);
+function isSourceRef(ref){
+ const {source,pointer}=ref??{};
+ return isText(source)&&typeof pointer==='string'&&!/^[^/]|~(?![01])/.test(pointer);
+}
+function sourceBinding(ref,sources){
+ if(!isSourceRef(ref))return null;
+ const digest=Object.hasOwn(sources,ref.source)&&sources[ref.source]?.sha256;
+ return isSha256(digest)?[ref.source,digest]:null;
+}
+
+evidence.addEventListener('toggle',({target})=>{
+ if(!target.open||target.children.length>1)return;
+ const fact=facts?.[target.dataset.row-1];
+ if(!fact)return;
+ const {id,action_index,action_ref,outcome_ref}=fact;
+ const {scope:{run_id},sources}=last.report;
+ const hashes=[action_ref,outcome_ref].map(ref=>sourceBinding(ref,sources));
+ const fields=[
+  ['Intent / role',(fact.intent??'—')+' / '+fact.role],
+  ['Execution',fact.execution_state+' · '+fact.finality],
+  ['Tx hash',fact.tx_hash],
+  ['Receipt',fact.receipt_id],
+  ['Requested',evidenceAmount(fact.requested_yocto)],
+  ['Action index',action_index+' / '+fact.action_type],
+  fact.provenance==='derived_initial'?['Source','From transaction',hashes[0]&&action_ref]:['Source',fact.provenance]
+ ];
+ const json=isText(run_id)&&isText(id)&&isCount(action_index)&&hashes.every(Boolean)
+  ?pretty({
+  format:'agent-crash-lab/citation-v1',run_id,fact_id:id,action_index,core_sha256:last.execution.coreSha256,
+  sources:Object.fromEntries(hashes),action_ref,outcome_ref
+ }):'';
+ const citation=json?`<button>Save citation</button><pre>${esc(json,true)}</pre>`
+  :'<p class="empty" role="status">Citation needs a complete reference.</p>';
+ target.insertAdjacentHTML('beforeend',`<dl class="fact-meta">${definitionRows(fields)}</dl>${citation}`);
+ if(json)target.querySelector('button').onclick=()=>{if(!busy)download('citation-'+target.dataset.row,json);};
+},true);
+
+const page=document.documentElement.dataset,themeKey='crash-lab-theme';
+function applyTheme(light){
+ page.theme=light?'light':'dark';
+ setText('theme-toggle',light?'Use dark theme':'Use light theme');
+}
+let savedTheme;
+try{savedTheme=localStorage.getItem(themeKey);}catch{}
+applyTheme(savedTheme==='light');
+$('theme-toggle').onclick=()=>{
+ applyTheme(page.theme==='dark');
+ try{localStorage.setItem(themeKey,page.theme);}catch{}
+};
+
+async function request(path,body,refresh=true){
+ if(browserMode)return browserRequest(path,body);
+ const options = {signal: AbortSignal.timeout(30000)};
+ if (body !== undefined) Object.assign(options, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json', 'X-CrashLab-Token': catalog.sessionToken},
+  body: path === '/api/assess' ? body : JSON.stringify(body)
+ });
+ const r = await fetch(path, options);
+ const data=await r.json().catch(invalidReport);
+ if(r.ok)return data;
+ if(refresh&&body&&r.status===403&&data?.error==='Local session token required'){
+  const token=(await request('/api/catalog'))?.sessionToken;
+  if(isText(token)){
+   catalog.sessionToken=token;
+   return request(path,body,false);
+  }
+ }
+ throw Error(data?.error||`HTTP ${r.status}`,{cause:r.status});
+}
+function download(name, payload) {
+ const url = URL.createObjectURL(new Blob([payload], {type: 'application/json'}));
+ const link = document.createElement('a');
+ link.href = url;
+ link.download = `crash-lab-${selected?.id ?? bundle.key}-${name}.json`;
+ link.click();
+ setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+function setBusy(message=''){
+ busy=!!message;
+ attr($('main'),'aria-busy',busy);
+ $('run').textContent=message||(catalog?(retryInspection?'Retry':'Run')+' inspection':'Retry setup');
+ $('upload').disabled=!catalog;
+ document.querySelectorAll('.sidebar :is(button,input,select),main button[id]:not(.tab,#finding-proof)').forEach(control=>attr(control,'aria-disabled',busy));
+ if(busy){
+  $('error').hidden=true;
+  status.textContent=message;
+ }
+}
+function error(e,hint=''){status.textContent='';$('error').hidden=false;setText('error',(e.message||String(e))+hint);}
+function showCase(s,filename){
+ if($('main').getBoundingClientRect().top<0)scrollTo({top:0,behavior:'instant'});
+ selected=s;
+ const id=s?.id??'',url=new URL(location.href);
+ if(s)url.searchParams.set('case',id);
+ else url.searchParams.delete('case');
+ url.hash='';
+ if(url.href!==location.href)history.replaceState(history.state,'',url);
+ const view=s??{title:'Imported recording',description:filename,question:'Check this bundle.'};
+ for(const key of ['title','description','question'])setText(key,view[key]);
+ setText('scenario-kind',s?caseOrigin(s.kind):view.title);
+ setText('scenario-number',s?'Case '+(catalog.scenarios.indexOf(s)+1):'Custom case');
+ picker.value=id;
+ for(const b of nav.children){
+  const current=b.dataset.id===id;
+  attr(b,'aria-current',current);
+  if(current)nav.scrollTop=Math.min(b.offsetTop,Math.max(nav.scrollTop,b.offsetTop+b.offsetHeight-nav.clientHeight));
+ }
+ setTab('overview');
+}
+const findCase=id=>catalog?.scenarios.find(s=>s.id===id);
+const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox'}[kind]??'Owned sandbox');
+nav.onclick=({target})=>{
+ const button=target.closest('.scenario');
+ if(button)select(findCase(button.dataset.id));
+};
+function select(s){
+ if(busy||!s){picker.value=selected?.id??'';return;}
+ bundle=null;
+ showCase(s);
+ run();
+}
+const highlights=CSS.highlights;
+let matchEnd=0,placement;
+const clearMatch=()=>{cancelAnimationFrame(placement);highlights?.delete(raw.id);};
+find.oninput=find.onreset=()=>{matchEnd=0;match.value='';clearMatch();};
+find.onsubmit=event=>{
+ event.preventDefault();
+ const text=raw.textContent, term=visible(find.elements.query.value,true), selection=getSelection();
+ let start=text.indexOf(term,matchEnd);
+ if(start<0)start=text.indexOf(term);
+ selection.removeAllRanges();
+ clearMatch();
+ if(!term||start<0){match.value='Not found';return;}
+ let end=matchEnd=start+term.length;
+ const range=new Range();
+ for(const child of raw.childNodes){
+  const node=child.firstChild??child;
+  if(start>=0&&start<node.length)range.setStart(node,start);
+  if(end<=node.length){range.setEnd(node,end);break;}
+  start-=node.length;
+  end-=node.length;
+ }
+ const long=highlights&&term.length>65536;
+ match.value='Match found';
+ const result=range.cloneRange();
+ if(long)highlights.set(raw.id,new Highlight(result));
+ else selection.addRange(result);
+ range.collapse(true);
+ placement=requestAnimationFrame(()=>{
+  if(!raw.offsetHeight)return;
+  const {offsetTop=0,height=innerHeight}=window.visualViewport??{};
+  const viewBottom=offsetTop+height,zoom=raw.currentCSSZoom??1;
+  const formTop=find.getBoundingClientRect().top-offsetTop;
+  const missing=raw.getBoundingClientRect().top+Math.min(height,40*zoom)-viewBottom;
+  scrollBy({top:Math.max(Math.min(formTop,0),missing),behavior:'instant'});
+  const box=raw.getBoundingClientRect(),head=range.getBoundingClientRect();
+  const middle=(Math.max(offsetTop,box.top)+Math.min(viewBottom,box.bottom))/2;
+  raw.scrollTop+=(head.top+head.height/2-middle)/zoom;
+ });
+};
+function renderRaw(text){
+ text=visible(text,true);
+ if(text.length<=65536){
+  raw.textContent=text;
+  return;
+ }
+ // Prefer line or separator breaks within a 16K code point cap.
+ for(const part of text.match(/.{8191,16383}\n|.{8191,16383}[ /.,](?![\p{M}\u200d])|.{1,16384}/gsu)){
+  const segment=document.createElement('span');
+  segment.textContent=part;
+  raw.append(segment);
+ }
+}
+function renderActivePanel(){
+ if(!last)return;
+ const report=last.report;
+ if(!$('panel-raw').hidden&&!raw.firstChild)renderRaw(reportJson());
+ if(!$('panel-scope').hidden&&!$('scope-facts').firstChild)renderScope(report);
+ if(!facts&&!$('panel-evidence').hidden&&report.invocation.status==='assessed')renderEvidence(report);
+}
+function setTab(id){
+ tabs.forEach(b=>{
+  const active=b.id==='tab-'+id;
+  attr(b,'aria-selected',active);
+  b.tabIndex=active?0:-1;
+  panelFor(b).hidden=!active;
+ });
+ renderActivePanel();
+}
+function clearResults(){
+ last=cache=facts=receiptRows=merchants=null;
+ $('results').hidden=true;
+ find.reset();
+ for(const id of ['raw','evidence-list','scope-facts','intents','utility-list','constraint-list','verdicts'])$(id).replaceChildren();
+ $('finding').hidden=true;
+ setEvidenceOrigin(null);
+}
+async function run(){
+ if(busy||!bundle&&!selected)return;
+ setBusy('Inspecting…');
+ clearResults();
+ try{
+  last=await request(bundle?'/api/assess':'/api/run',bundle?.bytes??{id:selected.id});
+  status.textContent=render(last);
+  renderActivePanel();
+  $('results').hidden=false;
+ }catch(e){
+  clearResults();
+  retryInspection=!bundle||e.cause!==400;
+  error(e,retryInspection?'':' · Import corrected bundle.');
+ }finally{setBusy();}
+}
+function verdicts(inspection,...cards){
+ const titles=['Payment authority','Useful work','Payment evidence'];
+ const defaults=['Principal by intent','Reference check'];
+ $('verdicts').innerHTML=cards.map(([state,value,note,foot],i)=>
+  `<article class="verdict ${state}"><div class="card-kicker">${titles[i]}</div><div class="verdict-value">${esc(value)}</div><p>${esc(note)}</p><div class="card-foot">${foot??defaults[i]}</div></article>`
+ ).join('');
+ return `${inspection}. ${cards[0][1]}. ${cards[1][1]}.`;
+}
+
+function excerpt(text) {
+ if (text.length <= 160) return text;
+ const preview = text.match(/^.{1,160}/su)[0];
+ return preview === text ? text : preview + '… See Raw report.';
+}
+const label = (text, invalid = 'Invalid ID') =>
+ typeof text === 'string' ? excerpt(text) : invalid;
+const joined=parts=>parts.filter(Boolean).join(' · ');
+function sourceHtml(ref,caption=''){
+ if(ref==null)return caption?'<div>No pointer</div>':'';
+ if(!isSourceRef(ref))return '<div>Invalid reference</div>';
+ const path=esc(ref.source+' · '+(ref.pointer||'(root)'));
+ return ref.pointer.length>160
+  ?`<details><summary>${caption||'Source path'}</summary>${path}</details>`
+  :`<div>${caption&&caption+' · '}${path}</div>`;
+}
+function renderScope(r){
+ const fields=[['Engine SHA256',last.execution.coreSha256]];
+ if(r.invocation.status==='assessed'){
+  const {run_id,chain_id,protocol_version,capture}=r.scope;
+  const text=(value,valid=isText)=>valid(value)?value:'Unavailable';
+  fields.push(['Run ID',text(run_id)],['Network / protocol version',text(chain_id)+' / '+text(protocol_version,isCount)],
+   ['Authority',r.authority.kind],sourceBinding(capture,r.sources)?['Capture','',capture]:['Capture','Unavailable']);
+  for(const d of r.diagnostics)fields.push([d.id+' · '+d.scope,d.message,d.ref]);
+ }else fields.push([r.invocation.code,r.invocation.message]);
+ $('scope-facts').innerHTML=definitionRows(fields);
+}
+
+const invalidReport=()=>{throw Error('The result contains invalid data. Please try again.');};
+function render(data){
+ const {report:r,execution}=data??{};
+ const {status:outcome,code,message}=r?.invocation??{};
+ const assessed=outcome==='assessed',failed=outcome==='failed';
+ const state=assessed?'Inspection complete':failed?'Inspection failed':outcome==='rejected'?'Input rejected':'';
+ const {rpc_records:rpcs,observed_transaction_hashes:txs,selected_required_utility:total,
+  selected_intermediate_utility:permitted}=r?.inventory??{};
+ const complete=r?.coverage?.financial_scope_complete;
+ const {required:us,intermediate}=r?.utility??{};
+ if(!state||r.format!=='agent-crash-lab/report-v1'||!isText(execution?.coreVersion)
+  ||!Number.isFinite(execution.elapsedMs)||execution.elapsedMs<0||!isSha256(execution.coreSha256)
+  ||(!assessed&&(!isText(code)||!isText(message)))
+  ||(assessed&&(typeof complete!=='boolean'||![txs,rpcs].every(isCount)||txs>rpcs
+   ||![r.constraints,r.native_facts,r.diagnostics,us,intermediate].every(Array.isArray)
+   ||us.length!==total||intermediate.length!==permitted
+   ||![r.scope,r.sources].every(v=>v&&typeof v==='object'&&!Array.isArray(v))
+   ||!r.native_facts.every(f=>[f?.id,f?.from,f?.to].every(isText)))))
+  invalidReport();
+ const count=assessed?r.native_facts.length:0;
+ setText('evidence-count',count);
+ $('evidence-back').hidden=!count;
+ setText('evidence-intro',count?'Linked first. Cite with bundle.':
+  !assessed?state+'. See Raw report.':
+  complete?'No action in scope.':'No verified actions.');
+ setText('timing',`${execution.elapsedMs} ms · ${browserMode?'Wasm':'local'}`);
+ setText('version',execution.coreVersion);
+ retryInspection=failed;
+ setText('run-state',state);
+ if(!assessed)return verdicts(state,['unknown','Unassessed',message],['unknown','Not evaluated',''],
+  ['unknown',code,failed?'Retry inspection.':'Import corrected bundle.','Raw report']);
+ const cs=r.constraints;
+ const messages=new Map(r.diagnostics.flatMap(d=>
+  d&&[d.id,d.scope,d.message].every(isText)?[[d.id,d.message]]:[]));
+ if(messages.size<r.diagnostics.length)invalidReport();
+ const reasons=({diagnostic_ids:ids=[]})=>{
+  if(!Array.isArray(ids))invalidReport();
+  return joined(ids.map(id=>messages.get(id)??invalidReport()).slice(0,2));
+ };
+ for(const row of intermediate){
+  if(row?.role!=='permitted_intermediate')invalidReport();
+  reasons(row);
+ }
+ let breaches=0,uncertain=0;
+ $('constraint-list').innerHTML=cs.map(c=>{
+  const status=c?.status;
+  if(!isText(status)||!Object.hasOwn(policyLabels,status))invalidReport();
+  if(status==='breached')breaches++;
+  else if(status!=='within')uncertain++;
+  return `<div class="constraint-row"><div>${esc(label(c.id))}<div class="constraint-detail">${esc(joined([label(c.metric??'','Invalid metric'),c.unit||'policy',reasons(c)]))}</div></div><span class="row-state ${status}">${status}</span></div>`;
+ }).join('');
+ const checks={status:'HTTP status',context:'Context',content:'Document',answer:'Answer'};
+ const states=['passed','unknown','unsupported','invalid_reference','failed'];
+ const bad=[],byIntent=new Map();
+ let passed=0,unresolved=-1;
+ const outputRows=us.map((u,index)=>{
+  const {status,observed_answer_present:present}=u??{};
+  const rank=states.indexOf(status);
+  if(rank<0)invalidReport();
+  if(!rank)passed++;
+  else if(rank===4)bad.push(u);
+  else if(unresolved<0)unresolved=index;
+  const [count=0,prior=0]=byIntent.get(u.intent)??[];
+  byIntent.set(u.intent,[count+1,Math.max(rank,prior)]);
+  if(present!==undefined&&typeof present!=='boolean'||!rank&&!present
+   ||present&&!Object.hasOwn(u,'observed_answer'))invalidReport();
+  const answer=present?'Answer: '+excerpt(JSON.stringify(u.observed_answer))
+   :present===false?'No recorded answer':'Answer not verified';
+  const reason=reasons(u);
+  const evidence=!rank?'':`<div>${esc(joined(Object.keys(checks).map(k=>u[k+'_check']===false
+   &&(k!=='answer'||present!==false)&&checks[k]+' mismatch').concat(reason)))}</div>${sourceHtml(u.observation_ref,u.reference_check?'':'Unverified source')}`;
+  return `<div id="utility-${index}" class="utility-row" tabindex="-1"><div>Intent ${esc(u.intent??'—')} · ${esc(label(u.id))}<div class="utility-answer">${esc(answer,true)}${evidence}</div></div><span class="status ${status}">${status.replace('_',' ')}</span></div>`;
+ }).join('');
+ const unknown=total-passed-bad.length;
+ if(r.coverage.all_required_utility_assessed!==!unknown)invalidReport();
+ const payment=!cs.length?['none','Not declared','No limits set.']
+  :breaches||uncertain?[breaches?'breach':'unknown',breaches?'Policy breached':'Evidence incomplete',
+   joined(['Checks',breaches&&breaches+' breached',uncertain&&uncertain+' unresolved'])+'.']
+  :['good','Within declared limits','No breach observed.'];
+ const output=!total?['none','Not required']:bad.length?['breach','Output failed']
+  :unknown?['unknown','Output unknown']:['good','Useful work verified'];
+ output.push(!total?'No required output.':`${passed} / ${total} required outputs passed${bad.length?`; ${bad.length} failed`:''}${unknown?`; ${unknown} unknown`:''}.`);
+ if(breaches&&passed&&passed===total)payment[2]+=' Useful work cannot authorize extra spending.';
+ if(!breaches&&bad.length)output[2]+=' Payment cannot verify output.';
+ if(cs.length&&!breaches&&!bad.length&&(uncertain||!complete))payment[2]+=' Unknown does not imply zero.';
+ if(unknown)output[3]='<button id="review-output">Review unresolved output</button>';
+ const announcement=verdicts(state,payment,output,[complete?'':'unknown',complete?'Scoped evidence complete':'Evidence incomplete',`${txs} transaction hashes · ${rpcs} RPC capture records. Origin assumed.`,selected?caseOrigin(selected.kind):r.authority.kind==='counterfactual'?'Declared synthetic':'Import origin unverified']);
+ if(unknown)$('review-output').onclick=()=>{
+  if(!busy)focusResult($('utility-'+unresolved),'overview');
+ };
+ merchants=cs.filter(c=>c.metric==='merchant_gross_principal');
+ renderFinding(merchants,bad,r);$('intents').innerHTML=intentLedger(merchants,byIntent,r.native_facts);
+ $('utility-list').innerHTML=(outputRows||'<div class="empty">No required outputs.</div>')+
+  (permitted?`<div class="empty">${permitted} permitted intermediate observations.</div>`:'');
+ return announcement;
+}
+$('run').onclick=()=>catalog?run():start();
+$('intents').onclick=({target})=>{
+ const button=target.closest('button.intent-id');
+ if(busy||!button)return;
+ const {intent}=merchants[button.closest('tr').sectionRowIndex];
+ const refs=last.report.native_facts.filter(f=>f.intent===intent&&isPrincipal(f)).map(f=>f.id);
+ showEvidence(new Set(refs),button);
+};
+picker.onchange=event=>select(findCase(event.currentTarget.value));
+tabs.forEach((tab,index)=>{
+ const panel=panelFor(tab);
+ attr(tab,'role','tab');
+ attr(tab,'aria-controls',panel.id);
+ attr(panel,'role','tabpanel');
+ panel.tabIndex=0;
+ attr(panel,'aria-labelledby',tab.id);
+ tab.onclick=()=>setTab(tab.id.slice(4));
+ tab.onkeydown=event=>{
+  const {key}=event;
+  if(!['ArrowRight','ArrowLeft','Home','End'].includes(key))return;
+  event.preventDefault();
+  const i=key==='Home'?0:key==='End'?tabs.length-1:(index+(key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  const next=tabs[i];
+  setTab(next.id.slice(4));
+  next.focus();
+ };
+});
+$('download').onclick=()=>!busy&&last&&download('report',reportJson());
+$('copy').onclick=async()=>{
+ if(busy||!last)return;
+ try{
+  await navigator.clipboard.writeText(reportJson());
+  setText('copy','Copied ✓');setTimeout(()=>setText('copy','Copy JSON'),1500);
+ }catch(e){error(e);}
+};
+$('export').onclick=async()=>{
+ if(busy||!last)return;
+ setBusy('Exporting bundle…');
+ try{
+  download('bundle',bundle?.bytes??pretty(await request('/api/bundle',{id:selected.id})));
+  status.textContent='Bundle exported.';
+ }catch(e){error(e);}finally{setBusy();}
+};
+$('upload').onclick=event=>{if(busy)event.preventDefault();};
+$('upload').onchange=async({currentTarget:input})=>{
+ const file = input.files[0];
+ if (!file || busy) {input.value = ''; return; }
+ setBusy('Reading bundle…');
+ try{
+  if (file.size > 9 * 1024 * 1024) throw Error(`${file.name} exceeds 9 MiB.`);
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  const key = Array.from(new Uint8Array(digest, 0, 6), b => b.toString(16).padStart(2, '0')).join('');
+  bundle = {bytes, key: 'import-' + key};
+
+  showCase(null, file.name);
+  setBusy();
+  await run();
+ }catch(err){error(err);}finally{setBusy();input.value='';}
+};
+function renderComparison(recording){
+ const policies=recording.policies;
+ const rows=[
+  ['Intent A principal',p=>'<strong class="comparison-value '+esc(p.financialStatus)+'">'+near(p.intentAGross)+' <small>NEAR</small></strong>'],
+  ['Payment policy',p=>esc(({within:'Within declared limits',breached:'Policy breached'})[p.financialStatus]??p.financialStatus)],
+  ['After restart',p=>esc(p.recovery)],
+  ['Intent B principal',p=>inNear(p.intentBGross)],
+  ['Required outputs passed',p=>esc(p.requiredOutputsPassed)],
+  ['Recorded answer',p=>'<code>'+esc(JSON.stringify(p.answer),true)+'</code>'],
+  ['Worker exit code',p=>esc(p.crashExitCode)]
+ ];
+ const body=rows.map(([label,render])=>`<tr><th scope="row">${label}</th>${
+  policies.map(p=>`<td>${render(p)}</td>`).join('')}</tr>`).join('');
+ const proof=definitionRows([
+  ['Run',recording.atUtc],
+  ['Assertions',recording.successful?'All matched':'Some failed'],
+  ['Local nodes',recording.ownedNodeStopped===true?'Stopped':'Shutdown not confirmed'],
+  ['Native send attempts',recording.nativeSendAttempts],
+  ['Evidence SHA256',recording.evidenceSha256]
+ ]);
+ $('native-content').innerHTML=`<p>Workers crashed after settlement.</p>
+${reportTable('<caption>Effects after restart</caption>',['Measure',...policies.map(p=>esc(p.name))],body)}
+<details><summary>Reproduction</summary><dl>${proof}</dl></details>`;
+}
+
+const dialog=$('native-dialog');
+$('native-btn').onclick=async()=>{
+ if(busy)return;
+ dialog.showModal();
+ const message='Loading comparison…';
+ setBusy(message);
+ setText('native-content',message);
+ try{
+  const comparison=await request('/api/native-result');
+  if(dialog.open)renderComparison(comparison);
+ }catch(e){if(dialog.open)setText('native-content',e.message);}
+ finally{status.textContent='';setBusy();}
+};
+$('close-native').onclick=()=>dialog.close();
+async function start(){
+ if(busy)return;
+ setBusy('Loading…');
+ try{
+  const next=await request('/api/catalog'),cases=next?.scenarios;
+  if(!Array.isArray(cases)||!cases.length)throw Error('Cannot load cases.');
+  nav.innerHTML=cases.map((s,i)=>`<button class="scenario" data-id="${esc(s.id)}"><span class="scenario-index">${i+1}</span><span><b>${esc(s.short)}</b><small>${esc(s.group)}${s.kind==='synthetic'?' / SYNTHETIC':''}</small></span></button>`).join('');
+  setText('case-count',cases.length);
+  picker.append(...cases.map((s,i)=>new Option((i+1)+'. '+s.short,s.id)));
+  catalog=next;
+ }catch(e){error(e);return;}
+ finally{setBusy();}
+ select(findCase(params.get('case'))??catalog.scenarios[0]);
+}
+start();

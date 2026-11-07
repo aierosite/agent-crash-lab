@@ -21,11 +21,11 @@ Declared owner task + exact capture bytes + independent output reference
 
 ## Components
 
-- `agent_crash_lab.py`: unchanged original pure assessor; 31 engineering quotas, exact amount math, strict JSON/pointer/source binding. It has no ambient IO or signing authority.
+- `agent_crash_lab.py` is the pure assessor. It enforces 31 engineering quotas, exact amount math, and strict JSON, pointer and source binding. Source IDs must be strings. Utility answers, outcome costs and diagnostics share an exact representation for decimals and integers outside the interoperable JSON range.
 - `workbench.py`: loopback HTTP adapter. Reads only named bundled scenarios; custom bundles provide bytes rather than server file paths. Runs the actual assessor on every request. A shared validator gives HTTP and CI the same bundle contract. Exports raw inputs and reports.
 - `web/`: dependency-free responsive inspector. Two result axes and scope are visible separately. Causal witnesses expose actual source pointers. Untrusted labels are escaped. Input rejection clears prior verdicts. Receipt HTML and raw JSON are created when their existing tabs open.
 - `gate.py`: explicit CI policy layered over the report, without changing the assessor's exit semantics.
-- `tools/verify_release.py --judge`: checks release-file consistency before running the three offline acceptance suites; CI uses this same entry point.
+- `tools/verify_release.py --judge` checks release-file consistency before running the four offline acceptance suites. CI uses this entry point.
 - `tools/native_crash.py`: optional Linux experiment, isolated genesis, fresh ephemeral key in memory, loopback-only endpoint, owned process cleanup. Pinned executable hash is checked before execution. Actual worker process exit77 is used, not a synthetic `crashed=true` label.
 - `tools/bind_native.py`: binds the recorded hashes/send indices to the task caps and useful-output documents declared before execution. It asserts expected native and useful-output results and writes reviewable reports.
 
@@ -45,4 +45,4 @@ The useful-output oracle checks the declared document and actual recorded answer
 
 Owner declarations and controlled captures are trusted. The tool does not validate NEAR signatures, Borsh/consensus authenticity, general authorization discovery or all public protocol variants. A caller can forge its own reference and recording; matching hashes will not turn that into authenticated history. A missing or unsupported dependent scope cannot receive a complete-clean claim.
 
-Local workbench limits: 9MiB request body, at most four concurrent assessment jobs, finite core quotas, 10s read timeout, explicit loopback Host/Origin and session token. These are engineering bounds, not a formal denial-of-service proof or an OS sandbox. No authentication/hosting promise is made for public networks.
+Local workbench limits: 9MiB request body, at most four concurrent assessment jobs, finite core quotas, 10s read timeout, explicit loopback Host/Origin and session token. Early upload rejection sends the status first. Up to four sockets may briefly discard unread bytes, each with a 250 ms deadline and a 9 MiB cap in 64 KiB chunks. This path does not parse the rejected body or take an assessment slot. Clients that keep sending past the discard budget can lose the response. These are engineering bounds, not a formal denial-of-service proof or an OS sandbox. No authentication/hosting promise is made for public networks.
