@@ -110,6 +110,39 @@ class PrototypeTests(unittest.TestCase):
         changed=deepcopy(plan);changed['intents'][0]['cap']='0'
         with self.assertRaisesRegex(ValueError,'binding mismatch'):self.lab.evaluate(changed,bundle)
 
+    def test_unicode_byte_bounds_match_the_inventory_reference(self):
+        for field in ['resource','version','invoice','source']:
+            for value in ['a'*129,'a'*256,'é'*128,'🚀'*64]:
+                with self.subTest(field=field,bytes=len(value.encode())):
+                    plan=manual();plan['intents'][0]['document'][field]=value
+                    result=self.lab.run(plan);self.assertTrue(result['matches']);self.assertEqual(result['actual']['gate'],0)
+            for value in ['a'*257,'é'*129,'🚀'*65,'\ud800']:
+                plan=manual();plan['intents'][0]['document'][field]=value
+                with self.assertRaisesRegex(ValueError,'UTF-8 bytes'):oracle.validate(plan)
+        for value in ['é'*64,'🚀'*32]:
+            plan=manual();plan['intents'][0]['document']['rows'][0]['sku']=value
+            self.assertTrue(self.lab.run(plan)['matches'])
+        for value in ['é'*65,'🚀'*33,'\ud800']:
+            plan=manual();plan['intents'][0]['document']['rows'][0]['sku']=value
+            with self.assertRaisesRegex(ValueError,'UTF-8 bytes'):oracle.validate(plan)
+
+    def test_reproducible_evaluation_detects_planned_faults_and_preserves_sources(self):
+        with tempfile.TemporaryDirectory(dir=ROOT) as folder:
+            output=Path(folder)/'evaluation'
+            run=subprocess.run([sys.executable,'-I','-S',str(ROOT/'tools/evaluate_suite.py'),'--out',str(output)],
+                cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=40)
+            self.assertEqual(run.returncode,0,run.stdout+run.stderr)
+            record=json.loads((output/'results.json').read_bytes())
+            self.assertEqual(record['totals']['generatedMatches'],192)
+            self.assertEqual(record['totals']['controlsPassed'],11)
+            self.assertEqual(record['totals']['mutationsDetected'],9)
+            self.assertEqual(record['totals']['domainDisagreements'],0)
+            self.assertTrue(record['sourceIntegrityVerifiedAfter'])
+            marker=output/'results.json';before=marker.read_bytes()
+            repeated=subprocess.run([sys.executable,'-I','-S',str(ROOT/'tools/evaluate_suite.py'),'--out',str(output)],
+                cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=5)
+            self.assertEqual(repeated.returncode,2);self.assertEqual(marker.read_bytes(),before)
+
     def test_parser_and_domain_bounds(self):
         values=[True,None,-1,2**32]
         for seed in values:

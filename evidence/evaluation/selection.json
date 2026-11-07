@@ -1,0 +1,122 @@
+{
+  "format": "agent-crash-lab/prospective-evaluation-v1",
+  "registeredAt": "2026-11-07T23:11:26.313408+00:00",
+  "frozenRelease": "v0.6.0",
+  "commit": "5b13536d2e9dadaad035a94c305e17b50bc880b8",
+  "selection": {
+    "seedFormula": "uint32_be(SHA256(ASCII(\"acl-q04-v0.6.0-eval:\" + decimal(i)))[0:4]), i=0..15",
+    "seeds": [
+      3188840848,
+      2882293484,
+      1016938663,
+      4251145004,
+      1572459623,
+      2834535036,
+      153941694,
+      985354444,
+      4109013958,
+      3872751099,
+      3549873940,
+      2705373544,
+      3483783203,
+      888751930,
+      1514631681,
+      4036514842
+    ],
+    "caseIndices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "expectedCases": 192,
+    "rule": "Run every selected pair once without exclusions. Any runner bug gets a new versioned output and all cases rerun."
+  },
+  "controls": [
+    "C01 equal-price independent intents, split actions in one hash, cap boundary, allowed",
+    "C02 two equal-price A payments exceed one-payment authority; both outputs still pass",
+    "C03 explicitly allowed two-hash installments, total at cap, both outputs pass",
+    "C04 paid wrong answer, financial constraints within",
+    "C05 paid altered document, financial constraints within",
+    "C06 missing required answer, financial constraints within, unknown gate",
+    "C07 zero transfer/free work, no committed positive settlement, allowed",
+    "C08 remove B initial receipt body, no complete B financial conclusion",
+    "C09 open owner horizon, complete observations do not prove a closed financial scope",
+    "C10 known A breach plus missing B receipt, breach takes precedence over unknown",
+    "C11 repeat final observation of the same transaction hash, no second payment"
+  ],
+  "mutations": [
+    "M01 drop independent intent filtering in financial facts",
+    "M02 count positive actions instead of distinct transaction hashes",
+    "M03 treat incomplete financial scope as complete and missing amounts as zero",
+    "M04 include zero-value actions as qualifying merchant settlement",
+    "M05 ignore incorrect recorded answer after content matches",
+    "M06 gate unresolved required output as success",
+    "M07 deduplicate equal-priced actions across independent transaction identities",
+    "M08 breach when total equals cap (>= instead of >)",
+    "M09 ignore altered document when recorded answer matches"
+  ],
+  "mutationRule": "Edit actual frozen assessor/workbench source only in memory. Compile, run all named controls and compare semantic projections. A non-crashing disagreement is a kill; crashes are separate invalid mutations, not evidence of detection. Record every survivor and killer. No mutation score marketed as real-world accuracy.",
+  "domainStudy": {
+    "identityFields": [
+      "resource",
+      "version",
+      "invoice",
+      "source"
+    ],
+    "identitySamples": [
+      "ASCII lengths 1,128,129,256,257",
+      "U+00E9 lengths 64,128,129",
+      "U+1F680 lengths 32,64,65",
+      "lone surrogate"
+    ],
+    "skuSamples": [
+      "ASCII lengths 1,128,129",
+      "U+00E9 lengths 64,65",
+      "U+1F680 lengths 32,33",
+      "lone surrogate"
+    ],
+    "expected": "Inventory identity markers 1..256 UTF-8 bytes; SKU 1..128 UTF-8 bytes; valid Unicode scalar text. Compare the original core reference validation with original oracle validation before any fix. The finite Lab still restricts rows to 1..8.",
+    "knownConcernBeforeEvaluation": "Oracle identity uses <=128 characters; core uses <=256 bytes. This is a pre-declared domain concern, not a newly discovered blind result."
+  },
+  "acceptance": {
+    "frozenIntegrity": "All 175 manifest entries must match before and after. Product remains unchanged during study.",
+    "generated": "All 192 cases must be accounted for, with full comparison and gate strata. Every mismatch retained; no tuning on this set labeled unseen afterward.",
+    "controls": "All 11 intended semantics must hold on unmodified assessor. Full expected projection on closed cases; explicit partial assertions for incomplete-receipt cases.",
+    "mutations": "All 9 intended semantic faults must have at least one non-crashing control kill. Surviving or crashing mutants block an adequacy claim.",
+    "domain": "Every stated byte-boundary sample must be concordant after an evidence-backed fix, with before/after record."
+  },
+  "limits": [
+    "Same-author, source-informed evaluation. Not an independent external audit or blind benchmark.",
+    "Generated episodes reuse an owned archived receipt topology and are counterfactual; no fresh signatures or chain executions.",
+    "Only the declared native transfer/inventory domain; no general smart-contract or agent accuracy claim.",
+    "No model calls, paid services, signing, wallet use, transactions, messages or competitor execution."
+  ],
+  "originalPlanSha256": "e3ab000a051a3190e9d8ab24fce8194240b3052dc1c9005866ad7032f8332226",
+  "sourceFreeze": {
+    "agent_crash_lab.py": {
+      "bytes": 56893,
+      "sha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469"
+    },
+    "workbench.py": {
+      "bytes": 13649,
+      "sha256": "8bc154d0fdf72acaae79c79d0e7da507ef517643e90fba37d48db04a4453be33"
+    },
+    "tools/scenario_lab.py": {
+      "bytes": 24395,
+      "sha256": "1e53e1ebfe7a62313f84287affaac82ffb0e59ee10606ce9e1f781543cdf13ee"
+    },
+    "episode_oracle.py": {
+      "bytes": 5043,
+      "sha256": "6e7057651640cbfe8294dba61265c67ac894f5a54ac6d20c3a708ca86dd5856e"
+    }
+  }
+}

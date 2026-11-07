@@ -16,14 +16,23 @@ def decimal(value,bits):
          and (value=='0' or value[0]!='0'),'Expected a canonical unsigned decimal')
     amount=int(value);need(amount<2**bits,'Amount exceeds its bound');return amount
 
+def bounded_text(value,maximum,message):
+    need(type(value) is str,message)
+    try:size=len(value.encode('utf-8'))
+    except UnicodeError:raise ValueError(message) from None
+    need(0<size<=maximum,message)
+    return value
+
 def solve(document):
     fields(document,['resource','version','invoice','source','rows'])
-    need(all(type(document[k]) is str and 0<len(document[k])<=128 for k in ['resource','version','invoice','source']),'Invalid document identity')
+    for key in ['resource','version','invoice','source']:
+        bounded_text(document[key],256,'Document identity must contain 1-256 UTF-8 bytes of valid Unicode text')
     rows=document['rows'];need(type(rows) is list and 1<=len(rows)<=8,'Expected 1–8 inventory rows')
     best=None;best_gap=-1;seen=set()
     for row in rows:
         fields(row,['sku','available','forecast'])
-        sku=row['sku'];need(type(sku) is str and sku and len(sku.encode())<=128 and sku not in seen,'Invalid SKU')
+        sku=bounded_text(row['sku'],128,'SKU must contain 1-128 UTF-8 bytes of valid Unicode text')
+        need(sku not in seen,'Duplicate SKU')
         seen.add(sku)
         need(all(type(row[k]) is int and 0<=row[k]<2**64 for k in ['available','forecast']),'Invalid quantity')
         gap=max(0,row['forecast']-row['available'])

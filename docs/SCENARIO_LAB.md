@@ -39,3 +39,5 @@ The reducer tries deleting transactions/actions, then lowering amounts within a 
 - [Workcell](https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173) informed the search/reduction/replay workflow. Its broader contract adapters and fresh testnet executions are different capabilities. This implementation does not copy its source or claim feature parity.
 
 The fifth offline judge suite, `test_scenario_lab.py`, checks generation determinism and variation, a separately executed oracle, allowed-work controls, reduction preservation/budget, exact replay, input errors and no-overwrite behavior.
+
+The oracle uses 1-256 UTF-8 bytes for document identity markers and 1-128 bytes for SKU text, rejecting invalid Unicode scalar text. The finite Lab profile allows 1-8 rows. [Reproduce the evaluation and deliberate-defect checks](EVALUATION.md).

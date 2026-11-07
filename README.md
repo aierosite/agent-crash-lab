@@ -6,9 +6,9 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![The Python-in-browser workbench in the v0.5.0 release](docs/workbench-browser.png)
 
-## Scenario Lab · v0.6.0
+## Scenario Lab · v0.6.1
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.6.0)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.6.1)
 
 Scenario Lab adds seeded counterfactual episodes, a separately executed blueprint oracle, predicate-preserving reduction and exact-input replay. The v36 workbench also checks passed-answer shape, exact quantity and profile consistency. The live-agent evidence below remains archived; generation is not a new chain/model experiment. [Generate → reduce → replay](docs/SCENARIO_LAB.md)
 
@@ -31,6 +31,16 @@ The first command verifies the assessor against planned expectations and exits 0
 
 Import that bundle into the browser inspector to inspect the receipts and output, or use the [exact replay command](docs/SCENARIO_LAB.md). These are explicitly synthetic inputs from an owned archived topology, not signed history or fresh transactions. The oracle runs in a separate Python process but shares the project author. Source-informed checks are not an external blind evaluation.
 
+## Check the evaluator
+
+The registered source-frozen study ran every selected case: 192 comparisons across 140 structural shapes, 11 hand-calculated controls and nine deliberate implementation mutations. All those checks agreed. A separate byte-boundary study exposed 16 oracle-domain disagreements; v0.6.1 fixes them and retains the original failing result. The repeated 56 boundary checks now agree. These are same-author, source-informed checks, not an external blind audit. [Selection, results and limits](docs/EVALUATION.md)
+
+```sh
+python -I -S tools/evaluate_suite.py --out evaluation-run
+```
+
+The command writes every case and mutation outcome into a new directory. It executes local reviewed source and in-memory mutations, without changing assessor files or calling a model/network. [Current measured result](verification/evaluation-current.json)
+
 ## Reproduce the judge checks
 
 Requires **Python 3.12+**, with no third-party packages or credentials. From the repository root:
@@ -39,7 +49,7 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and five entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, ten workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay and 14 Scenario Lab tests. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and five entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, ten workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay and 16 Scenario Lab tests. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
 
 The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the five Python judge suites.
 

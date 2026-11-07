@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.6.0",
-  "atUtc": "2026-11-07T22:56:57.370230+00:00",
+  "version": "0.6.1",
+  "atUtc": "2026-11-07T23:17:21.957034+00:00",
   "meaning": "Size and SHA256 of each release file except this manifest",
   "files": {
     ".gitattributes": {
@@ -41,8 +41,8 @@
       "sha256": "d711de520245f4b44e42a9da30df0ab5759a1353daed6626eca42c64b00dbdc8"
     },
     "README.md": {
-      "bytes": 21899,
-      "sha256": "610abc692f5fd416c2ae1aa7c158bfa34cb7e88bb0b5d9fbed54685c83995f7b"
+      "bytes": 22766,
+      "sha256": "4b66f9155bc390c09d73f0ffd1443ef6e7a8911429717abc6f5bd12738bc7bad"
     },
     "SOURCES.json": {
       "bytes": 4682,
@@ -76,6 +76,10 @@
       "bytes": 2411,
       "sha256": "43c71ffd6c6ae094e3087e82b9fa5e5192c889532dfbedcfe92262720191c659"
     },
+    "docs/EVALUATION.md": {
+      "bytes": 6187,
+      "sha256": "ec839a326de226fb231683d184ae1c628aeca35133e90849f710a4d0c82f478e"
+    },
     "docs/HANDOVER.fa.txt": {
       "bytes": 4739,
       "sha256": "c6a15c17163d7b125018736b1bba7dc1ea4adb448892ffbc78eafe1d2e26bc17"
@@ -97,8 +101,8 @@
       "sha256": "89014579ad91cf7711bcf7a8e307e0e3c70d1f4bb88f66837058ee4f64007aa9"
     },
     "docs/SCENARIO_LAB.md": {
-      "bytes": 5460,
-      "sha256": "ec97615eaad7455633c6ab3a364298f6fe3230153dea59ddc87810c4c70331ee"
+      "bytes": 5708,
+      "sha256": "5c7db7df80fba3989964f23ba47342e8135fe22827a639c7bbd397afad9f926c"
     },
     "docs/SUBMISSION.md": {
       "bytes": 3552,
@@ -149,8 +153,8 @@
       "sha256": "cd83d3c74956e41a1f704c6c788718bc4d498af952f41a4200af3cd60f1d03e0"
     },
     "episode_oracle.py": {
-      "bytes": 5043,
-      "sha256": "6e7057651640cbfe8294dba61265c67ac894f5a54ac6d20c3a708ca86dd5856e"
+      "bytes": 5337,
+      "sha256": "e81d16a10933642d48ecb139abe4f6a30c7846e4bc98b786bd30cdd955f7a365"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -175,6 +179,10 @@
     "evidence/deleted-signer-refund-precommit.json": {
       "bytes": 2667,
       "sha256": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca"
+    },
+    "evidence/evaluation/selection.json": {
+      "bytes": 5703,
+      "sha256": "4963a1a68694c01058f5ef7ad10a10b4e44329e9ccdcfd0e0ae67813b4cde792"
     },
     "evidence/failed-refund-observation.json": {
       "bytes": 99188,
@@ -310,7 +318,7 @@
     },
     "evidence/scenario-lab/original-bundle.json": {
       "bytes": 27152,
-      "sha256": "ec015fef5269afe7b0d258098c6c1cd3dac86c9b2ec5b19a6c18c50a49d3af03"
+      "sha256": "e37a40e52d67c069519bb56708839cc2fc360a54268c066d2e574f6cabcbc76a"
     },
     "evidence/scenario-lab/original-expected.json": {
       "bytes": 329,
@@ -322,7 +330,7 @@
     },
     "evidence/scenario-lab/reduced-bundle.json": {
       "bytes": 10541,
-      "sha256": "2513871df54e12add7dfcdf0e439a4ec66f06d905bbe3a83333ec1927e5510ce"
+      "sha256": "88f4f642315cac62451ece61cf7126857b27838eef1f7908efece336cd35d586"
     },
     "evidence/scenario-lab/reduced-expected.json": {
       "bytes": 311,
@@ -374,7 +382,7 @@
     },
     "pyproject.toml": {
       "bytes": 192,
-      "sha256": "286f14c64eb5c8b5b9a134318881d750dc6290073cd71d4653aca0ed502511d4"
+      "sha256": "bddfcbf827a3cb0ce9778833e098de1510c1fea9457426d7ec5e9eea8e2ac51b"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -501,8 +509,8 @@
       "sha256": "d39015e6ed11ebc1fc26f53957b7d2460ff87763f14c121d5decc0dd4af2c6b1"
     },
     "test_scenario_lab.py": {
-      "bytes": 13651,
-      "sha256": "33417dcf8d8a0296ac3f5e295a7c93c37c21e116fd12510edc9e2b8973568c20"
+      "bytes": 16042,
+      "sha256": "3c7f39cce8a9d02b22d40acf596753628be7a5be220c60f3ca0a1abb944bafed"
     },
     "test_workbench.py": {
       "bytes": 9756,
@@ -515,6 +523,10 @@
     "tools/bind_native.py": {
       "bytes": 5371,
       "sha256": "0abd59f917e99561bb151fa6ac2ee71993af76d69236a81e601aa8329c0020b6"
+    },
+    "tools/evaluate_suite.py": {
+      "bytes": 13640,
+      "sha256": "d11b577f75218d4e2743c3dd19c5bc21d4c63187589cca50bf253bfeeb9f09bc"
     },
     "tools/export_bundle.py": {
       "bytes": 1259,
@@ -542,7 +554,7 @@
     },
     "tools/verify_release.py": {
       "bytes": 2286,
-      "sha256": "22c71442a0b6da4272073503b1c32722a5abd106dcbadf3fe63a008b15da190d"
+      "sha256": "605c89af9f0b5b0c8424513de1a4925cb6484ddaf2cfb5aebe76dcb11f6725c3"
     },
     "verification/ACCEPTANCE_MAP.json": {
       "bytes": 4870,
@@ -596,6 +608,14 @@
       "bytes": 1119,
       "sha256": "0f2d85dbc5ef915e8458b60ce0c4eb90c9feb3d0543a5047c991fdec2e5d64ad"
     },
+    "verification/evaluation-current.json": {
+      "bytes": 101913,
+      "sha256": "7967a1b3d28566f3588c4991ad3a1b588cb1016131af21c43c67799f7a40234d"
+    },
+    "verification/evaluation-v0.6.0.json": {
+      "bytes": 100555,
+      "sha256": "cbb5498c2e06eede1fd7d93864f28bd2931052006f8da160e34b3d1bb86d32ba"
+    },
     "verification/live-agent.json": {
       "bytes": 13815,
       "sha256": "9a2ef272d770d7243f84a20cebb250b160123fc7121884b38ce7575b9f2fb50e"
@@ -646,15 +666,15 @@
     },
     "verification/scenario-lab-original-report.json": {
       "bytes": 21229,
-      "sha256": "0e96dcb8d923e9698728fa38eff8d7a42270aaa70f82a944c6bb5aadb88e0399"
+      "sha256": "6b51743f02535348968540ea9a01b6b43d64fc01aefe9d5f624c35e51632f685"
     },
     "verification/scenario-lab-reduced-report.json": {
       "bytes": 7020,
-      "sha256": "ce6201e51ba6b1aa990e69fef84dbd77969b0ebb27b0530133ceb9e7af3392da"
+      "sha256": "08d4d9aebf0342c726d278ce2da370756b8c3afd84217f3733df07a91a61c9a1"
     },
     "verification/scenario-lab.json": {
       "bytes": 3814,
-      "sha256": "d16f5a66936ca691dccbcf29d1d4ec81f3f64c7606358dee6c7dd3d543a81119"
+      "sha256": "7b99bab7e05a017d7c6706b57e422c9e66081ccbe74e83a35f1881aa54bffbc9"
     },
     "verification/tests-before-reserved-fix.py.txt": {
       "bytes": 21039,
@@ -686,7 +706,7 @@
     },
     "web/catalog.json": {
       "bytes": 23716,
-      "sha256": "21780649137d8a1e1d754ceb9833f1b0e516b18df06dae519301ce355dbc9d6e"
+      "sha256": "9d90ae1075e8f544a6b0a6f6fbf2e7a80bb8fbb3f806e091e94bbf55d2196e63"
     },
     "web/icon.svg": {
       "bytes": 341,
@@ -702,7 +722,7 @@
     },
     "workbench.py": {
       "bytes": 13649,
-      "sha256": "8bc154d0fdf72acaae79c79d0e7da507ef517643e90fba37d48db04a4453be33"
+      "sha256": "71a994cf4af58b53f23249b10da5fa9f391f10f2d30af8a25a113f16076ff88e"
     }
   }
 }
