@@ -857,8 +857,10 @@ class Assessment:
             try:
                 self.selected_index(ref, 'utilityObservations'); obs = self.ref(ref)
                 need(type(obs) is dict, 'utility_observation')
+                need(not {'recordedAnswer', 'scriptedAnswer'} <= obs.keys(), 'conflicting_answer_fields')
+                answer_field = 'recordedAnswer' if 'recordedAnswer' in obs else 'scriptedAnswer'
                 out.update(status='observed', observed_status=obs.get('httpStatus'),
-                           observed_answer_present='scriptedAnswer' in obs, observed_answer=obs.get('scriptedAnswer'))
+                           observed_answer_present=answer_field in obs, observed_answer=obs.get(answer_field))
             except InputError as e:
                 out['diagnostic_ids'] = [self.diag(e.code, 'intermediate_utility')]
             intermediate.append(out)

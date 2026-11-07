@@ -313,7 +313,7 @@ function download(name, payload) {
 function setBusy(message=''){
  busy=!!message;
  attr($('main'),'aria-busy',busy);
- $('run').textContent=message||(catalog?(retryInspection?'Retry':'Run')+' inspection':'Retry setup');
+ $('run').textContent=message||(catalog?(!bundle&&!selected?'Import corrected bundle':(retryInspection?'Retry':'Run')+' inspection'):'Retry setup');
  $('upload').disabled=!catalog;
  document.querySelectorAll('.sidebar :is(button,input,select),main button[id]:not(.tab,#finding-proof)').forEach(control=>attr(control,'aria-disabled',busy));
  if(busy){
@@ -441,8 +441,10 @@ async function run(){
   $('results').hidden=false;
  }catch(e){
   clearResults();
-  retryInspection=!bundle||e.cause!==400;
-  error(e,retryInspection?'':' · Import corrected bundle.');
+  const invalidBundle=!!bundle&&e.cause===400;
+  if(invalidBundle)bundle=null;
+  retryInspection=!invalidBundle;
+  error(e,invalidBundle&&!e.message.includes('Import ')?' · Import a corrected bundle.':'');
  }finally{setBusy();}
 }
 function verdicts(inspection,...cards){
@@ -483,7 +485,193 @@ function renderScope(r){
 }
 
 const invalidReport=()=>{throw Error('The result contains invalid data. Please try again.');};
+// Report contract: validate before creating any verdict or deferred evidence panel.
+// This checks the evaluator's display contract, not signatures or capture authenticity.
+function validateInspection(data){
+ const object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+ const text=value=>typeof value==='string'&&value.length>0;
+ const count=value=>Number.isSafeInteger(value)&&value>=0;
+ const sha=value=>typeof value==='string'&&/^[0-9a-f]{64}$/.test(value);
+ const boolean=value=>typeof value==='boolean';
+ const own=(value,key)=>Object.hasOwn(value,key);
+ const require=(condition,path)=>{
+  if(!condition)throw Error('The result contains invalid data. Please try again.',{cause:'report-contract: '+path});
+ };
+ const strings=value=>Array.isArray(value)&&value.every(text);
+ const unique=value=>new Set(value).size===value.length;
+ const amount=(value,nullable=false,bits=256n)=>nullable&&value===null
+  ||typeof value==='string'&&value.length<=78&&/^(0|[1-9]\d*)$/.test(value)&&BigInt(value)<2n**bits;
+ require(object(data)&&object(data.report)&&object(data.execution),'response');
+ const r=data.report,e=data.execution;
+ require(text(e.coreVersion)&&sha(e.coreSha256)&&Number.isFinite(e.elapsedMs)&&e.elapsedMs>=0,'execution');
+ require(['actual-local-assessment','actual-browser-python-assessment'].includes(e.mode)
+  &&e.liveModel===false&&e.networkTransactions===0,'execution scope');
+ require(r.format==='agent-crash-lab/report-v1'&&object(r.invocation),'report format');
+ const invocation=r.invocation.status;
+ require(['assessed','rejected','failed'].includes(invocation),'invocation');
+ if(invocation!=='assessed'){
+  require(text(r.invocation.code)&&text(r.invocation.message),'unassessed explanation');
+  require(!['constraints','native_facts','utility','coverage'].some(key=>own(r,key)),'unassessed verdict');
+  return data;
+ }
+ require(r.invocation.version===e.coreVersion&&r.invocation.profile==='near-sandbox-2.14/native-v1','assessed profile');
+ require(object(r.authority)&&['historical_controlled','reconstructed','counterfactual'].includes(r.authority.kind)
+  &&Array.isArray(r.authority.basis)&&text(r.authority.note),'authority');
+ require(object(r.scope)&&text(r.scope.run_id)&&text(r.scope.chain_id)&&count(r.scope.protocol_version)
+  &&boolean(r.scope.closed_horizon)&&text(r.scope.horizon_note),'scope');
+ require(object(r.sources)&&Object.keys(r.sources).length>0,'sources');
+ for(const [id,source] of Object.entries(r.sources)){
+  require(/^[A-Za-z0-9_.-]{1,64}$/.test(id)&&object(source)&&sha(source.sha256)&&count(source.bytes),'source binding');
+ }
+ const sourceRef=ref=>object(ref)&&text(ref.source)&&own(r.sources,ref.source)
+  &&typeof ref.pointer==='string'&&!/^[^/]|~(?![01])/.test(ref.pointer);
+ require(sourceRef(r.scope.capture)&&r.authority.basis.every(sourceRef),'authority references');
+ require(['constraints','native_facts','diagnostics'].every(key=>Array.isArray(r[key])),'report collections');
+ require(object(r.utility)&&Array.isArray(r.utility.required)&&Array.isArray(r.utility.intermediate),'utility collections');
+ const inventory=r.inventory,coverage=r.coverage;
+ require(object(inventory)&&object(coverage),'inventory and coverage');
+ for(const key of ['rpc_records','send_observations','declared_attempts','observed_transaction_hashes',
+  'selected_required_utility','selected_intermediate_utility'])require(count(inventory[key]),'inventory '+key);
+ require(inventory.observed_transaction_hashes<=inventory.rpc_records
+  &&inventory.send_observations<=inventory.rpc_records
+  &&(inventory.utility_observations===null||count(inventory.utility_observations)),'inventory bounds');
+ require(inventory.selected_required_utility===r.utility.required.length
+  &&inventory.selected_intermediate_utility===r.utility.intermediate.length,'utility counts');
+ require(boolean(coverage.financial_scope_complete)&&boolean(coverage.all_required_utility_assessed)
+  &&text(coverage.trust),'coverage');
+ require(!coverage.financial_scope_complete||r.scope.closed_horizon,'closed financial scope');
+ const diagnostics=new Set();
+ for(const d of r.diagnostics){
+  require(object(d)&&[d.id,d.category,d.scope,d.message].every(text)&&!diagnostics.has(d.id),'diagnostic');
+  diagnostics.add(d.id);
+ }
+ const reasons=(row,required=false)=>{
+  const ids=own(row,'diagnostic_ids')?row.diagnostic_ids:[];
+  require(strings(ids)&&ids.every(id=>diagnostics.has(id))&&(!required||ids.length>0),'diagnostic references');
+ };
+ const facts=new Map();
+ for(const f of r.native_facts){
+  require(object(f)&&[f.id,f.attempt_id,f.tx_hash,f.receipt_id,f.action_type,f.from,f.to].every(text)
+   &&!facts.has(f.id)&&count(f.action_index),'native action identity');
+  require(f.intent===null||text(f.intent),'native action intent');
+  require(['ordinary_principal','principal_refund','gas_return','unclassified_system_or_unsupported_origin'].includes(f.role)
+   &&['committed','rolled_back','unfinalized','unknown','unsupported'].includes(f.execution_state)
+   &&['whole_final','bound_final_head','unresolved'].includes(f.finality)
+   &&['observed','derived_initial'].includes(f.provenance),'native action state');
+  require(boolean(f.self)&&f.self===(f.from===f.to),'self transfer');
+  require(amount(f.requested_yocto,true,128n)&&amount(f.committed_yocto,true,128n),'native amounts');
+  if(f.execution_state==='committed')require(f.requested_yocto!==null&&f.requested_yocto===f.committed_yocto,'committed amount');
+  else require(f.committed_yocto===(f.execution_state==='rolled_back'?'0':null),'uncommitted amount');
+  require(!['committed','rolled_back'].includes(f.execution_state)||f.finality!=='unresolved','action finality');
+  // Missing citations stay visible as unavailable; they cannot create a signed-history claim.
+  require(own(f,'action_ref')&&own(f,'outcome_ref'),'action references');
+  facts.set(f.id,f);
+ }
+ const witnesses=(ids,intent)=>{
+  require(strings(ids)&&unique(ids)&&ids.every(id=>facts.has(id)&&facts.get(id).intent===intent),'fact references');
+  return ids.map(id=>facts.get(id));
+ };
+ const constraints=new Set();
+ for(const c of r.constraints){
+  require(object(c)&&['within','breached','unknown','unsupported','conflict'].includes(c.status)&&boolean(c.complete),'constraint');
+  reasons(c);
+  // A malformed owner declaration is a genuine unknown result, not a malformed report.
+  if(!own(c,'metric')){
+   require(c.status==='unknown'&&!c.complete,'invalid owner constraint');
+   reasons(c,true);
+   continue;
+  }
+  require(text(c.id)&&text(c.intent)&&!constraints.has(c.id),'constraint identity');
+  require(text(c.unit),'constraint unit');
+  constraints.add(c.id);
+  const linked=witnesses(c.witnesses,c.intent);
+  if(['merchant_gross_principal','protected_external_disbursement','committed_settlement_attempts'].includes(c.metric)){
+   require(['cap','known_subtotal','lower_excess'].every(key=>amount(c[key]))
+    &&amount(c.exact_total,true)&&amount(c.exact_excess,true),'constraint amounts');
+   const cap=BigInt(c.cap),subtotal=BigInt(c.known_subtotal),excess=subtotal>cap?subtotal-cap:0n;
+   require(BigInt(c.lower_excess)===excess,'constraint excess');
+   require(c.exact_total===(c.complete?c.known_subtotal:null)
+    &&c.exact_excess===(c.complete?c.lower_excess:null),'exact constraint totals');
+   require(subtotal>cap?c.status==='breached':c.complete?c.status==='within'
+    :['unknown','unsupported','conflict'].includes(c.status),'constraint verdict');
+   require(linked.every(f=>f.role==='ordinary_principal'&&f.execution_state==='committed'
+    &&BigInt(f.committed_yocto)>0n&&!f.self),'principal witnesses');
+   const witnessed=c.metric==='committed_settlement_attempts'?BigInt(new Set(linked.map(f=>f.tx_hash)).size)
+    :linked.reduce((sum,f)=>sum+BigInt(f.committed_yocto),0n);
+   require(witnessed===subtotal,'witness subtotal');
+  }else if(c.metric==='ordinary_recipient_allowlist'){
+   require(strings(c.allowed_accounts)&&unique(c.allowed_accounts)&&strings(c.known_recipients)
+    &&unique(c.known_recipients),'recipient lists');
+   require(linked.every(f=>f.role==='ordinary_principal'&&f.execution_state==='committed'
+    &&!c.allowed_accounts.includes(f.to)),'recipient witnesses');
+   require(linked.length?c.status==='breached':c.complete?c.status==='within'
+    :['unknown','unsupported','conflict'].includes(c.status),'recipient verdict');
+  }else if(c.metric==='principal_recovery'){
+   require(['destinations','full'].includes(c.mode)&&strings(c.allowed_accounts)
+    &&unique(c.allowed_accounts)&&Array.isArray(c.parents),'recovery policy');
+   let breached=false,missing=false;
+   for(const parent of c.parents){
+    require(object(parent)&&text(parent.receipt_id)&&text(parent.from)&&boolean(parent.finalized)
+     &&amount(parent.expected_yocto,true)&&amount(parent.successful_allowed_yocto),'recovery parent');
+    const refunds=witnesses(parent.refund_facts,c.intent);
+    const failed=witnesses(parent.failed_refund_facts,c.intent);
+    const forbidden=witnesses(parent.forbidden_refund_facts,c.intent);
+    require(refunds.every(f=>f.role==='principal_refund'&&f.parent_receipt_id===parent.receipt_id),'refund parent');
+    const equals=(rows,expected)=>rows.length===expected.length&&rows.every(f=>expected.includes(f));
+    require(equals(failed,refunds.filter(f=>f.execution_state==='rolled_back'))
+     &&equals(forbidden,refunds.filter(f=>f.execution_state==='committed'&&!c.allowed_accounts.includes(f.to))),'refund classification');
+    const recovered=refunds.filter(f=>f.execution_state==='committed'&&c.allowed_accounts.includes(f.to))
+     .reduce((sum,f)=>sum+BigInt(f.committed_yocto),0n);
+    require(recovered===BigInt(parent.successful_allowed_yocto),'refund total');
+    breached||=forbidden.length>0;
+    if(parent.expected_yocto===null||!parent.finalized)missing=true;
+    else if(c.mode==='full'&&BigInt(parent.expected_yocto)>0n&&parent.expected_yocto!==parent.successful_allowed_yocto){
+     if(failed.length||forbidden.length)breached=true;
+     else missing=true;
+    }
+   }
+   require(breached?c.status==='breached':c.complete&&!missing?c.status==='within'
+    :['unknown','unsupported','conflict'].includes(c.status),'recovery verdict');
+  }else require(c.status==='unsupported'&&!c.complete,'unsupported constraint');
+ }
+ const checks=['status_check','context_check','content_check','answer_check'];
+ const assessedOutputs=new Set();
+ for(const u of r.utility.required){
+  require(object(u)&&['passed','failed','unknown','unsupported','invalid_reference'].includes(u.status),'required output');
+  reasons(u);
+  if(u.status!=='unknown'){
+   require(text(u.id)&&text(u.intent)&&text(u.profile)&&!assessedOutputs.has(u.id),'output identity');
+   assessedOutputs.add(u.id);
+  }
+  for(const key of checks)require(!own(u,key)||boolean(u[key]),'output check');
+  for(const key of ['observed_status_present','observed_answer_present'])require(!own(u,key)||boolean(u[key]),'output presence');
+  if(own(u,'observed_answer_present'))require(own(u,'observed_answer')
+   &&(u.observed_answer_present||u.observed_answer===null),'recorded answer');
+  if(own(u,'observed_status_present'))require(own(u,'observed_status')
+   &&(u.observed_status_present||u.observed_status===null),'recorded HTTP status');
+  if(own(u,'reference_check'))require(u.reference_check==='consistent','reference check');
+  if(own(u,'response_sha256'))require(sha(u.response_sha256),'response digest');
+  if(u.status==='passed')require(text(u.id)&&text(u.intent)&&text(u.profile)&&sourceRef(u.observation_ref)
+   &&u.reference_check==='consistent'&&u.observed_status_present&&u.observed_status===200
+   &&u.observed_answer_present&&u.context_check===true&&u.content_check===true&&u.answer_check===true
+   &&sha(u.response_sha256),'passed output evidence');
+  else if(u.status==='failed')require(checks.some(key=>u[key]===false)||u.diagnostic_ids?.length>0,'failed output evidence');
+  else reasons(u,true);
+ }
+ for(const u of r.utility.intermediate){
+  require(object(u)&&u.role==='permitted_intermediate'&&['observed','unknown'].includes(u.status)
+   &&own(u,'ref'),'intermediate observation');
+  reasons(u,u.status==='unknown');
+  if(u.status==='observed')require(sourceRef(u.ref)&&boolean(u.observed_answer_present)
+   &&own(u,'observed_status')&&own(u,'observed_answer')
+   &&(u.observed_answer_present||u.observed_answer===null),'observed intermediate');
+ }
+ require(coverage.all_required_utility_assessed===r.utility.required.every(u=>['passed','failed'].includes(u.status)),'output coverage');
+ return data;
+}
+// End report contract.
 function render(data){
+ validateInspection(data);
  const {report:r,execution}=data??{};
  const {status:outcome,code,message}=r?.invocation??{};
  const assessed=outcome==='assessed',failed=outcome==='failed';
@@ -578,7 +766,7 @@ function render(data){
   (permitted?`<div class="empty">${permitted} permitted intermediate observations.</div>`:'');
  return announcement;
 }
-$('run').onclick=()=>catalog?run():start();
+$('run').onclick=()=>catalog?(!bundle&&!selected?$('upload').click():run()):start();
 $('intents').onclick=({target})=>{
  const button=target.closest('button.intent-id');
  if(busy||!button)return;
@@ -626,6 +814,9 @@ $('upload').onchange=async({currentTarget:input})=>{
  const file = input.files[0];
  if (!file || busy) {input.value = ''; return; }
  setBusy('Reading bundle…');
+ clearResults();
+ bundle=null;
+ showCase(null,file.name);
  try{
   if (file.size > 9 * 1024 * 1024) throw Error(`${file.name} exceeds 9 MiB.`);
   const bytes = new Uint8Array(await file.arrayBuffer());
@@ -633,10 +824,9 @@ $('upload').onchange=async({currentTarget:input})=>{
   const key = Array.from(new Uint8Array(digest, 0, 6), b => b.toString(16).padStart(2, '0')).join('');
   bundle = {bytes, key: 'import-' + key};
 
-  showCase(null, file.name);
   setBusy();
   await run();
- }catch(err){error(err);}finally{setBusy();input.value='';}
+ }catch(err){error(err,' · Import a corrected bundle or choose a case.');}finally{setBusy();input.value='';}
 };
 function renderComparison(recording){
  const policies=recording.policies;

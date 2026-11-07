@@ -336,8 +336,8 @@
       "sha256": "8d26e97f5e8c2b5fa143ba9aab0d2c1be6cff77357307c369956fcf1b37a067b"
     },
     "agent_crash_lab.py": {
-      "bytes": 56698,
-      "sha256": "fe1bfd13911e0db2cf414560ad2c8fd64a2acce915b6687ede6c7a2a0553e55a"
+      "bytes": 56893,
+      "sha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469"
     },
     "evidence/agent-leash-artifact-observation.json": {
       "bytes": 336480,
@@ -620,8 +620,8 @@
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
     "workbench.py": {
-      "bytes": 13234,
-      "sha256": "c2a7765f043e2fa94fd9b87caa279b912e10b2b6765ae4283796ec727de15072"
+      "bytes": 13649,
+      "sha256": "b4d20694ecbd09f3c23c122516521c7b5fd499d61d17f8535ce5ca9a9bb0da0d"
     }
   }
 }

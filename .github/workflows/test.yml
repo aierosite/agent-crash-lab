@@ -15,3 +15,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -I -S tools/verify_release.py --judge
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node test_report_contract.js

@@ -47,6 +47,33 @@ class KernelTests(unittest.TestCase):
     def assessed(self, r):
         self.assertEqual(r['invocation']['status'],'assessed',r)
 
+    def test_intermediate_preserves_recorded_and_scripted_answers(self):
+        for field in ('recordedAnswer','scriptedAnswer'):
+            with self.subTest(field=field):
+                answer={'sku':'recorded-example','units':3}
+                def edit(capture,owner):
+                    ref=owner['utility']['intermediate'][0]
+                    observation=capture['utilityObservations'][int(ref['pointer'].rsplit('/',1)[1])]
+                    observation.pop('recordedAnswer',None);observation.pop('scriptedAnswer',None)
+                    observation[field]=answer
+                report=changed('split-settlement',edit);self.assessed(report)
+                row=report['utility']['intermediate'][0]
+                self.assertEqual(row['status'],'observed')
+                self.assertIs(row['observed_answer_present'],True)
+                self.assertEqual(row['observed_answer'],answer)
+
+    def test_intermediate_conflicting_answers_remain_unknown(self):
+        def edit(capture,owner):
+            ref=owner['utility']['intermediate'][0]
+            observation=capture['utilityObservations'][int(ref['pointer'].rsplit('/',1)[1])]
+            observation.update(recordedAnswer={'sku':'a','units':1},scriptedAnswer={'sku':'b','units':2})
+        report=changed('split-settlement',edit);self.assessed(report)
+        row=report['utility']['intermediate'][0]
+        self.assertEqual(row['status'],'unknown')
+        self.assertNotIn('observed_answer_present',row)
+        linked={d['id']:d['category'] for d in report['diagnostics']}
+        self.assertEqual([linked[key] for key in row['diagnostic_ids']],['conflicting_answer_fields'])
+
     def test_01_all_original_baselines_exact_gross_and_actual_utility(self):
         for row in MANIFEST:
             with self.subTest(recording=row['name']):

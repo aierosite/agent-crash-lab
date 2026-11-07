@@ -62,18 +62,22 @@ def decode(raw):
         if len(value)!=len(pairs):raise ValueError('Duplicate JSON member')
         return value
     def constant(token):raise ValueError('Invalid JSON number: '+token)
-    text=raw.decode(json.detect_encoding(raw))
+    try:text=raw.decode(json.detect_encoding(raw))
+    except UnicodeError as e:raise ValueError('The input contains invalid text encoding. Import a valid JSON bundle.') from e
     quoted=r'"(?:[^"\\]++|\\.)*+(?:"|\\?\Z)'
     if re.match(r'(?:[^"\[\]{},]*+(?:'+quoted+r'|[\[\]{},])){4097}',text,re.S):
         raise ValueError('Bundle structure exceeds 4096 tokens')
-    return json.loads(text,object_pairs_hook=unique,parse_constant=constant)
+    try:return json.loads(text,object_pairs_hook=unique,parse_constant=constant)
+    except json.JSONDecodeError as e:raise ValueError('The input is not valid JSON. Import a corrected bundle.') from e
 
 def assess_bundle(b):
     if type(b) is not dict or set(b)-{'format','task_utf8','sources_utf8','classification'}:raise ValueError('Unexpected bundle fields')
     if b.get('format')!='agent-crash-lab/bundle-v1' or type(b.get('task_utf8')) is not str or type(b.get('sources_utf8')) is not dict:raise ValueError('Expected bundle-v1 with UTF-8 task and sources')
     sources=b['sources_utf8']
     if len(sources)>core.LIMITS['source_count'] or any(type(k) is not str or type(v) is not str for k,v in sources.items()):raise ValueError('Invalid source map')
-    return evaluate(b['task_utf8'].encode(),{k:v.encode() for k,v in sources.items()})
+    try:task=b['task_utf8'].encode();encoded={k:v.encode() for k,v in sources.items()}
+    except UnicodeError as e:raise ValueError('The bundle contains invalid Unicode text. Import a valid UTF-8 bundle.') from e
+    return evaluate(task,encoded)
 
 def gate(report):
     """Failure takes precedence; missing authority or evidence never passes."""
@@ -109,7 +113,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.5.0','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.5.2','coreVersion':core.VERSION})
         if path not in ('/','/app.js','/style.css','/icon.svg'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]

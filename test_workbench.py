@@ -1,7 +1,7 @@
 """HTTP, bundle, CI and archived native evidence tests."""
 from pathlib import Path
 from datetime import datetime,timezone
-import argparse,hashlib,json,runpy,subprocess,sys,tempfile,threading,time,unittest,urllib.request,urllib.error
+import argparse,hashlib,json,runpy,subprocess,sys,tempfile,threading,time,tomllib,unittest,urllib.request,urllib.error
 ROOT=Path(__file__).resolve().parent
 exports=runpy.run_path(str(ROOT/'tools/export_bundle.py'));app=exports['app']
 
@@ -22,7 +22,10 @@ class WorkbenchTests(unittest.TestCase):
         code,h,b=self.fetch(path,body,headers);return code,json.loads(b)
     def test_http_serves_real_engine_and_static_csp(self):
         code,h,html=self.fetch('/');self.assertEqual(code,200);self.assertIn(b'Agent Crash Lab',html);self.assertIn("frame-ancestors 'none'",h['Content-Security-Policy'])
-        self.assertEqual(self.json('/api/health')[1]['ok'],True)
+        health=self.json('/api/health')[1];self.assertEqual(health['ok'],True)
+        version=tomllib.loads((ROOT/'pyproject.toml').read_text())['project']['version']
+        self.assertEqual(health['version'],version)
+        self.assertEqual(json.loads((ROOT/'RELEASE_MANIFEST.json').read_bytes())['version'],version)
         self.assertEqual(self.fetch('/../../session.json')[0],404)
     def test_catalog_and_curated_case_outcomes(self):
         self.assertTrue(json.loads((ROOT/'web/catalog.json').read_bytes()) == exports['browser_catalog'](),
@@ -43,6 +46,19 @@ class WorkbenchTests(unittest.TestCase):
     def test_corrupted_input_is_rejected_without_financial_conclusion(self):
         b=self.json('/api/bundle',{'id':'double-payment'})[1];b['sources_utf8']['recording']+=' '
         code,out=self.json('/api/assess',b);self.assertEqual(code,200);self.assertEqual(out['report']['invocation']['status'],'rejected');self.assertNotIn('constraints',out['report'])
+
+    def test_malformed_json_and_unicode_have_actionable_errors(self):
+        for raw,message in [(b'{','The input is not valid JSON. Import a corrected bundle.'),
+                            (b'\xff','The input contains invalid text encoding. Import a valid JSON bundle.')]:
+            with self.subTest(raw=raw):
+                req=urllib.request.Request(self.base+'/api/assess',data=raw,
+                    headers={'Content-Type':'application/json','X-CrashLab-Token':self.server.token})
+                with self.assertRaises(urllib.error.HTTPError) as context:urllib.request.urlopen(req,timeout=10)
+                self.assertEqual(context.exception.code,400)
+                self.assertEqual(json.loads(context.exception.read()),{'error':message})
+        b=self.json('/api/bundle',{'id':'double-payment'})[1];b['task_utf8']='\ud800'
+        code,out=self.json('/api/assess',b);self.assertEqual(code,400)
+        self.assertEqual(out['error'],'The bundle contains invalid Unicode text. Import a valid UTF-8 bundle.')
     def test_cross_origin_host_token_and_content_type_rejected(self):
         self.assertEqual(self.json('/api/run',{'id':'double-payment'},{'Origin':'https://attacker.example'})[0],403)
         self.assertEqual(self.json('/api/run',{'id':'double-payment'},{'X-CrashLab-Token':'wrong'})[0],403)

@@ -1,6 +1,6 @@
 [project]
 name = "agent-crash-lab"
-version = "0.5.0"
+version = "0.5.2"
 description = "Intent-bound NEAR native payment and useful-output inspection"
 requires-python = ">=3.12"
 dependencies = []
