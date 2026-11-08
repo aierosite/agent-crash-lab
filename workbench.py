@@ -172,7 +172,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.18.1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.19.0','coreVersion':core.VERSION})
         if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
         if path=='/api/metadata-catalog':return self.send(200,metadata_catalog())
         if path=='/api/native-journal-catalog':return self.send(200,journal_catalog())

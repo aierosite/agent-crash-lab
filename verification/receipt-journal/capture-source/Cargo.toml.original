@@ -1,0 +1,29 @@
+[package]
+name = "crash-lab-receipt-crash-research"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+node-runtime = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/runtime/runtime" }
+near-store = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/store" }
+near-primitives = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/primitives" }
+near-primitives-core = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/primitives-core" }
+near-chain-configs = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/chain-configs" }
+near-parameters = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/parameters" }
+near-vm-runner = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/runtime/near-vm-runner", features = ["wasmtime_vm"] }
+near-crypto = { path = "/tmp/agent-crash-lab-receipt-v019/upstream/core/crypto" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[patch.crates-io]
+protobuf = { git = "https://github.com/near/rust-protobuf.git", rev = "86cdbf1ce1f085486b15ec94af1954c55c1e2862" }
+protobuf-support = { git = "https://github.com/near/rust-protobuf.git", rev = "86cdbf1ce1f085486b15ec94af1954c55c1e2862" }
+
+[profile.dev]
+debug = 0
+incremental = false
+codegen-units = 16
+panic = "abort"
+
+[workspace]

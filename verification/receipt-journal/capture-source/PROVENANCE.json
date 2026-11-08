@@ -1,0 +1,76 @@
+{
+  "format": "agent-crash-lab/native-journal-source-provenance-v1",
+  "capturedRuntime": "nearcore bc4e9e8cfb03d9e82f027883055624e18576993e / node-runtime2.14.0 / Wasmtime45.0.0 / protocol88",
+  "sealedSnapshotSha256": "f2943a3b38c38e84dc396bc23ae45dd4371a6ea86a46a3a0bc021699c677194d",
+  "recordedBinarySha256": "313a5679c4a0cb43697ecd2701f187e9eb75542361efef2c32962d0d234d6977",
+  "files": {
+    "main.rs": {
+      "bytes": 19316,
+      "sha256": "b612e8cd222a7f3db6374322a3ace141e753cc6d65a5affac149fb31fa3f606c",
+      "originalSnapshotPath": "runner/src/main.rs"
+    },
+    "Cargo.toml.original": {
+      "bytes": 1288,
+      "sha256": "8640267f2142df375268f1ebecc5ab639a92488ff451216be96c262a4df52c01",
+      "originalSnapshotPath": "runner/Cargo.toml"
+    },
+    "Cargo.lock": {
+      "bytes": 141029,
+      "sha256": "7a4c2d7656b09f7fe47c7836df81bca6cd420f50700794053bc6fcf78daa0fc3",
+      "originalSnapshotPath": "runner/Cargo.lock"
+    },
+    "historical-review.py": {
+      "bytes": 22599,
+      "sha256": "62b73748138c36ff5d5dd550e74e761e8fa77af06af64f02344b09dfce55cf13",
+      "originalSnapshotPath": "journal_review.py"
+    },
+    "financial_reference.py": {
+      "bytes": 7689,
+      "sha256": "ce1f35cd80a5b255c4ab1148082741afec3e093c95ae52bf28601cbe6ba3d1fb",
+      "originalSnapshotPath": "financial_reference.py"
+    },
+    "describe.json": {
+      "bytes": 15563,
+      "sha256": "47b617e479d79a269a7d8ffb590b9a134e440a8cf29a063d51ad2746d31d891e",
+      "originalSnapshotPath": "describe.stdout.txt"
+    },
+    "REGISTRATION.json": {
+      "bytes": 5086,
+      "sha256": "c433de806d1db600ab31eac3ebe1ec4fd9258199ff47c1ee2333afd5f65f6a9a",
+      "originalSnapshotPath": "REGISTRATION.json"
+    },
+    "inputs/after-payment-before-ack.json": {
+      "bytes": 2705,
+      "sha256": "2072b9d4e3eca7d24ea7cb705ffcff515798295f3f306bae755ca3607154967a",
+      "originalSnapshotPath": "inputs/after-payment-before-ack.json"
+    },
+    "inputs/after-principal-refund.json": {
+      "bytes": 2573,
+      "sha256": "adf06bad0a57e56863219947539719df56bed9ac37847442b5916f7a5fd8de08",
+      "originalSnapshotPath": "inputs/after-principal-refund.json"
+    },
+    "inputs/baseline.json": {
+      "bytes": 12508,
+      "sha256": "3b7c1dcf4ff0508b844765da4d40a0f5cda9d0b7cacd4aa03e52993ca823e57f",
+      "originalSnapshotPath": "inputs/baseline.json"
+    },
+    "inputs/before-payment.json": {
+      "bytes": 2705,
+      "sha256": "2072b9d4e3eca7d24ea7cb705ffcff515798295f3f306bae755ca3607154967a",
+      "originalSnapshotPath": "inputs/before-payment.json"
+    },
+    "inputs/failed-payment-refund-pending.json": {
+      "bytes": 2573,
+      "sha256": "adf06bad0a57e56863219947539719df56bed9ac37847442b5916f7a5fd8de08",
+      "originalSnapshotPath": "inputs/failed-payment-refund-pending.json"
+    },
+    "parent-driver.py": {
+      "bytes": 8159,
+      "sha256": "b47c543acae19b45155beabe852024ba8b50b565fc46e6dd9db0102b01f16b91",
+      "originalSnapshotPath": "run_experiment.py"
+    }
+  },
+  "freshPortableCaptureRebuildClaimed": false,
+  "thirdPartyRuntimeOrTargetSourceRedistributed": false,
+  "meaning": "Exact original owned capture/reference source and environment metadata. The historical assessor deliberately retains seven audited false acceptances; never use it as the current evaluator. No executable runtime binary is shipped."
+}

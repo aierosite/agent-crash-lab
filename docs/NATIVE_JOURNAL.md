@@ -1,4 +1,4 @@
-# Native receipt journals — private integration candidate
+# Native receipt journals · v0.19.0
 
 This view checks supplied local-runtime receipts against explicit caller payment
 intent. It separates merchant payment, principal refunds, receipt-operation
@@ -38,8 +38,11 @@ Its pinned 307,028-byte Wasm SHA256 is
 `1c5f5d30d292d660166b1e5b89a0173f70ecc5e714e1da3aaca5c9a3aece92e6`.
 No target Wasm/source, third-party runtime source or 93MB research executable is
 redistributed in this view. Generated journal observations, caller policies,
-references and audit records are included. The source audit and runtime build
-remain a separate sealed local study; the default viewer does not rebuild them.
+references and audit records are included. [Original capture source, manifest/lock and historical assessor](../verification/receipt-journal/capture-source/README.md)
+are shipped for inspection with exact provenance. The full dependency-source
+audit and runtime build remain a separate sealed local study; the default viewer
+does not rebuild them. The archived Cargo manifest describes the original
+path-bound research environment, not an independently tested portable rebuild.
 
 The exact-integer reference, parser and browser projection are same-author and
 source-informed. They are **not independent blind grading**. An external target
@@ -98,7 +101,9 @@ gate. It is a response-consistency boundary, not a second implementation of all
 runtime/conservation checks or an independent oracle. Installed examples also
 match a whole-report digest. Cancelled and stale async results are discarded.
 
-This is an unshipped integration candidate. Full release inventory, extracted
-package, actual UI/native/browser parity, CI and deployment checks must pass
-before any successor publication. The frozen v0.18.1 competition release remains
-the public version until that work is complete.
+The release manifest and validation asset distinguish source tests, extracted
+ZIP checks, actual UI/native/browser replay and CI/deployment observations.
+The frozen v0.18.1 competition snapshot remains available; this successor does
+not revise the application or imply independent evaluation. A reviewer can
+inspect the preserved sources and repeat the offline checks without running
+the original Rust capture experiment.

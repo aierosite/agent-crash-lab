@@ -34,6 +34,18 @@ class NativeJournalTests(unittest.TestCase):
                 with self.assertRaises(ValueError,msg=row['name']):api['assess_bundle'](journal,policy)
             else:self.assertEqual(api['assess_bundle'](journal,policy)['assessment'],row['corrected']['report'])
 
+    def test_archived_original_false_acceptances_are_reproducible(self):
+        archive=DATA/'capture-source';provenance=json.loads((archive/'PROVENANCE.json').read_bytes())
+        for name,item in provenance['files'].items():self.assertEqual(sha256((archive/name).read_bytes()).hexdigest(),item['sha256'])
+        frozen=runpy.run_path(str(archive/'historical-review.py'));count=0
+        for row in json.loads((DATA/'BOUNDARY-AUDIT.json').read_bytes())['rows']:
+            if row['expected']!='reject' or not row['original']['accepted']:continue
+            raw=(DATA/'controls'/(row['name']+'.jsonl')).read_bytes();policy=(DATA/'controls'/(row['name']+'.policy.json')).read_bytes()
+            self.assertEqual(frozen['review'](raw,frozen['load'](policy)),row['original']['report'])
+            with self.assertRaises(ValueError,msg=row['name']):api['assess_bundle'](raw.decode(),policy.decode())
+            count+=1
+        self.assertEqual(count,7)
+
     def test_unobserved_amount_is_not_zero(self):
         name='before-payment-torn-block-result'
         r=api['assess_bundle']((DATA/'controls'/(name+'.jsonl')).read_bytes().decode('utf-8'),(DATA/'controls'/(name+'.policy.json')).read_bytes().decode('utf-8'))['assessment']

@@ -8,11 +8,31 @@ too little, burn a refund or leave the user's rights unpaid. Crash Lab follows
 receipt identities and declared obligations rather than a `paid` flag, matching
 prices or root-transaction success.
 
-## Final review package · v0.18.1
+## Native receipt journals · v0.19.0
 
-[Download the verified release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1) · [Judge walkthrough](docs/JUDGES.md) · [72-second current UI demo](docs/agent-crash-lab-demo.mp4).
-This handoff corrects stale review links and updates the captioned walkthrough.
-The v0.18.0 inspectors and study results are unchanged.
+[Open the receipt journal](https://aierosite.github.io/agent-crash-lab/web/journal.html?browser=1&case=after-payment-before-ack).
+A missing final reply does not mean a missing payment. Four captured local-runtime
+process-stop boundaries separate pending payment, delivered payment, failed
+payment awaiting a refund and returned principal. The merchant can still be
+unpaid after a refund; a closed receipt operation is not a completed task.
+
+The viewer checks exact original journal/intent bytes in local Python or browser
+WebAssembly, retains unknown amounts as `null` and rejects inconsistent responses.
+It replays saved data, not a fresh node, model, wallet or transaction. Eight actual
+owned process kills at four predeclared cooperative pause points are preserved.
+This is same-author/source-informed evidence, not independent blind evaluation,
+authenticated-chain capture, disk recovery or a head-to-head result.
+
+[Methods, limits and CLI](docs/NATIVE_JOURNAL.md) · [Original capture source and provenance](verification/receipt-journal/capture-source/README.md).
+
+![Native payment and principal refund review](docs/native-journal-desktop.png)
+
+## Release and preserved competition snapshot
+
+[Download v0.19.0](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0) · [Judge walkthrough](docs/JUDGES.md) · [Metadata/recorded-agent video, v0.18.1](docs/agent-crash-lab-demo.mp4).
+The frozen [v0.18.1 final review package](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1)
+and all earlier tags remain available. This successor adds a finite native-journal
+view; it does not create another competition application or replace the original X post.
 
 ## Change authority · introduced in v0.18.0
 
@@ -61,10 +81,11 @@ screen recording or a new agent or chain execution. [Watch the hosted MP4](https
 NEAR HACKATHON · AI Security & Defense. The existing application remains the
 same project. The submitted X video shows the original v0.2.0; this repository and hosted
 workbench continue to improve. The v0.17.1 final snapshot is preserved, while
-v0.18.1 is the current final review package. [Entry and rule notes](docs/SUBMISSION.md).
+v0.18.1 remains the frozen final review package; v0.19.0 is its code/demo successor. [Entry and rule notes](docs/SUBMISSION.md).
 
 ## Try the workbench
 
+- [Native receipt journal: payment, principal refund and process completion](https://aierosite.github.io/agent-crash-lab/web/journal.html?browser=1&case=after-payment-before-ack)
 - [Recorded agent: bill utility, payment terms and finish](https://aierosite.github.io/agent-crash-lab/web/agent.html?browser=1&case=role-unguarded)
 - [Native payment and useful-output review](https://aierosite.github.io/agent-crash-lab/web/?browser=1&case=sibling-refund-diverted)
 - [Per-order token payment terms](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=billing-agent-repeats)
@@ -138,7 +159,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.18.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1),
+Download the [v0.19.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh
@@ -153,6 +174,8 @@ node test_agent_contract.js
 node test_state_contract.js
 node test_state_bundle_contract.js
 node test_state_cancellation.js
+node test_journal_contract.js
+node test_journal_cancellation.js
 ```
 
 The judge command first checks package membership and file bytes, then runs

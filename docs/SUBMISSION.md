@@ -7,7 +7,8 @@ HTTP 201 after the owner's payload/contact approval. This remains that same
 project; no duplicate application is needed for a new release.
 
 - Repository: https://github.com/aierosite/agent-crash-lab
-- Current final review package: [v0.18.1](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1)
+- Current code/demo successor: [v0.19.0](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0)
+- Preserved final review package: [v0.18.1](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1)
 - Start here: [judge walkthrough](JUDGES.md)
 - Current hosted demo: https://aierosite.github.io/agent-crash-lab/web/state.html?browser=1&case=qwen-1.5b-task15-clean-unguarded
 - Current video: [72-second captioned walkthrough](agent-crash-lab-demo.mp4)
@@ -67,3 +68,15 @@ inspectors are unchanged from v0.18.0. The initial saved application and its
 existing X link remain the entry; no duplicate submission is needed. The
 received organizer correction remains pending until manually confirmed.
 Unpublished receipt-runtime research is not part of this release.
+
+## Native-journal successor v0.19.0
+
+The existing competition entry, X post, received organizer correction and
+frozen finalv0.18.1 snapshot are retained. This release adds data-only review of
+saved unsigned local native-runtime journals and a source-bound browser view.
+It ships the original capture source and historical assessor for inspection,
+not a93MB executable or third-party runtime/target source. It starts no new
+model, runtime node, wallet, transaction or external evaluation in the viewer.
+The original72-second video remains the metadata/recorded-agent walkthrough;
+the new journal view has a separate live link, screenshots and methods.
+No duplicate application or new correction request is part of publication.

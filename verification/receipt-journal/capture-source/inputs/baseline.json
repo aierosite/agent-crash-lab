@@ -1,0 +1,427 @@
+{
+  "cases": [
+    {
+      "id": "storage-rollback",
+      "wasm_path": "fixtures/storage-control.wasm",
+      "current": "control.fixture",
+      "accounts": [
+        {
+          "id": "control.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "owner.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "agent.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "outsider.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "merchant.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "validator.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "1000000000000000000000000"
+        }
+      ],
+      "observe": [
+        "agent.fixture",
+        "control.fixture",
+        "merchant.fixture",
+        "outsider.fixture",
+        "owner.fixture",
+        "validator.fixture"
+      ],
+      "keys_hex": [
+        "6b"
+      ],
+      "gas_price": "1000000000",
+      "max_rounds": 40,
+      "calls": [
+        {
+          "label": "write-A",
+          "method": "write",
+          "args_utf8": "{}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "write-B-then-trap",
+          "method": "change_then_abort",
+          "args_utf8": "{}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "read-A",
+          "method": "read",
+          "args_utf8": "{}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        }
+      ],
+      "validator": "validator.fixture"
+    },
+    {
+      "id": "veto-recipient-exists",
+      "wasm_path": "fixtures/veto_policy.wasm",
+      "current": "veto.fixture",
+      "accounts": [
+        {
+          "id": "veto.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "owner.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "agent.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "outsider.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "merchant.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "validator.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "1000000000000000000000000"
+        }
+      ],
+      "observe": [
+        "agent.fixture",
+        "merchant.fixture",
+        "outsider.fixture",
+        "owner.fixture",
+        "validator.fixture",
+        "veto.fixture"
+      ],
+      "keys_hex": [
+        "5354415445"
+      ],
+      "gas_price": "1000000000",
+      "max_rounds": 40,
+      "calls": [
+        {
+          "label": "init",
+          "method": "new",
+          "args_utf8": "{\"owner\":\"owner.fixture\",\"agent\":\"agent.fixture\"}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "owner-policy",
+          "method": "set_policy",
+          "args_utf8": "{\"policy_hash\":\"registered-base\",\"limits\":[{\"asset_id\":\"near\",\"per_tx\":\"100\",\"daily\":\"150\",\"monthly\":\"400\"}],\"allowlist\":[\"merchant.fixture\"]}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "agent-spend",
+          "method": "spend",
+          "args_utf8": "{\"asset_id\":\"near\",\"amount\":\"100\",\"to\":\"merchant.fixture\",\"decision_hash\":\"registered-receipt-study\"}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "usage",
+          "method": "get_usage",
+          "args_utf8": "{\"asset_id\":\"near\"}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        }
+      ],
+      "validator": "validator.fixture"
+    },
+    {
+      "id": "veto-recipient-missing",
+      "wasm_path": "fixtures/veto_policy.wasm",
+      "current": "veto.fixture",
+      "accounts": [
+        {
+          "id": "veto.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "owner.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "agent.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "outsider.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "validator.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "1000000000000000000000000"
+        }
+      ],
+      "observe": [
+        "agent.fixture",
+        "merchant.fixture",
+        "outsider.fixture",
+        "owner.fixture",
+        "validator.fixture",
+        "veto.fixture"
+      ],
+      "keys_hex": [
+        "5354415445"
+      ],
+      "gas_price": "1000000000",
+      "max_rounds": 40,
+      "calls": [
+        {
+          "label": "init",
+          "method": "new",
+          "args_utf8": "{\"owner\":\"owner.fixture\",\"agent\":\"agent.fixture\"}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "owner-policy",
+          "method": "set_policy",
+          "args_utf8": "{\"policy_hash\":\"registered-base\",\"limits\":[{\"asset_id\":\"near\",\"per_tx\":\"100\",\"daily\":\"150\",\"monthly\":\"400\"}],\"allowlist\":[\"merchant.fixture\"]}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "agent-spend",
+          "method": "spend",
+          "args_utf8": "{\"asset_id\":\"near\",\"amount\":\"100\",\"to\":\"merchant.fixture\",\"decision_hash\":\"registered-receipt-study\"}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "usage",
+          "method": "get_usage",
+          "args_utf8": "{\"asset_id\":\"near\"}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        }
+      ],
+      "validator": "validator.fixture"
+    },
+    {
+      "id": "veto-agent-admin-denied",
+      "wasm_path": "fixtures/veto_policy.wasm",
+      "current": "veto.fixture",
+      "accounts": [
+        {
+          "id": "veto.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "owner.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "agent.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "outsider.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "merchant.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "validator.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "1000000000000000000000000"
+        }
+      ],
+      "observe": [
+        "agent.fixture",
+        "merchant.fixture",
+        "outsider.fixture",
+        "owner.fixture",
+        "validator.fixture",
+        "veto.fixture"
+      ],
+      "keys_hex": [
+        "5354415445"
+      ],
+      "gas_price": "1000000000",
+      "max_rounds": 40,
+      "calls": [
+        {
+          "label": "init",
+          "method": "new",
+          "args_utf8": "{\"owner\":\"owner.fixture\",\"agent\":\"agent.fixture\"}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "owner-policy",
+          "method": "set_policy",
+          "args_utf8": "{\"policy_hash\":\"registered-base\",\"limits\":[{\"asset_id\":\"near\",\"per_tx\":\"100\",\"daily\":\"150\",\"monthly\":\"400\"}],\"allowlist\":[\"merchant.fixture\"]}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "agent-hijack",
+          "method": "set_policy",
+          "args_utf8": "{\"policy_hash\":\"hijacked\",\"limits\":[{\"asset_id\":\"near\",\"per_tx\":\"999\",\"daily\":\"999\",\"monthly\":\"0\"}],\"allowlist\":[\"outsider.fixture\"]}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "read-config",
+          "method": "get_config",
+          "args_utf8": "{}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        }
+      ],
+      "validator": "validator.fixture"
+    },
+    {
+      "id": "veto-open-horizon",
+      "wasm_path": "fixtures/veto_policy.wasm",
+      "current": "veto.fixture",
+      "accounts": [
+        {
+          "id": "veto.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "owner.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "agent.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "outsider.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "merchant.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "0"
+        },
+        {
+          "id": "validator.fixture",
+          "balance": "100000000000000000000000000",
+          "locked": "1000000000000000000000000"
+        }
+      ],
+      "observe": [
+        "agent.fixture",
+        "merchant.fixture",
+        "outsider.fixture",
+        "owner.fixture",
+        "validator.fixture",
+        "veto.fixture"
+      ],
+      "keys_hex": [
+        "5354415445"
+      ],
+      "gas_price": "1000000000",
+      "max_rounds": 40,
+      "calls": [
+        {
+          "label": "init",
+          "method": "new",
+          "args_utf8": "{\"owner\":\"owner.fixture\",\"agent\":\"agent.fixture\"}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "owner-policy",
+          "method": "set_policy",
+          "args_utf8": "{\"policy_hash\":\"registered-base\",\"limits\":[{\"asset_id\":\"near\",\"per_tx\":\"100\",\"daily\":\"150\",\"monthly\":\"400\"}],\"allowlist\":[\"merchant.fixture\"]}",
+          "predecessor": "owner.fixture",
+          "signer": "owner.fixture",
+          "deposit": "0",
+          "gas": 100000000000000
+        },
+        {
+          "label": "agent-spend",
+          "method": "spend",
+          "args_utf8": "{\"asset_id\":\"near\",\"amount\":\"100\",\"to\":\"merchant.fixture\",\"decision_hash\":\"registered-receipt-study\"}",
+          "predecessor": "agent.fixture",
+          "signer": "agent.fixture",
+          "deposit": "0",
+          "gas": 100000000000000,
+          "round_limit": 1
+        }
+      ],
+      "validator": "validator.fixture"
+    }
+  ]
+}
