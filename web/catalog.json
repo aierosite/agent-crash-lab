@@ -700,6 +700,33 @@
       }
     }
   ],
+  "tokenRecordings": [
+    {
+      "id": "upstream-failed-withdrawal",
+      "title": "Rights lost after a failed withdrawal",
+      "path": "verification/token-study/upstream-failed-withdrawal.json"
+    },
+    {
+      "id": "ai-payment",
+      "title": "An allowed agent payment",
+      "path": "verification/token-study/ai-payment.json"
+    },
+    {
+      "id": "upstream-refund",
+      "title": "A fully returned deposit",
+      "path": "verification/token-study/upstream-refund.json"
+    },
+    {
+      "id": "upstream-healthy",
+      "title": "Two successful withdrawals",
+      "path": "verification/token-study/upstream-healthy.json"
+    },
+    {
+      "id": "upstream-auth",
+      "title": "An unauthorized withdrawal fails",
+      "path": "verification/token-study/upstream-auth.json"
+    }
+  ],
   "files": {
     "BASELINES.json": {
       "bytes": 18369,
@@ -1265,6 +1292,10 @@
       "bytes": 3222,
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
+    "token_review.py": {
+      "bytes": 14783,
+      "sha256": "579e90f671c7bd78feb372eb8d10b7bebd21bad6498c731c50e41b804d2e4368"
+    },
     "tools/scenario_lab.py": {
       "bytes": 27224,
       "sha256": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6"
@@ -1273,9 +1304,29 @@
       "bytes": 1612,
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
+    "verification/token-study/ai-payment.json": {
+      "bytes": 28723,
+      "sha256": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159"
+    },
+    "verification/token-study/upstream-auth.json": {
+      "bytes": 17756,
+      "sha256": "fb9a3341a9f28973ecf09e552d2d48ebe07c62477cf5d33cc36044079439ee42"
+    },
+    "verification/token-study/upstream-failed-withdrawal.json": {
+      "bytes": 28083,
+      "sha256": "4de62af127134f01acf5782dfcbe4d82e8a8560f9a1ba308493c2f856e48dc5a"
+    },
+    "verification/token-study/upstream-healthy.json": {
+      "bytes": 30075,
+      "sha256": "82ce5c2b2086900304a7ba35d09496b2c27e9b2fc3a828c0f5d163819ef1b22c"
+    },
+    "verification/token-study/upstream-refund.json": {
+      "bytes": 12641,
+      "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
+    },
     "workbench.py": {
-      "bytes": 18336,
-      "sha256": "6064188ccb9b57601b24e6a640ccff286b8e4187660fcec4773f0fecaf2af38d"
+      "bytes": 19292,
+      "sha256": "2a0280cc3a10bbfaa6d0977680e7c8ba4cce43113b2f7172b86670c6e3bdfa52"
     }
   }
 }

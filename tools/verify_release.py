@@ -16,7 +16,7 @@ def main():
         files=m['files'];bad=[];runs=[]
         if m['format']!='agent-crash-lab/release-v1' or type(files) is not dict:raise ValueError('Invalid manifest')
         names=json.dumps(sorted(files),separators=(',',':')).encode()
-        if sha256(names).hexdigest()!='8d47c96dbfee357d03b3b20510c7dde3bf4fd06e1def8eef598e6529654c59fc':
+        if sha256(names).hexdigest()!='6572be586d6c56c6476708b912eea7366efe6e8b4d7695c49cee26024a9f9532':
             raise ValueError('Release inventory mismatch')
         for name,expected in files.items():
             path=ROOT/name
@@ -25,7 +25,7 @@ def main():
             raw=path.read_bytes()
             if len(raw)!=expected['bytes'] or sha256(raw).hexdigest()!=expected['sha256']:bad.append({'file':name,'error':'hash-or-size'})
         if sys.argv[1:] and not bad:
-            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',)):
+            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',),('test_token_review.py',)):
                 r=subprocess.run([sys.executable,'-I','-S',script,*args],cwd=ROOT,capture_output=True,timeout=60)
                 runs.append({'suite':script,'exitCode':r.returncode,'error':r.stderr.decode(errors='replace')[-1200:] if r.returncode else ''})
         ok=not bad and all(r['exitCode']==0 for r in runs)

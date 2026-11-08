@@ -1,0 +1,11 @@
+{
+  "format": "agent-crash-lab/token-reference-v1",
+  "authorship": "Same-author literal arithmetic reference, fixed before new reviewer evaluation; read source first; not an external oracle.",
+  "cases": {
+    "upstream-healthy": {"heldDeltas": ["10000000", "-4000000", "-6000000"], "rightsDeltas": ["10000000", "-4000000", "-6000000"], "grossVaultOut": ["0", "4000000", "6000000"], "reduction": ["0", "0", "0"], "conclusion": "recorded-consistent"},
+    "upstream-refund": {"heldDeltas": ["0"], "rightsDeltas": ["0"], "grossVaultOut": ["10000000"], "reduction": ["0"], "conclusion": "recorded-consistent"},
+    "upstream-failed-withdrawal": {"heldDeltas": ["10000000", "0", "0"], "rightsDeltas": ["10000000", "0", "-4000000"], "grossVaultOut": ["0", "0", "0"], "reduction": ["0", "0", "4000000"], "conclusion": "recorded-inconsistency"},
+    "upstream-auth": {"heldDeltas": ["10000000", "0"], "rightsDeltas": ["10000000", "0"], "grossVaultOut": ["0", "0"], "reduction": ["0", "0"], "conclusion": "recorded-consistent"},
+    "ai-payment": {"heldDeltas": ["1000", "0", "-100"], "rightsDeltas": ["1000", "0", "-100"], "grossVaultOut": ["0", "0", "100"], "reduction": ["0", "0", "0"], "conclusion": "recorded-consistent"}
+  }
+}

@@ -127,8 +127,17 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.10.0','coreVersion':core.VERSION})
-        if path not in ('/','/app.js','/style.css','/icon.svg'):return self.send(404,{'error':'Not found'})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.11.0','coreVersion':core.VERSION})
+        if path=='/api/token-catalog':
+            catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
+            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_review.py']['sha256']})
+        if path=='/api/token-recording':
+            from urllib.parse import parse_qs
+            sid=parse_qs(urlsplit(self.path).query).get('case',[''])[0]
+            catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
+            entry=next((r for r in catalog['tokenRecordings'] if r['id']==sid),None)
+            return self.send(200,(ROOT/entry['path']).read_bytes()) if entry else self.send(404,{'error':'Unknown token recording'})
+        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
         self.send(200,file.read_bytes(),mime+'; charset=utf-8')
@@ -162,9 +171,12 @@ class Handler(BaseHTTPRequestHandler):
             self.connection.settimeout(10)
             raw=self.rfile.read(length)
             if len(raw)!=length:raise ValueError('Incomplete request')
+            path=urlsplit(self.path).path
+            if path=='/api/token-review':
+                reviewer=runpy.run_path(str(ROOT/'token_review.py'))
+                return self.send(200,reviewer['review'](raw))
             body=decode(raw)
             if type(body) is not dict:raise ValueError('Request must be an object')
-            path=urlsplit(self.path).path
             if path in ('/api/run','/api/bundle'):
                 sid=body.get('id');scenario=CATALOG.get(sid) if type(sid) is str else None
                 if scenario is None:raise ValueError('Unknown scenario')

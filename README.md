@@ -6,6 +6,16 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Custody is not entitlement · v0.11.0
+
+**[Open the recorded token review](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=upstream-failed-withdrawal)**
+
+A historical capture reports 10,000,000 token units still in a vault, but user rights fall to 6,000,000 after an unsuccessful withdrawal, with no corresponding captured token movement. The new separate review exposes this discrepancy while retaining successful-payment, reservation and refund controls. It compares custody **and** `credit + pending + reserved`, not backing alone.
+
+Five cases / twelve correlated transitions use factual extracts from pinned, externally authored Workcell archives. Extraction, literal arithmetic reference and reviewer are our own, source-informed work; this is not an external blind audit or new chain/model execution. Source pointers, exact byte hashes, receipt IDs, gross and net movement remain visible. Missing evidence stays inconclusive. [Method and limits](docs/TOKEN_REVIEW.md).
+
+The same reviewer runs in the CLI, local web service and browser Python. This conditional consistency review does not authenticate the capture or authorize token payments; the native engine, report and `gate.py` semantics remain unchanged.
+
 ## Follow each refund · v0.10.0
 
 **[Open the recovery example](https://aierosite.github.io/agent-crash-lab/web/?browser=1&case=sibling-refund-diverted)**

@@ -23,3 +23,4 @@ jobs:
           node-version: '22'
           package-manager-cache: false
       - run: node test_report_contract.js
+      - run: node test_token_contract.js

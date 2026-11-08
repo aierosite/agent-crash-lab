@@ -1,0 +1,20 @@
+{
+  "atUtc": "2026-11-08T03:05:16.434355+00:00",
+  "planSha256": "4f1b4193ececbca524b59b2f927c941b498e5994f27cfd97428939b659ab6c5b",
+  "referenceSha256": "133ef7d56a35c80884e9097f630557a266137a9ac5266e79e4981775338d694b",
+  "importerSha256": "afcf46f70449cb24e04b1c06dd31ec47426a1eec8475020c6e9892f34696f5b5",
+  "inputs": {
+    "ai-payment.json": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159",
+    "upstream-auth.json": "fb9a3341a9f28973ecf09e552d2d48ebe07c62477cf5d33cc36044079439ee42",
+    "upstream-failed-withdrawal.json": "4de62af127134f01acf5782dfcbe4d82e8a8560f9a1ba308493c2f856e48dc5a",
+    "upstream-healthy.json": "82ce5c2b2086900304a7ba35d09496b2c27e9b2fc3a828c0f5d163819ef1b22c",
+    "upstream-refund.json": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
+  },
+  "evaluationStarted": false,
+  "sameAuthorEvaluation": true,
+  "upstreamVerdictsUsed": false,
+  "planTimestampCorrection": {
+    "reason": "Initial plan used a guessed future timestamp; corrected to actual registration clock before any reviewer implementation or evaluation. No source or expected value changed.",
+    "previousPlanSha256": "fb5282dbef79ad315caeb5a76333ff7159eb86633dabb79f42f3c120552ccbe5"
+  }
+}

@@ -6,9 +6,12 @@ import argparse,hashlib,json
 ROOT=Path(__file__).resolve().parents[1]
 app=SimpleNamespace(**run_path(str(ROOT/'workbench.py')))
 def browser_catalog():
-    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json','tools/scenario_lab.py','episode_oracle.py'}
+    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json','tools/scenario_lab.py','episode_oracle.py','token_review.py'}
     for row in app.BASELINES.values():names.update([row['task'],*row['sources'].values()])
-    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
+    labels=[('upstream-failed-withdrawal','Rights lost after a failed withdrawal'),('ai-payment','An allowed agent payment'),('upstream-refund','A fully returned deposit'),('upstream-healthy','Two successful withdrawals'),('upstream-auth','An unauthorized withdrawal fails')]
+    recordings=[{'id':key,'title':title,'path':'verification/token-study/'+key+'.json'} for key,title in labels]
+    names.update(r['path'] for r in recordings)
+    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('scenario',choices=[*app.CATALOG,'browser-catalog']);p.add_argument('output',type=Path);a=p.parse_args()

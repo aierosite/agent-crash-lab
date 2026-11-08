@@ -1,0 +1,44 @@
+{
+  "format": "agent-crash-lab/token-study-plan-v1",
+  "createdAtUtc": "2026-11-08T03:05:16.434355+00:00",
+  "baseline": "v0.10.0",
+  "question": "Can a separately implemented recorded-custody reviewer expose entitlement destruction hidden by a sufficient vault balance, while retaining successful payout/refund/reservation controls?",
+  "selectedSources": [
+    "external/ref-exchange.json",
+    "external/agent-treasury.json"
+  ],
+  "selection": "All five cases and all twelve step transitions in the two pinned public archives selected before implementing the new reviewer; source actions and balances already read. This is source-informed, not blind.",
+  "independence": "Input archives authored by Workcell. Extraction, reference, reviewer and evaluation authored by us. No external blind audit. Do not use upstream verdict/checks as the oracle.",
+  "reference": "For a single-owner whole-vault ledger, rights = credit + pending + reserved. Independently tabulate endpoint changes and successful token transfers. Net held change must agree with token events. Rights change must equal net held change. A positive (held change - rights change) indicates reported entitlement reduction without corresponding token movement. Adequate backing alone is insufficient.",
+  "assumptions": [
+    "Producer-reported endpoint summaries are accurate",
+    "All vault liabilities belong to the declared single owner",
+    "No unrelated changes inside each interval",
+    "Token event implementation is truthful and stable",
+    "Captured FINAL outcome graph is authentic and complete"
+  ],
+  "limits": [
+    "No raw balance-query responses are present in the selected archives",
+    "No signature or state-proof authentication",
+    "No new model, contract or network execution",
+    "No prices or USD values",
+    "No token authorization verdict or native financial gate",
+    "Reported code identity is checked for consistency, not independently authenticated"
+  ],
+  "controlsBeforeEvaluation": [
+    "retain reserved rights",
+    "refund counts as both gross flows with net zero",
+    "failed withdrawal with sufficient backing",
+    "unauthorized withdrawal with unchanged rights",
+    "allowed 100-unit agent payout",
+    "missing receipt/transaction -> inconclusive",
+    "foreign event emitter cannot prove payment",
+    "changed code identity -> inconclusive",
+    "duplicate receipt or JSON key -> reject",
+    "amounts beyond JS safe integer remain exact",
+    "failed-receipt logs cannot prove payment"
+  ],
+  "productScope": "Separate recorded token-custody review in CLI, local web service and browser Python. Native engine/report/gate semantics remain unchanged. Label recorded consistency, inconsistency and inconclusive; never Safe.",
+  "publication": "Distribute only factual protocol records and numeric summaries with exact source pointers and hashes; do not copy or execute Workcell code, full expressive reports, or its verdicts. Original full captures remain private research inputs.",
+  "success": "Reproduce the historical reported 4000000-unit entitlement reduction and healthy controls, demonstrate meaningful semantic mutants, exact Python/browser report parity, retain native acceptance suites, publish only verified bytes. Preserve initial errors and amendments."
+}
