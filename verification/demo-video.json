@@ -1,23 +1,24 @@
 {
-  "atUtc": "2026-11-04T23:41:51.589974+00:00",
-  "video": "D:\\Upwork\\agent-crash-lab\\product\\docs\\agent-crash-lab-demo.mp4",
-  "sha256": "dc111b5d15d47c007b982af5cb5b75eb65eecb5b855d96468a480897a035ef87",
-  "bytes": 640613,
+  "atUtc": "2026-11-08T13:49:11.093945+00:00",
+  "version": "0.17.1",
+  "video": "docs/agent-crash-lab-demo.mp4",
+  "sha256": "7794456d6d03715f7bf74b56384c04ff8ceef8ee0fc7d71665828e8b8222b4bb",
+  "bytes": 959499,
   "durationSeconds": 60,
   "resolution": [
     1280,
-    820
+    850
   ],
-  "method": "Frame-based captioned walkthrough from actual local browser captures; not continuous screen recording, no live LLM or recreated UI",
+  "method": "Captioned frame-based walkthrough using unchanged actual public UI screenshots. Not continuous screen recording, new inference or new SDK/chain execution.",
   "frames": {
-    "01-problem.png": "dc80499b1583a7c9ec477b23b5a9491f52af364862119020ebcfc3869c4f3ca5",
-    "02-payment.png": "12bd065609232189f1b55cf2173f08a1548f982e44f5e9ceda9024191ff06897",
-    "03-recovery.png": "cd83d3c74956e41a1f704c6c788718bc4d498af952f41a4200af3cd60f1d03e0",
-    "04-evidence.png": "b69ecafc7d578275604eea7087431646ff9adc8c7cc5f7f45fc68696245b2a24",
-    "05-output.png": "08e7d0a8cbe194312c6ce68d8467b9b9e5d6b6e7bf20e5c364be052e727e7ec4",
-    "06-native.png": "ab399faafcd195b2641fa1b1db07d613ca57346d132cd13b0684bcb41b5a973c"
+    "docs/demo-frames-v0171/00-choose-case.png": "39396fea812973f15683cef956569ff89992aea0d93a643a958562e6d4e15386",
+    "docs/demo-frames-v0171/01-extra-fee.png": "bda0cbdb4a2ebf096137104aa0255680044654552bdede0c1c6f6a4b4b4f7138",
+    "docs/demo-frames-v0171/02-protected.png": "f1768c93c869f44824b9f07d6a5b4b2405e6ebafcae504c6090a2a0129e4fc0b",
+    "docs/demo-frames-v0171/03-unfinished.png": "94ad99cce7a430e462b6f7b7194abbd163443625c5b823a8fbfb5e8d64573480"
   },
   "decodeValidationExitCode": 0,
-  "encoder": "ffmpeg.exe",
-  "encodingToolNotBundled": true
+  "encoder": "existing ffmpeg.exe",
+  "encodingToolNotBundled": true,
+  "newModelCalls": 0,
+  "newTransactions": 0
 }

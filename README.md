@@ -8,6 +8,17 @@ too little, burn a refund or leave the user's rights unpaid. Crash Lab follows
 receipt identities and declared obligations rather than a `paid` flag, matching
 prices or root-transaction success.
 
+## Competition review
+
+[Start with the judge walkthrough](docs/JUDGES.md): recheck the extra-fee case,
+compare its guard, then inspect an unfinished job. The [current 60-second demo](docs/agent-crash-lab-demo.mp4)
+uses actual UI captures; it is a captioned frame-based walkthrough, not a new
+agent or chain execution. [Watch the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
+
+NEAR HACKATHON · AI Security & Defense. The existing application remains the
+same project. The submitted X video shows the original v0.2.0; this repository,
+hosted demo and v0.17.1 ZIP are the current review package. [Entry and rule notes](docs/SUBMISSION.md).
+
 ## Try the workbench
 
 - [Recorded agent: bill utility, payment terms and finish](https://aierosite.github.io/agent-crash-lab/web/agent.html?browser=1&case=role-unguarded)
@@ -83,7 +94,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.17.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.17.0),
+Download the [v0.17.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.17.1),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh

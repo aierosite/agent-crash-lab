@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.17.0",
-  "atUtc": "2026-11-08T13:31:39.755344+00:00",
+  "version": "0.17.1",
+  "atUtc": "2026-11-08T13:50:13.708960+00:00",
   "meaning": "Size and SHA256 of each release file except this manifest",
   "files": {
     ".gitattributes": {
@@ -49,8 +49,8 @@
       "sha256": "d711de520245f4b44e42a9da30df0ab5759a1353daed6626eca42c64b00dbdc8"
     },
     "README.md": {
-      "bytes": 10660,
-      "sha256": "16f90c12a04d16a74d69959216644cefb922f3bbf2cb30ce160469c87cceecca"
+      "bytes": 11352,
+      "sha256": "bd88ea40a01bab5932a2075f99996a54f5e9eaebd31e3bf68a8aaad5a1d9c43a"
     },
     "SOURCES.json": {
       "bytes": 4682,
@@ -112,6 +112,10 @@
       "bytes": 11575,
       "sha256": "599f1e52706fa003442f918a1e738b5d7f2481c3225f990397e445b6b089d213"
     },
+    "docs/JUDGES.md": {
+      "bytes": 6641,
+      "sha256": "3820244621de39b4f175e19a1712533326135b8ae1574a288ea3d761536d32b0"
+    },
     "docs/LIVE_AGENT.md": {
       "bytes": 4899,
       "sha256": "860174b820efb760b5211d5631ff4ff0f533f32cb675ac853a8b4686bdf0bc22"
@@ -153,8 +157,8 @@
       "sha256": "1eb09899de29619439bd409708122d17d28757e2deb8505ec36d3b7b9539ddf4"
     },
     "docs/SUBMISSION.md": {
-      "bytes": 3552,
-      "sha256": "3bac7448099f4aa23997e50fd10ef9d54a3ed6d6baf7d476fa9de8998b7ce1dc"
+      "bytes": 2992,
+      "sha256": "459c24af4b86e66bdb5c1770c0d5057daf8133d0ebecb0cb3574d45e43d3d144"
     },
     "docs/THREAT_MODEL.fa.txt": {
       "bytes": 2814,
@@ -173,12 +177,28 @@
       "sha256": "5a802135ba55f69f6e999c13e8dc687fce2a524c959e78dd205fab279f2cd851"
     },
     "docs/agent-crash-lab-demo.mp4": {
-      "bytes": 640613,
-      "sha256": "dc111b5d15d47c007b982af5cb5b75eb65eecb5b855d96468a480897a035ef87"
+      "bytes": 959499,
+      "sha256": "7794456d6d03715f7bf74b56384c04ff8ceef8ee0fc7d71665828e8b8222b4bb"
     },
     "docs/async-evidence.jpg": {
       "bytes": 82369,
       "sha256": "39c018cee305dded679a2929ac74f4970d1563f1d5a20443a92f316d88f73f91"
+    },
+    "docs/demo-frames-v0171/00-choose-case.png": {
+      "bytes": 56898,
+      "sha256": "39396fea812973f15683cef956569ff89992aea0d93a643a958562e6d4e15386"
+    },
+    "docs/demo-frames-v0171/01-extra-fee.png": {
+      "bytes": 80721,
+      "sha256": "bda0cbdb4a2ebf096137104aa0255680044654552bdede0c1c6f6a4b4b4f7138"
+    },
+    "docs/demo-frames-v0171/02-protected.png": {
+      "bytes": 81764,
+      "sha256": "f1768c93c869f44824b9f07d6a5b4b2405e6ebafcae504c6090a2a0129e4fc0b"
+    },
+    "docs/demo-frames-v0171/03-unfinished.png": {
+      "bytes": 80788,
+      "sha256": "94ad99cce7a430e462b6f7b7194abbd163443625c5b823a8fbfb5e8d64573480"
     },
     "docs/native-comparison.png": {
       "bytes": 61575,
@@ -2754,7 +2774,7 @@
     },
     "pyproject.toml": {
       "bytes": 200,
-      "sha256": "8980c579c37ce183e1efccde2656789c9239ddec9ad50e6072a49c57498b8910"
+      "sha256": "0f57bdc5448da5be42bd4f4ec73462b80bdca557d86c38c4a0b3173aa67f4dfc"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -3050,7 +3070,7 @@
     },
     "tools/verify_release.py": {
       "bytes": 2659,
-      "sha256": "2c87786ae061b70f3b4d9c102212d8aee1b61b5031ae849393f62c05757d8362"
+      "sha256": "8bde9cdb8d8fbac042cb890a606a369a26324f20be3acff5ccb62b6e91485f42"
     },
     "tools/verify_sdk_study.py": {
       "bytes": 1880,
@@ -3305,8 +3325,8 @@
       "sha256": "67f10f7ca08e17a87227c4da23b5f2883397a876d20f81734f616a8d10aca37e"
     },
     "verification/demo-video.json": {
-      "bytes": 1119,
-      "sha256": "0f2d85dbc5ef915e8458b60ce0c4eb90c9feb3d0543a5047c991fdec2e5d64ad"
+      "bytes": 1106,
+      "sha256": "5e201cda4301fb87f1fe7f8f7b8d880a1931ea7b27a25687197355fc92a1af46"
     },
     "verification/evaluation-current-v0.8.0.json": {
       "bytes": 101912,
@@ -5066,7 +5086,7 @@
     },
     "web/catalog.json": {
       "bytes": 106730,
-      "sha256": "7fde152f529019fc63e1c2b3646983f15d59c7620622cd5a42f3fc7cea2033db"
+      "sha256": "3722de1521417369e195c56cc2411130f70a42e3cbebc2bc6774328ff8e3612e"
     },
     "web/icon.svg": {
       "bytes": 341,
@@ -5114,7 +5134,7 @@
     },
     "workbench.py": {
       "bytes": 23395,
-      "sha256": "c803120fc3a62289ecfb08cde88720c81c7d07d2f0a8908c309b5652f627c8ab"
+      "sha256": "b5014b5333c717b35942f1e2144f00c1d05d2ff9d4995f978cea51096c883293"
     }
   }
 }
