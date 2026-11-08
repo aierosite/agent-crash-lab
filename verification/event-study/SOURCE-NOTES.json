@@ -1,0 +1,11 @@
+{
+  "sourcePins": {
+    "near/near-sdk-rs": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+    "near/NEPs": "095fe98218d2272a0a285008f72bdb3e8957e613"
+  },
+  "sourceCopyNote": "Registration sourceHashes identify saved decoded-resource research copies, each with one extra trailing newline introduced when saving. Comparison with the fetched GitHub decoded text confirmed this was the only difference. They are not asserted to be upstream raw Git blob hashes. Event literal text was extracted without alteration; the full SDK source is not distributed or executed.",
+  "authorship": "Six serialized log expectations are verbatim official SDK unit-test literals and two are valid NEP-300 examples. Fifteen owner contexts, synthetic receipt/state envelopes and the normalized direction reference are ours, source-informed. Four aliases and two initial response-boundary controls are constructed. Later parser and scope controls are post-result engineering checks, not a blind holdout.",
+  "invalidExample": "The NEP-300 batch burn example contains a trailing comma. It is preserved in reference.json as invalid strict JSON and is not repaired or counted among the eight valid vectors.",
+  "earlierTestError": "The v0.12 test helper built mint/burn data with transfer-style old_owner_id/new_owner_id aliases, repeating the implementation error. Its source is retained; correcting that test does not create an independent evaluator.",
+  "scope": "No SDK/competitor executable code, model, contract, RPC or transaction was run for this study. This is event conformance and response integrity, not a generic token authorization profile or independent end-to-end safety evaluation."
+}

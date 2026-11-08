@@ -1,0 +1,13 @@
+{
+  "frozenClientSha256": "d38e02e75e9291ccec45382f932a2da806156d2fc3d4d79c9382298e4a8c72d3",
+  "cases": [
+    {
+      "id": "roundtrip-omission",
+      "acceptedInvalidReport": true
+    },
+    {
+      "id": "malformed-promotion",
+      "acceptedInvalidReport": true
+    }
+  ]
+}

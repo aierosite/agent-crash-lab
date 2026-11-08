@@ -4,6 +4,23 @@ Open **Token custody review** from the workbench sidebar, select a recording and
 
 The input remains `agent-crash-lab/token-recording-v1`. Version 0.12 returns **`agent-crash-lab/token-review-v2`**. Native core 0.1.2, native report and `gate.py` semantics remain unchanged.
 
+## Correct event owners and complete report evidence · v0.12.1
+
+NEP-300 mint and burn use **`owner_id`**. Transfer uses `old_owner_id` and `new_owner_id`. Version 0.12 incorrectly applied the transfer field names to mint/burn, and its constructed test helper repeated that error. It could miss a valid mint/burn or attribute one to an account named by an extra transfer-style alias. Both the assessor and browser guard now derive the normalized owner from the standard's canonical field. Mint/burn remain custody changes, never payment delivery.
+
+Eight unchanged serialized event examples come from the [official SDK's test assertions](https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-contract-standards/src/fungible_token/events.rs) and [NEP-300](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0300.md). Fifteen derived owner contexts and four constructed alias controls expose eleven disagreements in the old parser; the correction matches all nineteen declared projections. These are source-informed conformance contexts, not nineteen independent trials or a broad accuracy estimate. The SDK's serialized expectations have external authorship; the state/receipt envelopes and direction reference are ours. No SDK or competitor code is executed. One normative burn example has a trailing comma: its invalid text is retained, not silently repaired or counted as a valid vector.
+
+The browser also reconstructs the **whole** event projection and ignored-log count from the input. Checking only that reported events occur in the source allowed two offsetting transfers to be omitted. The old guard also accepted a fabricated complete response for uninterpretable token-event evidence. Both original counterexamples and frozen sources are replayed. The corrected guard rejects omissions and promotion of incomplete event, identity, interval or liability evidence, while preserving valid full reports. Embedded event JSON checks duplicate/escaped duplicate keys, exact integer metadata, bounds and Unicode before interpretation.
+
+Select **Official mint event**, **Official burn event** or **Official batch transfer** for a constructed envelope around the official event text. These examples are explicitly synthetic; they are not deployment observations. Run:
+
+```sh
+python -I -S tools/verify_event_study.py
+node test_event_contract.js
+```
+
+The offline verifier reproduces twenty-one original reports, compares the nineteen projections and checks three interpretation mutants. The Node suite separately reproduces the two historical guard acceptances and rejects the same counterexamples in the corrected guard. Later parser/scope controls are post-result engineering checks, not a blind holdout. Registration, complete old reports, source fingerprints and method notes are under `verification/event-study`.
+
 ## A measured difference is not automatically lost entitlement
 
 The old v1 field `entitlement_reduction` used a change in vault surplus. A constructed capital top-up exposed the mistake: held tokens rose from 100 to 200, rights stayed 100, and the capture contained an incoming transfer of 100. V1 labeled 100 as entitlement reduction even though rights did not fall. A payout plus a separate top-up exposed the same causal ambiguity.

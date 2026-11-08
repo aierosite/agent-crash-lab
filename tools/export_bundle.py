@@ -10,6 +10,7 @@ def browser_catalog():
     for row in app.BASELINES.values():names.update([row['task'],*row['sources'].values()])
     labels=[('upstream-failed-withdrawal','Rights lost after a failed withdrawal'),('ai-payment','An allowed agent payment'),('upstream-refund','A fully returned deposit'),('upstream-healthy','Two successful withdrawals'),('upstream-auth','An unauthorized withdrawal fails')]
     recordings=[{'id':key,'title':title,'path':'verification/token-study/'+key+'.json'} for key,title in labels]
+    recordings.extend({'id':key,'title':title,'path':'verification/event-study/inputs/'+key+'.json'} for key,title in [('sdk-1-bob','Official mint event · constructed envelope'),('sdk-3-alice','Official burn event · constructed envelope'),('sdk-5-bob','Official batch transfer · constructed envelope')])
     names.update(r['path'] for r in recordings)
     captures=ROOT/'verification/rpc-study';source_files=['verification/rpc-study/EXPECTED-FROM-PUBLISHED.json']
     for request in sorted(captures.rglob('request.json')):

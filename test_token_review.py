@@ -41,8 +41,8 @@ class TokenReview(unittest.TestCase):
   for row in rows:row['outcome']['logs']=[line for line in row['outcome']['logs'] if not line.startswith('EVENT_JSON:')]
   for kind,old,new,n in events:
    item={'amount':str(n)}
-   if old is not None:item['old_owner_id']=d['vault'] if old=='vault' else 'owner.testnet' if old=='owner' else 'donor.testnet'
-   if new is not None:item['new_owner_id']=d['vault'] if new=='vault' else 'owner.testnet' if new=='owner' else 'donor.testnet'
+   if old is not None:item['owner_id' if kind=='ft_burn' else 'old_owner_id']=d['vault'] if old=='vault' else 'owner.testnet' if old=='owner' else 'donor.testnet'
+   if new is not None:item['owner_id' if kind=='ft_mint' else 'new_owner_id']=d['vault'] if new=='vault' else 'owner.testnet' if new=='owner' else 'donor.testnet'
    target['outcome']['logs'].append('EVENT_JSON:'+pack({'standard':'nep141','version':'1.0.0','event':kind,'data':[item]}).decode())
   return d
  def test_registered_reference(self):
@@ -150,7 +150,7 @@ class TokenReview(unittest.TestCase):
    self.assertEqual(caught.exception.code,400)
    caught.exception.close()
    with urllib.request.urlopen(base+'/api/token-catalog',timeout=5) as response:c=json.loads(response.read())
-   self.assertEqual(len(c['recordings']),5)
+   self.assertEqual({r['id'] for r in c['recordings']},{'upstream-failed-withdrawal','ai-payment','upstream-refund','upstream-healthy','upstream-auth','sdk-1-bob','sdk-3-alice','sdk-5-bob'})
    for entry in c['recordings']:
     with urllib.request.urlopen(base+'/api/token-recording?case='+entry['id'],timeout=5) as response:raw=response.read()
     self.assertEqual(len(raw),entry['bytes']);self.assertEqual(sha256(raw).hexdigest(),entry['sha256'])

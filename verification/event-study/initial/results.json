@@ -1,0 +1,614 @@
+{
+  "assessorSourceSha256": "04486ed109a67f0b6a89f42ab4055a4310f7dbf194f10d5c0907eb71eb98ba8b",
+  "referenceSha256": "5b971fd099fa8f9a340f2a3238c91d97f82a276d02f41cae8d1a4277862f3986",
+  "matched": 8,
+  "total": 19,
+  "cases": [
+    {
+      "id": "sdk-0-bob",
+      "sourceVector": "sdk-0",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "100",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "bob",
+            "100",
+            0
+          ]
+        ],
+        "gross_in": "100",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-1-alice",
+      "sourceVector": "sdk-1",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "200",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "alice",
+            "200",
+            1
+          ]
+        ],
+        "gross_in": "200",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-1-bob",
+      "sourceVector": "sdk-1",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "100",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "bob",
+            "100",
+            0
+          ]
+        ],
+        "gross_in": "100",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-2-bob",
+      "sourceVector": "sdk-2",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-100",
+        "events": [
+          [
+            "ft_burn",
+            "bob",
+            null,
+            "100",
+            0
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "100"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-3-alice",
+      "sourceVector": "sdk-3",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-200",
+        "events": [
+          [
+            "ft_burn",
+            "alice",
+            null,
+            "200",
+            0
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "200"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-3-bob",
+      "sourceVector": "sdk-3",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-100",
+        "events": [
+          [
+            "ft_burn",
+            "bob",
+            null,
+            "100",
+            1
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "100"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "sdk-4-alice",
+      "sourceVector": "sdk-4",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "100",
+        "events": [
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            0
+          ]
+        ],
+        "gross_in": "100",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "100",
+        "gross_out": "0",
+        "event_net": "100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "sdk-4-bob",
+      "sourceVector": "sdk-4",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-100",
+        "events": [
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            0
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "100"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "100",
+        "event_net": "-100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "sdk-5-alice",
+      "sourceVector": "sdk-5",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-100",
+        "events": [
+          [
+            "ft_transfer",
+            "alice",
+            "bob",
+            "200",
+            0
+          ],
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            1
+          ]
+        ],
+        "gross_in": "100",
+        "gross_out": "200"
+      },
+      "actual": {
+        "gross_in": "100",
+        "gross_out": "200",
+        "event_net": "-100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "alice",
+            "bob",
+            "200",
+            0
+          ],
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "sdk-5-bob",
+      "sourceVector": "sdk-5",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "100",
+        "events": [
+          [
+            "ft_transfer",
+            "alice",
+            "bob",
+            "200",
+            0
+          ],
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            1
+          ]
+        ],
+        "gross_in": "200",
+        "gross_out": "100"
+      },
+      "actual": {
+        "gross_in": "200",
+        "gross_out": "100",
+        "event_net": "100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "alice",
+            "bob",
+            "200",
+            0
+          ],
+          [
+            "ft_transfer",
+            "bob",
+            "alice",
+            "100",
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "nep-mint-foundation.near",
+      "sourceVector": "nep-mint",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "500",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "foundation.near",
+            "500",
+            0
+          ]
+        ],
+        "gross_in": "500",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "0",
+        "event_net": "0",
+        "conclusion": "inconclusive",
+        "events": []
+      },
+      "matched": false
+    },
+    {
+      "id": "nep-transfer-from.near",
+      "sourceVector": "nep-transfer",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-42",
+        "events": [
+          [
+            "ft_transfer",
+            "from.near",
+            "to.near",
+            "42",
+            0
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "42"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "42",
+        "event_net": "-42",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "from.near",
+            "to.near",
+            "42",
+            0
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "nep-transfer-to.near",
+      "sourceVector": "nep-transfer",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "42",
+        "events": [
+          [
+            "ft_transfer",
+            "from.near",
+            "to.near",
+            "42",
+            0
+          ]
+        ],
+        "gross_in": "42",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "42",
+        "gross_out": "0",
+        "event_net": "42",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "from.near",
+            "to.near",
+            "42",
+            0
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "nep-transfer-user1.near",
+      "sourceVector": "nep-transfer",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "-7500",
+        "events": [
+          [
+            "ft_transfer",
+            "user1.near",
+            "user2.near",
+            "7500",
+            1
+          ]
+        ],
+        "gross_in": "0",
+        "gross_out": "7500"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "7500",
+        "event_net": "-7500",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "user1.near",
+            "user2.near",
+            "7500",
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "nep-transfer-user2.near",
+      "sourceVector": "nep-transfer",
+      "expected": {
+        "conclusion": "recorded-parity",
+        "event_net": "7500",
+        "events": [
+          [
+            "ft_transfer",
+            "user1.near",
+            "user2.near",
+            "7500",
+            1
+          ]
+        ],
+        "gross_in": "7500",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "7500",
+        "gross_out": "0",
+        "event_net": "7500",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_transfer",
+            "user1.near",
+            "user2.near",
+            "7500",
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "id": "ft_mint-missing-owner",
+      "sourceVector": null,
+      "expected": {
+        "conclusion": "inconclusive",
+        "event_net": "0",
+        "events": [],
+        "gross_in": "0",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "100",
+        "gross_out": "0",
+        "event_net": "100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "bob",
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": false
+    },
+    {
+      "id": "ft_mint-foreign-owner-alias",
+      "sourceVector": null,
+      "expected": {
+        "conclusion": "recorded-evidence-conflict",
+        "event_net": "0",
+        "events": [],
+        "gross_in": "0",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "100",
+        "gross_out": "0",
+        "event_net": "100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_mint",
+            null,
+            "bob",
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": false
+    },
+    {
+      "id": "ft_burn-missing-owner",
+      "sourceVector": null,
+      "expected": {
+        "conclusion": "inconclusive",
+        "event_net": "0",
+        "events": [],
+        "gross_in": "0",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "100",
+        "event_net": "-100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_burn",
+            "bob",
+            null,
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": false
+    },
+    {
+      "id": "ft_burn-foreign-owner-alias",
+      "sourceVector": null,
+      "expected": {
+        "conclusion": "recorded-evidence-conflict",
+        "event_net": "0",
+        "events": [],
+        "gross_in": "0",
+        "gross_out": "0"
+      },
+      "actual": {
+        "gross_in": "0",
+        "gross_out": "100",
+        "event_net": "-100",
+        "conclusion": "recorded-parity",
+        "events": [
+          [
+            "ft_burn",
+            "bob",
+            null,
+            "100",
+            0
+          ]
+        ]
+      },
+      "matched": false
+    }
+  ],
+  "meaning": "Eight externally authored event serializations;15 correlated owner contexts plus4 constructed aliases. Synthetic envelope and direction reference are ours; not independent end-to-end grading."
+}

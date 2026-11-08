@@ -6,6 +6,14 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Read the canonical event owner · v0.12.1
+
+**[Inspect an official mint event in a constructed envelope](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=sdk-1-bob)**
+
+Mint/burn use `owner_id`, not transfer-style aliases. Official NEAR serialized test vectors exposed a mistake in both our parser and an earlier test helper. The correction preserves canonical owner identity and keeps mint/burn separate from payment delivery. The browser now checks the complete event projection, preventing offsetting flows from disappearing and incomplete event evidence from being promoted to a complete result.
+
+Eight externally authored event serializations supply fifteen derived owner contexts, plus four constructed alias controls. The old eleven disagreements, twenty-one original reports and two response-guard counterexamples remain reproducible. Synthetic envelopes and grading are ours; this is protocol conformance, not independent end-to-end safety accuracy. [Evidence and limitations](docs/TOKEN_REVIEW.md#correct-event-owners-and-complete-report-evidence--v0121).
+
 ## Root success is not a completed payout · v0.12.0
 
 **[Replay the independently collected source records](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=upstream-failed-withdrawal)**

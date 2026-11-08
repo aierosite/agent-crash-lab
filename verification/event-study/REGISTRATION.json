@@ -1,0 +1,60 @@
+{
+  "atUtc": "2026-11-08T04:44:37.690521+00:00",
+  "baseCommit": "a35f8af671d1630f802b4de755801429a390650d",
+  "frozenAssessorSha256": "04486ed109a67f0b6a89f42ab4055a4310f7dbf194f10d5c0907eb71eb98ba8b",
+  "frozenClientSha256": "d38e02e75e9291ccec45382f932a2da806156d2fc3d4d79c9382298e4a8c72d3",
+  "referenceSha256": "5b971fd099fa8f9a340f2a3238c91d97f82a276d02f41cae8d1a4277862f3986",
+  "inputHashes": {
+    "ft_burn-foreign-owner-alias.json": "1d4fdd8803e3e4956cbf97ee80acab832fe310817ecd8c3702e2383d6d26e491",
+    "ft_burn-missing-owner.json": "dbc0b437ed2b053159cb11ec72900fb64dc40bdd80e492ebf87e0e8b4a40de1f",
+    "ft_mint-foreign-owner-alias.json": "608c4f0faa990741ecd012c71ee793ed5c03979c4780f1375381c53ba4ffac94",
+    "ft_mint-missing-owner.json": "5b04c2d7b55c5ed2f638e9293f9c9488f9e5831cd0e0e600336603217590fff5",
+    "malformed-promotion.json": "69360c7cf7095916d253abc0b14e02c5564f3b0fe007a4a1448b50edd50152ef",
+    "nep-mint-foundation.near.json": "aa4de930e55926b1fcd25a58ec98f4c37fa4e687328be388f9a5179c72908316",
+    "nep-transfer-from.near.json": "4dbc37028e79afcc07e2ca15f9bdd1c65ccc2152bf2687b41e6a59514f6a0436",
+    "nep-transfer-to.near.json": "057f772f244be315c9afd1ae7ad6402e0139d1a41567ffcafb4dbfce37af739e",
+    "nep-transfer-user1.near.json": "99504724aba3523b46174bef2304a6ee9af363f6841a2cb9c1eb6fafcb076646",
+    "nep-transfer-user2.near.json": "9612d731738618ff58a3eaf5ef258d49ae522818da7ea1bb7fd28b4e1fd9a5ba",
+    "roundtrip-omission.json": "c290733125b88881b7ec8ef1d624515caad05d734eafafb401f2acc969f3d2d0",
+    "sdk-0-bob.json": "9a3b6726c6c945fd5630d3930592ed1b8f77efc76b835ee2216a3b9b6f514d33",
+    "sdk-1-alice.json": "95f17a89ade86ffe6db28c77a99454ec8ca2e063c465ed1bf618c7020183c53f",
+    "sdk-1-bob.json": "e8028821281320bf5766cd37d8e50758124d6860ec91eadcd5755c955aa8ac62",
+    "sdk-2-bob.json": "bcd87a90a50166d7e9bbbedc2ba8b2abed56688b66a0e78b70e97a6354c1f0c1",
+    "sdk-3-alice.json": "c6544f4d0c73a2d91a14b7960f3f468802caa9ac1246d18bba4fb3ef9f3b84ff",
+    "sdk-3-bob.json": "842029e2bdf48997ce6e733e5df22d948cc2043af20a01acf11c2f44121cc604",
+    "sdk-4-alice.json": "0b0de3e1af9c7d049d55797cd019c113c9f1266acf3f71391d9f6ec78c44ec39",
+    "sdk-4-bob.json": "2e67a85cb8a5012843fd308a5a7c574905a677752f442753793f99f40b38ff94",
+    "sdk-5-alice.json": "e44f7f056819af843adb7d1d52dce4df2343b1d1f982627ef60cbaaf8ffb0628",
+    "sdk-5-bob.json": "de873c61f5cb9dacd46d72063ba77b57084fb4c91cb06c810382680959e8d456"
+  },
+  "officialSourcePins": {
+    "near/NEPs": "095fe98218d2272a0a285008f72bdb3e8957e613",
+    "near/near-sdk-rs": "bacd081a0bd648d840b814dab7677e1f3330afbb"
+  },
+  "sourceHashes": {
+    "events.rs.txt": "7e4e3c1e4928d16635437569a947d261f25bb0153e9f3929b63d48dca618355f",
+    "nep-0300.md": "381f7128d1b1894e2712bd0b2c1cf77b5ba2fe47f29129bc4e23a11afa0f8630"
+  },
+  "validOfficialSerializedVectors": 8,
+  "derivedOfficialVaultContexts": 15,
+  "constructedAliasControls": 4,
+  "constructedBoundaryInputs": 2,
+  "sourceInformed": true,
+  "blindOrIndependentEvaluation": false,
+  "officialSerializedExpectationsExternallyAuthored": true,
+  "syntheticEnvelopeAndDirectionReferenceAuthoredByUs": true,
+  "executedPeerOrSDKCode": false,
+  "newTransactions": 0,
+  "evaluationStarted": false,
+  "hypotheses": [
+    "Canonical owner_id drives mint/burn custody; sender/receiver transfer aliases cannot substitute for it.",
+    "Every understood in-scope event must be retained in the report, including offsetting flows.",
+    "Uninterpretable token-event evidence cannot be promoted to a complete report by removing reasons."
+  ],
+  "acceptance": [
+    "Correctly project all15 official vault contexts without classifying mint/burn as payments.",
+    "Four alias controls use the canonical owner or remain inconclusive.",
+    "Both frozen report-boundary counterexamples must reproduce and corrected browser guard must reject them.",
+    "Preserve original source outputs, all original native and token studies, CLI/local/browser agreement and no native gate expansion."
+  ]
+}

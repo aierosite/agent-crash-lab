@@ -34,7 +34,8 @@ def decode(raw):
    elif type(v) is str:require(not any(0xd800<=ord(c)<=0xdfff for c in v),'The recording contains invalid Unicode text.')
    elif type(v) is float:raise ReviewError('Use exact whole numbers; decimal token amounts must be strings of atomic units.')
   return value
- except (UnicodeError,json.JSONDecodeError,RecursionError) as e:raise ReviewError('The recording is not valid, bounded UTF-8 JSON.') from e
+ except ReviewError:raise
+ except (UnicodeError,json.JSONDecodeError,RecursionError,ValueError) as e:raise ReviewError('The recording is not valid, bounded UTF-8 JSON.') from e
 def obj(value,keys,where):
  require(type(value) is dict and set(value)==set(keys),f'{where} has missing or unexpected fields.')
  return value
@@ -111,8 +112,8 @@ def transfers(nodes,contract,vault,txid,base):
    for di,item in enumerate(data):
     try:
      require(type(item) is dict,'Event data is not an object.');a=amount(item.get('amount'),'Event amount');kind=event['event']
-     old=account(item.get('old_owner_id')) if kind!='ft_mint' else None
-     new=account(item.get('new_owner_id')) if kind!='ft_burn' else None
+     old=account(item.get('owner_id') if kind=='ft_burn' else item.get('old_owner_id')) if kind!='ft_mint' else None
+     new=account(item.get('owner_id') if kind=='ft_mint' else item.get('new_owner_id')) if kind!='ft_burn' else None
     except ReviewError:complete=False;continue
     # Mint/burn affect custody but are not payments; preserve them as distinct events.
     if old==vault or new==vault:

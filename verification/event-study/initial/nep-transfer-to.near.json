@@ -1,0 +1,90 @@
+{
+  "format": "agent-crash-lab/token-review-v2",
+  "recording_id": "nep-transfer-to.near",
+  "recording_sha256": "057f772f244be315c9afd1ae7ad6402e0139d1a41567ffcafb4dbfce37af739e",
+  "assessor_sha256": "04486ed109a67f0b6a89f42ab4055a4310f7dbf194f10d5c0907eb71eb98ba8b",
+  "network": "sandbox",
+  "source": {
+    "case_pointer": "/official-event-vectors/nep-transfer",
+    "created_at": "source-informed protocol conformance fixture; no node execution",
+    "kind": "synthetic-control",
+    "sha256": "7e4e3c1e4928d16635437569a947d261f25bb0153e9f3929b63d48dca618355f",
+    "url": "https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-contract-standards/src/fungible_token/events.rs"
+  },
+  "asset": {
+    "code_hash": "6p4AEsDxnaapccE1icc94GRRhSjuNwytmEHz3ux1n6Da",
+    "contract": "token.testnet",
+    "deployed_after": "6p4AEsDxnaapccE1icc94GRRhSjuNwytmEHz3ux1n6Da",
+    "deployed_before": "6p4AEsDxnaapccE1icc94GRRhSjuNwytmEHz3ux1n6Da",
+    "sha256": "56584e0cdbd12f0b9982b93d1e8c3b3e4db7896b7ff9211c4a6a6f8770ccb9f5",
+    "standard": "nep141"
+  },
+  "vault": "to.near",
+  "conclusion": "recorded-parity",
+  "steps": [
+    {
+      "id": "event-step",
+      "operation": "event-conformance",
+      "source_pointer": "/synthetic/step",
+      "before": {
+        "block_hash": "synthetic-before",
+        "block_height": 1,
+        "credit": "10000",
+        "held": "10000",
+        "liabilities": "10000",
+        "pending": "0",
+        "reserved": "0"
+      },
+      "after": {
+        "block_hash": "synthetic-after",
+        "block_height": 2,
+        "credit": "10042",
+        "held": "10042",
+        "liabilities": "10042",
+        "pending": "0",
+        "reserved": "0"
+      },
+      "held_delta": "42",
+      "rights_delta": "42",
+      "gross_in": "42",
+      "gross_out": "0",
+      "event_net": "42",
+      "parity_difference": "0",
+      "transfer_out": "0",
+      "rights_debit_without_transfer": "0",
+      "backing_shortfall": "0",
+      "state_event_agreement": "agrees",
+      "ledger_relation": "matched",
+      "backing": "sufficient",
+      "conclusion": "recorded-parity",
+      "reasons": [],
+      "events": [
+        {
+          "kind": "ft_transfer",
+          "amount": "42",
+          "old_owner_id": "from.near",
+          "new_owner_id": "to.near",
+          "receipt_id": "synthetic-event-nep-transfer-to.near",
+          "transaction_id": "synthetic-transaction-nep-transfer-to.near",
+          "log_index": 0,
+          "data_index": 0,
+          "source_pointer": "/synthetic/result/receipts_outcome/0/outcome/logs/0",
+          "executor_id": "token.testnet"
+        }
+      ],
+      "ignored_event_logs": 0,
+      "transaction_ids": [
+        "synthetic-transaction-nep-transfer-to.near"
+      ]
+    }
+  ],
+  "assumptions": [
+    "Endpoint values are supplied observations; this reviewer does not authenticate their origin.",
+    "All vault rights belong to one owner and no unrelated change occurs within a recorded interval.",
+    "The declared token implementation emits truthful events and the archived FINAL outcomes are authentic."
+  ],
+  "meaning": "Conditional description of recorded custody and rights. A parity gap alone does not prove a failed obligation: capital, fees, writeoffs or reallocations may need a separate operation reference. Not token authorization, authenticated chain truth, independent grading or the native financial gate.",
+  "units": "Atomic token units; no ticker, decimal scaling, NEAR or USD conversion inferred.",
+  "new_model_calls": 0,
+  "new_transactions": 0
+}

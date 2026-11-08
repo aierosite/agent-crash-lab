@@ -725,6 +725,21 @@
       "id": "upstream-auth",
       "title": "An unauthorized withdrawal fails",
       "path": "verification/token-study/upstream-auth.json"
+    },
+    {
+      "id": "sdk-1-bob",
+      "title": "Official mint event · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-1-bob.json"
+    },
+    {
+      "id": "sdk-3-alice",
+      "title": "Official burn event · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-3-alice.json"
+    },
+    {
+      "id": "sdk-5-bob",
+      "title": "Official batch transfer · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-5-bob.json"
     }
   ],
   "sourceCorroboration": {
@@ -1387,8 +1402,8 @@
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
     "token_review.py": {
-      "bytes": 15165,
-      "sha256": "04486ed109a67f0b6a89f42ab4055a4310f7dbf194f10d5c0907eb71eb98ba8b"
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
     },
     "tools/scenario_lab.py": {
       "bytes": 27224,
@@ -1397,6 +1412,18 @@
     "tools/verify_token_rpc.py": {
       "bytes": 20051,
       "sha256": "892edef4ed3655b8c1cec7517fde9ef405512df3e386e8edf44222ecbf903406"
+    },
+    "verification/event-study/inputs/sdk-1-bob.json": {
+      "bytes": 2217,
+      "sha256": "e8028821281320bf5766cd37d8e50758124d6860ec91eadcd5755c955aa8ac62"
+    },
+    "verification/event-study/inputs/sdk-3-alice.json": {
+      "bytes": 2228,
+      "sha256": "c6544f4d0c73a2d91a14b7960f3f468802caa9ac1246d18bba4fb3ef9f3b84ff"
+    },
+    "verification/event-study/inputs/sdk-5-bob.json": {
+      "bytes": 2281,
+      "sha256": "de873c61f5cb9dacd46d72063ba77b57084fb4c91cb06c810382680959e8d456"
     },
     "verification/native-crash-comparison.json": {
       "bytes": 1612,
@@ -1728,7 +1755,7 @@
     },
     "workbench.py": {
       "bytes": 21400,
-      "sha256": "88d49bdec8c81e5a05ee69a95f52a3f26aa8f80f79c6ae8731467907fd4749c0"
+      "sha256": "18f11067cd556d14595944450be6829e7f2454f6132e54ccd4ae4d5c15c29acd"
     }
   }
 }
