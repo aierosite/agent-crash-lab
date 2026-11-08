@@ -1,24 +1,24 @@
 {
-  "atUtc": "2026-11-08T13:49:11.093945+00:00",
-  "version": "0.17.1",
+  "atUtc": "2026-11-08T19:13:28.856686+00:00",
+  "version": "0.18.1",
   "video": "docs/agent-crash-lab-demo.mp4",
-  "sha256": "7794456d6d03715f7bf74b56384c04ff8ceef8ee0fc7d71665828e8b8222b4bb",
-  "bytes": 959499,
-  "durationSeconds": 60,
+  "sha256": "6d280c166c65d1badefcb99e219d0420b0026966fb7ee124e05e22c899e5c73a",
+  "bytes": 1385027,
+  "durationSeconds": 72,
   "resolution": [
     1280,
     850
   ],
-  "method": "Captioned frame-based walkthrough using unchanged actual public UI screenshots. Not continuous screen recording, new inference or new SDK/chain execution.",
+  "method": "Captioned frame-based walkthrough. Four actual current metadata UI captures; two unchanged original v0.17.1 recorded-agent UI captures. Not continuous screen recording, fresh inference, SDK or NEAR execution. Restored-password control is constructed.",
   "frames": {
-    "docs/demo-frames-v0171/00-choose-case.png": "39396fea812973f15683cef956569ff89992aea0d93a643a958562e6d4e15386",
-    "docs/demo-frames-v0171/01-extra-fee.png": "bda0cbdb4a2ebf096137104aa0255680044654552bdede0c1c6f6a4b4b4f7138",
-    "docs/demo-frames-v0171/02-protected.png": "f1768c93c869f44824b9f07d6a5b4b2405e6ebafcae504c6090a2a0129e4fc0b",
-    "docs/demo-frames-v0171/03-unfinished.png": "94ad99cce7a430e462b6f7b7194abbd163443625c5b823a8fbfb5e8d64573480"
+    "docs/demo-frames-v0181/00-choose.png": "2e6e2b374d9aeee84e4136f2d90b5663d3c4832334843f55f9b470b9b038a344",
+    "docs/demo-frames-v0181/01-unguarded.png": "3072f397b66614d49914caff0a3b0c25911316d249c628441f2306e3947c6e4a",
+    "docs/demo-frames-v0181/02-owner-bound.png": "362f0ca7d8eb9ba2bf1119b919df1ac742b61da7f82a4044b2aba951c3119f46",
+    "docs/demo-frames-v0181/03-restored.png": "8d0a759d9c8619b7e086d6ad9391d3edbdc4f8c5432549c520893d09e42cca03",
+    "docs/demo-frames-v0181/04-extra-fee.png": "bda0cbdb4a2ebf096137104aa0255680044654552bdede0c1c6f6a4b4b4f7138",
+    "docs/demo-frames-v0181/05-unfinished.png": "94ad99cce7a430e462b6f7b7194abbd163443625c5b823a8fbfb5e8d64573480"
   },
   "decodeValidationExitCode": 0,
-  "encoder": "existing ffmpeg.exe",
-  "encodingToolNotBundled": true,
   "newModelCalls": 0,
   "newTransactions": 0
 }

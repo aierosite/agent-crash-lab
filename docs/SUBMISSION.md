@@ -7,15 +7,17 @@ HTTP 201 after the owner's payload/contact approval. This remains that same
 project; no duplicate application is needed for a new release.
 
 - Repository: https://github.com/aierosite/agent-crash-lab
-- Current review package: [v0.17.1](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.17.1)
+- Current final review package: [v0.18.1](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1)
 - Start here: [judge walkthrough](JUDGES.md)
-- Current hosted demo: https://aierosite.github.io/agent-crash-lab/web/agent.html?browser=1&case=role-unguarded
-- Current video: [60-second captioned walkthrough](agent-crash-lab-demo.mp4)
+- Current hosted demo: https://aierosite.github.io/agent-crash-lab/web/state.html?browser=1&case=qwen-1.5b-task15-clean-unguarded
+- Current video: [72-second captioned walkthrough](agent-crash-lab-demo.mp4)
 - Submitted X post: https://x.com/Amiinjalili/status/2117754340073230518
 
-The original X video shows v0.2.0. The current repository video shows the
-v0.17.1 recorded-agent review. Its actual UI frames and method are retained;
-it is not continuous screen recording or a newly executed model/chain session.
+The original X video shows v0.2.0. The current repository video includes the
+v0.18.0 metadata inspector and preserved v0.17.1 recorded-agent review. Its six
+actual UI frames and method are retained; it is not continuous screen recording
+or a newly executed model/chain session. X failed to load during final handoff;
+no replacement X post is claimed. The existing public demo post is retained.
 The original v0.3.0 native-demo history remains in earlier release artifacts.
 The application description/update request is separate from code publication:
 organizers apply corrections manually, so a successful request does not itself
@@ -56,3 +58,12 @@ separate change-authority view with the registered multi-task study's full
 coverage and preserved negative outcomes. It is a code/demo successor, not a
 duplicate hackathon application or another wallet correction request. The
 existing organizer-reviewed request is not treated as proof of applied changes.
+
+## Final review v0.18.1
+
+Final handoff on 8 November 2026: current package links and the captioned UI
+walkthrough are aligned. The metadata, payment, custody and recorded-agent
+inspectors are unchanged from v0.18.0. The initial saved application and its
+existing X link remain the entry; no duplicate submission is needed. The
+received organizer correction remains pending until manually confirmed.
+Unpublished receipt-runtime research is not part of this release.

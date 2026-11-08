@@ -8,7 +8,13 @@ too little, burn a refund or leave the user's rights unpaid. Crash Lab follows
 receipt identities and declared obligations rather than a `paid` flag, matching
 prices or root-transaction success.
 
-## Change authority · v0.18.0
+## Final review package · v0.18.1
+
+[Download the verified release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1) · [Judge walkthrough](docs/JUDGES.md) · [72-second current UI demo](docs/agent-crash-lab-demo.mp4).
+This handoff corrects stale review links and updates the captioned walkthrough.
+The v0.18.0 inspectors and study results are unchanged.
+
+## Change authority · introduced in v0.18.0
 
 [Open the metadata review](https://aierosite.github.io/agent-crash-lab/web/state.html?browser=1&case=qwen-1.5b-task15-clean-unguarded).
 In a recorded local-model run, the agent changed a fictional account password
@@ -43,19 +49,19 @@ financial reports; it does not rerun a model, SDK or external typed task predica
 
 The final submitted v0.17.1 tag/package remains available unchanged. The
 v0.18.0 successor adds metadata review; it does not replace the existing payment
-or recorded-agent dimensions. The 60-second video below shows v0.17.1.
+or recorded-agent dimensions. The current 72-second video below includes metadata review and the preserved recorded-agent cases.
 
 ## Competition review
 
 [Start with the judge walkthrough](docs/JUDGES.md): recheck the extra-fee case,
-compare its guard, then inspect an unfinished job. The [v0.17.1 60-second demo](docs/agent-crash-lab-demo.mp4)
-uses actual UI captures; it is a captioned frame-based walkthrough, not a new
-agent or chain execution. [Watch the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
+compare its guard, then inspect an unfinished job. The [v0.18.1 72-second demo](docs/agent-crash-lab-demo.mp4)
+uses actual UI captures; it is a captioned frame-based walkthrough, not continuous
+screen recording or a new agent or chain execution. [Watch the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
 
 NEAR HACKATHON · AI Security & Defense. The existing application remains the
 same project. The submitted X video shows the original v0.2.0; this repository and hosted
 workbench continue to improve. The v0.17.1 final snapshot is preserved, while
-v0.18.0 is the successor review package. [Entry and rule notes](docs/SUBMISSION.md).
+v0.18.1 is the current final review package. [Entry and rule notes](docs/SUBMISSION.md).
 
 ## Try the workbench
 
@@ -132,7 +138,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.17.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.17.1),
+Download the [v0.18.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh

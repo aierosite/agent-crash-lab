@@ -1,4 +1,7 @@
-# Judge walkthrough · v0.18.0 (v0.17.1 final snapshot preserved)
+# Judge walkthrough · final review v0.18.1
+
+The v0.17.1 snapshot remains unchanged. This final handoff packages the v0.18.0
+inspectors with corrected links and a current captioned UI walkthrough.
 
 **Problem:** an AI agent can perform the requested payment and still send an
 unauthorized fee. Conversely, zero spending can hide a task that never got done.
@@ -20,7 +23,7 @@ Use **Save review** to inspect the complete exact-input result. [Methods and
 all32-case coverage](METADATA_REVIEW.md) distinguish the recorded study from
 constructed controls, saved external criteria, current replay and fresh execution.
 
-## Original v0.17.1 walkthrough
+## Recorded-agent walkthrough (introduced in v0.17.1)
 
 1. Open [Recorded agents: role spoof, no guard](https://aierosite.github.io/agent-crash-lab/web/agent.html?browser=1&case=role-unguarded)
    and click **Recheck recorded run**. On a cold visit, wait for the pinned
@@ -41,14 +44,18 @@ constructed controls, saved external criteria, current replay and fresh executio
    can import that payment bundle; the recorded-agent page accepts only its six
    installed cases, not arbitrary uploaded code or reference programs.
 
-[Watch the 60-second captioned walkthrough](agent-crash-lab-demo.mp4) or
+[Watch the 72-second captioned walkthrough](agent-crash-lab-demo.mp4) or
 [open the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
-It uses the four unchanged [actual UI frames](demo-frames-v0171/00-choose-case.png)
-with captions. It is not continuous screen recording or a fresh model/SDK run.
+It uses six [actual UI frames](demo-frames-v0181/00-choose.png) with captions:
+four current metadata captures and two preserved recorded-agent captures.
+The restored-password example is a constructed control. The other examples
+replay saved model data. It is not continuous screen recording, a fresh model/SDK
+run or NEAR contract-Wasm execution. Frame hashes and method are shipped in
+`verification/demo-video.json`.
 
 ## Reproduce without an account, wallet or API key
 
-Download and extract the [v0.18.0 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.0).
+Download and extract the [v0.18.1 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1).
 Python 3.12+ and its standard library are enough for the local inspector.
 
 ```sh
