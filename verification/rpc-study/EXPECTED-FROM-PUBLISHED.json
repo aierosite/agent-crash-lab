@@ -1,0 +1,135 @@
+{
+  "atUtc": "2026-11-08T03:40:03.695666+00:00",
+  "phase": "Collection in progress; copied published expectations before inspecting/decoding fresh state values. Source-informed, not an external blind reference.",
+  "cases": {
+    "upstream-failed-withdrawal": {
+      "sourceSha256": "df812867dc62a343019d99480dcc60ed0f8639a8e6c77b66dc8d8c7449421a86",
+      "accounts": {
+        "root": "wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+        "target": "vault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+        "token": "token.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+        "notifier": "fault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+        "user": "user.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+        "agent": "agent.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet"
+      },
+      "before": {
+        "blockHash": "8GrRmWeL4WSDyzY8uQUwe4SZXzHLXkyZpDB8rYx8LoJB",
+        "blockHeight": 276023687,
+        "userTokens": "0",
+        "targetTokens": "10000000",
+        "recipientTokens": "0",
+        "credit": "10000000",
+        "pending": "0",
+        "liabilities": "10000000",
+        "tokenRegistered": false
+      },
+      "after": {
+        "blockHash": "7vPnPswvZVi4mBVimEDTaLD2YzJyJnuuu63b4zZH3K77",
+        "blockHeight": 276023705,
+        "userTokens": "0",
+        "targetTokens": "10000000",
+        "recipientTokens": "0",
+        "credit": "6000000",
+        "pending": "0",
+        "liabilities": "6000000",
+        "tokenRegistered": false
+      },
+      "transactionId": "6Xee9JLyWUfsWHHjMYkxCaPkV9EZBmJNCagheTWq2fdT",
+      "artifactClaims": [
+        {
+          "role": "target",
+          "accountId": "vault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+          "sha256": "f0ec34d5365e38d62a4751bd0c3c95423a1077a930fb882ad54f79ad322e3b84",
+          "codeHash": "HDTkUbH1cqHfKSE3fkipdzV5ZN1Q2FUoLXeAtSvEPeF5"
+        },
+        {
+          "role": "token",
+          "accountId": "token.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+          "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+          "codeHash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ"
+        },
+        {
+          "role": "counterparty",
+          "accountId": "fault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+          "sha256": "f0886a0089cf09c3a5450f1f28c575cfcafaec22dd7f83050fad277d718deff6",
+          "codeHash": "HBwVae5AePs8mPQ9E3uKHNNfxYxQ4GSskC2NaigMCKQZ"
+        }
+      ]
+    },
+    "ai-payment": {
+      "sourceSha256": "f94a88ea55191172168add2c2e940fe2520ee7677b008b85dbfbf7dadd7d416c",
+      "accounts": {
+        "root": "wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "target": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "token": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "notifier": "fault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "user": "user.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "agent": "agent.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet"
+      },
+      "before": {
+        "blockHash": "2sZPqoowSfyBnh42jKiUnVgnc5A4cTp1SxnTYz6MaqC6",
+        "blockHeight": 276031589,
+        "userTokens": "999999999000",
+        "targetTokens": "1000",
+        "recipientTokens": "0",
+        "credit": "900",
+        "pending": "0",
+        "reserved": "100",
+        "allowance": "1000",
+        "liabilities": "1000"
+      },
+      "after": {
+        "blockHash": "A2r6SZsBGudyHK6fmfgiAjVGpCtK22Nm7bboFnyhgpGH",
+        "blockHeight": 276031608,
+        "userTokens": "999999999100",
+        "targetTokens": "900",
+        "recipientTokens": "0",
+        "credit": "900",
+        "pending": "0",
+        "reserved": "0",
+        "allowance": "900",
+        "liabilities": "900"
+      },
+      "transactionId": "5MHkiBamzSn7SQeDSnfTk67ogeXFcQ9G69GgrSKpU1R5",
+      "artifactClaims": [
+        {
+          "role": "target",
+          "accountId": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+          "sha256": "0ef6d6609effb1dc9ac1a8d966c334a1802eca58751b94fe589ec8a81876271f",
+          "codeHash": "21R1hTcKcuEwXYDNfnCdCBZNxmYPBiyPjT1omj98dQdk"
+        },
+        {
+          "role": "token",
+          "accountId": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+          "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+          "codeHash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ"
+        },
+        {
+          "role": "counterparty",
+          "accountId": "fault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+          "sha256": "f0886a0089cf09c3a5450f1f28c575cfcafaec22dd7f83050fad277d718deff6",
+          "codeHash": "HBwVae5AePs8mPQ9E3uKHNNfxYxQ4GSskC2NaigMCKQZ"
+        }
+      ]
+    }
+  },
+  "stateLayouts": {
+    "tokenBalance": "LookupMap storage prefix t + Borsh AccountId (u32 byte length + UTF-8); value u128 little endian. Require expected code identity and exact key/value length.",
+    "historicalRefDeposit": "LookupMap prefix d + Borsh owner ID; AccountDeposit value is native storage amount u128 then HashMap<AccountId,u128>. Reject unknown/trailing/duplicate values.",
+    "treasury": "STATE: owner AccountId, agent AccountId, token AccountId, then four u128 values in order available,reserved,pending,allowance. No execution."
+  },
+  "outcomeProjection": [
+    "final_execution_status",
+    "status",
+    "transaction",
+    "transaction_outcome:id,block_hash,outcome.executor_id,status,receipt_ids,logs,gas_burnt,tokens_burnt",
+    "receipts_outcome:same fields keyed by identity; no ordering claim"
+  ],
+  "notComparedAsConsensus": "RPC proof/metadata fields are preserved but not used as a consensus or authentication claim. Record differences; do not amend source expectations to fit fresh results.",
+  "sources": [
+    "https://borsh.io/",
+    "https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173/contracts",
+    "https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173/upstream/ref-exchange"
+  ],
+  "contractExecution": false
+}

@@ -26,7 +26,7 @@ function resetWorker(message){
 function browserRequest(path,body){
  if(pending)throw Error('Inspection running');
  if(!worker){
-  worker=new Worker('browser-worker.js?bundle=lab-v8');
+  worker=new Worker('browser-worker.js?bundle=lab-v9');
   worker.onmessage=({data:{id,progress,error,result}})=>{
    const job=pending;
    if(!job||id!==job.id)return;

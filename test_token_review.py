@@ -7,9 +7,11 @@ api=runpy.run_path(str(ROOT/'token_review.py'));review=api['review'];pack=api['p
 STUDY=ROOT/'verification/token-study'
 def fixture(name):return json.loads((STUDY/(name+'.json')).read_bytes())
 def projection(r):
- return {'conclusion':r['conclusion'],'heldDeltas':[s['held_delta'] for s in r['steps']],
+ # Retain the sealed v1 reference's limited numeric/parity projection; v2 labels are tested explicitly below.
+ legacy={'recorded-parity':'recorded-consistent','recorded-gap':'recorded-inconsistency','recorded-evidence-conflict':'recorded-inconsistency','inconclusive':'inconclusive'}
+ return {'conclusion':legacy[r['conclusion']],'heldDeltas':[s['held_delta'] for s in r['steps']],
   'rightsDeltas':[s['rights_delta'] for s in r['steps']],'grossVaultOut':[s['gross_out'] for s in r['steps']],
-  'reduction':[s['entitlement_reduction'] for s in r['steps']]}
+  'reduction':[str(max(0,int(s['parity_difference']))) if s['state_event_agreement']=='agrees' else None for s in r['steps']]}
 def registered_checks(fn=review):
  reg=json.loads((STUDY/'registration.json').read_bytes());expected=json.loads((STUDY/'reference.json').read_bytes())['cases'];rows=[]
  assert sha256((STUDY/'plan.json').read_bytes()).hexdigest()==reg['planSha256']
@@ -24,7 +26,7 @@ def mutations():
  source=(ROOT/'token_review.py').read_text('utf-8');out=[]
  replacements={
   'drop-reserved-rights':("s['credit']+s['pending']+s['reserved']","s['credit']+s['pending']"),
-  'backing-only':(" or conservation!='preserved'",''),
+  'backing-only':("relation=='different' or ",''),
   'ignore-outgoing-refund':('net=inbound-outbound;agrees=delta==net','net=inbound;agrees=delta==net'),
  }
  for name,(old,new) in replacements.items():
@@ -32,13 +34,49 @@ def mutations():
   rows=registered_checks(ns['review']);out.append({'id':name,'sha256':sha256(mutant.encode()).hexdigest(),'caughtBy':[r['case'] for r in rows if not r['matches']]})
  return out
 class TokenReview(unittest.TestCase):
+ def episode(self,name,held,rights,events):
+  d=fixture('ai-payment');d['id']='synthetic-'+name;d['source']['kind']='synthetic-control';d['scope']['meaning']='Constructed semantic control; changed protocol-shaped data, not a fresh chain observation.';s=d['steps'][-1];d['steps']=[s];s['operation']=name
+  for i,side in enumerate(['before','after']):s[side].update(held=str(held[i]),credit=str(rights[i]),pending='0',reserved='0',liabilities=str(rights[i]))
+  rows=s['transactions'][0]['result']['receipts_outcome'];target=next(row for row in rows if row['outcome']['executor_id']==d['asset']['contract'] and any(line.startswith('EVENT_JSON:') for line in row['outcome']['logs']))
+  for row in rows:row['outcome']['logs']=[line for line in row['outcome']['logs'] if not line.startswith('EVENT_JSON:')]
+  for kind,old,new,n in events:
+   item={'amount':str(n)}
+   if old is not None:item['old_owner_id']=d['vault'] if old=='vault' else 'owner.testnet' if old=='owner' else 'donor.testnet'
+   if new is not None:item['new_owner_id']=d['vault'] if new=='vault' else 'owner.testnet' if new=='owner' else 'donor.testnet'
+   target['outcome']['logs'].append('EVENT_JSON:'+pack({'standard':'nep141','version':'1.0.0','event':kind,'data':[item]}).decode())
+  return d
  def test_registered_reference(self):
   rows=registered_checks();self.assertEqual(len(rows),5);self.assertTrue(all(r['matches'] for r in rows),rows)
+  for row in rows:
+   r=review((STUDY/(row['case']+'.json')).read_bytes());self.assertEqual(r['format'],'agent-crash-lab/token-review-v2');self.assertEqual(r['conclusion'],'recorded-gap' if row['case']=='upstream-failed-withdrawal' else 'recorded-parity')
+ def test_capital_does_not_reduce_rights(self):
+  d=self.episode('capital-top-up',(100,200),(100,100),[('ft_transfer','donor','vault',100)]);raw=pack(d);old=runpy.run_path(str(STUDY/'frozen-review-v1.py.txt'))['review'](raw)
+  self.assertEqual(old['steps'][0]['entitlement_reduction'],'100');self.assertEqual(old['steps'][0]['rights_delta'],'0')
+  r=review(raw)['steps'][0];self.assertEqual(r['parity_difference'],'100');self.assertEqual(r['rights_debit_without_transfer'],'0');self.assertEqual(r['conclusion'],'recorded-gap')
+ def test_paid_debit_and_topup(self):
+  d=self.episode('payout-and-topup',(100,100),(100,0),[('ft_transfer','vault','owner',100),('ft_transfer','donor','vault',100)])
+  r=review(pack(d))['steps'][0];self.assertEqual(r['parity_difference'],'100');self.assertEqual(r['rights_debit_without_transfer'],'0');self.assertEqual(r['transfer_out'],'100')
+ def test_assign_existing_surplus(self):
+  r=review(pack(self.episode('assign-surplus',(200,200),(100,200),[])))['steps'][0]
+  self.assertEqual(r['parity_difference'],'-100');self.assertEqual(r['backing_shortfall'],'0');self.assertEqual(r['rights_debit_without_transfer'],'0')
+ def test_spend_unowed_surplus(self):
+  d=self.episode('spend-surplus',(200,100),(100,100),[('ft_transfer','vault','owner',100)]);r=review(pack(d))['steps'][0]
+  self.assertEqual(r['rights_delta'],'0');self.assertEqual(r['backing_shortfall'],'0');self.assertEqual(r['ledger_relation'],'different')
+ def test_self_transfer_does_not_deliver(self):
+  d=self.episode('self-transfer',(100,100),(100,0),[('ft_transfer','vault','vault',100)]);r=review(pack(d))['steps'][0]
+  self.assertEqual([r[k] for k in ['gross_in','gross_out','transfer_out']],['0','0','0']);self.assertEqual(r['rights_debit_without_transfer'],'100')
+ def test_mint_burn_are_not_transfers(self):
+  for kind,held,rights,event in [('ft_mint',(100,200),(100,200),('ft_mint',None,'vault',100)),('ft_burn',(200,100),(200,100),('ft_burn','vault',None,100))]:
+   with self.subTest(kind=kind):
+    r=review(pack(self.episode(kind,held,rights,[event])))['steps'][0];self.assertEqual(r['conclusion'],'recorded-parity');self.assertEqual(r['transfer_out'],'0');self.assertEqual(r['backing_shortfall'],'0')
+ def test_endpoint_shortfall_is_exact(self):
+  d=self.episode('spend-backing',(100,0),(100,100),[('ft_transfer','vault','owner',100)]);r=review(pack(d))['steps'][0]
+  self.assertEqual(r['backing_shortfall'],'100');self.assertEqual(r['backing'],'insufficient');self.assertEqual(r['rights_debit_without_transfer'],'0')
  def test_semantic_mutants(self):
   rows=mutations();self.assertEqual(len(rows),3);self.assertTrue(all(r['caughtBy'] for r in rows),rows)
  def test_missing_receipt(self):
   d=fixture('upstream-healthy');d['steps'][1]['transactions'][0]['result']['receipts_outcome'].pop()
-  r=review(pack(d));self.assertEqual(r['steps'][1]['conclusion'],'inconclusive');self.assertIsNone(r['steps'][1]['entitlement_reduction'])
+  r=review(pack(d));self.assertEqual(r['steps'][1]['conclusion'],'inconclusive');self.assertIsNone(r['steps'][1]['rights_debit_without_transfer'])
  def test_missing_transaction(self):
   d=fixture('upstream-failed-withdrawal');d['steps'][-1]['transactions']=[]
   self.assertEqual(review(pack(d))['steps'][-1]['conclusion'],'inconclusive')
@@ -46,7 +84,7 @@ class TokenReview(unittest.TestCase):
   d=fixture('upstream-healthy')
   for row in d['steps'][1]['transactions'][0]['result']['receipts_outcome']:
    if any('EVENT_JSON:' in log for log in row['outcome']['logs']):row['outcome']['executor_id']='forged.testnet'
-  r=review(pack(d))['steps'][1];self.assertEqual(r['state_event_agreement'],'contradicts');self.assertEqual(r['gross_out'],'0');self.assertEqual(r['rights_conservation'],'unknown')
+  r=review(pack(d))['steps'][1];self.assertEqual(r['state_event_agreement'],'contradicts');self.assertEqual(r['gross_out'],'0');self.assertEqual(r['ledger_relation'],'unknown');self.assertEqual(r['conclusion'],'recorded-evidence-conflict')
  def test_code_change(self):
   d=fixture('ai-payment');d['asset']['deployed_after']='changed'
   self.assertEqual(review(pack(d))['conclusion'],'inconclusive')
@@ -67,12 +105,12 @@ class TokenReview(unittest.TestCase):
    for i,line in enumerate(logs):
     if line.startswith('EVENT_JSON:'):
      e=json.loads(line[len('EVENT_JSON:'):]);e['data'][0]['amount']=str(n);logs[i]='EVENT_JSON:'+pack(e).decode()
-  r=review(pack(d));self.assertEqual(r['conclusion'],'recorded-consistent');self.assertEqual(r['steps'][0]['gross_out'],str(n))
+  r=review(pack(d));self.assertEqual(r['conclusion'],'recorded-parity');self.assertEqual(r['steps'][0]['gross_out'],str(n))
  def test_failed_log_is_not_payment(self):
   d=fixture('upstream-auth');s=d['steps'][-1]
   node=next(x for x in s['transactions'][0]['result']['receipts_outcome'] if 'Failure' in x['outcome']['status'])
   node['outcome']['executor_id']=d['asset']['contract'];node['outcome']['logs']=['EVENT_JSON:'+pack({'standard':'nep141','version':'1.0.0','event':'ft_transfer','data':[{'old_owner_id':d['vault'],'new_owner_id':'sink.testnet','amount':'1'}]}).decode()]
-  r=review(pack(d));self.assertEqual(r['conclusion'],'recorded-consistent');self.assertEqual(r['steps'][-1]['gross_out'],'0');self.assertEqual(r['steps'][-1]['ignored_event_logs'],1)
+  r=review(pack(d));self.assertEqual(r['conclusion'],'recorded-parity');self.assertEqual(r['steps'][-1]['gross_out'],'0');self.assertEqual(r['steps'][-1]['ignored_event_logs'],1)
  def test_nonfinal(self):
   d=fixture('ai-payment');d['steps'][-1]['transactions'][0]['result']['final_execution_status']='EXECUTED_OPTIMISTIC'
   self.assertEqual(review(pack(d))['steps'][-1]['conclusion'],'inconclusive')

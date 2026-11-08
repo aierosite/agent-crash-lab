@@ -1,0 +1,108 @@
+"""Offline corroboration of two published fixtures against separately collected public-node bytes."""
+from pathlib import Path
+from hashlib import sha256
+import base64,json,struct,re
+class EvidenceError(ValueError):pass
+def need(ok,why):
+ if not ok:raise EvidenceError(why)
+def unique(pairs):
+ d={}
+ for k,v in pairs:need(k not in d,'Duplicate JSON field');d[k]=v
+ return d
+def read_json(path):
+ raw=path.read_bytes();need(len(raw)<=2097152,'Evidence file exceeds 2 MiB')
+ return json.loads(raw.decode('utf-8'),object_pairs_hook=unique,parse_constant=lambda _:(_ for _ in ()).throw(EvidenceError('Non-finite JSON number')))
+def unb64(s):
+ need(type(s) is str and len(s)<=2097152,'Invalid base64 value')
+ try:b=base64.b64decode(s,validate=True)
+ except (ValueError,TypeError) as e:raise EvidenceError('Invalid base64 encoding') from e
+ need(base64.b64encode(b).decode()==s,'Noncanonical base64 encoding');return b
+class Reader:
+ def __init__(self,b):self.b=b;self.i=0
+ def take(self,n):
+  need(type(n) is int and 0<=n<=65536 and self.i+n<=len(self.b),'Truncated or oversized Borsh field');out=self.b[self.i:self.i+n];self.i+=n;return out
+ def uint(self,n):return int.from_bytes(self.take(n),'little')
+ def vector(self):return self.take(self.uint(4))
+ def account(self):
+  try:s=self.vector().decode('ascii')
+  except UnicodeError as e:raise EvidenceError('Non-ASCII account ID') from e
+  need(2<=len(s)<=64 and re.fullmatch('[a-z0-9]+(?:[._-][a-z0-9]+)*',s) is not None,'Invalid account ID');return s
+ def end(self):need(self.i==len(self.b),'Unexpected trailing Borsh bytes')
+def account_key(prefix,account):
+ b=account.encode('ascii');return prefix+struct.pack('<I',len(b))+b
+def state_map(result):
+ need(type(result) is dict and 'error' not in result and type(result.get('values')) is list and not result.get('last_key'),'Incomplete or failed state query')
+ out={}
+ for i,row in enumerate(result['values']):
+  need(type(row) is dict and set(row)=={'key','value'},'Unexpected state entry');k,v=unb64(row['key']),unb64(row['value']);need(k not in out,'Duplicate storage key');out[k]=(i,v)
+ need(b'STATE' in out,'Contract state root is missing');return out
+def token_balance(result,vault):
+ values=state_map(result);root=Reader(values[b'STATE'][1]);need(root.vector()==b't','Unsupported token storage prefix');supply=root.uint(16);usage=root.uint(8);root.end()
+ total=0;owners={}
+ for key,(i,value) in values.items():
+  if key==b'STATE':continue
+  need(key[:1]==b't','Unexpected token storage key');r=Reader(key[1:]);owner=r.account();r.end();need(owner not in owners and len(value)==16,'Invalid token balance record');owners[owner]=(i,int.from_bytes(value,'little'));total+=owners[owner][1]
+ need(total==supply,'Stored token balances do not sum to total supply');need(vault in owners,'Selected vault has no stored balance record')
+ i,balance=owners[vault];return {'held':str(balance),'totalSupply':str(supply),'accountStorageUsage':usage,'proof':{'pointer':f'/result/values/{i}/value','key':base64.b64encode(account_key(b't',vault)).decode(),'byteOffset':0,'byteLength':16}}
+def treasury(result,accounts):
+ values=state_map(result);need(set(values)=={b'STATE'},'Unexpected treasury storage key');i,raw=values[b'STATE'];r=Reader(raw);ids=[r.account() for _ in range(3)];need(ids==[accounts['user'],accounts['agent'],accounts['token']],'Treasury owner/agent/token identities disagree')
+ fields={};proofs={}
+ for key in ['credit','reserved','pending','allowance']:
+  offset=r.i;fields[key]=str(r.uint(16));proofs[key]={'pointer':f'/result/values/{i}/value','byteOffset':offset,'byteLength':16}
+ r.end();fields['liabilities']=str(sum(int(fields[k]) for k in ['credit','reserved','pending']));return {'fields':fields,'proofs':proofs,'owner':ids[0]}
+def historical_ref(result,accounts):
+ values=state_map(result);root=Reader(values[b'STATE'][1]);owner=root.account();fees=[root.uint(4),root.uint(4)];pools=root.uint(8);pool_prefix=root.vector();deposit_prefix=root.vector();index_prefix=root.vector();whitelist_length=root.uint(8);element_prefix=root.vector();root.end()
+ need(owner==accounts['user'] and pools==0 and pool_prefix==b'p' and deposit_prefix==b'd' and index_prefix==b'wi' and element_prefix==b'we','Unsupported historical Ref root layout or pool/owner scope')
+ deposits={};proofs={}
+ for key,(i,value) in values.items():
+  if not key.startswith(deposit_prefix):continue
+  r=Reader(key[len(deposit_prefix):]);who=r.account();r.end();r=Reader(value);r.uint(16);count=r.uint(4);need(count<=1024,'Too many deposited token types');tokens={};last=''
+  for _ in range(count):
+   token=r.account();need(token>last and token not in tokens,'Duplicate or unordered deposit token');last=token;offset=r.i;tokens[token]=r.uint(16)
+   if token==accounts['token']:proofs[who]={'pointer':f'/result/values/{i}/value','key':base64.b64encode(key).decode(),'byteOffset':offset,'byteLength':16}
+  r.end();deposits[who]=tokens
+ need(set(deposits)=={accounts['user']} and accounts['token'] in deposits[accounts['user']],'Unsupported multi-owner or missing deposit scope')
+ credit=deposits[accounts['user']][accounts['token']]
+ return {'fields':{'credit':str(credit),'pending':'0','reserved':'0','liabilities':str(credit)},'proofs':{'credit':proofs[accounts['user']]},'owner':owner,'pools':pools,'whitelistLength':whitelist_length,'fees':fees}
+def result(folder):
+ req=read_json(folder/'request.json');res=read_json(folder/'response.json');observation=read_json(folder/'observation.json')
+ need(observation['endpoint']=='https://archival-rpc.testnet.near.org' and observation.get('httpStatus')==200 and observation.get('signed') is False,'Capture endpoint, status or request mode is unsupported')
+ need(sha256((folder/'request.json').read_bytes()).hexdigest()==observation['requestSha256'] and sha256((folder/'response.json').read_bytes()).hexdigest()==observation['responseSha256'],'Capture byte hashes disagree')
+ need(req.get('jsonrpc')=='2.0' and res.get('jsonrpc')=='2.0' and req.get('id')==res.get('id') and 'error' not in res and type(res.get('result')) is dict,'Missing, errored or mismatched RPC response')
+ need(req['method'] in ['status','block','tx','query'],'Unexpected non-read-only method')
+ if req['method']=='query':need(req['params']['request_type'] in ['view_account','view_state'],'Contract execution is outside this capture scope')
+ return req,res['result'],observation
+def outcome_projection(d):
+ def row(o):return {'id':o['id'],'block_hash':o['block_hash'],'outcome':{k:o['outcome'][k] for k in ['executor_id','status','receipt_ids','logs','gas_burnt','tokens_burnt']}}
+ return {'final_execution_status':d['final_execution_status'],'status':d['status'],'transaction':d['transaction'],'transaction_outcome':row(d['transaction_outcome']),'receipts_outcome':{o['id']:row(o) for o in d['receipts_outcome']}}
+def verify(captures,recordings):
+ expected=read_json(captures/'EXPECTED-FROM-PUBLISHED.json');status_request,status,_=result(captures/'01-status');need(status_request['method']=='status' and status['chain_id']=='testnet','The node did not identify testnet')
+ folders={p.name.split('-',1)[1]:p for p in captures.iterdir() if p.is_dir() and (p/'request.json').exists()};output=[]
+ for cid,definition in expected['cases'].items():
+  label='failed' if cid.startswith('upstream') else 'allowed';accounts=definition['accounts'];recording=read_json(recordings/(cid+'.json'));step=recording['steps'][-1];points=[]
+  need(recording['source']['sha256']==definition['sourceSha256'],'Published archive binding changed')
+  for side in ['before','after']:
+   snapshot=definition[side];block=snapshot['blockHash'];height=snapshot['blockHeight'];block_folder=captures/'02-original-block' if label=='failed' and side=='before' else folders[label+'-'+side+'-block'];req,header_result,_=result(block_folder)
+   need(req['method']=='block' and req['params']=={'block_id':block} and header_result['header']['hash']==block and header_result['header']['height']==height,'Header differs from the requested published block')
+   observations={};identities={}
+   for role in ['token','target']:
+    for kind in ['account','state']:
+     folder=folders[label+'-'+side+'-'+role+'-'+kind];req,r,meta=result(folder);params={'request_type':'view_'+kind,'block_id':block,'account_id':accounts[role]}
+     if kind=='state':params['prefix_base64']=''
+     need(req['method']=='query' and req['params']==params and r.get('block_hash')==block and r.get('block_height')==height,'State/account query lost its account or block binding')
+     observations[(role,kind)]=(r,folder.name,meta['responseSha256'])
+    artifact=next(a for a in definition['artifactClaims'] if a['accountId']==accounts[role]);reported=observations[(role,'account')][0]['code_hash'];need(reported==artifact['codeHash'],'Node-reported deployed code hash differs from the published artifact claim');identities[role]=reported
+   token=token_balance(observations[('token','state')][0],accounts['target']);ledger=historical_ref(observations[('target','state')][0],accounts) if label=='failed' else treasury(observations[('target','state')][0],accounts)
+   actual={'held':token['held'],**{k:ledger['fields'][k] for k in ['credit','pending','reserved','liabilities']}}
+   original={'held':snapshot['targetTokens'],**{k:snapshot.get(k,'0') for k in ['credit','pending','reserved','liabilities']}}
+   need(actual==original,'Raw stored values differ from published endpoint summaries')
+   need(all(step[side][k]==actual[k] for k in actual),'Normalized public recording differs from raw corroborated values')
+   if 'allowance' in ledger['fields']:need(ledger['fields']['allowance']==snapshot['allowance'],'Allowance differs from stored ledger')
+   points.append({'side':side,'blockHash':block,'blockHeight':height,'fields':actual,'codeIdentities':identities,'tokenProof':token['proof'],'rightsProofs':ledger['proofs'],'rawQueries':[{'kind':role+'-'+kind,'folder':folder,'responseSha256':digest} for (role,kind),(_,folder,digest) in observations.items()]})
+  req,tx,_=result(folders[label+'-tx']);need(req['method']=='tx' and req['params']=={'tx_hash':definition['transactionId'],'sender_account_id':step['transactions'][0]['result']['transaction']['signer_id'],'wait_until':'FINAL'},'Unexpected transaction status request')
+  need(tx['final_execution_status']=='FINAL' and outcome_projection(tx)==outcome_projection(step['transactions'][0]['result']),'Fresh transaction outcomes disagree with the published factual extraction')
+  output.append({'case':cid,'recordingSha256':sha256((recordings/(cid+'.json')).read_bytes()).hexdigest(),'points':points,'transactionId':definition['transactionId'],'transactionOutcomeProjectionMatches':True})
+ return {'format':'agent-crash-lab/rpc-corroboration-v1','cases':output,'provider':'https://archival-rpc.testnet.near.org','network':'testnet','freshReadRequests':23,'transactionSubmissions':0,'contractExecutions':0,'signatureOrStateProofVerified':False,'independentGrading':False,'meaning':'Separately collected public-node observations agree with the selected published fields. Trusts endpoint truth, storage schemas and historical code identity; does not authenticate consensus or establish interval exclusivity.'}
+if __name__=='__main__':
+ import argparse
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--recordings',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();r=verify(Path(__file__).resolve().parent,a.recordings);a.output.write_text(json.dumps(r,indent=2)+'\n','utf-8');print(json.dumps({'corroboratedCases':len(r['cases']),'snapshotPoints':sum(len(c['points']) for c in r['cases']),'freshReadRequests':r['freshReadRequests']}))

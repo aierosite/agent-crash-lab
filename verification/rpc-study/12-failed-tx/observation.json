@@ -1,0 +1,28 @@
+{
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "method": "tx",
+  "params": {
+    "tx_hash": "6Xee9JLyWUfsWHHjMYkxCaPkV9EZBmJNCagheTWq2fdT",
+    "sender_account_id": "user.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+    "wait_until": "FINAL"
+  },
+  "startedAtUtc": "2026-11-08T03:39:37.179957+00:00",
+  "requestSha256": "7f2914631a4c0b2b8795f7c9a19c2dcf8a8ee09c11971e2e1be658666a84cb8f",
+  "attempts": 1,
+  "signed": false,
+  "contractExecuted": false,
+  "httpStatus": 200,
+  "responseUrl": "https://archival-rpc.testnet.near.org",
+  "responseSha256": "17c25ffdb147fa69b4e131c94ee9898ead4b4d3762c01a5cda90befb014f961e",
+  "responseBytes": 8347,
+  "rpcError": null,
+  "resultKeys": [
+    "final_execution_status",
+    "receipts_outcome",
+    "status",
+    "transaction",
+    "transaction_outcome"
+  ],
+  "finishedAtUtc": "2026-11-08T03:39:40.490702+00:00",
+  "elapsedSeconds": 3.3107408999931067
+}

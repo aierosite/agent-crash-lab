@@ -1,0 +1,24 @@
+{
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "method": "block",
+  "params": {
+    "block_id": "2sZPqoowSfyBnh42jKiUnVgnc5A4cTp1SxnTYz6MaqC6"
+  },
+  "startedAtUtc": "2026-11-08T03:39:40.491230+00:00",
+  "requestSha256": "f5da5f9510849e28fdfabf0117f03184d7797f8202897b9eec5b059412d1d101",
+  "attempts": 1,
+  "signed": false,
+  "contractExecuted": false,
+  "httpStatus": 200,
+  "responseUrl": "https://archival-rpc.testnet.near.org",
+  "responseSha256": "1e94a6629d453837be967d0a5495daf1c455f59943667a468106ff9518d93ca1",
+  "responseBytes": 12955,
+  "rpcError": null,
+  "resultKeys": [
+    "author",
+    "chunks",
+    "header"
+  ],
+  "finishedAtUtc": "2026-11-08T03:39:43.790165+00:00",
+  "elapsedSeconds": 3.2989523999858648
+}

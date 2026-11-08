@@ -1,0 +1,37 @@
+{
+  "atUtc": "2026-11-08T03:38:03.609115+00:00",
+  "basePlanSha256": "d791c9267edf6fa80d64c914d1c9ee7ae25ccdc3b105f079b02285ffa1e829c2",
+  "selection": "Two terminal intervals: archived historical failed withdrawal and the independently recorded positive agent payout. Selected after reading published values, before fresh interval responses; not a blind test.",
+  "cases": {
+    "upstream-failed-withdrawal": {
+      "before": "8GrRmWeL4WSDyzY8uQUwe4SZXzHLXkyZpDB8rYx8LoJB",
+      "after": "7vPnPswvZVi4mBVimEDTaLD2YzJyJnuuu63b4zZH3K77"
+    },
+    "ai-payment": {
+      "before": "2sZPqoowSfyBnh42jKiUnVgnc5A4cTp1SxnTYz6MaqC6",
+      "after": "A2r6SZsBGudyHK6fmfgiAjVGpCtK22Nm7bboFnyhgpGH"
+    }
+  },
+  "newRequestBound": 21,
+  "plannedPerInterval": [
+    "two stored token state reads",
+    "two stored vault state reads",
+    "two token account/code identity reads",
+    "two vault account/code identity reads",
+    "two block headers",
+    "one transaction status"
+  ],
+  "alreadyCollected": "Original failed-withdrawal before block header replaces one new header read. Status confirmed chain_id=testnet.",
+  "sequential": true,
+  "timeoutSeconds": 8,
+  "responseBytes": 2097152,
+  "rateLimitAction": "stop collection, do not bypass",
+  "methods": [
+    "block",
+    "tx by hash/sender, wait_until FINAL",
+    "query:view_account",
+    "query:view_state with empty prefix, no pagination/proof"
+  ],
+  "excluded": "No call_function or view_code fetch/execute; no keys, credentials, signed payload, transaction submission, account changes, mainnet, paid endpoint or load/performance test.",
+  "goal": "Corroborate endpoint fields and receipt outcomes through our own raw query captures, separately from producer summaries. Source/schema inspection is static. Public-node consistency is not cryptographic state proof or independent grading."
+}

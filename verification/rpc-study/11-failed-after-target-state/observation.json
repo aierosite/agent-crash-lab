@@ -1,0 +1,27 @@
+{
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "method": "query",
+  "params": {
+    "request_type": "view_state",
+    "block_id": "7vPnPswvZVi4mBVimEDTaLD2YzJyJnuuu63b4zZH3K77",
+    "account_id": "vault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+    "prefix_base64": ""
+  },
+  "startedAtUtc": "2026-11-08T03:39:33.860169+00:00",
+  "requestSha256": "e232861596e151f6099dd7a878adc0a524c6e7477361669f9451fe59d66bd607",
+  "attempts": 1,
+  "signed": false,
+  "contractExecuted": false,
+  "httpStatus": 200,
+  "responseUrl": "https://archival-rpc.testnet.near.org",
+  "responseSha256": "9c9e7fdd06c5db0bc21b359700a0932f37311b605b3494ba1ae10d80bf119c4d",
+  "responseBytes": 711,
+  "rpcError": null,
+  "resultKeys": [
+    "block_hash",
+    "block_height",
+    "values"
+  ],
+  "finishedAtUtc": "2026-11-08T03:39:37.179417+00:00",
+  "elapsedSeconds": 3.319180899998173
+}

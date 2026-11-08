@@ -4,11 +4,11 @@ from hashlib import sha256
 import argparse,json,re,sys
 
 FORMAT='agent-crash-lab/token-recording-v1'
-REPORT='agent-crash-lab/token-review-v1'
+REPORT='agent-crash-lab/token-review-v2'
 MAX_BYTES=2*1024*1024
 U128=2**128
 ASSUMPTIONS=[
- 'Endpoint balances and rights are producer-reported summaries, not authenticated state proofs.',
+ 'Endpoint values are supplied observations; this reviewer does not authenticate their origin.',
  'All vault rights belong to one owner and no unrelated change occurs within a recorded interval.',
  'The declared token implementation emits truthful events and the archived FINAL outcomes are authentic.',
 ]
@@ -156,23 +156,24 @@ def review(raw):
   if not complete:reasons.append('The FINAL receipt graph or token-event interpretation is incomplete.')
   delta=after['held']-before['held'];rights=lambda s:s['credit']+s['pending']+s['reserved'];change=rights(after)-rights(before)
   if any(rights(s)!=s['liabilities'] for s in [before,after]):reasons.append('The reported total liability does not equal this single-owner ledger.')
-  inbound=sum(int(e['amount']) for e in events if e['new_owner_id']==d['vault']);outbound=sum(int(e['amount']) for e in events if e['old_owner_id']==d['vault'])
+  inbound=sum(int(e['amount']) for e in events if e['new_owner_id']==d['vault'] and e['old_owner_id']!=d['vault']);outbound=sum(int(e['amount']) for e in events if e['old_owner_id']==d['vault'] and e['new_owner_id']!=d['vault'])
+  transfer_out=sum(int(e['amount']) for e in events if e['kind']=='ft_transfer' and e['old_owner_id']==d['vault'] and e['new_owner_id']!=d['vault'])
   net=inbound-outbound;agrees=delta==net
   evidence='unknown' if reasons else 'agrees' if agrees else 'contradicts'
-  reduction=max(0,delta-change) if evidence=='agrees' else None
-  creation=max(0,change-delta) if evidence=='agrees' else None
-  conservation='unknown' if evidence!='agrees' else 'reduced_without_payment' if reduction else 'increased_without_backing' if creation else 'preserved'
+  unmatched=max(0,-change-transfer_out) if evidence=='agrees' else None
+  shortfall=max(0,*(s['liabilities']-s['held'] for s in [before,after])) if not reasons else None
+  relation='unknown' if evidence!='agrees' else 'different' if delta!=change else 'matched'
   backing='unknown' if reasons else 'insufficient' if any(s['held']<s['liabilities'] for s in [before,after]) else 'sufficient'
-  conclusion='inconclusive' if reasons else 'recorded-inconsistency' if evidence=='contradicts' or conservation!='preserved' or backing=='insufficient' else 'recorded-consistent'
+  conclusion='inconclusive' if reasons else 'recorded-evidence-conflict' if evidence=='contradicts' else 'recorded-gap' if relation=='different' or backing=='insufficient' else 'recorded-parity'
   rows.append({'id':sid,'operation':step['operation'],'source_pointer':step['source_pointer'],'before':step['before'],'after':step['after'],
    'held_delta':str(delta),'rights_delta':str(change),'gross_in':str(inbound),'gross_out':str(outbound),'event_net':str(net),
-   'entitlement_reduction':str(reduction) if reduction is not None else None,'unfunded_rights':str(creation) if creation is not None else None,
-   'state_event_agreement':evidence,'rights_conservation':conservation,'backing':backing,'conclusion':conclusion,
+   'parity_difference':str(delta-change),'transfer_out':str(transfer_out),'rights_debit_without_transfer':str(unmatched) if unmatched is not None else None,'backing_shortfall':str(shortfall) if shortfall is not None else None,
+   'state_event_agreement':evidence,'ledger_relation':relation,'backing':backing,'conclusion':conclusion,
    'reasons':reasons,'events':events,'ignored_event_logs':ignored,'transaction_ids':[t['result']['transaction']['hash'] for t in step['transactions']]})
- conclusion='recorded-inconsistency' if any(r['conclusion']=='recorded-inconsistency' for r in rows) else 'inconclusive' if any(r['conclusion']=='inconclusive' for r in rows) else 'recorded-consistent'
+ conclusion=next((state for state in ['recorded-evidence-conflict','recorded-gap','inconclusive'] if any(r['conclusion']==state for r in rows)),'recorded-parity')
  return {'format':REPORT,'recording_id':d['id'],'recording_sha256':sha256(raw).hexdigest(),'assessor_sha256':sha256(Path(__file__).read_bytes()).hexdigest(),
   'network':d['network'],'source':source,'asset':asset,'vault':d['vault'],'conclusion':conclusion,'steps':rows,'assumptions':ASSUMPTIONS,
-  'meaning':'Conditional consistency of recorded custody and rights. Not an authorization verdict, authenticated chain observation, independent audit, or native financial gate.',
+  'meaning':'Conditional description of recorded custody and rights. A parity gap alone does not prove a failed obligation: capital, fees, writeoffs or reallocations may need a separate operation reference. Not token authorization, authenticated chain truth, independent grading or the native financial gate.',
   'units':'Atomic token units; no ticker, decimal scaling, NEAR or USD conversion inferred.','new_model_calls':0,'new_transactions':0}
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('recording',type=Path);a=p.parse_args()

@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":"read-05","method":"query","params":{"request_type":"view_account","block_id":"8GrRmWeL4WSDyzY8uQUwe4SZXzHLXkyZpDB8rYx8LoJB","account_id":"vault.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet"}}

@@ -1,0 +1,35 @@
+{
+  "atUtc": "2026-11-08T03:35:58.449763+00:00",
+  "baseline": "v0.11.0",
+  "previousGoalTurn": "progress: verified public release, no new chain observations",
+  "purpose": "Independently collect public archival testnet outcome/block/stored-state responses for existing cited transactions. Do not claim consensus authentication.",
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "officialSource": "https://docs.near.org/api/rpc/providers",
+  "initialProbe": [
+    "status",
+    "block at the original failed-withdrawal before anchor"
+  ],
+  "methodsAllowed": [
+    "status",
+    "block",
+    "tx",
+    "query:view_account",
+    "query:view_state"
+  ],
+  "methodsExcluded": [
+    "send_tx",
+    "broadcast_tx_async",
+    "broadcast_tx_commit",
+    "call_function",
+    "any signing or key operation"
+  ],
+  "scope": "Raw state reads avoid executing third-party contract code, wallet use, transfers, paid APIs and mainnet. No keys/credentials are read or sent. No state changes.",
+  "limits": {
+    "initialRequests": 2,
+    "responseBytes": 2097152,
+    "timeoutSeconds": 8,
+    "retriesPerRequest": 0,
+    "onRateLimit": "stop, no bypass"
+  },
+  "interpretation": "Unavailable historical data is inconclusive, never proof of forgery. Endpoint response matching is not a state/consensus proof. Broader requests require reviewed schema and a prospective amendment."
+}

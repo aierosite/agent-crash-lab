@@ -1,0 +1,41 @@
+{
+  "atUtc": "2026-11-08T03:57:32.064708+00:00",
+  "initialV2SpecSha256": "72f56f1dae95247389a6a1029c7c1037e79d31efc833a803a02f7cebf84ca64c",
+  "observation": "The initial operation-reference wording incorrectly assumed the ROOT transaction failed. Actual archived and fresh tx response have root SuccessValue empty, while a child token receipt failed. This is a planning/source-reading correction before implementing the operation grader, not an engine accuracy gain.",
+  "actualRootStatus": {
+    "SuccessValue": ""
+  },
+  "failedChildReceipts": [
+    {
+      "id": "BFV37CnvcAikwi2cDeEcLGRwz6GqVP8qbykUb8FrLFbx",
+      "executor": "token.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet",
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: The account user.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet is not registered"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "revisedReference": "For an owner withdrawal with a failed token-transfer child and no settled owner transfer, rights must be preserved. Do not infer payout completion from root success.",
+  "additionalReadPlan": {
+    "method": "tx_status",
+    "params": "Existing tx_hash + sender_account_id + wait_until FINAL only",
+    "network": "testnet",
+    "endpoint": "https://archival-rpc.testnet.near.org",
+    "count": 2,
+    "purpose": "Read receipt ACTION bodies for the same two transactions, binding the failed child to ft_transfer amount/receiver and the allowed child payout. No contract invocation or signing.",
+    "ifMissing": "Receipt details may legitimately be incomplete. Preserve response and report inconclusive method binding; do not fill missing action bodies from assumptions.",
+    "folder": "receipt-details",
+    "maxResponseBytes": 2097152,
+    "socketTimeoutSeconds": 8,
+    "onRateLimit": "stop with no bypass",
+    "automaticRetries": 0
+  }
+}

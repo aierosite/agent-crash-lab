@@ -107,6 +107,15 @@ class Server(ThreadingHTTPServer):
         super().__init__(address,Handler)
         self.token=secrets.token_urlsafe(32)
 
+def token_source_check(body):
+    if type(body) is not dict or set(body)!={'recording_sha256'} or type(body['recording_sha256']) is not str or re.fullmatch('[0-9a-f]{64}',body['recording_sha256']) is None:raise ValueError('Choose an exact published token recording for this source check.')
+    known={hashlib.sha256((ROOT/'verification/token-study'/(name+'.json')).read_bytes()).hexdigest() for name in ['upstream-failed-withdrawal','ai-payment']}
+    if body['recording_sha256'] not in known:return {'format':'agent-crash-lab/source-check-v1','status':'not-in-study','recordingSha256':body['recording_sha256']}
+    api=runpy.run_path(str(ROOT/'tools/verify_token_rpc.py'));result=api['verify'](ROOT/'verification/rpc-study',ROOT/'verification/token-study')
+    row=next(c for c in result['cases'] if c['recordingSha256']==body['recording_sha256'])
+    return {'format':'agent-crash-lab/source-check-v1','status':'replayed','recordingSha256':body['recording_sha256'],'corroboration':row,
+            **{k:result[k] for k in ['provider','network','capturedReadRequests','capturedAtStart','capturedAtEnd','replayNetworkCalls','transactionSubmissions','contractExecutions','signatureOrStateProofVerified','independentGrading','datasetSha256','verifierSha256','meaning']}}
+
 class Handler(BaseHTTPRequestHandler):
     server_version='CrashLab/1.0'
     def log_message(self,*_):pass
@@ -127,16 +136,25 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.11.0','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.12.0','coreVersion':core.VERSION})
         if path=='/api/token-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
-            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_review.py']['sha256']})
+            source=catalog['sourceCorroboration']
+            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_review.py']['sha256'],
+                                 'sourceCorroboration':{**source,'verifierSha256':catalog['files'][source['module']]['sha256'],'hashes':{p:catalog['files'][p]['sha256'] for p in source['files']}}})
         if path=='/api/token-recording':
             from urllib.parse import parse_qs
             sid=parse_qs(urlsplit(self.path).query).get('case',[''])[0]
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             entry=next((r for r in catalog['tokenRecordings'] if r['id']==sid),None)
             return self.send(200,(ROOT/entry['path']).read_bytes()) if entry else self.send(404,{'error':'Unknown token recording'})
+        if path=='/api/token-source-file':
+            from urllib.parse import parse_qs
+            name=parse_qs(urlsplit(self.path).query).get('name',[''])[0]
+            catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
+            file=(ROOT/name).resolve()
+            if name not in catalog['sourceCorroboration']['files'] or not file.is_relative_to(ROOT.resolve()):return self.send(404,{'error':'Unknown source evidence file'})
+            return self.send(200,file.read_bytes())
         if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
@@ -184,6 +202,7 @@ class Handler(BaseHTTPRequestHandler):
                 result=bundle if path=='/api/bundle' else evaluate
                 return self.send(200,result(task,sources,scenario))
             if path=='/api/assess':return self.send(200,assess_bundle(body))
+            if path=='/api/token-source-check':return self.send(200,token_source_check(body))
             if path in ('/api/lab/search','/api/lab/shrink'):
                 return self.send(200,lab_operation(path.rsplit('/',1)[1],body))
             self.send(404,{'error':'Not found'})

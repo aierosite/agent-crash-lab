@@ -1,0 +1,6 @@
+{
+  "atUtc": "2026-11-08T03:46:36.261728+00:00",
+  "verifierSha256": "8516cc4fad8fd7268bd3ed55bc3262fc5761987c16c3f91a86cc4120f5b677f9",
+  "controlSourceSha256": "3875c78c54a611b1fe0606e37e74d1e571dae7b504c0fbda7689e9e5b930cd56",
+  "timing": "Raw baseline comparison already succeeded. Controls selected from source/schema review before evaluating them; source-informed and same-author, not held out."
+}

@@ -1,0 +1,265 @@
+{
+  "format": "agent-crash-lab/rpc-corroboration-v1",
+  "cases": [
+    {
+      "case": "upstream-failed-withdrawal",
+      "recordingSha256": "4de62af127134f01acf5782dfcbe4d82e8a8560f9a1ba308493c2f856e48dc5a",
+      "points": [
+        {
+          "side": "before",
+          "blockHash": "8GrRmWeL4WSDyzY8uQUwe4SZXzHLXkyZpDB8rYx8LoJB",
+          "blockHeight": 276023687,
+          "fields": {
+            "held": "10000000",
+            "credit": "10000000",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "10000000"
+          },
+          "codeIdentities": {
+            "token": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+            "target": "HDTkUbH1cqHfKSE3fkipdzV5ZN1Q2FUoLXeAtSvEPeF5"
+          },
+          "tokenProof": {
+            "pointer": "/result/values/2/value",
+            "key": "dC0AAAB2YXVsdC53Y2xtdzBmNXhnMnF3c24ud2NsbXcwMXU0dDVnMzNnLnRlc3RuZXQ=",
+            "byteOffset": 0,
+            "byteLength": 16
+          },
+          "rightsProofs": {
+            "credit": {
+              "pointer": "/result/values/1/value",
+              "key": "ZCwAAAB1c2VyLndjbG13MGY1eGcycXdzbi53Y2xtdzAxdTR0NWczM2cudGVzdG5ldA==",
+              "byteOffset": 69,
+              "byteLength": 16
+            }
+          },
+          "rawQueries": [
+            {
+              "kind": "token-account",
+              "folder": "03-failed-before-token-account",
+              "responseSha256": "f809ad47f67cde4585257b292389ae2832e21b6cbb2f22ce8d6ddf64045822ab"
+            },
+            {
+              "kind": "token-state",
+              "folder": "04-failed-before-token-state",
+              "responseSha256": "efc6e43e55a52e287528e9f2fe9a6f5de486512da377e80b073f5bb0fc088420"
+            },
+            {
+              "kind": "target-account",
+              "folder": "05-failed-before-target-account",
+              "responseSha256": "75ec6fa39e51c47ac15c93f36d1e8f0b8815ab1a60a45ed5e887ddf9e3037543"
+            },
+            {
+              "kind": "target-state",
+              "folder": "06-failed-before-target-state",
+              "responseSha256": "138cdc07cbcf8939eace91de6bc30e475d55a93a0720fc91a75d996fdcb6408f"
+            }
+          ]
+        },
+        {
+          "side": "after",
+          "blockHash": "7vPnPswvZVi4mBVimEDTaLD2YzJyJnuuu63b4zZH3K77",
+          "blockHeight": 276023705,
+          "fields": {
+            "held": "10000000",
+            "credit": "6000000",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "6000000"
+          },
+          "codeIdentities": {
+            "token": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+            "target": "HDTkUbH1cqHfKSE3fkipdzV5ZN1Q2FUoLXeAtSvEPeF5"
+          },
+          "tokenProof": {
+            "pointer": "/result/values/2/value",
+            "key": "dC0AAAB2YXVsdC53Y2xtdzBmNXhnMnF3c24ud2NsbXcwMXU0dDVnMzNnLnRlc3RuZXQ=",
+            "byteOffset": 0,
+            "byteLength": 16
+          },
+          "rightsProofs": {
+            "credit": {
+              "pointer": "/result/values/1/value",
+              "key": "ZCwAAAB1c2VyLndjbG13MGY1eGcycXdzbi53Y2xtdzAxdTR0NWczM2cudGVzdG5ldA==",
+              "byteOffset": 69,
+              "byteLength": 16
+            }
+          },
+          "rawQueries": [
+            {
+              "kind": "token-account",
+              "folder": "08-failed-after-token-account",
+              "responseSha256": "fadb3000d958b4c428f639921436cb352cf8e8f52ba05115a3c15f25760d3b90"
+            },
+            {
+              "kind": "token-state",
+              "folder": "09-failed-after-token-state",
+              "responseSha256": "7eb7ed38d900fd9d5c01012ef08e116468ebb8af534ee1bceab050a7b3b8905b"
+            },
+            {
+              "kind": "target-account",
+              "folder": "10-failed-after-target-account",
+              "responseSha256": "c177e420acaf2cf9f034980ff612f51c9834c7f8c70a009f9b10d2597d2c3fd3"
+            },
+            {
+              "kind": "target-state",
+              "folder": "11-failed-after-target-state",
+              "responseSha256": "9c9e7fdd06c5db0bc21b359700a0932f37311b605b3494ba1ae10d80bf119c4d"
+            }
+          ]
+        }
+      ],
+      "transactionId": "6Xee9JLyWUfsWHHjMYkxCaPkV9EZBmJNCagheTWq2fdT",
+      "transactionOutcomeProjectionMatches": true
+    },
+    {
+      "case": "ai-payment",
+      "recordingSha256": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159",
+      "points": [
+        {
+          "side": "before",
+          "blockHash": "2sZPqoowSfyBnh42jKiUnVgnc5A4cTp1SxnTYz6MaqC6",
+          "blockHeight": 276031589,
+          "fields": {
+            "held": "1000",
+            "credit": "900",
+            "pending": "0",
+            "reserved": "100",
+            "liabilities": "1000"
+          },
+          "codeIdentities": {
+            "token": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+            "target": "21R1hTcKcuEwXYDNfnCdCBZNxmYPBiyPjT1omj98dQdk"
+          },
+          "tokenProof": {
+            "pointer": "/result/values/3/value",
+            "key": "dC0AAAB2YXVsdC53Y2xtdzBod2QzNGE3enoud2NsbXcwMXU0dDVnMzNnLnRlc3RuZXQ=",
+            "byteOffset": 0,
+            "byteLength": 16
+          },
+          "rightsProofs": {
+            "credit": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 146,
+              "byteLength": 16
+            },
+            "reserved": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 162,
+              "byteLength": 16
+            },
+            "pending": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 178,
+              "byteLength": 16
+            },
+            "allowance": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 194,
+              "byteLength": 16
+            }
+          },
+          "rawQueries": [
+            {
+              "kind": "token-account",
+              "folder": "14-allowed-before-token-account",
+              "responseSha256": "d36f3ab333f77e9e56ab45db0fd948bb372c78e5ea8bbf4a4cdb78aa80711e3e"
+            },
+            {
+              "kind": "token-state",
+              "folder": "15-allowed-before-token-state",
+              "responseSha256": "66af5e12063af35cb7d9b3bb1db88a559d0d917953a3ab68331b5f66d581c016"
+            },
+            {
+              "kind": "target-account",
+              "folder": "16-allowed-before-target-account",
+              "responseSha256": "43c404172d60b813d4679d1da2e4a594974430ec0d1e71bbf972b7875d688d11"
+            },
+            {
+              "kind": "target-state",
+              "folder": "17-allowed-before-target-state",
+              "responseSha256": "339c2732aeaba0eaa8995c8f611b7b8e513d14729bf67591cfc501d345da3303"
+            }
+          ]
+        },
+        {
+          "side": "after",
+          "blockHash": "A2r6SZsBGudyHK6fmfgiAjVGpCtK22Nm7bboFnyhgpGH",
+          "blockHeight": 276031608,
+          "fields": {
+            "held": "900",
+            "credit": "900",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "900"
+          },
+          "codeIdentities": {
+            "token": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+            "target": "21R1hTcKcuEwXYDNfnCdCBZNxmYPBiyPjT1omj98dQdk"
+          },
+          "tokenProof": {
+            "pointer": "/result/values/3/value",
+            "key": "dC0AAAB2YXVsdC53Y2xtdzBod2QzNGE3enoud2NsbXcwMXU0dDVnMzNnLnRlc3RuZXQ=",
+            "byteOffset": 0,
+            "byteLength": 16
+          },
+          "rightsProofs": {
+            "credit": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 146,
+              "byteLength": 16
+            },
+            "reserved": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 162,
+              "byteLength": 16
+            },
+            "pending": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 178,
+              "byteLength": 16
+            },
+            "allowance": {
+              "pointer": "/result/values/0/value",
+              "byteOffset": 194,
+              "byteLength": 16
+            }
+          },
+          "rawQueries": [
+            {
+              "kind": "token-account",
+              "folder": "19-allowed-after-token-account",
+              "responseSha256": "22c526939c8a3be71f58e5d535fe4d6e85f4bacee163d9c2aa286b3384fe4db4"
+            },
+            {
+              "kind": "token-state",
+              "folder": "20-allowed-after-token-state",
+              "responseSha256": "f4b3cf84b4038d37d1366903cb80caae7a7260098ba249dcdb2596cab8c12bb2"
+            },
+            {
+              "kind": "target-account",
+              "folder": "21-allowed-after-target-account",
+              "responseSha256": "795450bb8c204aed59527c2511b91b3ca22723d625e91e41b1bba140d8e6b4ca"
+            },
+            {
+              "kind": "target-state",
+              "folder": "22-allowed-after-target-state",
+              "responseSha256": "d14ef4eedcc5b38ca334877669dbc2045a7efedc7ffd558a0ebe2af96129e617"
+            }
+          ]
+        }
+      ],
+      "transactionId": "5MHkiBamzSn7SQeDSnfTk67ogeXFcQ9G69GgrSKpU1R5",
+      "transactionOutcomeProjectionMatches": true
+    }
+  ],
+  "provider": "https://archival-rpc.testnet.near.org",
+  "network": "testnet",
+  "freshReadRequests": 23,
+  "transactionSubmissions": 0,
+  "contractExecutions": 0,
+  "signatureOrStateProofVerified": false,
+  "independentGrading": false,
+  "meaning": "Separately collected public-node observations agree with the selected published fields. Trusts endpoint truth, storage schemas and historical code identity; does not authenticate consensus or establish interval exclusivity."
+}

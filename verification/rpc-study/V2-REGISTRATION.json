@@ -1,0 +1,8 @@
+{
+  "atUtc": "2026-11-08T03:53:10.150086+00:00",
+  "specSha256": "72f56f1dae95247389a6a1029c7c1037e79d31efc833a803a02f7cebf84ca64c",
+  "frozenV1Sha256": "579e90f671c7bd78feb372eb8d10b7bebd21bad6498c731c50e41b804d2e4368",
+  "capitalControlSha256": "49ea8de960508eb35f610d5cf9c729bfaab6bc9d1c7e1a4e01a73b304e6e8e5d",
+  "capitalV1ReportSha256": "3bc9144a6a2e06ed86ae5eed0f396863b0ef60051e1992e5c4492d067e35251b",
+  "source": "source-informed semantic correction after inspecting data and counterexample; not blind"
+}

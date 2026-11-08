@@ -1,14 +1,43 @@
-# Recorded token custody and user rights
+# Token custody, user rights and operation references
 
-Open **Token custody review** from the workbench sidebar, or open `web/token.html` on the public demo. Choose an archived example and press **Review recording**. The local workbench runs the reviewer in its server process; the static demo runs the same Python source in Pyodide. The CLI can run with Python import isolation (`-I -S`). Import accepts the separate `agent-crash-lab/token-recording-v1` format, not a native payment bundle.
+Open **Token custody review** from the workbench sidebar, select a recording and press **Review recording**. Local mode runs Python in the workbench server. The static demo runs the same source in pinned Pyodide. Both inspect saved inputs; neither submits a transaction or calls a model.
 
-The question is narrower than payment authorization: **do the recorded custody changes reconcile with the rights the vault says it owes?** A sufficient vault balance alone does not establish that rights were preserved.
+The input remains `agent-crash-lab/token-recording-v1`. Version 0.12 returns **`agent-crash-lab/token-review-v2`**. Native core 0.1.2, native report and `gate.py` semantics remain unchanged.
 
-## Concrete discrepancy
+## A measured difference is not automatically lost entitlement
 
-The historical failed-withdrawal archive reports a vault with 10,000,000 atomic token units. A withdrawal fails. The vault still holds 10,000,000, but the user's recorded rights fall from 10,000,000 to 6,000,000. Captured token events show no corresponding payment. The reviewer exposes a **4,000,000-unit entitlement discrepancy**, even though backing remains sufficient. This is a conditional inconsistency in the supplied recording, not a new finding about current production Ref Finance.
+The old v1 field `entitlement_reduction` used a change in vault surplus. A constructed capital top-up exposed the mistake: held tokens rose from 100 to 200, rights stayed 100, and the capture contained an incoming transfer of 100. V1 labeled 100 as entitlement reduction even though rights did not fall. A payout plus a separate top-up exposed the same causal ambiguity.
 
-The control examples retain a successful deposit/withdrawal, a full return of a deposit, an unchanged unauthorized withdrawal, and a reserved 100-unit agent payment. A reservation preserves rights: `credit + pending + reserved` must be counted, not credit alone.
+V2 separates measurements:
+
+| Field | Meaning |
+| --- | --- |
+| `parity_difference` | Change in held tokens minus change in declared rights, signed. Capital, fees or reallocations can change it. |
+| `transfer_out` | Successful `ft_transfer` events crossing out of the vault. Self transfers, mint and burn are not delivery. |
+| `rights_debit_without_transfer` | Nonnegative rights debit not covered even by total outward transfers. A writeoff/burn may need a different operation reference; this alone is not an authorization verdict. |
+| `backing_shortfall` | Largest observed endpoint liability shortfall. It is not an estimate of new loss. |
+| `ledger_relation` | Matched, different or unknown net changes. |
+
+Results are `recorded-parity`, `recorded-gap`, `recorded-evidence-conflict` or `inconclusive`. A gap does not itself prove a failed obligation. Matching net changes do not prove successful delivery. The UI no longer labels a capital top-up lost rights or calls assignment of existing surplus new unfunded money.
+
+The frozen v1 reviewer remains in `verification/token-study/frozen-review-v1.py.txt`, with the original five-case literal reference and sealed inputs. Tests reproduce its capital-top-up label before checking the correction. The old reference's limited numeric/parity projection remains reproducible, with explicit translation of the new descriptive labels. This is a semantic/schema correction, not a newly independent accuracy result.
+
+## Separate source observations and explicit payout references
+
+For two **exact recording hashes**, press **Replay source check**. It checks a separately collected public archival dataset and a stated operation reference. The result is bound to the selected recording hash, verifier source hash, dataset hash and complete nested expected response. Editing an import or retaining the same case ID cannot inherit another file's corroboration. Changed selection, failed imports and rejected source responses clear the old view.
+
+The source collection on 8 November 2026 made **25 sequential, read-only public testnet requests** to `https://archival-rpc.testnet.near.org`: one status, four block headers, eight account/code-identity reads, eight raw storage reads, two transaction-status reads and two status-with-receipts reads. No keys, credentials, signing, contract invocation, transfers, mainnet or paid endpoints were used. The collector is not part of the runtime; tests and replay do not repeat those requests.
+
+The source checker compares four before/after points, eight deployed-code identities and two transaction outcome projections. An original Borsh reader decodes the stored token and rights values; it does not call or execute competitor contracts. Receipt action bodies bind the payout method, amount and recipient to its receipt outcome. The two artifact/storage profiles are deliberately pinned: a historical Ref exchange capture and Workcell's recorded treasury fixture. This is not a generic state decoder or proof of source-to-WASM compilation.
+
+| Selected interval | Explicit reference | Observation |
+| --- | --- | --- |
+| Historical owner withdrawal | When the token payout fails without delivery, preserve the user's rights. | The root succeeds, the child `ft_transfer` fails, held tokens stay 10,000,000, and rights fall 10,000,000 to 6,000,000. Reference failed. |
+| Recorded reserved agent payout | Deliver prior reserved 100 to the recorded owner and debit that amount once. | The transfer settles and rights fall 1,000 to 900. Reference passed. |
+
+The first operation-plan wording incorrectly assumed the **root transaction** failed. Source inspection showed root success with a failed child. `OPERATION-REFERENCE-AMENDMENT.json` records the correction before implementing the operation grader. Root success is not completed payout. Missing relevant receipt bodies keep the operation reference inconclusive while other source comparisons remain available.
+
+The initial offline reader accepted five invalid resealed controls: an embedded RPC result error, a duplicate receipt and float representations of query height, header height and transaction gas. The original source and 11/16 result are retained. The corrected reader rejects 16/16, and additional receipt-binding controls and semantic mutants cover the root-success shortcut and omission of reserved rights. Hashes are resealed in these controls so the semantic bindings are tested beyond file integrity alone.
 
 ## Reproduce offline
 
@@ -16,39 +45,30 @@ From the release directory:
 
 ```sh
 python -I -S token_review.py verification/token-study/upstream-failed-withdrawal.json
+python -I -S tools/verify_token_rpc.py
 python -I -S test_token_review.py
+python -I -S test_token_rpc.py
 node test_token_contract.js
+node test_source_contract.js
 ```
 
-The CLI prints a full review and exits 0 when the review completes, including a recorded inconsistency. Invalid input exits 2. **This command is not the native financial CI gate.** Existing `gate.py` behavior and native engine semantics are unchanged.
+`token_review.py` prints a completed descriptive review with exit 0, including a gap. The source verifier exits 0 for a successful fixed-study replay, **including the expected failed security reference**; inspect `operationReference.status`. Invalid input/source files exit 2. Neither command replaces the native financial gate.
 
-The report distinguishes `recorded-consistent`, `recorded-inconsistency` and `inconclusive`. It never says Safe. Per-step endpoint changes, gross in/out, net movement, reserved rights, backing, event receipt IDs and exact original archive pointers remain visible. Amounts stay exact integers in atomic units; no USDC identity, ticker, decimals, exchange rate or dollar value is inferred.
+The raw request/response bytes, byte hashes, source plans, first/corrected reader sources and controls are under `verification/rpc-study`. `tools/verify_token_rpc.py --captures DIRECTORY --recordings DIRECTORY --output FILE` supports offline verification of this documented two-case study. It does not contact a node. In the browser, setup and staged-file loading still use HTTP/CDN; `replayNetworkCalls: 0` describes the offline Python verifier, and no live chain RPC is issued by replay.
 
-## Input provenance and reference
+## Authorship, coverage and trust
 
-Five cases / twelve correlated transitions are selected from two public Workcell archives, pinned at [b80bcecc1d30263662b985fc025b83233e07a173](https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173/evidence):
+Five original cases / twelve correlated transitions are factual extracts from two Workcell public archives at [b80bcecc1d30263662b985fc025b83233e07a173](https://github.com/dotmantissa/workcell/tree/b80bcecc1d30263662b985fc025b83233e07a173/evidence):
 
-- [Historical Ref exchange capture](https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/evidence/wc_mw0eydrg_0c8f2c.json), SHA-256 `df812867dc62a343019d99480dcc60ed0f8639a8e6c77b66dc8d8c7449421a86`.
-- [Recorded agent treasury payment](https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/evidence/wc_mw0hwd2k_6d93f3.json), SHA-256 `f94a88ea55191172168add2c2e940fe2520ee7677b008b85dbfbf7dadd7d416c`.
+- [Historical Ref capture](https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/evidence/wc_mw0eydrg_0c8f2c.json), SHA-256 `df812867dc62a343019d99480dcc60ed0f8639a8e6c77b66dc8d8c7449421a86`.
+- [Recorded agent payment](https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/evidence/wc_mw0hwd2k_6d93f3.json), SHA-256 `f94a88ea55191172168add2c2e940fe2520ee7677b008b85dbfbf7dadd7d416c`.
 
-Only factual protocol records and numeric summaries are extracted. Workcell source code, its checks/verdicts, expressive report content and full source archives are not redistributed here. `tools/import_token_archive.py ARCHIVE --case CASE` reproduces an extraction from an exact matching downloaded original, without fetching anything or executing competitor code. The original byte hashes and Git blob hashes were verified at collection.
+`tools/import_token_archive.py ARCHIVE --case CASE` reproduces an extraction from an exact matching original, without fetching or executing anything. Only factual protocol records and numeric summaries are distributed. Competitor code, verdicts, expressive full reports and full original archives are not copied into the product or executed. Static source/ABI inspection informed our original storage reader.
 
-`verification/token-study/registration.json` seals the plan, literal arithmetic reference, extraction source and five inputs **before implementing/evaluating the reviewer**. Source actions and balances had already been read: the study is **source-informed**, not blind. A guessed future timestamp in the first plan was corrected to the actual registration clock before implementation; the previous digest is retained. Three deliberately incorrect semantic implementations test sensitivity to ignoring reserved rights, checking backing alone, and ignoring outgoing returns.
+Workcell authored the original input archives; we collected the new RPC responses and authored extraction, readers, references, grader and evaluation. This broadens data provenance but is **not externally authored grading, a blind audit, independent trials, a new model/contract run, or a real-world accuracy estimate**. The source selection and expected producer values were known before collection. The recipient-balance check was added after raw keys were inspected; it is disclosed as corroboration, not a preregistered holdout.
 
-Workcell authored the input archives. We authored extraction, reference, reviewer and evaluation. This broadens input authorship; it is **not externally authored grading, independent review, twelve independent trials, a new model inference, or a fresh contract experiment**. Do not present reference agreement as real-world accuracy.
+The public node is trusted. Matching queries are not cryptographic state proofs, verified signatures, a light-client consensus check, source-to-binary equivalence, proof of interval exclusivity or an audit of production Ref Finance. The stored fixtures may be obsolete or synthetic in purpose; no production vulnerability is asserted. Three original examples still rely solely on their producer summaries. No ticker, decimals, USDC identity, exchange rate or dollar value is inferred.
 
-## Interpretation and limits
+Technical primary references: [NEAR public providers](https://docs.near.org/api/rpc/providers), [transaction and receipt-status semantics](https://docs.near.org/api/rpc/transactions), [raw account/contract queries](https://docs.near.org/api/rpc/contracts), [Borsh specification](https://borsh.io/), and pinned [NEP-141](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0141.md), [NEP-297](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0297.md), [NEP-300](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0300.md). A one-yoctoNEAR attachment is not the token amount.
 
-For each closed, single-owner vault interval:
-
-1. `rights = credit + pending + reserved`; require agreement with reported total liabilities.
-2. Compare change in held tokens with net token events from the declared token contract's successful receipt outcomes.
-3. Compare change in rights with change in custody; expose unexplained reductions or increases separately from backing.
-
-Mint and burn are explicitly distinguished from transfer events. Foreign-emitter or failed-receipt event logs do not establish payment. Missing transactions/receipts, non-FINAL outcomes, unsupported token event semantics, unordered endpoint heights, inconsistent reported code identity or missing scope assumptions keep affected rows inconclusive. Duplicate JSON fields/receipt identities and malformed quantities are rejected.
-
-The selected endpoints are **producer-reported summaries**, not raw state-query responses. Source SHA-256 binds bytes but does not authenticate them. We do not validate signatures, consensus, code execution, the truthfulness of token events, the completeness of a real interval, hidden account changes, or production contract behavior. Reported code identity is checked for internal consistency, not independently proven. No fresh RPC, wallet, signing, chain transaction, paid API or model request occurs during this review.
-
-The event interpretation follows pinned primary specifications: [NEP-141](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0141.md), [NEP-297](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0297.md), [NEP-300](https://github.com/near/NEPs/blob/095fe98218d2272a0a285008f72bdb3e8957e613/neps/nep-0300.md). A one-yoctoNEAR call attachment is not the transferred token amount.
-
-The native assessor remains byte-identical to v0.10.0. This separate reviewer does not expand `near-sandbox-2.14/native-v1` to token authorization. More token implementations, independently collected state proofs, broader agents and external review remain open work.
+Broader owner-declared token authorization/operation models, independently authored evaluation, fresh permitted agent experiments and external review remain open. This release does not close the long-term goal.

@@ -36,7 +36,17 @@ async function boot(id){
  for(const path of ['agent_crash_lab.py','workbench.py','BASELINES.json'])await stage(path);
  python.runPython("import sys,json\nsys.path.insert(0,'/app')\nimport workbench as app");
 }
-async function route(path,body){
+async function route(path,body,id){
+ if(path==='/api/token-source-check'){
+  await stage(catalog.sourceCorroboration.module);
+  let count=0;for(const path of [...catalog.sourceCorroboration.files,...catalog.sourceCorroboration.cases.map(c=>'verification/token-study/'+c.id+'.json')]){
+   await stage(path);if(++count%10===0)postMessage({id,progress:'Loading source-check files · '+count});
+  }
+  python.globals.set('source_body',JSON.stringify(body));
+  try{
+   const result=JSON.parse(python.runPython("try:\n    source_value=app.token_source_check(json.loads(source_body))\nexcept ValueError as error:\n    source_value={'error':str(error)}\njson.dumps(source_value)"));if(result.error)throw Error(result.error);return result;
+  }finally{python.globals.delete('source_body');}
+ }
  if(path==='/api/token-review'){
   await stage('token_review.py');python.globals.set('token_input',body);
   try{
@@ -85,7 +95,7 @@ onmessage=async({data:{id,path,body}})=>{
  try{
   if(path==='/api/assess'&&body.byteLength>9*1024*1024)throw Error('Bundle exceeds 9 MiB');
   if(path==='/api/token-review'&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty token recording no larger than 2 MiB.');
-  await boot(id);const result=await route(path,body);postMessage({id,result});
+  await boot(id);const result=await route(path,body,id);postMessage({id,result});
  }catch(e){postMessage({id,error:String(e.message||e).trim().split('\n').pop().slice(0,300)});}
  finally{active=false;}
 };

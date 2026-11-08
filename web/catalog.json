@@ -727,6 +727,100 @@
       "path": "verification/token-study/upstream-auth.json"
     }
   ],
+  "sourceCorroboration": {
+    "module": "tools/verify_token_rpc.py",
+    "files": [
+      "verification/rpc-study/01-status/observation.json",
+      "verification/rpc-study/01-status/request.json",
+      "verification/rpc-study/01-status/response.json",
+      "verification/rpc-study/02-original-block/observation.json",
+      "verification/rpc-study/02-original-block/request.json",
+      "verification/rpc-study/02-original-block/response.json",
+      "verification/rpc-study/03-failed-before-token-account/observation.json",
+      "verification/rpc-study/03-failed-before-token-account/request.json",
+      "verification/rpc-study/03-failed-before-token-account/response.json",
+      "verification/rpc-study/04-failed-before-token-state/observation.json",
+      "verification/rpc-study/04-failed-before-token-state/request.json",
+      "verification/rpc-study/04-failed-before-token-state/response.json",
+      "verification/rpc-study/05-failed-before-target-account/observation.json",
+      "verification/rpc-study/05-failed-before-target-account/request.json",
+      "verification/rpc-study/05-failed-before-target-account/response.json",
+      "verification/rpc-study/06-failed-before-target-state/observation.json",
+      "verification/rpc-study/06-failed-before-target-state/request.json",
+      "verification/rpc-study/06-failed-before-target-state/response.json",
+      "verification/rpc-study/07-failed-after-block/observation.json",
+      "verification/rpc-study/07-failed-after-block/request.json",
+      "verification/rpc-study/07-failed-after-block/response.json",
+      "verification/rpc-study/08-failed-after-token-account/observation.json",
+      "verification/rpc-study/08-failed-after-token-account/request.json",
+      "verification/rpc-study/08-failed-after-token-account/response.json",
+      "verification/rpc-study/09-failed-after-token-state/observation.json",
+      "verification/rpc-study/09-failed-after-token-state/request.json",
+      "verification/rpc-study/09-failed-after-token-state/response.json",
+      "verification/rpc-study/10-failed-after-target-account/observation.json",
+      "verification/rpc-study/10-failed-after-target-account/request.json",
+      "verification/rpc-study/10-failed-after-target-account/response.json",
+      "verification/rpc-study/11-failed-after-target-state/observation.json",
+      "verification/rpc-study/11-failed-after-target-state/request.json",
+      "verification/rpc-study/11-failed-after-target-state/response.json",
+      "verification/rpc-study/12-failed-tx/observation.json",
+      "verification/rpc-study/12-failed-tx/request.json",
+      "verification/rpc-study/12-failed-tx/response.json",
+      "verification/rpc-study/13-allowed-before-block/observation.json",
+      "verification/rpc-study/13-allowed-before-block/request.json",
+      "verification/rpc-study/13-allowed-before-block/response.json",
+      "verification/rpc-study/14-allowed-before-token-account/observation.json",
+      "verification/rpc-study/14-allowed-before-token-account/request.json",
+      "verification/rpc-study/14-allowed-before-token-account/response.json",
+      "verification/rpc-study/15-allowed-before-token-state/observation.json",
+      "verification/rpc-study/15-allowed-before-token-state/request.json",
+      "verification/rpc-study/15-allowed-before-token-state/response.json",
+      "verification/rpc-study/16-allowed-before-target-account/observation.json",
+      "verification/rpc-study/16-allowed-before-target-account/request.json",
+      "verification/rpc-study/16-allowed-before-target-account/response.json",
+      "verification/rpc-study/17-allowed-before-target-state/observation.json",
+      "verification/rpc-study/17-allowed-before-target-state/request.json",
+      "verification/rpc-study/17-allowed-before-target-state/response.json",
+      "verification/rpc-study/18-allowed-after-block/observation.json",
+      "verification/rpc-study/18-allowed-after-block/request.json",
+      "verification/rpc-study/18-allowed-after-block/response.json",
+      "verification/rpc-study/19-allowed-after-token-account/observation.json",
+      "verification/rpc-study/19-allowed-after-token-account/request.json",
+      "verification/rpc-study/19-allowed-after-token-account/response.json",
+      "verification/rpc-study/20-allowed-after-token-state/observation.json",
+      "verification/rpc-study/20-allowed-after-token-state/request.json",
+      "verification/rpc-study/20-allowed-after-token-state/response.json",
+      "verification/rpc-study/21-allowed-after-target-account/observation.json",
+      "verification/rpc-study/21-allowed-after-target-account/request.json",
+      "verification/rpc-study/21-allowed-after-target-account/response.json",
+      "verification/rpc-study/22-allowed-after-target-state/observation.json",
+      "verification/rpc-study/22-allowed-after-target-state/request.json",
+      "verification/rpc-study/22-allowed-after-target-state/response.json",
+      "verification/rpc-study/23-allowed-tx/observation.json",
+      "verification/rpc-study/23-allowed-tx/request.json",
+      "verification/rpc-study/23-allowed-tx/response.json",
+      "verification/rpc-study/EXPECTED-FROM-PUBLISHED.json",
+      "verification/rpc-study/receipt-details/24-failed-tx-status/observation.json",
+      "verification/rpc-study/receipt-details/24-failed-tx-status/request.json",
+      "verification/rpc-study/receipt-details/24-failed-tx-status/response.json",
+      "verification/rpc-study/receipt-details/25-allowed-tx-status/observation.json",
+      "verification/rpc-study/receipt-details/25-allowed-tx-status/request.json",
+      "verification/rpc-study/receipt-details/25-allowed-tx-status/response.json"
+    ],
+    "datasetSha256": "059d7a513885ac422b8e2fac6f894326fb87e926f66016e4c0f69422a8273374",
+    "cases": [
+      {
+        "id": "upstream-failed-withdrawal",
+        "recordingSha256": "4de62af127134f01acf5782dfcbe4d82e8a8560f9a1ba308493c2f856e48dc5a",
+        "expectedResponseSha256": "b8c220a02e38632718f99901ae6928644b46243a3853a52f1dcceffdb41d07ff"
+      },
+      {
+        "id": "ai-payment",
+        "recordingSha256": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159",
+        "expectedResponseSha256": "2f174effff773c6542a1ad9171d0abf8dee54637f4022420fd8fedc0f5b17e0d"
+      }
+    ]
+  },
   "files": {
     "BASELINES.json": {
       "bytes": 18369,
@@ -1293,16 +1387,324 @@
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
     "token_review.py": {
-      "bytes": 14783,
-      "sha256": "579e90f671c7bd78feb372eb8d10b7bebd21bad6498c731c50e41b804d2e4368"
+      "bytes": 15165,
+      "sha256": "04486ed109a67f0b6a89f42ab4055a4310f7dbf194f10d5c0907eb71eb98ba8b"
     },
     "tools/scenario_lab.py": {
       "bytes": 27224,
       "sha256": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6"
     },
+    "tools/verify_token_rpc.py": {
+      "bytes": 20051,
+      "sha256": "892edef4ed3655b8c1cec7517fde9ef405512df3e386e8edf44222ecbf903406"
+    },
     "verification/native-crash-comparison.json": {
       "bytes": 1612,
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
+    },
+    "verification/rpc-study/01-status/observation.json": {
+      "bytes": 928,
+      "sha256": "e94a0e86851eb0042b1d63587ea4c468bed807bb05209ec9c91a8748d9bd84f0"
+    },
+    "verification/rpc-study/01-status/request.json": {
+      "bytes": 64,
+      "sha256": "af10ba45521b7dd15fd94a0522e62ec8fc425b786bb1652c412caf9edb42ab0c"
+    },
+    "verification/rpc-study/01-status/response.json": {
+      "bytes": 1720,
+      "sha256": "95fa2804a910251802a6d1a3205c52fa0581f67624223f969a946fef67ff5ebd"
+    },
+    "verification/rpc-study/02-original-block/observation.json": {
+      "bytes": 753,
+      "sha256": "a468fc25bec5031e9ec5d14f1a5121ee3d853f09a63205b9742c7ac4a4b56e19"
+    },
+    "verification/rpc-study/02-original-block/request.json": {
+      "bytes": 128,
+      "sha256": "37640ffc05097579eefbfdd09f0286f95edb213df202baf7985f2daebfe4cf6e"
+    },
+    "verification/rpc-study/02-original-block/response.json": {
+      "bytes": 13141,
+      "sha256": "8b6b5a66f35efb211e1ddc0f57f57e5c1d76acc518680291c52de4bdce75258b"
+    },
+    "verification/rpc-study/03-failed-before-token-account/observation.json": {
+      "bytes": 954,
+      "sha256": "91d7d85e8f52be225248bd8523954bb402e90378482986e78271a5beaa376e2a"
+    },
+    "verification/rpc-study/03-failed-before-token-account/request.json": {
+      "bytes": 209,
+      "sha256": "02fcd4c5abbde63a6df1659069f2ab035a215e0bdfaaade2a39f9cbe964fd39c"
+    },
+    "verification/rpc-study/03-failed-before-token-account/response.json": {
+      "bytes": 280,
+      "sha256": "f809ad47f67cde4585257b292389ae2832e21b6cbb2f22ce8d6ddf64045822ab"
+    },
+    "verification/rpc-study/04-failed-before-token-state/observation.json": {
+      "bytes": 900,
+      "sha256": "043e80de6aa31dcf0087b5ab336517d6066633546ac8c8f335825ea237dc6ff9"
+    },
+    "verification/rpc-study/04-failed-before-token-state/request.json": {
+      "bytes": 226,
+      "sha256": "3e69a6045e25f95d90d4b44c404ffd5161c4c0a9eda6bf1af889fe4186963ea9"
+    },
+    "verification/rpc-study/04-failed-before-token-state/response.json": {
+      "bytes": 437,
+      "sha256": "efc6e43e55a52e287528e9f2fe9a6f5de486512da377e80b073f5bb0fc088420"
+    },
+    "verification/rpc-study/05-failed-before-target-account/observation.json": {
+      "bytes": 954,
+      "sha256": "7d30d7371e38a1915effb7eb53b12fb60d07cf511f75797772be40a91efd75be"
+    },
+    "verification/rpc-study/05-failed-before-target-account/request.json": {
+      "bytes": 209,
+      "sha256": "1387600287199ede8987e69b520e8ff9c1eeac290eabfb8db113aa9d2ec6fe40"
+    },
+    "verification/rpc-study/05-failed-before-target-account/response.json": {
+      "bytes": 280,
+      "sha256": "75ec6fa39e51c47ac15c93f36d1e8f0b8815ab1a60a45ed5e887ddf9e3037543"
+    },
+    "verification/rpc-study/06-failed-before-target-state/observation.json": {
+      "bytes": 900,
+      "sha256": "0a330d8a6aa362dada388c5e2df679df28ca7d1229a57c91708273378c2a3808"
+    },
+    "verification/rpc-study/06-failed-before-target-state/request.json": {
+      "bytes": 226,
+      "sha256": "99eef51cd49a66f0dbe38ca71f54fdccfbab9ff99a809b5b0b7318e68e84be55"
+    },
+    "verification/rpc-study/06-failed-before-target-state/response.json": {
+      "bytes": 711,
+      "sha256": "138cdc07cbcf8939eace91de6bc30e475d55a93a0720fc91a75d996fdcb6408f"
+    },
+    "verification/rpc-study/07-failed-after-block/observation.json": {
+      "bytes": 762,
+      "sha256": "94b007ec8687537897c9f4439e4f1cf69ad91e8cd22d003ca53ac6feadf079aa"
+    },
+    "verification/rpc-study/07-failed-after-block/request.json": {
+      "bytes": 118,
+      "sha256": "6eca7ed67bdb4dcd403188604ee3eaefad6be46e2e075757e3bc07d21aa10b81"
+    },
+    "verification/rpc-study/07-failed-after-block/response.json": {
+      "bytes": 12861,
+      "sha256": "aa60a33279396dc2e5f74e54e37e8f9b52291efb6d7911d389e7eba4104d0536"
+    },
+    "verification/rpc-study/08-failed-after-token-account/observation.json": {
+      "bytes": 955,
+      "sha256": "5055ad17544c0070f4965a9563028158f1fbdce805c03fe3683d31484593b5da"
+    },
+    "verification/rpc-study/08-failed-after-token-account/request.json": {
+      "bytes": 209,
+      "sha256": "57973f3fc6a88aa1ad124eee30f5b891c03b4a1d60efb1e66e296972a38a3c98"
+    },
+    "verification/rpc-study/08-failed-after-token-account/response.json": {
+      "bytes": 280,
+      "sha256": "fadb3000d958b4c428f639921436cb352cf8e8f52ba05115a3c15f25760d3b90"
+    },
+    "verification/rpc-study/09-failed-after-token-state/observation.json": {
+      "bytes": 900,
+      "sha256": "cb47d3daa3076c6a89331e30d11152f0dca1850b5833f0e9b3d004b161079c6f"
+    },
+    "verification/rpc-study/09-failed-after-token-state/request.json": {
+      "bytes": 226,
+      "sha256": "e94cdf7a6493776a4499e93c9bc3c5f6725215360c06a17d16ee5e505cca7cd5"
+    },
+    "verification/rpc-study/09-failed-after-token-state/response.json": {
+      "bytes": 437,
+      "sha256": "7eb7ed38d900fd9d5c01012ef08e116468ebb8af534ee1bceab050a7b3b8905b"
+    },
+    "verification/rpc-study/10-failed-after-target-account/observation.json": {
+      "bytes": 954,
+      "sha256": "8852b237c289be83b2ba5f963746431c58603e3deac7c1e0c3355a9bd10c0539"
+    },
+    "verification/rpc-study/10-failed-after-target-account/request.json": {
+      "bytes": 209,
+      "sha256": "130b4f55b80f0ac2bb171778f24754601cfe2b5a2c523eaf46bceede58056b75"
+    },
+    "verification/rpc-study/10-failed-after-target-account/response.json": {
+      "bytes": 280,
+      "sha256": "c177e420acaf2cf9f034980ff612f51c9834c7f8c70a009f9b10d2597d2c3fd3"
+    },
+    "verification/rpc-study/11-failed-after-target-state/observation.json": {
+      "bytes": 899,
+      "sha256": "54a07ccd51ae13621ec81b14fb7e34de84f284d45903e191cf89a02ff07d8478"
+    },
+    "verification/rpc-study/11-failed-after-target-state/request.json": {
+      "bytes": 226,
+      "sha256": "e232861596e151f6099dd7a878adc0a524c6e7477361669f9451fe59d66bd607"
+    },
+    "verification/rpc-study/11-failed-after-target-state/response.json": {
+      "bytes": 711,
+      "sha256": "9c9e7fdd06c5db0bc21b359700a0932f37311b605b3494ba1ae10d80bf119c4d"
+    },
+    "verification/rpc-study/12-failed-tx/observation.json": {
+      "bytes": 934,
+      "sha256": "2abbd4d172ff5cd6ec11f6dfa1a3da0145f2e2beacbe34ceb149133175f24ff8"
+    },
+    "verification/rpc-study/12-failed-tx/request.json": {
+      "bytes": 202,
+      "sha256": "7f2914631a4c0b2b8795f7c9a19c2dcf8a8ee09c11971e2e1be658666a84cb8f"
+    },
+    "verification/rpc-study/12-failed-tx/response.json": {
+      "bytes": 8347,
+      "sha256": "17c25ffdb147fa69b4e131c94ee9898ead4b4d3762c01a5cda90befb014f961e"
+    },
+    "verification/rpc-study/13-allowed-before-block/observation.json": {
+      "bytes": 763,
+      "sha256": "986bc098bed3f2bfd46f306068a1fdf036a62ac3b40a4a8decb9cd9cd8ad875f"
+    },
+    "verification/rpc-study/13-allowed-before-block/request.json": {
+      "bytes": 118,
+      "sha256": "f5da5f9510849e28fdfabf0117f03184d7797f8202897b9eec5b059412d1d101"
+    },
+    "verification/rpc-study/13-allowed-before-block/response.json": {
+      "bytes": 12955,
+      "sha256": "1e94a6629d453837be967d0a5495daf1c455f59943667a468106ff9518d93ca1"
+    },
+    "verification/rpc-study/14-allowed-before-token-account/observation.json": {
+      "bytes": 954,
+      "sha256": "7e00fbf62d9b1adbdbf1631cba414044b89c262e4a78e1af33b16df24367dfb3"
+    },
+    "verification/rpc-study/14-allowed-before-token-account/request.json": {
+      "bytes": 209,
+      "sha256": "a7343734d593476ddbdd244b490132c60526edf1736563da1de993515f5b4460"
+    },
+    "verification/rpc-study/14-allowed-before-token-account/response.json": {
+      "bytes": 280,
+      "sha256": "d36f3ab333f77e9e56ab45db0fd948bb372c78e5ea8bbf4a4cdb78aa80711e3e"
+    },
+    "verification/rpc-study/15-allowed-before-token-state/observation.json": {
+      "bytes": 900,
+      "sha256": "14fefb2f9ebe2a02f34443ae86c0d54d2eaa1c9e5984e1664a4b679d974cf2a8"
+    },
+    "verification/rpc-study/15-allowed-before-token-state/request.json": {
+      "bytes": 226,
+      "sha256": "aca4d53dad0171a3850ca02024dde12700bbd30bc6615d79b06e831622a79a4c"
+    },
+    "verification/rpc-study/15-allowed-before-token-state/response.json": {
+      "bytes": 551,
+      "sha256": "66af5e12063af35cb7d9b3bb1db88a559d0d917953a3ab68331b5f66d581c016"
+    },
+    "verification/rpc-study/16-allowed-before-target-account/observation.json": {
+      "bytes": 954,
+      "sha256": "d58d79334949cf788acf5bc462568deb7bfa3f6a616cfb015b7b6ddd7d2cb81f"
+    },
+    "verification/rpc-study/16-allowed-before-target-account/request.json": {
+      "bytes": 209,
+      "sha256": "62309388f84ead387793669e6196e445b1bcb35af6effcdd3d3871ed4772ce89"
+    },
+    "verification/rpc-study/16-allowed-before-target-account/response.json": {
+      "bytes": 280,
+      "sha256": "43c404172d60b813d4679d1da2e4a594974430ec0d1e71bbf972b7875d688d11"
+    },
+    "verification/rpc-study/17-allowed-before-target-state/observation.json": {
+      "bytes": 898,
+      "sha256": "1de56ecf21071c3959d2a05dd7872433e8048dfa1becdfbbc86a631536f88c85"
+    },
+    "verification/rpc-study/17-allowed-before-target-state/request.json": {
+      "bytes": 226,
+      "sha256": "5a8a1ed03b941767dbe8c3ee889b468ad29103781bb2a52738b707489d027a00"
+    },
+    "verification/rpc-study/17-allowed-before-target-state/response.json": {
+      "bytes": 449,
+      "sha256": "339c2732aeaba0eaa8995c8f611b7b8e513d14729bf67591cfc501d345da3303"
+    },
+    "verification/rpc-study/18-allowed-after-block/observation.json": {
+      "bytes": 763,
+      "sha256": "dd4d7b8838aff9527c5c08546d7a7c433c8bf4202acbfe1cca5c05306445f2f8"
+    },
+    "verification/rpc-study/18-allowed-after-block/request.json": {
+      "bytes": 118,
+      "sha256": "721212528ee7f4558ff3f0b5f048f8cc3ea06f31d5fbb2a93ab2d031dd1eda7b"
+    },
+    "verification/rpc-study/18-allowed-after-block/response.json": {
+      "bytes": 12916,
+      "sha256": "8efb27d59bd96cdeb625f237552c52f49c64eb1ff83c344113cb2d29f3565888"
+    },
+    "verification/rpc-study/19-allowed-after-token-account/observation.json": {
+      "bytes": 953,
+      "sha256": "35e659bbcba79f7ccb184c53b9d3a78089afba88ade760f6d18507ebb7e14b6c"
+    },
+    "verification/rpc-study/19-allowed-after-token-account/request.json": {
+      "bytes": 209,
+      "sha256": "38c66d15e9db4964f26be84fbcdca3b33d1fc8c9991fb0e6bda27cd2bbe48204"
+    },
+    "verification/rpc-study/19-allowed-after-token-account/response.json": {
+      "bytes": 280,
+      "sha256": "22c526939c8a3be71f58e5d535fe4d6e85f4bacee163d9c2aa286b3384fe4db4"
+    },
+    "verification/rpc-study/20-allowed-after-token-state/observation.json": {
+      "bytes": 899,
+      "sha256": "b67aa1fb1b3750375845da55fe77590b05e2dcd0cbaf109dafd16caa91f96de9"
+    },
+    "verification/rpc-study/20-allowed-after-token-state/request.json": {
+      "bytes": 226,
+      "sha256": "1562909f4566924bc0e60f6bc4dab7905be9d759b39179f5b75ea1ba3e6c9afe"
+    },
+    "verification/rpc-study/20-allowed-after-token-state/response.json": {
+      "bytes": 551,
+      "sha256": "f4b3cf84b4038d37d1366903cb80caae7a7260098ba249dcdb2596cab8c12bb2"
+    },
+    "verification/rpc-study/21-allowed-after-target-account/observation.json": {
+      "bytes": 955,
+      "sha256": "c9a50c98c4ffd3f55aa78d41a17c7fbfb0284cc075b6925d8ee9eff61e0174ee"
+    },
+    "verification/rpc-study/21-allowed-after-target-account/request.json": {
+      "bytes": 209,
+      "sha256": "bd48af59723a4d38c860def3e8db74327c157e86f81ea4a0080d0478b72d61f0"
+    },
+    "verification/rpc-study/21-allowed-after-target-account/response.json": {
+      "bytes": 280,
+      "sha256": "795450bb8c204aed59527c2511b91b3ca22723d625e91e41b1bba140d8e6b4ca"
+    },
+    "verification/rpc-study/22-allowed-after-target-state/observation.json": {
+      "bytes": 900,
+      "sha256": "fff3269ec6db888384d7c1bd2519665fbe4b9191b97157ce2f0917dd27f732ce"
+    },
+    "verification/rpc-study/22-allowed-after-target-state/request.json": {
+      "bytes": 226,
+      "sha256": "e148e144e29480948e6db2a8c2329fa402a5b4aac43b43276ddc75909bd249af"
+    },
+    "verification/rpc-study/22-allowed-after-target-state/response.json": {
+      "bytes": 449,
+      "sha256": "d14ef4eedcc5b38ca334877669dbc2045a7efedc7ffd558a0ebe2af96129e617"
+    },
+    "verification/rpc-study/23-allowed-tx/observation.json": {
+      "bytes": 935,
+      "sha256": "72ebfdd18b3fe9c563d0402a36f0179e08e6a384dc408ab6b99779f3fd164c75"
+    },
+    "verification/rpc-study/23-allowed-tx/request.json": {
+      "bytes": 203,
+      "sha256": "e3320ae09136f35f9ad933f44e07a75998485bfb806e8989f6e5cfbcdfd97722"
+    },
+    "verification/rpc-study/23-allowed-tx/response.json": {
+      "bytes": 11269,
+      "sha256": "74adfaa7af4aea89d4ae094aa2ea0de5619e2d8050c71557df558eb6d9df6bd1"
+    },
+    "verification/rpc-study/EXPECTED-FROM-PUBLISHED.json": {
+      "bytes": 6079,
+      "sha256": "fce372c8b11ba9ec2fa2a99b6c952f44fecacaf318271f13a2f8524b78a55a8a"
+    },
+    "verification/rpc-study/receipt-details/24-failed-tx-status/observation.json": {
+      "bytes": 822,
+      "sha256": "28d1929dcc2e1c20d1539f4baddf37b44658aa84c5f3d41d5a4d2a537bb1133c"
+    },
+    "verification/rpc-study/receipt-details/24-failed-tx-status/request.json": {
+      "bytes": 209,
+      "sha256": "46c347687677dc493a00deb1826a17612aeea28c7a64147b820d525b6f764028"
+    },
+    "verification/rpc-study/receipt-details/24-failed-tx-status/response.json": {
+      "bytes": 11072,
+      "sha256": "4409de7126accbe87b1ba04efb3216e12f40bc0ee36e396a8b930ebfbc818935"
+    },
+    "verification/rpc-study/receipt-details/25-allowed-tx-status/observation.json": {
+      "bytes": 823,
+      "sha256": "9586451db4f683d97524e7cc8fbf70440bdd59f31cfbe968eda2ced9865dbd34"
+    },
+    "verification/rpc-study/receipt-details/25-allowed-tx-status/request.json": {
+      "bytes": 210,
+      "sha256": "aea9ade210996a5ee62a87bafef5e4f68b393209e7dd5004e58cfbd51ad7adf7"
+    },
+    "verification/rpc-study/receipt-details/25-allowed-tx-status/response.json": {
+      "bytes": 14757,
+      "sha256": "29555ace87615789da687c99e1f7844e4ff1dd94232da41e8e99ee84e69ded79"
     },
     "verification/token-study/ai-payment.json": {
       "bytes": 28723,
@@ -1325,8 +1727,8 @@
       "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
     },
     "workbench.py": {
-      "bytes": 19292,
-      "sha256": "2a0280cc3a10bbfaa6d0977680e7c8ba4cce43113b2f7172b86670c6e3bdfa52"
+      "bytes": 21400,
+      "sha256": "88d49bdec8c81e5a05ee69a95f52a3f26aa8f80f79c6ae8731467907fd4749c0"
     }
   }
 }

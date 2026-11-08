@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":"read-24","method":"tx_status","params":{"tx_hash":"6Xee9JLyWUfsWHHjMYkxCaPkV9EZBmJNCagheTWq2fdT","sender_account_id":"user.wclmw0f5xg2qwsn.wclmw01u4t5g33g.testnet","wait_until":"FINAL"}}

@@ -1,0 +1,24 @@
+{
+  "baseline": "v0.11.0",
+  "reason": "The frozen capital-topup control has custody +100, rights 0, a real shaped incoming event of100. Published v1 calls100 an entitlement reduction, although endpoint rights do not decrease. A parity difference alone does not establish a failed obligation. This is a same-author synthetic semantic counterexample, not a fresh transaction.",
+  "inputFormat": "Keep token-recording-v1 immutable inputs and the original five-case reference/registration.",
+  "outputFormat": "New explicit token-review-v2; native report/core/gate unchanged.",
+  "descriptiveFields": {
+    "parity_difference": "held_delta - rights_delta (signed). A change in vault surplus; not automatically lost user rights.",
+    "transfer_out": "Successful ft_transfer events crossing from vault to a different account; exclude mint/burn/self transfers from payout quantity.",
+    "rights_debit_without_transfer": "max(0, -rights_delta - transfer_out), only when evidence agrees. A measured debit unmatched by transfers, not an authorization/causation verdict; writeoffs/burns may need a different reference.",
+    "backing_shortfall": "Largest max(0, liabilities - held) at the two observed endpoints; not an estimate of new loss. Keep unknown when required evidence/identity/scope is missing.",
+    "ledger_relation": "matched/different/unknown for net custody versus rights change.",
+    "gross_in_out": "Boundary-crossing custody events; self transfers do not count as delivery. Preserve mint/burn as explicitly different kinds."
+  },
+  "conclusions": ["recorded-parity", "recorded-gap", "recorded-evidence-conflict", "inconclusive"],
+  "meaning": "Descriptive conditional reconciliation, not generic token authorization or a business-failure verdict. UI must not call surplus movement lost entitlement or claim unfunded rights when pre-existing surplus can cover them.",
+  "operationReferences": {
+    "historicalFailedWithdrawal": "For the selected owner-withdrawal, source-informed reference requires rights preserved when no transfer settles and transaction fails. Own raw RPC captures prove the stored rights drop; report this explicit reference failed, independently of generic parity.",
+    "recordedAgentPayout": "For selected execute, expected delivery equals prior reserved100; compare successful token transfer to owner and rights reduction100. Raw state/signed tx identity corroboration is provider-trusted, not consensus authentication. Same-author reference, not blind grading."
+  },
+  "sourceWorkflow": "Ship portable offline verifier plus exact requests/responses and initial/corrected reader tests. For the two exact recording hashes only, offer Replay source check in local and browser UI. Stage all files against catalog hashes; bind result to selected recording hash and verifier hash. Edited imports never inherit source-check claims. Replay sends no chain query, transaction or model request.",
+  "controls": ["capital top-up leaves rights unchanged", "matched payout plus separate top-up does not invent unpaid rights", "assigning surplus to rights does not invent new unfunded money", "spending unowed surplus does not invent new rights", "self transfer is not delivery", "mint/burn are custody changes, not transfers", "actual endpoint backing shortfall", "genuine failed-payout reference still fails", "genuine reserved agent payout still passes", "missing/faulty sources stay inconclusive or source-check unavailable", "modified import cannot inherit a corroboration badge"],
+  "history": "Retain frozen published v1 reviewer and original reference. Explain v2 schema/semantic change; do not translate a reference change into a claimed accuracy gain. Preserve initial RPC reader11/16 and corrected16/16 results/source. No external blind audit or fresh contract/model execution.",
+  "constraints": "No new agents/chats, paid API/model, wallet, signing, transaction, mainnet or messages. No copy/execute of competitor implementation. Only our own reader executes. Research source/ABI inspection is static. Goal remains active."
+}

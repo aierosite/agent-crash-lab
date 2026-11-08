@@ -6,6 +6,16 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Root success is not a completed payout · v0.12.0
+
+**[Replay the independently collected source records](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=upstream-failed-withdrawal)**
+
+A root transaction succeeds while its child token transfer fails: custody stays 10,000,000 but the user's rights fall to 6,000,000. A separate reserved payout delivers 100 and reduces rights once. The source check reconstructs both intervals from **25 saved, read-only public testnet responses**, including raw storage, code identities and receipt action bodies. Replay submits no transaction and makes no live chain query.
+
+Token report **v2** also corrects a reproduced semantic mistake: a capital top-up is not lost entitlement. It separates signed custody/rights differences, outward delivery and an unmatched rights debit; only an explicit operation reference determines whether an obligation failed. Exact input and whole-response hashes prevent edited imports from inheriting corroboration. [Method, raw records, first reader failures and trust limits](docs/TOKEN_REVIEW.md).
+
+The new source observations are separately collected, but the reference and evaluation remain ours. This is not independent grading, a cryptographic state proof or a new agent/contract experiment. Native core 0.1.2 and its financial gate are unchanged.
+
 ## Custody is not entitlement · v0.11.0
 
 **[Open the recorded token review](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=upstream-failed-withdrawal)**

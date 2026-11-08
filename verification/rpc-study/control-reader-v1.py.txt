@@ -1,0 +1,53 @@
+"""Prospective structural counterexamples for the new offline RPC reader; never sends requests."""
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import copy,json,runpy,shutil,tempfile,base64
+ROOT=Path(__file__).resolve().parent;RECORDINGS=ROOT.parent/'token-v0.11.0/release-checkout/verification/token-study'
+def write_json(path,value):path.write_text(json.dumps(value,separators=(',',':')),'utf-8')
+def mutate_response(folder,change):
+ p=folder/'response.json';d=json.loads(p.read_bytes());change(d);write_json(p,d);o=json.loads((folder/'observation.json').read_bytes());o['responseSha256']=sha256(p.read_bytes()).hexdigest();o['responseBytes']=p.stat().st_size;write_json(folder/'observation.json',o)
+def mutate_request(folder,change):
+ p=folder/'request.json';d=json.loads(p.read_bytes());change(d);write_json(p,d);o=json.loads((folder/'observation.json').read_bytes());o['requestSha256']=sha256(p.read_bytes()).hexdigest();write_json(folder/'observation.json',o)
+def target_value(d):return next(r for r in d['result']['values'] if base64.b64decode(r['key']).startswith(b'd'))
+def credit(d):
+ row=target_value(d);b=bytearray(base64.b64decode(row['value']));b[-16:]=(10000001).to_bytes(16,'little');row['value']=base64.b64encode(b).decode()
+def reserved(d):
+ row=next(r for r in d['result']['values'] if base64.b64decode(r['key'])==b'STATE');b=bytearray(base64.b64decode(row['value']));b[-48:-32]=(0).to_bytes(16,'little');row['value']=base64.b64encode(b).decode()
+def append_state(d):
+ row=next(r for r in d['result']['values'] if base64.b64decode(r['key'])==b'STATE');row['value']=base64.b64encode(base64.b64decode(row['value'])+b'\0').decode()
+def duplicate_receipt(d):d['result']['receipts_outcome'].append(copy.deepcopy(d['result']['receipts_outcome'][0]))
+PLANS=[
+ ('changed-rights','06-failed-before-target-state','response',credit),
+ ('dropped-reservation','17-allowed-before-target-state','response',reserved),
+ ('trailing-state-byte','17-allowed-before-target-state','response',append_state),
+ ('duplicate-storage-key','04-failed-before-token-state','response',lambda d:d['result']['values'].append(copy.deepcopy(d['result']['values'][0]))),
+ ('wrong-block','04-failed-before-token-state','response',lambda d:d['result'].update(block_hash='wrong')),
+ ('wrong-account','04-failed-before-token-state','request',lambda d:d['params'].update(account_id='wrong.testnet')),
+ ('wrong-code','03-failed-before-token-account','response',lambda d:d['result'].update(code_hash='wrong')),
+ ('rpc-error','03-failed-before-token-account','response',lambda d:d.update(error={'code':-1,'message':'failure'})),
+ ('rpc-result-error','03-failed-before-token-account','response',lambda d:d['result'].update(error='failure')),
+ ('nonfinal','23-allowed-tx','response',lambda d:d['result'].update(final_execution_status='EXECUTED')),
+ ('duplicate-receipt','23-allowed-tx','response',duplicate_receipt),
+ ('query-height-float','04-failed-before-token-state','response',lambda d:d['result'].update(block_height=float(d['result']['block_height']))),
+ ('header-height-float','02-original-block','response',lambda d:d['result']['header'].update(height=float(d['result']['header']['height']))),
+ ('transaction-gas-float','23-allowed-tx','response',lambda d:d['result']['transaction']['actions'][0]['FunctionCall'].update(gas=float(d['result']['transaction']['actions'][0]['FunctionCall']['gas']))),
+ ('request-id-drift','03-failed-before-token-account','response',lambda d:d.update(id='wrong')),
+ ('disallowed-method','03-failed-before-token-account','request',lambda d:d.update(method='send_tx')),
+]
+def evaluate(source):
+ api=runpy.run_path(str(source));baseline=api['verify'](ROOT,RECORDINGS);rows=[];scratch=ROOT/'lab';scratch.mkdir(exist_ok=True)
+ for name,target,kind,change in PLANS:
+  with tempfile.TemporaryDirectory(prefix='rpc-control-',dir=scratch) as temp:
+   folder=Path(temp).resolve();assert folder.is_relative_to(scratch.resolve())
+   for p in ROOT.iterdir():
+    if p.is_dir() and (p/'request.json').is_file():shutil.copytree(p,folder/p.name)
+   shutil.copyfile(ROOT/'EXPECTED-FROM-PUBLISHED.json',folder/'EXPECTED-FROM-PUBLISHED.json')
+   (mutate_response if kind=='response' else mutate_request)(folder/target,change)
+   try:api['verify'](folder,RECORDINGS);accepted=True;message=None
+   except (ValueError,KeyError,TypeError) as e:accepted=False;message=str(e)
+   rows.append({'id':name,'shouldReject':True,'rejected':not accepted,'error':message,'byteHashesResealed':True})
+ return {'atUtc':datetime.now(timezone.utc).isoformat(),'verifierSha256':sha256(source.read_bytes()).hexdigest(),'baselineCases':len(baseline['cases']),'controls':rows,'rejected':sum(r['rejected'] for r in rows),'total':len(rows),'meaning':'Same-author source-informed structural controls; resealed hashes test semantic bindings rather than integrity alone. No fresh network calls.'}
+if __name__=='__main__':
+ import argparse
+ p=argparse.ArgumentParser();p.add_argument('--source',type=Path,default=ROOT/'verify_raw.py');p.add_argument('--output',type=Path,required=True);a=p.parse_args();out=evaluate(a.source);need=not a.output.exists();assert need,'Preserve prior evaluation';write_json(a.output,out);print(json.dumps({'rejected':out['rejected'],'total':out['total'],'acceptedInvalid':[r['id'] for r in out['controls'] if not r['rejected']]}))
