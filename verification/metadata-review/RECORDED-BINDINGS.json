@@ -1,0 +1,198 @@
+[
+  {
+    "sample": "qwen-1.5b-task0-clean-unguarded",
+    "episode": "multi-task/qwen-1.5b/task0/clean/unguarded/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 33
+  },
+  {
+    "sample": "qwen-1.5b-task0-clean-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task0/clean/owner-bound/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 34
+  },
+  {
+    "sample": "qwen-1.5b-task3-clean-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task3/clean/owner-bound/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 35
+  },
+  {
+    "sample": "qwen-1.5b-task3-clean-unguarded",
+    "episode": "multi-task/qwen-1.5b/task3/clean/unguarded/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 36
+  },
+  {
+    "sample": "qwen-1.5b-task4-clean-unguarded",
+    "episode": "multi-task/qwen-1.5b/task4/clean/unguarded/seed83",
+    "authoritySha256": "7c0b21cbb2f7c3a4ad4d615347e781b64aff87c1dff0eb6a3ff39980460b1325",
+    "captureSha256": "e18f85d01a85e31b84c4688087a7ce507615c1dfdc4c63c738b63be9416d6695",
+    "frozenComparisonIndex": 37
+  },
+  {
+    "sample": "qwen-1.5b-task4-clean-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task4/clean/owner-bound/seed83",
+    "authoritySha256": "7c0b21cbb2f7c3a4ad4d615347e781b64aff87c1dff0eb6a3ff39980460b1325",
+    "captureSha256": "e18f85d01a85e31b84c4688087a7ce507615c1dfdc4c63c738b63be9416d6695",
+    "frozenComparisonIndex": 38
+  },
+  {
+    "sample": "qwen-1.5b-task15-clean-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task15/clean/owner-bound/seed83",
+    "authoritySha256": "df192dee72c44b37a0974ab4a2d53c69702fe4be9f5bb3395f0d867f03bd058a",
+    "captureSha256": "2ff054e66cbc6d063032102a1702d20362952691dea27c8825aa7f505ca1e5fb",
+    "frozenComparisonIndex": 39
+  },
+  {
+    "sample": "qwen-1.5b-task15-clean-unguarded",
+    "episode": "multi-task/qwen-1.5b/task15/clean/unguarded/seed83",
+    "authoritySha256": "ad347b6281e788a6ad7026ae9ec77efcafe8637343915bd3549f3bcf5f3099c1",
+    "captureSha256": "1b07d5c53c0023f1e6b36613bd5d8f65d9194e74f5b34cfc50cbb65b7967bbf0",
+    "frozenComparisonIndex": 40
+  },
+  {
+    "sample": "qwen-1.5b-task0-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task0/role-spoof/owner-bound/seed83",
+    "authoritySha256": "d8307f3dea83b0519267a8b65438ad24b8d97347f9c52e9680c33dd240aa530d",
+    "captureSha256": "3394ce34df2660b4749b9e9e36996a561947c616ad2ee490285de1d2463f1fd5",
+    "frozenComparisonIndex": 41
+  },
+  {
+    "sample": "qwen-1.5b-task0-role-spoof-unguarded",
+    "episode": "multi-task/qwen-1.5b/task0/role-spoof/unguarded/seed83",
+    "authoritySha256": "c9ca0074630a7c3c6cdc89d55d1b2646eefdd0a1af83b31ecae79a4f6f324015",
+    "captureSha256": "6dca517275e1275b74a4ac737844f04e1c0fff0f83a9010df7c4e821b7ab60fe",
+    "frozenComparisonIndex": 42
+  },
+  {
+    "sample": "qwen-1.5b-task3-role-spoof-unguarded",
+    "episode": "multi-task/qwen-1.5b/task3/role-spoof/unguarded/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 43
+  },
+  {
+    "sample": "qwen-1.5b-task3-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task3/role-spoof/owner-bound/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 44
+  },
+  {
+    "sample": "qwen-1.5b-task4-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task4/role-spoof/owner-bound/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 45
+  },
+  {
+    "sample": "qwen-1.5b-task4-role-spoof-unguarded",
+    "episode": "multi-task/qwen-1.5b/task4/role-spoof/unguarded/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 46
+  },
+  {
+    "sample": "qwen-1.5b-task15-role-spoof-unguarded",
+    "episode": "multi-task/qwen-1.5b/task15/role-spoof/unguarded/seed83",
+    "authoritySha256": "70dfa003475e828b9144f1952b237ce815c030ca4b5dd803213fdd391a1272f6",
+    "captureSha256": "f9b6843336dccda8a16aa4749f35bdecd7fc093441a854628d3c48ff1d1d89ba",
+    "frozenComparisonIndex": 47
+  },
+  {
+    "sample": "qwen-1.5b-task15-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-1.5b/task15/role-spoof/owner-bound/seed83",
+    "authoritySha256": "df192dee72c44b37a0974ab4a2d53c69702fe4be9f5bb3395f0d867f03bd058a",
+    "captureSha256": "2ff054e66cbc6d063032102a1702d20362952691dea27c8825aa7f505ca1e5fb",
+    "frozenComparisonIndex": 48
+  },
+  {
+    "sample": "qwen-0.5b-task0-clean-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task0/clean/owner-bound/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 49
+  },
+  {
+    "sample": "qwen-0.5b-task0-clean-unguarded",
+    "episode": "multi-task/qwen-0.5b/task0/clean/unguarded/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 50
+  },
+  {
+    "sample": "qwen-0.5b-task3-clean-unguarded",
+    "episode": "multi-task/qwen-0.5b/task3/clean/unguarded/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 51
+  },
+  {
+    "sample": "qwen-0.5b-task3-clean-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task3/clean/owner-bound/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 52
+  },
+  {
+    "sample": "qwen-0.5b-task4-clean-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task4/clean/owner-bound/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 53
+  },
+  {
+    "sample": "qwen-0.5b-task4-clean-unguarded",
+    "episode": "multi-task/qwen-0.5b/task4/clean/unguarded/seed83",
+    "authoritySha256": "5448d3ac9e2cc555bb5a1db575378e14d01d8041a951e550cdd15ee1048115cd",
+    "captureSha256": "7d5d2258a089e70f3329b1c945a2ac953c003b8969ec03382cce9b7e4519d46c",
+    "frozenComparisonIndex": 54
+  },
+  {
+    "sample": "qwen-0.5b-task15-clean-unguarded",
+    "episode": "multi-task/qwen-0.5b/task15/clean/unguarded/seed83",
+    "authoritySha256": "0ffbeacbd900c6610dc39be282cc8ef461a3f19fac7447a442f97980bf6cece5",
+    "captureSha256": "535eff424d5a6b0b6ca061453ff561523a557b653bdbb412f199bbb535f4113e",
+    "frozenComparisonIndex": 55
+  },
+  {
+    "sample": "qwen-0.5b-task15-clean-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task15/clean/owner-bound/seed83",
+    "authoritySha256": "0ffbeacbd900c6610dc39be282cc8ef461a3f19fac7447a442f97980bf6cece5",
+    "captureSha256": "535eff424d5a6b0b6ca061453ff561523a557b653bdbb412f199bbb535f4113e",
+    "frozenComparisonIndex": 56
+  },
+  {
+    "sample": "qwen-0.5b-task0-role-spoof-unguarded",
+    "episode": "multi-task/qwen-0.5b/task0/role-spoof/unguarded/seed83",
+    "authoritySha256": "10f03eb9525e98257cbd3689d82cae4f791c6c07a24ef127ee57ffcad2b2e8b3",
+    "captureSha256": "f9661d35650cb1b9c19d543b5d6f41b993b2589fbed70148e380144ca7b3b6de",
+    "frozenComparisonIndex": 57
+  },
+  {
+    "sample": "qwen-0.5b-task0-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task0/role-spoof/owner-bound/seed83",
+    "authoritySha256": "10f03eb9525e98257cbd3689d82cae4f791c6c07a24ef127ee57ffcad2b2e8b3",
+    "captureSha256": "f9661d35650cb1b9c19d543b5d6f41b993b2589fbed70148e380144ca7b3b6de",
+    "frozenComparisonIndex": 58
+  },
+  {
+    "sample": "qwen-0.5b-task3-role-spoof-owner-bound",
+    "episode": "multi-task/qwen-0.5b/task3/role-spoof/owner-bound/seed83",
+    "authoritySha256": "a2f6b9a731bf6f4717de5bfe7ebc4202093a351abdec9992082c4a9f73203e54",
+    "captureSha256": "16dc8f7362fcb5af5fb7f93e87e12d8bd49f02586ee581f091d6e7ca9696f657",
+    "frozenComparisonIndex": 59
+  },
+  {
+    "sample": "qwen-0.5b-task3-role-spoof-unguarded",
+    "episode": "multi-task/qwen-0.5b/task3/role-spoof/unguarded/seed83",
+    "authoritySha256": "2b0c9856e277e8a903714ef5c8706390aa76aa833eaf5aced85621315e253fb4",
+    "captureSha256": "a9d2ae92b1e3bc6456e7ec21bf6312a3b8ab15e387a4b3c0d2864e29d2c13b9c",
+    "frozenComparisonIndex": 60
+  }
+]

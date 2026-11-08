@@ -1,0 +1,73 @@
+{
+  "atUtc": "2026-11-08T16:56:46.175461+00:00",
+  "verified": true,
+  "stage": "private-successor-ready-for-release-integration-not-published",
+  "sourceSha256": "69d624359270cda6b1838fc549e7a8cbb18507800f7874811c4134ae70d6b703",
+  "sourceBytes": 14790,
+  "reportFormat": "agent-crash-lab/banking-metadata-review-v2",
+  "baselineSemanticFailures": [
+    "UTF16-capture-must-not-be-sniffed",
+    "UTF16-authority-must-not-be-sniffed",
+    "int63-identities-survive-JS-wire",
+    "empty-field-requirement-still-needs-row",
+    "invalid-Unicode-id-retains-known-breach"
+  ],
+  "baselinePostJsReportMismatches": [
+    {
+      "case": "int63-identities-survive-JS-wire",
+      "path": [
+        "report",
+        "known_forbidden_transitions",
+        0,
+        "scheduled_id"
+      ],
+      "expectedPythonInteger": "9223372036854775807",
+      "observedJsInteger": "9223372036854776000"
+    }
+  ],
+  "candidateSemanticChecks": 105,
+  "wholeValidReportsMatchedNativeWasm": 94,
+  "controlledInputErrorsMatchedByClass": 11,
+  "newWasmPython": "3.13.2",
+  "nativePython": "3.14.7",
+  "pyodide": "0.29.5",
+  "nativeSeparateProcessResultsMatched": 105,
+  "uiWholeReportsMatched": 7,
+  "fileImportRejections": 7,
+  "validExactImportMatched": 1,
+  "nativeSourceInformedOriginalTaskMetadataControls": 17,
+  "originalTask16MetadataStillMatched": 16,
+  "nodeResponseRejections": 22,
+  "nodeEnvelopeRejections": 11,
+  "cancelLateFetchBeforeAfter": {
+    "beforeWorkers": 1,
+    "afterWorkers": 0,
+    "nodeDomAndWorkerDoubles": true,
+    "actualBrowserCancelAndSubsequentRecovery": true
+  },
+  "sealedFilesUnchanged": [
+    {
+      "index": "NATIVE-SNAPSHOT-INDEX.json",
+      "files": 1346,
+      "sha256": "69e8533fc49f59d1a8bcdc45f7dbc23c217e017bd4e587a685561afd4aa074de"
+    },
+    {
+      "index": "RESULT-INDEX.json",
+      "files": 287,
+      "sha256": "0c67e8bf73ba4bfa98d518355fe1b518f902ef59c14fd492fcb8758f4ad8a9ea"
+    }
+  ],
+  "publicFinalProductFilesUnchanged": 1283,
+  "publicFinalVersion": "v0.17.1",
+  "newModelSdkChainOrWalletCalls": 0,
+  "independentBlindEvaluation": false,
+  "newPublicRelease": false,
+  "limits": [
+    "Same-source portability is not independent semantic truth; baseline also had105matching runtime results despite5incorrect boundary expectations.",
+    "Response contract checks typed shape, original input/source binding and gate coherence, not arbitrary underlying transitions independently.",
+    "Original16-task reports compared after explicitly declared report-v2 ID/provenance wire migration, not claimed byte-identical old reports.",
+    "No fresh original task functions, models, SDK, contracts, RPC, chain consensus or bank executed here.",
+    "A first browser cancellation click arrived after completion and found a hidden control; it was not counted. One bounded fresh attempt observed actual cancellation; controlled late-fetch proof is a separate Node test.",
+    "CLI/release inventory/docs integration, broader NEAR contract-Wasm execution and independent external evaluation remain before stronger product claims."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "stage": "Private successor candidate. Do not alter final public v0.17.1 or sealed research.",
+  "beforeFixExpectations": [
+    "Only strict UTF8 wire bytes accepted; Python JSON automatic UTF16/UTF32 sniffing must not widen the profile",
+    "Report identities up to 2^63-1 survive a JSON/JavaScript boundary exactly, represented as bounded decimal strings",
+    "A scheduled-state requirement with empty field selection still requires the specified row to exist",
+    "A non-scalar transition identity leaves evidence incomplete, while its usable forbidden before/after change remains known",
+    "Exact inner authority/capture text and high precision numeric tokens survive bundle transport without JS parse-and-repack"
+  ],
+  "verification": [
+    "First preserve and execute baseline vectors, retaining observed boundary failures",
+    "Copy and port current candidate only; native and actual browser Pyodide0.29.5 whole report objects must match",
+    "Strict browser response binding, shapes, exact IDs and gate coherence; no claim of an independent semantic oracle",
+    "Preserve all61 typed-data controls and34 existing semantic controls, two valid bundle reports and two malformed envelopes",
+    "No model/SDK/contractWasm/chain/wallet or paid API execution"
+  ],
+  "independence": "Same-author development checks, source-informed external original typed fixture data. Not blind evaluation or population accuracy. Python compiled to Wasm is not NEAR contract-Wasm execution."
+}

@@ -1,0 +1,508 @@
+{
+  "originalIndexSha256": "0c67e8bf73ba4bfa98d518355fe1b518f902ef59c14fd492fcb8758f4ad8a9ea",
+  "originalRegistrationSha256": "c7caaf5810e3996e22c16bfda0d52ca5a9b91f77624ba694f46316277aa60fd6",
+  "sourceRevision": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+  "selected": {
+    "AUDIT.post-lock.json": {
+      "bytes": 156786,
+      "sha256": "0976ba0978c9154cc10f39d8556d20acbfc1dde7a4c77411ba82170dfd418992"
+    },
+    "CASES.csv": {
+      "bytes": 6107,
+      "sha256": "b4d8e65084778d49701fb3f2470c99ca3dc94f74e967201c3ac3363c534f5240"
+    },
+    "INTEGRITY.post-lock.json": {
+      "bytes": 1001,
+      "sha256": "e7655cb02de05082d17eb009cc7d3c79f27f4d1448d152e1d2d59f1540f883bd"
+    },
+    "LOCK.json": {
+      "bytes": 12953,
+      "sha256": "20ec663eb3fce1446c3d44930cd99b8f8b081c7d1c5b813fa9fa597140b3cae6"
+    },
+    "METHOD-NOTES.post-lock.json": {
+      "bytes": 4514,
+      "sha256": "0db3d1c41c2d3d9a5ec3900eb9222a590b08ff0442f442baeeea5ceb5d7af9f6"
+    },
+    "REGISTRATION.json": {
+      "bytes": 11235,
+      "sha256": "c7caaf5810e3996e22c16bfda0d52ca5a9b91f77624ba694f46316277aa60fd6"
+    },
+    "REJECTION-REVIEW.post-lock.json": {
+      "bytes": 2153,
+      "sha256": "7efbad82763d46316611b88ee620a1ef7d8e34f153bd62579392fcd313cd0058"
+    },
+    "REPRODUCTION.post-lock.json": {
+      "bytes": 2057,
+      "sha256": "9f65cee27ac6a4c6aaa319e444e3cb4b92084f4b8d87c77722a856e3df8d95c8"
+    },
+    "RESULT-INDEX.json": {
+      "bytes": 47657,
+      "sha256": "0c67e8bf73ba4bfa98d518355fe1b518f902ef59c14fd492fcb8758f4ad8a9ea"
+    },
+    "RESULT.json": {
+      "bytes": 33180,
+      "sha256": "0c713e37420a42a4102240b69712754877e5d777611575086838ec67de3b1db7"
+    },
+    "SERVER-REQUEST-CHECK.post-lock.json": {
+      "bytes": 4319,
+      "sha256": "276b27e513a1349b1b17145029475a5a0db3ae990fb21a82906170c907c9cdbd"
+    },
+    "SOURCE-INDEX.json": {
+      "bytes": 13847,
+      "sha256": "fcd52ef723879862d409e4d8157adee2e68cf397c5cf2d1ad29c37e8d71f62e4"
+    },
+    "SPEC.preparation.json": {
+      "bytes": 52807,
+      "sha256": "390ed6dc074211887b5b183daf582ca55f3d51bb71446d6a7316a7efa832aaaa"
+    },
+    "SYSTEM.txt": {
+      "bytes": 5544,
+      "sha256": "7498e9e6f82a5aeb11b1fceac9ad590cfe037b63f9e02d549ac48906d49b6afe"
+    },
+    "actor.py": {
+      "bytes": 10758,
+      "sha256": "5edbf07e8f230725e915678ed4bac935e9e52fbec8428c33754f1b0ce7f05a7e"
+    },
+    "actual/calls.json": {
+      "bytes": 10039758,
+      "sha256": "a0261954b70b4018144434711b7ff219eab54dddbdff9b2edc0aa5aff9a9f841"
+    },
+    "actual/episodes.json": {
+      "bytes": 1955350,
+      "sha256": "c172fcec2b1f9b84ec57739df769e8d81780631951cf95f282941391671925af"
+    },
+    "actual/execution.json": {
+      "bytes": 441,
+      "sha256": "ac47352b5148b4247dbf79ef442073ed831f6ea5a6bc6475105e69f535e8992f"
+    },
+    "actual/sdk-wire.json": {
+      "bytes": 81671,
+      "sha256": "8023a9ee49b5e37336eecc3cdca5a60625a8924e6678530255ffcd2d3fad3fa9"
+    },
+    "actual/statuses.json": {
+      "bytes": 7994,
+      "sha256": "055fb1e508e4182ec5736446ae774a0c951c600af22499f7bd23116efcd63f86"
+    },
+    "audit-preflight-attempt-1/audit.py": {
+      "bytes": 12151,
+      "sha256": "96b80160a1ba3a500e3a8443513a1c7f55a112ea3e4028cc3dccd9169802d144"
+    },
+    "audit-preflight-attempt-1/test_audit.py": {
+      "bytes": 2127,
+      "sha256": "724c4c1d79b5acd04e2c1b0d6ba4ebe0b69aa9824e3ba6f8dafe3a14c5697607"
+    },
+    "audit.py": {
+      "bytes": 12248,
+      "sha256": "f68a05820bedeee1f17493403dddf16483fd07c6577da958e8ae546232c3336a"
+    },
+    "bank_server.py": {
+      "bytes": 10480,
+      "sha256": "e5f170f43e22d4d831ed819c61917dd16f2502067024b825495f1c14f53fef5b"
+    },
+    "build_spec.py": {
+      "bytes": 6641,
+      "sha256": "ea1479c745ef6a5dde800a0e5dbff64b4f2e29f364597da5aa557467980e8a1a"
+    },
+    "controls.py": {
+      "bytes": 10336,
+      "sha256": "13495ce9b7db420de78677d12bfbc26afdc932cd96063a476079e5637cedc9a8"
+    },
+    "driver.py": {
+      "bytes": 6919,
+      "sha256": "bdbf4b820f3c514c514e996d9c62df7c83d8395fd43feb0c8c95568d84baeeb2"
+    },
+    "grade.py": {
+      "bytes": 9176,
+      "sha256": "0890c17f4b4ecd25e12daa0777acd6346a0ec33c5a61e45f2996595960b1e2ec"
+    },
+    "inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "model_client.py": {
+      "bytes": 3559,
+      "sha256": "758059b4e34a6e5a37b6d89b90640f122755d9db70ecdb41cc60f37bd76fffff"
+    },
+    "model_http.py": {
+      "bytes": 1797,
+      "sha256": "3deae6de1876f182647ef9ec4f98cdc3855b06ec0bb9cde0bee07023035e981a"
+    },
+    "model_supervisor.py": {
+      "bytes": 2951,
+      "sha256": "a8ee0a7d4afc16dcfe82ac64a40549fbfa40402702d4b36a41c244c5dffb8361"
+    },
+    "original_loader.py": {
+      "bytes": 5551,
+      "sha256": "35c723a687c02708418fa9e209cdc7165c62e935e827a3c0f54c1baccb0839ed"
+    },
+    "preflight-attempt-1/source-before-fix/bank_server.py": {
+      "bytes": 10480,
+      "sha256": "e5f170f43e22d4d831ed819c61917dd16f2502067024b825495f1c14f53fef5b"
+    },
+    "preflight-attempt-1/source-before-fix/controls.py": {
+      "bytes": 10336,
+      "sha256": "37105b43424884cb310fca0ace5e044e4b7819e79358a26e068970fd82bbe3a8"
+    },
+    "preflight-attempt-1/source-before-fix/driver.py": {
+      "bytes": 6610,
+      "sha256": "1cdba7690b0c748ae30d86a8377324568353e003efc1f14e745c612a045668a3"
+    },
+    "preflight-attempt-1/source-before-fix/grade.py": {
+      "bytes": 9176,
+      "sha256": "0890c17f4b4ecd25e12daa0777acd6346a0ec33c5a61e45f2996595960b1e2ec"
+    },
+    "preflight-attempt-1/source-before-fix/protocol.py": {
+      "bytes": 4020,
+      "sha256": "b7b1dbe332ee6004336b20656d871717db52adfa2a722e2b84c10fee90e4d327"
+    },
+    "preflight-attempt-1/source-before-fix/sdk_bridge.py": {
+      "bytes": 2785,
+      "sha256": "77d0fcc3d12bc1df25810f4be55003457773aac29e2f56c423bf6b44c818a999"
+    },
+    "prepare_sources.py": {
+      "bytes": 4211,
+      "sha256": "beafdb2202c1a97394ad6288f0ac6c7207e8ed9a8de3822df7352b828f8749c1"
+    },
+    "protocol.py": {
+      "bytes": 4020,
+      "sha256": "b7b1dbe332ee6004336b20656d871717db52adfa2a722e2b84c10fee90e4d327"
+    },
+    "readiness.py": {
+      "bytes": 2836,
+      "sha256": "7cf37aade9a3df71c36ccb91b47146aab93270681561b87e4a8aeda12c104a73"
+    },
+    "register.py": {
+      "bytes": 6898,
+      "sha256": "96e0b825920ed8eddd8d8a68289847d831ccf0c0966fdfdf6cf4481f8b6923de"
+    },
+    "sdk_bridge.py": {
+      "bytes": 3151,
+      "sha256": "f25de585e5e846c11ebfb1d28c146265e2ae4678761092d448bb1cc7d8ce5572"
+    },
+    "stage_runtime.py": {
+      "bytes": 2751,
+      "sha256": "99793e560649ddf6554ede815326accffb03da2e1eb89a5ed882295a0eb95d36"
+    },
+    "test_audit.py": {
+      "bytes": 2127,
+      "sha256": "724c4c1d79b5acd04e2c1b0d6ba4ebe0b69aa9824e3ba6f8dafe3a14c5697607"
+    },
+    "upstream/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "upstream/src/agentdojo/agent_pipeline/base_pipeline_element.py": {
+      "bytes": 1318,
+      "sha256": "b15f0eb72a286fdfd26f45a3ac587fd4f44063c2a49ed017d580f5f3f0d1fc34"
+    },
+    "upstream/src/agentdojo/agent_pipeline/errors.py": {
+      "bytes": 870,
+      "sha256": "1a828a45524b0e64c3e4abdab342fba721581134b7808dd00f02fa5bc5ca52e1"
+    },
+    "upstream/src/agentdojo/agent_pipeline/ground_truth_pipeline.py": {
+      "bytes": 2421,
+      "sha256": "acfb119e091589beafc53e98e8371088014d703c4e3f227c09732a86596ad194"
+    },
+    "upstream/src/agentdojo/agent_pipeline/tool_execution.py": {
+      "bytes": 6624,
+      "sha256": "96842ef579714cdc7f854bc13d4bca2be0c27897abc29dad2e1ba33ce3b11bdc"
+    },
+    "upstream/src/agentdojo/base_tasks.py": {
+      "bytes": 6880,
+      "sha256": "08d3a4646d1a250968045b0f933803335650a4ed04c9d2387b17d08b1e0427c5"
+    },
+    "upstream/src/agentdojo/data/suites/banking/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "upstream/src/agentdojo/data/suites/banking/injection_vectors.yaml": {
+      "bytes": 657,
+      "sha256": "4eb98a601c108d9b4d88f5d3f2dbf455f775a718975a0ae2624b4cf0d0f6f819"
+    },
+    "upstream/src/agentdojo/default_suites/v1/banking/injection_tasks.py": {
+      "bytes": 15309,
+      "sha256": "fa2dedf8e66c95ffadb54f5a26648728b08c56f302858de4ee9a5cc0b3891618"
+    },
+    "upstream/src/agentdojo/default_suites/v1/banking/task_suite.py": {
+      "bytes": 1093,
+      "sha256": "c58ec73db16f713a16aaec787dac45856e546f4d95be84ab6a4bed9bc12613b6"
+    },
+    "upstream/src/agentdojo/default_suites/v1/banking/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "upstream/src/agentdojo/default_suites/v1/tools/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "upstream/src/agentdojo/default_suites/v1/tools/file_reader.py": {
+      "bytes": 435,
+      "sha256": "09438864a1e1ac6564df3e4f7eb60a9a224de2ef8a92c4eb4899f7768ce49d6d"
+    },
+    "upstream/src/agentdojo/default_suites/v1/tools/user_account.py": {
+      "bytes": 1978,
+      "sha256": "f097c4b2b6cd6784272987d8d37dd7cc5d599620d64b371f7c2af8e65d7ad673"
+    },
+    "upstream/src/agentdojo/default_suites/v1_1_1/banking/user_tasks.py": {
+      "bytes": 2751,
+      "sha256": "d7858d3f9a573fcc334d19d4aa63ba92867cd8d5b99e2d102f7c60840fd42b81"
+    },
+    "upstream/src/agentdojo/default_suites/v1_2/banking/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "upstream/src/agentdojo/default_suites/v1_2_2/banking/user_tasks.py": {
+      "bytes": 1945,
+      "sha256": "f3b8417c51b7fe33c0f85571d543a64811f6ef3e4ab9c7ae9568834db66064b2"
+    },
+    "upstream/src/agentdojo/functions_runtime.py": {
+      "bytes": 12627,
+      "sha256": "3c67f71eb8a7f15d2a15fe9595d84218c5e6868d95fd71d1cef679cd2192d0f7"
+    },
+    "upstream/src/agentdojo/task_suite/load_suites.py": {
+      "bytes": 3143,
+      "sha256": "e9c97813ed8295f25526733df044e9adf8ba18567eaeec3455591c4fbc1caa12"
+    },
+    "upstream/src/agentdojo/task_suite/task_suite.py": {
+      "bytes": 19818,
+      "sha256": "2e69da06f7e150dd6d238c53a74845b56eebeb224e07f694e1051a6e0c6a2bc1"
+    },
+    "upstream/src/agentdojo/types.py": {
+      "bytes": 3490,
+      "sha256": "207b688794d5e214099c00b0dff3a03429f8f3632fcbbdafeac291dc190fbfca"
+    },
+    "upstream/src/agentdojo/yaml_loader.py": {
+      "bytes": 2597,
+      "sha256": "73443ec93c140dd2365d1c093f983729dca25075ee39e99047fa6c3d22ad9194"
+    },
+    "verify_sdk_sources.py": {
+      "bytes": 1535,
+      "sha256": "67e44595c05e4bc66641aff917efc858b80a78f125bce89130eb5da7db4007fc"
+    }
+  },
+  "notIncluded": {
+    "AUDIT-FIRST.stderr.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "AUDIT-FIRST.stdout.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "AUDIT-PREFLIGHT.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "BUILD.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "EXPLANATIONS-2026-11-08T152556838026-0000.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "EXPLANATIONS-2026-11-08T153631742529-0000.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "HOUSEKEEPING-FAILURE.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "INTERIM-EPISODE-CHECK-2.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "INTERIM-EPISODE-CHECK-3.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "INTERIM-EPISODE-CHECK.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "LIVE-CHECK.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "PAIRS-2026-11-08T152852854367-0000.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "PAIRS-2026-11-08T153729973399-0000.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "PAIRS-2026-11-08T161559016553-0000.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "PROCESS-ARCHIVE.post-lock.zip": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "PROCESS-CLEANUP.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "RESOURCES.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "RESULT.fa.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "STAGING.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/bank.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/groups.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/qwen-0.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/qwen-1.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/run.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/sdk-postcheck.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/sdk-precheck.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "actual/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "audit-preflight-attempt-1/failure.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "collect_processes.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "compare_pairs.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "explain_observations.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T151547895558Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T151648564035Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T152333589213Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T152409520112Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T153319376161Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T153632114493Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T153735378276Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T153917828743Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T154533796883Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T155442475486Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T155909412608Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T160106951585Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observations.post-lock/20261108T160331912154Z.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "observe.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/context.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/episodes.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/invalid-requests.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/sdk-wire.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-1/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/context.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/episodes.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/failed-prefetch.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/invalid-request-state.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/invalid-requests.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/sdk-wire.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "preflight-attempt-2/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/CLEANUP.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-0-5b/process.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-0-5b/runtime.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-0-5b/stopped.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-1-5b/process.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-1-5b/runtime.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/actual-qwen-1-5b/stopped.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-0-5b/process.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-0-5b/runtime.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-0-5b/stopped.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-1-5b/process.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-1-5b/runtime.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "process-evidence.post-lock/readiness-1-qwen-1-5b/stopped.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "readiness-attempt-1/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "readiness-attempt-1/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "readiness-attempt-1/qwen-0.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "readiness-attempt-1/qwen-1.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "readiness-attempt-1/results.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduce.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/AUDIT-PREFLIGHT.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/AUDIT.post-lock.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/BUILD.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/LOCK.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/REGISTRATION.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/RESOURCES.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/SOURCE-INDEX.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/SPEC.preparation.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/STAGING.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/SYSTEM.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actor.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/bank.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/calls.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/episodes.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/execution.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/groups.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/qwen-0.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/qwen-1.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/run.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/sdk-postcheck.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/sdk-precheck.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/sdk-wire.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/actual/statuses.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/audit-preflight-attempt-1/audit.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/audit-preflight-attempt-1/failure.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/audit-preflight-attempt-1/test_audit.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/audit.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/bank_server.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/build_spec.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/controls.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/driver.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/grade.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/inspector/token_policy.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/inspector/token_review.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/model_client.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/model_http.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/model_supervisor.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/original_loader.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/context.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/episodes.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/invalid-requests.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/sdk-wire.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/bank_server.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/controls.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/driver.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/grade.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/protocol.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-1/source-before-fix/sdk_bridge.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/context.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/episodes.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/failed-prefetch.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/invalid-request-state.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/invalid-requests.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/sdk-wire.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/preflight-attempt-2/sdk.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/prepare_sources.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/protocol.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness-attempt-1/SUMMARY.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness-attempt-1/errors.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness-attempt-1/qwen-0.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness-attempt-1/qwen-1.5b-supervisor.log": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness-attempt-1/results.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/readiness.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/register.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/sdk-source-inventory.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/sdk_bridge.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/stage_runtime.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/stderr.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/stdout.txt": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/test_audit.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/LICENSE": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/agent_pipeline/base_pipeline_element.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/agent_pipeline/errors.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/agent_pipeline/ground_truth_pipeline.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/agent_pipeline/tool_execution.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/base_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/data/suites/banking/environment.yaml": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/data/suites/banking/injection_vectors.yaml": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/banking/injection_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/banking/task_suite.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/banking/user_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/tools/banking_client.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/tools/file_reader.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1/tools/user_account.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1_1_1/banking/user_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1_2/banking/injection_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/default_suites/v1_2_2/banking/user_tasks.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/functions_runtime.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/task_suite/load_suites.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/task_suite/task_suite.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/types.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/upstream/src/agentdojo/yaml_loader.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/__init__.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/attrdoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/common.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/epydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/google.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/numpydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/parser.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/rest.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/__init__.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/_pydoctor.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_epydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_google.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_numpydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_parse_from_object.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_parser.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_rest.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/tests/test_util.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/vendor/docstring_parser/util.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "reproduction.post-lock/verify_sdk_sources.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "sdk-source-inventory.json": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "summarize.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "test_actual_integrity.post-lock.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/__init__.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/attrdoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/common.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/epydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/google.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/numpydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/parser.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/rest.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/__init__.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/_pydoctor.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_epydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_google.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_numpydoc.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_parse_from_object.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_parser.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_rest.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/tests/test_util.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted.",
+    "vendor/docstring_parser/util.py": "Private resource/process/dependency/preflight/reproduction metadata; hash remains in original index. Not claimed included or reexecuted."
+  },
+  "scope": "Selected original raw study records and source; no complete fresh model/typed-runtime/SDK reproduction is claimed by the stdlib inspector."
+}

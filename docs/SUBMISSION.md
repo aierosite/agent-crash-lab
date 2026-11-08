@@ -47,3 +47,12 @@ production audit or general guarantee of agent safety.
 See [README](../README.md), [architecture](ARCHITECTURE.md),
 [recorded-agent methods](RECORDED_AGENTS.md), [SDK conformance](SDK_CONFORMANCE.md)
 and [prior-art comparison](COMPETITIVE_REVIEW.md) for exact evidence boundaries.
+
+
+## Successor release v0.18.0
+
+The original final v0.17.1 tag and application remain unchanged. v0.18.0 adds a
+separate change-authority view with the registered multi-task study's full
+coverage and preserved negative outcomes. It is a code/demo successor, not a
+duplicate hackathon application or another wallet correction request. The
+existing organizer-reviewed request is not treated as proof of applied changes.

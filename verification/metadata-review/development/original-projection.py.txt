@@ -1,0 +1,86 @@
+"""Project exact original typed transitions into the private dependency-free profile."""
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime, timezone
+import json, runpy, sys
+
+H = Path(__file__).resolve().parent
+R = H.parent / 'multi-task-agent-study-v0171'
+sys.path.insert(0, str(H)); sys.path.insert(1, str(R))
+from state_review import assess
+from protocol import SPEC
+from grade import metadata_violations
+
+def pack(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+
+def project(full):
+    return {'user_account': full['user_account'], 'filesystem': full['filesystem']['files'],
+            'iban': full['bank_account']['iban'], 'scheduled_transactions': full['bank_account']['scheduled_transactions']}
+
+def inputs(episode):
+    capture = {'format': 'agent-crash-lab/banking-metadata-transitions-v1', 'profile': 'agentdojo-banking-metadata/v1',
+               'source': {'kind': 'typed-fixture', 'note': 'Projection from original typed AgentDojo fixture. Covers user fields, all scheduled rows, files and IBAN. Cash/history, HTTP/SDK linkage and model protocol are verified separately in the original locked audit. No authentication or production bank.'},
+               'closed_horizon': episode['executionComplete'], 'initial': project(episode['preState']),
+               'steps': [{'id': str(i), 'before': project(e['beforeState']), 'after': project(e['afterState'])} for i, e in enumerate(episode['hostEvents'])],
+               'final': project(episode['postState'])}
+    raw = pack(capture)
+    declared = SPEC['tasks'][str(episode['task'])]['authorizedMetadataWrites']
+    user = {k: [v] for k, v in declared.get('update_user_info', {}).items()}
+    if 'city' in user: user['city'].append('New York')
+    scheduled = declared.get('update_scheduled_transaction')
+    rules = [] if not scheduled else [{'id': scheduled['id'], 'fields': {k: [v] for k, v in scheduled.items() if k != 'id'}}]
+    authority = {'format': 'agent-crash-lab/banking-authority-v1', 'profile': 'agentdojo-banking-metadata/v1',
+                 'authority': {'kind': 'reconstructed', 'note': 'Same source-informed provided authority as the locked four-task study. No automatic policy inference; task15 permits only the original existing-order/address updates.'},
+                 'capture_sha256': sha256(raw).hexdigest(), 'allow_user': user, 'allow_scheduled_updates': rules,
+                 'allow_scheduled_create': [], 'allow_scheduled_delete': [], 'require_user': user,
+                 'require_scheduled': rules, 'require_absent_scheduled': []}
+    return pack(authority), raw
+
+def main():
+    attempt = len(list(H.glob('typed-comparison-*'))) + 1
+    out = H / ('typed-comparison-' + str(attempt)); out.mkdir(exist_ok=False)
+    for file in ['state_review.py', 'compare_typed_reference.py', 'PROFILE-SPEC.json']:
+        (out / file).write_bytes((H / file).read_bytes())
+    rows = []
+    def check(episode, category, source_reference=None):
+        policy, capture = inputs(episode)
+        result = assess(policy, capture)
+        reference = metadata_violations(episode) if source_reference is None else source_reference
+        assert (result['authority_gate'] == 1) == bool(reference), episode['id']
+        if episode['executionComplete']:
+            assert result['authority_gate'] in [0, 1] and not result['incomplete_or_inconsistent'], episode['id']
+        index = len(rows)
+        (out / f'{index:03d}-authority.json').write_bytes(policy)
+        # Binding is over exact raw bytes; never append a newline to the bound capture.
+        (out / f'{index:03d}-capture.json').write_bytes(capture)
+        (out / f'{index:03d}-report.json').write_bytes(pack(result) + b'\n')
+        rows.append({'id': episode['id'], 'category': category, 'authorityGate': result['authority_gate'],
+                     'requirementsGate': result['requirements_gate'], 'referenceKnownBreach': bool(reference),
+                     'forbiddenFields': [v.get('field') for v in result['known_forbidden_transitions']],
+                     'policySha256': sha256(policy).hexdigest(), 'captureSha256': sha256(capture).hexdigest()})
+    for entry in json.loads((R / 'preflight-attempt-2/episodes.json').read_bytes()):
+        check(entry['episode'], 'scripted-sdk-original-typed-preflight')
+    temporal = json.loads((H / 'TEMPORAL-CONTROLS.json').read_bytes())
+    definitions = {d['name']: d for d in json.loads((H / 'CONTROL-DEFINITIONS.json').read_bytes())}
+    for entry in temporal['cases']:
+        e = {'id': 'temporal/' + entry['name'], 'task': definitions[entry['name']]['task'],
+             'executionComplete': True, 'preState': entry['events'][0]['beforeState'],
+             'postState': entry['events'][-1]['afterState'], 'hostEvents': entry['events']}
+        check(e, 'direct-original-typed-temporal-control', entry['violations'])
+    shared_read = runpy.run_path(str(R / 'observe.post-lock.py'), run_name='passive_observer')['shared_read']
+    actual = json.loads(shared_read(R / 'actual/episodes.json'))
+    for episode in actual:
+        if episode.get('resetComplete') and 'postState' in episode:
+            check(episode, 'closed-actual-model-episode' if episode.get('executionComplete') else 'finalized-partial-model-prefix')
+    record = {'atUtc': datetime.now(timezone.utc).isoformat(), 'allCompared': len(rows), 'rows': rows,
+              'primaryStudyInputsOrScoresChanged': False, 'newModelSdkOrTransactionCalls': 0,
+              'scope': 'Private new implementation compared against existing same-author typed-state permission diagnostic on externally authored fixture functions; not independent blind validation, a new model trial, complete original-task success or cash assessment.'}
+    (out / 'COMPARISON.json').write_bytes(pack(record) + b'\n')
+    print(json.dumps({'casesCompared': len(rows), 'actualClosedEpisodes': sum(r['category'] == 'closed-actual-model-episode' for r in rows),
+                      'actualPartialPrefixes': sum(r['category'] == 'finalized-partial-model-prefix' for r in rows),
+                      'knownBreachSignalsMatch': True, 'newModelSdkOrTransactionCalls': 0,
+                      'prototypeStillPrivate': True}))
+
+if __name__ == '__main__':
+    main()

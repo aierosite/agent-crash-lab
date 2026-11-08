@@ -1,0 +1,29 @@
+'use strict';
+const ui=id=>document.getElementById(id);let config,worker,pending,timer,sequence=0,report;
+const digest=async b=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',b))].map(x=>x.toString(16).padStart(2,'0')).join('');
+function busy(value,message){for(const id of ['sample','run','input'])ui(id).disabled=value;ui('cancel').hidden=!value;ui('status').textContent=message;}
+function clear(){report=null;ui('results').hidden=true;ui('save').disabled=true;ui('error').hidden=true;ui('report').textContent='';ui('violations').replaceChildren();}
+function stop(message){clearTimeout(timer);worker?.terminate();worker=null;pending=null;busy(false,message);}
+function fail(message){clear();ui('error').hidden=false;ui('error').textContent=message;stop('Review not accepted. Choose another input or retry.');}
+function render(value){
+ report=value;ui('authority').textContent=['Within declared permission','Outside declared permission','Not established'][value.authority_gate];ui('authority-note').textContent=value.known_forbidden_transitions.length?value.known_forbidden_transitions.length+' forbidden transition(s) retained, including changes later restored.':'No forbidden transition was established in the supplied record.';
+ ui('requirements').textContent=value.required_state_checks.length?['Required state matched','Required state missing','Not established'][value.requirements_gate]:'None declared';ui('requirements-note').textContent=value.required_state_checks.length?'This concerns the requested metadata only; other task requirements were not checked.':'A vacuous metadata requirement does not prove task completion.';
+ ui('horizon').textContent=value.closed_horizon?'Declared closed':'Open prefix';ui('source').textContent=value.incomplete_or_inconsistent.length+' missing/inconsistent observation(s). Source: '+value.source_kind+'. Authority: '+value.authority_kind+'.';
+ ui('count').textContent='Showing '+Math.min(100,value.known_forbidden_transitions.length)+' of '+value.known_forbidden_transitions.length+'. Save the review for every entry.';
+ for(const item of value.known_forbidden_transitions.slice(0,100)){const li=document.createElement('li');li.textContent='Step '+(item.step+1)+' · '+item.kind+(item.field?' · '+item.field:'')+(item.scheduled_id!==null?' · scheduled ID '+item.scheduled_id:'');ui('violations').append(li);}
+ ui('checks').textContent=JSON.stringify({required_state_checks:value.required_state_checks,incomplete_or_inconsistent:value.incomplete_or_inconsistent},null,2);ui('report').textContent=JSON.stringify(value,null,2);ui('results').hidden=false;ui('save').disabled=false;
+}
+async function run(raw){
+ clear();busy(true,'Checking the exact input envelope…');const id=++sequence;let binding;
+ try{binding=await metadataBundleBinding(raw,config.files['state_review.py'].sha256);}catch{fail('Choose a valid UTF-8 metadata bundle with exact authority and capture text, no duplicate fields, and a size of at most 1 MiB.');return;}
+ if(!worker){worker=new Worker('state-worker.js');worker.onerror=()=>fail('Browser Python stopped. Retry the review.');}
+ pending={id,binding};timer=setTimeout(()=>fail('The review did not finish in time. No result was accepted.'),180000);
+ worker.onmessage=({data})=>{if(!pending||data.id!==pending.id)return;if(data.progress){ui('status').textContent=data.progress;return;}if(data.error){fail(data.error);return;}try{validateMetadataReport(data.report,pending.binding);render(data.report);clearTimeout(timer);pending=null;busy(false,'Review complete. Input/source binding and response checks passed.');}catch(error){fail(error.message);}};
+ worker.postMessage({id,bundle:raw});
+}
+ui('run').onclick=async()=>{clear();busy(true,'Loading the selected example…');try{const item=config.samples.find(s=>s.id===ui('sample').value);if(!item)throw Error();const r=await fetch(item.path,{cache:'no-store'});if(!r.ok)throw Error();const raw=new Uint8Array(await r.arrayBuffer()),expected=config.files[item.path];if(raw.length!==expected.bytes||await digest(raw)!==expected.sha256)throw Error();await run(raw);}catch{fail('The example could not load or did not match its source. Reload after the update.');}};
+ui('input').onchange=async()=>{const file=ui('input').files?.[0];if(!file)return;clear();if(file.size>1048576){fail('Choose a metadata bundle no larger than 1 MiB.');return;}try{await run(new Uint8Array(await file.arrayBuffer()));}catch{fail('The selected file could not be read. Choose it again.');}finally{ui('input').value='';}};
+ui('sample').onchange=()=>{clear();ui('status').textContent='Example selected. Review it to inspect its evidence.';};ui('cancel').onclick=()=>{clear();stop('Review cancelled. No result was accepted.');};
+ui('save').onclick=()=>{if(!report)return;const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='metadata-review.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+async function setup(){try{const r=await fetch('config.json',{cache:'no-store'});if(!r.ok)throw Error();config=await r.json();if(config.format!=='agent-crash-lab/private-state-portability-v1'||!Array.isArray(config.samples))throw Error();for(const sample of config.samples){const option=document.createElement('option');option.value=sample.id;option.textContent=sample.title;ui('sample').append(option);}busy(false,'Choose an example or a local bundle. No model or payment is executed.');}catch{fail('The example/source inventory could not load. Reload and retry.');for(const id of ['sample','run','input'])ui(id).disabled=true;}}
+setup();addEventListener('pagehide',()=>{worker?.terminate();clearTimeout(timer);});

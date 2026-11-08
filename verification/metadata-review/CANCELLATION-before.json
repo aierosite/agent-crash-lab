@@ -1,0 +1,9 @@
+{
+  "source": "state-client.before-cancellation.js",
+  "controlledSchedule": "Cancel after sample fetch begins; release the successful fetch only after cancellation",
+  "workersStartedAfterCancellation": 1,
+  "timersAfterCancellation": 1,
+  "status": "Checking the exact input envelope…",
+  "expectedNoRestart": false,
+  "actualBrowserRun": false
+}

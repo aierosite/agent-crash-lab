@@ -116,6 +116,18 @@ def token_source_check(body):
     return {'format':'agent-crash-lab/source-check-v1','status':'replayed','recordingSha256':body['recording_sha256'],'corroboration':row,
             **{k:result[k] for k in ['provider','network','capturedReadRequests','capturedAtStart','capturedAtEnd','replayNetworkCalls','transactionSubmissions','contractExecutions','signatureOrStateProofVerified','independentGrading','datasetSha256','verifierSha256','meaning']}}
 
+def metadata_catalog():
+    catalog=json.loads((ROOT/'web/catalog.json').read_bytes());entry=catalog['metadataReview']
+    paths=['state_review.py',*[s['path'] for s in entry['samples']]]
+    return {**entry,'files':{p:catalog['files'][p] for p in paths}}
+
+def metadata_input(cid):
+    entry=next((s for s in metadata_catalog()['samples'] if s['id']==cid),None)
+    if not entry:return None
+    path=(ROOT/entry['path']).resolve()
+    if not path.is_relative_to((ROOT/'verification/metadata-review/inputs').resolve()):raise ValueError('Invalid metadata example path')
+    return path.read_bytes()
+
 class Handler(BaseHTTPRequestHandler):
     server_version='CrashLab/1.0'
     def log_message(self,*_):pass
@@ -136,8 +148,13 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.17.1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.18.0','coreVersion':core.VERSION})
         if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
+        if path=='/api/metadata-catalog':return self.send(200,metadata_catalog())
+        if path=='/api/metadata-input':
+            from urllib.parse import parse_qs
+            raw=metadata_input(parse_qs(urlsplit(self.path).query).get('case',[''])[0])
+            return self.send(200,raw) if raw is not None else self.send(404,{'error':'Unknown metadata example'})
         if path=='/api/token-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             source=catalog['sourceCorroboration']
@@ -163,7 +180,7 @@ class Handler(BaseHTTPRequestHandler):
             file=(ROOT/name).resolve()
             if name not in catalog['sourceCorroboration']['files'] or not file.is_relative_to(ROOT.resolve()):return self.send(404,{'error':'Unknown source evidence file'})
             return self.send(200,file.read_bytes())
-        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css','/agent.html','/agent.js','/agent.css','/agent-contract.js','/agent-worker.js'):return self.send(404,{'error':'Not found'})
+        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css','/agent.html','/agent.js','/agent.css','/agent-contract.js','/agent-worker.js','/state.html','/state.js','/state-contract.js','/state.css','/state-worker.js'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
         self.send(200,file.read_bytes(),mime+'; charset=utf-8')
@@ -191,6 +208,7 @@ class Handler(BaseHTTPRequestHandler):
         try:
             length=int(self.headers.get('Content-Length','0'))
             if not 0<length<=MAX_BODY:return reject(413,'Request exceeds 9 MiB bound or is empty')
+            if urlsplit(self.path).path=='/api/metadata-review' and length>1048576:return reject(413,'Metadata bundle exceeds 1 MiB')
         except ValueError:return self.send(400,{'error':'Invalid Content-Length'})
         if not SLOTS.acquire(blocking=False):return reject(429,'Four assessments already in progress')
         try:
@@ -198,6 +216,9 @@ class Handler(BaseHTTPRequestHandler):
             raw=self.rfile.read(length)
             if len(raw)!=length:raise ValueError('Incomplete request')
             path=urlsplit(self.path).path
+            if path=='/api/metadata-review':
+                reviewer=runpy.run_path(str(ROOT/'state_review.py'))
+                return self.send(200,reviewer['assess_bundle'](raw))
             if path=='/api/token-review':
                 reviewer=runpy.run_path(str(ROOT/'token_review.py'))
                 return self.send(200,reviewer['review'](raw))

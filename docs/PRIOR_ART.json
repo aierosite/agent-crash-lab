@@ -53,5 +53,14 @@
       "overlap": "nonce/day caps and policy ledger"
     }
   ],
-  "codeCopiedIntoCore": false
+  "codeCopiedIntoCore": false,
+  "metadataStudy": {
+    "source": "https://github.com/ethz-spylab/agentdojo/tree/089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "version": "banking TaskSuite v1.2.2; Task15 inherited from v1.1.1",
+    "selectedOriginalSourceLicense": "evidence/metadata-study/archive/upstream/LICENSE",
+    "originalStudyIndexSha256": "0c67e8bf73ba4bfa98d518355fe1b518f902ef59c14fd492fcb8758f4ad8a9ea",
+    "actualCoverage": "32planned/27closed/1partial/4unstarted;192returnedresponses/45SDKmockpayments",
+    "currentRuntime": "Current stdlib projection/metadata/financial replay, not fresh external typed predicates, model or SDK",
+    "independence": "Original task/tool authors external. Selection, wrappers, permissions, metadata inspector, integrity checks and new test controls ours; source-informed, not blind."
+  }
 }

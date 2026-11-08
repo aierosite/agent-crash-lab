@@ -55,3 +55,22 @@ The bounded interactive Scenario Lab routes accept only seed/cases or blueprint/
 ## Compatible partial views · engine 0.1.2
 
 When no supported complete FINAL graph exists, compatible parsed views are combined by receipt/outcome ID. Each item's original action/outcome pointer remains bound to its physical source. Known outcomes replace Unknown placeholders; receipt ancestry is revalidated across the union. Conflicting combined ancestry fails closed for that attempt. Existing bounds cover raw records before the union; duplicate records do not multiply financial effects. A union is always incomplete and requires matching finalized block anchors for committed partial effects. It cannot prove an exact total or close the owner's horizon. Complete FINAL graphs retain the established path. [Reproduction and controls](ASYNC_EVIDENCE.md).
+
+
+## Explicit metadata projection (v0.18.0)
+
+`state_review.py` is a separate stdlib finite profile. Its exact-byte authority
+binds one supplied capture; user fields, stable scheduled IDs, files and IBAN
+are checked across every usable transition. `authority_gate` and
+`requirements_gate` never replace cash, original task criteria or communication.
+Report-v2 scheduled IDs are decimal strings, including values above JavaScript's
+safe integer range. The CLI supports an exact-text bundle or two raw files.
+
+The workbench's token-protected `/api/metadata-review` sends raw bytes directly
+to the inspector, with a 1 MiB cap. It does not pass through a generic JSON
+parser that can change encodings or numbers. Pages runs the fingerprinted same
+module in pinned Pyodide. The JS boundary checks strict shapes, source/input
+digests and gate coherence; installed cases also have a whole-report digest.
+That boundary is not a second independent semantic evaluator. Uploaded data
+cannot select a Python module or arbitrary adapter. Cancelling invalidates all
+pending fetch/hash/Worker callbacks. [Methods](METADATA_REVIEW.md).

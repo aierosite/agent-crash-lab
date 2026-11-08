@@ -1,0 +1,9 @@
+{
+  "source": "state-client.js",
+  "controlledSchedule": "Cancel after sample fetch begins; release the successful fetch only after cancellation",
+  "workersStartedAfterCancellation": 0,
+  "timersAfterCancellation": 0,
+  "status": "Review cancelled. No result was accepted.",
+  "expectedNoRestart": true,
+  "actualBrowserRun": false
+}

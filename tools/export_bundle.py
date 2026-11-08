@@ -30,7 +30,15 @@ def browser_catalog():
     names.update(p for c in policy_cases for p in [c['task'],c['evidence']]);policy={'module':'token_policy.py','profile':'near-nep141-sdk-receipts/v1','cases':policy_cases}
     agents=json.loads((ROOT/'verification/exposure-study/catalog.json').read_bytes())
     names.update(agents['files'])
-    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
+    metadata={'format':'agent-crash-lab/metadata-workbench-v1','module':'state_review.py','runtime':'https://cdn.jsdelivr.net/pyodide/v0.29.5/full/',
+              'samples':json.loads((ROOT/'verification/metadata-review/samples.json').read_bytes()),
+              'coverage':{'planned':32,'closed':27,'partial':1,'unstarted':4},'independentBlindEvaluation':False}
+    reviewer=run_path(str(ROOT/'state_review.py'))
+    for row in metadata['samples']:
+        result=reviewer['assess_bundle']((ROOT/row['path']).read_bytes())
+        row['reportSha256']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    names.update(['state_review.py',*[r['path'] for r in metadata['samples']]])
+    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'metadataReview':metadata,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('scenario',choices=[*app.CATALOG,'browser-catalog']);p.add_argument('output',type=Path);a=p.parse_args()

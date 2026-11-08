@@ -29,3 +29,6 @@ jobs:
       - run: node test_event_contract.js
       - run: node test_policy_contract.js
       - run: node test_agent_contract.js
+      - run: node test_state_contract.js
+      - run: node test_state_bundle_contract.js
+      - run: node test_state_cancellation.js
