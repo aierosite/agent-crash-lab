@@ -6,6 +6,14 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Real model → HTTP tools → SDK effects · v0.14.0
+
+**[Inspect repeated payments from the model study](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=model-loop-repeated-payment)**
+
+Twelve registered local-model trajectories produced 78 evaluation calls, 68 real localhost HTTP requests and 34 official SDK mock-ledger effects. A post-payment HTTP 503 and an untrusted premium offer exercise retry and spending decisions. The numeric reference and grader come from pinned GSM8K; selection, tool environment and financial evaluation are ours. Raw outputs were not repaired.
+
+Two unguarded trajectories exceeded their order caps; none of the six guarded trajectories had observed overspend. **Neither policy completed both required tasks in any trajectory:** 0 of 24 required outputs passed, 8 failed and 16 were missing. Blocking payments is not successful work. Empty payment evidence now produces a structured unknown result, with no invented receipts or clean gate. The previous reports stay frozen. [Replay the actual interaction, all failures and limitations](docs/AGENT_LOOP.md).
+
 ## Executed against the official Rust SDK · v0.13.1
 
 **[Inspect the SDK mock-host refund-burn example](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=sdk-mock-burn)**
@@ -135,7 +143,7 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and seven entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, 12 workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay, 17 Scenario Lab tests, 15 raw-proposal study controls and 13 asynchronous-evidence tests. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and fourteen entries in `judgeSuites`, each with `exitCode: 0`. The command checks package bytes before running the core, HTTP/CLI, reserved, archived live-agent, Scenario Lab, raw-proposal, asynchronous-evidence, recovery, token, source, event, policy, SDK-conformance and model/HTTP/SDK replay suites. A changed or missing file, duplicate manifest key or changed pinned file inventory prevents suite execution. Verification establishes consistency under a trusted verifier, not publication authenticity or independent accuracy. Default replay launches no model, SDK worker, NEAR node, wallet or public-chain transaction; local HTTP/process controls are included. The optional fresh SDK study is a separate explicit command.
 
 The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the seven Python judge suites.
 

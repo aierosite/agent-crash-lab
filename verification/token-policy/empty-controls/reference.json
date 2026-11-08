@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "id": "empty-payments-captured",
+      "task": "verification/token-policy/empty-controls/empty-payments-captured/task.json",
+      "evidence": "verification/token-policy/empty-controls/empty-payments-captured/evidence.json",
+      "expectedGate": 2,
+      "kind": "actual-derived empty input"
+    },
+    {
+      "id": "empty-evidence-with-declared-binding",
+      "task": "verification/token-policy/empty-controls/empty-evidence-with-declared-binding/task.json",
+      "evidence": "verification/token-policy/empty-controls/empty-evidence-with-declared-binding/evidence.json",
+      "expectedGate": 2,
+      "kind": "constructed missing binding control"
+    }
+  ],
+  "note": "Post-result support extension controls; not independent samples."
+}

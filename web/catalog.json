@@ -916,6 +916,27 @@
         "kind": "synthetic",
         "task": "verification/token-policy/inputs/sdk-mock-burn/task.json",
         "evidence": "verification/token-policy/inputs/sdk-mock-burn/evidence.json"
+      },
+      {
+        "id": "model-loop-repeated-payment",
+        "title": "Qwen + SDK mock · repeated payment",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/model-loop-repeated-payment/task.json",
+        "evidence": "verification/token-policy/inputs/model-loop-repeated-payment/evidence.json"
+      },
+      {
+        "id": "model-loop-premature-finish",
+        "title": "Qwen + SDK mock · unfinished work",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/model-loop-premature-finish/task.json",
+        "evidence": "verification/token-policy/inputs/model-loop-premature-finish/evidence.json"
+      },
+      {
+        "id": "model-loop-no-payments",
+        "title": "Qwen + SDK mock · no payment records",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/model-loop-no-payments/task.json",
+        "evidence": "verification/token-policy/inputs/model-loop-no-payments/evidence.json"
       }
     ]
   },
@@ -1485,8 +1506,8 @@
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
     "token_policy.py": {
-      "bytes": 29045,
-      "sha256": "686f47a5535bc22b07cf59d289c3db00e64d693339207d7c527f55dc280b01c8"
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
     },
     "token_review.py": {
       "bytes": 15292,
@@ -1860,6 +1881,30 @@
       "bytes": 780,
       "sha256": "3a4b4e73eddc3d9134abb03ee2b440fab96f82397716069d78ef842009306f43"
     },
+    "verification/token-policy/inputs/model-loop-no-payments/evidence.json": {
+      "bytes": 417,
+      "sha256": "b7f04e28adc3e7d5f4738c080d0529abc1784c24a62ae36352ce86c660c10933"
+    },
+    "verification/token-policy/inputs/model-loop-no-payments/task.json": {
+      "bytes": 713,
+      "sha256": "3bc73daa0e2a8201c2a2023e227045d84c816e4fd0cce6afcdf16032d196fecc"
+    },
+    "verification/token-policy/inputs/model-loop-premature-finish/evidence.json": {
+      "bytes": 2322,
+      "sha256": "70182ac31a13e5f161ffaf1a4622c7c0305b75594269eeb3d44b92602a77bf7f"
+    },
+    "verification/token-policy/inputs/model-loop-premature-finish/task.json": {
+      "bytes": 861,
+      "sha256": "38a8cc570bbf7ceee9e30e4e4ec1e4e02278fd1b68ce1475b3e6f0c28614c404"
+    },
+    "verification/token-policy/inputs/model-loop-repeated-payment/evidence.json": {
+      "bytes": 25203,
+      "sha256": "c564bf4a6fc75015d53c8faf856c02d6e258ab7a36ef0cabbf8726a432779f33"
+    },
+    "verification/token-policy/inputs/model-loop-repeated-payment/task.json": {
+      "bytes": 2652,
+      "sha256": "429a5774f89ab256cc78c4231749b9ff192b1d0431cb27f7766b66a5682947e0"
+    },
     "verification/token-policy/inputs/refunded-deposit/evidence.json": {
       "bytes": 15648,
       "sha256": "8481c402e139e824f3d74935973222b3fb681fbb9c2c634aecd58a3507af8fa0"
@@ -1930,7 +1975,7 @@
     },
     "workbench.py": {
       "bytes": 22661,
-      "sha256": "b767adfa6bbe7bb370ea8c020d6407b99fcbea86f8392e5fddfb2ef555ee6794"
+      "sha256": "2d066103d0d359cbf5a3d05a859be475a6050df662d8029216e00b59e712bf82"
     }
   }
 }

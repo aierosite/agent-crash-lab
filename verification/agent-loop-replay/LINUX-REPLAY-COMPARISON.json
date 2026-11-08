@@ -1,0 +1,29 @@
+[
+  {
+    "file": "AUDIT.json",
+    "originalSha256": "4fdecda615283ecdd5fa78b0d8a49db197df22852d1e9100670ab39d786f14a3",
+    "linuxSha256": "8d7889e1c6d4c5ca73a0234d036485ecc3b8c213ee5ddf2d7c59fe63a89ed589",
+    "objectsEqual": true,
+    "crlfOnly": true,
+    "originalCrlf": 31,
+    "linuxCrlf": 0
+  },
+  {
+    "file": "original-external-grades.json",
+    "originalSha256": "3ab0c7d6c6aa214e588744453c34cdd97a168784242da9405a4b9bf026b02472",
+    "linuxSha256": "01ee406e2b55d54df0e2d1a18e78f4b1c09108f9e4cf2f904898efb35867fba9",
+    "objectsEqual": true,
+    "crlfOnly": true,
+    "originalCrlf": 1,
+    "linuxCrlf": 0
+  },
+  {
+    "file": "original-financial-reports.json",
+    "originalSha256": "21b61129567a0273a773026bf909a0b892d7852c92f5fe061ec009abdf4f8eb5",
+    "linuxSha256": "c9b4283865adbaa8f5f072ae53dca15cfb48f5b29592fd1ec2027d757a8851e7",
+    "objectsEqual": true,
+    "crlfOnly": true,
+    "originalCrlf": 2821,
+    "linuxCrlf": 0
+  }
+]

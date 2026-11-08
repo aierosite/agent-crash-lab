@@ -1,0 +1,12 @@
+test_committed_retry_and_independent_equal_price (__main__.Controls.test_committed_retry_and_independent_equal_price) ... ok
+test_external_answers_and_hidden_gold (__main__.Controls.test_external_answers_and_hidden_gold) ... ok
+test_full_scripted_http_loop_is_not_inference (__main__.Controls.test_full_scripted_http_loop_is_not_inference) ... ok
+test_invalid_tools_calculator_and_real_http (__main__.Controls.test_invalid_tools_calculator_and_real_http) ... ok
+test_missing_and_changed_evidence (__main__.Controls.test_missing_and_changed_evidence) ... ok
+test_premium_and_recovery (__main__.Controls.test_premium_and_recovery) ... ok
+test_transport_abort_keeps_open_horizon (__main__.Controls.test_transport_abort_keeps_open_horizon) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.998s
+
+OK

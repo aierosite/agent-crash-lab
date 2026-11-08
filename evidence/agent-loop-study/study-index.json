@@ -1,0 +1,194 @@
+{
+  "format": "agent-crash-lab/agent-loop-study-index-v1",
+  "source": "Original registered same-owner model/tool execution with externally authored GSM8K numeric reference. Actual SDK mock ledger, constructed receipt envelopes.",
+  "files": {
+    "AUDIT-TAMPERING.json": {
+      "bytes": 906,
+      "sha256": "efb6505e403ce11d28e4afc7a4627aa66fefe8fcdc8981291385ec231d996fa8"
+    },
+    "AUDIT.json": {
+      "bytes": 940,
+      "sha256": "4fdecda615283ecdd5fa78b0d8a49db197df22852d1e9100670ab39d786f14a3"
+    },
+    "LOCK.json": {
+      "bytes": 2974,
+      "sha256": "e412aa59fbbc36b6b145828d5e20314a59f75dd59b1a719ccc3eb8b7e32142ff"
+    },
+    "POST-EXECUTION-SDK-CHECK.json": {
+      "bytes": 230,
+      "sha256": "0c27d0c82363c5c32c9a7c4ad36eeef784132fb66e1e285a261a0e24099dfc5c"
+    },
+    "PRE-INFERENCE-AMENDMENT.json": {
+      "bytes": 630,
+      "sha256": "23b5224bd8e7eaa492efb9bd03ce37b279403e04f221b171d02d623cf021be39"
+    },
+    "REGISTER.py": {
+      "bytes": 6351,
+      "sha256": "4ede64c36661eb48408f72ad5d924b0bca6570275c333865e0d0e3a0568cc20e"
+    },
+    "REGISTRATION.initial.json": {
+      "bytes": 6403,
+      "sha256": "b0d795138f7e3156f2e9554c1877aa4447a4dddccfbcaeb60338a745031e77cf"
+    },
+    "REGISTRATION.json": {
+      "bytes": 6403,
+      "sha256": "7a3e7d8172202c05b90c1de6daf0f387f929962d6e782e57698c93e1393e04a5"
+    },
+    "SDK-SOURCE-CHECK.json": {
+      "bytes": 241,
+      "sha256": "d0e2c00aa02bc3d64d82607b2174af09eeae770cecf4e692af5f2e1673640b80"
+    },
+    "actor.py": {
+      "bytes": 13318,
+      "sha256": "56fd3392e3aaec67d74e815bf72d1bc104629e6d7d09ad5469b8b2976e1b095c"
+    },
+    "actual/calls.json": {
+      "bytes": 1478818,
+      "sha256": "8245a9999a8413154152944168395b3ed8a3a720b011408261dbf025c5bc1af1"
+    },
+    "actual/episodes.json": {
+      "bytes": 113624,
+      "sha256": "5c3d7276f11c9e3c6ae42499485a78fa9307b95909d5cd3973bf7660c4288d2b"
+    },
+    "actual/execution.json": {
+      "bytes": 409,
+      "sha256": "980c00075e515c4019224450dc0169ca8ae785f04675bc2e90c547c01a0c8cc0"
+    },
+    "actual/run.json": {
+      "bytes": 239,
+      "sha256": "cc75b2aa6da1d2d4b4e5b02acdfc5b90414296251ff2c84a63119f73e51b312a"
+    },
+    "actual/runtime.log": {
+      "bytes": 76384,
+      "sha256": "562bf216abcd6d87bb31152fa2ae25277605e0135b7b1c3a0d0bac59e8fbd7fe"
+    },
+    "actual/sdk-wire.json": {
+      "bytes": 40254,
+      "sha256": "571e9cc9a5143fbcb26f832b16018135f2f87849ec2d499aadb1e3f4f79f06f1"
+    },
+    "actual/sdk.log": {
+      "bytes": 6222,
+      "sha256": "9a6f0eb6f936e56b2c4991ec3d8b8d6bc91590bd28bac985f4ca0ad000228d36"
+    },
+    "actual/server.json": {
+      "bytes": 514,
+      "sha256": "381ccf0f18de8bff8e85074106104420f8e8aed1ab440c009b79b663f46cc74a"
+    },
+    "agent_tools.py": {
+      "bytes": 8161,
+      "sha256": "4cc65da4dc47cd7dee9f978d363c118a90c60d5af39a026b94d93504d99ef922"
+    },
+    "assess_episode.py": {
+      "bytes": 3566,
+      "sha256": "0f08e528f04938329ac105edd0e6d4a64c236cf745cef3bc5ec12226bb978d5d"
+    },
+    "audit_actual.py": {
+      "bytes": 8884,
+      "sha256": "a2cc38b613361c98c07f21e0c89b44d39dc789f38460e119a288b1db05daf3b7"
+    },
+    "build_worker.py": {
+      "bytes": 2310,
+      "sha256": "649760eb018337efd59a6372f944541776e3e0168831c116261690fa463bdcbb"
+    },
+    "controls.stderr.txt": {
+      "bytes": 1423,
+      "sha256": "f350a3e10aa8db2130732fc1de2b691c23775fc99ef40c4f3e67e2d945439c66"
+    },
+    "controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controls2.stderr.txt": {
+      "bytes": 4325,
+      "sha256": "77eb511cba47de8dd6867d9e59a1aab0cd9a4b515a38a852a76c3722dc5237ee"
+    },
+    "controls2.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controls3.stderr.txt": {
+      "bytes": 841,
+      "sha256": "0251b2907f3e56db227d2c07db7ef7643af4511b9791b5e045440bd4e64b7386"
+    },
+    "controls3.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "first-live-observation.json": {
+      "bytes": 1125,
+      "sha256": "cc84824dc08b8899e894ac152fb3051fd233ada51e60e675aa2038d999460dda"
+    },
+    "grader.py": {
+      "bytes": 2511,
+      "sha256": "c27e51ce5d65fc0c7c84a6233accd9600410105db7cceb57cb4ce74f2ec7b1a1"
+    },
+    "inspector/token_policy.py": {
+      "bytes": 29045,
+      "sha256": "686f47a5535bc22b07cf59d289c3db00e64d693339207d7c527f55dc280b01c8"
+    },
+    "inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "lock.py": {
+      "bytes": 1398,
+      "sha256": "25e8479390503d3c848ee8082f43a0dff5b44b15c792edcb9bf1111405173e22"
+    },
+    "original-external-grades.json": {
+      "bytes": 5712,
+      "sha256": "3ab0c7d6c6aa214e588744453c34cdd97a168784242da9405a4b9bf026b02472"
+    },
+    "original-financial-reports.json": {
+      "bytes": 108346,
+      "sha256": "21b61129567a0273a773026bf909a0b892d7852c92f5fe061ec009abdf4f8eb5"
+    },
+    "reference/LICENSE": {
+      "bytes": 1062,
+      "sha256": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b"
+    },
+    "reference/grade_school_math/data/test.jsonl": {
+      "bytes": 749738,
+      "sha256": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14"
+    },
+    "reference/grade_school_math/dataset.py": {
+      "bytes": 2246,
+      "sha256": "c22b81bccaaebfd1123be296e8b3c3dca3ddc704c46b70bf4a50603bb627e197"
+    },
+    "test_audit_tampering.py": {
+      "bytes": 2698,
+      "sha256": "d47243637d72d42b100fc6f62b5ca1619b8b23be8b0c0eb03f58b3341304512e"
+    },
+    "test_controls.py": {
+      "bytes": 7650,
+      "sha256": "0acaca5f7228690bcf65814f6a3888dea4cbbbf839b16643987dba928a203925"
+    },
+    "transport_model.py": {
+      "bytes": 3563,
+      "sha256": "b18f3b8b272ab6204e290d60fcde8933bd57be17eb0588697e700b73c60aaf29"
+    },
+    "worker-build.json": {
+      "bytes": 593,
+      "sha256": "296df2a33806cc49a995883f87cd3c411dd72793bdc26ee648921c64c66b373f"
+    },
+    "worker-build.stderr.txt": {
+      "bytes": 1068,
+      "sha256": "d012c4adf6c3b2935ca23a7764cd3945fd01e7af41bc69888f6c5440a1c88889"
+    },
+    "worker-build.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "worker/Cargo.lock": {
+      "bytes": 65529,
+      "sha256": "c7ba7d7305553b35fc2d4d2d0d1132ca032c03751321e17787732f18c9b21157"
+    },
+    "worker/Cargo.toml": {
+      "bytes": 309,
+      "sha256": "4a82ac2f35f5d0eedeeee92dd2132ddbe9c4371a16461f230e37482f22bc870f"
+    },
+    "worker/src/main.rs": {
+      "bytes": 3835,
+      "sha256": "c59e736bb0fcc800c027691ada275eb310e340b13de3ca694eef77376ee9d453"
+    }
+  }
+}

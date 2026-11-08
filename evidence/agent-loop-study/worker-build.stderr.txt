@@ -1,0 +1,12 @@
+     Locking 274 packages to latest Rust 1.95.0 compatible versions
+   Compiling near-sys v0.4.1 (/tmp/agent-crash-lab-loop-v0131/upstream/near-sys)
+   Compiling near-crypto-hash v0.2.0 (/tmp/agent-crash-lab-loop-v0131/upstream/near-crypto-hash)
+   Compiling near-sdk-env v0.1.9 (/tmp/agent-crash-lab-loop-v0131/upstream/near-sdk-env)
+   Compiling near-sdk-macros v5.30.1 (/tmp/agent-crash-lab-loop-v0131/upstream/near-sdk-macros)
+   Compiling near-sdk-core v4.4.2 (/tmp/agent-crash-lab-loop-v0131/upstream/near-sdk-core)
+   Compiling near-digest v0.1.5 (/tmp/agent-crash-lab-loop-v0131/upstream/near-digest)
+   Compiling near-global-contracts v0.3.3 (/tmp/agent-crash-lab-loop-v0131/upstream/near-global-contracts)
+   Compiling near-sdk v5.30.1 (/tmp/agent-crash-lab-loop-v0131/upstream/near-sdk)
+   Compiling near-contract-standards v5.30.1 (/tmp/agent-crash-lab-loop-v0131/upstream/near-contract-standards)
+   Compiling crash-lab-agent-loop-sdk v0.1.0 (/tmp/agent-crash-lab-loop-v0131/worker)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.55s

@@ -1,0 +1,41 @@
+{
+  "checks": [
+    {
+      "id": "baseline",
+      "exitCode": 0,
+      "expectedAccepted": true,
+      "matched": true
+    },
+    {
+      "id": "edited-final-answer",
+      "exitCode": 1,
+      "expectedAccepted": false,
+      "matched": true
+    },
+    {
+      "id": "edited-sdk-effect",
+      "exitCode": 1,
+      "expectedAccepted": false,
+      "matched": true
+    },
+    {
+      "id": "orphan-sdk-pay",
+      "exitCode": 1,
+      "expectedAccepted": false,
+      "matched": true
+    },
+    {
+      "id": "source-relocked-after-model",
+      "exitCode": 1,
+      "expectedAccepted": false,
+      "matched": true
+    },
+    {
+      "id": "question-resealed-in-http-traces",
+      "exitCode": 1,
+      "expectedAccepted": false,
+      "matched": true
+    }
+  ],
+  "meaning": "Same-author actual-data integrity controls, not an independent accuracy estimate."
+}

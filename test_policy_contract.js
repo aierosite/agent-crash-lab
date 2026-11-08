@@ -8,6 +8,9 @@ for c in json.loads((r/'verification/token-policy/encoding-controls/reference.js
 cases.extend(json.loads((r/'verification/token-policy/interface-controls/reference.json').read_bytes())['cases'])
 cases.extend(json.loads((r/'verification/token-policy/boundary-controls/reference.json').read_bytes())['cases'])
 cases.extend(json.loads((r/'verification/token-policy/wire-controls/reference.json').read_bytes())['cases'])
+cases.extend(json.loads((r/'verification/token-policy/empty-controls/reference.json').read_bytes())['cases'])
+ids={c['id'] for c in cases}
+cases.extend(c for c in json.loads((r/'web/catalog.json').read_bytes())['tokenPolicy']['cases'] if c['id'] not in ids)
 for c in cases:
  if c.get('bundle'):
   b=json.loads((r/c['bundle']).read_bytes());tr=b['task_utf8'].encode();er=b['evidence_utf8'].encode()
@@ -20,7 +23,8 @@ const child=spawnSync('python',['-I','-S','-c',script],{cwd:__dirname,encoding:'
 for(const row of rows){
  const task=context.tokenEventJSON(row.taskUtf8),evidence=context.tokenEventJSON(row.evidenceUtf8),check=r=>context.validatePolicyReport(r,task,evidence,row.hashes);
  assert.doesNotThrow(()=>check(row.report),row.id);accepted++;
- const mutate=[r=>{r.gate=(r.gate+1)%3;},r=>{r.assessor_sha256='0'.repeat(64);},r=>{r.primitive_sha256='0'.repeat(64);},r=>{r.task_sha256='0'.repeat(64);},r=>{r.evidence_sha256='0'.repeat(64);},r=>{r.scope.closed_horizon=!r.scope.closed_horizon;},r=>{r.source.kind='synthetic';r.source.note='forged';},r=>{r.authority.note='forged';},r=>{r.intents[0].gross_known=String(BigInt(r.intents[0].gross_known)+1n);},r=>{r.intents[0].settled_known_min=String(BigInt(r.intents[0].settled_known_min)+1n);},r=>{r.intents[0].recipient='foreign.testnet';},r=>{r.intents[0].burn_cap='999';},r=>{r.intents[0].gross_status='within';r.intents[0].settlement_requirement='passed';r.gate=0;},r=>{r.graphs[0].known_outcomes++;},r=>{r.payments.pop();},r=>{r.extra=true;},r=>{r.meaning='Safe to pay';},r=>{r.new_transactions=1;},r=>{r.not_assessed=[];}];
+ const mutate=[r=>{r.gate=(r.gate+1)%3;},r=>{r.assessor_sha256='0'.repeat(64);},r=>{r.primitive_sha256='0'.repeat(64);},r=>{r.task_sha256='0'.repeat(64);},r=>{r.evidence_sha256='0'.repeat(64);},r=>{r.scope.closed_horizon=!r.scope.closed_horizon;},r=>{r.source.kind='synthetic';r.source.note='forged';},r=>{r.authority.note='forged';},r=>{r.intents[0].gross_known=String(BigInt(r.intents[0].gross_known)+1n);},r=>{r.intents[0].settled_known_min=String(BigInt(r.intents[0].settled_known_min)+1n);},r=>{r.intents[0].recipient='foreign.testnet';},r=>{r.intents[0].burn_cap='999';},r=>{r.intents[0].gross_status='within';r.intents[0].settlement_requirement='passed';r.gate=0;},r=>{r.payments.pop();},r=>{r.extra=true;},r=>{r.meaning='Safe to pay';},r=>{r.new_transactions=1;},r=>{r.not_assessed=[];}];
+ if(row.report.graphs.length)mutate.push(r=>{r.graphs[0].known_outcomes++;});
  if(row.report.known_custody_events.length)mutate.push(r=>{r.known_custody_events.pop();},r=>{r.known_custody_events[0].amount='999';},r=>{r.known_custody_events[0].source_refs=['/fake'];},r=>{r.known_custody_events[0].source_pointer='/fake';});
  if(row.report.payments.length)mutate.push(r=>{r.payments[0].receipt='fake';},r=>{r.payments[0].amount='999';},r=>{r.payments[0].scope_receipts=[];},r=>{r.payments[0].body_refs=['/fake'];},r=>{r.payments[0].settlement_status='known';r.payments[0].settled='999';r.payments[0].cost='999';r.payments[0].reasons=[];});
  const index=row.report.payments.findIndex(p=>p.callback!==null);if(index>=0)mutate.push(r=>{r.payments[index].callback.data_id='fake';},r=>{r.payments[index].callback.unused_limit='999';},r=>{r.payments[index].callback.returned_hook_path=[];},r=>{r.payments[index].callback.body_refs=[];},r=>{r.payments[index].refund='0';r.payments[index].burn='0';r.payments[index].used=r.payments[index].amount;r.payments[index].cost=r.payments[index].amount;r.payments[index].settled=r.payments[index].amount;});

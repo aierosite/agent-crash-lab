@@ -1,0 +1,7 @@
+{
+  "atUtc": "2026-11-08T08:11:04.848766+00:00",
+  "exitCode": 0,
+  "command": "set -eu\nexport RUSTUP_HOME=/tmp/agent-crash-lab-sdk-v013-tools/rustup\nexport CARGO_HOME=/tmp/agent-crash-lab-sdk-v013-tools/cargo\nexport CARGO_TARGET_DIR=/tmp/agent-crash-lab-sdk-v013-tools/target\nexport CARGO_BUILD_JOBS=2\nexport PATH=\"$CARGO_HOME/bin:$PATH\"\ncargo build --offline --manifest-path /tmp/agent-crash-lab-loop-v0131/worker/Cargo.toml\n",
+  "sourceGitArchiveSha256": "e20f1809349115791b50caf954695097030ca71b09709e43d9a88b1f661353a4",
+  "linuxRoot": "/tmp/agent-crash-lab-loop-v0131"
+}

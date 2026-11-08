@@ -1,4 +1,4 @@
-# Token payment policy · v0.13.0
+# Token payment policy · v0.14.0
 
 Use the payment-terms page from the workbench, the CLI, or an exact-byte input
 bundle. The same Python inspector runs locally and in the browser worker;
@@ -54,6 +54,12 @@ per-intent constraints and explicit receipt bindings.
 read-only status request/response observations. Each input must be nonempty,
 strict UTF-8 JSON no larger than 2 MiB, without duplicate members, fractional
 numeric metadata or invalid Unicode. Financial amounts are decimal strings.
+
+The observations array permits zero through 128 entries. Zero observations with
+declared orders remains gate 2: no graphs/payments or exact amounts are invented,
+even if the owner declares a closed horizon. [The actual model study](AGENT_LOOP.md)
+preserves two originally unassessed zero-payment episodes and separately replays
+them with this additive profile support.
 
 The report binds assessor, primitives and both input fingerprints. It states
 the source claim, authority, interpretation profile and horizon explicitly.

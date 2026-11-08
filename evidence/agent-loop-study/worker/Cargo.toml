@@ -1,0 +1,11 @@
+[package]
+name = "crash-lab-agent-loop-sdk"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+near-contract-standards = { path = "../upstream/near-contract-standards" }
+near-sdk = { path = "../upstream/near-sdk", default-features = false, features = ["legacy", "unit-testing"] }
+
+[workspace]

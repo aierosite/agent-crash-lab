@@ -22,8 +22,16 @@ def check(fn,c):
  return 'quantities' not in expected or {k:report['payments'][0][k] for k in expected['quantities']}==expected['quantities']
 
 class PaymentPolicy(unittest.TestCase):
+ def test_no_observation_cannot_claim_a_clean_gate(self):
+  base=DATA/'empty-controls/empty-payments-captured';task=json.loads((base/'task.json').read_bytes());evidence=(base/'evidence.json').read_bytes()
+  for closed in [True,False]:
+   for minimum in ['0','100']:
+    value=copy.deepcopy(task);value['closed_horizon']=closed
+    for intent in value['intents']:intent['min_settled']=minimum
+    report=assess(pack(value),evidence);self.assertEqual(report['gate'],2);self.assertEqual(report['graphs'],[]);self.assertEqual(report['payments'],[])
+    self.assertTrue(all(i['gross_exact'] is None and i['settled_exact'] is None and i['gross_status']=='unknown' for i in report['intents']))
  def test_observed_browser_imports_replay_against_current_bytes(self):
-  result=runpy.run_path(str(ROOT/'tools/verify_policy_browser.py'))['verify']();self.assertEqual(result['actualUiInputs'],91);self.assertEqual(result['completeReportsMatched'],76);self.assertEqual(result['rejectedInputsClearedPriorResult'],15)
+  result=runpy.run_path(str(ROOT/'tools/verify_policy_browser.py'))['verify']();self.assertEqual(result['actualUiInputs'],98);self.assertEqual(result['completeReportsMatched'],83);self.assertEqual(result['rejectedInputsClearedPriorResult'],15);self.assertEqual(result['historicalBrowserStudy']['actualUiInputs'],91)
  def test_malformed_rpc_errors_cannot_be_silently_ignored(self):
   plan=json.loads((DATA/'wire-controls/reference.json').read_bytes());old=runpy.run_path(str(HISTORY/'wire/token_policy.py.txt'))['assess']
   for c in plan['cases']:
@@ -102,7 +110,7 @@ class PaymentPolicy(unittest.TestCase):
    req=urllib.request.Request(origin+'/api/token-policy',data=raw,headers={'Content-Type':'application/json','X-CrashLab-Token':token or server.token})
    with urllib.request.urlopen(req,timeout=10) as r:return json.loads(r.read())
   try:
-   catalog=get('/api/token-policy-catalog');self.assertEqual(len(catalog['cases']),11);self.assertEqual(catalog['assessorSha256'],sha256((ROOT/'token_policy.py').read_bytes()).hexdigest())
+   catalog=get('/api/token-policy-catalog');self.assertEqual(len(catalog['cases']),14);self.assertEqual(catalog['assessorSha256'],sha256((ROOT/'token_policy.py').read_bytes()).hexdigest())
    for c in catalog['cases']:
     b=get('/api/token-policy-input?case='+c['id']);self.assertEqual(post(pack(b)),assess(b['task_utf8'].encode(),b['evidence_utf8'].encode()))
    for raw in [b'{}',b'{bad',pack({'task_path':'private.txt'}),b'[]']:

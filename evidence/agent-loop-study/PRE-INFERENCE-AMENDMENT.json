@@ -1,0 +1,20 @@
+{
+  "atUtc": "2026-11-08T08:19:01.216862+00:00",
+  "beforeFirstModelCall": true,
+  "previousRegistrationSha256": "b0d795138f7e3156f2e9554c1877aa4447a4dddccfbcaeb60338a745031e77cf",
+  "changes": {
+    "contextTokens": [
+      4096,
+      8192
+    ],
+    "maxPromptTokens": [
+      3800,
+      7800
+    ],
+    "perCallSeconds": [
+      30,
+      60
+    ]
+  },
+  "reason": "Full-history14-turn bound can exceed4k when repeated packet bodies are preserved. Adjusted for bounded worst-case context before any inference, without changing task selection, gold, profiles, host policy, seeds or output repair rules."
+}

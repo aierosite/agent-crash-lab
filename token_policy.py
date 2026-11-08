@@ -236,7 +236,7 @@ def assess(task_raw,evidence_raw):
  intents={};binding_ids=set()
  for row in task['intents']:
   strict_object(row,['id','recipient','max_gross','min_settled','max_burn'],'Intent');need(type(row['id']) is str and 0<len(row['id'])<=96 and row['id'] not in intents,'Duplicate/invalid intent ID');account(row['recipient']);need(row['recipient']!=payer,'Payer self delivery is not a payment');[policy_amount(row[k]) for k in ['max_gross','min_settled','max_burn']];intents[row['id']]=row
- if type(evidence['observations']) is not list or not 0<len(evidence['observations'])<=128:raise PolicyError('Observation quota')
+ if type(evidence['observations']) is not list or len(evidence['observations'])>128:raise PolicyError('Observation quota')
  graphs={}
  for i,obs in enumerate(evidence['observations']):
   strict_object(obs,['id','request','response'],'Observation');request=obs['request'];response=obs['response']

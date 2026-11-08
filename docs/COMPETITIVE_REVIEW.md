@@ -41,12 +41,21 @@ grading, deployed-WASM behavior and a head-to-head Workcell run remain unproven.
 
 ## Remaining gaps
 
+v0.14.0 adds a registered real local-model → HTTP tools → official SDK mock-ledger
+loop, retaining all twelve trajectories and their failures. Of 24 required
+useful outputs, none passed; two unguarded runs breached caps, while guarded
+runs still failed their work. The numeric reference/grader is externally
+authored GSM8K, but the wrapper, selection and financial grading remain ours.
+This improves inspectable end-to-end evidence, not independent blind evaluation
+or a head-to-head Workcell result. Workcell's public head remained b80bcecc when
+rechecked on 8 November 2026. [Complete methods and negative results](AGENT_LOOP.md).
+
 The v0.13.0 token-policy component applies the Workcell-inspired distinction between economic invariants to arbitrary supplied per-order policies. Gross commitment, recipient, burned refund and minimum SDK settlement are separate; allowed split payments, independent equal-price intents and returned promises remain supported. It follows recorded body/data-ID relations rather than treating root success or equal amounts as delivery. A Python inspector, a separately implemented browser response boundary and exact-input replay form one workflow. This is original source-informed implementation and grading, not an independently executed comparison with Workcell or a claim that Workcell lacks these capabilities. The two additional historical transaction-status observations are public-node reads, not fresh contract execution or authenticated consensus.
 
-- **Broader live-agent/generalization evidence:** the archived native/model trials and fresh inference-only study cover bounded local cases. The latter found 1/16 successful raw outputs, retained failures and observed no financial violation; its payment projections are synthetic. Independent authorship, an external blind evaluation and an external adopter study remain unproven. Source-informed regressions are not an unseen benchmark.
+- **Broader live-agent/generalization evidence:** the archived native/model trials, earlier inference-only study and v0.14.0 real HTTP/SDK loop cover bounded local cases. The earlier study found 1/16 successful raw outputs; the new loop found 0/24 and two cap breaches. Receipt envelopes around SDK mock effects remain constructed. Independent authorship, an external blind evaluation and an external adopter study remain unproven. Source-informed regressions are not an unseen benchmark.
 - **Network scope:** our actual payment evidence is owned local NEAR execution, not a fresh public-network deployment. The assessor does not authenticate consensus or signatures and does not accept arbitrary chain/contract profiles.
 - **Prevention:** the tool diagnoses an episode; it cannot intercept a signer or enforce a vault rule. That is a complementary system, not a missing switch in this inspector.
 - **Browser runtime trust:** the optional browser version downloads pinned Pyodide from jsDelivr and needs a modern WebAssembly-capable browser. Assessment inputs are not posted to a server by our code. For a runtime without CDN execution, use the offline ZIP and local Python.
 - **Outcome:** there is no evidence-based way to promise first place, estimate win probability or infer judges' scores from repository test counts.
 
-We made no competitor-directed transactions, registrations, messages or payments. The later raw-proposal study records local inference only, with no new native execution. No production audit is implied.
+We made no competitor-directed transactions, registrations, messages or payments. The raw-proposal study records local inference only; the later agent-loop study adds actual local HTTP tools and SDK mock-ledger effects, without transactions or chain consensus. No production audit is implied.

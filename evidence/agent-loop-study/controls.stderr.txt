@@ -1,0 +1,21 @@
+test_committed_retry_and_independent_equal_price (__main__.Controls.test_committed_retry_and_independent_equal_price) ... ok
+/usr/lib/python3.12/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  for index, test in enumerate(self):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_external_answers_and_hidden_gold (__main__.Controls.test_external_answers_and_hidden_gold) ... ok
+test_invalid_tools_calculator_and_real_http (__main__.Controls.test_invalid_tools_calculator_and_real_http) ... ok
+test_missing_and_changed_evidence (__main__.Controls.test_missing_and_changed_evidence) ... <frozen runpy>:259: ResourceWarning: unclosed file <_io.FileIO name=6 mode='rb' closefd=True>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+/usr/lib/python3.12/unittest/suite.py:107: ResourceWarning: unclosed file <_io.BufferedReader name=7>
+  for index, test in enumerate(self):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_premium_and_recovery (__main__.Controls.test_premium_and_recovery) ... ok
+/usr/lib/python3.12/unittest/suite.py:84: ResourceWarning: unclosed file <_io.BufferedReader name=6>
+  return self.run(*args, **kwds)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.945s
+
+OK
