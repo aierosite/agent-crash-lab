@@ -1,0 +1,36 @@
+{
+  "skipFocused": {
+    "id": "",
+    "text": "Skip to inspection",
+    "top": 10
+  },
+  "skipTarget": "main",
+  "afterSkipTab": {
+    "details": "lab-panel",
+    "tag": "SUMMARY"
+  },
+  "arrowTab": {
+    "focus": "tab-evidence",
+    "panelVisible": true,
+    "selected": [
+      "tab-evidence"
+    ]
+  },
+  "endTab": {
+    "focus": "tab-scope",
+    "panelVisible": true
+  },
+  "homeTab": {
+    "focus": "tab-overview",
+    "panelVisible": true
+  },
+  "modalOpen": {
+    "focus": "close-native",
+    "focusInside": true,
+    "open": true
+  },
+  "modalClosed": {
+    "focus": "native-btn",
+    "open": false
+  }
+}

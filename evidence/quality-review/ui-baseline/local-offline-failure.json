@@ -1,0 +1,18 @@
+{
+  "busy": "false",
+  "downloadRendered": false,
+  "error": "Failed to fetch",
+  "errorRendered": true,
+  "exportRendered": false,
+  "focus": {
+    "id": "run",
+    "tag": "BUTTON",
+    "text": "Retry inspection"
+  },
+  "resultsRendered": false,
+  "runAriaDisabled": "false",
+  "runLabel": "Retry inspection",
+  "runNativeDisabled": false,
+  "status": "",
+  "title": "Two partial views prove a budget breach"
+}

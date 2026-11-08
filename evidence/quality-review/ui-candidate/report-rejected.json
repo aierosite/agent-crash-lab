@@ -1,0 +1,10 @@
+{
+  "busy": "false",
+  "downloadVisible": false,
+  "errorVisible": true,
+  "exportVisible": false,
+  "focus": "run",
+  "message": "The result contains invalid data. Please try again.",
+  "resultsHidden": true,
+  "run": "Retry inspection"
+}

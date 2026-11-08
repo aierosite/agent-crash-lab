@@ -1,0 +1,10 @@
+{
+  "busy": "false",
+  "downloadVisible": true,
+  "errorVisible": false,
+  "exportVisible": true,
+  "focus": "run",
+  "message": "Cannot reach the local inspection service. Start or restart the workbench, then retry.",
+  "resultsHidden": false,
+  "run": "Run inspection"
+}

@@ -1,0 +1,798 @@
+{
+  "themeButton": "Use light theme",
+  "viewportWidth": 1265,
+  "documentScrollWidth": 1265,
+  "samples": [
+    {
+      "text": "Skip to inspection",
+      "element": "skip-link",
+      "foreground": "rgb(30, 30, 40)",
+      "background": [
+        241,
+        238,
+        246
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Agent Crash Lab",
+      "element": "brand",
+      "foreground": "rgb(244, 239, 255)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 17,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 16.396409215482972,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Local replay",
+      "element": "local-status",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Use light theme",
+      "element": "theme-toggle",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Case file",
+      "element": "case-file-label",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "1",
+      "element": "scenario-index",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 32
+    },
+    {
+      "text": "Live agent retry",
+      "element": "B",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 550,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 16
+    },
+    {
+      "text": "7",
+      "element": "scenario-index",
+      "foreground": "rgb(214, 198, 255)",
+      "background": [
+        37,
+        33,
+        53
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.929299798685204,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Partial evidence, proven excess",
+      "element": "B",
+      "foreground": "rgb(244, 239, 255)",
+      "background": [
+        37,
+        33,
+        53
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 550,
+      "threshold": 4.5,
+      "ratio": 13.829792889786706,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Constructed asynchronous evidence / SYNTHETIC",
+      "element": "SMALL",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        37,
+        33,
+        53
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 7.539958110303766,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Import bundle",
+      "element": "upload-btn",
+      "foreground": "rgb(244, 239, 255)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 16.396409215482972,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Crash & restart",
+      "element": "native-btn",
+      "foreground": "rgb(214, 198, 255)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 11.772039105711164,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Generate, inspect, reduce",
+      "element": "SUMMARY",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 13.034623676547382,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Explore synthetic payment episodes. No agent, wallet or contract is executed.",
+      "element": "P",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.191154864134592,
+      "passed": true,
+      "occurrences": 5
+    },
+    {
+      "text": "Seed",
+      "element": "LABEL",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.191154864134592,
+      "passed": true,
+      "occurrences": 6
+    },
+    {
+      "text": "Generate & check",
+      "element": "lab-search",
+      "foreground": "rgb(33, 26, 49)",
+      "background": [
+        215,
+        199,
+        255
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 10.743998240519637,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Case 7",
+      "element": "scenario-number",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 6.962944576893705,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Two partial views prove a budget breach",
+      "element": "title",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 56.32,
+      "fontWeight": 400,
+      "threshold": 3,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Synthetic control: two compatible observations prove distinct finalized effects. Their uni",
+      "element": "description",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 13,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Intent A · payment limit exceeded",
+      "element": "finding-label",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "≥8",
+      "element": "finding-total",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 57.6,
+      "fontWeight": 650,
+      "threshold": 3,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Exact total unknown · 5 yoctoNEAR allowed",
+      "element": "finding-caption",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 7
+    },
+    {
+      "text": "Review 2 linked actions",
+      "element": "finding-proof",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Run inspection",
+      "element": "run",
+      "foreground": "rgb(33, 26, 49)",
+      "background": [
+        215,
+        199,
+        255
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 10.743998240519637,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Inspection complete",
+      "element": "run-state",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 6
+    },
+    {
+      "text": "3.336 ms · local",
+      "element": "timing",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Payment authority",
+      "element": "card-kicker",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 3
+    },
+    {
+      "text": "Policy breached",
+      "element": "verdict-value",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 19,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Principal by intent",
+      "element": "card-foot",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 6.962944576893705,
+      "passed": true,
+      "occurrences": 16
+    },
+    {
+      "text": "Useful work verified",
+      "element": "verdict-value",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 19,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Evidence incomplete",
+      "element": "verdict-value",
+      "foreground": "rgb(237, 202, 145)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 19,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 10.583891853334048,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Download episode.json",
+      "element": "ci-download",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 4
+    },
+    {
+      "text": "python -I -S gate.py --bundle episode.json",
+      "element": "ci-command",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        25,
+        25,
+        35
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 15.191657506719876,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Overview",
+      "element": "tab-overview",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Payments by intent",
+      "element": "H2",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 16,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Against reference",
+      "element": "SMALL",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 6.3060521236169755,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "A →",
+      "element": "intent-id",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 13,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Limit exceeded",
+      "element": "policy-state breached",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "5",
+      "element": "amount-figure",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 24,
+      "fontWeight": 400,
+      "threshold": 3,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 3
+    },
+    {
+      "text": "yoctoNEAR",
+      "element": "amount-unit",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 9,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 6.962944576893705,
+      "passed": true,
+      "occurrences": 3
+    },
+    {
+      "text": "Unknown",
+      "element": "amount-unresolved",
+      "foreground": "rgb(237, 202, 145)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 500,
+      "threshold": 4.5,
+      "ratio": 10.583891853334048,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Passed",
+      "element": "output-state passed",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 13,
+      "fontWeight": 500,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Within scope",
+      "element": "policy-state within",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "passed",
+      "element": "status passed",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 500,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "A-merchant",
+      "element": "DIV",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 4
+    },
+    {
+      "text": "breached",
+      "element": "row-state breached",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "unknown",
+      "element": "row-state unknown",
+      "foreground": "rgb(237, 202, 145)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 10.583891853334048,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "within",
+      "element": "row-state within",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Offline ZIP & source",
+      "element": "A",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    }
+  ],
+  "skipped": {
+    "inactive": 0,
+    "opacity": 0,
+    "image": 0,
+    "unparsed": 0
+  },
+  "scope": "Rendered flat-surface text styles, including offscreen scrollable content; not a full WCAG audit or screen-reader certification."
+}

@@ -1,0 +1,18 @@
+{
+  "busy": "false",
+  "downloadRendered": true,
+  "error": "",
+  "errorRendered": false,
+  "exportRendered": true,
+  "focus": {
+    "id": "",
+    "tag": "BODY",
+    "text": "\nSkip to inspection\n\nAgent Crash Lab\nLocal replayUse light theme\n\n\n\nCase file17\nChoose a case1. Live agent retry2. Live "
+  },
+  "resultsRendered": true,
+  "runAriaDisabled": "false",
+  "runLabel": "Run inspection",
+  "runNativeDisabled": false,
+  "status": "Inspection complete. Policy breached. Useful work verified.",
+  "title": "Two partial views prove a budget breach"
+}

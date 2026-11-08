@@ -1,0 +1,10 @@
+{
+  "busy": "false",
+  "downloadVisible": true,
+  "errorVisible": false,
+  "exportVisible": true,
+  "focus": "run",
+  "message": "Inspection files could not be loaded. Check your connection and retry setup, or use the offline ZIP.",
+  "resultsHidden": false,
+  "run": "Run inspection"
+}

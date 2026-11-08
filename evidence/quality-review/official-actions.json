@@ -1,0 +1,57 @@
+{
+  "atUtc": "2026-11-08T01:30:29.526828+00:00",
+  "sources": [
+    {
+      "repository": "actions/checkout",
+      "tag": "v7.0.1",
+      "commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "releaseUrl": "https://github.com/actions/checkout/releases/tag/v7.0.1",
+      "publishedAt": "2026-07-20T15:10:05Z",
+      "files": {
+        "action.yml": {
+          "sha256": "d59219cb79590abdb877deaa14e3b65a00c05318bf5a6f3b989b9162b5d08c35",
+          "bytes": 5144
+        },
+        "README.md": {
+          "sha256": "3df94d90d0df6df603a549cc779bc6cab4b21f8deef82eb6fef1f4d88b788174",
+          "bytes": 14138
+        }
+      }
+    },
+    {
+      "repository": "actions/setup-python",
+      "tag": "v7.1.0",
+      "commit": "6d4fd22b20465ccc0f7354476588e8df7c9ca0e0",
+      "releaseUrl": "https://github.com/actions/setup-python/releases/tag/v7.1.0",
+      "publishedAt": "2026-10-22T02:56:04Z",
+      "files": {
+        "action.yml": {
+          "sha256": "0829b3f54d769f8b25cefd4d856c735bc8e097d6597835b838ebb4da497c838d",
+          "bytes": 3141
+        },
+        "README.md": {
+          "sha256": "d0a51dcaf89df5b8211d4bdbf74631c2cacf25879f95834c70bebef51e9ad1f9",
+          "bytes": 7860
+        }
+      }
+    },
+    {
+      "repository": "actions/setup-node",
+      "tag": "v7.1.0",
+      "commit": "949feb2413d6458794dcd2491c4babbbce0c15c1",
+      "releaseUrl": "https://github.com/actions/setup-node/releases/tag/v7.1.0",
+      "publishedAt": "2026-10-08T02:52:34Z",
+      "files": {
+        "action.yml": {
+          "sha256": "84cd55863dbadfb83ed786c0bb4336553c2f4ceb52e102fccec01848f1977387",
+          "bytes": 3002
+        },
+        "README.md": {
+          "sha256": "d8a3975d3194be46f878eb9e78bcfa6823b78cd076b0ebf98ea533f381718fc0",
+          "bytes": 14971
+        }
+      }
+    }
+  ],
+  "readOnly": true
+}

@@ -1,0 +1,18 @@
+{
+  "busy": "false",
+  "downloadRendered": true,
+  "error": "The result contains invalid data. Please try again.",
+  "errorRendered": false,
+  "exportRendered": true,
+  "focus": {
+    "id": "run",
+    "tag": "BUTTON",
+    "text": "Run inspection"
+  },
+  "resultsRendered": true,
+  "runAriaDisabled": "false",
+  "runLabel": "Run inspection",
+  "runNativeDisabled": false,
+  "status": "Inspection complete. Policy breached. Useful work verified.",
+  "title": "Two partial views prove a budget breach"
+}

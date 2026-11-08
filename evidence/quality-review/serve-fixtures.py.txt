@@ -1,0 +1,67 @@
+"""Owned fault fixtures. They never modify the product or contact a model/chain."""
+from pathlib import Path
+from copy import deepcopy
+from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
+from functools import partial
+from urllib.parse import urlsplit
+import json,runpy,secrets,threading
+HERE=Path(__file__).resolve().parent;ROOT=HERE/'release-checkout'
+app=runpy.run_path(str(ROOT/'workbench.py'))
+class FaultHandler(app['Handler']):
+    def do_GET(self):
+        path=urlsplit(self.path).path
+        if path=='/qa-state':return super().send(200,self.server.state)
+        if path=='/api/catalog' and self.server.kind=='catalog' and not self.server.state['faultsInjected']:
+            self.server.state['faultsInjected'].append('catalog-503')
+            return self.send(503,{'error':'Controlled setup outage. Retry setup.'})
+        return super().do_GET()
+    def do_POST(self):
+        if urlsplit(self.path).path=='/api/run':self.server.state['runPosts']+=1
+        return super().do_POST()
+    def send(self,status,body,kind='application/json; charset=utf-8'):
+        path=urlsplit(self.path).path;state=self.server.state
+        if path=='/api/catalog':
+            state['catalogResponses']+=1
+            if self.server.kind=='token' and state['catalogResponses']==1 and status==200:
+                # The constructed response contains the old token; rotate before transmitting it.
+                self.server.token=secrets.token_urlsafe(32);state['faultsInjected'].append('token-rotated')
+        if path=='/api/run':
+            state['runStatuses'].append(status)
+            if status==200:
+                state['successfulEngineRuns']+=1
+                if self.server.kind=='report' and state['successfulEngineRuns']==2:
+                    body=deepcopy(body);body['report']['constraints'][0]['known_subtotal']='0'
+                    state['faultsInjected'].append('inconsistent-report')
+        return super().send(status,body,kind)
+class FaultServer(app['Server']):
+    def __init__(self,kind):
+        super().__init__(('127.0.0.1',0));self.RequestHandlerClass=FaultHandler;self.kind=kind
+        self.state={'kind':kind,'catalogResponses':0,'runPosts':0,'runStatuses':[],
+                    'successfulEngineRuns':0,'faultsInjected':[],'tokensLogged':False}
+    def handle_error(self,request,address):pass
+class StaticHandler(SimpleHTTPRequestHandler):
+    def log_message(self,*_):pass
+    def end_headers(self):self.send_header('Cache-Control','no-store');super().end_headers()
+    def do_GET(self):
+        path=urlsplit(self.path).path
+        if path=='/qa-state':
+            raw=json.dumps(self.server.state).encode();self.send_response(200)
+            self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(raw)))
+            self.end_headers();self.wfile.write(raw);return
+        if path=='/agent_crash_lab.py' and not self.server.state['faultsInjected']:
+            self.server.state['faultsInjected'].append('staged-source-503')
+            raw=b'Controlled staged source outage';self.send_response(503);self.send_header('Content-Length',str(len(raw)))
+            self.end_headers();self.wfile.write(raw);return
+        return super().do_GET()
+servers=[];threads=[];ports={}
+for kind in ['catalog','report','token']:
+    server=FaultServer(kind);servers.append(server);ports[kind]=server.server_port
+static=ThreadingHTTPServer(('127.0.0.1',0),partial(StaticHandler,directory=str(ROOT)))
+static.state={'kind':'static','faultsInjected':[],'tokensLogged':False};servers.append(static);ports['static']=static.server_port
+for server in servers:
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start();threads.append(thread)
+(HERE/'fixture-ports.json').write_text(json.dumps(ports)+'\n');print(json.dumps(ports),flush=True)
+try:threading.Event().wait()
+finally:
+    for server in servers:server.shutdown();server.server_close()
+    for thread in threads:thread.join(2)

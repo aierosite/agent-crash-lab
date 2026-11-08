@@ -25,7 +25,7 @@ function resetWorker(message){
 function browserRequest(path,body){
  if(pending)throw Error('Inspection running');
  if(!worker){
-  worker=new Worker('browser-worker.js?bundle=lab-v5');
+  worker=new Worker('browser-worker.js?bundle=lab-v6');
   worker.onmessage=({data:{id,progress,error,result}})=>{
    const job=pending;
    if(!job||id!==job.id)return;
@@ -36,11 +36,11 @@ function browserRequest(path,body){
    if(result?.error!==undefined)job.reject(Error(result.error,{cause:400}));
    else job.resolve(result);
   };
-  worker.onerror=()=>resetWorker('Python failed. Use ZIP.');
+  worker.onerror=()=>resetWorker('Browser Python stopped unexpectedly. Retry the inspection, or use the offline ZIP.');
  }
  return new Promise((resolve,reject)=>{
   const id=++requestId;
-  const timer=setTimeout(()=>resetWorker('Browser timeout. Use ZIP.'),path==='/api/catalog'?90000:30000);
+  const timer=setTimeout(()=>resetWorker('The browser inspection took too long. Retry, or use the offline ZIP for this recording.'),path==='/api/catalog'?90000:30000);
   pending={id,timer,resolve,reject};
   try{worker.postMessage({id,path,body});}
   catch(error){resetWorker(error.message);}
@@ -296,7 +296,14 @@ async function request(path,body,refresh=true){
   headers: {'Content-Type': 'application/json', 'X-CrashLab-Token': catalog.sessionToken},
   body: path === '/api/assess' ? body : JSON.stringify(body)
  });
- const r = await fetch(path, options);
+ let r;
+ try{r=await fetch(path,options);}
+ catch(cause){
+  const message=cause?.name==='TimeoutError'
+   ?'The local inspection service took too long to respond. Retry, or restart the workbench.'
+   :'Cannot reach the local inspection service. Start or restart the workbench, then retry.';
+  throw Error(message,{cause});
+ }
  const data=await r.json().catch(invalidReport);
  if(r.ok)return data;
  if(refresh&&body&&r.status===403&&data?.error==='Local session token required'){

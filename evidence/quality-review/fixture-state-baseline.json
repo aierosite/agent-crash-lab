@@ -1,0 +1,51 @@
+{
+  "catalog": {
+    "kind": "catalog",
+    "catalogResponses": 2,
+    "runPosts": 1,
+    "runStatuses": [
+      200
+    ],
+    "successfulEngineRuns": 1,
+    "faultsInjected": [
+      "catalog-503"
+    ],
+    "tokensLogged": false
+  },
+  "report": {
+    "kind": "report",
+    "catalogResponses": 1,
+    "runPosts": 3,
+    "runStatuses": [
+      200,
+      200,
+      200
+    ],
+    "successfulEngineRuns": 3,
+    "faultsInjected": [
+      "inconsistent-report"
+    ],
+    "tokensLogged": false
+  },
+  "token": {
+    "kind": "token",
+    "catalogResponses": 2,
+    "runPosts": 2,
+    "runStatuses": [
+      403,
+      200
+    ],
+    "successfulEngineRuns": 1,
+    "faultsInjected": [
+      "token-rotated"
+    ],
+    "tokensLogged": false
+  },
+  "static": {
+    "kind": "static",
+    "faultsInjected": [
+      "staged-source-503"
+    ],
+    "tokensLogged": false
+  }
+}

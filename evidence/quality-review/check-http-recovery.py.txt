@@ -1,0 +1,55 @@
+"""Only the owned loopback server is stressed; no external request or transaction."""
+from pathlib import Path
+from hashlib import sha256
+from http.server import ThreadingHTTPServer
+import json,runpy,socket,threading,time,urllib.request,urllib.error
+HERE=Path(__file__).resolve().parent;ROOT=HERE/'release-checkout'
+app=runpy.run_path(str(ROOT/'workbench.py'))
+class OwnedServer(app['Server']):
+    def handle_error(self,request,address):
+        # Disconnects are deliberate; record the exception type without request data/tokens.
+        import sys
+        self.disconnections.append(type(sys.exc_info()[1]).__name__)
+server=OwnedServer(('127.0.0.1',0));server.disconnections=[]
+thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+base='http://127.0.0.1:'+str(server.server_port)
+def fetch():
+    request=urllib.request.Request(base+'/api/run',data=b'{"id":"async-partial-union"}',
+        headers={'Content-Type':'application/json','X-CrashLab-Token':server.token})
+    try:response=urllib.request.urlopen(request,timeout=3)
+    except urllib.error.HTTPError as error:response=error
+    return response.status,json.loads(response.read())
+clients=[]
+try:
+    status,initial=fetch();assert status==200
+    expected=sha256(json.dumps(initial['report'],sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    for _ in range(4):
+        connection=socket.create_connection(('127.0.0.1',server.server_port),timeout=2)
+        headers=('POST /api/run HTTP/1.1\r\nHost: 127.0.0.1:'+str(server.server_port)+'\r\nContent-Type: application/json\r\n'
+                 'X-CrashLab-Token: '+server.token+'\r\nContent-Length: 128\r\nConnection: close\r\n\r\n{')
+        connection.sendall(headers.encode());clients.append(connection)
+    # Wait for the exact owned handler capacity, not an arbitrary sleep or stale state marker.
+    deadline=time.monotonic()+2
+    while time.monotonic()<deadline:
+        if getattr(app['SLOTS'],'_value',None)==0:break
+        threading.Event().wait(.01)
+    assert getattr(app['SLOTS'],'_value',None)==0
+    start=time.perf_counter();status,overloaded=fetch();rejection_ms=(time.perf_counter()-start)*1000
+    assert status==429 and rejection_ms<2000
+    for connection in clients:connection.close()
+    clients=[];start=time.perf_counter();attempts=[]
+    while time.perf_counter()-start<2:
+        status,recovered=fetch();attempts.append(status)
+        if status==200:break
+        threading.Event().wait(.01)
+    assert status==200 and sha256(json.dumps(recovered['report'],sort_keys=True,separators=(',',':')).encode()).hexdigest()==expected
+    record={'capacity':4,'excessRequestStatus':429,'excessRequestMs':round(rejection_ms,3),
+        'recoveredWithinMs':round((time.perf_counter()-start)*1000,3),'recoveryStatuses':attempts,
+        'fullReportMatchedAfterRecovery':True,'disconnectionExceptionTypes':server.disconnections,
+        'scope':'Owned authenticated loopback requests only. This is not a public-network load test.',
+        'tokensLogged':False,'nativeTransactions':0,'modelCalls':0}
+    with (HERE/'http-recovery-baseline.json').open('x',encoding='utf-8') as stream:stream.write(json.dumps(record,indent=2)+'\n')
+    print(json.dumps(record))
+finally:
+    for connection in clients:connection.close()
+    server.shutdown();server.server_close();thread.join(2)

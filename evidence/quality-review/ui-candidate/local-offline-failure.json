@@ -1,0 +1,9 @@
+{
+  "downloadVisible": false,
+  "errorVisible": true,
+  "exportVisible": false,
+  "focus": "run",
+  "message": "Cannot reach the local inspection service. Start or restart the workbench, then retry.",
+  "resultsHidden": true,
+  "run": "Retry inspection"
+}

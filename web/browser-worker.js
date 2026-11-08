@@ -7,9 +7,11 @@ async function read(path){
  const expected=catalog.files[path];
  if(!expected||path.split('/').some(p=>p==='..'||p===''))throw Error('Unlisted release path');
  const url=new URL(path,root);url.searchParams.set('sha',expected.sha256);
- const response=await fetch(url);if(!response.ok)throw Error(`Release file unavailable: ${path}`);
+ let response;
+ try{response=await fetch(url);}catch(cause){throw Error('Inspection files could not be downloaded. Check your connection and retry setup, or use the offline ZIP.',{cause});}
+ if(!response.ok)throw Error('Inspection files could not be loaded. Check your connection and retry setup, or use the offline ZIP.');
  const bytes=new Uint8Array(await response.arrayBuffer());
- if(bytes.byteLength!==expected.bytes||await digest(bytes)!==expected.sha256)throw Error(`Release file changed: ${path}. Reload after deployment finishes.`);
+ if(bytes.byteLength!==expected.bytes||await digest(bytes)!==expected.sha256)throw Error('Inspection files do not match this release. Reload after the update finishes, or use the offline ZIP.');
  return bytes;
 }
 async function stage(path){
@@ -21,10 +23,16 @@ async function stage(path){
 async function boot(id){
  if(python)return;
  postMessage({id,progress:'Starting browser Python…'});
- const response=await fetch(new URL('catalog.json',self.location.href),{cache:'reload'});if(!response.ok)throw Error('Browser catalog unavailable');
- catalog=await response.json();if(catalog.format!=='agent-crash-lab/browser-v1')throw Error('Unsupported browser catalog');
- importScripts(RUNTIME+'pyodide.js');
- python=await loadPyodide({indexURL:RUNTIME});python.FS.mkdir('/app');
+ try{
+  const response=await fetch(new URL('catalog.json',self.location.href),{cache:'reload'});
+  if(!response.ok)throw Error('Catalog download failed');
+  catalog=await response.json();if(catalog.format!=='agent-crash-lab/browser-v1')throw Error('Unsupported catalog');
+ }catch(cause){throw Error('The browser case list could not be loaded. Reload and retry setup, or use the offline ZIP.',{cause});}
+ try{
+  importScripts(RUNTIME+'pyodide.js');
+  python=await loadPyodide({indexURL:RUNTIME});
+ }catch(cause){throw Error('Browser Python could not start. Check your connection and retry setup, or use the offline ZIP.',{cause});}
+ python.FS.mkdir('/app');
  for(const path of ['agent_crash_lab.py','workbench.py','BASELINES.json'])await stage(path);
  python.runPython("import sys,json\nsys.path.insert(0,'/app')\nimport workbench as app");
 }

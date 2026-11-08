@@ -1,0 +1,7 @@
+{
+  "atUtc": "2026-11-08T01:49:49.369613+00:00",
+  "reason": "Add owned local-service stop/restart to assess fetch-error clarity and recovery with a new anti-CSRF token.",
+  "beforeAdditionalOutageObservation": true,
+  "productSourcesChanged": false,
+  "toolingCorrection": "The busy UI was observed, with focus retained and exports hidden. A second locator press may wait until aria-disabled clears. The backend count assertion failed and values were not persisted before stopping the owned server. Do not claim duplicate-request prevention from that attempt; repeat with a documented current-focus key API or report the limitation."
+}

@@ -1,0 +1,75 @@
+{
+  "atUtc": "2026-11-08T01:33:49.916530+00:00",
+  "format": "agent-crash-lab/quality-review-v1",
+  "baseline": "v0.9.0",
+  "sourceHashes": {
+    "agent_crash_lab.py": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "workbench.py": "17b4c5523d2e8356c38249e8592e7f030b6cb7ee397f36e850b5b00db9700a7a",
+    "web/app.js": "c52d20dbf49290f07bfc81e4a6f19997897394249deb94d2442b0638a1e9ba18",
+    "web/style.css": "5b1d246e285b9cbc5e47d97e58a8b7a9841619f7cd6745ff00e4974c99c344aa",
+    "web/index.html": "b76fc04fd7afe0d4e658ff5cfce57bfac9562a4e957fc49f9ecfab33227d5d92",
+    "web/browser-worker.js": "f59452fd43fac4caf5522fa71fda93e2b6272e75487594eb1094141f4a98b392"
+  },
+  "previousGoalTurn": "progress",
+  "resources": {
+    "cases": [
+      "All 46 declared baselines",
+      "128 copies of each compatible partial view",
+      "Above the 4 MiB source limit",
+      "Above the 4096 RPC-record bound within other decode bounds when possible",
+      "Beyond the declared decode-depth limit"
+    ],
+    "latencyBudgetSeconds": 30,
+    "perWorkerTimeoutSeconds": 45,
+    "memoryScope": "Owned standalone Python worker. Windows process-lifetime PeakWorkingSetSize and optional Python allocation metrics; no browser memory or model memory claim.",
+    "expectations": [
+      "Valid inputs retain exact report hashes across repeats",
+      "Over-bound input rejects or remains incomplete; it never produces a clean financial conclusion",
+      "Record cold/import and warm-assessment time separately; no universal speedup claim"
+    ]
+  },
+  "recovery": {
+    "fixtures": [
+      "One local catalog 503, then success",
+      "One deliberately inconsistent report, then success",
+      "One stale local anti-CSRF token, then controlled refresh",
+      "One browser-staged source 503, then success"
+    ],
+    "ownedHttpOnly": true,
+    "expected": [
+      "Visible actionable error, no stale financial verdict/export",
+      "Retry on the same tab reaches an actual matching report",
+      "A token refresh is bounded to one retry",
+      "Four incomplete authorized loopback requests cannot leak assessment slots after their clients close"
+    ]
+  },
+  "accessibility": {
+    "modes": [
+      "Dark desktop",
+      "Light desktop",
+      "390x844 mobile"
+    ],
+    "checks": [
+      "Keyboard skip link, tabs/arrows, disclosures and modal dismissal",
+      "Focus returns visibly after transient failures and modal close",
+      "Rendered accessible names, result/error live semantics and busy controls",
+      "No document-level horizontal overflow; a labeled table may scroll within its own region",
+      "Contrast samples measured from rendered flat surfaces; this is not a full WCAG audit or screen-reader certification"
+    ]
+  },
+  "actions": {
+    "sources": "official-actions/index.json",
+    "policy": [
+      "Review pinned official action.yml and README",
+      "Pin exact commits, disable unneeded credential persistence and automatic package-manager caching",
+      "Keep contents read-only; do not dispatch the fresh native/model workflow",
+      "Verify the ordinary four-job matrix on GitHub after publication"
+    ]
+  },
+  "exclusions": [
+    "No paid API, purchase, model call, wallet, signing, native transaction or message",
+    "No new agent/chat",
+    "No broad changes without a measured defect or requirement"
+  ],
+  "scope": "Same-author measured engineering review on owned local fixtures and published code; not an external audit."
+}

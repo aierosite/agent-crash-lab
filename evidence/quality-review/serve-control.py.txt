@@ -1,0 +1,28 @@
+from pathlib import Path
+from urllib.parse import urlsplit
+import argparse,json,runpy,threading
+HERE=Path(__file__).resolve().parent;app=runpy.run_path(str(HERE/'release-checkout/workbench.py'))
+parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,required=True);parser.add_argument('--slow',action='store_true');args=parser.parse_args()
+class ControlHandler(app['Handler']):
+    def do_GET(self):
+        if urlsplit(self.path).path=='/qa-state':return super().send(200,self.server.state)
+        return super().do_GET()
+    def do_POST(self):
+        if urlsplit(self.path).path=='/api/run':self.server.state['runPosts']+=1
+        return super().do_POST()
+    def send(self,status,body,kind='application/json; charset=utf-8'):
+        path=urlsplit(self.path).path
+        if path=='/api/catalog':self.server.state['catalogResponses']+=1
+        if path=='/api/run':
+            self.server.state['runStatuses'].append(status)
+            if status==200:
+                self.server.state['responses']+=1
+                if args.slow and self.server.state['responses']==2:
+                    self.server.state['controlledDelaySeconds']=2
+                    threading.Event().wait(2)
+        return super().send(status,body,kind)
+server=app['Server'](('127.0.0.1',args.port));server.RequestHandlerClass=ControlHandler
+server.state={'runPosts':0,'responses':0,'runStatuses':[],'catalogResponses':0,'controlledDelaySeconds':0,'tokensLogged':False}
+print(json.dumps({'port':server.server_port,'slow':args.slow}),flush=True)
+try:server.serve_forever()
+finally:server.server_close()

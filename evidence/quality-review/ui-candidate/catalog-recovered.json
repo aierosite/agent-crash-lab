@@ -1,0 +1,10 @@
+{
+  "busy": "false",
+  "downloadVisible": true,
+  "errorVisible": false,
+  "exportVisible": true,
+  "focus": "run",
+  "message": "Controlled setup outage. Retry setup.",
+  "resultsHidden": false,
+  "run": "Run inspection"
+}

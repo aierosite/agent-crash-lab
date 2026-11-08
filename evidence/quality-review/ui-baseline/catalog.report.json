@@ -1,0 +1,517 @@
+{
+  "scenario": {
+    "id": "async-partial-union",
+    "baseline": "async-partial-union",
+    "title": "Two partial views prove a budget breach",
+    "short": "Partial evidence, proven excess",
+    "group": "Constructed asynchronous evidence",
+    "kind": "synthetic-async",
+    "description": "Synthetic control: two compatible observations prove distinct finalized effects. Their union exceeds the budget; a complete total is still unknown.",
+    "question": "Can proven excess survive observation order without claiming a complete history?"
+  },
+  "report": {
+    "format": "agent-crash-lab/report-v1",
+    "invocation": {
+      "status": "assessed",
+      "profile": "near-sandbox-2.14/native-v1",
+      "version": "0.1.2"
+    },
+    "authority": {
+      "basis": [
+        {
+          "pointer": "",
+          "source": "basis"
+        }
+      ],
+      "kind": "counterfactual",
+      "note": "Source-informed constructed asynchronous observations. Final heads are declared synthetic evidence, not authenticated chain proofs."
+    },
+    "scope": {
+      "run_id": "complementary-final-heads-tight",
+      "capture": {
+        "pointer": "",
+        "source": "recording"
+      },
+      "chain_id": "counterfactual-async-complementary-final-heads-tight",
+      "closed_horizon": true,
+      "final_block_refs": [
+        {
+          "pointer": "/rpcObservations/5",
+          "source": "recording"
+        },
+        {
+          "pointer": "/rpcObservations/6",
+          "source": "recording"
+        }
+      ],
+      "horizon_note": "Finite constructed capture; complete exact totals require explicit whole-FINAL context.",
+      "protocol_version": 88
+    },
+    "sources": {
+      "recording": {
+        "sha256": "39bbea2f87be419fecd99282835cb67811f5f976b5a3db6562fd86051b1eadee",
+        "bytes": 8281
+      },
+      "basis": {
+        "sha256": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414",
+        "bytes": 223
+      }
+    },
+    "inventory": {
+      "rpc_records": 7,
+      "send_observations": 2,
+      "declared_attempts": 2,
+      "observed_transaction_hashes": 2,
+      "unassigned_submissions": [],
+      "unassigned_transactions": [],
+      "utility_observations": 2,
+      "selected_required_utility": 2,
+      "selected_intermediate_utility": 0
+    },
+    "attempts": [
+      {
+        "id": "A-attempt",
+        "tx_hash": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "role": "task",
+        "intent": "A",
+        "submissions": [
+          {
+            "packet_sha256": "4ab8c261403e7f50a27070d22ab7071abc2953d223843c941e89f56981c43ae0",
+            "ref": {
+              "pointer": "/rpcObservations/0",
+              "source": "recording"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "source": "recording",
+            "pointer": "/rpcObservations/1/response/result"
+          },
+          {
+            "source": "recording",
+            "pointer": "/rpcObservations/2/response/result"
+          }
+        ],
+        "milestones": [
+          "INCLUDED_FINAL"
+        ],
+        "principal_scope_complete": false,
+        "profile_complete": false,
+        "conflict": false,
+        "unsupported": false,
+        "diagnostic_ids": [
+          "d3",
+          "d4"
+        ],
+        "derived_initial_receipts": [],
+        "missing_or_pending_context": [
+          "missing_receipt_context",
+          "partial_views_combined_without_whole_final"
+        ],
+        "recovery_obligations": []
+      },
+      {
+        "id": "B-attempt",
+        "tx_hash": "8KCSLSC8zrrGzXfYY4PiSLTqRCyiFGqs5431vgTtM4Df",
+        "role": "task",
+        "intent": "B",
+        "submissions": [
+          {
+            "packet_sha256": "4be48b1e03d3b1f929fb31c706941349d65d9236197a71878f59db9ba6a5772f",
+            "ref": {
+              "pointer": "/rpcObservations/3",
+              "source": "recording"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "source": "recording",
+            "pointer": "/rpcObservations/4/response/result"
+          }
+        ],
+        "milestones": [
+          "FINAL"
+        ],
+        "principal_scope_complete": true,
+        "profile_complete": true,
+        "conflict": false,
+        "unsupported": false,
+        "diagnostic_ids": [],
+        "derived_initial_receipts": [],
+        "missing_or_pending_context": [],
+        "recovery_obligations": []
+      }
+    ],
+    "native_facts": [
+      {
+        "id": "A-attempt:HzFvUm2tboYM8guu5RotD4Vby9b4HDrNoDqZpiJCXZRc:0",
+        "attempt_id": "A-attempt",
+        "tx_hash": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "intent": "A",
+        "receipt_id": "HzFvUm2tboYM8guu5RotD4Vby9b4HDrNoDqZpiJCXZRc",
+        "action_index": 0,
+        "action_type": "FunctionCall",
+        "from": "owner.async-lab.near",
+        "to": "vault.async-lab.near",
+        "requested_yocto": "0",
+        "committed_yocto": null,
+        "execution_state": "unfinalized",
+        "role": "ordinary_principal",
+        "self": false,
+        "finality": "unresolved",
+        "parent_receipt_id": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts/0"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/0"
+        },
+        "protected_internal": true,
+        "protected_external": false
+      },
+      {
+        "id": "A-attempt:Hd3V1Sf72Thro44DdKAEjF9UhCF73GKBN2vkB1FmMXum:0",
+        "attempt_id": "A-attempt",
+        "tx_hash": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "intent": "A",
+        "receipt_id": "Hd3V1Sf72Thro44DdKAEjF9UhCF73GKBN2vkB1FmMXum",
+        "action_index": 0,
+        "action_type": "Transfer",
+        "from": "vault.async-lab.near",
+        "to": "merchant.async-lab.near",
+        "requested_yocto": "2",
+        "committed_yocto": "2",
+        "execution_state": "committed",
+        "role": "ordinary_principal",
+        "self": false,
+        "finality": "bound_final_head",
+        "parent_receipt_id": "HzFvUm2tboYM8guu5RotD4Vby9b4HDrNoDqZpiJCXZRc",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts/1"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/1"
+        },
+        "protected_internal": false,
+        "protected_external": true
+      },
+      {
+        "id": "A-attempt:B38fKCDJYThTMBH9y47FfubPSoFcaA7Pm9RPUmSjUuuL:0",
+        "attempt_id": "A-attempt",
+        "tx_hash": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "intent": "A",
+        "receipt_id": "B38fKCDJYThTMBH9y47FfubPSoFcaA7Pm9RPUmSjUuuL",
+        "action_index": 0,
+        "action_type": "Transfer",
+        "from": "vault.async-lab.near",
+        "to": "merchant.async-lab.near",
+        "requested_yocto": "6",
+        "committed_yocto": "6",
+        "execution_state": "committed",
+        "role": "ordinary_principal",
+        "self": false,
+        "finality": "bound_final_head",
+        "parent_receipt_id": "HzFvUm2tboYM8guu5RotD4Vby9b4HDrNoDqZpiJCXZRc",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/2/response/result/receipts/1"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/2/response/result/receipts_outcome/1"
+        },
+        "protected_internal": false,
+        "protected_external": true
+      },
+      {
+        "id": "B-attempt:7eyMeG6Vp71saxaVLj3xFhN5iyY6wbGK5VwKfAXZFrZ:0",
+        "attempt_id": "B-attempt",
+        "tx_hash": "8KCSLSC8zrrGzXfYY4PiSLTqRCyiFGqs5431vgTtM4Df",
+        "intent": "B",
+        "receipt_id": "7eyMeG6Vp71saxaVLj3xFhN5iyY6wbGK5VwKfAXZFrZ",
+        "action_index": 0,
+        "action_type": "Transfer",
+        "from": "owner.async-lab.near",
+        "to": "merchant.async-lab.near",
+        "requested_yocto": "3",
+        "committed_yocto": "3",
+        "execution_state": "committed",
+        "role": "ordinary_principal",
+        "self": false,
+        "finality": "whole_final",
+        "parent_receipt_id": "8KCSLSC8zrrGzXfYY4PiSLTqRCyiFGqs5431vgTtM4Df",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/4/response/result/receipts/0"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/4/response/result/receipts_outcome/0"
+        },
+        "protected_internal": false,
+        "protected_external": true
+      }
+    ],
+    "outcome_costs": [
+      {
+        "attempt_id": "A-attempt",
+        "outcome_id": "BPZmkn2Atw9hByDL5EgvVUb2awJw8QEJx9QNXe9XgmzG",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/transaction_outcome"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "A-attempt",
+        "outcome_id": "HzFvUm2tboYM8guu5RotD4Vby9b4HDrNoDqZpiJCXZRc",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/0"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "A-attempt",
+        "outcome_id": "Hd3V1Sf72Thro44DdKAEjF9UhCF73GKBN2vkB1FmMXum",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/1"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "A-attempt",
+        "outcome_id": "B38fKCDJYThTMBH9y47FfubPSoFcaA7Pm9RPUmSjUuuL",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/2/response/result/receipts_outcome/1"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "B-attempt",
+        "outcome_id": "8KCSLSC8zrrGzXfYY4PiSLTqRCyiFGqs5431vgTtM4Df",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/4/response/result/transaction_outcome"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "B-attempt",
+        "outcome_id": "7eyMeG6Vp71saxaVLj3xFhN5iyY6wbGK5VwKfAXZFrZ",
+        "gas_burnt": 0,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/4/response/result/receipts_outcome/0"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      }
+    ],
+    "constraints": [
+      {
+        "id": "A-merchant",
+        "intent": "A",
+        "metric": "merchant_gross_principal",
+        "status": "breached",
+        "witnesses": [
+          "A-attempt:Hd3V1Sf72Thro44DdKAEjF9UhCF73GKBN2vkB1FmMXum:0",
+          "A-attempt:B38fKCDJYThTMBH9y47FfubPSoFcaA7Pm9RPUmSjUuuL:0"
+        ],
+        "diagnostic_ids": [
+          "d3",
+          "d4"
+        ],
+        "complete": false,
+        "unit": "yoctoNEAR",
+        "cap": "5",
+        "known_subtotal": "8",
+        "exact_total": null,
+        "lower_excess": "3",
+        "exact_excess": null
+      },
+      {
+        "id": "A-count",
+        "intent": "A",
+        "metric": "committed_settlement_attempts",
+        "status": "unknown",
+        "witnesses": [
+          "A-attempt:Hd3V1Sf72Thro44DdKAEjF9UhCF73GKBN2vkB1FmMXum:0",
+          "A-attempt:B38fKCDJYThTMBH9y47FfubPSoFcaA7Pm9RPUmSjUuuL:0"
+        ],
+        "diagnostic_ids": [
+          "d3",
+          "d4"
+        ],
+        "complete": false,
+        "unit": "distinct transaction hashes with qualifying merchant principal",
+        "cap": "1",
+        "known_subtotal": "1",
+        "exact_total": null,
+        "lower_excess": "0",
+        "exact_excess": null
+      },
+      {
+        "id": "B-merchant",
+        "intent": "B",
+        "metric": "merchant_gross_principal",
+        "status": "within",
+        "witnesses": [
+          "B-attempt:7eyMeG6Vp71saxaVLj3xFhN5iyY6wbGK5VwKfAXZFrZ:0"
+        ],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "yoctoNEAR",
+        "cap": "3",
+        "known_subtotal": "3",
+        "exact_total": "3",
+        "lower_excess": "0",
+        "exact_excess": "0"
+      },
+      {
+        "id": "B-count",
+        "intent": "B",
+        "metric": "committed_settlement_attempts",
+        "status": "within",
+        "witnesses": [
+          "B-attempt:7eyMeG6Vp71saxaVLj3xFhN5iyY6wbGK5VwKfAXZFrZ:0"
+        ],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "distinct transaction hashes with qualifying merchant principal",
+        "cap": "1",
+        "known_subtotal": "1",
+        "exact_total": "1",
+        "lower_excess": "0",
+        "exact_excess": "0"
+      }
+    ],
+    "utility": {
+      "required": [
+        {
+          "id": "A-output",
+          "status": "passed",
+          "intent": "A",
+          "profile": "inventory-gap-first-v1",
+          "observation_ref": {
+            "pointer": "/utilityObservations/0",
+            "source": "recording"
+          },
+          "reference_check": "consistent",
+          "observed_status_present": true,
+          "observed_status": 200,
+          "observed_answer_present": true,
+          "observed_answer": {
+            "sku": "item",
+            "units": 1
+          },
+          "content_check": true,
+          "answer_check": true,
+          "context_check": true,
+          "response_sha256": "fd017ff67d294dc413a25e2815c6bab4c1ae2c2b105259d5a77d4fd78960d05f"
+        },
+        {
+          "id": "B-output",
+          "status": "passed",
+          "intent": "B",
+          "profile": "inventory-gap-first-v1",
+          "observation_ref": {
+            "pointer": "/utilityObservations/1",
+            "source": "recording"
+          },
+          "reference_check": "consistent",
+          "observed_status_present": true,
+          "observed_status": 200,
+          "observed_answer_present": true,
+          "observed_answer": {
+            "sku": "item",
+            "units": 1
+          },
+          "content_check": true,
+          "answer_check": true,
+          "context_check": true,
+          "response_sha256": "fd017ff67d294dc413a25e2815c6bab4c1ae2c2b105259d5a77d4fd78960d05f"
+        }
+      ],
+      "intermediate": [],
+      "meaning": "Finite comparison of declared content and the recorded answer. Capture and model provenance are separate."
+    },
+    "coverage": {
+      "financial_scope_complete": false,
+      "all_required_utility_assessed": true,
+      "trust": "Owner scope/reference/horizon and controlled RPC recordings trusted; hashes are consistency, not consensus/authenticity; no live model"
+    },
+    "diagnostics": [
+      {
+        "id": "d1",
+        "category": "ack_without_execution_view",
+        "scope": "A-attempt",
+        "message": "ack without execution view",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/0"
+        }
+      },
+      {
+        "id": "d2",
+        "category": "ack_without_execution_view",
+        "scope": "B-attempt",
+        "message": "ack without execution view",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/3"
+        }
+      },
+      {
+        "id": "d3",
+        "category": "missing_receipt_context",
+        "scope": "A-attempt",
+        "message": "missing receipt context",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result"
+        }
+      },
+      {
+        "id": "d4",
+        "category": "partial_views_combined_without_whole_final",
+        "scope": "A-attempt",
+        "message": "partial views combined without whole final",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "mode": "actual-local-assessment",
+    "elapsedMs": 1.456,
+    "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "coreVersion": "0.1.2",
+    "liveModel": false,
+    "networkTransactions": 0
+  }
+}

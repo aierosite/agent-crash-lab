@@ -1,0 +1,15 @@
+{
+  "capacity": 4,
+  "excessRequestStatus": 429,
+  "excessRequestMs": 1.079,
+  "recoveredWithinMs": 3.43,
+  "recoveryStatuses": [
+    200
+  ],
+  "fullReportMatchedAfterRecovery": true,
+  "disconnectionExceptionTypes": [],
+  "scope": "Owned authenticated loopback requests only. This is not a public-network load test.",
+  "tokensLogged": false,
+  "nativeTransactions": 0,
+  "modelCalls": 0
+}

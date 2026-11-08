@@ -6,9 +6,13 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Recovery and measured limits · v0.9.1
+
+Transient failures now explain how to retry the local service or browser setup. Invalid results stay hidden and cannot be exported. An owned-fixture review covers recovery, keyboard paths, two themes and a mobile viewport. The optional [resource measurement command](docs/QUALITY_REVIEW.md) records repeated latency and OS process peak memory with exact input/source hashes. These are same-author engineering checks, not an external audit or a universal memory/performance guarantee.
+
 ## Order-independent partial evidence · v0.9.0
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.9.0)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.9.1)
 
 Open **Scenario Lab** to generate, inspect and reduce new synthetic episodes directly in the local or browser workbench. **Keep this run in CI** downloads the exact current input as `episode.json` with its explained 0/1/2 gate. Local reference checks use an isolated Python process; browser reference checks use a separate module in the same WebAssembly runtime, explicitly disclosed in the interface. [Walk through the workflow](docs/WORKFLOW.md).
 

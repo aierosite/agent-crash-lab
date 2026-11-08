@@ -1,0 +1,478 @@
+{
+  "themeButton": "Use light theme",
+  "viewportWidth": 375,
+  "documentScrollWidth": 375,
+  "samples": [
+    {
+      "text": "Skip to inspection",
+      "element": "skip-link",
+      "foreground": "rgb(30, 30, 40)",
+      "background": [
+        241,
+        238,
+        246
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Agent Crash Lab",
+      "element": "brand",
+      "foreground": "rgb(244, 239, 255)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 15,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 16.396409215482972,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Use light theme",
+      "element": "theme-toggle",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 3
+    },
+    {
+      "text": "Case file",
+      "element": "case-file-label",
+      "foreground": "rgb(184, 177, 200)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 8.939268984674356,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Import bundle",
+      "element": "upload-btn",
+      "foreground": "rgb(244, 239, 255)",
+      "background": [
+        19,
+        19,
+        27
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 16.396409215482972,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Generate, inspect, reduce",
+      "element": "SUMMARY",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 13.034623676547382,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Explore synthetic payment episodes. No agent, wallet or contract is executed.",
+      "element": "P",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.191154864134592,
+      "passed": true,
+      "occurrences": 5
+    },
+    {
+      "text": "Seed",
+      "element": "LABEL",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        38,
+        38,
+        49
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 8.191154864134592,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Generate & check",
+      "element": "lab-search",
+      "foreground": "rgb(33, 26, 49)",
+      "background": [
+        215,
+        199,
+        255
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 10.743998240519637,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Case 7",
+      "element": "scenario-number",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 9,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 6.962944576893705,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "Two partial views prove a budget breach",
+      "element": "title",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 35,
+      "fontWeight": 400,
+      "threshold": 3,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Synthetic control: two compatible observations prove distinct finalized effects. Their uni",
+      "element": "description",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 5
+    },
+    {
+      "text": "Intent A · payment limit exceeded",
+      "element": "finding-label",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "≥8",
+      "element": "finding-total",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 34,
+      "fontWeight": 650,
+      "threshold": 3,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Review 2 linked actions",
+      "element": "finding-proof",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Run inspection",
+      "element": "run",
+      "foreground": "rgb(33, 26, 49)",
+      "background": [
+        215,
+        199,
+        255
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 10.743998240519637,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Python via jsDelivr.",
+      "element": "browser-note",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 10
+    },
+    {
+      "text": "3.8 ms · Wasm",
+      "element": "timing",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Payment authority",
+      "element": "card-kicker",
+      "foreground": "rgb(195, 189, 207)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 600,
+      "threshold": 4.5,
+      "ratio": 9.044415780535767,
+      "passed": true,
+      "occurrences": 3
+    },
+    {
+      "text": "Policy breached",
+      "element": "verdict-value",
+      "foreground": "rgb(255, 171, 169)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.162083599661152,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Principal by intent",
+      "element": "card-foot",
+      "foreground": "rgb(172, 165, 187)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 6.962944576893705,
+      "passed": true,
+      "occurrences": 6
+    },
+    {
+      "text": "Useful work verified",
+      "element": "verdict-value",
+      "foreground": "rgb(155, 213, 185)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.918552307510298,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Evidence incomplete",
+      "element": "verdict-value",
+      "foreground": "rgb(237, 202, 145)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 14,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 10.583891853334048,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Download episode.json",
+      "element": "ci-download",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 2
+    },
+    {
+      "text": "python -I -S gate.py --bundle episode.json",
+      "element": "ci-command",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        25,
+        25,
+        35
+      ],
+      "fontSizePx": 12,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 15.191657506719876,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Raw report",
+      "element": "tab-raw",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Report JSON",
+      "element": "H2",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 16,
+      "fontWeight": 650,
+      "threshold": 4.5,
+      "ratio": 14.392421829271026,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "{\n  \"scenario\": {\n    \"id\": \"async-partial-union\",\n    \"baseline\": \"async-partial-union\",\n",
+      "element": "raw",
+      "foreground": "rgb(241, 238, 246)",
+      "background": [
+        25,
+        25,
+        35
+      ],
+      "fontSizePx": 11,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 15.191657506719876,
+      "passed": true,
+      "occurrences": 1
+    },
+    {
+      "text": "Offline ZIP & source",
+      "element": "A",
+      "foreground": "rgb(208, 186, 255)",
+      "background": [
+        30,
+        30,
+        40
+      ],
+      "fontSizePx": 10,
+      "fontWeight": 400,
+      "threshold": 4.5,
+      "ratio": 9.554881130697582,
+      "passed": true,
+      "occurrences": 1
+    }
+  ],
+  "skipped": {
+    "inactive": 0,
+    "opacity": 0,
+    "image": 0,
+    "unparsed": 0
+  },
+  "scope": "Rendered flat-surface text styles, including offscreen scrollable content; not a full WCAG audit or screen-reader certification."
+}

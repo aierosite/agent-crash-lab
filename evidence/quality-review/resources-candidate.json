@@ -1,0 +1,1198 @@
+{
+  "format": "agent-crash-lab/resource-measurement-v1",
+  "atUtc": "2026-11-08T01:57:37.451134+00:00",
+  "measuredSources": {
+    "agent_crash_lab.py": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "workbench.py": "649a07c1411d66c4f5d8c4227e114fe2a44c392164fb66408b3ed0c9ee4cc01c",
+    "tools/measure_resources.py": "37a79927a4f1084336d66582b70ce2dfcdf4a53c663a57a29ae9ae1b74ec45cc",
+    "BASELINES.json": "0ca6bd2c8df62877cfa7380f5a5e1d5d0b18f640453c433760dbd072969d35bb"
+  },
+  "python": "3.14.7",
+  "os": "Windows",
+  "logicalCpuCount": 12,
+  "cases": [
+    {
+      "case": "baselines",
+      "ownedPid": 45500,
+      "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "importMs": 75.017,
+      "inputPreparationMs": 9.861,
+      "samples": 138,
+      "medianMs": 3.871,
+      "maxMs": 10.659,
+      "beforeImportProcessLifetimePeakBytes": 22020096,
+      "afterProcessLifetimePeakBytes": 35487744,
+      "checks": [
+        {
+          "input": "agent-leash-artifact",
+          "inputBytes": 346436,
+          "taskSha256": "8259b543871df5663366d72f9dd097c53cd2eac0099d8ce46e9970a51816eceb",
+          "sourcesSha256": {
+            "basis": "f333add999c1d6b3d5f69823226c4935f4074e9e6ff43b7f00c20e35a417c32b",
+            "recording": "710b2d4e44bb0c67bab8778154d8a089b7668fd5195eadba76cf7f4d84827c69"
+          },
+          "warmupMs": 11.208,
+          "repeatedMs": [
+            10.659,
+            10.273,
+            10.377
+          ],
+          "reportSha256": "aec40bd92c714f4613422b74778b9782179b2ae0b304d1e9a7b7da9cdb825f92",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "balance-attribution",
+          "inputBytes": 55607,
+          "taskSha256": "2b86a2c0151826a61cab75bd38d35f70069514bf8d7b1ec6aeacad5fbfa47e42",
+          "sourcesSha256": {
+            "basis": "bc3870aa8a13dd52248915cd30a29af7ed5eab4a34c7c04be445d728acea2c85",
+            "recording": "d55ed8a5666bebfe395dec26eb30d388ceb6a47fbc00dd4de96b3d1c9e83a789"
+          },
+          "warmupMs": 2.118,
+          "repeatedMs": [
+            2.124,
+            2.143,
+            2.124
+          ],
+          "reportSha256": "a061355cb03b2231bf12db1eb4ca818d23625af4787216d9b4e5f7db2c9acfbe",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "deleted-signer-refund",
+          "inputBytes": 31858,
+          "taskSha256": "e199dcfe32018ed8441eb2b662c74cecac9ce8c8064a9090c55a6f76e2c195cd",
+          "sourcesSha256": {
+            "basis": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca",
+            "recording": "db6669e98f42630ff82d85eb4e26e58615c8619e423085db28e444a76d30a186"
+          },
+          "warmupMs": 1.221,
+          "repeatedMs": [
+            1.225,
+            1.21,
+            1.229
+          ],
+          "reportSha256": "349a2abe96be224b7a25902a009a8f82ab4730a9fd92daa6fbc05fde44dcdcfb",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "function-deposit",
+          "inputBytes": 150751,
+          "taskSha256": "55002f48c25ca87e61bb88e81ee2632cc113afa2ba77380e3684a5bf04ae784a",
+          "sourcesSha256": {
+            "basis": "877cff66472502942b9799330871488168edb62cd0965fe11d01a5f625ce0e00",
+            "recording": "11f4a493beb8526759eb1d653fbcfeaaf5b10b4ca2f0346f6bcce2be1237e8ce"
+          },
+          "warmupMs": 4.836,
+          "repeatedMs": [
+            4.797,
+            4.794,
+            4.811
+          ],
+          "reportSha256": "32401cdd114c9a09c952d95e04cd4f2fb73038e8b54ed6630d240b76f7458ee8",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "gas-key-refund",
+          "inputBytes": 71580,
+          "taskSha256": "9ce2ae69563821f0a99337c4bebd4f77d812301c5e5c1f20c4bf3c6c0b63410d",
+          "sourcesSha256": {
+            "basis": "d6dfdac5e70135147de9a4262be89f7e13aa90ba05fe3e7984b3a143b8421e78",
+            "recording": "a69119f3581550443e57b3ffd218c25ae3d15a4fe4600341efa3140b47c81801"
+          },
+          "warmupMs": 2.617,
+          "repeatedMs": [
+            2.649,
+            2.608,
+            2.616
+          ],
+          "reportSha256": "05e64c4ba17eb6454e2d7f61127347683e62c82cea24732ef0d5daad907abdfa",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "intent-duplicate-0",
+          "inputBytes": 419187,
+          "taskSha256": "963273bc4b3127767b8f26be68222afab0dbdf56010915de0f78af98788a1b33",
+          "sourcesSha256": {
+            "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7",
+            "recording": "9ba4b2d8d5f1425782cc79bd2fa2a7b8c90f7db46fbaf1684ed395167dc18509"
+          },
+          "warmupMs": 9.891,
+          "repeatedMs": [
+            9.335,
+            9.494,
+            9.423
+          ],
+          "reportSha256": "aa786915fbffcb7d2f861210904bcb6ffbeadfc68ae9768051a6c601a09902de",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "intent-duplicate-1",
+          "inputBytes": 419205,
+          "taskSha256": "43232af3115036702d06c67aa67329f72fa3b7c5cc225a95b2f47e2a1506a35e",
+          "sourcesSha256": {
+            "basis": "49cf2b2d7cebbcb3b5ffdd5aad7d74b46337e994ce6ea15d95313c0491c389d7",
+            "recording": "9ba4b2d8d5f1425782cc79bd2fa2a7b8c90f7db46fbaf1684ed395167dc18509"
+          },
+          "warmupMs": 9.895,
+          "repeatedMs": [
+            9.814,
+            9.413,
+            10.055
+          ],
+          "reportSha256": "faa9fa1e73b64518f8cd4007ca61865bd3ba6e5ec585034cc5c1bc7611975ddc",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "merchant-utility-0",
+          "inputBytes": 290278,
+          "taskSha256": "f7a3fcec49ed66d87c070507b709a652aaa4b9dd3f8a3f3572e88476c5f2f00f",
+          "sourcesSha256": {
+            "basis": "5180970d2dc565574edb51b85f21b6886e0b3748f07ddc3bb91346c131625313",
+            "recording": "a59429b4ebcbd684c0d39b7b669e78a0ad98376434952f1a60cf03d3c39328c0"
+          },
+          "warmupMs": 6.969,
+          "repeatedMs": [
+            7.085,
+            6.958,
+            7.004
+          ],
+          "reportSha256": "0504361de5ca1cb6cef400de3557c64eac003659bfd1731f3a194a02ba8e7332",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "merchant-utility-1",
+          "inputBytes": 290307,
+          "taskSha256": "f43d94afbe3dff50fb166c88d9300616d071a39fbbcd3d746022e0cae74cafb1",
+          "sourcesSha256": {
+            "basis": "5180970d2dc565574edb51b85f21b6886e0b3748f07ddc3bb91346c131625313",
+            "recording": "a59429b4ebcbd684c0d39b7b669e78a0ad98376434952f1a60cf03d3c39328c0"
+          },
+          "warmupMs": 7.061,
+          "repeatedMs": [
+            7.143,
+            7.086,
+            7.169
+          ],
+          "reportSha256": "a235361c1b20ab28aa07d6b7cb0657b11e75554dd6fe0c551853dd06f59bf35b",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "monetary-yield",
+          "inputBytes": 73666,
+          "taskSha256": "22f204b705f119b71aa169833168fa22312a1d27dc722f7b296ddca9f967fa85",
+          "sourcesSha256": {
+            "basis": "46b4565c77555b9052eed066f8f4b2f244d7339790e1ab6d0d8ec982310b7cd2",
+            "recording": "0f842b61503df7f9bb57254adc9878996b6eb361c58f6ca92c6f75eab5da0c80"
+          },
+          "warmupMs": 2.307,
+          "repeatedMs": [
+            2.287,
+            2.295,
+            2.278
+          ],
+          "reportSha256": "dfc70774cc2bfdaeb429c5b1ff5527931d1a93eff92a7c56e065c350144e1e20",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "none-ack",
+          "inputBytes": 27404,
+          "taskSha256": "b963da76d4b14e798b7d41b8cdf1267ee6a59a94cc1a2dde20676543f27cfa5f",
+          "sourcesSha256": {
+            "basis": "9072fe3e0b505c008e65a89612b32289402e2b38c496ce21cd2c0681001cd165",
+            "recording": "7fd27783ed26a5a7d1ac056e62d62971ed146efea2a39db3e307624b123da02b"
+          },
+          "warmupMs": 1.145,
+          "repeatedMs": [
+            1.127,
+            1.135,
+            1.153
+          ],
+          "reportSha256": "423f03eb564c5e60814d5d1f1e4faed3553b56c3e32e1eea2db05c73d8453743",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "self-function-deposit",
+          "inputBytes": 53241,
+          "taskSha256": "60bdb07173e328d0c1940aa02b719d7438c3d1b9dcad06f9ad625dbdad7dcf01",
+          "sourcesSha256": {
+            "basis": "9f41daf413db91df75443df7d01ffa07c6583b551bccc2631ab27a1e77fbdf56",
+            "recording": "76bbd2584ad27624324f73af43d657b4492ad1b6573b704063d38beff309679c"
+          },
+          "warmupMs": 1.925,
+          "repeatedMs": [
+            1.95,
+            1.975,
+            1.931
+          ],
+          "reportSha256": "691c70fbff1486c667f29bf4cfced28ebecc2de9ba1f854d5260b532c8632dd5",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "split-settlement",
+          "inputBytes": 66423,
+          "taskSha256": "87c1f90af62764d238e83c73bb77123bd121f1bf600dbab9927388d3536bdf75",
+          "sourcesSha256": {
+            "basis": "37f57da33c9cad0a78be4e294fb227c0960af6ce1121254d1f5f4854858bccf1",
+            "recording": "c82d62aeb8b47b336a1170b6b1a39bca4ec0b53c7e555e2fb49f83c986192b87"
+          },
+          "warmupMs": 2.786,
+          "repeatedMs": [
+            2.749,
+            2.798,
+            2.667
+          ],
+          "reportSha256": "d4dacc3150146fa32b0147869d1b2f2d5cbfba3667bea887f8c2ae4bb8826a15",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "success-receipt-id",
+          "inputBytes": 115064,
+          "taskSha256": "d2430733716505819ad2af91a643f8e7e4a83f9e71c8417b725d6bf108935bfc",
+          "sourcesSha256": {
+            "basis": "e1f7a19b25065839924069438abe0a95d5ae5ff562d484aff85c55eaa62d397e",
+            "recording": "12217adb73f26bc9da1474b834fc2c4fe9fc1ed3d3455b7ab98a17c2fb99ba1f"
+          },
+          "warmupMs": 3.135,
+          "repeatedMs": [
+            3.181,
+            3.148,
+            3.197
+          ],
+          "reportSha256": "dc0d058d2dbb97812ad783bc5319e7ffc431a2c79dd925ce43cb479c055e2822",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "zero-principal",
+          "inputBytes": 49917,
+          "taskSha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b",
+          "sourcesSha256": {
+            "basis": "f37377dd65113c442f5312355d94068c388d49d6af6fe9a14db5c28876eed710",
+            "recording": "c5b5ecf91ec8706aba8d88e028dd29751b54b45a3c4b025db0183edb798e2ca1"
+          },
+          "warmupMs": 1.815,
+          "repeatedMs": [
+            1.834,
+            1.86,
+            1.808
+          ],
+          "reportSha256": "7159cdf0a9ff4b6b7e3a4c820b1109ab10c5eed12f7a1e8954287c5fbddc04e1",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "failed-refund",
+          "inputBytes": 105168,
+          "taskSha256": "d78e09a85541cb667ad543718ec580902b7b19ff81813b7d3470347ef5f090f6",
+          "sourcesSha256": {
+            "basis": "4f2d035ac803edd3ed2f87be3b270dbe0025b596f230fe0288faffee7853d31b",
+            "recording": "271d460974a48bf71b361132cc52552f34319c4916aa885c5245963fbafff731"
+          },
+          "warmupMs": 3.229,
+          "repeatedMs": [
+            3.455,
+            3.293,
+            3.182
+          ],
+          "reportSha256": "d39827bfc6d85b5a22f2edd03a956cd6a18fcd4449be7833cf96999c6d323289",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "refund-override",
+          "inputBytes": 86243,
+          "taskSha256": "bf6cd1caf53af228c949681bb394c4dc4acf1c78fec96ac3c0e5c9a947c12d5c",
+          "sourcesSha256": {
+            "basis": "60ca504bebf8ac64b7f7b08f248b8fc8b2d6f2c7d3e3a6070f8413a01cf6c10a",
+            "recording": "6c8cc8c2c7779f8668b124e4bc45e82b7819d5fbed9933506c87cc0df6b8cb3c"
+          },
+          "warmupMs": 2.75,
+          "repeatedMs": [
+            2.796,
+            2.876,
+            2.752
+          ],
+          "reportSha256": "eff69e10c4b0c61e149abe01702d06ecc367ba170f7a3bc3531f28412c6ae5b0",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "native-naive",
+          "inputBytes": 151725,
+          "taskSha256": "867aa71f83c0310e67b85358db0963dfda87344c5a153315f63e21fea48c3ba5",
+          "sourcesSha256": {
+            "basis": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad",
+            "recording": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f"
+          },
+          "warmupMs": 4.326,
+          "repeatedMs": [
+            4.221,
+            4.427,
+            4.384
+          ],
+          "reportSha256": "2e90a7b794140391b68bd83c099fc66158b010d8b715d6d371efd58b8986a2ad",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "native-durable",
+          "inputBytes": 151321,
+          "taskSha256": "b5dc24bda7f66e5c3c23e5a0ebb5ed6e3635f2ca5afa56f497941268e7520e9c",
+          "sourcesSha256": {
+            "basis": "66a6d473edf51fd7e463f7d32c61cf123b04a72a3e54b47216b887f2702addad",
+            "recording": "186fed48345f2e03fb5aaceda00d69a9a6eeedd369fff0a1ccee3e44f9975f8f"
+          },
+          "warmupMs": 4.185,
+          "repeatedMs": [
+            4.163,
+            4.151,
+            3.973
+          ],
+          "reportSha256": "ce49bee47f86816a07f5d1be141639c49a0077adb31efde1c5ce3495d3fad191",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-normal-naive",
+          "inputBytes": 171036,
+          "taskSha256": "a5ace98f40328d640bcd944648e1001bf0669a1213fee5d903aec194ac2be75d",
+          "sourcesSha256": {
+            "basis": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59",
+            "recording": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36"
+          },
+          "warmupMs": 4.93,
+          "repeatedMs": [
+            5.0,
+            5.04,
+            5.024
+          ],
+          "reportSha256": "b7145b3bcc0db1edf66dadf754f901aa1528c689e8ba16baa8fa7e390743812e",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-normal-durable",
+          "inputBytes": 170632,
+          "taskSha256": "ab8557db0b4347969944d28502b0a2754063b8c80764fabe4d7c4b94784671ec",
+          "sourcesSha256": {
+            "basis": "a2bfd531dd4c2766bb0715670b1f45eed7ded863712efd06da2ad889c7b03e59",
+            "recording": "0f923dc8299bce3c6092d6a59c43a04b8a7adebdc66c9b932b936d930b28bc36"
+          },
+          "warmupMs": 4.761,
+          "repeatedMs": [
+            4.781,
+            4.719,
+            4.698
+          ],
+          "reportSha256": "208c9f203ef1eb6e23cf8a4f37a26bc1f9e9e7b4cb77e25b8301ab95aaab406b",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-reordered-naive",
+          "inputBytes": 171149,
+          "taskSha256": "82198e43df60b7d18d9f68272752b673df469a72643dc4f8266b46d482b61773",
+          "sourcesSha256": {
+            "basis": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4",
+            "recording": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541"
+          },
+          "warmupMs": 4.979,
+          "repeatedMs": [
+            4.903,
+            4.899,
+            4.951
+          ],
+          "reportSha256": "dd597abd62be3b86098c222e49d845ebe108cc0d62d49e8ab5f1a036f063fb5a",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-reordered-durable",
+          "inputBytes": 170745,
+          "taskSha256": "5533c99c323016289399d108055723e84c6057f0dfeb2463313e9f48251c8094",
+          "sourcesSha256": {
+            "basis": "baf18f07cd784685abb3a9f483f3d7e36cd24284d441f31dd65d98215bde92b4",
+            "recording": "4d1abfaaa46a7604c7d60407ad0481059ed7b412692a639639a3a80b0283a541"
+          },
+          "warmupMs": 4.713,
+          "repeatedMs": [
+            4.57,
+            4.822,
+            4.695
+          ],
+          "reportSha256": "c8cccfed9e42e3cd33c6790d8118e51bcedd9cee9741c58567349d2a57739e03",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-corrupt-naive",
+          "inputBytes": 171071,
+          "taskSha256": "8052c31ac818be14380f8b9706de9a6ec5258f2b648df64f46b803a0d6a45f32",
+          "sourcesSha256": {
+            "basis": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789",
+            "recording": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8"
+          },
+          "warmupMs": 4.901,
+          "repeatedMs": [
+            4.954,
+            4.968,
+            4.961
+          ],
+          "reportSha256": "14836c87bd06d9543b0d26130616cf1142aa7e6d874f23ba1412bce9f2e1bd3c",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-corrupt-durable",
+          "inputBytes": 170667,
+          "taskSha256": "0b375deeed5443ea2b505f408d0ce985d0da3fc2b9d7e4c842528ff1bc12bfa1",
+          "sourcesSha256": {
+            "basis": "92bb7a8b50fb6d7016556d8f67bb57d737e9aba24641bfcab938a55704d39789",
+            "recording": "f5913c0c33f35348b0420ff8c231008e55acdc588463ed878f5b731b95d4b0d8"
+          },
+          "warmupMs": 4.723,
+          "repeatedMs": [
+            4.766,
+            4.651,
+            4.912
+          ],
+          "reportSha256": "0e5af52ddea0d9e070ba74412471ac8e59123c9a2b72008832bea4869585cf11",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-reduced-naive",
+          "inputBytes": 59510,
+          "taskSha256": "2f810a9106400a9265f1c1531b37d3881f5972fe08fdb5d373c4234d9156a460",
+          "sourcesSha256": {
+            "basis": "8db6cc6a1f756023a7b4510afc00ba4ecfdf4310d2984cd2d3b320634697c234",
+            "recording": "e7186f235a3daa48093b982dbc51f471c52ae69944d86984862a01e758764a6f"
+          },
+          "warmupMs": 2.262,
+          "repeatedMs": [
+            2.236,
+            2.186,
+            2.194
+          ],
+          "reportSha256": "8eb7618276f5a8a7e56c96f75d423384f6fc1d40adaa319617c78dead573b64a",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "live-single-naive",
+          "inputBytes": 40294,
+          "taskSha256": "0b8d3e1b113610742cc2680f8f556f731f63d1e9b4ecc81c4e5128387b5c4d8d",
+          "sourcesSha256": {
+            "basis": "6090d1cd99aec63d0489b8b6fbc537cc6e160c24db1cd12e4781f2ea59f07f6c",
+            "recording": "a0aca90b45d33697b6688210b5f9093c1fbf7cc8abf7f5d1963a1f81ee693ae0"
+          },
+          "warmupMs": 1.547,
+          "repeatedMs": [
+            1.555,
+            1.576,
+            1.588
+          ],
+          "reportSha256": "9a1fc7a53d5e7727ad489e48b5b9b1cc49863470d37a4c1cf0a1afd6581d9075",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-0-unprotected",
+          "inputBytes": 210203,
+          "taskSha256": "2f86ad9806f29fc5b21e1e4435ec835e691c639432ba246c0663cafa79549b0e",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "91578f78632cc8187d168181fe597e5d423b2ea4a58b67dcfa162af066ef7e98"
+          },
+          "warmupMs": 3.885,
+          "repeatedMs": [
+            3.808,
+            3.821,
+            3.809
+          ],
+          "reportSha256": "43fa445e0650a70144b4d857d9eaefd87d87c56d712b636b23d55461056e1e26",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-0-guarded",
+          "inputBytes": 210197,
+          "taskSha256": "987dba38bc63912083162f1b8e63667bcfeb20080b811219bee5a18ba303914e",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "ffce4e9af7a69fc87303faa96a9be3e57b21021d4b69609b79e3db5943e2a6b0"
+          },
+          "warmupMs": 3.838,
+          "repeatedMs": [
+            3.777,
+            3.768,
+            3.795
+          ],
+          "reportSha256": "f04c546f37c98ed9d2875825da7be15698b8cfd0f12d14336abc2a661f506243",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-1-unprotected",
+          "inputBytes": 210300,
+          "taskSha256": "8454eea458ce027685b2511226231435d32b53da2193054bb239e051fba6978f",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "b71b8a357669b3ae78355c757658608c4c10748e361b211a8f7fe9e6e8138b6e"
+          },
+          "warmupMs": 3.81,
+          "repeatedMs": [
+            3.786,
+            3.807,
+            3.797
+          ],
+          "reportSha256": "1cb016236c5284590e527ce7446c7c1edcec61ddcabf2990e4e154ff8c43b0aa",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-1-guarded",
+          "inputBytes": 210288,
+          "taskSha256": "c605e1fe730bda491328107d8d7e63b78a112a5c25b80cf0f2a9b7d352af76de",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "ac3906ef3d48ad5150e922c659d32baca230a2817093b92900bfaecd5ad06a15"
+          },
+          "warmupMs": 3.925,
+          "repeatedMs": [
+            3.951,
+            3.862,
+            3.833
+          ],
+          "reportSha256": "e88704a82d50c13ebf3e65802597b38141c0668af95143e0474fccafe59ea600",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-2-unprotected",
+          "inputBytes": 210372,
+          "taskSha256": "2db5821a3087af38c0ff25407bd5a2bc184097a6d299551f3cb45d399cb477f3",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "d239e3c4d5454c2d2646b86a528beb397fe2c89c34065dc662d32ebcbc631326"
+          },
+          "warmupMs": 3.997,
+          "repeatedMs": [
+            3.828,
+            3.848,
+            3.871
+          ],
+          "reportSha256": "569e8e90ed75e8e2efd06577699635312e5bd512bf43c48ab9a4bd1d916b7f0e",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-2-guarded",
+          "inputBytes": 210360,
+          "taskSha256": "5b070a73ff0087f271ba1734fa56ddb339bd0885e24954c97c737bf71318b98c",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "4ea408bcb9d70c28d7e6e5dd0fab80351b2f92452c9c38261b8ec28df2c36f48"
+          },
+          "warmupMs": 3.841,
+          "repeatedMs": [
+            3.846,
+            3.872,
+            3.856
+          ],
+          "reportSha256": "66542400a48f4e70d8a535bceecd40a6ac12cf81e153cd77d4b836446640028f",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-3-unprotected",
+          "inputBytes": 210378,
+          "taskSha256": "ca96c6d293a7a5083b804b7be698ae863674c5b9d7aeb19cddafee92e750a3f8",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "2cefc7e647a3cf0b9fbf1ae13b93dcc021669457b4cd992e124b8fb89ceb0e5f"
+          },
+          "warmupMs": 4.081,
+          "repeatedMs": [
+            3.843,
+            3.81,
+            4.061
+          ],
+          "reportSha256": "7588134a9bc804e64cc314b09121034e2be5d72e00dc9320bb6f03a48aa6a979",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-3-guarded",
+          "inputBytes": 210367,
+          "taskSha256": "252f1d82c1315ace4c333b1bc6c0c2df709baf47e92640df8993830b2b47abcb",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "6650056871f96cdabfe3ece9ee369074872313208c903045437bfee2a39f4613"
+          },
+          "warmupMs": 3.862,
+          "repeatedMs": [
+            3.844,
+            3.843,
+            3.803
+          ],
+          "reportSha256": "d0c57df232adc0bbbbd6a944f546830bd08139aabd2d8ad6f72543120b18f43a",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-4-unprotected",
+          "inputBytes": 215105,
+          "taskSha256": "8bd611e49f9117c4e657e7dfc4e0b440ad57cc2f99e326f4418ed82fb6ff7571",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "f7a323d725eee6066058097f2405fa86c29531730241505a8fbce98ef3565a7a"
+          },
+          "warmupMs": 6.75,
+          "repeatedMs": [
+            4.246,
+            4.262,
+            4.337
+          ],
+          "reportSha256": "184365021a8a5c980f89d05f87c51dff6fec75da7539a4d4407881867d50cd36",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-4-guarded",
+          "inputBytes": 215105,
+          "taskSha256": "d1a838f6fb65578cebeacd775008caeab1120e8d18847427dca7c037948936ec",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "8f998fa34d621ed237b3090c9f8b7a010704eebb3d485625cd47a75aa9313c94"
+          },
+          "warmupMs": 4.22,
+          "repeatedMs": [
+            4.327,
+            4.302,
+            4.256
+          ],
+          "reportSha256": "87ff7705f4412961fbd41dcd28bac8a6f186e584f0590e0151a2e0a869e341c4",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-5-unprotected",
+          "inputBytes": 215307,
+          "taskSha256": "9e77250a0fa37afdde1732e314fe39b9cad268a0a7a2ec793065c1303099c451",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "4c2569da4b126e95fea4298f0fe4cee77ed5eb05ec04466b5dc5a0eff4db0d09"
+          },
+          "warmupMs": 5.145,
+          "repeatedMs": [
+            7.015,
+            4.238,
+            4.225
+          ],
+          "reportSha256": "6255bdcb4ed4cebfc7934493f059baff131c7d10de6960b0ae3da867ac22f63a",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-5-guarded",
+          "inputBytes": 215288,
+          "taskSha256": "0a5f8e35e9870628615f97462dc7abcf91d02ab8638eede4ffb2e54107ccebbc",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "df1e31ea975f1532dab51c8691c2aec493cd6a76befe70d528e99adb6a4ec99f"
+          },
+          "warmupMs": 4.223,
+          "repeatedMs": [
+            4.29,
+            4.4,
+            4.364
+          ],
+          "reportSha256": "0e69a9fc3a52fa748681200169945ff6d0486a7687ed68232f54a2a438654fd4",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-6-unprotected",
+          "inputBytes": 215360,
+          "taskSha256": "883a3c4608a1a174e372c45da4ae058ec73d29c87249849c7db4baaf81bc4572",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "0383bbcd04efce014e5ee36b90065b07cc3cc6a6d7d79cf15e0fb5e59fc76e40"
+          },
+          "warmupMs": 4.405,
+          "repeatedMs": [
+            4.277,
+            4.265,
+            4.262
+          ],
+          "reportSha256": "b9d89a881ba7cd218db09059726adf7fe69823c869b7e6e212e0994fa7df0154",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-6-guarded",
+          "inputBytes": 215342,
+          "taskSha256": "1394fb5a7d755de6e2a9e595ba86fb1a97fef0da6e36f1f049f48cff21ac4b1f",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "1f0fc2626f38192e37ce0d7f0f7067c9796262994d86b9207aa943ddbae481ea"
+          },
+          "warmupMs": 4.358,
+          "repeatedMs": [
+            4.325,
+            4.254,
+            4.279
+          ],
+          "reportSha256": "56bcf1830c149811e542faac4591bd70a044bd7ddf5d1900e63b02977e980f81",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-7-unprotected",
+          "inputBytes": 215131,
+          "taskSha256": "1610e34a3575dcf2dc36fd0e87b50a497d645693efc5b2878b371de45f2c6a92",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "6932561e77a8e6876800cd32058e784378fbd37ec48501b5e2b1362302c2d09c"
+          },
+          "warmupMs": 4.56,
+          "repeatedMs": [
+            4.266,
+            4.204,
+            4.143
+          ],
+          "reportSha256": "e81c37a363ca703f66e6ca942b4e1237d4b3d609c828acb157d87b243feea3ff",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "proposal-7-guarded",
+          "inputBytes": 215112,
+          "taskSha256": "9a41f8bbbe44813534f462b37ff98a7394611875c3b748bf832c793d1b0c2759",
+          "sourcesSha256": {
+            "basis": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e",
+            "execution": "f77c4f257e1ba111669d4038a12ce59516a8895393a75c1ebec8b2a4336204fc",
+            "model-calls": "48e53c6427bebd616a79d73ce6fc595bcde421a678edb855835598f383792c39",
+            "recording": "cc61e957b1ce921c8a379c79408a730dddeb62070a9c4a907a26021d50b20931"
+          },
+          "warmupMs": 4.083,
+          "repeatedMs": [
+            4.325,
+            4.319,
+            4.417
+          ],
+          "reportSha256": "b54cc7d75898ca11cb197fadd484289ed0653c0e608b537985eee8db2a6b97d2",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "async-partial-union",
+          "inputBytes": 11254,
+          "taskSha256": "712423d3efba04c8ba0cf312a0e9270432622e0a63a3a05c82b4c6b9d361b68a",
+          "sourcesSha256": {
+            "recording": "39bbea2f87be419fecd99282835cb67811f5f976b5a3db6562fd86051b1eadee",
+            "basis": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+          },
+          "warmupMs": 1.353,
+          "repeatedMs": [
+            1.314,
+            1.34,
+            1.324
+          ],
+          "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "async-unfinalized",
+          "inputBytes": 10624,
+          "taskSha256": "25d0e74214d44c2d159e96286ee1d6de75b393315d5f472a8a1133673e386bcb",
+          "sourcesSha256": {
+            "recording": "f74eb4097e1dcec2758a980feb45ffbdc5cde9625e00616ac2aaea7e0667025c",
+            "basis": "04f2c9cfea8af1ad9aaed833ff55f4214ef74d51d189ead5fa392302eaf89518"
+          },
+          "warmupMs": 1.281,
+          "repeatedMs": [
+            1.251,
+            1.273,
+            1.272
+          ],
+          "reportSha256": "35f451b71b8a15808a9a3770a18fc8f7c1289c9ed8a539b8d30f9a09a3173395",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        },
+        {
+          "input": "async-allowed",
+          "inputBytes": 11226,
+          "taskSha256": "0997c411a23b253d1beaaba5fe9f5f2b3186e02849bdcf454200e61b20de603c",
+          "sourcesSha256": {
+            "recording": "8129d6bbda603d8c8b9e60e4691ad3928da4523bc4411524634cce2e7742ed90",
+            "basis": "56fabd211903d0d492c7ed47e9b12e31b6706faab9ec50d0a78554de03af08c6"
+          },
+          "warmupMs": 1.274,
+          "repeatedMs": [
+            1.321,
+            1.321,
+            1.266
+          ],
+          "reportSha256": "13e641bf9ac64dcabee803cb4465304ca77305eee761ea05aadea9df23389789",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        }
+      ],
+      "memoryMeaning": "OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.",
+      "warmupExcludedFromRepeatedLatencySamples": true,
+      "modelCalls": 0,
+      "networkRequests": 0,
+      "nativeTransactions": 0,
+      "controllerWallMsIncludingInterpreter": 949.526
+    },
+    {
+      "case": "repeated-partials-128",
+      "ownedPid": 47052,
+      "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "importMs": 63.338,
+      "inputPreparationMs": 5.318,
+      "samples": 3,
+      "medianMs": 47.259,
+      "maxMs": 49.71,
+      "beforeImportProcessLifetimePeakBytes": 22081536,
+      "afterProcessLifetimePeakBytes": 31444992,
+      "checks": [
+        {
+          "input": "repeated-partials-128",
+          "inputBytes": 637491,
+          "taskSha256": "5fb43a392e63c93c2d374e1a506c401efb7af8e4d82ffb9d189fd62635659adf",
+          "sourcesSha256": {
+            "recording": "df1c858a6ad73e26d9f525cdbeafb0ee19a6eaca534bb427c4b9505f58f96270",
+            "basis": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+          },
+          "warmupMs": 50.331,
+          "repeatedMs": [
+            49.71,
+            47.259,
+            46.338
+          ],
+          "reportSha256": "436bacd99b7380fb2002e4e9eaea51da983c2be69254dc756b1f04177768166a",
+          "invocation": {
+            "status": "assessed",
+            "profile": "near-sandbox-2.14/native-v1",
+            "version": "0.1.2"
+          }
+        }
+      ],
+      "memoryMeaning": "OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.",
+      "warmupExcludedFromRepeatedLatencySamples": true,
+      "modelCalls": 0,
+      "networkRequests": 0,
+      "nativeTransactions": 0,
+      "controllerWallMsIncludingInterpreter": 358.081
+    },
+    {
+      "case": "source-over-bound",
+      "ownedPid": 47532,
+      "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "importMs": 62.759,
+      "inputPreparationMs": 3.132,
+      "samples": 3,
+      "medianMs": 0.006,
+      "maxMs": 0.01,
+      "beforeImportProcessLifetimePeakBytes": 22044672,
+      "afterProcessLifetimePeakBytes": 31592448,
+      "checks": [
+        {
+          "input": "source-over-bound",
+          "inputBytes": 4197278,
+          "taskSha256": "2d78d5d59beb40ddf061c5a55e9ce563c0bce33840240d46a90fd76c9e692ebe",
+          "sourcesSha256": {
+            "recording": "2650f5452459081abf6602c1620ef8c809a8a1887a2f4692369575bd10ea2b85",
+            "basis": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+          },
+          "warmupMs": 0.018,
+          "repeatedMs": [
+            0.01,
+            0.006,
+            0.004
+          ],
+          "reportSha256": "8f5f8326abcc9154b135f743a45e92bdab3fd18043799f6e407ecec993485c29",
+          "invocation": {
+            "status": "rejected",
+            "code": "resource_source_file",
+            "message": "Input outside the declared profile"
+          }
+        }
+      ],
+      "memoryMeaning": "OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.",
+      "warmupExcludedFromRepeatedLatencySamples": true,
+      "modelCalls": 0,
+      "networkRequests": 0,
+      "nativeTransactions": 0,
+      "controllerWallMsIncludingInterpreter": 158.097
+    },
+    {
+      "case": "rpc-over-bound",
+      "ownedPid": 45960,
+      "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "importMs": 62.21,
+      "inputPreparationMs": 0.688,
+      "samples": 3,
+      "medianMs": 2.442,
+      "maxMs": 2.657,
+      "beforeImportProcessLifetimePeakBytes": 22056960,
+      "afterProcessLifetimePeakBytes": 30900224,
+      "checks": [
+        {
+          "input": "rpc-over-bound",
+          "inputBytes": 15997,
+          "taskSha256": "cb4c7d8c5dc5403e823622995a39c21547afc8c1173ef7a979718dbeee5c3e86",
+          "sourcesSha256": {
+            "recording": "c684938ccf426b77570afe8eb485c9053f259ac95eb360ea0466e3fef6093ae4",
+            "basis": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+          },
+          "warmupMs": 2.697,
+          "repeatedMs": [
+            2.442,
+            2.657,
+            2.441
+          ],
+          "reportSha256": "f1663cfa15f59bce72073fa25014fc849b32f98c64b3040f4f7eec2287aa7d08",
+          "invocation": {
+            "status": "rejected",
+            "code": "resource_rpcs",
+            "message": "Input outside the declared profile"
+          }
+        }
+      ],
+      "memoryMeaning": "OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.",
+      "warmupExcludedFromRepeatedLatencySamples": true,
+      "modelCalls": 0,
+      "networkRequests": 0,
+      "nativeTransactions": 0,
+      "controllerWallMsIncludingInterpreter": 163.067
+    },
+    {
+      "case": "depth-over-bound",
+      "ownedPid": 46072,
+      "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "importMs": 65.523,
+      "inputPreparationMs": 0.458,
+      "samples": 3,
+      "medianMs": 0.584,
+      "maxMs": 0.705,
+      "beforeImportProcessLifetimePeakBytes": 22257664,
+      "afterProcessLifetimePeakBytes": 31457280,
+      "checks": [
+        {
+          "input": "depth-over-bound",
+          "inputBytes": 11410,
+          "taskSha256": "9c9bd0d08e9d063eb417d362529e2927c5e086fcd7a84ead38e7e4bc88d57d2c",
+          "sourcesSha256": {
+            "recording": "83d13e22307eff632d7ad7471c7330a233cb8dad60d9bf4bf00b5bd5bfb9bf80",
+            "basis": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+          },
+          "warmupMs": 0.901,
+          "repeatedMs": [
+            0.705,
+            0.579,
+            0.584
+          ],
+          "reportSha256": "5b14410150de59b6233fac6c1538a799d95dd9945a6af428b9a62705e3be3978",
+          "invocation": {
+            "status": "rejected",
+            "code": "resource_depth",
+            "message": "Input outside the declared profile"
+          }
+        }
+      ],
+      "memoryMeaning": "OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.",
+      "warmupExcludedFromRepeatedLatencySamples": true,
+      "modelCalls": 0,
+      "networkRequests": 0,
+      "nativeTransactions": 0,
+      "controllerWallMsIncludingInterpreter": 158.755
+    }
+  ],
+  "scope": "Single-machine owned Python workers, three warm repeated assessments per input. No speedup, universal memory bound, browser-memory or external-audit claim."
+}

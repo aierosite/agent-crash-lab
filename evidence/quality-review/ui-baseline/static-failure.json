@@ -1,0 +1,18 @@
+{
+  "busy": "false",
+  "downloadRendered": false,
+  "error": "Release file unavailable: agent_crash_lab.py",
+  "errorRendered": true,
+  "exportRendered": false,
+  "focus": {
+    "id": "",
+    "tag": "BODY",
+    "text": "\nSkip to inspection\n\nAgent Crash Lab\nBrowser replayUse light theme\n\n\n\nCase file\nChoose a case\n\nImport bundleScenario Lab"
+  },
+  "resultsRendered": false,
+  "runAriaDisabled": "false",
+  "runLabel": "Retry setup",
+  "runNativeDisabled": false,
+  "status": "",
+  "title": "Inspect a recorded run"
+}

@@ -1,0 +1,67 @@
+{
+  "atUtc": "2026-11-08T01:56:51.666248+00:00",
+  "fullReportMatches": [
+    {
+      "file": "ui-baseline/catalog.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-baseline/local-restarted.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-baseline/report.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-baseline/static.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-browser-python-assessment"
+    },
+    {
+      "file": "ui-baseline/token.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-candidate/catalog-recovered.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-candidate/local-restarted.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-candidate/report-recovered.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    },
+    {
+      "file": "ui-candidate/static-recovered.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-browser-python-assessment"
+    },
+    {
+      "file": "ui-candidate/token-recovered.report.json",
+      "case": "async-partial-union",
+      "reportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "mode": "actual-local-assessment"
+    }
+  ],
+  "count": 10,
+  "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441"
+}

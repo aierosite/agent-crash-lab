@@ -1,0 +1,84 @@
+"""Bounded owned-worker measurements; no network, model or native execution."""
+from pathlib import Path
+from hashlib import sha256
+from copy import deepcopy
+import ctypes,json,os,platform,runpy,statistics,subprocess,sys,time
+HERE=Path(__file__).resolve().parent;ROOT=HERE/'release-checkout'
+CASES=['baselines','repeated-partials-128','source-over-bound','rpc-over-bound','depth-over-bound']
+def peak_working_set():
+    if os.name!='nt':
+        import resource
+        value=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return int(value*(1 if sys.platform=='darwin' else 1024))
+    from ctypes import wintypes
+    class Counters(ctypes.Structure):
+        _fields_=[('cb',wintypes.DWORD),('PageFaultCount',wintypes.DWORD),
+          *[(name,ctypes.c_size_t) for name in ['PeakWorkingSetSize','WorkingSetSize','QuotaPeakPagedPoolUsage',
+            'QuotaPagedPoolUsage','QuotaPeakNonPagedPoolUsage','QuotaNonPagedPoolUsage','PagefileUsage','PeakPagefileUsage']]]
+    counters=Counters();counters.cb=ctypes.sizeof(counters)
+    get_process=ctypes.windll.kernel32.GetCurrentProcess;get_process.restype=wintypes.HANDLE
+    get_info=ctypes.windll.psapi.GetProcessMemoryInfo
+    get_info.argtypes=[wintypes.HANDLE,ctypes.POINTER(Counters),wintypes.DWORD]
+    if not get_info(get_process(),ctypes.byref(counters),counters.cb):raise ctypes.WinError()
+    return int(counters.PeakWorkingSetSize)
+def pack(value):return json.dumps(value,ensure_ascii=True,sort_keys=True,separators=(',',':')).encode()
+def child(case):
+    before_peak=peak_working_set();start=time.perf_counter()
+    app=runpy.run_path(str(ROOT/'workbench.py'));import_ms=(time.perf_counter()-start)*1000
+    start=time.perf_counter();inputs=[]
+    if case=='baselines':
+        for name,row in app['BASELINES'].items():inputs.append((name,(ROOT/row['task']).read_bytes(),
+            {key:(ROOT/path).read_bytes() for key,path in row['sources'].items()}))
+    else:
+        task,sources=app['data_for'](app['CATALOG']['async-partial-union']);owner=json.loads(task)
+        capture=json.loads(sources['recording'])
+        if case=='repeated-partials-128':
+            rows=[row for row in capture['rpcObservations'] if row['request']['method']=='tx_status'
+                  and row['request']['params']['tx_hash']==owner['attempts'][0]['tx_hash']]
+            capture['rpcObservations'].extend(deepcopy(rows)*127)
+        elif case=='rpc-over-bound':capture['rpcObservations']=[{} for _ in range(4097)]
+        elif case=='depth-over-bound':
+            nested=0
+            for _ in range(67):nested=[nested]
+            capture['qualityDepthProbe']=nested
+        raw=b' '*(4194304+1) if case=='source-over-bound' else pack(capture)
+        sources={**sources,'recording':raw};owner['sources']['recording']=sha256(raw).hexdigest()
+        inputs.append((case,pack(owner),sources))
+    prepare_ms=(time.perf_counter()-start)*1000
+    samples=[];checks=[]
+    for name,task,sources in inputs:
+        warm_start=time.perf_counter();warm=app['core'].assess(task,sources)
+        warm_ms=(time.perf_counter()-warm_start)*1000;expected=sha256(pack(warm)).hexdigest()
+        if case in ['baselines','repeated-partials-128']:assert warm['invocation']['status']=='assessed'
+        else:assert warm['invocation']['status']=='rejected' and warm['invocation']['code'].startswith('resource'),warm['invocation']
+        if case=='repeated-partials-128':
+            row=next(c for c in warm['constraints'] if c['id']=='A-merchant')
+            assert row['known_subtotal']=='8' and row['status']=='breached' and row['exact_total'] is None
+        local=[]
+        for _ in range(3):
+            start=time.perf_counter();report=app['core'].assess(task,sources);elapsed=(time.perf_counter()-start)*1000
+            assert sha256(pack(report)).hexdigest()==expected and elapsed<30000
+            local.append(elapsed);samples.append(elapsed)
+        checks.append({'input':name,'inputBytes':len(task)+sum(map(len,sources.values())),
+                      'warmupMs':round(warm_ms,3),'repeatedMs':[round(x,3) for x in local],
+                      'reportSha256':expected,'invocation':warm['invocation']})
+    result={'case':case,'ownedPid':os.getpid(),'coreSha256':app['CORE_SHA256'],'importMs':round(import_ms,3),
+      'inputPreparationMs':round(prepare_ms,3),'samples':len(samples),'medianMs':round(statistics.median(samples),3),
+      'maxMs':round(max(samples),3),'beforeImportProcessLifetimePeakBytes':before_peak,
+      'afterProcessLifetimePeakBytes':peak_working_set(),'checks':checks,
+      'memoryMeaning':'OS-reported process-lifetime peak working set including interpreter, imports, inputs and assessments; not incremental allocator bytes, browser memory or model memory.',
+      'warmupExcludedFromRepeatedLatencySamples':True,'modelCalls':0,'networkRequests':0,'nativeTransactions':0}
+    print(json.dumps(result));return 0
+def main():
+    records=[]
+    for case in CASES:
+        start=time.perf_counter();process=subprocess.run([sys.executable,'-I','-S',str(Path(__file__).resolve()),'--child',case],
+              capture_output=True,timeout=45)
+        assert process.returncode==0,(case,process.stdout.decode(errors='replace'),process.stderr.decode(errors='replace'))
+        record=json.loads(process.stdout);record['controllerWallMsIncludingInterpreter']=round((time.perf_counter()-start)*1000,3)
+        records.append(record);print(json.dumps({k:record[k] for k in ['case','samples','maxMs','afterProcessLifetimePeakBytes']}),flush=True)
+    result={'baseline':'v0.9.0','python':sys.version.split()[0],'os':platform.system(),'logicalCpuCount':os.cpu_count(),
+       'cases':records,'scope':'Single-machine owned Python workers, three warm repeated assessments per input. No speedup, universal memory bound, browser-memory or external-audit claim.'}
+    with (HERE/'resources-baseline.json').open('x',encoding='utf-8') as stream:stream.write(json.dumps(result,indent=2)+'\n')
+    return 0
+if __name__=='__main__':raise SystemExit(child(sys.argv[2]) if len(sys.argv)>1 and sys.argv[1]=='--child' else main())

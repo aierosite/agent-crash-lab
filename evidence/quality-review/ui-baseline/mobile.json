@@ -1,0 +1,16 @@
+{
+  "geometry": {
+    "clientWidth": 375,
+    "innerHeight": 844,
+    "innerWidth": 390,
+    "pickerVisible": true,
+    "scrollWidth": 375
+  },
+  "keyboard": {
+    "focus": "case-select",
+    "picker": "async-allowed",
+    "scroll": 375,
+    "title": "Complete evidence confirms allowed work",
+    "width": 375
+  }
+}
