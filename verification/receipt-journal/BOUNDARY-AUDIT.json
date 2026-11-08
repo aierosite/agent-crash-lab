@@ -1,0 +1,1190 @@
+{
+  "atUtc": "2026-11-08T19:54:36.270137+00:00",
+  "verified": true,
+  "controls": 25,
+  "rows": [
+    {
+      "name": "boolean-success",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "6dff3f21070cbed3ffc56e0bbd8a7ec146a6ca25c99eb209ab198b209d628c0a",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "SuccessValue must be exact Base64 text"
+      }
+    },
+    {
+      "name": "invalid-base64-success",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "17957e3fae85385c61d452e55c6c46d37b592144ee0e06f6953378aad9ec123f",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "SuccessValue is not valid Base64"
+      }
+    },
+    {
+      "name": "noncanonical-base64-success",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "4b1ae0dc2b99c186e374a8b2cd40bbac048152735813f1b8fb08e5add711a243",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "SuccessValue is not canonical Base64"
+      }
+    },
+    {
+      "name": "boolean-gas-counter",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "82c4e783cac03a38460cf5d68475636e9f6a88a702e61ae530800a5740fa24f2",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Gas burnt must be an unsigned integer"
+      }
+    },
+    {
+      "name": "boolean-burnt-amount",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "781bfdc264043b41b84389bbd3428929799baa484b6dac82139dccde8b3923cc",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Decimal text required at outcome.tokens_burnt"
+      }
+    },
+    {
+      "name": "boolean-metadata-version",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "cd301891362363bc2a5c0ef53ca43abc2a15074a868cede1bd539276b38c5a0e",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Unsupported execution metadata version/fields"
+      }
+    },
+    {
+      "name": "malformed-failure",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "19f1c173d63316eaa3321ebac63be1be60a1de3c96de462ac2abd60b8a081322",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Recipient balance and successful receipt principal disagree"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Unsupported native action failure"
+      }
+    },
+    {
+      "name": "unexecutable-string-call-gas",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "c14d9222c29e367d8a17a7dd96c7777b5f4a0ab52f91285b21ccdad2eda1dfcd",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Invalid typed call gas"
+      }
+    },
+    {
+      "name": "boolean-unsigned-count",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "8ef4785941cd44d77ad585edcab3c3ab0bc76f5cad742db69cf76eae8992f6fd",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Invalid unsigned run header"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Invalid unsigned run header"
+      }
+    },
+    {
+      "name": "missing-child-outcome",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "23171bc0fb4d0858a5b948dad6fbb4a280c307cc58a1cfb43d87fd6e21600597",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Missing/duplicate receipt outcome"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Missing/duplicate receipt outcome"
+      }
+    },
+    {
+      "name": "missing-queue-measurement",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "b09843ce3142cfe7b3f98d50fe3de6ba3d7158d78f57ef7147555aa1449dd19f",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": true,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": true,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "nonempty-internal-queue",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "5183a49be91b0728e94a8bf2bf55cc61f369a338df2f2ed60f56d282f6bd32fa",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": true,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": true,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "numeric-queue-flag",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "73ff3ecb719a79959ddd52244bbd2137cf617e3bc577f035717ca2840b8c5492",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Raw/derived internal queue differs"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Raw/derived internal queue differs"
+      }
+    },
+    {
+      "name": "inconsistent-queue-flag",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "d6f501e133bf22797408bb0c5656f0886d4611c51f9eec431eba0519fae65f53",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Raw/derived internal queue differs"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Raw/derived internal queue differs"
+      }
+    },
+    {
+      "name": "principal-refund-amount-mismatch",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": "reject",
+      "rawSha256": "25271e8e3dd6b38932a67832485f46cb28583138d6736305322913d69a127d4e",
+      "original": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Principal refund binding differs"
+      },
+      "corrected": {
+        "accepted": false,
+        "errorType": "EvidenceError",
+        "error": "Principal refund binding differs"
+      }
+    },
+    {
+      "name": "known-wrong-recipient-with-incomplete-run",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 1
+      },
+      "rawSha256": "75f1752ed993fb817b07ec6c307510d9c7da3188e592154a845b4e137f081358",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [
+            {
+              "kind": "recipient-outside-intent",
+              "receipt_id": "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5"
+            }
+          ],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [
+            {
+              "kind": "recipient-outside-intent",
+              "receipt_id": "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5"
+            }
+          ],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "known-cap-breach-with-incomplete-run",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 1
+      },
+      "rawSha256": "75f1752ed993fb817b07ec6c307510d9c7da3188e592154a845b4e137f081358",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [
+            {
+              "kind": "gross-principal-cap-exceeded",
+              "committed": "100",
+              "cap": "50"
+            }
+          ],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [
+            {
+              "kind": "gross-principal-cap-exceeded",
+              "committed": "100",
+              "cap": "50"
+            }
+          ],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": false,
+          "complete_records": 21,
+          "fault_checkpoint": {
+            "case": "veto-recipient-exists",
+            "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+            "round": 1,
+            "step": 2
+          },
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "before-payment-torn-marker",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "08327f794a5239face1d87dae881d347bf3ec3f48f3933d37ec01a955e86e135",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5",
+            "3prbAm4HPKxFBdTYM5P1vx7f5qeGfaawLogvzBxMSAAW"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 18,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5",
+            "3prbAm4HPKxFBdTYM5P1vx7f5qeGfaawLogvzBxMSAAW"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 18,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "before-payment-torn-block-result",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "ee7bb3c1dc799e25b2f3784ce221c3591402b6c16e20a95617482d39c6c29154",
+      "original": {
+        "accepted": true,
+        "report": {
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "operation_closed": false,
+          "whole_run_complete": false,
+          "evidence": "Intended receipt execution not observed",
+          "torn_tail": true
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "unobserved",
+          "principal_committed": null,
+          "principal_received": null,
+          "beneficiary_delta": null,
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "89Yy3eeh7w2jr74b97XjG1wDj1K1RAFJibxMsTs3oJ2f"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": true,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 17,
+          "fault_checkpoint": null,
+          "evidence": "Intended receipt execution not observed. Unknown amounts are not zero.",
+          "scope": "Explicit one-root unsigned local native-transfer profile. No whole-task, retry or authenticated-chain claim."
+        }
+      }
+    },
+    {
+      "name": "after-payment-before-ack-torn-marker",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 0
+      },
+      "rawSha256": "2b199fde781aafe691512e1d2fc01a30e9412b94dd3772baff7263bfa3dae25b",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 20,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 0,
+          "payment_status": "settled",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "100",
+          "beneficiary_delta": "100",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 20,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "after-payment-before-ack-torn-block-result",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "dd8498404b337359771cb606bee1fcfb5eaa16366305af0e7c5286b1453f49d0",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5",
+            "3prbAm4HPKxFBdTYM5P1vx7f5qeGfaawLogvzBxMSAAW"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 19,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5",
+            "3prbAm4HPKxFBdTYM5P1vx7f5qeGfaawLogvzBxMSAAW"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 19,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "failed-payment-refund-pending-torn-marker",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 1
+      },
+      "rawSha256": "98e4f716e544e9a375bd706c7cb2193b743fc30eaaa4d5f9c1f6a8b892263b16",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "pending"
+            }
+          ],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 20,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "pending"
+            }
+          ],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 20,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "failed-payment-refund-pending-torn-block-result",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 2
+      },
+      "rawSha256": "6bda849db6c14646162843d73bfa4757390fa8b01dc997ec168f85df97d1fc69",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT",
+            "J1QT5tNDxwJn6cVgYPLLZ5su2wWTHuKeXoBoGRRzMzrg"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 19,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 2,
+          "payment_status": "unknown",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [],
+          "principal_refunds": [],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT",
+            "J1QT5tNDxwJn6cVgYPLLZ5su2wWTHuKeXoBoGRRzMzrg"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 19,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "after-principal-refund-torn-marker",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 1
+      },
+      "rawSha256": "e0c9736abd5eadd7eaacfed522c1c38cb8d8dfde384c0ffad6330bc237aa042a",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "settled"
+            }
+          ],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 22,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "settled"
+            }
+          ],
+          "violations": [],
+          "operation_closed": true,
+          "pending_receipt_ids": [],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 22,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    },
+    {
+      "name": "after-principal-refund-torn-block-result",
+      "kind": "constructed boundary control; no new runtime/model execution",
+      "expected": {
+        "gate": 1
+      },
+      "rawSha256": "682e190d68001e38d87b410d63ae45542b0146de4eea5d34cfeb6b3288716502",
+      "original": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "pending"
+            }
+          ],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 21,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      },
+      "corrected": {
+        "accepted": true,
+        "report": {
+          "format": "agent-crash-lab/local-native-journal-review-v1",
+          "required_payment_gate": 1,
+          "payment_status": "failed",
+          "root_status": "success",
+          "principal_committed": "100",
+          "principal_received": "0",
+          "beneficiary_delta": "0",
+          "failed_principal_receipts": [
+            "BAETwqmMuXuFJNJXSSqEd17PVc1Pgsoz22C3M2WApfBT"
+          ],
+          "principal_refunds": [
+            {
+              "receipt_id": "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL",
+              "amount": "100",
+              "status": "pending"
+            }
+          ],
+          "violations": [],
+          "operation_closed": false,
+          "pending_receipt_ids": [
+            "mVPozx6fPUXgGQxvMAh9nFUM7CUptuwem4Yp8dau6NL"
+          ],
+          "internal_queue_remaining": false,
+          "queue_observation_missing": false,
+          "whole_run_complete": false,
+          "torn_tail": true,
+          "complete_records": 21,
+          "fault_checkpoint": null,
+          "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+        }
+      }
+    }
+  ],
+  "originalMalformedControlsAccepted": 7,
+  "correctedMalformedControlsRejected": 13,
+  "allEightActualCrashReportsPreservedExactly": true,
+  "allFourFullControlIntentReportsPreservedExactly": true,
+  "correctedAssessorSha256": "df31ffc7a126a28860e46d1b966e83ae2e7852cb87b4edc5229bad52c120a877",
+  "frozenOriginalAssessorSha256": "62b73748138c36ff5d5dd550e74e761e8fa77af06af64f02344b09dfce55cf13",
+  "runtimeExecutionsForTheseControls": 0,
+  "independentBlindEvaluation": false,
+  "meaning": "Constructed corruption, missing-queue, torn-record and caller-intent controls derived from the same four actual journals. Not25 independent benchmarks or fresh contract executions. Original false acceptances and source retained."
+}

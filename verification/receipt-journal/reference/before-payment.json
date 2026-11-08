@@ -1,0 +1,29 @@
+{
+  "format": "agent-crash-lab/local-native-journal-review-v1",
+  "required_payment_gate": 2,
+  "payment_status": "unknown",
+  "root_status": "success",
+  "principal_committed": "100",
+  "principal_received": "0",
+  "beneficiary_delta": "0",
+  "failed_principal_receipts": [],
+  "principal_refunds": [],
+  "violations": [],
+  "operation_closed": false,
+  "pending_receipt_ids": [
+    "E5CBy9rsZ2Yc35UUY9H5vDZTZ5kNoLjW3Zph5ZxmxKT5",
+    "3prbAm4HPKxFBdTYM5P1vx7f5qeGfaawLogvzBxMSAAW"
+  ],
+  "internal_queue_remaining": false,
+  "queue_observation_missing": false,
+  "whole_run_complete": false,
+  "torn_tail": false,
+  "complete_records": 19,
+  "fault_checkpoint": {
+    "case": "veto-recipient-exists",
+    "mode": "sync_data_then_cooperative_pause_for_external_sigkill",
+    "round": 0,
+    "step": 2
+  },
+  "scope": "Explicit one-root unsigned local native-transfer profile. Payment state is separate from transcript completion, useful work, retry authorization, signatures and authentic chain history."
+}

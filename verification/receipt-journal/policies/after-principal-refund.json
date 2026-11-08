@@ -1,0 +1,10 @@
+{
+  "format": "agent-crash-lab/unsigned-native-payment-intent-v1",
+  "case": "veto-recipient-missing",
+  "step": 2,
+  "payer": "veto.fixture",
+  "beneficiary": "merchant.fixture",
+  "required_atomic": "100",
+  "scope": "Native transfer from the designated receipt root. Explicit supplied owner intent, not authentication, whole-task success or a retry authorization.",
+  "max_gross_atomic": "100"
+}

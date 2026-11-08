@@ -1,0 +1,46 @@
+[
+  {
+    "id": "before-payment",
+    "label": "Payment pending when the process stops",
+    "journal": "verification/receipt-journal/journals/before-payment-set-1.jsonl",
+    "repeatJournal": "verification/receipt-journal/journals/before-payment-set-2.jsonl",
+    "policy": "verification/receipt-journal/policies/before-payment.json",
+    "reference": "verification/receipt-journal/reference/before-payment.json",
+    "expectedGate": 2,
+    "sourceKind": "actual-controlled-local-runtime-crash",
+    "wholeRunComplete": false
+  },
+  {
+    "id": "after-payment-before-ack",
+    "label": "Payment arrived before the missing final reply",
+    "journal": "verification/receipt-journal/journals/after-payment-before-ack-set-1.jsonl",
+    "repeatJournal": "verification/receipt-journal/journals/after-payment-before-ack-set-2.jsonl",
+    "policy": "verification/receipt-journal/policies/after-payment-before-ack.json",
+    "reference": "verification/receipt-journal/reference/after-payment-before-ack.json",
+    "expectedGate": 0,
+    "sourceKind": "actual-controlled-local-runtime-crash",
+    "wholeRunComplete": false
+  },
+  {
+    "id": "failed-payment-refund-pending",
+    "label": "Payout failed; principal refund still pending",
+    "journal": "verification/receipt-journal/journals/failed-payment-refund-pending-set-1.jsonl",
+    "repeatJournal": "verification/receipt-journal/journals/failed-payment-refund-pending-set-2.jsonl",
+    "policy": "verification/receipt-journal/policies/failed-payment-refund-pending.json",
+    "reference": "verification/receipt-journal/reference/failed-payment-refund-pending.json",
+    "expectedGate": 1,
+    "sourceKind": "actual-controlled-local-runtime-crash",
+    "wholeRunComplete": false
+  },
+  {
+    "id": "after-principal-refund",
+    "label": "Principal refunded; merchant was not paid",
+    "journal": "verification/receipt-journal/journals/after-principal-refund-set-1.jsonl",
+    "repeatJournal": "verification/receipt-journal/journals/after-principal-refund-set-2.jsonl",
+    "policy": "verification/receipt-journal/policies/after-principal-refund.json",
+    "reference": "verification/receipt-journal/reference/after-principal-refund.json",
+    "expectedGate": 1,
+    "sourceKind": "actual-controlled-local-runtime-crash",
+    "wholeRunComplete": false
+  }
+]

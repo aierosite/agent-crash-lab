@@ -1,0 +1,40 @@
+{
+  "atUtc": "2026-11-08T20:00:34.653285+00:00",
+  "verified": true,
+  "isolatedCopyCliCases": [
+    {
+      "case": "before-payment",
+      "exitCode": 2,
+      "wholeReportMatchedDirectApi": true
+    },
+    {
+      "case": "after-payment-before-ack",
+      "exitCode": 0,
+      "wholeReportMatchedDirectApi": true
+    },
+    {
+      "case": "failed-payment-refund-pending",
+      "exitCode": 1,
+      "wholeReportMatchedDirectApi": true
+    },
+    {
+      "case": "after-principal-refund",
+      "exitCode": 1,
+      "wholeReportMatchedDirectApi": true
+    },
+    {
+      "case": "boolean-success",
+      "exitCode": 2,
+      "rejected": true,
+      "unknownAmountPreservedAsNull": false
+    },
+    {
+      "case": "before-payment-torn-block-result",
+      "exitCode": 2,
+      "rejected": false,
+      "unknownAmountPreservedAsNull": true
+    }
+  ],
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "Fresh isolated Python command processes on preserved data. No runtime, model, network or chain reexecution."
+}

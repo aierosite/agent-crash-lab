@@ -1,0 +1,19 @@
+{
+  "atUtc": "2026-11-08T20:00:34.653530+00:00",
+  "originalFrozenRegistrationSha256": "c433de806d1db600ab31eac3ebe1ec4fd9258199ff47c1ee2333afd5f65f6a9a",
+  "originalAssessorSha256": "62b73748138c36ff5d5dd550e74e761e8fa77af06af64f02344b09dfce55cf13",
+  "correctedAssessorSha256": "df31ffc7a126a28860e46d1b966e83ae2e7852cb87b4edc5229bad52c120a877",
+  "postHocSourceInformedCorrection": true,
+  "runtimeInputsAndBinaryChanged": false,
+  "actualExecutionsCompletedBeforeCorrection": 9,
+  "originalSourceAndNegativeControlsRetained": true,
+  "changes": [
+    "Strict terminal SuccessValue type/canonical Base64; typed native Failure structure.",
+    "Typed gas/burnt amounts, metadata version/contracts/cost entries and actual input case/call grammar.",
+    "Reject a new call after an unresolved prior receipt step.",
+    "Uniform unknown result preserves unobserved amounts as null, never invented zero."
+  ],
+  "validEightCrashReportsChanged": false,
+  "validFourControlIntentReportsChanged": false,
+  "independentBlindGrading": false
+}

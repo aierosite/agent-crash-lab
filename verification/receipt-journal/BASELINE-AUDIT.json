@@ -1,0 +1,44 @@
+{
+  "atUtc": "2026-11-08T19:46:20.492152+00:00",
+  "verified": true,
+  "originalFullReportValuesMatched": true,
+  "originalFullJournalValuesMatched": true,
+  "comparisonExcludesOnlyPlannedAddedBlockFields": [
+    "congestion_receipt_bytes",
+    "internal_queue_remaining_after"
+  ],
+  "allOtherValuesPreserved": true,
+  "rawOutputByteEqualityClaimed": false,
+  "actualApplyBlocks": 36,
+  "rawQueueBytesObservedZeroInBlocks": 36,
+  "actualNewRuntimeControlCases": 5,
+  "sameOriginalCaseInputs": true,
+  "reviews": [
+    {
+      "intent": "before-payment",
+      "case": "veto-recipient-exists",
+      "gate": 0,
+      "payment": "settled"
+    },
+    {
+      "intent": "after-payment-before-ack",
+      "case": "veto-recipient-exists",
+      "gate": 0,
+      "payment": "settled"
+    },
+    {
+      "intent": "failed-payment-refund-pending",
+      "case": "veto-recipient-missing",
+      "gate": 1,
+      "payment": "failed"
+    },
+    {
+      "intent": "after-principal-refund",
+      "case": "veto-recipient-missing",
+      "gate": 1,
+      "payment": "failed"
+    }
+  ],
+  "openHorizonGate": 2,
+  "meaning": "Actual new runtime control. Exact original report/journal values preserved after removing only the two predeclared new queue measurements. Same-author source-informed comparison, not new independent benchmark cases."
+}
