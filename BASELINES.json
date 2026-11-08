@@ -374,5 +374,29 @@
       "recording": "evidence/proposal-study/cases/proposal-7-guarded.recording.json"
     },
     "task": "evidence/proposal-study/cases/proposal-7-guarded.task.json"
+  },
+  {
+    "name": "async-partial-union",
+    "task": "evidence/async-study/examples/async-partial-union.task.json",
+    "sources": {
+      "recording": "evidence/async-study/examples/async-partial-union.recording.json",
+      "basis": "evidence/async-study/examples/async-partial-union.basis.json"
+    }
+  },
+  {
+    "name": "async-unfinalized",
+    "task": "evidence/async-study/examples/async-unfinalized.task.json",
+    "sources": {
+      "recording": "evidence/async-study/examples/async-unfinalized.recording.json",
+      "basis": "evidence/async-study/examples/async-unfinalized.basis.json"
+    }
+  },
+  {
+    "name": "async-allowed",
+    "task": "evidence/async-study/examples/async-allowed.task.json",
+    "sources": {
+      "recording": "evidence/async-study/examples/async-allowed.recording.json",
+      "basis": "evidence/async-study/examples/async-allowed.basis.json"
+    }
   }
 ]

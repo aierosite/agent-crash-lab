@@ -2,6 +2,7 @@
 from pathlib import Path, PurePosixPath
 from hashlib import sha256
 import argparse, json, runpy, subprocess, sys
+from copy import deepcopy
 
 ROOT=Path(__file__).resolve().parents[1]
 EVIDENCE=ROOT/'evidence/proposal-study'
@@ -44,7 +45,7 @@ def checked_index(directory):
          [(i,p) for i in range(8) for p in ('unprotected','guarded')],'Study selection is incomplete')
     return index
 
-def verify(directory=EVIDENCE):
+def verify(directory=EVIDENCE, *, replay=False):
     directory=directory.resolve();index=checked_index(directory)
     # Only the reviewed, byte-pinned oracle is executed. The archived inference harness is never run.
     process=subprocess.run([sys.executable,'-I','-S',str(directory/'proposal_oracle.py'),
@@ -55,7 +56,8 @@ def verify(directory=EVIDENCE):
     reference=decode(process.stdout)
     need(len(reference['cases'])==16,'Reference returned an incomplete study')
     app=runpy.run_path(str(ROOT/'workbench.py'))
-    need(app['CORE_SHA256']==index['coreSha256'],'Assessor source differs from the registered replay baseline')
+    changed=app['CORE_SHA256']!=index['coreSha256']
+    need(replay or not changed,'The assessor differs from the recorded version. Use --replay for an explicit reassessment; no new model call will run.')
     rows=[]
     common={'basis':(directory/'locked-plan.json').read_bytes(),
             'model-calls':(directory/'actual/calls.json').read_bytes(),
@@ -72,9 +74,12 @@ def verify(directory=EVIDENCE):
         need(report['invocation']['status']=='assessed' and actual==expected['expected'],
              'Assessment differs from the separate reference: '+entry['name'])
         digest=sha256(canonical(report)).hexdigest()
-        need(digest==entry['coreReportSha256'],'Full replay report changed: '+entry['name'])
+        historical=deepcopy(report)
+        if replay:historical['invocation']['version']='0.1.1'
+        historical_digest=sha256(canonical(historical)).hexdigest()
+        need(historical_digest==entry['coreReportSha256'],'Replay changed more than the declared engine version: '+entry['name'])
         rows.append({'case':entry['case'],'policy':entry['policy'],'gate':actual['gate'],
-                     'outputs':actual['utility'],'fullReportSha256':digest,'referenceMatched':True})
+                     'outputs':actual['utility'],'fullReportSha256':digest,'historicalNormalizedReportSha256':historical_digest,'referenceMatched':True})
     return {'verified':True,'meaning':'Assessor and evidence replay agree; this is not a successful-agent score.',
             'model':decode((directory/'locked-plan.json').read_bytes())['artifacts'],
             'metrics':reference['metrics'],'evaluationCallsRecorded':reference['evaluationCalls'],
@@ -82,14 +87,17 @@ def verify(directory=EVIDENCE):
             'financialComparisons':64,'utilityComparisons':32,'cases':rows,
             'newInferenceCalls':0,'nativeTransactions':0,'paymentScope':'counterfactual',
             'referenceMode':'separate-original-Python-process-same-author','externalBlindAudit':False,
-            'scope':reference['scope'],'coreSha256':app['CORE_SHA256'],'planSha256':PLAN_SHA256}
+            'scope':reference['scope'],'coreSha256':app['CORE_SHA256'],'baseCoreSha256':index['coreSha256'],
+            'replay':replay,'sourceChanged':changed,'reportVersionNormalizedForHistoricalComparison':bool(replay),
+            'coreVersion':app['core'].VERSION,'baseCoreVersion':'0.1.1','planSha256':PLAN_SHA256}
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out',type=Path,help='Write replay results to a new JSON file')
+    parser.add_argument('--replay',action='store_true',help='Explicitly reassess archived inputs with the current engine; only the report version may differ from historical hashes')
     args=parser.parse_args()
     try:
-        result=verify()
+        result=verify(replay=args.replay)
         if args.out:
             with args.out.open('xb') as stream:stream.write(canonical(result)+b'\n')
         print(json.dumps({k:v for k,v in result.items() if k not in ('cases','model')}));return 0

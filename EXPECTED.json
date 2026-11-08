@@ -787,5 +787,65 @@
       "unknown",
       "failed"
     ]
+  },
+  "async-partial-union": {
+    "intents": {
+      "A": {
+        "merchant_gross": null,
+        "known_subtotal": "8",
+        "merchant_status": "breached",
+        "cap": "5"
+      },
+      "B": {
+        "merchant_gross": "3",
+        "known_subtotal": "3",
+        "merchant_status": "within",
+        "cap": "3"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "async-unfinalized": {
+    "intents": {
+      "A": {
+        "merchant_gross": null,
+        "known_subtotal": "0",
+        "merchant_status": "unknown",
+        "cap": "5"
+      },
+      "B": {
+        "merchant_gross": "3",
+        "known_subtotal": "3",
+        "merchant_status": "within",
+        "cap": "3"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
+  },
+  "async-allowed": {
+    "intents": {
+      "A": {
+        "merchant_gross": "5",
+        "known_subtotal": "5",
+        "merchant_status": "within",
+        "cap": "5"
+      },
+      "B": {
+        "merchant_gross": "3",
+        "known_subtotal": "3",
+        "merchant_status": "within",
+        "cap": "3"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "passed"
+    ]
   }
 }

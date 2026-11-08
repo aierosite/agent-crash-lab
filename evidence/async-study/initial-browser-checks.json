@@ -1,0 +1,289 @@
+{
+  "atUtc": "2026-11-08T00:59:43.960837+00:00",
+  "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+  "actualUiReports": [
+    {
+      "mode": "python",
+      "case": "complementary-final-heads-tight-reversed",
+      "fullReportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "breached",
+          "known_subtotal": "8",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "1",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "python",
+      "case": "complementary-final-heads-u128-original",
+      "fullReportSha256": "86436e444842e218037a4a469e54b05edb7fa8ee5c5deb137710672fb0bc7119",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "breached",
+          "known_subtotal": "340282366920938463463374607431768211456",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "1",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "python",
+      "case": "conflicting-leaf-tight-original",
+      "fullReportSha256": "dbb3680f674e238b34831d26c552086c3a54954055e6458923c8d1a88e0f008b",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "python",
+      "case": "no-final-heads-tight-reversed",
+      "fullReportSha256": "35f451b71b8a15808a9a3770a18fc8f7c1289c9ed8a539b8d30f9a09a3173395",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "python",
+      "case": "whole-final-allowed-original",
+      "fullReportSha256": "13e641bf9ac64dcabee803cb4465304ca77305eee761ea05aadea9df23389789",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "within",
+          "known_subtotal": "5",
+          "exact_total": "5"
+        },
+        "A-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "wasm",
+      "case": "complementary-final-heads-tight-reversed",
+      "fullReportSha256": "6ef542e07054e250096ec040c6c99fdabc6f8026bd73f002303e727e7d86a5c9",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "breached",
+          "known_subtotal": "8",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "1",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "wasm",
+      "case": "complementary-final-heads-u128-original",
+      "fullReportSha256": "86436e444842e218037a4a469e54b05edb7fa8ee5c5deb137710672fb0bc7119",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "breached",
+          "known_subtotal": "340282366920938463463374607431768211456",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "1",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "wasm",
+      "case": "conflicting-leaf-tight-original",
+      "fullReportSha256": "dbb3680f674e238b34831d26c552086c3a54954055e6458923c8d1a88e0f008b",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "wasm",
+      "case": "no-final-heads-tight-reversed",
+      "fullReportSha256": "35f451b71b8a15808a9a3770a18fc8f7c1289c9ed8a539b8d30f9a09a3173395",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "A-count": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    },
+    {
+      "mode": "wasm",
+      "case": "whole-final-allowed-original",
+      "fullReportSha256": "13e641bf9ac64dcabee803cb4465304ca77305eee761ea05aadea9df23389789",
+      "matched": true,
+      "financial": {
+        "A-merchant": {
+          "status": "within",
+          "known_subtotal": "5",
+          "exact_total": "5"
+        },
+        "A-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        },
+        "B-merchant": {
+          "status": "within",
+          "known_subtotal": "3",
+          "exact_total": "3"
+        },
+        "B-count": {
+          "status": "within",
+          "known_subtotal": "1",
+          "exact_total": "1"
+        }
+      }
+    }
+  ],
+  "nativeTransactions": 0,
+  "modelCalls": 0,
+  "candidateOnly": true
+}

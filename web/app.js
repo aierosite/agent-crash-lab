@@ -59,22 +59,23 @@ function near(value){
  if(!fitsYocto(value,78,256n))throw Error('Invalid NEAR amount field.');
  return formatYocto(value);
 }
-const inNear=value=>near(value)+' NEAR';
+const moneyParts=value=>{const number=near(value);return value&&value!=='0'&&value.length<=12?[value,'yoctoNEAR']:[number,'NEAR'];};
+const moneyText=value=>moneyParts(value).join(' ');
 const pretty=x=>JSON.stringify(x,null,2);
 const reportJson=()=>cache ??= pretty(last);
 const definitionRows=fields=>fields.map(([label,value,ref])=>`<dt>${esc(label)}</dt><dd>${esc(value)}${sourceHtml(ref)}</dd>`).join('');
 
 const isPrincipal=f=>f.role==='ordinary_principal';
 const positivePrincipal=f=>isPrincipal(f)&&/^[1-9]\d*$/.test(f.requested_yocto);
-const amount=(value, excess='')=>`<span class="amount-figure${excess?' breached':''}">${near(value)}</span><span class="amount-unit">NEAR</span>${excess}`;
+const amount=(value, excess='')=>{const [number,unit]=moneyParts(value);return `<span class="amount-figure${excess?' breached':''}">${number}</span><span class="amount-unit">${unit}</span>${excess}`;};
 const policyLabels={within:'Within scope',breached:'Limit exceeded',unknown:'Unresolved',unsupported:'Unsupported',conflict:'Evidence conflict'};
 function intentRow(c,[count=0,rank=0]=[],hasReceipt){
  const outputLabel=!count?'Not required':rank===4?'Failed':rank?'Unknown':'Passed';
  const state=count?outputLabel.toLowerCase():'not-declared';
  const known=c.exact_total!=null;
  const excess=c.lower_excess;
- const extra=excess!=null&&excess!=='0'?`<span class="cell-note breached">${known?'':'At least '}${inNear(excess)} over the limit</span>`:'';
- const committed=known?amount(c.exact_total,extra):`<span class="amount-unresolved">Unknown</span><span class="cell-note">Known subtotal: ${inNear(c.known_subtotal)}</span>${extra}`;
+ const extra=excess!=null&&excess!=='0'?`<span class="cell-note breached">${known?'':'At least '}${moneyText(excess)} over the limit</span>`:'';
+ const committed=known?amount(c.exact_total,extra):`<span class="amount-unresolved">Unknown</span><span class="cell-note">Known subtotal: ${moneyText(c.known_subtotal)}</span>${extra}`;
  const id=esc(c.intent);
  const intent=hasReceipt
   ?`<button class="intent-id" aria-label="Payment receipts for intent ${id}">${id} →</button>`
@@ -104,7 +105,7 @@ function recoveryFinding(report){
   &&p.finalized&&p.expected_yocto!==p.successful_allowed_yocto);
  return failed&&{tone:'breach',intent:row.intent,label:'principal recovery failed',
   total:near(failed.successful_allowed_yocto),unit:true,
-  caption:'Recovered to allowed recipients · '+inNear(failed.expected_yocto)+' required',
+  caption:'Recovered to allowed recipients · '+moneyText(failed.expected_yocto)+' required',
   refs:failed.failed_refund_facts};
 }
 
@@ -351,7 +352,7 @@ function showCase(s,filename){
  setTab('overview');
 }
 const findCase=id=>catalog?.scenarios.find(s=>s.id===id);
-const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox','model-proposals':'Recorded Qwen · synthetic payments'}[kind]??'Owned sandbox');
+const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox','model-proposals':'Recorded Qwen · synthetic payments','synthetic-async':'Synthetic partial evidence'}[kind]??'Owned sandbox');
 nav.onclick=({target})=>{
  const button=target.closest('.scenario');
  if(button)select(findCase(button.dataset.id));
@@ -866,7 +867,7 @@ function renderComparison(recording){
   ['Intent A principal',p=>'<strong class="comparison-value '+esc(p.financialStatus)+'">'+near(p.intentAGross)+' <small>NEAR</small></strong>'],
   ['Payment policy',p=>esc(({within:'Within declared limits',breached:'Policy breached'})[p.financialStatus]??p.financialStatus)],
   ['After restart',p=>esc(p.recovery)],
-  ['Intent B principal',p=>inNear(p.intentBGross)],
+  ['Intent B principal',p=>moneyText(p.intentBGross)],
   ['Required outputs passed',p=>esc(p.requiredOutputsPassed)],
   ['Recorded answer',p=>'<code>'+esc(JSON.stringify(p.answer),true)+'</code>'],
   ['Worker exit code',p=>esc(p.crashExitCode)]
@@ -1023,7 +1024,7 @@ async function start(){
  try{
   const next=await request('/api/catalog'),cases=next?.scenarios;
   if(!Array.isArray(cases)||!cases.length)throw Error('Cannot load cases.');
-  nav.innerHTML=cases.map((s,i)=>`<button class="scenario" data-id="${esc(s.id)}"><span class="scenario-index">${i+1}</span><span><b>${esc(s.short)}</b><small>${esc(s.group)}${s.kind==='synthetic'?' / SYNTHETIC':''}</small></span></button>`).join('');
+  nav.innerHTML=cases.map((s,i)=>`<button class="scenario" data-id="${esc(s.id)}"><span class="scenario-index">${i+1}</span><span><b>${esc(s.short)}</b><small>${esc(s.group)}${String(s.kind).startsWith('synthetic')?' / SYNTHETIC':''}</small></span></button>`).join('');
   setText('case-count',cases.length);
   picker.append(...cases.map((s,i)=>new Option((i+1)+'. '+s.short,s.id)));
   catalog=next;

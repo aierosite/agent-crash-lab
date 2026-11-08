@@ -553,5 +553,9 @@
       "check": "A-answer",
       "matched": true
     }
-  ]
+  ],
+  "replay": {
+    "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "planCoreSha256": "d493656c72e63fc48597bc3085c0ef259530bafb05e9fd62d8a973ec10bc624b"
+  }
 }

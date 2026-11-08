@@ -1,1 +1,307 @@
-{"execution":{"coreSha256":"846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469","coreVersion":"0.1.1","elapsedMs":1.083,"liveModel":false,"mode":"actual-local-assessment","networkTransactions":0},"report":{"attempts":[{"conflict":false,"derived_initial_receipts":[],"diagnostic_ids":[],"id":"A-extra","intent":"A","milestones":["FINAL"],"missing_or_pending_context":[],"observations":[{"pointer":"/rpcObservations/0/response/result","source":"recording"},{"pointer":"/rpcObservations/1/response/result","source":"recording"}],"principal_scope_complete":true,"profile_complete":true,"recovery_obligations":[],"role":"task","submissions":[{"packet_sha256":"a0e3c80fc22582bb7e52f1baaa9cb5e3d61a42983283927a4e74b29e353253da","ref":{"pointer":"/rpcObservations/0","source":"recording"}}],"tx_hash":"34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4","unsupported":false}],"authority":{"basis":[],"kind":"counterfactual","note":"Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed."},"constraints":[{"cap":"4","complete":true,"diagnostic_ids":[],"exact_excess":"1","exact_total":"5","id":"A-merchant","intent":"A","known_subtotal":"5","lower_excess":"1","metric":"merchant_gross_principal","status":"breached","unit":"yoctoNEAR","witnesses":["A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0"]},{"cap":"1","complete":true,"diagnostic_ids":[],"exact_excess":"0","exact_total":"1","id":"A-count","intent":"A","known_subtotal":"1","lower_excess":"0","metric":"committed_settlement_attempts","status":"within","unit":"distinct transaction hashes with qualifying merchant principal","witnesses":["A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0"]},{"cap":"4714391578802473965","complete":true,"diagnostic_ids":[],"exact_excess":"0","exact_total":"0","id":"B-merchant","intent":"B","known_subtotal":"0","lower_excess":"0","metric":"merchant_gross_principal","status":"within","unit":"yoctoNEAR","witnesses":[]},{"cap":"3","complete":true,"diagnostic_ids":[],"exact_excess":"0","exact_total":"0","id":"B-count","intent":"B","known_subtotal":"0","lower_excess":"0","metric":"committed_settlement_attempts","status":"within","unit":"distinct transaction hashes with qualifying merchant principal","witnesses":[]}],"coverage":{"all_required_utility_assessed":true,"financial_scope_complete":true,"trust":"Owner scope/reference/horizon and controlled RPC recordings trusted; hashes are consistency, not consensus/authenticity; no live model"},"diagnostics":[],"format":"agent-crash-lab/report-v1","inventory":{"declared_attempts":1,"observed_transaction_hashes":1,"rpc_records":2,"selected_intermediate_utility":0,"selected_required_utility":2,"send_observations":1,"unassigned_submissions":[],"unassigned_transactions":[],"utility_observations":2},"invocation":{"profile":"near-sandbox-2.14/native-v1","status":"assessed","version":"0.1.1"},"native_facts":[{"action_index":0,"action_ref":{"pointer":"/rpcObservations/1/response/result/receipts/0","source":"recording"},"action_type":"Transfer","attempt_id":"A-extra","committed_yocto":"5","execution_state":"committed","finality":"whole_final","from":"owner.depositlab.near","id":"A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0","intent":"A","outcome_ref":{"pointer":"/rpcObservations/1/response/result/receipts_outcome/0","source":"recording"},"parent_receipt_id":"34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4","protected_external":true,"protected_internal":false,"provenance":"observed","receipt_id":"BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4","requested_yocto":"5","role":"ordinary_principal","self":false,"to":"merchant.repaymentlab.near","tx_hash":"34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4"},{"action_index":0,"action_ref":{"pointer":"/rpcObservations/1/response/result/receipts/1","source":"recording"},"action_type":"Transfer","attempt_id":"A-extra","committed_yocto":"200864306250000000000","execution_state":"committed","finality":"whole_final","from":"system","id":"A-extra:Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9:0","intent":"A","outcome_ref":{"pointer":"/rpcObservations/1/response/result/receipts_outcome/1","source":"recording"},"parent_receipt_id":"BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4","protected_external":false,"protected_internal":false,"provenance":"observed","receipt_id":"Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9","requested_yocto":"200864306250000000000","role":"gas_return","self":false,"to":"owner.depositlab.near","tx_hash":"34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4"}],"outcome_costs":[{"attempt_id":"A-extra","gas_burnt":223182562500,"meaning":"observed outcome fields, not universal owner loss","outcome_id":"34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4","ref":{"pointer":"/rpcObservations/1/response/result/transaction_outcome","source":"recording"},"tokens_burnt":"22318256250000000000"},{"attempt_id":"A-extra","gas_burnt":223182562500,"meaning":"observed outcome fields, not universal owner loss","outcome_id":"BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4","ref":{"pointer":"/rpcObservations/1/response/result/receipts_outcome/0","source":"recording"},"tokens_burnt":"22318256250000000000"},{"attempt_id":"A-extra","gas_burnt":223182562500,"meaning":"observed outcome fields, not universal owner loss","outcome_id":"Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9","ref":{"pointer":"/rpcObservations/1/response/result/receipts_outcome/1","source":"recording"},"tokens_burnt":"0"}],"scope":{"capture":{"pointer":"","source":"recording"},"chain_id":"counterfactual-42","closed_horizon":true,"horizon_note":"Finite synthetic container only, not observed network finality or completeness.","protocol_version":88,"run_id":"generated-42-1"},"sources":{"recording":{"bytes":6044,"sha256":"7129e6f95a3e5435c38bb7dcada1b8ac9f42d21355bc8bcc2e956ff1a97c1293"}},"utility":{"intermediate":[],"meaning":"Finite comparison of declared content and the recorded answer. Capture and model provenance are separate.","required":[{"answer_check":true,"content_check":true,"context_check":true,"id":"A-output","intent":"A","observation_ref":{"pointer":"/utilityObservations/0","source":"recording"},"observed_answer":{"sku":"A0","units":12},"observed_answer_present":true,"observed_status":200,"observed_status_present":true,"profile":"inventory-gap-first-v1","reference_check":"consistent","response_sha256":"2c8028fd9d6b888fc84aa653d94591bbd850364015a79baebe120829c7a1eb89","status":"passed"},{"answer_check":true,"content_check":true,"context_check":true,"id":"B-output","intent":"B","observation_ref":{"pointer":"/utilityObservations/1","source":"recording"},"observed_answer":{"sku":"B2","units":1},"observed_answer_present":true,"observed_status":200,"observed_status_present":true,"profile":"inventory-gap-first-v1","reference_check":"consistent","response_sha256":"a3b06897d157c6d4504734ad41b8905aae2b726b0a0cfa00d4506229d1cc468e","status":"passed"}]}},"scenario":null}
+{
+  "scenario": null,
+  "report": {
+    "format": "agent-crash-lab/report-v1",
+    "invocation": {
+      "status": "assessed",
+      "profile": "near-sandbox-2.14/native-v1",
+      "version": "0.1.2"
+    },
+    "authority": {
+      "basis": [],
+      "kind": "counterfactual",
+      "note": "Synthetic counterfactual generated from an owned archived receipt topology. Identifiers and packet bytes are synthetic; no signatures, consensus, new model calls or network execution are claimed."
+    },
+    "scope": {
+      "run_id": "generated-42-1",
+      "capture": {
+        "pointer": "",
+        "source": "recording"
+      },
+      "chain_id": "counterfactual-42",
+      "closed_horizon": true,
+      "horizon_note": "Finite synthetic container only, not observed network finality or completeness.",
+      "protocol_version": 88
+    },
+    "sources": {
+      "recording": {
+        "sha256": "7129e6f95a3e5435c38bb7dcada1b8ac9f42d21355bc8bcc2e956ff1a97c1293",
+        "bytes": 6044
+      }
+    },
+    "inventory": {
+      "rpc_records": 2,
+      "send_observations": 1,
+      "declared_attempts": 1,
+      "observed_transaction_hashes": 1,
+      "unassigned_submissions": [],
+      "unassigned_transactions": [],
+      "utility_observations": 2,
+      "selected_required_utility": 2,
+      "selected_intermediate_utility": 0
+    },
+    "attempts": [
+      {
+        "id": "A-extra",
+        "tx_hash": "34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4",
+        "role": "task",
+        "intent": "A",
+        "submissions": [
+          {
+            "packet_sha256": "a0e3c80fc22582bb7e52f1baaa9cb5e3d61a42983283927a4e74b29e353253da",
+            "ref": {
+              "pointer": "/rpcObservations/0",
+              "source": "recording"
+            }
+          }
+        ],
+        "observations": [
+          {
+            "source": "recording",
+            "pointer": "/rpcObservations/0/response/result"
+          },
+          {
+            "source": "recording",
+            "pointer": "/rpcObservations/1/response/result"
+          }
+        ],
+        "milestones": [
+          "FINAL"
+        ],
+        "principal_scope_complete": true,
+        "profile_complete": true,
+        "conflict": false,
+        "unsupported": false,
+        "diagnostic_ids": [],
+        "derived_initial_receipts": [],
+        "missing_or_pending_context": [],
+        "recovery_obligations": []
+      }
+    ],
+    "native_facts": [
+      {
+        "id": "A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0",
+        "attempt_id": "A-extra",
+        "tx_hash": "34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4",
+        "intent": "A",
+        "receipt_id": "BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4",
+        "action_index": 0,
+        "action_type": "Transfer",
+        "from": "owner.depositlab.near",
+        "to": "merchant.repaymentlab.near",
+        "requested_yocto": "5",
+        "committed_yocto": "5",
+        "execution_state": "committed",
+        "role": "ordinary_principal",
+        "self": false,
+        "finality": "whole_final",
+        "parent_receipt_id": "34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts/0"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/0"
+        },
+        "protected_internal": false,
+        "protected_external": true
+      },
+      {
+        "id": "A-extra:Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9:0",
+        "attempt_id": "A-extra",
+        "tx_hash": "34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4",
+        "intent": "A",
+        "receipt_id": "Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9",
+        "action_index": 0,
+        "action_type": "Transfer",
+        "from": "system",
+        "to": "owner.depositlab.near",
+        "requested_yocto": "200864306250000000000",
+        "committed_yocto": "200864306250000000000",
+        "execution_state": "committed",
+        "role": "gas_return",
+        "self": false,
+        "finality": "whole_final",
+        "parent_receipt_id": "BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4",
+        "provenance": "observed",
+        "action_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts/1"
+        },
+        "outcome_ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/1"
+        },
+        "protected_internal": false,
+        "protected_external": false
+      }
+    ],
+    "outcome_costs": [
+      {
+        "attempt_id": "A-extra",
+        "outcome_id": "34z3E2XJKBNBgGEzS3vWDqpKtLjXKBXNMkkZVPbjJ7W4",
+        "gas_burnt": 223182562500,
+        "tokens_burnt": "22318256250000000000",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/transaction_outcome"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "A-extra",
+        "outcome_id": "BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4",
+        "gas_burnt": 223182562500,
+        "tokens_burnt": "22318256250000000000",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/0"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      },
+      {
+        "attempt_id": "A-extra",
+        "outcome_id": "Bid3o9aqA439cZzgzgDFuFsRN2izCDQWynNebqXbCAU9",
+        "gas_burnt": 223182562500,
+        "tokens_burnt": "0",
+        "ref": {
+          "source": "recording",
+          "pointer": "/rpcObservations/1/response/result/receipts_outcome/1"
+        },
+        "meaning": "observed outcome fields, not universal owner loss"
+      }
+    ],
+    "constraints": [
+      {
+        "id": "A-merchant",
+        "intent": "A",
+        "metric": "merchant_gross_principal",
+        "status": "breached",
+        "witnesses": [
+          "A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0"
+        ],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "yoctoNEAR",
+        "cap": "4",
+        "known_subtotal": "5",
+        "exact_total": "5",
+        "lower_excess": "1",
+        "exact_excess": "1"
+      },
+      {
+        "id": "A-count",
+        "intent": "A",
+        "metric": "committed_settlement_attempts",
+        "status": "within",
+        "witnesses": [
+          "A-extra:BhzgScS2p1qmGtX6F1oa1h19UTaKPZx2mNLgfY1GHzW4:0"
+        ],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "distinct transaction hashes with qualifying merchant principal",
+        "cap": "1",
+        "known_subtotal": "1",
+        "exact_total": "1",
+        "lower_excess": "0",
+        "exact_excess": "0"
+      },
+      {
+        "id": "B-merchant",
+        "intent": "B",
+        "metric": "merchant_gross_principal",
+        "status": "within",
+        "witnesses": [],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "yoctoNEAR",
+        "cap": "4714391578802473965",
+        "known_subtotal": "0",
+        "exact_total": "0",
+        "lower_excess": "0",
+        "exact_excess": "0"
+      },
+      {
+        "id": "B-count",
+        "intent": "B",
+        "metric": "committed_settlement_attempts",
+        "status": "within",
+        "witnesses": [],
+        "diagnostic_ids": [],
+        "complete": true,
+        "unit": "distinct transaction hashes with qualifying merchant principal",
+        "cap": "3",
+        "known_subtotal": "0",
+        "exact_total": "0",
+        "lower_excess": "0",
+        "exact_excess": "0"
+      }
+    ],
+    "utility": {
+      "required": [
+        {
+          "id": "A-output",
+          "status": "passed",
+          "intent": "A",
+          "profile": "inventory-gap-first-v1",
+          "observation_ref": {
+            "pointer": "/utilityObservations/0",
+            "source": "recording"
+          },
+          "reference_check": "consistent",
+          "observed_status_present": true,
+          "observed_status": 200,
+          "observed_answer_present": true,
+          "observed_answer": {
+            "sku": "A0",
+            "units": 12
+          },
+          "content_check": true,
+          "answer_check": true,
+          "context_check": true,
+          "response_sha256": "2c8028fd9d6b888fc84aa653d94591bbd850364015a79baebe120829c7a1eb89"
+        },
+        {
+          "id": "B-output",
+          "status": "passed",
+          "intent": "B",
+          "profile": "inventory-gap-first-v1",
+          "observation_ref": {
+            "pointer": "/utilityObservations/1",
+            "source": "recording"
+          },
+          "reference_check": "consistent",
+          "observed_status_present": true,
+          "observed_status": 200,
+          "observed_answer_present": true,
+          "observed_answer": {
+            "sku": "B2",
+            "units": 1
+          },
+          "content_check": true,
+          "answer_check": true,
+          "context_check": true,
+          "response_sha256": "a3b06897d157c6d4504734ad41b8905aae2b726b0a0cfa00d4506229d1cc468e"
+        }
+      ],
+      "intermediate": [],
+      "meaning": "Finite comparison of declared content and the recorded answer. Capture and model provenance are separate."
+    },
+    "coverage": {
+      "financial_scope_complete": true,
+      "all_required_utility_assessed": true,
+      "trust": "Owner scope/reference/horizon and controlled RPC recordings trusted; hashes are consistency, not consensus/authenticity; no live model"
+    },
+    "diagnostics": []
+  },
+  "execution": {
+    "mode": "actual-local-assessment",
+    "elapsedMs": 1.077,
+    "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "coreVersion": "0.1.2",
+    "liveModel": false,
+    "networkTransactions": 0
+  }
+}

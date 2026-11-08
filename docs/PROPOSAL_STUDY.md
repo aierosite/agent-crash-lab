@@ -36,11 +36,11 @@ The two financial projections were identical in every trajectory. This batch pro
 From a trusted copy of this release, with Python 3.12+:
 
 ```sh
-python -I -S tools/verify_proposal_study.py
+python -I -S tools/verify_proposal_study.py --replay
 python -I -S test_proposal_study.py
 ```
 
-The verifier first checks the byte-pinned study index, registration, raw observations and locked sources. Only then does it run the reviewed separate reference with `-I -S`. It replays the current inspector against all 16 projections and compares both the reference assertions and every full canonical report SHA256. Exit **0** means agreement of inspector and evidence; the episode gates remain fourteen **1** results and two **2** results. There are **64 financial + 32 output assertions across 16 correlated projections of eight trajectories**, not 96 independent trials.
+The verifier first checks the byte-pinned study index, registration, raw observations and locked sources. Only then does it run the reviewed separate reference with `-I -S`. With `--replay`, it explicitly reassesses all 16 archived projections with the current inspector. It compares reference assertions and the full historical report SHA256 after normalizing only the declared engine version to 0.1.1. Every other report field must match. Actual current hashes, normalized historical hashes and both source hashes are reported separately. Without `--replay`, a changed assessor source is rejected; the recorded model run is never relabeled as a fresh run. Exit **0** means agreement of inspector and evidence; the episode gates remain fourteen **1** results and two **2** results. There are **64 financial + 32 output assertions across 16 correlated projections of eight trajectories**, not 96 independent trials.
 
 The tests include nine pre-inference synthetic model-double controls, which are explicitly rejected as actual inference. They cover always-buy overspending/retry, legitimate B, skip-all, perfect proposals, tie/zero inventory, wrong answers, malformed answers, source and trace tampering. Five packaged controls additionally check full replay, altered raw/task/source files, a rewritten index, changes to actual host/model records and the three workbench examples. Default replay launches no model or network service.
 

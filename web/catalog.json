@@ -62,6 +62,36 @@
       "question": "Are valid per-task payments being confused with successful completion?"
     },
     {
+      "id": "async-partial-union",
+      "baseline": "async-partial-union",
+      "title": "Two partial views prove a budget breach",
+      "short": "Partial evidence, proven excess",
+      "group": "Constructed asynchronous evidence",
+      "kind": "synthetic-async",
+      "description": "Synthetic control: two compatible observations prove distinct finalized effects. Their union exceeds the budget; a complete total is still unknown.",
+      "question": "Can proven excess survive observation order without claiming a complete history?"
+    },
+    {
+      "id": "async-unfinalized",
+      "baseline": "async-unfinalized",
+      "title": "Observed success is not finalized payment",
+      "short": "Unfinalized is unknown",
+      "group": "Constructed asynchronous control",
+      "kind": "synthetic-async",
+      "description": "The same constructed receipt fragments lack matching finalized block anchors. A stays unknown; independent fully observed B remains within scope.",
+      "question": "Does missing finality stay unknown while independent work remains assessable?"
+    },
+    {
+      "id": "async-allowed",
+      "baseline": "async-allowed",
+      "title": "Complete evidence confirms allowed work",
+      "short": "Complete, allowed control",
+      "group": "Constructed asynchronous control",
+      "kind": "synthetic-async",
+      "description": "A constructed complete FINAL view confirms an allowed five-yoctoNEAR payment. Correct outputs and independent B both pass.",
+      "question": "Does the inspector still accept genuinely complete, permitted work?"
+    },
+    {
       "id": "double-payment",
       "baseline": "native-naive",
       "title": "Duplicate payment after restart",
@@ -518,16 +548,40 @@
         "recording": "evidence/proposal-study/cases/proposal-7-guarded.recording.json"
       },
       "task": "evidence/proposal-study/cases/proposal-7-guarded.task.json"
+    },
+    {
+      "name": "async-partial-union",
+      "task": "evidence/async-study/examples/async-partial-union.task.json",
+      "sources": {
+        "recording": "evidence/async-study/examples/async-partial-union.recording.json",
+        "basis": "evidence/async-study/examples/async-partial-union.basis.json"
+      }
+    },
+    {
+      "name": "async-unfinalized",
+      "task": "evidence/async-study/examples/async-unfinalized.task.json",
+      "sources": {
+        "recording": "evidence/async-study/examples/async-unfinalized.recording.json",
+        "basis": "evidence/async-study/examples/async-unfinalized.basis.json"
+      }
+    },
+    {
+      "name": "async-allowed",
+      "task": "evidence/async-study/examples/async-allowed.task.json",
+      "sources": {
+        "recording": "evidence/async-study/examples/async-allowed.recording.json",
+        "basis": "evidence/async-study/examples/async-allowed.basis.json"
+      }
     }
   ],
   "files": {
     "BASELINES.json": {
-      "bytes": 13535,
-      "sha256": "b1ec08bbaef3cc25dfe0fe09d607e77813d854443d30b8c84c18f625bd23e3a5"
+      "bytes": 14448,
+      "sha256": "0ca6bd2c8df62877cfa7380f5a5e1d5d0b18f640453c433760dbd072969d35bb"
     },
     "agent_crash_lab.py": {
-      "bytes": 56893,
-      "sha256": "846d21e8aac5caf58edc1af89111d41e5cc3d14e62744315ccb39b39c351b469"
+      "bytes": 59356,
+      "sha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441"
     },
     "episode_oracle.py": {
       "bytes": 5337,
@@ -540,6 +594,42 @@
     "evidence/agent-leash-artifact-precommit.json": {
       "bytes": 2816,
       "sha256": "f333add999c1d6b3d5f69823226c4935f4074e9e6ff43b7f00c20e35a417c32b"
+    },
+    "evidence/async-study/examples/async-allowed.basis.json": {
+      "bytes": 195,
+      "sha256": "56fabd211903d0d492c7ed47e9b12e31b6706faab9ec50d0a78554de03af08c6"
+    },
+    "evidence/async-study/examples/async-allowed.recording.json": {
+      "bytes": 8412,
+      "sha256": "8129d6bbda603d8c8b9e60e4691ad3928da4523bc4411524634cce2e7742ed90"
+    },
+    "evidence/async-study/examples/async-allowed.task.json": {
+      "bytes": 2619,
+      "sha256": "0997c411a23b253d1beaaba5fe9f5f2b3186e02849bdcf454200e61b20de603c"
+    },
+    "evidence/async-study/examples/async-partial-union.basis.json": {
+      "bytes": 223,
+      "sha256": "808207263fb43d5be83fe0049ae1fd4ed194bd3a4ca45731871e5bff07bce414"
+    },
+    "evidence/async-study/examples/async-partial-union.recording.json": {
+      "bytes": 8281,
+      "sha256": "39bbea2f87be419fecd99282835cb67811f5f976b5a3db6562fd86051b1eadee"
+    },
+    "evidence/async-study/examples/async-partial-union.task.json": {
+      "bytes": 2750,
+      "sha256": "712423d3efba04c8ba0cf312a0e9270432622e0a63a3a05c82b4c6b9d361b68a"
+    },
+    "evidence/async-study/examples/async-unfinalized.basis.json": {
+      "bytes": 198,
+      "sha256": "04f2c9cfea8af1ad9aaed833ff55f4214ef74d51d189ead5fa392302eaf89518"
+    },
+    "evidence/async-study/examples/async-unfinalized.recording.json": {
+      "bytes": 7805,
+      "sha256": "f74eb4097e1dcec2758a980feb45ffbdc5cde9625e00616ac2aaea7e0667025c"
+    },
+    "evidence/async-study/examples/async-unfinalized.task.json": {
+      "bytes": 2621,
+      "sha256": "25d0e74214d44c2d159e96286ee1d6de75b393315d5f472a8a1133673e386bcb"
     },
     "evidence/balance-attribution-observation.json": {
       "bytes": 50060,
@@ -958,8 +1048,8 @@
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
     },
     "workbench.py": {
-      "bytes": 15304,
-      "sha256": "5fd5381fa66f902aeab0ab041d034f8cdf811987b12b32b50aadd85703bffc9a"
+      "bytes": 16679,
+      "sha256": "17b4c5523d2e8356c38249e8592e7f030b6cb7ee397f36e850b5b00db9700a7a"
     }
   }
 }

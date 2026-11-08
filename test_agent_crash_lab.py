@@ -81,7 +81,11 @@ class KernelTests(unittest.TestCase):
                 for tid,e in EXPECTED[row['name']]['intents'].items():
                     result=constraint(r,tid+'-merchant')
                     if e['merchant_gross'] is None:
-                        self.assertIn(result['status'],['unknown','unsupported','conflict'])
+                        if 'known_subtotal' in e:
+                            self.assertEqual(result['known_subtotal'],e['known_subtotal'])
+                            self.assertEqual(result['status'],e['merchant_status'])
+                        else:
+                            self.assertIn(result['status'],['unknown','unsupported','conflict'])
                         self.assertIsNone(result['exact_total'])
                     else:
                         self.assertEqual(result['known_subtotal'],e['merchant_gross'],(row['name'],tid,result,r['diagnostics']))

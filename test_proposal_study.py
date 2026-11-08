@@ -1,7 +1,7 @@
 """Recorded inference replay, byte binding, policy and dishonest-success controls."""
 from pathlib import Path
 from copy import deepcopy
-import json, runpy, shutil, tempfile, unittest
+import json, runpy, shutil, subprocess, sys, tempfile, unittest
 
 ROOT=Path(__file__).resolve().parent
 verifier=runpy.run_path(str(ROOT/'tools/verify_proposal_study.py'))
@@ -11,7 +11,7 @@ StudyControls=runpy.run_path(str(EVIDENCE/'test_study.py'))['StudyControls']
 
 class PackagedStudyTests(unittest.TestCase):
     def test_all_eight_actual_trajectories_replay_without_repair(self):
-        result=verifier['verify']()
+        result=verifier['verify'](replay=True)
         self.assertTrue(result['verified']);self.assertEqual(len(result['cases']),16)
         self.assertEqual(result['evaluationCallsRecorded'],40);self.assertEqual(result['warmupCallsRecorded'],1)
         metrics=result['metrics']
@@ -21,6 +21,15 @@ class PackagedStudyTests(unittest.TestCase):
         self.assertEqual(result['newInferenceCalls'],0);self.assertEqual(result['nativeTransactions'],0)
         self.assertEqual(sum(r['gate']==2 for r in result['cases']),2)
         self.assertEqual(sum(r['gate']==1 for r in result['cases']),14)
+    def test_changed_engine_requires_explicit_replay_and_keeps_historical_hashes(self):
+        result=verifier['verify'](replay=True)
+        self.assertTrue(result['sourceChanged']);self.assertEqual(result['baseCoreVersion'],'0.1.1')
+        self.assertEqual(result['coreVersion'],'0.1.2')
+        self.assertTrue(all(r['fullReportSha256']!=r['historicalNormalizedReportSha256'] for r in result['cases']))
+        command=[sys.executable,'-I','-S',str(ROOT/'tools/verify_proposal_study.py')]
+        strict=subprocess.run(command,capture_output=True,timeout=15)
+        self.assertEqual(strict.returncode,2);self.assertIn('--replay',json.loads(strict.stdout)['error'])
+
     def test_changed_input_or_source_is_rejected_before_execution(self):
         for name in ['actual/calls.json','actual/cases.json','actual/execution.json','proposal_oracle.py',
                      'cases/proposal-0-guarded.task.json','cases/proposal-0-guarded.recording.json']:

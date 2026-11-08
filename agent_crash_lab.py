@@ -9,7 +9,7 @@ import json
 import re
 from decimal import Decimal
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 PROFILE = 'near-sandbox-2.14/native-v1'
 REPORT = 'agent-crash-lab/report-v1'
 LIMITS = {
@@ -337,6 +337,51 @@ class Assessment:
         return {k: tx[k] for k in ['hash', 'signer_id', 'receiver_id', 'public_key', 'nonce', 'actions']} | {
             'nonce_index': tx.get('nonce_index'), 'nonce_mode': tx.get('nonce_mode', 'monotonic')}
 
+    def receipt_links(self, tx, outcomes, bodies):
+        root = outcomes[tx['hash']]
+        children = root['outcome']['receipt_ids']
+        issues = []
+        if len(children) == 1 and children[0] in bodies:
+            initial = bodies[children[0]]; ia = initial['receipt']['Action']
+            need(initial['predecessor_id'] == tx['signer_id'] and initial['receiver_id'] == tx['receiver_id']
+                 and ia['signer_id'] == tx['signer_id'] and ia['signer_public_key'] == tx['public_key']
+                 and equal(ia['actions'], tx['actions']), 'initial_transaction_binding')
+        parents = {}; missing = set(); edges = {}
+        for rid, o in outcomes.items():
+            edges[rid] = o['outcome']['receipt_ids']
+            if self.status(o['outcome']['status']) == 'pending':
+                issues.append('pending_outcome')
+            for child in edges[rid]:
+                need(child not in parents, 'multiple_causal_parents')
+                parents[child] = rid
+                if child not in outcomes:
+                    missing.add(child)
+            if type(o['outcome']['status']) is dict and 'SuccessReceiptId' in o['outcome']['status']:
+                need(o['outcome']['status']['SuccessReceiptId'] in edges[rid], 'returned_receipt_binding')
+        colors = {}; stack = [(tx['hash'], False)]
+        while stack:
+            rid, done = stack.pop()
+            if done:
+                colors[rid] = 2
+                continue
+            need(colors.get(rid) != 1, 'receipt_cycle')
+            if colors.get(rid) == 2 or rid not in outcomes:
+                continue
+            colors[rid] = 1; stack.append((rid, True))
+            stack.extend((c, False) for c in reversed(edges[rid]))
+        need(set(colors) == set(outcomes), 'unreachable_outcome')
+        need(tx['hash'] not in parents, 'root_cycle')
+        for rid, b in bodies.items():
+            if rid not in outcomes:
+                missing.add(rid)
+            else:
+                need(outcomes[rid]['outcome']['executor_id'] == b['receiver_id'], 'receipt_executor')
+                need(rid in parents, 'unreachable_body')
+        missing.update(set(outcomes) - {tx['hash']} - set(bodies))
+        if missing:
+            issues.append('missing_receipt_context')
+        return parents, missing, issues
+
     def graph(self, v, ref):
         fields(v, ['status', 'transaction', 'transaction_outcome', 'receipts_outcome', 'final_execution_status'], ['receipts'])
         self.status(v['status'], True)
@@ -405,49 +450,40 @@ class Assessment:
                                                 'actions': tx['actions'], 'refund_to': None}}}
             body_refs[rid] = {'source': ref['source'], 'pointer': ref['pointer'] + '/transaction'}
             derived.add(rid)
-        if len(children) == 1 and children[0] in bodies:
-            initial = bodies[children[0]]; ia = initial['receipt']['Action']
-            need(initial['predecessor_id'] == tx['signer_id'] and initial['receiver_id'] == tx['receiver_id']
-                 and ia['signer_id'] == tx['signer_id'] and ia['signer_public_key'] == tx['public_key']
-                 and equal(ia['actions'], tx['actions']), 'initial_transaction_binding')
-        parents = {}; missing = set(); edges = {}
-        for rid, o in outcomes.items():
-            edges[rid] = o['outcome']['receipt_ids']
-            if self.status(o['outcome']['status']) == 'pending':
-                issues.append('pending_outcome')
-            for child in edges[rid]:
-                need(child not in parents, 'multiple_causal_parents')
-                parents[child] = rid
-                if child not in outcomes:
-                    missing.add(child)
-            if type(o['outcome']['status']) is dict and 'SuccessReceiptId' in o['outcome']['status']:
-                need(o['outcome']['status']['SuccessReceiptId'] in edges[rid], 'returned_receipt_binding')
-        colors = {}; stack = [(tx['hash'], False)]
-        while stack:
-            rid, done = stack.pop()
-            if done:
-                colors[rid] = 2
-                continue
-            need(colors.get(rid) != 1, 'receipt_cycle')
-            if colors.get(rid) == 2 or rid not in outcomes:
-                continue
-            colors[rid] = 1; stack.append((rid, True))
-            stack.extend((c, False) for c in reversed(edges[rid]))
-        need(set(colors) == set(outcomes), 'unreachable_outcome')
-        need(tx['hash'] not in parents, 'root_cycle')
-        for rid, b in bodies.items():
-            if rid not in outcomes:
-                missing.add(rid)
-            else:
-                need(outcomes[rid]['outcome']['executor_id'] == b['receiver_id'], 'receipt_executor')
-                need(rid in parents, 'unreachable_body')
-        missing.update(set(outcomes) - {tx['hash']} - set(bodies))
-        if missing:
-            issues.append('missing_receipt_context')
+        parents, missing, link_issues = self.receipt_links(tx, outcomes, bodies)
+        issues.extend(link_issues)
         structural = expanded and not missing and not issues and v['final_execution_status'] == 'FINAL'
         return {'v': v, 'ref': ref, 'tx': tx, 'context': context, 'outcomes': outcomes, 'out_refs': out_refs,
                 'bodies': bodies, 'body_refs': body_refs, 'derived': derived, 'parents': parents,
                 'structural_final': structural, 'issues': issues, 'expanded': expanded}
+
+    def combine_partial_graphs(self, graphs):
+        # Every raw graph was bounded and parsed before identity conflict checks.
+        # Physical source pointers stay attached to the individual evidence items.
+        combined = dict(graphs[0])
+        bodies = {}; body_refs = {}; derived = set(); outcomes = {}; out_refs = {}
+        for graph in graphs:
+            for rid, body in graph['bodies'].items():
+                if rid not in bodies or (rid in derived and rid not in graph['derived']):
+                    bodies[rid] = body; body_refs[rid] = graph['body_refs'][rid]
+                    if rid in graph['derived']:
+                        derived.add(rid)
+                    else:
+                        derived.discard(rid)
+            for rid, outcome in graph['outcomes'].items():
+                previous = outcomes.get(rid)
+                # Unknown is absence of execution evidence, not a conflicting terminal state.
+                if previous is None or (previous['outcome']['status'] == 'Unknown'
+                                        and outcome['outcome']['status'] != 'Unknown'):
+                    outcomes[rid] = outcome; out_refs[rid] = graph['out_refs'][rid]
+        parents, _, issues = self.receipt_links(combined['tx'], outcomes, bodies)
+        issues = sorted(set(issues) | {issue for graph in graphs for issue in graph['issues']})
+        # A union may improve the lower bound, but never manufactures a complete FINAL view.
+        issues.append('partial_views_combined_without_whole_final')
+        combined.update(bodies=bodies, body_refs=body_refs, derived=derived,
+                        outcomes=outcomes, out_refs=out_refs, parents=parents,
+                        structural_final=False, issues=issues, expanded=True)
+        return combined
 
     def inspect_attempt(self, a, views, anchors):
         scope = a['id']; graphs = []; ids = []; errors = []; unsupported = False; record_work = 0
@@ -513,7 +549,13 @@ class Assessment:
             return result
         g = next((x for x in candidates if x['structural_final']), None)
         if g is None:
-            g = max(candidates, key=lambda x: len(x['bodies']))
+            try:
+                g = self.combine_partial_graphs(graphs) if len(graphs) > 1 else candidates[0]
+            except InputError as error:
+                result['conflict'] = True
+                result['diagnostic_ids'].append(self.diag('incompatible_partial_graphs', scope,
+                    message='Partial observations disagree about receipt ancestry: ' + error.code))
+                return result
         known = {}; action_rows = {}; sem_errors = []; any_unsupported = False
         for rid, b in g['bodies'].items():
             ac = b['receipt']['Action']; parsed = []
