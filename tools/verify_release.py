@@ -16,7 +16,7 @@ def main():
         files=m['files'];bad=[];runs=[]
         if m['format']!='agent-crash-lab/release-v1' or type(files) is not dict:raise ValueError('Invalid manifest')
         names=json.dumps(sorted(files),separators=(',',':')).encode()
-        if sha256(names).hexdigest()!='d1202670da8e049aeff63f9c9c114b0684cbcd91191de39a96dbdae566f910ae':
+        if sha256(names).hexdigest()!='eaca8830914b7836aa7809d88dbf8f2a9b0c071bada3234ca9c7ccf12bfb7490':
             raise ValueError('Release inventory mismatch')
         for name,expected in files.items():
             path=ROOT/name

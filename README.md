@@ -27,12 +27,13 @@ authenticated-chain capture, disk recovery or a head-to-head result.
 
 ![Native payment and principal refund review](docs/native-journal-desktop.png)
 
-## Release and preserved competition snapshot
+## Final competition package · v0.19.1
 
-[Download v0.19.0](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0) · [Judge walkthrough](docs/JUDGES.md) · [Metadata/recorded-agent video, v0.18.1](docs/agent-crash-lab-demo.mp4).
-The frozen [v0.18.1 final review package](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.18.1)
-and all earlier tags remain available. This successor adds a finite native-journal
-view; it does not create another competition application or replace the original X post.
+[Download the final v0.19.1 package](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1) · [Judge walkthrough](docs/JUDGES.md) · [84-second current UI demo](docs/agent-crash-lab-demo.mp4).
+This is the final review handoff for the existing NEAR HACKATHON application.
+It aligns the journal, metadata and recorded-agent walkthrough and package links.
+The v0.19.0 inspectors and study results are unchanged. Earlier tags, including
+v0.18.1, remain available; there is no duplicate competition application.
 
 ## Change authority · introduced in v0.18.0
 
@@ -69,19 +70,19 @@ financial reports; it does not rerun a model, SDK or external typed task predica
 
 The final submitted v0.17.1 tag/package remains available unchanged. The
 v0.18.0 successor adds metadata review; it does not replace the existing payment
-or recorded-agent dimensions. The current 72-second video below includes metadata review and the preserved recorded-agent cases.
+or recorded-agent dimensions. The current 84-second video includes native journals, metadata and preserved recorded-agent cases.
 
 ## Competition review
 
 [Start with the judge walkthrough](docs/JUDGES.md): recheck the extra-fee case,
-compare its guard, then inspect an unfinished job. The [v0.18.1 72-second demo](docs/agent-crash-lab-demo.mp4)
+compare its guard, then inspect an unfinished job. The [v0.19.1 84-second demo](docs/agent-crash-lab-demo.mp4)
 uses actual UI captures; it is a captioned frame-based walkthrough, not continuous
 screen recording or a new agent or chain execution. [Watch the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
 
 NEAR HACKATHON · AI Security & Defense. The existing application remains the
 same project. The submitted X video shows the original v0.2.0; this repository and hosted
 workbench continue to improve. The v0.17.1 final snapshot is preserved, while
-v0.18.1 remains the frozen final review package; v0.19.0 is its code/demo successor. [Entry and rule notes](docs/SUBMISSION.md).
+v0.19.1 is the current final review package; all earlier snapshots remain unchanged. [Entry and rule notes](docs/SUBMISSION.md).
 
 ## Try the workbench
 
@@ -159,7 +160,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.19.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0),
+Download the [v0.19.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh

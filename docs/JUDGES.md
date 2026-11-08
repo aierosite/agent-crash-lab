@@ -1,8 +1,10 @@
-# Judge walkthrough · successor v0.19.0
+# Judge walkthrough · final v0.19.1
 
-The v0.18.1 final competition snapshot and earlier tags remain unchanged.
-This successor adds a finite unsigned native-receipt journal view; the existing
-application and original X post remain the competition entry.
+This is the current final package for the existing competition application.
+The native journal, metadata, payment and recorded-agent inspectors are unchanged
+from v0.19.0. Earlier tags remain available. Follow the two journal examples,
+then the recorded-agent/metadata examples below. The original X demo remains
+the submitted post unless an organizer confirms a replacement.
 
 ## Start here: payment can outlive the process
 
@@ -65,18 +67,19 @@ constructed controls, saved external criteria, current replay and fresh executio
    can import that payment bundle; the recorded-agent page accepts only its six
    installed cases, not arbitrary uploaded code or reference programs.
 
-[Watch the 72-second captioned walkthrough](agent-crash-lab-demo.mp4) or
+[Watch the 84-second captioned walkthrough](agent-crash-lab-demo.mp4) or
 [open the hosted MP4](https://aierosite.github.io/agent-crash-lab/docs/agent-crash-lab-demo.mp4).
-It uses six [actual UI frames](demo-frames-v0181/00-choose.png) with captions:
-four current metadata captures and two preserved recorded-agent captures.
-The restored-password example is a constructed control. The other examples
-replay saved model data. It is not continuous screen recording, a fresh model/SDK
-run or NEAR contract-Wasm execution. Frame hashes and method are shipped in
-`verification/demo-video.json`.
+Seven preserved actual UI captures show delivered payment without a final reply,
+principal refund without merchant payment, extra fee, unfinished work, unauthorized
+metadata change, an owner-bound counterpart and a restored forbidden change.
+The last example is a constructed control. The others replay saved runtime/model
+data. This is a captioned frame-based walkthrough, not continuous screen recording
+or fresh model/SDK/chain execution. Original frame hashes, source paths and method
+are shipped in `verification/demo-video.json`.
 
 ## Reproduce without an account, wallet or API key
 
-Download and extract the [v0.19.0 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.0).
+Download and extract the [v0.19.1 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1).
 Python 3.12+ and its standard library are enough for the local inspector.
 
 ```sh
