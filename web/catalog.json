@@ -1691,6 +1691,63 @@
     },
     "independentBlindEvaluation": false
   },
+  "nativeJournal": {
+    "format": "agent-crash-lab/native-journal-workbench-v1",
+    "module": "receipt_journal.py",
+    "mathModule": "receipt_journal_math.py",
+    "runtime": "https://cdn.jsdelivr.net/pyodide/v0.29.5/full/",
+    "samples": [
+      {
+        "id": "before-payment",
+        "label": "Payment pending when the process stops",
+        "journal": "verification/receipt-journal/journals/before-payment-set-1.jsonl",
+        "repeatJournal": "verification/receipt-journal/journals/before-payment-set-2.jsonl",
+        "policy": "verification/receipt-journal/policies/before-payment.json",
+        "reference": "verification/receipt-journal/reference/before-payment.json",
+        "expectedGate": 2,
+        "sourceKind": "actual-controlled-local-runtime-crash",
+        "wholeRunComplete": false,
+        "reportSha256": "01c9aaa23bf8f552ad053efa26e16d62471c1b67bc5ec139b85cdf8ebd008ab9"
+      },
+      {
+        "id": "after-payment-before-ack",
+        "label": "Payment arrived before the missing final reply",
+        "journal": "verification/receipt-journal/journals/after-payment-before-ack-set-1.jsonl",
+        "repeatJournal": "verification/receipt-journal/journals/after-payment-before-ack-set-2.jsonl",
+        "policy": "verification/receipt-journal/policies/after-payment-before-ack.json",
+        "reference": "verification/receipt-journal/reference/after-payment-before-ack.json",
+        "expectedGate": 0,
+        "sourceKind": "actual-controlled-local-runtime-crash",
+        "wholeRunComplete": false,
+        "reportSha256": "42512faff28b47bc586ee044bfdab47bb53400d3d9ed71e9947a9badf18de7da"
+      },
+      {
+        "id": "failed-payment-refund-pending",
+        "label": "Payout failed; principal refund still pending",
+        "journal": "verification/receipt-journal/journals/failed-payment-refund-pending-set-1.jsonl",
+        "repeatJournal": "verification/receipt-journal/journals/failed-payment-refund-pending-set-2.jsonl",
+        "policy": "verification/receipt-journal/policies/failed-payment-refund-pending.json",
+        "reference": "verification/receipt-journal/reference/failed-payment-refund-pending.json",
+        "expectedGate": 1,
+        "sourceKind": "actual-controlled-local-runtime-crash",
+        "wholeRunComplete": false,
+        "reportSha256": "d9616c6c8e80c0c8895f6de88d4b3ff700a5231ff8cb424c811f8c65a2d7f1d6"
+      },
+      {
+        "id": "after-principal-refund",
+        "label": "Principal refunded; merchant was not paid",
+        "journal": "verification/receipt-journal/journals/after-principal-refund-set-1.jsonl",
+        "repeatJournal": "verification/receipt-journal/journals/after-principal-refund-set-2.jsonl",
+        "policy": "verification/receipt-journal/policies/after-principal-refund.json",
+        "reference": "verification/receipt-journal/reference/after-principal-refund.json",
+        "expectedGate": 1,
+        "sourceKind": "actual-controlled-local-runtime-crash",
+        "wholeRunComplete": false,
+        "reportSha256": "b3f29154f1a7e3ad059716369d9de0006ff6dca9d4d4a04a6512a8ec91ab419a"
+      }
+    ],
+    "independentBlindEvaluation": false
+  },
   "files": {
     "BASELINES.json": {
       "bytes": 18369,
@@ -2368,6 +2425,14 @@
       "bytes": 1663,
       "sha256": "f37377dd65113c442f5312355d94068c388d49d6af6fe9a14db5c28876eed710"
     },
+    "receipt_journal.py": {
+      "bytes": 30162,
+      "sha256": "75e3d1ec21adf5641ab196b8f857b2955e98c751932e8762f4c92ed5e9ad5cff"
+    },
+    "receipt_journal_math.py": {
+      "bytes": 6110,
+      "sha256": "42da007b3a6f9495f57a165814ce40bd5d4202b8036dc241730cc81b244fc59b"
+    },
     "state_review.py": {
       "bytes": 15272,
       "sha256": "6d091b9e3cc6613d1e085dfde4b44455ee95d365ac266a15443380ee5c59001e"
@@ -2655,6 +2720,38 @@
     "verification/native-crash-comparison.json": {
       "bytes": 1612,
       "sha256": "a19030aae583634b520bca074dd56dcaf84f0b37b1d09244f6134f6f133df100"
+    },
+    "verification/receipt-journal/journals/after-payment-before-ack-set-1.jsonl": {
+      "bytes": 82658,
+      "sha256": "75f1752ed993fb817b07ec6c307510d9c7da3188e592154a845b4e137f081358"
+    },
+    "verification/receipt-journal/journals/after-principal-refund-set-1.jsonl": {
+      "bytes": 84690,
+      "sha256": "cc1b01de357fc35225e3e0184e6d7ed7091e27a257c17c534b76b07a6441ce78"
+    },
+    "verification/receipt-journal/journals/before-payment-set-1.jsonl": {
+      "bytes": 77553,
+      "sha256": "f5cba47cd3772dc318be5b965b8646fab29f975008bd2cd1613c6a408c6dd5b2"
+    },
+    "verification/receipt-journal/journals/failed-payment-refund-pending-set-1.jsonl": {
+      "bytes": 81075,
+      "sha256": "7b81d422e85f504230fe24cb3d75a4ba7e03702a0ba3e149ed0e0740c6c4bab8"
+    },
+    "verification/receipt-journal/policies/after-payment-before-ack.json": {
+      "bytes": 408,
+      "sha256": "13bf81084cdfc84c2648a54d7cd5ff46958b75ceddf970cbcc66d5405daff1c7"
+    },
+    "verification/receipt-journal/policies/after-principal-refund.json": {
+      "bytes": 409,
+      "sha256": "98abba51dcd7c787dd3579500e10b190ddd784abc43a1b63df8c9ed7416ce7c8"
+    },
+    "verification/receipt-journal/policies/before-payment.json": {
+      "bytes": 408,
+      "sha256": "13bf81084cdfc84c2648a54d7cd5ff46958b75ceddf970cbcc66d5405daff1c7"
+    },
+    "verification/receipt-journal/policies/failed-payment-refund-pending.json": {
+      "bytes": 409,
+      "sha256": "98abba51dcd7c787dd3579500e10b190ddd784abc43a1b63df8c9ed7416ce7c8"
     },
     "verification/rpc-study/01-status/observation.json": {
       "bytes": 928,
@@ -3125,8 +3222,8 @@
       "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
     },
     "workbench.py": {
-      "bytes": 24780,
-      "sha256": "f5fcf68b0bb7dd2ba380fa9fe350d9be651793418d6afa2c3a9a24a1c260c657"
+      "bytes": 27118,
+      "sha256": "8bd84682909855e7fec38411d34f73337574f0ac33b19532ada156e4b6263bf9"
     }
   }
 }

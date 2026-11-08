@@ -128,6 +128,30 @@ def metadata_input(cid):
     if not path.is_relative_to((ROOT/'verification/metadata-review/inputs').resolve()):raise ValueError('Invalid metadata example path')
     return path.read_bytes()
 
+def journal_catalog():
+    catalog=json.loads((ROOT/'web/catalog.json').read_bytes());entry=catalog['nativeJournal']
+    paths=[entry['module'],entry['mathModule'],*[s[k] for s in entry['samples'] for k in ['journal','policy']]]
+    return {**entry,'files':{p:catalog['files'][p] for p in paths}}
+
+def journal_input(cid,part):
+    if part not in ['journal','policy']:return None
+    entry=next((s for s in journal_catalog()['samples'] if s['id']==cid),None)
+    if not entry:return None
+    path=(ROOT/entry[part]).resolve()
+    if not path.is_relative_to((ROOT/'verification/receipt-journal').resolve()):raise ValueError('Invalid installed journal path')
+    return path.read_bytes()
+
+def journal_assessment(body):
+    if type(body) is not dict or set(body)!={'format','journal_utf8','policy_utf8'} or body['format']!='agent-crash-lab/native-journal-bundle-v1':
+        raise ValueError('Choose a native journal bundle containing exact journal_utf8 and policy_utf8 text.')
+    if any(type(body[k]) is not str for k in ['journal_utf8','policy_utf8']):raise ValueError('Journal and payment intent must be UTF-8 text, not objects or file paths.')
+    try:
+        for field,limit in [('journal_utf8',4194304),('policy_utf8',16384)]:
+            if not 0<len(body[field].encode('utf-8'))<=limit:raise ValueError('Journal must be 1 byte–4 MiB; payment intent must be 1 byte–16 KiB.')
+    except UnicodeError as e:raise ValueError('The journal bundle contains invalid Unicode. Choose the original UTF-8 files.') from e
+    reviewer=runpy.run_path(str(ROOT/'receipt_journal.py'))
+    return reviewer['assess_bundle'](body['journal_utf8'],body['policy_utf8'])
+
 class Handler(BaseHTTPRequestHandler):
     server_version='CrashLab/1.0'
     def log_message(self,*_):pass
@@ -151,6 +175,12 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/health':return self.send(200,{'ok':True,'version':'0.18.1','coreVersion':core.VERSION})
         if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
         if path=='/api/metadata-catalog':return self.send(200,metadata_catalog())
+        if path=='/api/native-journal-catalog':return self.send(200,journal_catalog())
+        if path=='/api/native-journal-input':
+            from urllib.parse import parse_qs
+            query=parse_qs(urlsplit(self.path).query)
+            raw=journal_input(query.get('case',[''])[0],query.get('part',[''])[0])
+            return self.send(200,raw) if raw is not None else self.send(404,{'error':'Choose an installed journal and either journal or policy.'})
         if path=='/api/metadata-input':
             from urllib.parse import parse_qs
             raw=metadata_input(parse_qs(urlsplit(self.path).query).get('case',[''])[0])
@@ -180,7 +210,7 @@ class Handler(BaseHTTPRequestHandler):
             file=(ROOT/name).resolve()
             if name not in catalog['sourceCorroboration']['files'] or not file.is_relative_to(ROOT.resolve()):return self.send(404,{'error':'Unknown source evidence file'})
             return self.send(200,file.read_bytes())
-        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css','/agent.html','/agent.js','/agent.css','/agent-contract.js','/agent-worker.js','/state.html','/state.js','/state-contract.js','/state.css','/state-worker.js'):return self.send(404,{'error':'Not found'})
+        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css','/agent.html','/agent.js','/agent.css','/agent-contract.js','/agent-worker.js','/state.html','/state.js','/state-contract.js','/state.css','/state-worker.js','/journal.html','/journal.js','/journal.css','/journal-contract.js','/journal-worker.js'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
         self.send(200,file.read_bytes(),mime+'; charset=utf-8')
@@ -227,6 +257,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200,reviewer['assess_bundle'](raw))
             body=decode(raw)
             if type(body) is not dict:raise ValueError('Request must be an object')
+            if path=='/api/native-journal-review':return self.send(200,journal_assessment(body))
             if path=='/api/agent-review':
                 if len(raw)>4096 or set(body)!={'id'}:raise ValueError('Choose one installed recorded agent case')
                 reviewer=runpy.run_path(str(ROOT/'agent_review.py'))

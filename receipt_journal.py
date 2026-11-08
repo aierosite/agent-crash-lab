@@ -265,7 +265,7 @@ def review(raw,policy):
                 parent_tag,parent_body,_=action(parent);parent_outcome=target['outcomes'].get(parent_id)
                 require(parent_tag=='Transfer' and parent_outcome is not None and 'Failure' in parent_outcome['status'],'Principal refund lacks failed transfer')
                 require(receipt['receiver_id']==parent['predecessor_id'] and context['signer_id']=='system' and number(body['deposit'],'refund amount')==number(parent_body['deposit'],'failed transfer amount'),'Principal refund binding differs')
-                refunds.append({'receipt_id':rid,'amount':body['deposit'],'status':'pending' if o is None else ('settled' if 'SuccessValue' in o['status'] else 'failed')})
+                refunds.append({'receipt_id':rid,'amount':str(number(body['deposit'],'refund amount')),'status':'pending' if o is None else ('settled' if 'SuccessValue' in o['status'] else 'failed')})
         else:raise EvidenceError('Unknown native transfer actor')
     if committed>cap:violations.append({'kind':'gross-principal-cap-exceeded','committed':str(committed),'cap':str(cap)})
     after=target['blocks'][-1]['snapshot_after'];delta=_ref['principal_delta'](target['before'],after,beneficiary)

@@ -38,7 +38,14 @@ def browser_catalog():
         result=reviewer['assess_bundle']((ROOT/row['path']).read_bytes())
         row['reportSha256']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     names.update(['state_review.py',*[r['path'] for r in metadata['samples']]])
-    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'metadataReview':metadata,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
+    journal={'format':'agent-crash-lab/native-journal-workbench-v1','module':'receipt_journal.py','mathModule':'receipt_journal_math.py','runtime':metadata['runtime'],
+             'samples':json.loads((ROOT/'verification/receipt-journal/samples.json').read_bytes()),'independentBlindEvaluation':False}
+    journal_api=run_path(str(ROOT/'receipt_journal.py'))
+    for row in journal['samples']:
+        result=journal_api['assess_bundle'](*[(ROOT/row[k]).read_bytes().decode('utf-8') for k in ['journal','policy']])
+        row['reportSha256']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    names.update([journal['module'],journal['mathModule'],*[r[k] for r in journal['samples'] for k in ['journal','policy']]])
+    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'metadataReview':metadata,'nativeJournal':journal,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('scenario',choices=[*app.CATALOG,'browser-catalog']);p.add_argument('output',type=Path);a=p.parse_args()

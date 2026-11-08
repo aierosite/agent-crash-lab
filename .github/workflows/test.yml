@@ -32,3 +32,5 @@ jobs:
       - run: node test_state_contract.js
       - run: node test_state_bundle_contract.js
       - run: node test_state_cancellation.js
+      - run: node test_journal_contract.js
+      - run: node test_journal_cancellation.js

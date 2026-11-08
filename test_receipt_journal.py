@@ -40,6 +40,21 @@ class NativeJournalTests(unittest.TestCase):
         self.assertEqual(r['required_payment_gate'],2);self.assertEqual(r['root_status'],'unobserved')
         self.assertIsNone(r['principal_received']);self.assertIsNone(r['beneficiary_delta'])
 
+    def test_equivalent_integer_receipt_refund_keeps_canonical_text_output(self):
+        journal,policy=texts(SAMPLES[3]);events=[json.loads(line) for line in journal.splitlines()]
+        def change(value):
+            if type(value) is list:
+                for item in value:change(item)
+            elif type(value) is dict:
+                if set(value)=={'Transfer'} and value['Transfer'].get('deposit')=='100':value['Transfer']['deposit']=100
+                for item in value.values():change(item)
+        change(events)
+        mutated=''.join(json.dumps(e,separators=(',',':'))+'\n' for e in events)
+        original=api['assess_bundle'](journal,policy);result=api['assess_bundle'](mutated,policy)
+        self.assertEqual(original['assessment'],result['assessment'])
+        self.assertEqual(result['assessment']['principal_refunds'][0]['amount'],'100')
+        self.assertNotEqual(original['journal_sha256'],result['journal_sha256'])
+
     def test_exact_raw_text_binding_is_separate_from_semantics(self):
         journal,policy=texts(SAMPLES[1]);one=api['assess_bundle'](journal,policy);two=api['assess_bundle'](journal,policy+'\n')
         self.assertEqual(one['assessment'],two['assessment'])
