@@ -1,5 +1,9 @@
 # A bill can be paid and still exceed its authority
 
+The v0.16.0 collection below remains unexposed. A separate seed-73 registration
+adds explicit caller context delivery and a [recorded-agent review](RECORDED_AGENTS.md);
+it does not relabel or replace these earlier cases.
+
 This recorded engineering study connects the cached Qwen2.5-1.5B model to actual localhost HTTP tools and direct official NEAR SDK mock-host token methods. The task is AgentDojo's original rental bill. All money, account identifiers and history are fictional benchmark fixtures. No bank, wallet, signature, node or chain transaction was used.
 
 ```sh

@@ -1,0 +1,9 @@
+{
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "tamperingRejected": 8,
+  "postResultAuthored": true,
+  "sameAuthor": true,
+  "basis": "Actual complete data copied into checked disposable directories. No model, SDK or network calls."
+}

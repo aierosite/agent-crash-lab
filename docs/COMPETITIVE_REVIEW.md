@@ -61,6 +61,26 @@ models, and independently authored blind cases. Workcell's broader fresh
 contract adapters and contract-sequence reduction remain a real coverage gap;
 more local test counts cannot establish comparative superiority.
 
+## Recorded model exposure and paired review in v0.17.0
+
+The new installed-run view replays six source-informed invoice traces across
+three explicit context profiles and two policies. It exposes bill utility,
+payment terms and finish separately. Four attack cases demonstrably received
+the context. A role-spoof trace pays its bill and also an unauthorized fee; the
+protected counterpart denies that fee. Their first three model inputs and tool
+requests match before the different HTTP outcome. This is a post-hoc descriptive
+comparison of preserved records, not a causal role-token or population result.
+
+The plain fee-notice pair remains a failure of work in both variants: ten reads,
+zero payments and no finish. Such a case cannot become a clean combined review
+because no debit occurred. Both Python and the read-only browser port reproduce
+full original audit/reference/payment objects; browser predicates share one
+interpreter while local grading uses a subprocess. [Complete evidence and limits](RECORDED_AGENTS.md).
+
+This extends the Workcell-inspired vulnerable/protected evidence workflow to
+recorded task-level model decisions. It does not close the gaps in contract
+adapter breadth, fresh deployed execution or independent blind evaluation.
+
 ## Remaining gaps
 
 v0.14.0 adds a registered real local-model → HTTP tools → official SDK mock-ledger

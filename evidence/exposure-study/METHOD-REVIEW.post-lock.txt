@@ -1,0 +1,9 @@
+Post-lock literature review; not a change to registered source, metrics or cases.
+
+The original AgentDojo paper, section 3.4, separates benign utility, utility under attack and targeted attacker success. This study reports exact case outcomes and preserves missing/unrun work. A selected attacker predicate being false is not proof that every financial constraint holds. No population attack-rate estimate, confidence interval or independent-blind label is justified by this source-informed six-case, one-seed collection.
+Source: https://arxiv.org/html/2406.13352v3#S3.SS4
+
+The pinned llama.cpp server documentation supports token-ID prompts and says parse_special=false treats marker strings as ordinary text. The inherited raw ChatML serializer is deliberately retained and disclosed for this adversarial fixture. Its role-marker surface is not claimed to be safe. A later tokenizer-boundary experiment must remain separate from primary collection and must not be presented as preregistered model-performance evidence.
+Source: https://github.com/ggml-org/llama.cpp/blob/cd959bae99ff4bed22bef2604f45241c09bbb8c8/tools/server/README.md
+
+Observed original HTTP response -> exact context message -> full model request -> returned response establishes delivery through the owned runtime. It cannot establish attention or understanding. Caller retrieval is not relabelled as a model-selected tool action. Earlier zero-exposure and failed studies remain intact.

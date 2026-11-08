@@ -1,0 +1,40 @@
+{
+  "atUtc": "2026-11-08T12:27:51.470877+00:00",
+  "baseline": "D:\\Upwork\\agent-crash-lab\\longterm\\banking-flat-study-v015",
+  "originalCopiedSourceHashes": {
+    "bank_tools.py": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6",
+    "bank_loop.py": "c19a442731ee0df1268d8edfb6ee1439a9a2c1e5f7bca4a662b95bb9a56f60e3",
+    "agent_tools_common.py": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef",
+    "actor.py": "38217d79f1ee5f2db7a25f070cdd4cb2057f5337b3d31da4cfc9b0ff06f50ced",
+    "projection.py": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6",
+    "reference_grade.py": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2",
+    "banking-context.json": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b",
+    "sdk-source-inventory.json": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e",
+    "BUILD.json": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd",
+    "worker/Cargo.toml": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581",
+    "worker/Cargo.lock": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39",
+    "worker/src/main.rs": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213",
+    "reference/LICENSE": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e",
+    "reference/user_tasks.py": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82",
+    "reference/injection_tasks.py": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311",
+    "reference/banking_client.py": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42",
+    "reference/environment.yaml": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b",
+    "reference/CALIBRATION.json": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b",
+    "reference/VERSION-RESOLUTION.json": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f",
+    "reference/json-grammar-vendor.gbnf": "1a3e3469892957861029adcd24ad0c886b778a942dd4a18cc146238ad56474dd",
+    "audit.py": "0303a4430cce036e401b8e07fc0232a7808bf95eadd2158964bafdd50e048395",
+    "controls.py": "398b536e4371da269d8829725729f0d116ce048e4b402fdfb6dff88f6f4b4a5d",
+    "inspector/token_policy.py": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935",
+    "inspector/token_review.py": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0",
+    "transport.py": "6d97f7fe534a339930ca650ff996ed74ca743d47729fe57d8c7bf0bb1b621222"
+  },
+  "changedBeforeInference": [
+    "bank_tools.py initial_invoice uses pinned external template and explicit payloads",
+    "bank_loop.py records caller prefetch and inserts exact context message",
+    "controls.py adds exposure and failure controls; actual prefetch changes event count",
+    "transport.py new isolated root and eleven-test lock gate",
+    "actor.py documentation only; same resource bounds and uncorrected model actions"
+  ],
+  "sameAuthor": true,
+  "newModelCalls": 0
+}

@@ -28,3 +28,4 @@ jobs:
       - run: node test_source_contract.js
       - run: node test_event_contract.js
       - run: node test_policy_contract.js
+      - run: node test_agent_contract.js

@@ -136,7 +136,8 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.16.0','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.17.0','coreVersion':core.VERSION})
+        if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
         if path=='/api/token-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             source=catalog['sourceCorroboration']
@@ -162,7 +163,7 @@ class Handler(BaseHTTPRequestHandler):
             file=(ROOT/name).resolve()
             if name not in catalog['sourceCorroboration']['files'] or not file.is_relative_to(ROOT.resolve()):return self.send(404,{'error':'Unknown source evidence file'})
             return self.send(200,file.read_bytes())
-        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css'):return self.send(404,{'error':'Not found'})
+        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css','/agent.html','/agent.js','/agent.css','/agent-contract.js','/agent-worker.js'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
         self.send(200,file.read_bytes(),mime+'; charset=utf-8')
@@ -205,6 +206,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200,reviewer['assess_bundle'](raw))
             body=decode(raw)
             if type(body) is not dict:raise ValueError('Request must be an object')
+            if path=='/api/agent-review':
+                if len(raw)>4096 or set(body)!={'id'}:raise ValueError('Choose one installed recorded agent case')
+                reviewer=runpy.run_path(str(ROOT/'agent_review.py'))
+                return self.send(200,reviewer['review'](body['id']))
             if path in ('/api/run','/api/bundle'):
                 sid=body.get('id');scenario=CATALOG.get(sid) if type(sid) is str else None
                 if scenario is None:raise ValueError('Unknown scenario')

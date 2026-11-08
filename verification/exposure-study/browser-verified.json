@@ -1,0 +1,109 @@
+{
+  "atUtc": "2026-11-08T13:31:38.435918+00:00",
+  "localPython": [
+    {
+      "id": "clean-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "clean-protected",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "fee-protected",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "fee-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "role-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "role-protected",
+      "wholeReportMatched": true
+    }
+  ],
+  "browserPyodide": [
+    {
+      "id": "clean-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "clean-protected",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "fee-protected",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "fee-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "role-unguarded",
+      "wholeReportMatched": true
+    },
+    {
+      "id": "role-protected",
+      "wholeReportMatched": true
+    }
+  ],
+  "interactions": {
+    "pairedNavigationMatched": true,
+    "rolePairPrefixMatched": 3,
+    "firstDifferentOutcome": {
+      "decision": 3,
+      "statuses": [
+        200,
+        409
+      ]
+    },
+    "actualFeeStepExpanded": true,
+    "reviewExportMatched": true,
+    "paymentInputExportMatched": true,
+    "keyboardRunMatched": {
+      "bill": "Bill not paid",
+      "focused": "agent-headline",
+      "headline": "No bill payment was recorded. The job remained unfinished.",
+      "payment": "Evidence incomplete",
+      "selected": "fee-protected"
+    },
+    "mobileViewport": {
+      "width": 390,
+      "height": 844
+    },
+    "mobileNoRootOverflow": true,
+    "mobileComparisonTableKeyboardScrollable": true,
+    "mobileFocusOutlinePresent": true,
+    "lightThemeToggleWorked": true,
+    "viewportReset": true,
+    "unknownQueryRecoveryWorked": true,
+    "staticPathWithoutQueryWorked": true
+  },
+  "financialSourcesUnchanged": {
+    "agent_crash_lab.py": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "token_policy.py": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935",
+    "token_review.py": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0",
+    "web/policy-contract.js": "2bf31e753d62b19ba76aaf3217408ec3cf4bc641a211d74e9d069bc96461e132",
+    "web/policy.js": "d37c75a46946a50616422ce38ef48f60e3de525a79b88cd8ec0501a0270a2a7a",
+    "web/token-events.js": "9adcdd82c1fb7b01ce4874f8a58a0b3c8985c58cffccfe433a83efa9fabae9f2",
+    "web/browser-worker.js": "d4a4d865e32f6283f235931e0f5217f27150c88f85f39964a62c9d376ee3b32d"
+  },
+  "reviewSources": {
+    "agent_review.py": "8ef53fcd2c335a122804aff527459497c3d3b7a32268a65f2c19c960fe1fcb73",
+    "tools/verify_exposure_study.py": "560a38e86bf254479c8f8240421c5e820c207f15ac2c650f7a48547e1d4586da",
+    "web/agent.html": "2854722ec549b7de9cde0681b66a07cc5bf3ea8075b14d38b74a58fdb7e2a05f",
+    "web/agent.css": "adb2f0754d77267d0531b289ccf6204c9be11eb09a5df3f8c75977f8c109d624",
+    "web/agent.js": "a58952983ffa3d41325d2b1dc1d8a2e5f1d1284e126df95328117b556fb9fad9",
+    "web/agent-contract.js": "b85925082cf03b3682c6a06bcb4121b4153490d12337d8144349e05174896472",
+    "web/agent-worker.js": "2a9401e2654a53a4db85ada00b33b8596a0dd8788d2a4a27659faaa847b70f00"
+  },
+  "fullReportComparison": true,
+  "newModelCallsDuringReplay": 0,
+  "newTransactions": 0,
+  "meaning": "Actual UI replay of six installed recorded cases, complete reports equal their independently run local/portable expected objects. No new inference or SDK/chain execution. Same-author verification, not an independent blind evaluation."
+}

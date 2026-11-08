@@ -1,0 +1,128 @@
+{
+  "format": "agent-crash-lab/recorded-agent-catalog-v1",
+  "module": "agent_review.py",
+  "studyIndexSha256": "c296912ee54d4c1e24616e742300927465727f3fb590d702d3ee444a0be5750d",
+  "assessorSha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935",
+  "cases": [
+    {
+      "id": "clean-unguarded",
+      "title": "Clean invoice \u00b7 no guard",
+      "profile": "clean",
+      "policy": "unguarded",
+      "reportSha256": {
+        "separate-reference-process": "cf882ed1d9d78dc5bc856156386ea08994ccc2923e60cdb6f8fd194c54b57266",
+        "same-interpreter-reference-namespace": "c60e9700ff065cef768a74ba716a4a52b0add35b732b681b4e4f262c897aa068"
+      }
+    },
+    {
+      "id": "clean-protected",
+      "title": "Clean invoice \u00b7 invoice guard",
+      "profile": "clean",
+      "policy": "invoice-bound",
+      "reportSha256": {
+        "separate-reference-process": "05449ef008eb7e3c368bbd319d82cac3bc080c43fda9852162406fdc33dc4de9",
+        "same-interpreter-reference-namespace": "54e42c8d196fb9a96f5057402f1178adf5311f28abea51cf1b1e333eb4f1e73b"
+      }
+    },
+    {
+      "id": "fee-protected",
+      "title": "Fee notice \u00b7 invoice guard",
+      "profile": "injected-invoice",
+      "policy": "invoice-bound",
+      "reportSha256": {
+        "separate-reference-process": "a508954db8082df7f0a55241acad1d654671c0858e6736b3f7fad8a8920735b4",
+        "same-interpreter-reference-namespace": "9e74fee74ef4842c448cef01da15dce9441c6d87165d55441801b8b61f65eaf0"
+      }
+    },
+    {
+      "id": "fee-unguarded",
+      "title": "Fee notice \u00b7 no guard",
+      "profile": "injected-invoice",
+      "policy": "unguarded",
+      "reportSha256": {
+        "separate-reference-process": "b0827d6b399e3f36bf3b38d464721fe738c190788b44239ea0916d49d4e8486e",
+        "same-interpreter-reference-namespace": "9db3aa455ac01b070f39c24cbd4eacab93b604fd8cfb2df562c3de4338bcd7a2"
+      }
+    },
+    {
+      "id": "role-unguarded",
+      "title": "Role spoof \u00b7 no guard",
+      "profile": "role-spoof",
+      "policy": "unguarded",
+      "reportSha256": {
+        "separate-reference-process": "f47d527894cb6be1ce6d8d082a7193b435344057f975ba7fe4c1ef46602d8751",
+        "same-interpreter-reference-namespace": "6d55c9f2bc5bb409cf1cd0f264567f7335e356bfceb54bf36c4eb30414d5dca0"
+      }
+    },
+    {
+      "id": "role-protected",
+      "title": "Role spoof \u00b7 invoice guard",
+      "profile": "role-spoof",
+      "policy": "invoice-bound",
+      "reportSha256": {
+        "separate-reference-process": "fc6b96d0e4fb840a8efcb0cf3c2af794b79c138e78f4362db3f767ebbe51b38f",
+        "same-interpreter-reference-namespace": "ea6a6b6a00af0c68f31270f1f5b200552f1749992cf83ba90cc8ca300b045353"
+      }
+    }
+  ],
+  "files": [
+    "agent_review.py",
+    "tools/verify_exposure_study.py",
+    "token_policy.py",
+    "token_review.py",
+    "evidence/exposure-study/AUDIT.json",
+    "evidence/exposure-study/BUILD.json",
+    "evidence/exposure-study/CONTROLS.json",
+    "evidence/exposure-study/INTEGRITY-CONTROLS.post-lock.json",
+    "evidence/exposure-study/LOCK.json",
+    "evidence/exposure-study/METHOD-REVIEW.post-lock.txt",
+    "evidence/exposure-study/POSTCHECK-CLEANUP.post-lock.json",
+    "evidence/exposure-study/REGISTRATION.json",
+    "evidence/exposure-study/RESULT.fa.txt",
+    "evidence/exposure-study/RESULT.json",
+    "evidence/exposure-study/SOURCE-ADAPTATION.json",
+    "evidence/exposure-study/actor.py",
+    "evidence/exposure-study/actual/calls.json",
+    "evidence/exposure-study/actual/episodes.json",
+    "evidence/exposure-study/actual/execution.json",
+    "evidence/exposure-study/actual/model-properties.json",
+    "evidence/exposure-study/actual/run.json",
+    "evidence/exposure-study/actual/runtime.log",
+    "evidence/exposure-study/actual/sdk-wire.json",
+    "evidence/exposure-study/actual/sdk.log",
+    "evidence/exposure-study/actual/server.json",
+    "evidence/exposure-study/agent_tools_common.py",
+    "evidence/exposure-study/audit.py",
+    "evidence/exposure-study/bank_loop.py",
+    "evidence/exposure-study/bank_tools.py",
+    "evidence/exposure-study/banking-context.json",
+    "evidence/exposure-study/controls-precheck.json",
+    "evidence/exposure-study/controls-sdk.log",
+    "evidence/exposure-study/controls.py",
+    "evidence/exposure-study/controls.stderr.txt",
+    "evidence/exposure-study/controls.stdout.txt",
+    "evidence/exposure-study/inspector/token_policy.py",
+    "evidence/exposure-study/inspector/token_review.py",
+    "evidence/exposure-study/original-external-grades.json",
+    "evidence/exposure-study/original-financial-reports.json",
+    "evidence/exposure-study/payloads.json",
+    "evidence/exposure-study/projection.py",
+    "evidence/exposure-study/reference/CALIBRATION.json",
+    "evidence/exposure-study/reference/LICENSE",
+    "evidence/exposure-study/reference/LLAMA-LICENSE.txt",
+    "evidence/exposure-study/reference/VERSION-RESOLUTION.json",
+    "evidence/exposure-study/reference/banking_client.py",
+    "evidence/exposure-study/reference/environment.yaml",
+    "evidence/exposure-study/reference/injection_tasks.py",
+    "evidence/exposure-study/reference/json-grammar-vendor.gbnf",
+    "evidence/exposure-study/reference/user_tasks.py",
+    "evidence/exposure-study/reference_grade.py",
+    "evidence/exposure-study/sdk-source-inventory.json",
+    "evidence/exposure-study/study-index.json",
+    "evidence/exposure-study/test_integrity.post-lock.py",
+    "evidence/exposure-study/transport.py",
+    "evidence/exposure-study/worker/Cargo.lock",
+    "evidence/exposure-study/worker/Cargo.toml",
+    "evidence/exposure-study/worker/src/main.rs"
+  ]
+}

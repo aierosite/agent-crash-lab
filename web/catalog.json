@@ -968,6 +968,134 @@
       }
     ]
   },
+  "agentRuns": {
+    "format": "agent-crash-lab/recorded-agent-catalog-v1",
+    "module": "agent_review.py",
+    "studyIndexSha256": "c296912ee54d4c1e24616e742300927465727f3fb590d702d3ee444a0be5750d",
+    "assessorSha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935",
+    "cases": [
+      {
+        "id": "clean-unguarded",
+        "title": "Clean invoice · no guard",
+        "profile": "clean",
+        "policy": "unguarded",
+        "reportSha256": {
+          "separate-reference-process": "cf882ed1d9d78dc5bc856156386ea08994ccc2923e60cdb6f8fd194c54b57266",
+          "same-interpreter-reference-namespace": "c60e9700ff065cef768a74ba716a4a52b0add35b732b681b4e4f262c897aa068"
+        }
+      },
+      {
+        "id": "clean-protected",
+        "title": "Clean invoice · invoice guard",
+        "profile": "clean",
+        "policy": "invoice-bound",
+        "reportSha256": {
+          "separate-reference-process": "05449ef008eb7e3c368bbd319d82cac3bc080c43fda9852162406fdc33dc4de9",
+          "same-interpreter-reference-namespace": "54e42c8d196fb9a96f5057402f1178adf5311f28abea51cf1b1e333eb4f1e73b"
+        }
+      },
+      {
+        "id": "fee-protected",
+        "title": "Fee notice · invoice guard",
+        "profile": "injected-invoice",
+        "policy": "invoice-bound",
+        "reportSha256": {
+          "separate-reference-process": "a508954db8082df7f0a55241acad1d654671c0858e6736b3f7fad8a8920735b4",
+          "same-interpreter-reference-namespace": "9e74fee74ef4842c448cef01da15dce9441c6d87165d55441801b8b61f65eaf0"
+        }
+      },
+      {
+        "id": "fee-unguarded",
+        "title": "Fee notice · no guard",
+        "profile": "injected-invoice",
+        "policy": "unguarded",
+        "reportSha256": {
+          "separate-reference-process": "b0827d6b399e3f36bf3b38d464721fe738c190788b44239ea0916d49d4e8486e",
+          "same-interpreter-reference-namespace": "9db3aa455ac01b070f39c24cbd4eacab93b604fd8cfb2df562c3de4338bcd7a2"
+        }
+      },
+      {
+        "id": "role-unguarded",
+        "title": "Role spoof · no guard",
+        "profile": "role-spoof",
+        "policy": "unguarded",
+        "reportSha256": {
+          "separate-reference-process": "f47d527894cb6be1ce6d8d082a7193b435344057f975ba7fe4c1ef46602d8751",
+          "same-interpreter-reference-namespace": "6d55c9f2bc5bb409cf1cd0f264567f7335e356bfceb54bf36c4eb30414d5dca0"
+        }
+      },
+      {
+        "id": "role-protected",
+        "title": "Role spoof · invoice guard",
+        "profile": "role-spoof",
+        "policy": "invoice-bound",
+        "reportSha256": {
+          "separate-reference-process": "fc6b96d0e4fb840a8efcb0cf3c2af794b79c138e78f4362db3f767ebbe51b38f",
+          "same-interpreter-reference-namespace": "ea6a6b6a00af0c68f31270f1f5b200552f1749992cf83ba90cc8ca300b045353"
+        }
+      }
+    ],
+    "files": [
+      "agent_review.py",
+      "tools/verify_exposure_study.py",
+      "token_policy.py",
+      "token_review.py",
+      "evidence/exposure-study/AUDIT.json",
+      "evidence/exposure-study/BUILD.json",
+      "evidence/exposure-study/CONTROLS.json",
+      "evidence/exposure-study/INTEGRITY-CONTROLS.post-lock.json",
+      "evidence/exposure-study/LOCK.json",
+      "evidence/exposure-study/METHOD-REVIEW.post-lock.txt",
+      "evidence/exposure-study/POSTCHECK-CLEANUP.post-lock.json",
+      "evidence/exposure-study/REGISTRATION.json",
+      "evidence/exposure-study/RESULT.fa.txt",
+      "evidence/exposure-study/RESULT.json",
+      "evidence/exposure-study/SOURCE-ADAPTATION.json",
+      "evidence/exposure-study/actor.py",
+      "evidence/exposure-study/actual/calls.json",
+      "evidence/exposure-study/actual/episodes.json",
+      "evidence/exposure-study/actual/execution.json",
+      "evidence/exposure-study/actual/model-properties.json",
+      "evidence/exposure-study/actual/run.json",
+      "evidence/exposure-study/actual/runtime.log",
+      "evidence/exposure-study/actual/sdk-wire.json",
+      "evidence/exposure-study/actual/sdk.log",
+      "evidence/exposure-study/actual/server.json",
+      "evidence/exposure-study/agent_tools_common.py",
+      "evidence/exposure-study/audit.py",
+      "evidence/exposure-study/bank_loop.py",
+      "evidence/exposure-study/bank_tools.py",
+      "evidence/exposure-study/banking-context.json",
+      "evidence/exposure-study/controls-precheck.json",
+      "evidence/exposure-study/controls-sdk.log",
+      "evidence/exposure-study/controls.py",
+      "evidence/exposure-study/controls.stderr.txt",
+      "evidence/exposure-study/controls.stdout.txt",
+      "evidence/exposure-study/inspector/token_policy.py",
+      "evidence/exposure-study/inspector/token_review.py",
+      "evidence/exposure-study/original-external-grades.json",
+      "evidence/exposure-study/original-financial-reports.json",
+      "evidence/exposure-study/payloads.json",
+      "evidence/exposure-study/projection.py",
+      "evidence/exposure-study/reference/CALIBRATION.json",
+      "evidence/exposure-study/reference/LICENSE",
+      "evidence/exposure-study/reference/LLAMA-LICENSE.txt",
+      "evidence/exposure-study/reference/VERSION-RESOLUTION.json",
+      "evidence/exposure-study/reference/banking_client.py",
+      "evidence/exposure-study/reference/environment.yaml",
+      "evidence/exposure-study/reference/injection_tasks.py",
+      "evidence/exposure-study/reference/json-grammar-vendor.gbnf",
+      "evidence/exposure-study/reference/user_tasks.py",
+      "evidence/exposure-study/reference_grade.py",
+      "evidence/exposure-study/sdk-source-inventory.json",
+      "evidence/exposure-study/study-index.json",
+      "evidence/exposure-study/test_integrity.post-lock.py",
+      "evidence/exposure-study/transport.py",
+      "evidence/exposure-study/worker/Cargo.lock",
+      "evidence/exposure-study/worker/Cargo.toml",
+      "evidence/exposure-study/worker/src/main.rs"
+    ]
+  },
   "files": {
     "BASELINES.json": {
       "bytes": 18369,
@@ -976,6 +1104,10 @@
     "agent_crash_lab.py": {
       "bytes": 59356,
       "sha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441"
+    },
+    "agent_review.py": {
+      "bytes": 9608,
+      "sha256": "8ef53fcd2c335a122804aff527459497c3d3b7a32268a65f2c19c960fe1fcb73"
     },
     "episode_oracle.py": {
       "bytes": 5337,
@@ -1040,6 +1172,222 @@
     "evidence/deleted-signer-refund-precommit.json": {
       "bytes": 2667,
       "sha256": "91d2a085b558550330e4b35de074d96f1773ed07101d7f3b7aed527239f46eca"
+    },
+    "evidence/exposure-study/AUDIT.json": {
+      "bytes": 3523,
+      "sha256": "64fe943431f79b2a983d6e98c48232b1ed81e16475e9420c7756ec6ce6632d9f"
+    },
+    "evidence/exposure-study/BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "evidence/exposure-study/CONTROLS.json": {
+      "bytes": 195,
+      "sha256": "d9e72d67bb494710e0ac9e5df3dced0ba96f73217e813b27470deda466da94b9"
+    },
+    "evidence/exposure-study/INTEGRITY-CONTROLS.post-lock.json": {
+      "bytes": 247,
+      "sha256": "9268ee9977d04f59d6c643e1a472490f2ebff1486bf47d1b062af8087b3bee9d"
+    },
+    "evidence/exposure-study/LOCK.json": {
+      "bytes": 5080,
+      "sha256": "2be0e242a2fc71617e171eec671ee80c0505753f656ad0eaf05328cecfd571e7"
+    },
+    "evidence/exposure-study/METHOD-REVIEW.post-lock.txt": {
+      "bytes": 1457,
+      "sha256": "ff6716613175cff313ecac0c946fce0a5624583adc45fdd81024fc966a859328"
+    },
+    "evidence/exposure-study/POSTCHECK-CLEANUP.post-lock.json": {
+      "bytes": 669,
+      "sha256": "8a5d5bbbfb7976609c1478b17de134fb5cf6aac90a664000802e42c2d9a88055"
+    },
+    "evidence/exposure-study/REGISTRATION.json": {
+      "bytes": 11169,
+      "sha256": "cca52c052af77fa46392eafbcbf9533b359fd80761fb225e4010a97ef120c3f2"
+    },
+    "evidence/exposure-study/RESULT.fa.txt": {
+      "bytes": 2414,
+      "sha256": "2d51004898ec846e21ba1333dbf9f48267d451a9eb7e8e84b3d70be4f7794c3a"
+    },
+    "evidence/exposure-study/RESULT.json": {
+      "bytes": 3693,
+      "sha256": "2a2ad8ad9c8f41b1d326d416ce5b737f1e532970132b979b6e592a566d64c31b"
+    },
+    "evidence/exposure-study/SOURCE-ADAPTATION.json": {
+      "bytes": 3082,
+      "sha256": "b42b981e4079d6cf905af51f4e638b13ebab2b8e3d46aedf52b9ff500d014c38"
+    },
+    "evidence/exposure-study/actor.py": {
+      "bytes": 8436,
+      "sha256": "42143231eae8238c71a4106a0f6b61dd826675ed3d6b785889e2dfbb994c09c3"
+    },
+    "evidence/exposure-study/actual/calls.json": {
+      "bytes": 577977,
+      "sha256": "9f67d3232565442381e9ea0ce536df1a88e3cd5060f0b3528ab6a6cff00212ab"
+    },
+    "evidence/exposure-study/actual/episodes.json": {
+      "bytes": 106331,
+      "sha256": "17855aedd10e8220ed2f1a037e27b40531759554d1fc3afdd8bea2ee3adb1cb4"
+    },
+    "evidence/exposure-study/actual/execution.json": {
+      "bytes": 419,
+      "sha256": "d636b129112731ad666be57805984208f77cc81086bc3dce484924aeb4d3be52"
+    },
+    "evidence/exposure-study/actual/model-properties.json": {
+      "bytes": 4552,
+      "sha256": "50300d692937bb280af496ec34fd545e13b8b6d1120c72426e02237e0df669bd"
+    },
+    "evidence/exposure-study/actual/run.json": {
+      "bytes": 239,
+      "sha256": "1f4be4c978459495a8545a256d196d36c42652a070e372060929a51064ba3a73"
+    },
+    "evidence/exposure-study/actual/runtime.log": {
+      "bytes": 34667,
+      "sha256": "d921e83ca55d4a45e6d4ea1c66854405d1ffeacc3e551161b13f27d969dd5004"
+    },
+    "evidence/exposure-study/actual/sdk-wire.json": {
+      "bytes": 10157,
+      "sha256": "22914ac7fef15d6980ff6615c7da6c4b2bb68630c9a000ec56523432e73d5e83"
+    },
+    "evidence/exposure-study/actual/sdk.log": {
+      "bytes": 985,
+      "sha256": "cd0ef9e549823c791bb77769eb4ce4c2e6631c1905a39c4629ced0937cb0d478"
+    },
+    "evidence/exposure-study/actual/server.json": {
+      "bytes": 562,
+      "sha256": "f4411b4bf042aeb24551db4952eca0641a995e8ace2abd97b352f3628fe7db69"
+    },
+    "evidence/exposure-study/agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "evidence/exposure-study/audit.py": {
+      "bytes": 15456,
+      "sha256": "426650a6b16f1cef87592c0eee917ea9b4b4507befc0fa47f33e5dd90be1f630"
+    },
+    "evidence/exposure-study/bank_loop.py": {
+      "bytes": 6436,
+      "sha256": "4aa188eb8d57ba61ba7e453836ea8d61d4fb66c17a325d5b7e4a388000764ee8"
+    },
+    "evidence/exposure-study/bank_tools.py": {
+      "bytes": 4495,
+      "sha256": "5aba5022b111d281f177b0e8a590ebd1fbc03b26a2ad4e9e8d1ed60aeb29e99e"
+    },
+    "evidence/exposure-study/banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "evidence/exposure-study/controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "51c01af6e8aeb38f8bd71fc09f55e596c5973e456ae8788875c8bd4682a86c53"
+    },
+    "evidence/exposure-study/controls-sdk.log": {
+      "bytes": 2361,
+      "sha256": "28fa70e0b711d2741f85576398d13daaa2b382230b1a39571cf7d706de2a3c08"
+    },
+    "evidence/exposure-study/controls.py": {
+      "bytes": 11273,
+      "sha256": "35d9ada61c539d40d0df5afe3d57db1fd213d78390fc887cc832138ca7859a4f"
+    },
+    "evidence/exposure-study/controls.stderr.txt": {
+      "bytes": 1546,
+      "sha256": "0fb34e700135039a623deb2fbf504b9599fdd2b8884051e054551e1d03e698f3"
+    },
+    "evidence/exposure-study/controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/exposure-study/inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "evidence/exposure-study/inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "evidence/exposure-study/original-external-grades.json": {
+      "bytes": 3898,
+      "sha256": "6b36edc15c46e55ba2fa6ae7a2625334ce5f2703117f2e3abca820478a1c7b2f"
+    },
+    "evidence/exposure-study/original-financial-reports.json": {
+      "bytes": 29732,
+      "sha256": "5e7886d48cb3dbb51294736a2d4a2b3a4e43a25b3fcb57b0f41cd632d0b3c21f"
+    },
+    "evidence/exposure-study/payloads.json": {
+      "bytes": 1236,
+      "sha256": "4fd0608d21d031944a2fca37d27fe2f191bc4a65e0575913dccbc47dd5c37272"
+    },
+    "evidence/exposure-study/projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "evidence/exposure-study/reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "evidence/exposure-study/reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "evidence/exposure-study/reference/LLAMA-LICENSE.txt": {
+      "bytes": 1078,
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d"
+    },
+    "evidence/exposure-study/reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "evidence/exposure-study/reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "evidence/exposure-study/reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "evidence/exposure-study/reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "evidence/exposure-study/reference/json-grammar-vendor.gbnf": {
+      "bytes": 601,
+      "sha256": "1a3e3469892957861029adcd24ad0c886b778a942dd4a18cc146238ad56474dd"
+    },
+    "evidence/exposure-study/reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "evidence/exposure-study/reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "evidence/exposure-study/sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "evidence/exposure-study/study-index.json": {
+      "bytes": 9189,
+      "sha256": "c296912ee54d4c1e24616e742300927465727f3fb590d702d3ee444a0be5750d"
+    },
+    "evidence/exposure-study/test_integrity.post-lock.py": {
+      "bytes": 5413,
+      "sha256": "3ea43b839c27c77cfe0b14af154a8b41fa1dbffc7641163f89e5369594f67337"
+    },
+    "evidence/exposure-study/transport.py": {
+      "bytes": 6106,
+      "sha256": "672809b5db7314f3b2409ef98cda0897b9a9f76909967b70456f0bcfdf60f52e"
+    },
+    "evidence/exposure-study/worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "evidence/exposure-study/worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "evidence/exposure-study/worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
     },
     "evidence/failed-refund-observation.json": {
       "bytes": 99188,
@@ -1545,6 +1893,10 @@
       "bytes": 27224,
       "sha256": "ec0638edf44a8769299f7d52b1cf158d811d306f82000af9bf33dede3f389fc6"
     },
+    "tools/verify_exposure_study.py": {
+      "bytes": 7107,
+      "sha256": "560a38e86bf254479c8f8240421c5e820c207f15ac2c650f7a48547e1d4586da"
+    },
     "tools/verify_token_rpc.py": {
       "bytes": 20051,
       "sha256": "892edef4ed3655b8c1cec7517fde9ef405512df3e386e8edf44222ecbf903406"
@@ -2034,8 +2386,8 @@
       "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
     },
     "workbench.py": {
-      "bytes": 22892,
-      "sha256": "96fb3e25edf2614115febe1123493e0e6d55844b461ff05295bd04d1e65f35c1"
+      "bytes": 23395,
+      "sha256": "c803120fc3a62289ecfb08cde88720c81c7d07d2f0a8908c309b5652f627c8ab"
     }
   }
 }

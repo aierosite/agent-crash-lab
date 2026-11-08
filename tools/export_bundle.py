@@ -28,7 +28,9 @@ def browser_catalog():
     policy_cases.extend({'id':key,'title':title,'kind':'synthetic','task':'verification/token-policy/inputs/'+key+'/task.json','evidence':'verification/token-policy/inputs/'+key+'/evidence.json'} for key,title in [('model-loop-repeated-payment','Qwen + SDK mock · repeated payment'),('model-loop-premature-finish','Qwen + SDK mock · unfinished work'),('model-loop-no-payments','Qwen + SDK mock · no payment records')])
     policy_cases.extend({'id':r['id'],'title':r['title'],'kind':'synthetic','task':'verification/token-policy/inputs/'+r['id']+'/task.json','evidence':'verification/token-policy/inputs/'+r['id']+'/evidence.json'} for r in json.loads((ROOT/'verification/billing-study/reference.json').read_bytes())['cases'])
     names.update(p for c in policy_cases for p in [c['task'],c['evidence']]);policy={'module':'token_policy.py','profile':'near-nep141-sdk-receipts/v1','cases':policy_cases}
-    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
+    agents=json.loads((ROOT/'verification/exposure-study/catalog.json').read_bytes())
+    names.update(agents['files'])
+    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('scenario',choices=[*app.CATALOG,'browser-catalog']);p.add_argument('output',type=Path);a=p.parse_args()

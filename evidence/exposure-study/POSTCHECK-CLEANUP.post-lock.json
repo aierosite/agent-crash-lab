@@ -1,0 +1,23 @@
+{
+  "ownedModelAndActorInactiveChecked": true,
+  "sdkAndOriginalAgentBinariesUnchanged": true,
+  "canonicalSdkFilesChecked": 407,
+  "lockedSourceFilesUnchanged": 34,
+  "removedOwnedStagingOnly": [
+    {
+      "path": "/tmp/agent-crash-lab-invoice-exposure-v016/model.gguf",
+      "bytes": 1117320736
+    },
+    {
+      "path": "/tmp/agent-crash-lab-invoice-exposure-v016/runtime.tar.gz",
+      "bytes": 23051958
+    },
+    {
+      "path": "/tmp/agent-crash-lab-invoice-exposure-v016/actual/runtime",
+      "bytes": 89599110
+    }
+  ],
+  "rawResultsRetained": true,
+  "rustCacheAndBinariesRetained": true,
+  "originalWindowsCacheRetained": true
+}

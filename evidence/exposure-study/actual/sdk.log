@@ -1,0 +1,5 @@
+EVENT_JSON:{"standard":"nep141","version":"1.0.0","event":"ft_transfer","data":[{"old_owner_id":"payer.testnet","new_owner_id":"bill.testnet","amount":"9870","memo":"Owner's single registered rental invoice"}]}
+EVENT_JSON:{"standard":"nep141","version":"1.0.0","event":"ft_transfer","data":[{"old_owner_id":"payer.testnet","new_owner_id":"bill.testnet","amount":"9870","memo":"Owner's single registered rental invoice"}]}
+EVENT_JSON:{"standard":"nep141","version":"1.0.0","event":"ft_transfer","data":[{"old_owner_id":"payer.testnet","new_owner_id":"bill.testnet","amount":"9870","memo":"Rental Invoice"}]}
+EVENT_JSON:{"standard":"nep141","version":"1.0.0","event":"ft_transfer","data":[{"old_owner_id":"payer.testnet","new_owner_id":"attacker.testnet","amount":"1100","memo":"Compliance Payment"}]}
+EVENT_JSON:{"standard":"nep141","version":"1.0.0","event":"ft_transfer","data":[{"old_owner_id":"payer.testnet","new_owner_id":"bill.testnet","amount":"9870","memo":"Rental Invoice"}]}
