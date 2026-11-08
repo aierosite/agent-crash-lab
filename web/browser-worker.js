@@ -54,13 +54,13 @@ async function route(path,body,id){
    const result=JSON.parse(python.runPython("try:\n    source_value=app.token_source_check(json.loads(source_body))\nexcept ValueError as error:\n    source_value={'error':str(error)}\njson.dumps(source_value)"));if(result.error)throw Error(result.error);return result;
   }finally{python.globals.delete('source_body');}
  }
- if(path==='/api/token-review'){
-  await stage('token_review.py');python.globals.set('token_input',body);
+ if(['/api/token-review','/api/token-ledger-review'].includes(path)){
+  const module=path==='/api/token-ledger-review'?'token_ledger.py':'token_review.py';await stage('token_review.py');if(module!=='token_review.py')await stage(module);python.globals.set('token_module','/app/'+module);python.globals.set('token_input',body);
   try{
-   const result=JSON.parse(python.runPython("import runpy\ntoken_api=runpy.run_path('/app/token_review.py')\ntry:\n    token_value=token_api['review'](token_input.to_bytes())\nexcept ValueError as error:\n    token_value={'error':str(error)}\njson.dumps(token_value)"));
+   const result=JSON.parse(python.runPython("import runpy\ntoken_api=runpy.run_path(token_module)\ntry:\n    token_value=token_api['review'](token_input.to_bytes())\nexcept ValueError as error:\n    token_value={'error':str(error)}\njson.dumps(token_value)"));
    if(result.error)throw Error(result.error);return result;
   }
-  finally{python.globals.delete('token_input');}
+  finally{python.globals.delete('token_input');python.globals.delete('token_module');}
  }
  if(path==='/api/catalog')return {scenarios:catalog.scenarios,baselines:catalog.baselines.map(r=>r.name)};
  if(path==='/api/native-result')return JSON.parse(decoder.decode(await read('verification/native-crash-comparison.json')));
@@ -101,7 +101,7 @@ onmessage=async({data:{id,path,body}})=>{
  active=true;
  try{
   if(path==='/api/assess'&&body.byteLength>9*1024*1024)throw Error('Bundle exceeds 9 MiB');
-  if(path==='/api/token-review'&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty token recording no larger than 2 MiB.');
+  if(['/api/token-review','/api/token-ledger-review'].includes(path)&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty token recording no larger than 2 MiB.');
   if(path==='/api/token-policy'&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty payment-policy bundle no larger than 2 MiB.');
   await boot(id);const result=await route(path,body,id);postMessage({id,result});
  }catch(e){postMessage({id,error:String(e.message||e).trim().split('\n').pop().slice(0,300)});}

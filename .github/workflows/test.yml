@@ -25,6 +25,7 @@ jobs:
           package-manager-cache: false
       - run: node test_report_contract.js
       - run: node test_token_contract.js
+      - run: node test_token_ledger_contract.js
       - run: node test_source_contract.js
       - run: node test_event_contract.js
       - run: node test_policy_contract.js

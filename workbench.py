@@ -172,7 +172,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.19.1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.20.0.dev1','coreVersion':core.VERSION})
         if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
         if path=='/api/metadata-catalog':return self.send(200,metadata_catalog())
         if path=='/api/native-journal-catalog':return self.send(200,journal_catalog())
@@ -185,10 +185,11 @@ class Handler(BaseHTTPRequestHandler):
             from urllib.parse import parse_qs
             raw=metadata_input(parse_qs(urlsplit(self.path).query).get('case',[''])[0])
             return self.send(200,raw) if raw is not None else self.send(404,{'error':'Unknown metadata example'})
-        if path=='/api/token-catalog':
+        if path in ['/api/token-catalog','/api/token-ledger-catalog']:
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             source=catalog['sourceCorroboration']
-            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_review.py']['sha256'],
+            ledger=path=='/api/token-ledger-catalog'
+            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_ledger.py' if ledger else 'token_review.py']['sha256'],**({'baseAssessorSha256':catalog['files']['token_review.py']['sha256']} if ledger else {}),
                                  'sourceCorroboration':{**source,'verifierSha256':catalog['files'][source['module']]['sha256'],'hashes':{p:catalog['files'][p]['sha256'] for p in source['files']}}})
         if path=='/api/token-policy-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes());policy=catalog['tokenPolicy']
@@ -239,6 +240,7 @@ class Handler(BaseHTTPRequestHandler):
             length=int(self.headers.get('Content-Length','0'))
             if not 0<length<=MAX_BODY:return reject(413,'Request exceeds 9 MiB bound or is empty')
             if urlsplit(self.path).path=='/api/metadata-review' and length>1048576:return reject(413,'Metadata bundle exceeds 1 MiB')
+            if urlsplit(self.path).path=='/api/token-ledger-review' and length>2097152:return reject(413,'Choose a token recording no larger than 2 MiB.')
         except ValueError:return self.send(400,{'error':'Invalid Content-Length'})
         if not SLOTS.acquire(blocking=False):return reject(429,'Four assessments already in progress')
         try:
@@ -249,8 +251,8 @@ class Handler(BaseHTTPRequestHandler):
             if path=='/api/metadata-review':
                 reviewer=runpy.run_path(str(ROOT/'state_review.py'))
                 return self.send(200,reviewer['assess_bundle'](raw))
-            if path=='/api/token-review':
-                reviewer=runpy.run_path(str(ROOT/'token_review.py'))
+            if path in ['/api/token-review','/api/token-ledger-review']:
+                reviewer=runpy.run_path(str(ROOT/('token_ledger.py' if path=='/api/token-ledger-review' else 'token_review.py')))
                 return self.send(200,reviewer['review'](raw))
             if path=='/api/token-policy':
                 reviewer=runpy.run_path(str(ROOT/'token_policy.py'))

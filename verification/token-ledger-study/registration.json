@@ -1,0 +1,8 @@
+{
+  "scope": "Same-author source-informed report/UI refinement. Exact source financial facts plus explicitly labelled constructed controls, not an independent benchmark.",
+  "casesSha256": "cd285ebf907c1d82e265a1074b83794afc5f18c8aec3be020a393ddd837c4a13",
+  "cases": 8,
+  "baselineCommit": "97ddc442f489166f283f3feb21389050890a837b",
+  "kind": "private-unreleased-registered-ledger-diagnostic",
+  "independentBlind": false
+}

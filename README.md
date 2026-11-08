@@ -1,5 +1,11 @@
 # Agent Crash Lab
 
+Private research candidate **0.20.0.dev1**. The public competition snapshot stays
+v0.19.1. This branch adds a separately source-bound reported-ledger diagnostic
+while preserving the v2 primitive, original API and historical study reports.
+See [candidate scope and limits](docs/TOKEN_LEDGER.md). No independent blind
+accuracy or competitor ranking is established.
+
 **Follow the money. Verify the work.** Inspect an agent's supplied NEAR payment
 receipts against explicit owner intent, and check recorded task output separately.
 

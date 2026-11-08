@@ -6,7 +6,7 @@ import argparse,hashlib,json
 ROOT=Path(__file__).resolve().parents[1]
 app=SimpleNamespace(**run_path(str(ROOT/'workbench.py')))
 def browser_catalog():
-    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json','tools/scenario_lab.py','episode_oracle.py','token_review.py','token_policy.py'}
+    names={'agent_crash_lab.py','workbench.py','BASELINES.json','verification/native-crash-comparison.json','tools/scenario_lab.py','episode_oracle.py','token_review.py','token_ledger.py','token_policy.py'}
     for row in app.BASELINES.values():names.update([row['task'],*row['sources'].values()])
     labels=[('upstream-failed-withdrawal','Rights lost after a failed withdrawal'),('ai-payment','An allowed agent payment'),('upstream-refund','A fully returned deposit'),('upstream-healthy','Two successful withdrawals'),('upstream-auth','An unauthorized withdrawal fails')]
     recordings=[{'id':key,'title':title,'path':'verification/token-study/'+key+'.json'} for key,title in labels]

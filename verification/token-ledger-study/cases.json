@@ -1,0 +1,799 @@
+[
+  {
+    "id": "partial-refund-overcredit",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-partial-refund-overcredit",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "a partial refund limits credit to net externally measured funding",
+        "created_at": "2026-11-08T21:59:29.622527+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "partial-refund-overcredit",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/partial-refund-overcredit",
+          "before": {
+            "block_hash": "8phvTi1EydS5qHcJiJZXsjhkvZ4guNThXZcTDBsUXZhG",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "9GSFd9cS559GCVV9wbHi4YrXjMfmZcHjvNTjQp1rXxai",
+            "block_height": 2,
+            "held": "7",
+            "credit": "10",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "7"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw"
+                },
+                "transaction_outcome": {
+                  "id": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw",
+                  "block_hash": "HAJzsoBvKmb3CN6D7eGbMvKvvEFYjw1GsyosySznrh9Q",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq",
+                    "block_hash": "HWkAWYLZyRdZYwE9arNeoVjcsRL3RXsEm55anTRh5Q6z",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [
+                        "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"7\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                      ],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "conflict",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "3",
+    "kind": "exact-source-financial-projection"
+  },
+  {
+    "id": "pending-callback",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-pending-callback",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": false,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "pending callbacks cannot be reported as settled economic passes",
+        "created_at": "2026-11-08T21:59:29.634565+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "pending-callback",
+          "operation": "callback",
+          "source_pointer": "/external-cases/pending-callback",
+          "before": {
+            "block_hash": "Cr4neEwqvveiBWbGsSiKjznUXMQWK5ULphEprKsKhNso",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "5y4mrSskY5hfzyg7ujfb7Zo4946ZBpYYh7BYwfiJvxhk",
+            "block_height": 2,
+            "held": "0",
+            "credit": "0",
+            "pending": "1",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "H5TahWkkkxJG6WRfnnRmSBGibYMXCXZEUPkSEikJqAYL"
+                },
+                "transaction_outcome": {
+                  "id": "H5TahWkkkxJG6WRfnnRmSBGibYMXCXZEUPkSEikJqAYL",
+                  "block_hash": "9DZrDAwpedeAmRY5yxDtJ51aVJ4hmoJ5AEjvEwhARCRg",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "Ab8bhtBdYLhZnqFKjfevWB8TqzwZpJsQYYYMKVygAetg"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "Ab8bhtBdYLhZnqFKjfevWB8TqzwZpJsQYYYMKVygAetg",
+                    "block_hash": "EHECVnTtsRP3Ko617bQ9YoQKbHk3pC2zUUPNYKZQVyWy",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "conflict",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "1",
+    "kind": "exact-source-financial-projection"
+  },
+  {
+    "id": "unauthorized-rejected-credit-change",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-unauthorized-rejected-credit-change",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "unauthorized action must fail and preserve every economic field",
+        "created_at": "2026-11-08T21:59:29.673002+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "unauthorized-rejected-credit-change",
+          "operation": "callback",
+          "source_pointer": "/external-cases/unauthorized-rejected-credit-change",
+          "before": {
+            "block_hash": "8VsnDofKVT1VHDFFjeLrzV2XY8J4X1v422tSDRyrkUAd",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "HSg34ma52PrfTGDUeSgzS6U3P65ia7XR1heEi9t2mZpV",
+            "block_height": 2,
+            "held": "0",
+            "credit": "1",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "GYaEBohXjXFFJiv5bJcmBHeGMtiaV7GFe1RP3GUUuSpm"
+                },
+                "transaction_outcome": {
+                  "id": "GYaEBohXjXFFJiv5bJcmBHeGMtiaV7GFe1RP3GUUuSpm",
+                  "block_hash": "iPm3mD8cHhxJiMfrs9bxhEWSnwGcZMJHZHRsXmrdcsc",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "EtTNqjz4dVkPdw8HWCaJ2un3g6wnVUupUfbfuj6ybG8g"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "EtTNqjz4dVkPdw8HWCaJ2un3g6wnVUupUfbfuj6ybG8g",
+                    "block_hash": "Y6Sqs6h1UQDx3rZjVUpBWKUdJRkubBvZgw9y7dVNNCS",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "conflict",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "1",
+    "kind": "exact-source-financial-projection"
+  },
+  {
+    "id": "partial-refund-net",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-partial-refund-net",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "a partial refund limits credit to net externally measured funding",
+        "created_at": "2026-11-08T21:59:29.615790+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "partial-refund-net",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/partial-refund-net",
+          "before": {
+            "block_hash": "CWNp8eKXzrLKJc4PF3B9Vwbsd9HM4ZzeGr5uAp7GRb9Q",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "FWZxoX4g4SfHvhYwXs75oXMnCR5FMj2KVRFXdEbge9iW",
+            "block_height": 2,
+            "held": "7",
+            "credit": "7",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "7"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "DwDc4qQ3WBYL2wUrmmVUNgdoUQ3eexTFNuNg3iszy6n7"
+                },
+                "transaction_outcome": {
+                  "id": "DwDc4qQ3WBYL2wUrmmVUNgdoUQ3eexTFNuNg3iszy6n7",
+                  "block_hash": "37YBRbr7GxNENY7m4eZtLDzTbwignotcHEZoPWPMYXdA",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "6CLQSbVo4ukpEz2X8dDsqBEyivW9VAotjfg63tML1UP8"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "6CLQSbVo4ukpEz2X8dDsqBEyivW9VAotjfg63tML1UP8",
+                    "block_hash": "AVnYaAhF7Z5tmmR2ep4KUPkadAUwY1EpY3AWo3cKU5zX",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [
+                        "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"7\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                      ],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "matches",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "0",
+    "kind": "exact-source-financial-projection"
+  },
+  {
+    "id": "huge-exact-deposit",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-huge-exact-deposit",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "arbitrary precision balances remain exact beyond JavaScript safe integers",
+        "created_at": "2026-11-08T21:59:29.679567+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "huge-exact-deposit",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/huge-exact-deposit",
+          "before": {
+            "block_hash": "9DXP9D6v4E1AzMWYvkbPsf8FCcsGuatmitktPLPRWhm2",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "5JFN6yoFt5pG7Fga2CAFDomsMe62t1W8wmQ4H2U3yyQ9",
+            "block_height": 2,
+            "held": "100000000000000000000001",
+            "credit": "100000000000000000000001",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "100000000000000000000001"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "HpQkx92LBLsJ8efuq1WNXxTi1NB7z7FQcX2uHU4ML4yw"
+                },
+                "transaction_outcome": {
+                  "id": "HpQkx92LBLsJ8efuq1WNXxTi1NB7z7FQcX2uHU4ML4yw",
+                  "block_hash": "J4Yv4LuJTorURKYrQg1wEE9VWKdRxsRK5hQKfu3dWnm9",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "AFGRiVkSNceavUVCsRDa8KjVvsnrUfL4NUBv7th5k1nT"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "AFGRiVkSNceavUVCsRDa8KjVvsnrUfL4NUBv7th5k1nT",
+                    "block_hash": "7teh3dizy53MpvYT3iL3Ltou3Z8nQ68BkkkFqn1Td6Eq",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [
+                        "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"100000000000000000000001\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                      ],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "matches",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "0",
+    "kind": "exact-source-financial-projection"
+  },
+  {
+    "id": "scope-not-declared",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-partial-refund-overcredit",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": false
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "a partial refund limits credit to net externally measured funding",
+        "created_at": "2026-11-08T21:59:29.622527+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "partial-refund-overcredit",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/partial-refund-overcredit",
+          "before": {
+            "block_hash": "8phvTi1EydS5qHcJiJZXsjhkvZ4guNThXZcTDBsUXZhG",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "9GSFd9cS559GCVV9wbHi4YrXjMfmZcHjvNTjQp1rXxai",
+            "block_height": 2,
+            "held": "7",
+            "credit": "10",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "7"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw"
+                },
+                "transaction_outcome": {
+                  "id": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw",
+                  "block_hash": "HAJzsoBvKmb3CN6D7eGbMvKvvEFYjw1GsyosySznrh9Q",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq",
+                    "block_hash": "HWkAWYLZyRdZYwE9arNeoVjcsRL3RXsEm55anTRh5Q6z",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [
+                        "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"7\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                      ],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "not-declared",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "3",
+    "kind": "constructed-projection-control"
+  },
+  {
+    "id": "missing-receipt-and-known-disagreement",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-partial-refund-overcredit",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "a partial refund limits credit to net externally measured funding",
+        "created_at": "2026-11-08T21:59:29.622527+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "partial-refund-overcredit",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/partial-refund-overcredit",
+          "before": {
+            "block_hash": "8phvTi1EydS5qHcJiJZXsjhkvZ4guNThXZcTDBsUXZhG",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "9GSFd9cS559GCVV9wbHi4YrXjMfmZcHjvNTjQp1rXxai",
+            "block_height": 2,
+            "held": "7",
+            "credit": "10",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "7"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw"
+                },
+                "transaction_outcome": {
+                  "id": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw",
+                  "block_hash": "HAJzsoBvKmb3CN6D7eGbMvKvvEFYjw1GsyosySznrh9Q",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "conflict",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "3",
+    "kind": "constructed-projection-control"
+  },
+  {
+    "id": "sum-beyond-u128",
+    "input": {
+      "asset": {
+        "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+        "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+        "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+        "standard": "nep141"
+      },
+      "format": "agent-crash-lab/token-recording-v1",
+      "id": "external-calibration-partial-refund-overcredit",
+      "network": "sandbox",
+      "scope": {
+        "closed_intervals": true,
+        "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+        "single_owner_whole_vault": true
+      },
+      "source": {
+        "kind": "synthetic-control",
+        "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+        "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+        "case_pointer": "a partial refund limits credit to net externally measured funding",
+        "created_at": "2026-11-08T21:59:29.622527+00:00"
+      },
+      "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "steps": [
+        {
+          "id": "partial-refund-overcredit",
+          "operation": "deposit",
+          "source_pointer": "/external-cases/partial-refund-overcredit",
+          "before": {
+            "block_hash": "8phvTi1EydS5qHcJiJZXsjhkvZ4guNThXZcTDBsUXZhG",
+            "block_height": 1,
+            "held": "0",
+            "credit": "0",
+            "pending": "0",
+            "reserved": "0",
+            "liabilities": "0"
+          },
+          "after": {
+            "block_hash": "9GSFd9cS559GCVV9wbHi4YrXjMfmZcHjvNTjQp1rXxai",
+            "block_height": 2,
+            "held": "340282366920938463463374607431768211455",
+            "credit": "340282366920938463463374607431768211455",
+            "pending": "340282366920938463463374607431768211455",
+            "reserved": "340282366920938463463374607431768211455",
+            "liabilities": "340282366920938463463374607431768211455"
+          },
+          "transactions": [
+            {
+              "source_pointer": "/synthetic-minimal-net-wrapper",
+              "result": {
+                "transaction": {
+                  "hash": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw"
+                },
+                "transaction_outcome": {
+                  "id": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw",
+                  "block_hash": "HAJzsoBvKmb3CN6D7eGbMvKvvEFYjw1GsyosySznrh9Q",
+                  "outcome": {
+                    "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                    "receipt_ids": [
+                      "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq"
+                    ],
+                    "logs": [],
+                    "status": {
+                      "SuccessValue": ""
+                    }
+                  }
+                },
+                "receipts_outcome": [
+                  {
+                    "id": "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq",
+                    "block_hash": "HWkAWYLZyRdZYwE9arNeoVjcsRL3RXsEm55anTRh5Q6z",
+                    "outcome": {
+                      "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                      "receipt_ids": [],
+                      "logs": [
+                        "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"7\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                      ],
+                      "status": {
+                        "SuccessValue": ""
+                      }
+                    }
+                  }
+                ],
+                "status": {
+                  "SuccessValue": ""
+                },
+                "final_execution_status": "FINAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "expectedStatus": "conflict",
+    "expectedBeforeDifference": "0",
+    "expectedAfterDifference": "680564733841876926926749214863536422910",
+    "kind": "constructed-projection-control"
+  }
+]
