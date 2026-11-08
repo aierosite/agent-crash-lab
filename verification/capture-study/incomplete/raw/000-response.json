@@ -1,0 +1,83 @@
+{
+ "id": "plain-0",
+ "jsonrpc": "2.0",
+ "result": {
+  "final_execution_status": "FINAL",
+  "receipts": [
+   {
+    "predecessor_id": "payer.testnet",
+    "receipt": {
+     "Action": {
+      "actions": [
+       {
+        "FunctionCall": {
+         "args": "eyJhbW91bnQiOiI0MCIsInJlY2VpdmVyX2lkIjoicGF5ZWUudGVzdG5ldCJ9",
+         "deposit": "1",
+         "gas": 30000000000000,
+         "method_name": "ft_transfer"
+        }
+       }
+      ],
+      "input_data_ids": [],
+      "output_data_receivers": [],
+      "signer_id": "payer.testnet"
+     }
+    },
+    "receipt_id": "f8ffdd08897e721db75903831c5767cd2ca372a34291",
+    "receiver_id": "token.testnet"
+   }
+  ],
+  "receipts_outcome": [
+   {
+    "block_hash": "520b4e07d36779bb4bdb617e90d3d085882164c96e0e",
+    "id": "f8ffdd08897e721db75903831c5767cd2ca372a34291",
+    "outcome": {
+     "executor_id": "token.testnet",
+     "gas_burnt": 1,
+     "logs": [
+      "EVENT_JSON:{\"data\":[{\"amount\":\"40\",\"new_owner_id\":\"payee.testnet\",\"old_owner_id\":\"payer.testnet\"}],\"event\":\"ft_transfer\",\"standard\":\"nep141\",\"version\":\"1.0.0\"}"
+     ],
+     "receipt_ids": [],
+     "status": {
+      "SuccessValue": ""
+     },
+     "tokens_burnt": "1"
+    }
+   }
+  ],
+  "status": {
+   "SuccessValue": ""
+  },
+  "transaction": {
+   "actions": [
+    {
+     "FunctionCall": {
+      "args": "eyJhbW91bnQiOiI0MCIsInJlY2VpdmVyX2lkIjoicGF5ZWUudGVzdG5ldCJ9",
+      "deposit": "1",
+      "gas": 30000000000000,
+      "method_name": "ft_transfer"
+     }
+    }
+   ],
+   "hash": "b4e939731cbae5d838726cb0e187899af2d0762b5b6f",
+   "receiver_id": "token.testnet",
+   "signer_id": "payer.testnet"
+  },
+  "transaction_outcome": {
+   "block_hash": "520b4e07d36779bb4bdb617e90d3d085882164c96e0e",
+   "id": "b4e939731cbae5d838726cb0e187899af2d0762b5b6f",
+   "outcome": {
+    "executor_id": "payer.testnet",
+    "gas_burnt": 1,
+    "logs": [],
+    "receipt_ids": [
+     "f8ffdd08897e721db75903831c5767cd2ca372a34291"
+    ],
+    "status": {
+     "SuccessReceiptId": "f8ffdd08897e721db75903831c5767cd2ca372a34291"
+    },
+    "tokens_burnt": "1"
+   }
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+  "format": "agent-crash-lab/passive-capture-spec-v1",
+  "baseline": "v0.14.0 / 920aa1bfe05257971a9072e42a80c97f0442f63b",
+  "problem": "Own agent integration currently requires hand-building nested token execution JSON. A passive, portable capture must retain original provider bytes and explicit owner bindings without gaining signing/network powers or hiding malformed responses.",
+  "requirements": [
+    "Standard-library CLI/API. No network code, signer, wallet, subprocess grader or new dependency. Accept only caller-supplied bytes/files.",
+    "Policy template must explicitly declare authority, network, token, payer, finite horizon, intents and receipt-to-intent bindings. No amount-based assignment or inferred owner consent.",
+    "Store exact original policy/request/response bytes and SHA-256 with safe generated paths. Never overwrite an existing output directory. Hash equality is internal integrity, not source authenticity or consensus.",
+    "Validate strict UTF-8/duplicate/integer JSON using current payment decoder before embedding records. Preserve all raw inputs, including non-JSON/duplicate-field replies.",
+    "Uninterpretable records stay explicitly listed. Only supported parsed observations enter the existing profile, with an explicitly forced open horizon and changed note; no fabricated RPC error, hidden removal or clean gate from incomplete capture.",
+    "Known spending excess in interpretable evidence may still yield gate1 despite unrelated unparsed replies; otherwise incomplete capture cannot yield gate0. Existing payment assessor and browser contract stay unchanged.",
+    "Rebuild task/evidence/bundle on check from original bytes. Detect changed original bytes even when JSON semantics is unchanged. Reject unsafe/reused paths and record identities.",
+    "Generated exact-byte bundle must work in the existing CLI/local/browser WebAssembly inspector with matching full reports and visible source/scope claims.",
+    "Invalid policy or an unsupported assembled profile remains a structured rejected assessment, with raw capture retained. Do not relabel it as a financial clean result.",
+    "Evidence count, individual and aggregate byte bounds remain finite. Existing capture directories or unrelated user files are never deleted by failure recovery."
+  ],
+  "plannedChecks": [
+    "Canonical allowed payment capture and exact full-report parity, not just gate parity.",
+    "Same-price independent intents and permitted installments stay within declared limits.",
+    "Repeated payment breach remains a breach.",
+    "HTML/non-UTF8/duplicate-field raw responses survive on disk and cannot produce a clean gate.",
+    "Known breach plus unrelated bad raw response remains gate1 with explicitly open horizon and retained bad bytes.",
+    "Edited whitespace in an original source file fails integrity rather than inheriting the old exported bundle.",
+    "Existing output directory, path traversal, symlink and duplicate record labels rejected without overwriting user data.",
+    "Generated bundle actual browser imports match Python for gates0,1,2."
+  ],
+  "limits": "Source-informed engineering controls, not new chain/model execution or independent blind financial accuracy. Do not modify the ongoing locked agent-interface study or the released product before full validation."
+}

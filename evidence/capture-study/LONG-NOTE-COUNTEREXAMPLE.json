@@ -1,0 +1,30 @@
+{
+  "prototypeSourceSha256": "334fa2ccd917ba7e02e361c56993a866b905bd9363c6e985ab56f04655e53818",
+  "expectedGate": 1,
+  "actual": {
+    "format": "agent-crash-lab/token-capture-review-v1",
+    "capture_sha256": "d6e3ace284a87bc84bf7e7446b9ef142145076b1433feef8ef3526ce6c82845c",
+    "reader_sha256": "334fa2ccd917ba7e02e361c56993a866b905bd9363c6e985ab56f04655e53818",
+    "source_integrity": {
+      "raw_files_checked": 7,
+      "raw_bytes_checked": 7495,
+      "matched": true,
+      "authenticity": "not assessed; fingerprints bind supplied files, not their origin or consensus"
+    },
+    "source": {
+      "kind": "synthetic",
+      "note": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+    },
+    "supported_records": [],
+    "uninterpreted_records": [],
+    "effective_closed_horizon": null,
+    "assessment_accepted": false,
+    "assessment_error": "Unsupported source kind/note; authenticity is not verified",
+    "gate": 2,
+    "assessment": null,
+    "new_transactions": 0,
+    "network_requests": 0,
+    "meaning": "Passive supplied-byte capture and conditional existing-profile assessment. Raw unsupported replies are retained; an incomplete capture cannot establish a clean gate. Useful work remains separate."
+  },
+  "meaning": "Pre-publication source-informed counterexample: appending diagnostic notes exceeded an otherwise valid2048-character note bound and hid a known excess behind a rejected assessment. Raw notes were preserved; this is a new prototype wrapper issue, not a v0.14.0 financial-engine defect."
+}

@@ -4,6 +4,12 @@ For the concise interactive path, see [Inspect → reduce → CI](WORKFLOW.md). 
 
 Use Crash Lab when a retry can spend twice or when a paid API can return a wrong answer. Capture and evaluate one episode in a test environment before promoting an agent change. It is an inspector, not a payment gateway.
 
+For caller-supplied token RPC bodies, use the [passive capture workflow](PASSIVE_CAPTURE.md).
+It retains original bytes, explicit owner assignments and uninterpretable replies,
+then builds the existing token-policy input without making a network request.
+Its financial gate does not grade useful work; the native episode contract below
+retains separate required-output checks.
+
 ## Try the complete contract first
 
 ```sh

@@ -1,0 +1,38 @@
+{
+  "format": "agent-crash-lab/capture-workflow-reference-v1",
+  "source": "Source-informed constructed workflow controls, not independent financial accuracy.",
+  "cases": [
+    {
+      "id": "allowed",
+      "capture": "verification/capture-study/allowed",
+      "expectedGate": 0,
+      "expectedUnparsed": 0,
+      "captureSha256": "42995f559e11dd791404980e9de1dfc9405ad7a1976c37a6d0953ae93b72bf27",
+      "bundleSha256": "f29ad1a55bec1e4744654e9c2d39c4c3c697b68aaab98ddd1631705929408f5b"
+    },
+    {
+      "id": "excess",
+      "capture": "verification/capture-study/excess",
+      "expectedGate": 1,
+      "expectedUnparsed": 0,
+      "captureSha256": "57edff55dfa70c5b51d4bbcc1c060599bb4b7d6cb5b785aeaf606d154c27c4a1",
+      "bundleSha256": "795db4bc3d4761dfbf42fcfb08c25b73e13e9dfdcd89f8c57829c4cbd212c063"
+    },
+    {
+      "id": "incomplete",
+      "capture": "verification/capture-study/incomplete",
+      "expectedGate": 2,
+      "expectedUnparsed": 1,
+      "captureSha256": "1438fec75c6f7f5610f20f3babc6433bc3c657ae5e01d5fbc85d6a8e95e3760d",
+      "bundleSha256": "45f87bd8cde4ccd2eccc43db30cf2bf0ef05c09c2bf8e016349b3a164052339f"
+    },
+    {
+      "id": "excess-and-unparsed",
+      "capture": "verification/capture-study/excess-and-unparsed",
+      "expectedGate": 1,
+      "expectedUnparsed": 1,
+      "captureSha256": "c94da71e1b156c485c4bb4090e786f6d22632b583266ff94398da75a8b5028da",
+      "bundleSha256": "52b5d8f46f3a77c573ce2f9f69e621042cb79f2c7efcbff4f349e6bcb28aa976"
+    }
+  ]
+}

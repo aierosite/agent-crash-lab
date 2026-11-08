@@ -1,0 +1,10 @@
+{
+  "id": "plain-0",
+  "jsonrpc": "2.0",
+  "method": "tx_status",
+  "params": {
+    "sender_account_id": "payer.testnet",
+    "tx_hash": "b4e939731cbae5d838726cb0e187899af2d0762b5b6f",
+    "wait_until": "FINAL"
+  }
+}

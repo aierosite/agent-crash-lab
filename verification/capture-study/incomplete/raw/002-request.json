@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":"failed","method":"tx_status","params":{"tx_hash":"unobserved","sender_account_id":"payer.testnet"}}
