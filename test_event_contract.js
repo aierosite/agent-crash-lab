@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{spawnSync}=require('node:child_process');
-const source=fs.readFileSync(__dirname+'/web/token.js','utf8'),context=vm.createContext({});vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);
+const source=fs.readFileSync(__dirname+'/web/token.js','utf8'),context=vm.createContext({});vm.runInContext(fs.readFileSync(__dirname+'/web/token-events.js','utf8'),context);vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);
 const script=`import pathlib,runpy,json,copy,hashlib
 r=pathlib.Path.cwd();a=runpy.run_path(str(r/'token_review.py'));rows=[]
 def add(d,label):

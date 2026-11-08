@@ -1,0 +1,30 @@
+{
+  "phase": "research prototype; no product release or authorization claim",
+  "profile": "near-nep141-sdk-receipts/v1",
+  "inputs": "Exact owner-policy bytes bind exact evidence bytes, payer, token contract, finite horizon, per-intent caps/recipient/minimum non-refunded-and-not-burned settlement, and explicit transaction/receipt bindings.",
+  "assumptions": ["Unsigned reconstructed or owner-declared policy is trusted, not cryptographically authenticated.", "Captured FINAL outcomes/action bodies and the declared token's SDK-compatible event/method semantics are trusted; no signature, state proof or source-to-WASM equivalence is verified.", "A finite closed horizon is an owner declaration, not proof that no outside transaction exists."],
+  "separateQuantities": {
+    "committedGross": "Final successful payer-to-recipient transfer events, before refunds; failed receipts and self transfers contribute zero.",
+    "returnedToPayer": "Reverse transfer events in the causally linked resolver, not arbitrary same-amount incoming payments.",
+    "burnedRefund": "Canonical owner_id burn events for the receiver in that resolver; not delivery and not a payer refund.",
+    "payerCost": "Initial transfer minus causal returned tokens; includes any burned refund.",
+    "settledAllocation": "Initial transfer minus causal refund minus causal refund burn. It may have been spent/forwarded by the receiver and does not prove retained balance or useful work.",
+    "resolverReportedUsed": "Decoded resolver return; SDK can report the full amount when a refund is burned. It must not replace settledAllocation.",
+    "usefulWork": "Not assessed by this token-settlement profile; native utility evaluation remains separate.",
+    "rights": "Ledger/right conservation remains a separate owner reference; no generic rights verdict is inferred from token flows alone."
+  },
+  "correlation": [
+    "Match receipt body ID to its outcome executor and its creation predecessor; enforce root signer propagation except native system refunds.",
+    "Plain ft_transfer supports atomic batches of plain transfer actions assigned to one intent; event tuples and action tuples must agree. Split receipts and independent equal-price intents remain valid.",
+    "Single-action ft_transfer_call requires its returned resolver receipt, matching sender/receiver/amount, hook arguments/msg and the exact hook output-data ID consumed by the resolver.",
+    "Same tuple/amount, a memo saying refund, graph creation siblings or root SuccessValue alone are insufficient callback correlation.",
+    "Resolver U must agree with amount minus the causal refund. Refund plus burn is bounded by the hook's SDK-compatible unused amount; failure/malformed/oversized hook output defaults to the original amount. Unknown receiver balance prevents a refund-sufficiency claim.",
+    "Missing/ambiguous callback/body/data-ID evidence keeps settlement unknown; known final gross over a cap still proves a breach.",
+    "Mixing multiple asynchronous calls within one receipt is initially unsupported for settlement attribution; observed gross bounds still remain available. This limit does not redefine the long-term scope."
+  ],
+  "observations": "Group by transaction identity; duplicate identical observations are idempotent. Merge compatible FINAL node/body maps with source references. Conflicting FINAL identities remain explicit; no choosing a convenient observation or erasing known violations in other transactions.",
+  "decision": "Separate per-intent committed-gross, recipient, burned-refund cap and settlement-minimum results. Overall breach/failure has priority over unrelated unknown evidence; otherwise any incomplete/conflicting/unsupported evidence prevents an overall within result. No payment is sent or signed.",
+  "referenceAuthorship": "SDK source and type semantics have external authorship. Original literal numeric reference, synthetic envelopes, selection, extractor and policy checker are ours, source-informed; not blind or independent end-to-end grading.",
+  "publicationGate": ["Do not publish as a generic token policy engine before source binding, causal counterexamples, split/equal-price allowed controls, partial/conflicting evidence and Python/browser boundaries are verified.", "Preserve the original observed records, source-informed reference, failures and post-result corrections; do not silently relabel constructed evidence as an execution."],
+  "primarySources": ["https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-contract-standards/src/fungible_token/core_impl.rs", "https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-sdk-core/src/json_types/integers.rs", "https://docs.near.org/api/rpc/transactions", "https://nomicon.io/RuntimeSpec/Receipts.html", "https://doc.rust-lang.org/core/primitive.u128.html"]
+}

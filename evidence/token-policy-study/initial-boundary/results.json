@@ -1,0 +1,90 @@
+{
+  "atUtc": "2026-11-08T05:50:16.312804+00:00",
+  "sourceSha256": "e3013dc5bf627852e6ae1676d168fe445b4b833b6503f8138681efea13ce3eb8",
+  "checkSourceSha256": "5ad9fb97843096bb010b79cb5651166024982db8e834e614a9a615d365bf28a3",
+  "sourceInformedPostResult": true,
+  "total": 10,
+  "matched": 4,
+  "cases": [
+    {
+      "id": "response-list",
+      "matched": false,
+      "gate": null,
+      "error": {
+        "type": "AttributeError",
+        "message": "'list' object has no attribute 'get'",
+        "structured": false
+      }
+    },
+    {
+      "id": "request-list",
+      "matched": false,
+      "gate": null,
+      "error": {
+        "type": "TypeError",
+        "message": "list indices must be integers or slices, not str",
+        "structured": false
+      }
+    },
+    {
+      "id": "params-null",
+      "matched": false,
+      "gate": null,
+      "error": {
+        "type": "TypeError",
+        "message": "'NoneType' object is not subscriptable",
+        "structured": false
+      }
+    },
+    {
+      "id": "body-null",
+      "matched": true,
+      "gate": 2,
+      "error": null
+    },
+    {
+      "id": "receipt-null",
+      "matched": false,
+      "gate": null,
+      "error": {
+        "type": "AttributeError",
+        "message": "'NoneType' object has no attribute 'get'",
+        "structured": false
+      }
+    },
+    {
+      "id": "output-edge-null",
+      "matched": false,
+      "gate": null,
+      "error": {
+        "type": "AttributeError",
+        "message": "'NoneType' object has no attribute 'get'",
+        "structured": false
+      }
+    },
+    {
+      "id": "hook-actions-null",
+      "matched": true,
+      "gate": 2,
+      "error": null
+    },
+    {
+      "id": "action-null",
+      "matched": true,
+      "gate": 2,
+      "error": null
+    },
+    {
+      "id": "body-id-list",
+      "matched": true,
+      "gate": 2,
+      "error": null
+    },
+    {
+      "id": "malformed-final-does-not-merge-poisoned-effects",
+      "matched": false,
+      "gate": 2,
+      "error": null
+    }
+  ]
+}

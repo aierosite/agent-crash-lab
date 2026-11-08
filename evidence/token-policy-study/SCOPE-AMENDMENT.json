@@ -1,0 +1,9 @@
+{
+  "atUtc": "2026-11-08T05:21:13.047423+00:00",
+  "originalSpecSha256": "5573436f533a9a678d12c43fecfe19da2ba0f7e275167b17cfa11e47d9abb371",
+  "beforeExtractorImplementation": true,
+  "scopeRule": "An owner binding covers the payment receipt and its observed creation descendants, so callback/reentrant payer outflows cannot disappear from authority accounting. Distinct bindings must have disjoint receipt subtrees; overlap is an invalid/ambiguous owner scope, not double-counted spending.",
+  "grossRule": "Gross constraints count every known final payer-out transfer in that subtree, regardless of whether the basic method/settlement parser is supported. Incoming transfers never cancel gross exposure.",
+  "settlementRule": "SDK settlement correlates the initial transfer and resolver refund/burn. A same-payer reverse flow outside the verified resolver makes this simple settlement interpretation unknown. Forwarding by the recipient is not retained-balance evidence; useful work remains unassessed.",
+  "mergeRule": "Compatible FINAL outcome/body maps may be unioned by physical receipt identity with exact source pointers. Conflicting nodes do not provide chosen facts. Known breaches in other compatible transactions still take precedence over unknown/conflicting evidence."
+}

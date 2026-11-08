@@ -836,6 +836,75 @@
       }
     ]
   },
+  "tokenPolicy": {
+    "module": "token_policy.py",
+    "profile": "near-nep141-sdk-receipts/v1",
+    "cases": [
+      {
+        "id": "allowed-split-payments",
+        "title": "One order, two allowed payments",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/allowed-split-payments/task.json",
+        "evidence": "verification/token-policy/inputs/allowed-split-payments/evidence.json"
+      },
+      {
+        "id": "repeated-payment-breaches-cap",
+        "title": "A retry exceeds the order limit",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/repeated-payment-breaches-cap/task.json",
+        "evidence": "verification/token-policy/inputs/repeated-payment-breaches-cap/evidence.json"
+      },
+      {
+        "id": "independent-equal-price-intents",
+        "title": "Same price, separate orders",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/independent-equal-price-intents/task.json",
+        "evidence": "verification/token-policy/inputs/independent-equal-price-intents/evidence.json"
+      },
+      {
+        "id": "sender-deleted-burn",
+        "title": "A burned refund is not delivery",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/sender-deleted-burn/task.json",
+        "evidence": "verification/token-policy/inputs/sender-deleted-burn/evidence.json"
+      },
+      {
+        "id": "reported-used-is-not-delivered",
+        "title": "Resolver used does not mean delivered",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/reported-used-is-not-delivered/task.json",
+        "evidence": "verification/token-policy/inputs/reported-used-is-not-delivered/evidence.json"
+      },
+      {
+        "id": "missing-causal-descendant-100",
+        "title": "A missing receipt prevents settlement certainty",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/missing-causal-descendant-100/task.json",
+        "evidence": "verification/token-policy/inputs/missing-causal-descendant-100/evidence.json"
+      },
+      {
+        "id": "hook-returned-promise-supported",
+        "title": "Receiver returns another promise",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/hook-returned-promise-supported/task.json",
+        "evidence": "verification/token-policy/inputs/hook-returned-promise-supported/evidence.json"
+      },
+      {
+        "id": "refunded-deposit",
+        "title": "Historical testnet · deposit returned",
+        "kind": "observed-historical",
+        "task": "verification/token-policy/inputs/refunded-deposit/task.json",
+        "evidence": "verification/token-policy/inputs/refunded-deposit/evidence.json"
+      },
+      {
+        "id": "accepted-deposit",
+        "title": "Historical testnet · deposit accepted",
+        "kind": "observed-historical",
+        "task": "verification/token-policy/inputs/accepted-deposit/task.json",
+        "evidence": "verification/token-policy/inputs/accepted-deposit/evidence.json"
+      }
+    ]
+  },
   "files": {
     "BASELINES.json": {
       "bytes": 18369,
@@ -1401,6 +1470,10 @@
       "bytes": 3222,
       "sha256": "a0bd52a8527d14b970dd4133c2879ee5ccd92dc3650aa44a5e22ac26c3b2f95b"
     },
+    "token_policy.py": {
+      "bytes": 29045,
+      "sha256": "686f47a5535bc22b07cf59d289c3db00e64d693339207d7c527f55dc280b01c8"
+    },
     "token_review.py": {
       "bytes": 15292,
       "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
@@ -1733,6 +1806,78 @@
       "bytes": 14757,
       "sha256": "29555ace87615789da687c99e1f7844e4ff1dd94232da41e8e99ee84e69ded79"
     },
+    "verification/token-policy/inputs/accepted-deposit/evidence.json": {
+      "bytes": 15647,
+      "sha256": "fbca0fb2fefcc5b2d22a7461ed6bba10940d114aa03e3128929bf85647a3131d"
+    },
+    "verification/token-policy/inputs/accepted-deposit/task.json": {
+      "bytes": 876,
+      "sha256": "52995eb76272476228239b711644a883a1e2d9a36014533ab7afbdb0255d652d"
+    },
+    "verification/token-policy/inputs/allowed-split-payments/evidence.json": {
+      "bytes": 3907,
+      "sha256": "0314a74df7ca645379078e40ce3a3d5ba4aecc5382a94bd72e30018f5a2f61eb"
+    },
+    "verification/token-policy/inputs/allowed-split-payments/task.json": {
+      "bytes": 925,
+      "sha256": "c313f5b9930585d182982b92f18cb97a3bba4fcdfa425ad1101a0b2c6b17b1ea"
+    },
+    "verification/token-policy/inputs/hook-returned-promise-supported/evidence.json": {
+      "bytes": 4529,
+      "sha256": "09a98f479852c0ead74a8d2ca24476bfc01a54f9cc8e860ea5052456dc474fb4"
+    },
+    "verification/token-policy/inputs/hook-returned-promise-supported/task.json": {
+      "bytes": 780,
+      "sha256": "9b199f929c792a7a2a1bf8e4029e9338601af11cfcc41f851d2392b8aa69408e"
+    },
+    "verification/token-policy/inputs/independent-equal-price-intents/evidence.json": {
+      "bytes": 3907,
+      "sha256": "748335b2716718505f16b0bdf40349b59cafef2f0ccb2b30e2097b219b1fc130"
+    },
+    "verification/token-policy/inputs/independent-equal-price-intents/task.json": {
+      "bytes": 1015,
+      "sha256": "a670db05de8051a25f4bccb1df29ffd1e653563c1bc408b1348f9886cdd57059"
+    },
+    "verification/token-policy/inputs/missing-causal-descendant-100/evidence.json": {
+      "bytes": 3816,
+      "sha256": "a945fa8308467012472dbab1561b147866fe8a6c5d96ea612c2bd9c05746e2eb"
+    },
+    "verification/token-policy/inputs/missing-causal-descendant-100/task.json": {
+      "bytes": 780,
+      "sha256": "3a4b4e73eddc3d9134abb03ee2b440fab96f82397716069d78ef842009306f43"
+    },
+    "verification/token-policy/inputs/refunded-deposit/evidence.json": {
+      "bytes": 15648,
+      "sha256": "8481c402e139e824f3d74935973222b3fb681fbb9c2c634aecd58a3507af8fa0"
+    },
+    "verification/token-policy/inputs/refunded-deposit/task.json": {
+      "bytes": 878,
+      "sha256": "8fd119f896962963f6295445fe4ba18ec0becdd2ce1235f0c8d8dbd21d0e6761"
+    },
+    "verification/token-policy/inputs/repeated-payment-breaches-cap/evidence.json": {
+      "bytes": 3925,
+      "sha256": "d3fb51752b016747b0bb54f00031901f5baa47112574522390ed63d9d9e41c06"
+    },
+    "verification/token-policy/inputs/repeated-payment-breaches-cap/task.json": {
+      "bytes": 925,
+      "sha256": "40e579956a512702a67900c30700c3cac4af6fecee3f4e52aa70cb6f181c65d4"
+    },
+    "verification/token-policy/inputs/reported-used-is-not-delivered/evidence.json": {
+      "bytes": 3951,
+      "sha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
+    },
+    "verification/token-policy/inputs/reported-used-is-not-delivered/task.json": {
+      "bytes": 780,
+      "sha256": "83ec87ce7b8ae4f8a44d035db15731bbc4cdfdddebc8f6f75a6af6faeb97786c"
+    },
+    "verification/token-policy/inputs/sender-deleted-burn/evidence.json": {
+      "bytes": 3951,
+      "sha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
+    },
+    "verification/token-policy/inputs/sender-deleted-burn/task.json": {
+      "bytes": 779,
+      "sha256": "0be083fbe91d659e68d77101056de33d1d66e77165f52692b142475ba4fc7a75"
+    },
     "verification/token-study/ai-payment.json": {
       "bytes": 28723,
       "sha256": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159"
@@ -1754,8 +1899,8 @@
       "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
     },
     "workbench.py": {
-      "bytes": 21400,
-      "sha256": "18f11067cd556d14595944450be6829e7f2454f6132e54ccd4ae4d5c15c29acd"
+      "bytes": 22661,
+      "sha256": "feaae2f1fc0aa13bb337d66be3607e28eadc199c9fe1bb92f8052c6e9aca5a92"
     }
   }
 }

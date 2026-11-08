@@ -1,0 +1,67 @@
+{
+  "sourceCommit": "b4afaff8ebd60de979e6b9e7bda748dced557485",
+  "sourceInformed": true,
+  "cases": [
+    {
+      "label": "duplicate-owner",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "escaped-duplicate",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "float-metadata",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "oversized-integer",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "valid-big-integer",
+      "expected": "recorded-parity",
+      "actual": "recorded-parity"
+    },
+    {
+      "label": "valid-emoji-memo",
+      "expected": "recorded-parity",
+      "actual": "recorded-parity"
+    },
+    {
+      "label": "surrogate-memo",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "scope",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "identity",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "liability",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "height",
+      "expected": "inconclusive",
+      "actual": "inconclusive"
+    },
+    {
+      "label": "complete",
+      "expected": "recorded-parity",
+      "actual": "recorded-parity"
+    }
+  ],
+  "allMatched": true
+}

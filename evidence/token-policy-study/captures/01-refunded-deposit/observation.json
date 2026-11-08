@@ -1,0 +1,18 @@
+{
+  "startedAtUtc": "2026-11-08T05:06:45.503853+00:00",
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "method": "tx_status",
+  "requestSha256": "0fbdcf0cf896aba9ed0b771cadfa348d3ea11949640ccd50348c05dab3179bf7",
+  "attempts": 1,
+  "signed": false,
+  "contractExecuted": false,
+  "transactionSubmitted": false,
+  "httpStatus": 200,
+  "responseUrl": "https://archival-rpc.testnet.near.org",
+  "responseSha256": "9c1871529bcba72c10e6f7f2efb2bd69cff789b412e6493ff2130d20daa14d3c",
+  "responseBytes": 15036,
+  "rpcError": null,
+  "receiptBodies": 6,
+  "finishedAtUtc": "2026-11-08T05:06:49.249875+00:00",
+  "elapsedSeconds": 3.746037000033539
+}

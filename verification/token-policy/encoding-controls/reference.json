@@ -1,0 +1,55 @@
+{
+  "atUtc": "2026-11-08T06:10:14.114339+00:00",
+  "beforeFix": true,
+  "sourceInformedPostResult": true,
+  "independentBlindEvaluation": false,
+  "sourceSha256": "ea56c8b8c516199a554e279d75506ecc5de48bf8653623e81b18e9565c564976",
+  "sdkSource": "https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-contract-standards/src/fungible_token/core_impl.rs#L175",
+  "meaning": "SDK parses bytes with serde_json, not Python encoding autodetection. Non-UTF8/BOM hook JSON must follow its invalid-output unused=A branch; a non-UTF8 resolver value is uninterpretable supplied evidence. No SDK executable run.",
+  "cases": [
+    {
+      "id": "hook-utf16",
+      "target": "ft_on_transfer",
+      "encoding": "utf-16",
+      "expectedGate": 0,
+      "expectedSettlement": "known",
+      "expectedUnused": "100",
+      "originalGate": 2,
+      "taskSha256": "05bba7cc19f958290c02c488606c677ec9e8d8c0fc4bb76175f040311b5f8e81",
+      "evidenceSha256": "9656e78c0ef71fa8d9c084e2c58fd1281d83a0ec132d31f8d1f068dddb50a2d5"
+    },
+    {
+      "id": "hook-utf32",
+      "target": "ft_on_transfer",
+      "encoding": "utf-32",
+      "expectedGate": 0,
+      "expectedSettlement": "known",
+      "expectedUnused": "100",
+      "originalGate": 2,
+      "taskSha256": "daa09cd2dbad0269cd02e013ea5106479689580a94affe0a9f54827d8aa17abf",
+      "evidenceSha256": "50b37479dc77ce3ea095b9176811f68f4f0fd8829816514944255e7465940c44"
+    },
+    {
+      "id": "hook-utf8-bom",
+      "target": "ft_on_transfer",
+      "encoding": "utf-8-sig",
+      "expectedGate": 0,
+      "expectedSettlement": "known",
+      "expectedUnused": "100",
+      "originalGate": 2,
+      "taskSha256": "39ffa7d5d6c3fa54133c915f77993a29e21cae0e2ac72e4041c599123755008a",
+      "evidenceSha256": "7dae4b0a734fcac02fdd269ac1dfddcfbb95d1a167b577aaa1d40b2477450b90"
+    },
+    {
+      "id": "resolver-utf16",
+      "target": "ft_resolve_transfer",
+      "encoding": "utf-16",
+      "expectedGate": 2,
+      "expectedSettlement": "unknown",
+      "expectedUnused": null,
+      "originalGate": 2,
+      "taskSha256": "30c787d85b652f0985912c88df0e90d5c696186fcf927fcc113dbeaa59824d1f",
+      "evidenceSha256": "4bef0b53ee857fc467ef5f73d1a75d6ff62a44ba008c58221bf6dd276c2b590e"
+    }
+  ]
+}

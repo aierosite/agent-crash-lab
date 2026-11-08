@@ -1,0 +1,18 @@
+Evidence-labeled development delta after v0.12.1
+
+Workcell source review remains pinned at b80bcecc1d30263662b985fc025b83233e07a173 (longterm/research/WORKCELL-INSPIRATION.fa.md). Its scenario search, replay, reduction and ledger invariants were statically inspected; no peer code was executed here. Lack of an independently executed comparison is not evidence that Workcell lacks a feature.
+
+New evidence for Crash Lab, not a claim of superiority:
+- Previously the product's token check was descriptive custody parity plus a sealed two-case source reference. The local research prototype now accepts arbitrary supplied owner policy/evidence bindings and evaluates per-intent gross, recipient, burned refund and minimum SDK settlement.
+- Actual receipt-body/data-ID observations from two additional historical testnet status reads substantiate the callback correlation design. Root success, equal amount and a refund memo are insufficient. Resolver used, payer cost and non-refunded/non-burned allocation remain separate.
+- Positive split payments, two independent equal-price intents, exact duplicate observation idempotence and compatible FINAL fragment union were exercised. Known cap excess survives an unrelated incomplete callback and a conflict in another transaction.
+- This is still a research prototype, tested in Python only. It has not acquired the peer's independently reproduced contract-execution coverage. No new transaction or SDK executable test ran. The product/demo stays at verified v0.12.1.
+
+Remaining competitive gap: broad, independently authored end-to-end grading; new permitted execution evidence; additional documented receipt/action profiles; robust browser contract and user workflow; measured resources; and an explicit integration of task utility and owner ledger references. Do not replace those gaps with counts of correlated controls or say the long-term goal is complete.
+
+Primary model sources, read as research data:
+https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-contract-standards/src/fungible_token/core_impl.rs
+https://github.com/near/near-sdk-rs/blob/bacd081a0bd648d840b814dab7677e1f3330afbb/near-sdk-core/src/json_types/integers.rs
+https://docs.near.org/api/rpc/transactions
+https://nomicon.io/RuntimeSpec/Receipts.html
+https://doc.rust-lang.org/core/primitive.u128.html

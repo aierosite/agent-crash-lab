@@ -1,0 +1,288 @@
+"""Inspect declared NEP-141 payment terms against supplied receipt evidence, offline."""
+from pathlib import Path
+from hashlib import sha256
+import base64,json,re,runpy
+
+HERE=Path(__file__).resolve().parent
+BASE=HERE/'token_review.py'
+primitive=runpy.run_path(str(BASE))
+decode=primitive['decode'];pack=primitive['pack'];account=primitive['account']
+class EvidenceUnknown(ValueError):pass
+class PolicyError(ValueError):pass
+def need(ok,why):
+ if not ok:raise EvidenceUnknown(why)
+def canonical(x):return json.dumps(x,ensure_ascii=True,sort_keys=True,separators=(',',':'))
+def strict_object(x,keys,where):
+ if type(x) is not dict or set(x)!=set(keys):raise PolicyError(where+' has missing or extra fields')
+def u128(x):
+ need(type(x) is str and re.fullmatch(r'\+?[0-9]+',x) is not None,'Expected SDK U128 string')
+ digits=x.lstrip('+').lstrip('0') or '0';need(len(digits)<=39 and int(digits)<2**128,'U128 overflow');return int(digits)
+def policy_amount(x):
+ need(type(x) is str and re.fullmatch(r'0|[1-9][0-9]{0,38}',x) is not None,'Policy amount must be canonical');return u128(x)
+def binary(x):
+ need(type(x) is str and len(x)<=131072,'Invalid encoded RPC bytes')
+ try:raw=base64.b64decode(x,validate=True)
+ except (ValueError,TypeError) as e:raise EvidenceUnknown('Invalid RPC base64') from e
+ need(base64.b64encode(raw).decode()==x,'Noncanonical RPC base64');return raw
+def args(fc):
+ try:d=decode(binary(fc['args']))
+ except (ValueError,KeyError,TypeError) as e:raise EvidenceUnknown('Uninterpretable function arguments') from e
+ need(type(d) is dict,'Function arguments must be an object');return d
+def node_projection(row):
+ o=row['outcome'];return {'id':row['id'],'block_hash':row['block_hash'],'outcome':{k:o[k] for k in ['executor_id','receipt_ids','status','logs']}}
+def body_projection(row):
+ need(type(row) is dict and type(row.get('receipt_id')) is str and 0<len(row['receipt_id'])<=64,'Receipt body needs a bounded receipt ID')
+ account(row.get('predecessor_id'));account(row.get('receiver_id'));receipt=row.get('receipt');need(type(receipt) is dict,'Receipt body must declare its kind');action=receipt.get('Action')
+ if type(action) is not dict:return {'receipt_id':row['receipt_id'],'unsupportedReceiptBody':True}
+ account(action.get('signer_id'));need(type(action.get('actions')) is list and 0<len(action['actions'])<=64,'Receipt actions must be a bounded nonempty list')
+ inputs=action.get('input_data_ids',[]);outputs=action.get('output_data_receivers',[])
+ need(type(inputs) is list and len(inputs)<=64 and all(type(x) is str and 0<len(x)<=64 for x in inputs) and len(inputs)==len(set(inputs)),'Receipt input-data IDs are malformed')
+ need(type(outputs) is list and len(outputs)<=64,'Receipt output-data edges exceed their bound')
+ for edge in outputs:
+  need(type(edge) is dict and type(edge.get('data_id')) is str and 0<len(edge['data_id'])<=64,'Receipt output-data edge is malformed');account(edge.get('receiver_id'))
+ return {'receipt_id':row['receipt_id'],'predecessor_id':row['predecessor_id'],'receiver_id':row['receiver_id'],'Action':{k:action.get(k,[]) if k in ['input_data_ids','output_data_receivers'] else action.get(k) for k in ['signer_id','actions','input_data_ids','output_data_receivers']}}
+
+class Graph:
+ def __init__(self,tx):
+  self.tx=tx;self.transaction=None;self.top_status=None;self.nodes={};self.bodies={};self.node_refs={};self.body_refs={};self.errors=[];self.rpc_errors=[];self.conflicts=[];self.final_observations=0;self.pending_observations=0;self.complete=False;self.reachable=set();self.parents={};self.events=[];self.events_understood=False
+ def add(self,request,response,pointer):
+  try:
+   need(request['method'] in ['tx','tx_status'],'Only read-only status observations are supported')
+   need(request['params']['tx_hash']==self.tx and request['jsonrpc']=='2.0' and response.get('jsonrpc')=='2.0' and response.get('id')==request.get('id'),'RPC request/response binding mismatch')
+   if 'error' in response:self.rpc_errors.append(pointer+': RPC error');return
+   result=response['result'];t=result['transaction'];need(t['hash']==self.tx and t['signer_id']==request['params']['sender_account_id'],'Transaction identity differs from request')
+   account(t['signer_id']);account(t['receiver_id']);need(type(t['actions']) is list,'Root action list absent')
+   if result.get('final_execution_status')!='FINAL':self.pending_observations+=1;return
+   # Validate each physical observation before merging compatible FINAL facts.
+   primitive['outcomes'](result)
+   rows=[result['transaction_outcome'],*result['receipts_outcome']]
+   staged_nodes=[(row['id'],node_projection(row),pointer+('/transaction_outcome' if i==0 else '/receipts_outcome/'+str(i-1))) for i,row in enumerate(rows)]
+   bodies=result.get('receipts',[]);need(type(bodies) is list and len(bodies)<=8192,'Receipt bodies malformed or oversized');seen=set();staged_bodies=[]
+   for i,row in enumerate(bodies):
+    value=body_projection(row);rid=value['receipt_id'];need(rid not in seen,'Duplicate receipt body');seen.add(rid);staged_bodies.append((rid,value,pointer+'/receipts/'+str(i)))
+   # Commit this observation only after its entire supported projection validates.
+   # A malformed FINAL must not poison facts retained from a valid observation.
+   self.final_observations+=1
+   if self.transaction is None:self.transaction=t;self.top_status=result.get('status')
+   elif canonical(self.transaction)!=canonical(t) or canonical(self.top_status)!=canonical(result.get('status')):self.conflicts.append(pointer+': conflicting FINAL transaction identity/status')
+   for rid,value,ref in staged_nodes:
+    if rid in self.nodes and canonical(self.nodes[rid])!=canonical(value):self.conflicts.append(ref+': conflicting FINAL outcome '+rid)
+    else:self.nodes[rid]=value
+    self.node_refs.setdefault(rid,[]).append(ref)
+   for rid,value,ref in staged_bodies:
+    if rid in self.bodies and canonical(self.bodies[rid])!=canonical(value):self.conflicts.append(ref+': conflicting FINAL body '+rid)
+    else:self.bodies[rid]=value
+    self.body_refs.setdefault(rid,[]).append(ref)
+  except (ValueError,KeyError,TypeError) as e:self.errors.append(pointer+': '+str(e))
+ def finish(self,token,payer):
+  if not self.transaction or self.conflicts:return
+  try:
+   need(self.tx in self.nodes,'Root outcome absent')
+   result={'transaction':self.transaction,'transaction_outcome':self.nodes[self.tx],'receipts_outcome':[v for k,v in self.nodes.items() if k!=self.tx],'status':self.top_status,'final_execution_status':'FINAL'}
+   _,nodes,closed=primitive['outcomes'](result)
+   todo=[self.tx]
+   while todo:
+    rid=todo.pop()
+    if rid in self.reachable or rid not in nodes:continue
+    self.reachable.add(rid);todo.extend(nodes[rid]['outcome']['receipt_ids'])
+   for rid,row in nodes.items():
+    for child in row['outcome']['receipt_ids']:self.parents.setdefault(child,set()).add(rid)
+   need(all(len(v)==1 for v in self.parents.values()),'Receipt has multiple creation parents')
+   events,understood,_=primitive['transfers'](nodes,token,payer,self.tx,'/merged')
+   self.events_understood=understood
+   for e in events:
+    if e['receipt_id'] not in self.reachable:continue
+    li=e['log_index'];e['source_refs']=[p+'/outcome/logs/'+str(li) for p in self.node_refs[e['receipt_id']]];e['source_pointer']=e['source_refs'][0];self.events.append(e)
+   self.complete=closed and understood
+   if closed:
+    tag,value,_=self.returned(self.tx)
+    need(canonical({tag:value})==canonical(self.top_status),'Whole transaction result conflicts with its returned outcome chain')
+  except (ValueError,KeyError,TypeError) as e:self.conflicts.append(str(e));self.events=[];self.complete=False
+ def closure(self,rid):
+  seen=set();todo=[rid]
+  while todo:
+   key=todo.pop()
+   if key in seen:continue
+   seen.add(key)
+   if key in self.nodes:todo.extend(self.nodes[key]['outcome']['receipt_ids'])
+  return seen
+ def body(self,rid):
+  need(not self.conflicts and rid in self.reachable,'Payment context is not a compatible FINAL graph')
+  need(rid in self.bodies,'Required receipt body is absent')
+  b=self.bodies[rid];need('Action' in b,'Unsupported receipt body kind');a=b['Action'];o=self.nodes[rid]['outcome']
+  need(b['receiver_id']==o['executor_id'],'Receipt body/outcome receiver mismatch')
+  parents=self.parents.get(rid,set());need(len(parents)==1,'Receipt creation parent is not unique/present');parent=next(iter(parents))
+  if b['predecessor_id']=='system':
+   need(all(type(x) is dict and set(x)=={'Transfer'} for x in a['actions']),'System receipt is not a native refund')
+  else:
+   need(self.nodes[parent]['outcome']['executor_id']==b['predecessor_id'],'Receipt predecessor differs from creator executor')
+   need(a['signer_id']==self.transaction['signer_id'],'Signer propagation mismatch')
+  if parent==self.tx:need(b['receiver_id']==self.transaction['receiver_id'] and canonical(a['actions'])==canonical(self.transaction['actions']),'Initial receipt differs from root actions/receiver')
+  need(type(a['actions']) is list and 0<len(a['actions'])<=64,'Invalid action list')
+  need(type(a['input_data_ids']) is list and len(a['input_data_ids'])==len(set(a['input_data_ids'])),'Invalid callback input IDs')
+  need(type(a['output_data_receivers']) is list,'Invalid output-data receivers')
+  return b
+ def returned(self,rid):
+  path=[]
+  while True:
+   need(rid in self.reachable and rid not in path,'Returned promise chain missing/cyclic');path.append(rid);o=self.nodes[rid]['outcome'];status=o['status'];tag=next(iter(status))
+   if tag in ['SuccessValue','Failure']:return tag,status[tag],path
+   need(tag=='SuccessReceiptId' and status[tag] in o['receipt_ids'],'Returned promise is unresolved');rid=status[tag]
+
+def function_calls(body):
+ calls=[]
+ for action in body['Action']['actions']:
+  need(type(action) is dict and set(action)=={'FunctionCall'},'Unsupported mixed action batch');fc=action['FunctionCall'];need(type(fc) is dict and type(fc.get('method_name')) is str,'Function action is malformed');calls.append((fc,args(fc)))
+ return calls
+def unused_amount(g,hook,amount):
+ tag,value,path=g.returned(hook)
+ if tag=='Failure':return amount,path
+ raw=binary(value)
+ if len(raw)>42:return amount,path
+ try:return min(amount,u128(json.loads(raw.decode('utf-8')))),path
+ except (ValueError,UnicodeError,TypeError):return amount,path
+
+def empty_payment(binding):
+ return {'id':binding['id'],'intent':binding['intent'],'transaction':binding['tx_hash'],'receipt':binding['receipt_id'],'scope_receipts':[],'method':None,'settlement_status':'unknown','amount':None,'refund':None,'burn':None,'used':None,'cost':None,'settled':None,'reasons':[],'body_refs':[],'callback':None}
+
+def payment(g,binding,token,payer):
+ rid=binding['receipt_id'];scope=g.closure(rid);out=empty_payment(binding);out.update(scope_receipts=sorted(scope),body_refs=g.body_refs.get(rid,[]))
+ try:
+  b=g.body(rid);need(b['receiver_id']==token and b['predecessor_id']==payer,'Payment action is not from the declared payer to token')
+  calls=function_calls(b);names=[fc['method_name'] for fc,_ in calls];need(all(n in ['ft_transfer','ft_transfer_call'] for n in names),'Unsupported token method')
+  for fc,a in calls:need(fc.get('deposit')=='1','Token operation needs one yoctoNEAR');account(a.get('receiver_id'));need(u128(a.get('amount'))>0,'Token transfer amount must be positive')
+  out['amount']=str(sum(u128(a['amount']) for _,a in calls));out['method']=('batch-ft_transfer' if all(n=='ft_transfer' for n in names) else 'mixed-async-batch') if len(calls)>1 else names[0]
+  need(scope<=g.reachable,'A receipt in this payment subtree is missing')
+  need(all(next(iter(g.nodes[key]['outcome']['status']))!='Unknown' and ('SuccessReceiptId' not in g.nodes[key]['outcome']['status'] or g.nodes[key]['outcome']['status']['SuccessReceiptId'] in g.nodes[key]['outcome']['receipt_ids']) for key in scope),'A payment-subtree outcome is unresolved')
+  _,scope_understood,_=primitive['transfers']({key:g.nodes[key] for key in scope},token,payer,g.tx,'/payment')
+  need(scope_understood,'A token event in this payment subtree cannot be interpreted')
+  o=g.nodes[rid]['outcome'];tag=next(iter(o['status']))
+  if tag=='Failure':
+   out.update(settlement_status='known',refund='0',burn='0',used='0',cost='0',settled='0');return out
+  need(tag in ['SuccessValue','SuccessReceiptId'],'Payment receipt is pending')
+  events=[e for e in g.events if e['receipt_id']==rid]
+  expected=[(payer,a['receiver_id'],str(u128(a['amount']))) for _,a in calls]
+  actual=[(e['old_owner_id'],e['new_owner_id'],e['amount']) for e in events if e['kind']=='ft_transfer']
+  need(len(events)==len(actual) and actual==expected,'Initial action/event projection mismatch')
+  if all(n=='ft_transfer' for n in names):
+   # Plain transfer creates no receiver hook. Later payer/return effects in its
+   # creation closure cannot silently be merged into this simple settlement.
+   extra=[e for e in g.events if e['receipt_id'] in scope and e['receipt_id']!=rid]
+   need(not extra,'Extra token effects outside a plain transfer receipt')
+   n=out['amount'];out.update(settlement_status='known',refund='0',burn='0',used=n,cost=n,settled=n);return out
+  need(len(calls)==1 and names==['ft_transfer_call'],'Asynchronous action batch is not attributed by this profile')
+  fc,a=calls[0];amount=u128(a['amount']);payee=a['receiver_id'];need(type(a.get('msg')) is str,'Receiver msg is not a string')
+  need(tag=='SuccessReceiptId','Transfer-call does not return a resolver promise');resolver=o['status']['SuccessReceiptId'];need(resolver in o['receipt_ids'],'Resolver is not created by payment')
+  rb=g.body(resolver);rc=function_calls(rb);need(rb['receiver_id']==token and rb['predecessor_id']==token and len(rc)==1,'Resolver identity/action shape mismatch');rfc,ra=rc[0]
+  need(rfc['method_name']=='ft_resolve_transfer' and rfc.get('deposit')=='0' and ra.get('sender_id')==payer and ra.get('receiver_id')==payee and u128(ra.get('amount'))==amount,'Resolver method/arguments mismatch')
+  inputs=rb['Action']['input_data_ids'];need(len(inputs)==1 and type(inputs[0]) is str,'Resolver does not consume one hook data ID');data_id=inputs[0]
+  hooks=[]
+  for child in o['receipt_ids']:
+   if child==resolver or child not in g.bodies:continue
+   candidate=g.bodies[child]
+   if any(x.get('data_id')==data_id and x.get('receiver_id')==token for x in candidate.get('Action',{}).get('output_data_receivers',[])):hooks.append(child)
+  need(len(hooks)==1,'Hook-to-resolver data ID is missing or ambiguous');hook=hooks[0];hb=g.body(hook);hc=function_calls(hb)
+  need(hb['predecessor_id']==token and hb['receiver_id']==payee and len(hc)==1,'Hook caller/receiver/action mismatch');hfc,ha=hc[0]
+  need(hfc['method_name']=='ft_on_transfer' and hfc.get('deposit')=='0' and ha.get('sender_id')==payer and u128(ha.get('amount'))==amount and ha.get('msg')==a['msg'],'Hook method/arguments mismatch')
+  unused,returned_path=unused_amount(g,hook,amount)
+  producers=[]
+  for key,body in g.bodies.items():
+   for edge in body.get('Action',{}).get('output_data_receivers',[]):
+    if edge.get('data_id')==data_id:
+     need(key in returned_path and edge.get('receiver_id')==token,'Conflicting/foreign data-ID producer');producers.append(key)
+  need(hook in producers and len(producers)==len(set(producers)),'Duplicate data-ID production')
+  rs=g.nodes[resolver]['outcome']['status'];need(set(rs)=={'SuccessValue'},'Resolver has not returned a final value');used=u128(json.loads(binary(rs['SuccessValue']).decode('utf-8')))
+  refund=burn=0;refund_refs=[];burn_refs=[]
+  # The custody extractor filters against payer; a refund-burn belongs to payee.
+  # Parse that resolver separately for canonical payee burn facts.
+  local={resolver:g.nodes[resolver]};all_resolver_events,understood,_=primitive['transfers'](local,token,payee,g.tx,'/resolver')
+  need(understood,'Resolver token logs are uninterpretable')
+  for e in all_resolver_events:
+   # Log entries are strings. Keep the physical string pointer and a separate
+   # embedded-data index instead of pretending /data is a JSON child of it.
+   refs=[{'log_pointer':p+'/outcome/logs/'+str(e['log_index']),'embedded_data_index':e['data_index']} for p in g.node_refs[resolver]]
+   if e['kind']=='ft_transfer' and e['old_owner_id']==payee and e['new_owner_id']==payer:refund+=int(e['amount']);refund_refs.extend(refs)
+   elif e['kind']=='ft_burn' and e['old_owner_id']==payee:burn+=int(e['amount']);burn_refs.extend(refs)
+   else:raise EvidenceUnknown('Unexpected resolver token event')
+  need(refund+burn<=min(amount,unused) and not(refund and burn),'Refund/burn exceeds unused amount or mixes exclusive SDK branches')
+  need(used==amount-refund,'Resolver return differs from payer cost')
+  # A reverse flow elsewhere in this same payment closure is not this resolver's
+  # refund. Never infer its purpose by an equal amount or account pair.
+  reverse=[e for e in g.events if e['receipt_id'] in scope and e['receipt_id']!=resolver and e['kind']=='ft_transfer' and e['old_owner_id']!=payer and e['new_owner_id']==payer]
+  need(not reverse,'Additional reverse flow outside the verified resolver')
+  out.update(settlement_status='known',refund=str(refund),burn=str(burn),used=str(used),cost=str(amount-refund),settled=str(amount-refund-burn),callback={'hook_receipt':hook,'resolver_receipt':resolver,'data_id':data_id,'returned_hook_path':returned_path,'unused_limit':str(unused),'refund_event_refs':refund_refs,'burn_event_refs':burn_refs,'refund_sufficiency':'not assessed without receiver-balance reference','body_refs':g.body_refs.get(hook,[])+g.body_refs.get(resolver,[])})
+ except (ValueError,KeyError,TypeError) as e:out['reasons'].append(str(e))
+ return out
+
+def assess(task_raw,evidence_raw):
+ task=decode(task_raw);evidence=decode(evidence_raw)
+ strict_object(task,['format','profile','authority','evidence_sha256','network','token_contract','payer','closed_horizon','horizon_note','intents','bindings'],'Task')
+ strict_object(evidence,['format','network','source','observations'],'Evidence')
+ if task['format']!='agent-crash-lab/token-task-v1' or task['profile']!='near-nep141-sdk-receipts/v1' or evidence['format']!='agent-crash-lab/token-execution-v1':raise PolicyError('Unsupported payment-policy format or interpretation profile')
+ if task['evidence_sha256']!=sha256(evidence_raw).hexdigest() or task['network']!=evidence['network']:raise PolicyError('Task does not bind exact evidence/network')
+ if task['network'] not in ['testnet','mainnet','sandbox']:raise PolicyError('Unsupported network name')
+ source=evidence['source']
+ if type(source) is not dict or not {'kind','note'}<=set(source) or not set(source)<={'kind','note','captureResponseSha256'}:raise PolicyError('Evidence source must declare its kind and note')
+ if source['kind'] not in ['synthetic','public-archival-rpc','owner-recording'] or type(source['note']) is not str or not 0<len(source['note'])<=2048:raise PolicyError('Unsupported source kind/note; authenticity is not verified')
+ if 'captureResponseSha256' in source and (type(source['captureResponseSha256']) is not str or re.fullmatch('[0-9a-f]{64}',source['captureResponseSha256']) is None):raise PolicyError('Invalid claimed capture fingerprint')
+ strict_object(task['authority'],['kind','note'],'Authority')
+ if task['authority']['kind'] not in ['owner-declared','reconstructed'] or type(task['authority']['note']) is not str or not 0<len(task['authority']['note'])<=2048:raise PolicyError('Declared authority needs a supported kind and a note within 2048 characters')
+ token=account(task['token_contract']);payer=account(task['payer']);need(token!=payer,'Payer must differ from token contract')
+ if type(task['closed_horizon']) is not bool or type(task['horizon_note']) is not str or not 0<len(task['horizon_note'])<=2048:raise PolicyError('Declare whether the supplied horizon is closed and describe it within 2048 characters')
+ if type(task['intents']) is not list or not 0<len(task['intents'])<=64 or type(task['bindings']) is not list or len(task['bindings'])>512:raise PolicyError('Intent/binding quota')
+ intents={};binding_ids=set()
+ for row in task['intents']:
+  strict_object(row,['id','recipient','max_gross','min_settled','max_burn'],'Intent');need(type(row['id']) is str and 0<len(row['id'])<=96 and row['id'] not in intents,'Duplicate/invalid intent ID');account(row['recipient']);need(row['recipient']!=payer,'Payer self delivery is not a payment');[policy_amount(row[k]) for k in ['max_gross','min_settled','max_burn']];intents[row['id']]=row
+ if type(evidence['observations']) is not list or not 0<len(evidence['observations'])<=128:raise PolicyError('Observation quota')
+ graphs={}
+ for i,obs in enumerate(evidence['observations']):
+  strict_object(obs,['id','request','response'],'Observation');request=obs['request'];response=obs['response']
+  if type(obs['id']) is not str or not 0<len(obs['id'])<=96 or type(request) is not dict or type(request.get('params')) is not dict or type(response) is not dict:raise PolicyError('An observation needs an ID and request/response objects with named transaction parameters')
+  tx=request['params'].get('tx_hash');need(type(tx) is str and 0<len(tx)<=96,'Invalid transaction identity');g=graphs.setdefault(tx,Graph(tx));g.add(request,response,'/observations/'+str(i)+'/response/result')
+ for g in graphs.values():g.finish(token,payer)
+ # Physical receipts cannot belong to different transaction identities.
+ receipts={}
+ for g in graphs.values():
+  for rid in g.nodes:
+   if rid in receipts and receipts[rid]!=g.tx:g.conflicts.append('Receipt reused across transactions');graphs[receipts[rid]].conflicts.append('Receipt reused across transactions')
+   receipts[rid]=g.tx
+ for g in graphs.values():
+  if g.conflicts:g.events=[];g.complete=False
+ payments=[];assigned={};physical_bindings=set()
+ for binding in task['bindings']:
+  strict_object(binding,['id','intent','tx_hash','receipt_id'],'Binding');need(type(binding['id']) is str and 0<len(binding['id'])<=96 and binding['id'] not in binding_ids and type(binding['intent']) is str and binding['intent'] in intents,'Invalid binding identity/intent');binding_ids.add(binding['id']);need(type(binding['receipt_id']) is str and 0<len(binding['receipt_id'])<=96 and type(binding['tx_hash']) is str and 0<len(binding['tx_hash'])<=96,'Invalid binding receipt/transaction')
+  physical=(binding['tx_hash'],binding['receipt_id']);need(physical not in physical_bindings,'Duplicate physical payment binding');physical_bindings.add(physical)
+  if binding['receipt_id']==binding['tx_hash']:raise PolicyError('Bind the payment action receipt, not the transaction outcome')
+  g=graphs.get(binding['tx_hash'])
+  if not g:
+   out=empty_payment(binding);out['reasons'].append('Transaction observation is absent');payments.append(out);continue
+  out=payment(g,binding,token,payer)
+  for rid in out['scope_receipts']:
+   key=(g.tx,rid);need(key not in assigned,'Owner payment bindings have overlapping receipt subtrees');assigned[key]=binding['intent']
+  payments.append(out)
+ result=[];gate=0;all_events=[e for g in graphs.values() for e in g.events]
+ for iid,intent in intents.items():
+  owned=[e for e in all_events if assigned.get((e['transaction_id'],e['receipt_id']))==iid];outgoing=[e for e in owned if e['kind']=='ft_transfer' and e['old_owner_id']==payer and e['new_owner_id']!=payer];gross=sum(int(e['amount']) for e in outgoing);wrong=[e for e in outgoing if e['new_owner_id']!=intent['recipient']];items=[p for p in payments if p['intent']==iid]
+  closed=bool(items) and task['closed_horizon'] and all(p['transaction'] in graphs and graphs[p['transaction']].complete and not graphs[p['transaction']].conflicts for p in items)
+  settled=sum(int(p['settled']) for p in items if p.get('settled') is not None);known=bool(items) and all(p.get('settlement_status')=='known' for p in items)
+  direct_burn=sum(int(e['amount']) for e in owned if e['kind']=='ft_burn' and e['old_owner_id']==payer);burn=direct_burn+sum(int(p['burn']) for p in items if p.get('burn') is not None)
+  budget='breached' if gross>int(intent['max_gross']) else 'within' if closed else 'unknown';recipient='breached' if wrong else 'within' if closed else 'unknown';burn_status='breached' if burn>int(intent['max_burn']) else 'within' if closed and known else 'unknown';requirement='passed' if settled>=int(intent['min_settled']) else 'failed' if closed and known else 'unknown'
+  if 'breached' in [budget,recipient,burn_status] or requirement=='failed':gate=1
+  elif gate!=1 and ('unknown' in [budget,recipient,burn_status,requirement]):gate=2
+  result.append({'intent':iid,'recipient':intent['recipient'],'gross_known':str(gross),'gross_exact':str(gross) if closed else None,'gross_cap':intent['max_gross'],'gross_status':budget,'recipient_status':recipient,'burn_known':str(burn),'burn_cap':intent['max_burn'],'burn_status':burn_status,'settled_known_min':str(settled),'settled_exact':str(settled) if closed and known else None,'minimum_settled':intent['min_settled'],'settlement_requirement':requirement,'gross_event_refs':[{'transaction':e['transaction_id'],'receipt':e['receipt_id'],'log_index':e['log_index'],'data_index':e['data_index'],'source_refs':e['source_refs']} for e in outgoing]})
+ unassigned=[e for e in all_events if e['kind']=='ft_transfer' and e['old_owner_id']==payer and e['new_owner_id']!=payer and (e['transaction_id'],e['receipt_id']) not in assigned]
+ source_unknown=bool(unassigned) or any(g.conflicts or g.errors or not g.complete for g in graphs.values())
+ if gate!=1 and source_unknown:gate=2
+ return {'format':'agent-crash-lab/token-policy-report-v1','profile':task['profile'],'assessor_sha256':sha256(Path(__file__).read_bytes()).hexdigest(),'primitive_sha256':sha256(BASE.read_bytes()).hexdigest(),'task_sha256':sha256(task_raw).hexdigest(),'evidence_sha256':sha256(evidence_raw).hexdigest(),'source_kind':source['kind'],'source':source,'authority':task['authority'],'scope':{'closed_horizon':task['closed_horizon'],'note':task['horizon_note']},'assumptions':['The unsigned declared policy, receipt assignments and finite horizon are trusted inputs.','RPC outcomes, receipt bodies and token logs are supplied facts, not authenticated consensus or a proof of contract implementation.','Settlement means non-refunded, non-burned allocation under the selected SDK receipt profile; it does not establish retained balance or useful work.'],'network':task['network'],'payer':payer,'token':token,'gate':gate,'intents':result,'payments':payments,'known_custody_events':all_events,'unassigned_payer_out_events':unassigned,'graphs':[{'transaction':g.tx,'final_observations':g.final_observations,'pending_observations':g.pending_observations,'known_outcomes':len(g.nodes),'complete_event_graph':g.complete,'errors':g.errors,'rpc_errors':g.rpc_errors,'conflicts':g.conflicts} for g in graphs.values()],'not_assessed':['retained receiver balance','useful work','generic ledger/right conservation','signature/state/consensus authentication','source-to-WASM equivalence','refund sufficiency without a balance reference'],'new_transactions':0,'new_model_calls':0,'meaning':'Conditional policy assessment of supplied finalized receipt facts. Gross authority, SDK settlement and burned refund are separate. A gate0 is not an authorization to send money or a whole-agent safety verdict.'}
+
+def assess_bundle(raw):
+ value=decode(raw);strict_object(value,['format','task_utf8','evidence_utf8'],'Payment bundle')
+ if value['format']!='agent-crash-lab/token-policy-bundle-v1' or type(value['task_utf8']) is not str or type(value['evidence_utf8']) is not str:raise PolicyError('Import token-policy-bundle-v1 containing the exact UTF-8 policy and evidence text')
+ return assess(value['task_utf8'].encode('utf-8'),value['evidence_utf8'].encode('utf-8'))
+
+if __name__=='__main__':
+ import argparse
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('task',type=Path);p.add_argument('evidence',type=Path);p.add_argument('--gate',action='store_true',help='Use declared payment-policy gate 0/1/2 as the process exit code');a=p.parse_args()
+ try:
+  result=assess(a.task.read_bytes(),a.evidence.read_bytes());print(json.dumps(result));raise SystemExit(result['gate'] if a.gate else 0)
+ except (ValueError,KeyError,TypeError,OSError) as e:print(json.dumps({'error':str(e)}));raise SystemExit(2)

@@ -1,0 +1,55 @@
+{
+  "atUtc": "2026-11-08T05:06:24.998554+00:00",
+  "baseCommit": "b4afaff8ebd60de979e6b9e7bda748dced557485",
+  "sourceInformedNotBlind": true,
+  "maxRequests": 2,
+  "method": "tx_status",
+  "endpoint": "https://archival-rpc.testnet.near.org",
+  "waitUntil": "FINAL",
+  "targets": [
+    {
+      "id": "refunded-deposit",
+      "sourceCase": "upstream-refund",
+      "sourceRecordingSha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511",
+      "transactionId": "7rXGLn3rADXytVqQvXHUJyR1XjmxY3yPdCw3SuBRKxK9",
+      "sender": "user.wclmw0f26ghx8db.wclmw01u4t5g33g.testnet",
+      "receiver": "token.wclmw0f26ghx8db.wclmw01u4t5g33g.testnet",
+      "rootMethod": "ft_transfer_call",
+      "recordedExpectedRoot": {
+        "SuccessValue": "IjAi"
+      }
+    },
+    {
+      "id": "accepted-deposit",
+      "sourceCase": "ai-payment",
+      "sourceRecordingSha256": "531a010cebd7f17eecb16bce1cb6c765c2307af36e0e62659313a36e65f3e159",
+      "transactionId": "DVq23RGrvypu4wnfttgLNLAAzS9JYwiJiPYH84CdjE4L",
+      "sender": "user.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "receiver": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+      "rootMethod": "ft_transfer_call",
+      "recordedExpectedRoot": {
+        "SuccessValue": "IjEwMDAi"
+      }
+    }
+  ],
+  "sourceHashes": {
+    "core_impl.rs.txt": "7f818d86401f3fbdb0575b0c4299c66f7bc98e649e46a5d7e5be68d6ecff721a",
+    "LICENSE-MIT.txt": "6cebe29bfb696cda15f15ff96c5c0b57447d2b562310c703d99d008f511a8594"
+  },
+  "sdkPin": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+  "executedSdkCode": false,
+  "newTransactions": 0,
+  "signing": false,
+  "wallet": false,
+  "paidEndpoint": false,
+  "retryPolicy": "One attempt per target; stop on429, no automatic extra receipt requests.",
+  "purpose": [
+    "Inspect original action bodies and callback input/output data-ID bindings for two historical ft_transfer_call flows.",
+    "Test whether gross transfer, resolver return, refunded tokens, burned refund and economic delivery must be separate fields.",
+    "Do not implement or claim generic token authorization before causal and uncertainty rules are registered."
+  ],
+  "preconditions": [
+    "Public endpoint trusted; no signature/state proof or new contract execution.",
+    "Original transaction identities and producer outcomes already known before query; not a holdout or independent grading."
+  ]
+}

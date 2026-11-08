@@ -6,6 +6,18 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Check each order's token payment terms · v0.13.0
+
+**[Inspect an order that pays twice](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=repeated-payment-breaches-cap)**
+
+Supply a policy and recorded receipts, rather than relying on a sealed example. Check each intent's gross cap, recipient, permitted refund burn and minimum settlement. Receipt bodies, callback data IDs and returned promises connect a transfer-call to its resolver. Equal prices and root success do not establish delivery. Allowed installments and independent same-price orders remain valid.
+
+A payment of 100 with a burned refund of 80 can cost the payer 100 while allocating only 20. Gross authority, payer cost and non-refunded/non-burned allocation are separate quantities. Missing causal receipts prevent a definite settlement; a known overspend survives unrelated uncertainty. The browser reconstructs the source projection before accepting the Python result, and exposes exact input downloads and original receipt/log-string pointers.
+
+![Constructed SDK-style example: cost100, settlement20, refund burn80](docs/token-payment-terms.png)
+
+The portable checks retain prior reports and reproduced mistakes. References and grading remain our source-informed work; no new SDK/contract execution, cryptographic consensus proof or external blind accuracy claim is made. [Format, CLI, evidence and limits](docs/TOKEN_POLICY.md).
+
 ## Read the canonical event owner · v0.12.1
 
 **[Inspect an official mint event in a constructed envelope](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=sdk-1-bob)**

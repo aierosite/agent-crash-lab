@@ -1,0 +1,145 @@
+{
+  "format": "agent-crash-lab/token-policy-research-report-v1",
+  "assessor_sha256": "049b63de1cf3f451fa59b0a8d694b0a7cff538f3dda04fa805425e1d77a4aff0",
+  "primitive_sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0",
+  "task_sha256": "dcdc4e702c04e0f0d132709ec409f674fde76db33e29c1680ebf496169663ff1",
+  "evidence_sha256": "8a7eb2806ceee799ca6d1eb71088f15e844e33dfccf633c4b4dea9e83b8c8681",
+  "source_kind": "synthetic",
+  "authority": {
+    "kind": "reconstructed",
+    "note": "Original source-informed experiment reference, not an original customer authorization or signed policy."
+  },
+  "network": "sandbox",
+  "payer": "payer.testnet",
+  "token": "token.testnet",
+  "gate": 0,
+  "intents": [
+    {
+      "intent": "A",
+      "gross_known": "340282366920938463463374607431768211455",
+      "gross_exact": "340282366920938463463374607431768211455",
+      "gross_cap": "340282366920938463463374607431768211455",
+      "gross_status": "within",
+      "recipient_status": "within",
+      "burn_known": "0",
+      "burn_status": "within",
+      "settled_known_min": "0",
+      "settled_exact": "0",
+      "minimum_settled": "0",
+      "settlement_requirement": "passed",
+      "gross_event_refs": [
+        {
+          "transaction": "443b441226703acd82ca81ba0638f4d7d76711d9f672",
+          "receipt": "518957204650721196af0ed44a10d95e986bbb3dff50",
+          "log_index": 0,
+          "data_index": 0,
+          "source_refs": [
+            "/observations/0/response/result/receipts_outcome/0/outcome/logs/0"
+          ]
+        }
+      ]
+    }
+  ],
+  "payments": [
+    {
+      "id": "payment-1",
+      "intent": "A",
+      "transaction": "443b441226703acd82ca81ba0638f4d7d76711d9f672",
+      "receipt": "518957204650721196af0ed44a10d95e986bbb3dff50",
+      "scope_receipts": [
+        "26ba4a357a6cecda4ed3045a41ebeefcf22acb19aa63",
+        "518957204650721196af0ed44a10d95e986bbb3dff50",
+        "d872698d25be3e16518eb035f09671aae9877f2ae3b7"
+      ],
+      "method": "ft_transfer_call",
+      "settlement_status": "known",
+      "amount": "340282366920938463463374607431768211455",
+      "refund": "340282366920938463463374607431768211455",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0",
+      "reasons": [],
+      "body_refs": [
+        "/observations/0/response/result/receipts/0"
+      ],
+      "callback": {
+        "hook_receipt": "26ba4a357a6cecda4ed3045a41ebeefcf22acb19aa63",
+        "resolver_receipt": "d872698d25be3e16518eb035f09671aae9877f2ae3b7",
+        "data_id": "d73bce64183441bfdc771a71098ec1424b9b5bfe2ca2",
+        "returned_hook_path": [
+          "26ba4a357a6cecda4ed3045a41ebeefcf22acb19aa63"
+        ],
+        "unused_limit": "340282366920938463463374607431768211455",
+        "refund_event_refs": [
+          {
+            "log_pointer": "/observations/0/response/result/receipts_outcome/2/outcome/logs/0",
+            "embedded_data_index": 0
+          }
+        ],
+        "burn_event_refs": [],
+        "refund_sufficiency": "not assessed without receiver-balance reference",
+        "body_refs": [
+          "/observations/0/response/result/receipts/1",
+          "/observations/0/response/result/receipts/2"
+        ]
+      }
+    }
+  ],
+  "known_custody_events": [
+    {
+      "kind": "ft_transfer",
+      "amount": "340282366920938463463374607431768211455",
+      "old_owner_id": "payer.testnet",
+      "new_owner_id": "payee.testnet",
+      "receipt_id": "518957204650721196af0ed44a10d95e986bbb3dff50",
+      "transaction_id": "443b441226703acd82ca81ba0638f4d7d76711d9f672",
+      "log_index": 0,
+      "data_index": 0,
+      "source_pointer": "/observations/0/response/result/receipts_outcome/0/outcome/logs/0",
+      "executor_id": "token.testnet",
+      "source_refs": [
+        "/observations/0/response/result/receipts_outcome/0/outcome/logs/0"
+      ]
+    },
+    {
+      "kind": "ft_transfer",
+      "amount": "340282366920938463463374607431768211455",
+      "old_owner_id": "payee.testnet",
+      "new_owner_id": "payer.testnet",
+      "receipt_id": "d872698d25be3e16518eb035f09671aae9877f2ae3b7",
+      "transaction_id": "443b441226703acd82ca81ba0638f4d7d76711d9f672",
+      "log_index": 0,
+      "data_index": 0,
+      "source_pointer": "/observations/0/response/result/receipts_outcome/2/outcome/logs/0",
+      "executor_id": "token.testnet",
+      "source_refs": [
+        "/observations/0/response/result/receipts_outcome/2/outcome/logs/0"
+      ]
+    }
+  ],
+  "unassigned_payer_out_events": [],
+  "graphs": [
+    {
+      "transaction": "443b441226703acd82ca81ba0638f4d7d76711d9f672",
+      "final_observations": 1,
+      "pending_observations": 0,
+      "known_outcomes": 4,
+      "complete_event_graph": true,
+      "errors": [],
+      "rpc_errors": [],
+      "conflicts": []
+    }
+  ],
+  "not_assessed": [
+    "retained receiver balance",
+    "useful work",
+    "generic ledger/right conservation",
+    "signature/state/consensus authentication",
+    "source-to-WASM equivalence",
+    "refund sufficiency without a balance reference"
+  ],
+  "new_transactions": 0,
+  "new_model_calls": 0,
+  "meaning": "Research-only conditional policy assessment of supplied finalized receipt facts. Gross authority, SDK settlement and burned refund are separate. A gate0 is not an authorization to send money or a whole-agent safety verdict."
+}

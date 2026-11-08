@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{spawnSync}=require('node:child_process'),{webcrypto}=require('node:crypto');
-const source=fs.readFileSync(__dirname+'/web/token.js','utf8'),context=vm.createContext({crypto:webcrypto,TextEncoder});vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);
+const source=fs.readFileSync(__dirname+'/web/token.js','utf8'),context=vm.createContext({crypto:webcrypto,TextEncoder});vm.runInContext(fs.readFileSync(__dirname+'/web/token-events.js','utf8'),context);vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);
 const script=`import pathlib,runpy,json,hashlib
 r=pathlib.Path.cwd();app=runpy.run_path(str(r/'workbench.py'));review=runpy.run_path(str(r/'token_review.py'))['review'];c=json.loads((r/'web/catalog.json').read_bytes());s=c['sourceCorroboration'];meta={**s,'verifierSha256':c['files'][s['module']]['sha256']};rows=[]
 for row in s['cases']:

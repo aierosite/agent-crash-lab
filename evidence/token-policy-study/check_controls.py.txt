@@ -1,0 +1,69 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import argparse,base64,copy,json,runpy
+H=Path(__file__).resolve().parent;builder=runpy.run_path(str(H/'build_corpus.py'));pack=builder['pack'];reference=json.loads((H/'REFERENCE.json').read_bytes());definitions={c['id']:c for c in reference['constructedCases']}
+def base(name='used-all'):
+ e,payer,payee,token,tx,p=builder['fixture'](definitions[name]);t=builder['task'](e,payer,payee,token,tx,p,definitions[name]['settled'],definitions[name]['amount']);return t,e
+def result(e,i=0):return e['observations'][i]['response']['result']
+def parts(e):
+ r=result(e);return r,*[next(b for b in r['receipts'] if b['receipt']['Action']['actions'][0]['FunctionCall']['method_name']==name) for name in ['ft_transfer_call','ft_on_transfer','ft_resolve_transfer']]
+def fc(body):return body['receipt']['Action']['actions'][0]['FunctionCall']
+def change_args(body,**changes):
+ action=fc(body);a=json.loads(base64.b64decode(action['args']));a.update(changes);action['args']=builder['enc'](a)
+def reseal(t,e):t['evidence_sha256']=sha256(pack(e)).hexdigest();return pack(t),pack(e)
+def plain(cid,n):
+ d=copy.deepcopy(definitions['used-all']);d.update(id=cid,amount=str(n));e,payer,payee,token,tx,p=builder['fixture'](d);r=result(e);initial=next(b for b in r['receipts'] if b['receipt_id']==p);call=fc(initial);a=json.loads(base64.b64decode(call['args']));a.pop('msg');call.update(method_name='ft_transfer',args=builder['enc'](a));r['transaction']['actions']=copy.deepcopy(initial['receipt']['Action']['actions']);r['receipts']=[initial];r['receipts_outcome']=[o for o in r['receipts_outcome'] if o['id']==p];r['receipts_outcome'][0]['outcome'].update(receipt_ids=[],status={'SuccessValue':''});r['status']={'SuccessValue':''};return e,payer,payee,token,tx,p
+def combine_plains(values,independent=False):
+ e1,payer,payee,token,tx,p=plain('plain-0',values[0]);e=copy.deepcopy(e1);t=builder['task'](e,payer,payee,token,tx,p,str(sum(values) if not independent else values[0]),str(sum(values) if not independent else values[0]));t['bindings'][0]['id']='plain-0'
+ for i,n in enumerate(values[1:],1):
+  extra,_,_,_,tx2,p2=plain('plain-'+str(i),n);e['observations'].extend(extra['observations']);iid='B'+str(i) if independent else 'A'
+  if independent:t['intents'].append({'id':iid,'recipient':payee,'max_gross':str(n),'min_settled':str(n),'max_burn':'0'})
+  t['bindings'].append({'id':'plain-'+str(i),'intent':iid,'tx_hash':tx2,'receipt_id':p2})
+ return t,e
+def incoming(cid,n,sender='donor.testnet'):
+ e,_,_,_,_,_=plain(cid,n);r=result(e);r['transaction']['signer_id']=sender;e['observations'][0]['request']['params']['sender_account_id']=sender;r['transaction_outcome']['outcome']['executor_id']=sender
+ b=r['receipts'][0];b['predecessor_id']=sender;b['receipt']['Action']['signer_id']=sender;change_args(b,receiver_id='payer.testnet');r['transaction']['actions']=copy.deepcopy(b['receipt']['Action']['actions']);r['receipts_outcome'][0]['outcome']['logs']=[builder['event']('ft_transfer',str(n),sender,'payer.testnet')];return e
+def make_controls():
+ rows=[]
+ def add(cid,task,evidence,gate,settlement=None,error=False):rows.append({'id':cid,'task':task,'evidence':evidence,'expectedGate':gate,'expectedSettlement':settlement,'expectsError':error})
+ for method,cid in [('ft_resolve_transfer','missing-resolver-body'),('ft_on_transfer','missing-hook-body')]:
+  t,e=base();r=result(e);r['receipts']=[b for b in r['receipts'] if fc(b)['method_name']!=method];add(cid,t,e,2,'unknown')
+ t,e=base();_,_,_,rb=parts(e);rb['receipt']['Action']['input_data_ids']=['foreign-data'];add('data-id-mismatch',t,e,2,'unknown')
+ t,e=base();r,p,h,rb=parts(e);duplicate=copy.deepcopy(h);old=h['receipt_id'];duplicate['receipt_id']=builder['hashid']('second-hook');r['receipts'].append(duplicate);o=copy.deepcopy(next(o for o in r['receipts_outcome'] if o['id']==old));o['id']=duplicate['receipt_id'];r['receipts_outcome'].append(o);next(o for o in r['receipts_outcome'] if o['id']==p['receipt_id'])['outcome']['receipt_ids'].append(duplicate['receipt_id']);add('duplicate-data-producer',t,e,2,'unknown')
+ for field,value in [('sender_id','wrong.testnet'),('receiver_id','wrong.testnet'),('amount','99')]:
+  t,e=base();_,_,_,rb=parts(e);change_args(rb,**{field:value});add('resolver-wrong-'+field,t,e,2,'unknown')
+ t,e=base();r,p,_,_=parts(e);next(o for o in r['receipts_outcome'] if o['id']==p['receipt_id'])['outcome']['executor_id']='forged.testnet';add('forged-outcome-executor',t,e,2,'unknown')
+ t,e=base();e['observations'].append(copy.deepcopy(e['observations'][0]));add('identical-observation-idempotence',t,e,0,'known')
+ t,e=base();a=copy.deepcopy(e['observations'][0]);b=copy.deepcopy(a);r,p,h,rb=parts(e)
+ for obs,missing in [(a,rb['receipt_id']),(b,h['receipt_id'])]:
+  rr=obs['response']['result'];rr['receipts']=[x for x in rr['receipts'] if x['receipt_id']!=missing];rr['receipts_outcome']=[x for x in rr['receipts_outcome'] if x['id']!=missing]
+ e['observations']=[a,b];add('compatible-final-partial-union',t,e,0,'known')
+ t,e=base();a=copy.deepcopy(e['observations'][0]);r,p,_,_=parts(e);next(o for o in a['response']['result']['receipts_outcome'] if o['id']==p['receipt_id'])['outcome']['logs']=[builder['event']('ft_transfer','99','payer.testnet','payee.testnet')];e['observations'].append(a);add('conflicting-final-outcomes',t,e,2,'unknown')
+ t,e=base();r,_,_,rb=parts(e);r['receipts']=[b for b in r['receipts'] if b['receipt_id']!=rb['receipt_id']];t['intents'][0]['max_gross']='50';add('known-excess-missing-callback',t,e,1,'unknown')
+ t,e=combine_plains([40,60]);add('allowed-split-payments',t,e,0,'known')
+ t,e=combine_plains([50,50],True);add('independent-equal-price-intents',t,e,0,'known')
+ t,e=combine_plains([100,100]);t['intents'][0].update(max_gross='100',min_settled='100');add('repeated-payment-breaches-cap',t,e,1,'known')
+ t,e=combine_plains([100]);e['observations'].extend(incoming('topup',100)['observations']);t['intents'][0]['max_gross']='50';add('unrelated-topup-cannot-offset-gross',t,e,1,'known')
+ t,e=combine_plains([100]);e['observations'].extend(incoming('capital',100)['observations']);add('legitimate-capital-not-a-loss',t,e,0,'known')
+ e,payer,payee,token,tx,p=plain('batch',40);r=result(e);body=r['receipts'][0];second=copy.deepcopy(body['receipt']['Action']['actions'][0]);value=json.loads(base64.b64decode(second['FunctionCall']['args']));value['amount']='60';second['FunctionCall']['args']=builder['enc'](value);body['receipt']['Action']['actions'].append(second);r['transaction']['actions']=copy.deepcopy(body['receipt']['Action']['actions']);r['receipts_outcome'][0]['outcome']['logs'].append(builder['event']('ft_transfer','60',payer,payee));t=builder['task'](e,payer,payee,token,tx,p,'100','100');add('atomic-plain-batch',t,e,0,'known')
+ t,e=base();r,p,h,rb=parts(e);extra=copy.deepcopy(p['receipt']['Action']['actions'][0]);a=json.loads(base64.b64decode(extra['FunctionCall']['args']));a.pop('msg');a['amount']='1';extra['FunctionCall'].update(method_name='ft_transfer',args=builder['enc'](a));p['receipt']['Action']['actions'].append(extra);r['transaction']['actions']=copy.deepcopy(p['receipt']['Action']['actions']);next(o for o in r['receipts_outcome'] if o['id']==p['receipt_id'])['outcome']['logs'].append(builder['event']('ft_transfer','1','payer.testnet','payee.testnet'));t['intents'][0]['max_gross']='101';add('mixed-async-batch-unknown',t,e,2,'unknown')
+ t,e=base();r,p,h,rb=parts(e);newid=builder['hashid']('reverse');newbody=copy.deepcopy(p);newbody.update(receipt_id=newid,predecessor_id='payee.testnet');change_args(newbody,receiver_id='payer.testnet');fc(newbody)['method_name']='ft_transfer';r['receipts'].append(newbody);newout=copy.deepcopy(next(o for o in r['receipts_outcome'] if o['id']==p['receipt_id']));newout.update(id=newid);newout['outcome'].update(receipt_ids=[],status={'SuccessValue':''},logs=[builder['event']('ft_transfer','100','payee.testnet','payer.testnet')]);r['receipts_outcome'].append(newout);next(o for o in r['receipts_outcome'] if o['id']==h['receipt_id'])['outcome']['receipt_ids'].append(newid);add('reverse-outside-resolver-unknown',t,e,2,'unknown')
+ t,e=base('receiver-spent-all');e['observations'].extend(incoming('same-pair-topup',100,'payee.testnet')['observations']);add('unrelated-same-pair-return-not-callback',t,e,0,'known')
+ t,e=base();_,_,_,rb=parts(e);t['bindings'].append({'id':'nested','intent':'A','tx_hash':t['bindings'][0]['tx_hash'],'receipt_id':rb['receipt_id']});add('overlapping-owner-bindings-rejected',t,e,None,error=True)
+ t,e=base('sender-deleted-burn');t['intents'][0]['max_burn']='80';add('explicitly-allowed-burn',t,e,0,'known')
+ t,e=base('sender-deleted-burn');t['intents'][0].update(max_burn='80',min_settled='50');add('reported-used-is-not-delivered',t,e,1,'known')
+ t,e=base('partial-refund');t['intents'][0]['min_settled']='80';add('gross-event-is-not-settled',t,e,1,'known')
+ folder=H/'corpus/refunded-deposit';t=json.loads((folder/'task.json').read_bytes());e=json.loads((folder/'evidence.json').read_bytes());t['intents'][0]['min_settled']='1';add('observed-root-success-full-refund-underpays',t,e,1,'known')
+ return rows
+def evaluate(module,output):
+ api=runpy.run_path(str(module));rows=[];output.mkdir(exist_ok=False)
+ for case in make_controls():
+  t,e=reseal(case['task'],case['evidence']);result=None;error=None
+  try:result=api['assess'](t,e)
+  except (ValueError,KeyError,TypeError) as ex:error={'type':type(ex).__name__,'message':str(ex)}
+  matched=bool(error) if case['expectsError'] else error is None and result['gate']==case['expectedGate'] and (case['expectedSettlement'] is None or all(p['settlement_status']==case['expectedSettlement'] for p in result['payments']))
+  row={k:case[k] for k in ['id','expectedGate','expectedSettlement','expectsError']};row.update(matched=matched,actualGate=result.get('gate') if result else None,error=error);rows.append(row);(output/(case['id']+'.json')).write_text(json.dumps({'check':row,'task':case['task'],'evidence':case['evidence'],'report':result},indent=2)+'\n','utf-8')
+ outcome={'atUtc':datetime.now(timezone.utc).isoformat(),'sourceSha256':sha256(module.read_bytes()).hexdigest(),'controlSourceSha256':sha256(Path(__file__).read_bytes()).hexdigest(),'sourceInformedPostBaselineControls':True,'matched':sum(r['matched'] for r in rows),'total':len(rows),'cases':rows};(output/'results.json').write_text(json.dumps(outcome,indent=2)+'\n','utf-8');print(json.dumps({'matched':outcome['matched'],'total':outcome['total'],'failures':[r for r in rows if not r['matched']]}));return outcome
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('module',type=Path);p.add_argument('output',type=Path);a=p.parse_args();evaluate(a.module,a.output)

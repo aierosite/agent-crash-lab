@@ -136,12 +136,19 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.12.1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.13.0','coreVersion':core.VERSION})
         if path=='/api/token-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             source=catalog['sourceCorroboration']
             return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_review.py']['sha256'],
                                  'sourceCorroboration':{**source,'verifierSha256':catalog['files'][source['module']]['sha256'],'hashes':{p:catalog['files'][p]['sha256'] for p in source['files']}}})
+        if path=='/api/token-policy-catalog':
+            catalog=json.loads((ROOT/'web/catalog.json').read_bytes());policy=catalog['tokenPolicy']
+            return self.send(200,{**policy,'assessorSha256':catalog['files'][policy['module']]['sha256'],'primitiveSha256':catalog['files']['token_review.py']['sha256'],'files':{p:catalog['files'][p] for c in policy['cases'] for p in [c['task'],c['evidence']]}})
+        if path=='/api/token-policy-input':
+            from urllib.parse import parse_qs
+            cid=parse_qs(urlsplit(self.path).query).get('case',[''])[0];catalog=json.loads((ROOT/'web/catalog.json').read_bytes());entry=next((r for r in catalog['tokenPolicy']['cases'] if r['id']==cid),None)
+            return self.send(200,{'format':'agent-crash-lab/token-policy-bundle-v1','task_utf8':(ROOT/entry['task']).read_bytes().decode('utf-8'),'evidence_utf8':(ROOT/entry['evidence']).read_bytes().decode('utf-8')}) if entry else self.send(404,{'error':'Unknown token payment example'})
         if path=='/api/token-recording':
             from urllib.parse import parse_qs
             sid=parse_qs(urlsplit(self.path).query).get('case',[''])[0]
@@ -155,7 +162,7 @@ class Handler(BaseHTTPRequestHandler):
             file=(ROOT/name).resolve()
             if name not in catalog['sourceCorroboration']['files'] or not file.is_relative_to(ROOT.resolve()):return self.send(404,{'error':'Unknown source evidence file'})
             return self.send(200,file.read_bytes())
-        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css'):return self.send(404,{'error':'Not found'})
+        if path not in ('/','/app.js','/style.css','/icon.svg','/token.html','/token.js','/token.css','/token-events.js','/policy.html','/policy.js','/policy-contract.js','/policy.css'):return self.send(404,{'error':'Not found'})
         file=ROOT/'web'/(path[1:] or 'index.html')
         mime={'html':'text/html','js':'text/javascript','css':'text/css','svg':'image/svg+xml'}[file.suffix[1:]]
         self.send(200,file.read_bytes(),mime+'; charset=utf-8')
@@ -193,6 +200,9 @@ class Handler(BaseHTTPRequestHandler):
             if path=='/api/token-review':
                 reviewer=runpy.run_path(str(ROOT/'token_review.py'))
                 return self.send(200,reviewer['review'](raw))
+            if path=='/api/token-policy':
+                reviewer=runpy.run_path(str(ROOT/'token_policy.py'))
+                return self.send(200,reviewer['assess_bundle'](raw))
             body=decode(raw)
             if type(body) is not dict:raise ValueError('Request must be an object')
             if path in ('/api/run','/api/bundle'):

@@ -37,6 +37,13 @@ async function boot(id){
  python.runPython("import sys,json\nsys.path.insert(0,'/app')\nimport workbench as app");
 }
 async function route(path,body,id){
+ if(path==='/api/token-policy'){
+  await stage('token_review.py');await stage('token_policy.py');python.globals.set('policy_input',body);
+  try{
+   const result=JSON.parse(python.runPython("import runpy\npolicy_api=runpy.run_path('/app/token_policy.py')\ntry:\n    policy_value=policy_api['assess_bundle'](policy_input.to_bytes())\nexcept ValueError as error:\n    policy_value={'error':str(error)}\njson.dumps(policy_value)"));
+   if(result.error)throw Error(result.error);return result;
+  }finally{python.globals.delete('policy_input');}
+ }
  if(path==='/api/token-source-check'){
   await stage(catalog.sourceCorroboration.module);
   let count=0;for(const path of [...catalog.sourceCorroboration.files,...catalog.sourceCorroboration.cases.map(c=>'verification/token-study/'+c.id+'.json')]){
@@ -95,6 +102,7 @@ onmessage=async({data:{id,path,body}})=>{
  try{
   if(path==='/api/assess'&&body.byteLength>9*1024*1024)throw Error('Bundle exceeds 9 MiB');
   if(path==='/api/token-review'&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty token recording no larger than 2 MiB.');
+  if(path==='/api/token-policy'&&(!body?.byteLength||body.byteLength>2*1024*1024))throw Error('Choose a nonempty payment-policy bundle no larger than 2 MiB.');
   await boot(id);const result=await route(path,body,id);postMessage({id,result});
  }catch(e){postMessage({id,error:String(e.message||e).trim().split('\n').pop().slice(0,300)});}
  finally{active=false;}

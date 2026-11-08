@@ -1,0 +1,40 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import base64,json
+H=Path(__file__).resolve().parent
+pack=lambda x:json.dumps(x,ensure_ascii=True,sort_keys=True,separators=(',',':')).encode()
+enc=lambda x:base64.b64encode(pack(x)).decode()
+hashid=lambda s:sha256(s.encode()).hexdigest()[:44]
+def event(kind,amount,old=None,new=None,owner=None):
+ d={'amount':amount}
+ if kind=='ft_transfer':d.update(old_owner_id=old,new_owner_id=new)
+ else:d['owner_id']=owner
+ return 'EVENT_JSON:'+pack({'standard':'nep141','version':'1.0.0','event':kind,'data':[d]}).decode()
+def fixture(c):
+ payer='payer.testnet';payee='payee.testnet';token='token.testnet';cid=c['id'];tx=hashid(cid+'tx');p,h,r,data=[hashid(cid+k) for k in ['p','h','r','data']];block=hashid(cid+'block')
+ def call(method,args,deposit):return {'FunctionCall':{'method_name':method,'args':enc(args),'deposit':str(deposit),'gas':30000000000000}}
+ def body(rid,pred,receiver,action,inputs=[],outputs=[]):return {'receipt_id':rid,'predecessor_id':pred,'receiver_id':receiver,'receipt':{'Action':{'signer_id':payer,'actions':[action],'input_data_ids':inputs,'output_data_receivers':outputs}}}
+ def outcome(rid,executor,children,status,logs=[]):return {'id':rid,'block_hash':block,'outcome':{'executor_id':executor,'receipt_ids':children,'status':status,'logs':logs,'gas_burnt':1,'tokens_burnt':'1'}}
+ args={'receiver_id':payee,'amount':c['amount'],'msg':'accept'};action=call('ft_transfer_call',args,1)
+ bodies=[body(p,payer,token,action),body(h,token,payee,call('ft_on_transfer',{'sender_id':payer,'amount':c['amount'],'msg':'accept'},0),outputs=[{'data_id':data,'receiver_id':token}]),body(r,token,token,call('ft_resolve_transfer',{'sender_id':payer,'receiver_id':payee,'amount':c['amount']},0),inputs=[data])]
+ hook={'Failure':{'ActionError':{'index':0,'kind':{'FunctionCallError':{'ExecutionError':'Constructed receiver failure'}}}}} if c['hook'] is None else {'SuccessValue':base64.b64encode(c['hook'].encode()).decode()}
+ logs=[]
+ if c['refund']!='0':logs.append(event('ft_transfer',c['refund'],payee,payer))
+ if c['burn']!='0':logs.append(event('ft_burn',c['burn'],owner=payee))
+ used={'SuccessValue':enc(c['used'])}
+ result={'final_execution_status':'FINAL','status':used,'transaction':{'hash':tx,'signer_id':payer,'receiver_id':token,'actions':[action]},'transaction_outcome':outcome(tx,payer,[p],{'SuccessReceiptId':p}),'receipts_outcome':[outcome(p,token,[h,r],{'SuccessReceiptId':r},[event('ft_transfer',c['amount'],payer,payee)]),outcome(h,payee,[],hook),outcome(r,token,[],used,logs)],'receipts':bodies}
+ request={'jsonrpc':'2.0','id':cid,'method':'tx_status','params':{'tx_hash':tx,'sender_account_id':payer,'wait_until':'FINAL'}};response={'jsonrpc':'2.0','id':cid,'result':result}
+ return {'format':'agent-crash-lab/token-execution-v1','network':'sandbox','source':{'kind':'synthetic','note':'Original constructed SDK-style receipt/data-dependency envelope; no valid signature, contract execution or chain observation.'},'observations':[{'id':cid,'request':request,'response':response}]},payer,payee,token,tx,p
+def task(evidence,payer,payee,token,tx,p,min_settled,max_gross,max_burn='0'):
+ return {'format':'agent-crash-lab/token-task-v1','profile':'near-nep141-sdk-receipts/v1','authority':{'kind':'reconstructed','note':'Original source-informed experiment reference, not an original customer authorization or signed policy.'},'evidence_sha256':sha256(pack(evidence)).hexdigest(),'network':evidence['network'],'token_contract':token,'payer':payer,'closed_horizon':True,'horizon_note':'Finite supplied experiment only; no assertion about outside/future transactions.','intents':[{'id':'A','recipient':payee,'max_gross':max_gross,'min_settled':min_settled,'max_burn':max_burn}],'bindings':[{'id':'payment-1','intent':'A','tx_hash':tx,'receipt_id':p}]}
+def main():
+ ref=json.loads((H/'REFERENCE.json').read_bytes());corpus=H/'corpus';corpus.mkdir(exist_ok=False);rows=[]
+ for c in ref['constructedCases']:
+  evidence,payer,payee,token,tx,p=fixture(c);policy=task(evidence,payer,payee,token,tx,p,c['settled'],c['amount']);expected={k:c[k] for k in ['amount','refund','burn','used','cost','settled']}
+  folder=corpus/c['id'];folder.mkdir();(folder/'evidence.json').write_bytes(pack(evidence));(folder/'task.json').write_bytes(pack(policy));rows.append({'id':c['id'],'kind':'synthetic','expected':expected,'expectedGate':1 if int(c['burn']) else 0})
+ for c in ref['observedCases']:
+  cap=H/c['capture'];response=json.loads(cap.read_bytes());request=json.loads((cap.parent/'request.json').read_bytes());result=response['result'];payer=result['transaction']['signer_id'];token=result['transaction']['receiver_id'];p=result['transaction_outcome']['outcome']['status']['SuccessReceiptId'];args=json.loads(base64.b64decode(result['transaction']['actions'][0]['FunctionCall']['args']));payee=args['receiver_id'];tx=result['transaction']['hash']
+  evidence={'format':'agent-crash-lab/token-execution-v1','network':'testnet','source':{'kind':'public-archival-rpc','note':'Own bounded read-only query of a previously published transaction; node trusted, no consensus proof or new execution.','captureResponseSha256':sha256(cap.read_bytes()).hexdigest()},'observations':[{'id':c['id'],'request':request,'response':response}]};policy=task(evidence,payer,payee,token,tx,p,c['settled'],c['amount']);folder=corpus/c['id'];folder.mkdir();(folder/'evidence.json').write_bytes(pack(evidence));(folder/'task.json').write_bytes(pack(policy));rows.append({'id':c['id'],'kind':'observed-historical','expected':{k:c[k] for k in ['amount','refund','burn','used','cost','settled']},'expectedGate':0})
+ index={'atUtc':datetime.now(timezone.utc).isoformat(),'referenceSha256':sha256((H/'REFERENCE.json').read_bytes()).hexdigest(),'cases':rows,'files':{p.relative_to(H).as_posix():sha256(p.read_bytes()).hexdigest() for p in sorted(corpus.rglob('*.json'))},'extractorImplemented':False};(H/'CORPUS.json').write_text(json.dumps(index,indent=2)+'\n','utf-8');print(json.dumps({'corpusCases':len(rows),'beforeExtractor':True}))
+if __name__=='__main__':main()

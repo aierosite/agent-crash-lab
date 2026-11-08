@@ -1,0 +1,13 @@
+{
+  "atUtc": "2026-11-08T05:36:37.454027+00:00",
+  "copiedFiles": 2,
+  "externalWorkingDirectory": "D:/Upwork",
+  "cliExit": 0,
+  "reportedGate": 1,
+  "payerCost": "100",
+  "resolverReportedUsed": "100",
+  "settledAllocation": "20",
+  "burnedRefund": "80",
+  "exactSourceFingerprintsMatched": true,
+  "meaning": "Two-file inspector copy runs from a different directory; CLI exit0 means assessment completed, not gate0 or payment authorization."
+}

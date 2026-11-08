@@ -1,0 +1,31 @@
+{
+  "sourceInformedPostResult": true,
+  "independentBlindEvaluation": false,
+  "meaning": "Constructed exact large-integer/conflict, prototype-like ID/text and empty-assignment controls. No chain, SDK or model execution.",
+  "cases": [
+    {
+      "id": "large-nonce",
+      "bundle": "verification/token-policy/interface-controls/large-nonce.json",
+      "sha256": "d87b39700748fc60ae615cfea905a354593b484ef850e59aed80e1d7e548fe09",
+      "expectedGate": 0
+    },
+    {
+      "id": "conflicting-large-nonce",
+      "bundle": "verification/token-policy/interface-controls/conflicting-large-nonce.json",
+      "sha256": "fc27e6d949a426f069f706c9588b837d6940fbb1953b65526358bb8a71c75254",
+      "expectedGate": 2
+    },
+    {
+      "id": "prototype-id-text",
+      "bundle": "verification/token-policy/interface-controls/prototype-id-text.json",
+      "sha256": "1ae3ced2843ce23570e9efdf67538b0298ab71e1f161ffe2e2d13ea12bcc8504",
+      "expectedGate": 0
+    },
+    {
+      "id": "no-payment-assignments",
+      "bundle": "verification/token-policy/interface-controls/no-payment-assignments.json",
+      "sha256": "2e85be42290cad54af1cf4a105cc3e6dbea259f59f4c7c9e666be40540a77ddc",
+      "expectedGate": 2
+    }
+  ]
+}

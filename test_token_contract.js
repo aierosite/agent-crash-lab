@@ -1,7 +1,7 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),{spawnSync}=require('node:child_process');
 const root=__dirname,source=fs.readFileSync(root+'/web/token.js','utf8');
-const context=vm.createContext({});vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);const validate=context.validateTokenReport;
+const context=vm.createContext({});vm.runInContext(fs.readFileSync(__dirname+'/web/token-events.js','utf8'),context);vm.runInContext(source.slice(0,source.indexOf('// All imported text')),context);const validate=context.validateTokenReport;
 const script=`import runpy,pathlib,json,copy,hashlib
 r=pathlib.Path.cwd();a=runpy.run_path(str(r/'token_review.py'));out=[]
 for p in sorted((r/'verification/token-study').glob('*.json')):

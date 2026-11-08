@@ -1,0 +1,76 @@
+{
+  "atUtc": "2026-11-08T05:47:55.162902+00:00",
+  "sourceSha256": "aeebcba5c0dd11c44c61beaed70646d4f617eebe8a75606b451381cec291f409",
+  "checkSourceSha256": "5adfcbf8734c7cb05d57ff1144074386b836b347fbfd34d32fc2082025640c08",
+  "sourceInformedPostResult": true,
+  "total": 6,
+  "matched": 2,
+  "cases": [
+    {
+      "id": "missing-causal-descendant-100",
+      "matched": false,
+      "expectedGate": 2,
+      "actualGate": 2,
+      "expectedSettlement": "unknown",
+      "actualSettlement": "known",
+      "expectedMinimum": "0",
+      "actualMinimum": "100",
+      "error": null
+    },
+    {
+      "id": "missing-causal-descendant-50",
+      "matched": false,
+      "expectedGate": 1,
+      "actualGate": 1,
+      "expectedSettlement": "unknown",
+      "actualSettlement": "known",
+      "expectedMinimum": "0",
+      "actualMinimum": "100",
+      "error": null
+    },
+    {
+      "id": "uninterpretable-causal-token-log",
+      "matched": false,
+      "expectedGate": 2,
+      "actualGate": 2,
+      "expectedSettlement": "unknown",
+      "actualSettlement": "known",
+      "expectedMinimum": "0",
+      "actualMinimum": "100",
+      "error": null
+    },
+    {
+      "id": "unrelated-missing-sibling-preserves-known-payment",
+      "matched": true,
+      "expectedGate": 2,
+      "actualGate": 2,
+      "expectedSettlement": "known",
+      "actualSettlement": "known",
+      "expectedMinimum": "100",
+      "actualMinimum": "100",
+      "error": null
+    },
+    {
+      "id": "hook-returned-promise-supported",
+      "matched": true,
+      "expectedGate": 0,
+      "actualGate": 0,
+      "expectedSettlement": "known",
+      "actualSettlement": "known",
+      "expectedMinimum": "100",
+      "actualMinimum": "100",
+      "error": null
+    },
+    {
+      "id": "transaction-root-is-not-payment-receipt",
+      "matched": false,
+      "expectedGate": null,
+      "actualGate": 2,
+      "expectedSettlement": null,
+      "actualSettlement": "unknown",
+      "expectedMinimum": null,
+      "actualMinimum": "0",
+      "error": null
+    }
+  ]
+}

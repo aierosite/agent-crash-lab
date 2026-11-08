@@ -1,0 +1,220 @@
+{
+  "format": "agent-crash-lab/token-settlement-reference-v1",
+  "constructedCases": [
+    {
+      "id": "used-all",
+      "amount": "100",
+      "hook": "\"0\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "0",
+      "burn": "0",
+      "used": "100",
+      "cost": "100",
+      "settled": "100"
+    },
+    {
+      "id": "partial-refund",
+      "amount": "100",
+      "hook": "\"30\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "30",
+      "burn": "0",
+      "used": "70",
+      "cost": "70",
+      "settled": "70"
+    },
+    {
+      "id": "unused-capped",
+      "amount": "100",
+      "hook": "\"200\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "100",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "balance-limited",
+      "amount": "100",
+      "hook": "\"80\"",
+      "balance": "20",
+      "senderExists": true,
+      "refund": "20",
+      "burn": "0",
+      "used": "80",
+      "cost": "80",
+      "settled": "80"
+    },
+    {
+      "id": "receiver-spent-all",
+      "amount": "100",
+      "hook": "\"100\"",
+      "balance": "0",
+      "senderExists": true,
+      "refund": "0",
+      "burn": "0",
+      "used": "100",
+      "cost": "100",
+      "settled": "100"
+    },
+    {
+      "id": "sender-deleted-burn",
+      "amount": "100",
+      "hook": "\"80\"",
+      "balance": "100",
+      "senderExists": false,
+      "refund": "0",
+      "burn": "80",
+      "used": "100",
+      "cost": "100",
+      "settled": "20"
+    },
+    {
+      "id": "sender-deleted-balance-limited",
+      "amount": "100",
+      "hook": "\"80\"",
+      "balance": "20",
+      "senderExists": false,
+      "refund": "0",
+      "burn": "20",
+      "used": "100",
+      "cost": "100",
+      "settled": "80"
+    },
+    {
+      "id": "sender-deleted-used-all",
+      "amount": "100",
+      "hook": "\"0\"",
+      "balance": "100",
+      "senderExists": false,
+      "refund": "0",
+      "burn": "0",
+      "used": "100",
+      "cost": "100",
+      "settled": "100"
+    },
+    {
+      "id": "hook-failed",
+      "amount": "100",
+      "hook": null,
+      "balance": "100",
+      "senderExists": true,
+      "refund": "100",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "hook-invalid-json",
+      "amount": "100",
+      "hook": "not JSON",
+      "balance": "50",
+      "senderExists": true,
+      "refund": "50",
+      "burn": "0",
+      "used": "50",
+      "cost": "50",
+      "settled": "50"
+    },
+    {
+      "id": "hook-oversized-valid-u128",
+      "amount": "100",
+      "hook": "\"000000000000000000000000000000000000000000000000001\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "100",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "hook-plus-leading-zero",
+      "amount": "100",
+      "hook": "\"+030\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "30",
+      "burn": "0",
+      "used": "70",
+      "cost": "70",
+      "settled": "70"
+    },
+    {
+      "id": "hook-number-not-u128-string",
+      "amount": "100",
+      "hook": "30",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "100",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "hook-negative-string",
+      "amount": "100",
+      "hook": "\"-1\"",
+      "balance": "100",
+      "senderExists": true,
+      "refund": "100",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "tiny-burn",
+      "amount": "1",
+      "hook": "\"1\"",
+      "balance": "1",
+      "senderExists": false,
+      "refund": "0",
+      "burn": "1",
+      "used": "1",
+      "cost": "1",
+      "settled": "0"
+    },
+    {
+      "id": "u128-max-refund",
+      "amount": "340282366920938463463374607431768211455",
+      "hook": "\"340282366920938463463374607431768211455\"",
+      "balance": "340282366920938463463374607431768211455",
+      "senderExists": true,
+      "refund": "340282366920938463463374607431768211455",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    }
+  ],
+  "observedCases": [
+    {
+      "id": "refunded-deposit",
+      "capture": "captures/01-refunded-deposit/response.json",
+      "amount": "10000000",
+      "refund": "10000000",
+      "burn": "0",
+      "used": "0",
+      "cost": "0",
+      "settled": "0"
+    },
+    {
+      "id": "accepted-deposit",
+      "capture": "captures/02-accepted-deposit/response.json",
+      "amount": "1000",
+      "refund": "0",
+      "burn": "0",
+      "used": "1000",
+      "cost": "1000",
+      "settled": "1000"
+    }
+  ],
+  "limits": "Literal source-informed arithmetic reference; receiver balance/sender existence are construction premises, not independently decoded network state. Settled allocation is not retained balance or useful work."
+}

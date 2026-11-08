@@ -1,0 +1,41 @@
+"""Source-informed integration checks; registered after prototype results, not a holdout."""
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import copy,json,runpy,sys
+H=Path(__file__).resolve().parent
+STUDY=H.parent/'token-policy-study-v0.12.1'
+C=runpy.run_path(str(STUDY/'check_controls.py'))
+base,parts,fc,reseal=[C[k] for k in ['base','parts','fc','reseal']]
+B=C['builder'];hid=B['hashid']
+
+def cases():
+ rows=[]
+ def add(cid,t,e,gate,status,settled,error=False):rows.append(dict(id=cid,task=t,evidence=e,gate=gate,status=status,settled=settled,error=error))
+ for cap in ['100','50']:
+  t,e=base();r,p,h,_=parts(e);next(o for o in r['receipts_outcome'] if o['id']==h['receipt_id'])['outcome']['receipt_ids'].append(hid('missing-hook-child'));t['intents'][0]['max_gross']=cap
+  add('missing-causal-descendant-'+cap,t,e,2 if cap=='100' else 1,'unknown','0')
+ t,e=base();r,p,h,_=parts(e);key=hid('unknown-token-log');body=copy.deepcopy(p);body.update(receipt_id=key,predecessor_id='payee.testnet');r['receipts'].append(body)
+ outcome=copy.deepcopy(next(o for o in r['receipts_outcome'] if o['id']==p['receipt_id']));outcome.update(id=key);outcome['outcome'].update(receipt_ids=[],status={'SuccessValue':''},logs=['EVENT_JSON:'+json.dumps({'standard':'nep141','version':'9.0.0','event':'ft_transfer','data':[]})]);r['receipts_outcome'].append(outcome);next(o for o in r['receipts_outcome'] if o['id']==h['receipt_id'])['outcome']['receipt_ids'].append(key)
+ add('uninterpretable-causal-token-log',t,e,2,'unknown','0')
+ t,e=base();r,p,h,_=parts(e);wid=hid('wrapper');wrapper=copy.deepcopy(p);wrapper.update(receipt_id=wid,predecessor_id='agent.testnet',receiver_id='payer.testnet');wrapper['receipt']['Action']['actions']=[{'FunctionCall':{'method_name':'execute','args':B['enc']({}),'deposit':'0','gas':30000000000000}}]
+ for b in r['receipts']:b['receipt']['Action']['signer_id']='agent.testnet'
+ wrapper['receipt']['Action']['signer_id']='agent.testnet';r['receipts'].append(wrapper);r['transaction'].update(signer_id='agent.testnet',receiver_id='payer.testnet',actions=copy.deepcopy(wrapper['receipt']['Action']['actions']));e['observations'][0]['request']['params']['sender_account_id']='agent.testnet';r['transaction_outcome']['outcome'].update(executor_id='agent.testnet',receipt_ids=[wid],status={'SuccessReceiptId':wid});outcome=copy.deepcopy(r['receipts_outcome'][0]);outcome.update(id=wid);outcome['outcome'].update(executor_id='payer.testnet',receipt_ids=[p['receipt_id'],hid('missing-unrelated-child')],status={'SuccessValue':B['enc']('100')},logs=[]);r['receipts_outcome'].append(outcome)
+ add('unrelated-missing-sibling-preserves-known-payment',t,e,2,'known','100')
+ t,e=base();r,p,h,rb=parts(e);key=hid('hook-returned-promise');body=copy.deepcopy(h);body.update(receipt_id=key,predecessor_id='payee.testnet',receiver_id='worker.testnet');fc(body).update(method_name='get_unused',args=B['enc']({}));r['receipts'].append(body);ho=next(o for o in r['receipts_outcome'] if o['id']==h['receipt_id']);outcome=copy.deepcopy(ho);outcome.update(id=key);outcome['outcome'].update(executor_id='worker.testnet');r['receipts_outcome'].append(outcome);ho['outcome'].update(receipt_ids=[key],status={'SuccessReceiptId':key})
+ add('hook-returned-promise-supported',t,e,0,'known','100')
+ t,e=base();t['bindings'][0]['receipt_id']=t['bindings'][0]['tx_hash'];add('transaction-root-is-not-payment-receipt',t,e,None,None,None,True)
+ return rows
+
+def evaluate(module,output):
+ api=runpy.run_path(str(module));output.mkdir(exist_ok=False);rows=[]
+ for c in cases():
+  task,evidence=reseal(c['task'],c['evidence']);report=error=None
+  try:report=api['assess'](task,evidence)
+  except (ValueError,KeyError,TypeError) as ex:error={'type':type(ex).__name__,'message':str(ex)}
+  match=error is not None if c['error'] else error is None and report['gate']==c['gate'] and report['payments'][0]['settlement_status']==c['status'] and report['intents'][0]['settled_known_min']==c['settled']
+  row=dict(id=c['id'],matched=match,expectedGate=c['gate'],actualGate=report.get('gate') if report else None,expectedSettlement=c['status'],actualSettlement=report['payments'][0]['settlement_status'] if report else None,expectedMinimum=c['settled'],actualMinimum=report['intents'][0]['settled_known_min'] if report else None,error=error);rows.append(row)
+  (output/(c['id']+'.json')).write_text(json.dumps(dict(check=row,task=json.loads(task),evidence=c['evidence'],report=report),indent=2)+'\n','utf-8')
+ summary=dict(atUtc=datetime.now(timezone.utc).isoformat(),sourceSha256=sha256(module.read_bytes()).hexdigest(),checkSourceSha256=sha256(Path(__file__).read_bytes()).hexdigest(),sourceInformedPostResult=True,total=len(rows),matched=sum(r['matched'] for r in rows),cases=rows);(output/'results.json').write_text(json.dumps(summary,indent=2)+'\n','utf-8');print(json.dumps(summary));return summary
+
+if __name__=='__main__':evaluate(Path(sys.argv[1]),Path(sys.argv[2]))

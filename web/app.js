@@ -14,7 +14,7 @@ const evidence=$('evidence-list'),raw=$('raw'),find=$('raw-find'),match=$('raw-m
 let catalog,selected,last,cache,bundle,facts,receiptRows,merchants,busy=false,retryInspection=false;
 const params=new URLSearchParams(location.search);
 const browserMode=params.get('browser')==='1';
-if(browserMode)document.querySelector('a[href="token.html"]').href='token.html?browser=1';
+if(browserMode)for(const link of document.querySelectorAll('a[href="token.html"],a[href="policy.html"]'))link.href+='?browser=1';
 let worker,pending,requestId=0;
 let labCases=[],labCurrent=null,labReduction=null,recoveryPolicies=[];
 function resetWorker(message){
@@ -26,7 +26,7 @@ function resetWorker(message){
 function browserRequest(path,body){
  if(pending)throw Error('Inspection running');
  if(!worker){
-  worker=new Worker('browser-worker.js?bundle=lab-v10');
+  worker=new Worker('browser-worker.js?bundle=lab-v11');
   worker.onmessage=({data:{id,progress,error,result}})=>{
    const job=pending;
    if(!job||id!==job.id)return;

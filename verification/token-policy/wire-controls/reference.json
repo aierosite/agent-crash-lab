@@ -1,0 +1,32 @@
+{
+  "sourceInformedPostResult": true,
+  "beforeWireFix": true,
+  "afterInitialIdFix": true,
+  "sourceSha256": "c41c28d2124e28681d15c73cb4b0f44baf95cb8ded59abd637ad6c8bd866b451",
+  "guardSha256": "9caa8a68e07c6d5676385fb4bcb88da8a1d1fb799cb934c6789ef5cfc8a4ad3e",
+  "primaryReference": "https://www.jsonrpc.org/specification#response_object",
+  "meaning": "A response contains result or error, never both; an error needs integer code and string message. Valid transient errors remain covered by earlier positive controls. No new RPC request.",
+  "cases": [
+    {
+      "id": "result-and-error",
+      "bundle": "verification/token-policy/wire-controls/result-and-error.json",
+      "sha256": "7399fdd5a53a1bafe4fc8a0b9ce5a40b77b03293b5dde25696006705296075b5",
+      "originalGate": 0,
+      "expectedGate": 2
+    },
+    {
+      "id": "null-error-before-final",
+      "bundle": "verification/token-policy/wire-controls/null-error-before-final.json",
+      "sha256": "105ff6bb998366bebd3a77cdfe9cc55716e3c7f3ae4b57119932bd73520ae558",
+      "originalGate": 0,
+      "expectedGate": 2
+    },
+    {
+      "id": "boolean-error-code",
+      "bundle": "verification/token-policy/wire-controls/boolean-error-code.json",
+      "sha256": "a6d345be0d563c6f0ec14d5134e6d2ada205adbdfec2da96fbd7c21bfbb660a7",
+      "originalGate": 0,
+      "expectedGate": 2
+    }
+  ]
+}

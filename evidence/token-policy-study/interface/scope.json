@@ -1,0 +1,7 @@
+{
+  "meaning": "Actual UI checks from this development step. Baseline source amplification measured only for64 events;8192-event input tested only after dedup/lazy fix. Counts are correlated engineering controls, not an independent accuracy estimate. Narrow-frame check is Chromium390x844CSS, not mobileSafari or native-device certification.",
+  "sourceBeforeSha256": "5415e9813d4f70768af8e68f249f2bcfec12a7701cd05a63e9ce45efbf089ca9",
+  "independentBlindEvaluation": false,
+  "newTransactions": 0,
+  "newModelCalls": 0
+}

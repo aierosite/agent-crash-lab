@@ -1,0 +1,286 @@
+{
+  "atUtc": "2026-11-08T05:34:29.929923+00:00",
+  "currentSourceSha256": "049b63de1cf3f451fa59b0a8d694b0a7cff538f3dda04fa805425e1d77a4aff0",
+  "plannedOriginalFamilies": 5,
+  "additionalEngineeringAblations": 3,
+  "mutantsCaught": 8,
+  "mutants": [
+    {
+      "id": "root-success-shortcut",
+      "sourceSha256": "69b10894186ecc0d276c3ee35091db2f884768fb005ec64b47bc650cd6c629c3",
+      "caughtBy": [
+        {
+          "kind": "registered-reference",
+          "id": "partial-refund"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "unused-capped"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "balance-limited"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-burn"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-balance-limited"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-failed"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-invalid-json"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-oversized-valid-u128"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-plus-leading-zero"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-number-not-u128-string"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-negative-string"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "tiny-burn"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "u128-max-refund"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "refunded-deposit"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "missing-resolver-body"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "missing-hook-body"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "data-id-mismatch"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "duplicate-data-producer"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "resolver-wrong-sender_id"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "resolver-wrong-receiver_id"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "resolver-wrong-amount"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "known-excess-missing-callback"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "mixed-async-batch-unknown"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "reverse-outside-resolver-unknown"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "reported-used-is-not-delivered"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "gross-event-is-not-settled"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "observed-root-success-full-refund-underpays"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "gross-as-settled",
+      "sourceSha256": "fc4f5395b12647541d5d8bb7527cca7a60006c3e43a0ce5a374e46e262eb9ed7",
+      "caughtBy": [
+        {
+          "kind": "registered-reference",
+          "id": "partial-refund"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "unused-capped"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "balance-limited"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-burn"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-balance-limited"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-failed"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-invalid-json"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-oversized-valid-u128"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-plus-leading-zero"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-number-not-u128-string"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "hook-negative-string"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "tiny-burn"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "u128-max-refund"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "refunded-deposit"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "reported-used-is-not-delivered"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "gross-event-is-not-settled"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "observed-root-success-full-refund-underpays"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "reported-used-as-settled",
+      "sourceSha256": "b21c657103324152f1d7826f89a98a95a386fc3be359d0be623a2457640bcc83",
+      "caughtBy": [
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-burn"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "sender-deleted-balance-limited"
+        },
+        {
+          "kind": "registered-reference",
+          "id": "tiny-burn"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "reported-used-is-not-delivered"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "incoming-offsets-gross",
+      "sourceSha256": "8a233735d04181fa3027e1d9947e3575df436e5dda4723a3d673027b99b55b29",
+      "caughtBy": [
+        {
+          "kind": "planned-boundary",
+          "id": "unrelated-topup-cannot-offset-gross"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "amount-only-callback",
+      "sourceSha256": "ee74bf478fb84692ec39db8bbc8fd07ea4ccd29a31f56d9d651b347983443331",
+      "caughtBy": [
+        {
+          "kind": "planned-boundary",
+          "id": "data-id-mismatch"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "duplicate-physical-effects",
+      "sourceSha256": "02442071f1f9be2c0c7d10075cbdd5e238816da28b2dd3d232b5870e755ffe9d",
+      "caughtBy": [
+        {
+          "kind": "planned-boundary",
+          "id": "identical-observation-idempotence"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "compatible-final-partial-union"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "select-first-final-only",
+      "sourceSha256": "c713cb427cf827a83026313eaf34a13a3ffd78d78a81e8e2b184753b9ca7996f",
+      "caughtBy": [
+        {
+          "kind": "planned-boundary",
+          "id": "compatible-final-partial-union"
+        },
+        {
+          "kind": "planned-boundary",
+          "id": "conflicting-final-outcomes"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    },
+    {
+      "id": "collapse-independent-intents",
+      "sourceSha256": "d72bb4d14cfeed1e985e23bd19c649cb04133b7a0484e3244ac2d9ed0dc65960",
+      "caughtBy": [
+        {
+          "kind": "planned-boundary",
+          "id": "independent-equal-price-intents"
+        }
+      ],
+      "meaning": "Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection."
+    }
+  ],
+  "sourceInformedNotBlind": true
+}

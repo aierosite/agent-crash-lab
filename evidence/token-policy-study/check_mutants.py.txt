@@ -1,0 +1,39 @@
+"""Source-informed semantic ablations; hashes alone never count as detection."""
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import json,runpy
+H=Path(__file__).resolve().parent
+source=(H/'token_policy_lab.py').read_text('utf-8');controls=runpy.run_path(str(H/'check_controls.py'));pack=controls['pack'];corpus=json.loads((H/'CORPUS.json').read_bytes())
+plans={
+ 'root-success-shortcut':[("  need(tag in ['SuccessValue','SuccessReceiptId'],'Payment receipt is pending')","  need(tag in ['SuccessValue','SuccessReceiptId'],'Payment receipt is pending')\n  if 'SuccessValue' in g.top_status:\n   n=out['amount'];out.update(settlement_status='known',refund='0',burn='0',used=n,cost=n,settled=n);return out")],
+ 'gross-as-settled':[("settled=str(amount-refund-burn)","settled=str(amount)")],
+ 'reported-used-as-settled':[("settled=str(amount-refund-burn)","settled=str(used)")],
+ 'incoming-offsets-gross':[("gross=sum(int(e['amount']) for e in outgoing)","gross=max(0,sum(int(e['amount']) for e in outgoing)-sum(int(e['amount']) for e in all_events if e['kind']=='ft_transfer' and e['new_owner_id']==payer and e['old_owner_id']!=payer))")],
+ 'amount-only-callback':[("if any(x.get('data_id')==data_id and x.get('receiver_id')==token for x in candidate.get('Action',{}).get('output_data_receivers',[])):hooks.append(child)","if candidate.get('receiver_id')==payee:hooks.append(child)"),("need(key in returned_path and edge.get('receiver_id')==token,'Conflicting/foreign data-ID producer');producers.append(key)","producers.append(key)"),("need(hook in producers and len(producers)==len(set(producers)),'Duplicate data-ID production')","pass # callback provenance deliberately omitted")],
+ 'duplicate-physical-effects':[("self.events.append(e)","self.events.extend([e]*len(self.node_refs[e['receipt_id']]))")],
+ 'select-first-final-only':[("primitive['outcomes'](result);self.final_observations+=1","primitive['outcomes'](result);self.final_observations+=1\n   if self.final_observations>1:return")],
+ 'collapse-independent-intents':[("owned=[e for e in all_events if assigned.get((e['transaction_id'],e['receipt_id']))==iid]","owned=all_events")]
+}
+def evaluate(api):
+ failures=[]
+ for case in corpus['cases']:
+  folder=H/'corpus'/case['id'];r=api['assess']((folder/'task.json').read_bytes(),(folder/'evidence.json').read_bytes());p=r['payments'][0];projection={k:p.get(k) for k in ['amount','refund','burn','used','cost','settled']}
+  if projection!=case['expected'] or r['gate']!=case['expectedGate']:failures.append({'kind':'registered-reference','id':case['id']})
+ for case in controls['make_controls']():
+  tr,er=controls['reseal'](case['task'],case['evidence']);r=None;error=False
+  try:r=api['assess'](tr,er)
+  except (ValueError,KeyError,TypeError):error=True
+  good=error if case['expectsError'] else not error and r['gate']==case['expectedGate'] and (case['expectedSettlement'] is None or all(p['settlement_status']==case['expectedSettlement'] for p in r['payments']))
+  if not good:failures.append({'kind':'planned-boundary','id':case['id']})
+ return failures
+def main():
+ baseline=runpy.run_path(str(H/'token_policy_lab.py'));assert not evaluate(baseline),'Current baseline does not satisfy its declared reference'
+ root=H/'mutants';root.mkdir(exist_ok=False);rows=[]
+ for name,changes in plans.items():
+  changed=source
+  for old,new in changes:assert changed.count(old)==1,(name,old);changed=changed.replace(old,new)
+  folder=root/name;folder.mkdir();p=folder/'token_policy_lab.py';p.write_text(changed,'utf-8');(folder/'token_primitives.py.txt').write_bytes((H/'token_primitives.py.txt').read_bytes());api=runpy.run_path(str(p));failures=evaluate(api);assert failures,name
+  rows.append({'id':name,'sourceSha256':sha256(p.read_bytes()).hexdigest(),'caughtBy':failures,'meaning':'Numeric/categorical reference or expected policy result disagrees; a changed source hash is not counted as detection.'})
+ out={'atUtc':datetime.now(timezone.utc).isoformat(),'currentSourceSha256':sha256((H/'token_policy_lab.py').read_bytes()).hexdigest(),'plannedOriginalFamilies':5,'additionalEngineeringAblations':3,'mutantsCaught':len(rows),'mutants':rows,'sourceInformedNotBlind':True};(H/'MUTANTS.json').write_text(json.dumps(out,indent=2)+'\n','utf-8');print(json.dumps({'semanticMutantsCaught':len(rows),'failureFamilies':{r['id']:len(r['caughtBy']) for r in rows}}))
+if __name__=='__main__':main()

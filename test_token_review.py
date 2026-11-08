@@ -34,6 +34,28 @@ def mutations():
   rows=registered_checks(ns['review']);out.append({'id':name,'sha256':sha256(mutant.encode()).hexdigest(),'caughtBy':[r['case'] for r in rows if not r['matches']]})
  return out
 class TokenReview(unittest.TestCase):
+ def test_portable_post_result_parser_and_scope_expectations(self):
+  # Preserve the prior 12 literal expectations. These are reconstructed,
+  # source-informed post-result probes, not original raw inputs or a holdout.
+  plan=json.loads((ROOT/'verification/event-study/post-result-parser-semantics.json').read_bytes());matched=[]
+  for case in plan['cases']:
+   d=json.loads((ROOT/'verification/event-study/inputs/sdk-1-bob.json').read_bytes());d['id']='post-result-'+case['label'];d['scope']['meaning']='Reconstructed post-result parser/scope probe; synthetic and source-informed, not a chain observation or blind evaluation.';row=d['steps'][0]['transactions'][0]['result']['receipts_outcome'][0];event=json.loads(row['outcome']['logs'][0][11:]);label=case['label'];text=pack(event).decode()
+   if label=='duplicate-owner':text=text.replace('"owner_id":"bob"','"owner_id":"bob","owner_id":"bob"',1)
+   elif label=='escaped-duplicate':text=text.replace('"owner_id":"bob"','"owner_id":"bob","\\u006fwner_id":"bob"',1)
+   elif label=='float-metadata':text='{"metadata":0.5,'+text[1:]
+   elif label=='oversized-integer':text='{"metadata":'+('9'*4301)+','+text[1:]
+   elif label=='valid-big-integer':text='{"metadata":9007199254740993,'+text[1:]
+   elif label in ['valid-emoji-memo','surrogate-memo']:
+    event['data'][0]['memo']='\U0001f600' if label=='valid-emoji-memo' else '\ud800';text=pack(event).decode()
+   elif label=='scope':d['scope']['single_owner_whole_vault']=False
+   elif label=='identity':d['asset']['code_hash']='different-code'
+   elif label=='liability':d['steps'][0]['before']['liabilities']='9999'
+   elif label=='height':d['steps'][0]['before']['block_height']=d['steps'][0]['after']['block_height']
+   else:self.assertEqual(label,'complete')
+   row['outcome']['logs'][0]='EVENT_JSON:'+text
+   with self.subTest(case=label):self.assertEqual(review(pack(d))['conclusion'],case['expected'])
+   matched.append(label)
+  self.assertEqual(len(set(matched)),12)
  def episode(self,name,held,rights,events):
   d=fixture('ai-payment');d['id']='synthetic-'+name;d['source']['kind']='synthetic-control';d['scope']['meaning']='Constructed semantic control; changed protocol-shaped data, not a fresh chain observation.';s=d['steps'][-1];d['steps']=[s];s['operation']=name
   for i,side in enumerate(['before','after']):s[side].update(held=str(held[i]),credit=str(rights[i]),pending='0',reserved='0',liabilities=str(rights[i]))

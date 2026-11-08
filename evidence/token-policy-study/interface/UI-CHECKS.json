@@ -1,0 +1,316 @@
+{
+  "importsTotal": 77,
+  "importMatches": 77,
+  "localAndBrowserFullReportsMatch": true,
+  "examples": 9,
+  "importChecks": [
+    {
+      "id": "used-all",
+      "matches": true
+    },
+    {
+      "id": "partial-refund",
+      "matches": true
+    },
+    {
+      "id": "unused-capped",
+      "matches": true
+    },
+    {
+      "id": "balance-limited",
+      "matches": true
+    },
+    {
+      "id": "receiver-spent-all",
+      "matches": true
+    },
+    {
+      "id": "sender-deleted-burn",
+      "matches": true
+    },
+    {
+      "id": "sender-deleted-balance-limited",
+      "matches": true
+    },
+    {
+      "id": "sender-deleted-used-all",
+      "matches": true
+    },
+    {
+      "id": "hook-failed",
+      "matches": true
+    },
+    {
+      "id": "hook-invalid-json",
+      "matches": true
+    },
+    {
+      "id": "hook-oversized-valid-u128",
+      "matches": true
+    },
+    {
+      "id": "hook-plus-leading-zero",
+      "matches": true
+    },
+    {
+      "id": "hook-number-not-u128-string",
+      "matches": true
+    },
+    {
+      "id": "hook-negative-string",
+      "matches": true
+    },
+    {
+      "id": "tiny-burn",
+      "matches": true
+    },
+    {
+      "id": "u128-max-refund",
+      "matches": true
+    },
+    {
+      "id": "refunded-deposit",
+      "matches": true
+    },
+    {
+      "id": "accepted-deposit",
+      "matches": true
+    },
+    {
+      "id": "missing-resolver-body",
+      "matches": true
+    },
+    {
+      "id": "missing-hook-body",
+      "matches": true
+    },
+    {
+      "id": "data-id-mismatch",
+      "matches": true
+    },
+    {
+      "id": "duplicate-data-producer",
+      "matches": true
+    },
+    {
+      "id": "resolver-wrong-sender_id",
+      "matches": true
+    },
+    {
+      "id": "resolver-wrong-receiver_id",
+      "matches": true
+    },
+    {
+      "id": "resolver-wrong-amount",
+      "matches": true
+    },
+    {
+      "id": "forged-outcome-executor",
+      "matches": true
+    },
+    {
+      "id": "identical-observation-idempotence",
+      "matches": true
+    },
+    {
+      "id": "compatible-final-partial-union",
+      "matches": true
+    },
+    {
+      "id": "conflicting-final-outcomes",
+      "matches": true
+    },
+    {
+      "id": "known-excess-missing-callback",
+      "matches": true
+    },
+    {
+      "id": "allowed-split-payments",
+      "matches": true
+    },
+    {
+      "id": "independent-equal-price-intents",
+      "matches": true
+    },
+    {
+      "id": "repeated-payment-breaches-cap",
+      "matches": true
+    },
+    {
+      "id": "unrelated-topup-cannot-offset-gross",
+      "matches": true
+    },
+    {
+      "id": "legitimate-capital-not-a-loss",
+      "matches": true
+    },
+    {
+      "id": "atomic-plain-batch",
+      "matches": true
+    },
+    {
+      "id": "mixed-async-batch-unknown",
+      "matches": true
+    },
+    {
+      "id": "reverse-outside-resolver-unknown",
+      "matches": true
+    },
+    {
+      "id": "unrelated-same-pair-return-not-callback",
+      "matches": true
+    },
+    {
+      "id": "overlapping-owner-bindings-rejected",
+      "matches": true
+    },
+    {
+      "id": "explicitly-allowed-burn",
+      "matches": true
+    },
+    {
+      "id": "reported-used-is-not-delivered",
+      "matches": true
+    },
+    {
+      "id": "gross-event-is-not-settled",
+      "matches": true
+    },
+    {
+      "id": "observed-root-success-full-refund-underpays",
+      "matches": true
+    },
+    {
+      "id": "transient-rpc-error-before-final",
+      "matches": true
+    },
+    {
+      "id": "pending-before-compatible-final",
+      "matches": true
+    },
+    {
+      "id": "overlap-with-missing-descendant",
+      "matches": true
+    },
+    {
+      "id": "source-type-structured-rejection",
+      "matches": true
+    },
+    {
+      "id": "network-enum-rejection",
+      "matches": true
+    },
+    {
+      "id": "source-kind-cannot-claim-authentication",
+      "matches": true
+    },
+    {
+      "id": "binding-empty-id-rejection",
+      "matches": true
+    },
+    {
+      "id": "duplicate-missing-physical-binding",
+      "matches": true
+    },
+    {
+      "id": "independent-known-excess-survives-conflict",
+      "matches": true
+    },
+    {
+      "id": "missing-causal-descendant-100",
+      "matches": true
+    },
+    {
+      "id": "missing-causal-descendant-50",
+      "matches": true
+    },
+    {
+      "id": "uninterpretable-causal-token-log",
+      "matches": true
+    },
+    {
+      "id": "unrelated-missing-sibling-preserves-known-payment",
+      "matches": true
+    },
+    {
+      "id": "hook-returned-promise-supported",
+      "matches": true
+    },
+    {
+      "id": "transaction-root-is-not-payment-receipt",
+      "matches": true
+    },
+    {
+      "id": "response-list",
+      "matches": true
+    },
+    {
+      "id": "request-list",
+      "matches": true
+    },
+    {
+      "id": "params-null",
+      "matches": true
+    },
+    {
+      "id": "body-null",
+      "matches": true
+    },
+    {
+      "id": "receipt-null",
+      "matches": true
+    },
+    {
+      "id": "output-edge-null",
+      "matches": true
+    },
+    {
+      "id": "hook-actions-null",
+      "matches": true
+    },
+    {
+      "id": "action-null",
+      "matches": true
+    },
+    {
+      "id": "body-id-list",
+      "matches": true
+    },
+    {
+      "id": "malformed-final-does-not-merge-poisoned-effects",
+      "matches": true
+    },
+    {
+      "id": "hook-utf16",
+      "matches": true
+    },
+    {
+      "id": "hook-utf32",
+      "matches": true
+    },
+    {
+      "id": "hook-utf8-bom",
+      "matches": true
+    },
+    {
+      "id": "resolver-utf16",
+      "matches": true
+    },
+    {
+      "id": "invalid-json",
+      "matches": true
+    },
+    {
+      "id": "empty-bundle",
+      "matches": true
+    },
+    {
+      "id": "oversize",
+      "matches": true
+    },
+    {
+      "id": "duplicate-field",
+      "matches": true
+    }
+  ]
+}

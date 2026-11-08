@@ -1,0 +1,39 @@
+"""Post-result malformed-envelope controls, not an independent evaluation."""
+from pathlib import Path
+from datetime import datetime,timezone
+from hashlib import sha256
+import json,runpy,sys
+H=Path(__file__).resolve().parent;C=runpy.run_path(str(H.parent/'token-policy-study-v0.12.1/check_controls.py'))
+
+def cases():
+ rows=[]
+ def add(name,mutate):
+  t,e=C['base']();mutate(t,e);rows.append((name,t,e))
+ add('response-list',lambda t,e:e['observations'][0].update(response=[]))
+ add('request-list',lambda t,e:e['observations'][0].update(request=[]))
+ add('params-null',lambda t,e:e['observations'][0]['request'].update(params=None))
+ add('body-null',lambda t,e:C['result'](e)['receipts'].__setitem__(0,None))
+ add('receipt-null',lambda t,e:C['result'](e)['receipts'][0].update(receipt=None))
+ add('output-edge-null',lambda t,e:C['parts'](e)[2]['receipt']['Action']['output_data_receivers'].__setitem__(0,None))
+ add('hook-actions-null',lambda t,e:C['parts'](e)[2]['receipt']['Action'].update(actions=None))
+ add('action-null',lambda t,e:C['parts'](e)[2]['receipt']['Action']['actions'].__setitem__(0,None))
+ add('body-id-list',lambda t,e:C['parts'](e)[2].update(receipt_id=[]))
+ # A malformed FINAL observation must never contribute a financial fact. A
+ # complete valid observation before it remains, but the source error is shown.
+ def poison(t,e):
+  import copy
+  extra=copy.deepcopy(e['observations'][0]);r=extra['response']['result'];r['receipts_outcome'][0]['outcome']['logs']=[C['builder']['event']('ft_transfer','1000','payer.testnet','payee.testnet')];r['receipts']=[None];e['observations'].append(extra)
+ add('malformed-final-does-not-merge-poisoned-effects',poison)
+ return rows
+
+def evaluate(module,out):
+ api=runpy.run_path(str(module));out.mkdir(exist_ok=False);rows=[]
+ for cid,t,e in cases():
+  tr,er=C['reseal'](t,e);r=error=None
+  try:r=api['assess'](tr,er)
+  except Exception as ex:error={'type':type(ex).__name__,'message':str(ex),'structured':isinstance(ex,ValueError)}
+  good=bool(error and error['structured']) or r is not None and r['gate']==2 and (cid!='malformed-final-does-not-merge-poisoned-effects' or r['intents'][0]['gross_known']=='100')
+  row={'id':cid,'matched':good,'gate':r.get('gate') if r else None,'error':error};rows.append(row);(out/(cid+'.json')).write_text(json.dumps({'check':row,'task':json.loads(tr),'evidence':e,'report':r},indent=2)+'\n','utf-8')
+ summary={'atUtc':datetime.now(timezone.utc).isoformat(),'sourceSha256':sha256(module.read_bytes()).hexdigest(),'checkSourceSha256':sha256(Path(__file__).read_bytes()).hexdigest(),'sourceInformedPostResult':True,'total':len(rows),'matched':sum(r['matched'] for r in rows),'cases':rows};(out/'results.json').write_text(json.dumps(summary,indent=2)+'\n','utf-8');print(json.dumps(summary));return summary
+
+if __name__=='__main__':evaluate(Path(sys.argv[1]),Path(sys.argv[2]))

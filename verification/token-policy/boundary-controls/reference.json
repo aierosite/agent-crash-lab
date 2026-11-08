@@ -1,0 +1,74 @@
+{
+  "preparedAtUtc": "2026-11-08T06:57:23.274094+00:00",
+  "beforeFix": true,
+  "sourceInformedPostResult": true,
+  "independentBlindEvaluation": false,
+  "sourceSha256": "d22312838aa7652c943742b95641fcfc8ea661c2cf16e0567019c5cb90fa9cbd",
+  "guardSha256": "7c6b502c4f31c56751409829d405cb5987d7781735142c0cbba4280532a7c4e9",
+  "meaning": "Explicit null receipt fields are not omitted fields. RPC IDs require presence, supported scalar type and exact type equality. Counterfeit responses are original-source-derived constructions; the explicit-null ID is a positive control.",
+  "cases": [
+    {
+      "id": "null-input-ids",
+      "bundle": "verification/token-policy/boundary-controls/null-input-ids.json",
+      "sha256": "be2e17a782b46b5e237ba2e12749d8ea81b9c42e7afaa437bdfd7d7f2b656fed",
+      "originalGate": 2,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 0
+    },
+    {
+      "id": "null-output-edges",
+      "bundle": "verification/token-policy/boundary-controls/null-output-edges.json",
+      "sha256": "d1ca509c5ccd8305e5d259b8c49f1d92af152dd16d73684c32bd8dbc0b830198",
+      "originalGate": 2,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 0
+    },
+    {
+      "id": "null-receipt-list",
+      "bundle": "verification/token-policy/boundary-controls/null-receipt-list.json",
+      "sha256": "9d01f3731ee6281a4d9693286c7a3fe2e38ff931f3ad04a554d0edf5a889072a",
+      "originalGate": 2,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 1
+    },
+    {
+      "id": "bool-numeric-rpc-id",
+      "bundle": "verification/token-policy/boundary-controls/bool-numeric-rpc-id.json",
+      "sha256": "a8a6d425b338ee09dc4dcf1360dcfb8d1469ddff69c028a4d7d7cd2f8fb7a7ed",
+      "originalGate": 0,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 0
+    },
+    {
+      "id": "bool-rpc-id",
+      "bundle": "verification/token-policy/boundary-controls/bool-rpc-id.json",
+      "sha256": "37d4f44f9c1bf439f7ba9a1461d55b07e2b484fb4368660a77fe9919230bda16",
+      "originalGate": 0,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 0
+    },
+    {
+      "id": "missing-rpc-id",
+      "bundle": "verification/token-policy/boundary-controls/missing-rpc-id.json",
+      "sha256": "30568ea03f29d50e6dd92c107ba76db145a6e1d201fdb140717fddf1f79fa64e",
+      "originalGate": 0,
+      "expectedGate": 2,
+      "responseIsCounterfeit": true,
+      "responseGate": 0
+    },
+    {
+      "id": "explicit-null-rpc-id",
+      "bundle": "verification/token-policy/boundary-controls/explicit-null-rpc-id.json",
+      "sha256": "6c2eedef50e14b1db10f23fa6c75f2061136ec92e3e01022da05b187ea5e6372",
+      "originalGate": 0,
+      "expectedGate": 0,
+      "responseIsCounterfeit": false,
+      "responseGate": 0
+    }
+  ]
+}

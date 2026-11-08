@@ -1,0 +1,279 @@
+{
+  "atUtc": "2026-11-08T05:16:50.468231+00:00",
+  "referenceSha256": "62df8d488a90d664e1d6fa6485092f832629705d54b3937f2e01cb2fdc2525c7",
+  "cases": [
+    {
+      "id": "used-all",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "0",
+        "burn": "0",
+        "used": "100",
+        "cost": "100",
+        "settled": "100"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "partial-refund",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "30",
+        "burn": "0",
+        "used": "70",
+        "cost": "70",
+        "settled": "70"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "unused-capped",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "100",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "balance-limited",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "20",
+        "burn": "0",
+        "used": "80",
+        "cost": "80",
+        "settled": "80"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "receiver-spent-all",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "0",
+        "burn": "0",
+        "used": "100",
+        "cost": "100",
+        "settled": "100"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "sender-deleted-burn",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "0",
+        "burn": "80",
+        "used": "100",
+        "cost": "100",
+        "settled": "20"
+      },
+      "expectedGate": 1
+    },
+    {
+      "id": "sender-deleted-balance-limited",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "0",
+        "burn": "20",
+        "used": "100",
+        "cost": "100",
+        "settled": "80"
+      },
+      "expectedGate": 1
+    },
+    {
+      "id": "sender-deleted-used-all",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "0",
+        "burn": "0",
+        "used": "100",
+        "cost": "100",
+        "settled": "100"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-failed",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "100",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-invalid-json",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "50",
+        "burn": "0",
+        "used": "50",
+        "cost": "50",
+        "settled": "50"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-oversized-valid-u128",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "100",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-plus-leading-zero",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "30",
+        "burn": "0",
+        "used": "70",
+        "cost": "70",
+        "settled": "70"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-number-not-u128-string",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "100",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "hook-negative-string",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "100",
+        "refund": "100",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "tiny-burn",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "1",
+        "refund": "0",
+        "burn": "1",
+        "used": "1",
+        "cost": "1",
+        "settled": "0"
+      },
+      "expectedGate": 1
+    },
+    {
+      "id": "u128-max-refund",
+      "kind": "synthetic",
+      "expected": {
+        "amount": "340282366920938463463374607431768211455",
+        "refund": "340282366920938463463374607431768211455",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "refunded-deposit",
+      "kind": "observed-historical",
+      "expected": {
+        "amount": "10000000",
+        "refund": "10000000",
+        "burn": "0",
+        "used": "0",
+        "cost": "0",
+        "settled": "0"
+      },
+      "expectedGate": 0
+    },
+    {
+      "id": "accepted-deposit",
+      "kind": "observed-historical",
+      "expected": {
+        "amount": "1000",
+        "refund": "0",
+        "burn": "0",
+        "used": "1000",
+        "cost": "1000",
+        "settled": "1000"
+      },
+      "expectedGate": 0
+    }
+  ],
+  "files": {
+    "corpus/accepted-deposit/evidence.json": "fbca0fb2fefcc5b2d22a7461ed6bba10940d114aa03e3128929bf85647a3131d",
+    "corpus/accepted-deposit/task.json": "52995eb76272476228239b711644a883a1e2d9a36014533ab7afbdb0255d652d",
+    "corpus/balance-limited/evidence.json": "d9faeda5d2466be6af77daf43c7cbe2669bbd8da3a53a538fcce03d7c33a5f75",
+    "corpus/balance-limited/task.json": "0d7399de22f051e7d0e0a9f85d4c106bc985226da19eeb017dbf5ae7ebb72969",
+    "corpus/hook-failed/evidence.json": "66dbc3e22ac2d043108aca08ce6d364820a5aa991dc4ffa9b889495741fb570f",
+    "corpus/hook-failed/task.json": "06306056268ea517aaae4a864b37a63275586fc77c32ce25f5610b00a91865a1",
+    "corpus/hook-invalid-json/evidence.json": "5096ee2a6846504dbb0434c3a55550323a1a0df37c3a8988f73ffb3a457eec87",
+    "corpus/hook-invalid-json/task.json": "7021c691d8771bd5ad5d6d2a9898e4022ea5c5bb89f4749b410132294c572912",
+    "corpus/hook-negative-string/evidence.json": "9188eeb8150ac6aa0daba4fcfdb0bbd8898eb721093073961a0ee92640f049b8",
+    "corpus/hook-negative-string/task.json": "4ca70f3a98f28fc05dbd599571b1c1758b8c79e1fd0d768fa0967015dcd9dd8b",
+    "corpus/hook-number-not-u128-string/evidence.json": "f471e5b05158cf87b0f5f4d07a5a1da7d03caaf0db1e26eaf001d8fade9354a7",
+    "corpus/hook-number-not-u128-string/task.json": "d795659233b5f49a204fee8a3308ef49c0760105a9d93ab77413a9dbb1e97fc8",
+    "corpus/hook-oversized-valid-u128/evidence.json": "a0fdaab29ba845d8afe82dc9b13d0f26b57db65a0ba61c30300ee79b8034ab91",
+    "corpus/hook-oversized-valid-u128/task.json": "5522d9dcd9f618cd9fa770478f6a35ff640db84032b7aa3660dc3b5c1281fb35",
+    "corpus/hook-plus-leading-zero/evidence.json": "0559c6f4d269180eddfd2adaf566188ad5aa6072ec71b8b77013fd2350e81507",
+    "corpus/hook-plus-leading-zero/task.json": "935b63ad0ae105f07ad49a3620ffd22cc2917c6a5303a76390f98b78de75d774",
+    "corpus/partial-refund/evidence.json": "5a94f4c29f1ac8c8b5a3f15e0c491bc9b582c45ffe9803a2f603a62545449cce",
+    "corpus/partial-refund/task.json": "da7dc4345a0271ac429715ed71f761a17c98c9b38b12e6a978a87460ad2d3c72",
+    "corpus/receiver-spent-all/evidence.json": "0193f47fccfbc5461eecfd3d3b487fb3cda8626eb06f3d1617d44242a7e1bf59",
+    "corpus/receiver-spent-all/task.json": "c275f2d89e23ed5e54776ceae78e33dd7ea54cd85b5055d9387e8fc5701b7034",
+    "corpus/refunded-deposit/evidence.json": "8481c402e139e824f3d74935973222b3fb681fbb9c2c634aecd58a3507af8fa0",
+    "corpus/refunded-deposit/task.json": "8fd119f896962963f6295445fe4ba18ec0becdd2ce1235f0c8d8dbd21d0e6761",
+    "corpus/sender-deleted-balance-limited/evidence.json": "5289e77de3cf04806163632d39585769aa6e42f2cd42b81b7eca84944b431118",
+    "corpus/sender-deleted-balance-limited/task.json": "ff774a6bdebacf23442539bd37e1af09e0e80cd54913a2708b503d3cd383b5b3",
+    "corpus/sender-deleted-burn/evidence.json": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85",
+    "corpus/sender-deleted-burn/task.json": "0be083fbe91d659e68d77101056de33d1d66e77165f52692b142475ba4fc7a75",
+    "corpus/sender-deleted-used-all/evidence.json": "adda0c2807a4e7645a48594530a0302372a81b5da21e82fc547d3dd295655d5c",
+    "corpus/sender-deleted-used-all/task.json": "0040d00200c1b7d2ab7c0c7f0bc03e2ab25fbec45df853a16e800c3b455b9b6d",
+    "corpus/tiny-burn/evidence.json": "d8281d8d8c85221f55e82a5000f9bb39a10f7d5de55a156f4e87181a79aceed7",
+    "corpus/tiny-burn/task.json": "991ecfd1ecbc435480e7a97377cbb4a9d010287ce6bb104581de34d051806b43",
+    "corpus/u128-max-refund/evidence.json": "8a7eb2806ceee799ca6d1eb71088f15e844e33dfccf633c4b4dea9e83b8c8681",
+    "corpus/u128-max-refund/task.json": "dcdc4e702c04e0f0d132709ec409f674fde76db33e29c1680ebf496169663ff1",
+    "corpus/unused-capped/evidence.json": "9061014416ea4e6452323bad5387e10dc7e890ae631c2b66dc835d819368cd58",
+    "corpus/unused-capped/task.json": "4290735cd55797e99605b8ac1ac8cc0a9dfbec7eda123b1fb5ba33518b882678",
+    "corpus/used-all/evidence.json": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47",
+    "corpus/used-all/task.json": "86c636def24c104d5b9e2568a1ea5a8ef7c6cd78878a30c35ef2c96a6696c1ed"
+  },
+  "extractorImplemented": false
+}

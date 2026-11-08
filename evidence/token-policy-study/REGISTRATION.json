@@ -1,0 +1,50 @@
+{
+  "atUtc": "2026-11-08T05:14:45.331561+00:00",
+  "referenceSha256": "62df8d488a90d664e1d6fa6485092f832629705d54b3937f2e01cb2fdc2525c7",
+  "specSha256": "5573436f533a9a678d12c43fecfe19da2ba0f7e275167b17cfa11e47d9abb371",
+  "constructedCases": 16,
+  "observedHistoricalCases": 2,
+  "baseProductCommit": "b4afaff8ebd60de979e6b9e7bda748dced557485",
+  "newTransactions": 0,
+  "sourceInformed": true,
+  "blindOrIndependentGrading": false,
+  "extractorImplemented": false,
+  "captureFiles": {
+    "captures/01-refunded-deposit/observation.json": "8117813ce374a3ae3d2da3c90cccdab88985065c2716f039b47f9179a35a70c5",
+    "captures/01-refunded-deposit/request.json": "0fbdcf0cf896aba9ed0b771cadfa348d3ea11949640ccd50348c05dab3179bf7",
+    "captures/01-refunded-deposit/response.json": "9c1871529bcba72c10e6f7f2efb2bd69cff789b412e6493ff2130d20daa14d3c",
+    "captures/02-accepted-deposit/observation.json": "203f3048e130562070d50fdfd877b14398c6fd35c96712b57a1cb846e6c49500",
+    "captures/02-accepted-deposit/request.json": "0b2feb64fffbfd1fd0884940f758f690b5cb46e0dae81fb5e1d449c81ece1fd1",
+    "captures/02-accepted-deposit/response.json": "e07e19ad781fc1c42ad00eb401d9c26d7cfef4e8780280a912d5bc8395e89d2e"
+  },
+  "sourceFiles": {
+    "core_impl.rs.txt": "7f818d86401f3fbdb0575b0c4299c66f7bc98e649e46a5d7e5be68d6ecff721a",
+    "integers.rs.txt": "986ed74326bcb7496a50e51d7c8b199764affb6a3bf9efb8c6bfe342dcc0a138",
+    "LICENSE-MIT.txt": "6cebe29bfb696cda15f15ff96c5c0b57447d2b562310c703d99d008f511a8594"
+  },
+  "semanticMutantsPlanned": [
+    "Root success alone implies settlement.",
+    "Count gross event amount as settled after a refund.",
+    "Count resolver reported used as settled after a burned refund.",
+    "Subtract unrelated incoming transfer from gross authority use.",
+    "Correlate callbacks solely by equal amount/recipient instead of input/output data ID."
+  ],
+  "boundaryControlsPlanned": [
+    "Missing resolver body",
+    "Missing hook body",
+    "Mismatched callback data ID",
+    "Duplicate same data-ID producer",
+    "Mismatched resolver sender/receiver/amount",
+    "Forged outcome executor",
+    "Duplicate observation idempotence",
+    "Compatible FINAL partial observation union",
+    "Conflicting FINAL node identities",
+    "Known cap excess despite unrelated missing callback",
+    "Split plain payments allowed",
+    "Independent same-price intents allowed",
+    "Repeated settlement breaches cap",
+    "Same-amount unrelated top-up cannot offset gross",
+    "Atomic plain-transfer batch",
+    "Mixed async batch remains explicitly unknown"
+  ]
+}

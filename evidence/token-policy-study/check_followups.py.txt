@@ -1,0 +1,30 @@
+"""Post-baseline engineering controls, explicitly separate from the registered corpus."""
+from pathlib import Path
+from datetime import datetime,timezone
+from hashlib import sha256
+import argparse,copy,json,runpy
+H=Path(__file__).resolve().parent;c=runpy.run_path(str(H/'check_controls.py'));pack=c['pack']
+def cases():
+ out=[]
+ def add(cid,t,e,gate=None,error=False):out.append({'id':cid,'task':t,'evidence':e,'gate':gate,'error':error})
+ t,e=c['base']();failed=copy.deepcopy(e['observations'][0]);failed['response'].pop('result');failed['response']['error']={'code':-32000,'message':'Transaction not available yet'};e['observations'].insert(0,failed);add('transient-rpc-error-before-final',t,e,0)
+ t,e=c['base']();pending=copy.deepcopy(e['observations'][0]);pending['response']['result']['final_execution_status']='EXECUTED_OPTIMISTIC';e['observations'].insert(0,pending);add('pending-before-compatible-final',t,e,0)
+ t,e=c['base']();r,p,h,rb=c['parts'](e);rid=rb['receipt_id'];r['receipts']=[b for b in r['receipts'] if b['receipt_id']!=rid];r['receipts_outcome']=[o for o in r['receipts_outcome'] if o['id']!=rid];t['bindings'].append({'id':'missing-child','intent':'A','tx_hash':t['bindings'][0]['tx_hash'],'receipt_id':rid});add('overlap-with-missing-descendant',t,e,error=True)
+ t,e=c['base']();e['source']='not an object';add('source-type-structured-rejection',t,e,error=True)
+ t,e=c['base']();t['network']=e['network']='unsupported-network';add('network-enum-rejection',t,e,error=True)
+ t,e=c['base']();e['source']['kind']='cryptographically-verified-chain';add('source-kind-cannot-claim-authentication',t,e,error=True)
+ t,e=c['base']();t['bindings'][0]['id']='';add('binding-empty-id-rejection',t,e,error=True)
+ t,e=c['base']();t['bindings'][0].update(tx_hash='missing-transaction',receipt_id='missing-receipt');t['bindings'].append({**t['bindings'][0],'id':'second-claim'});add('duplicate-missing-physical-binding',t,e,error=True)
+ # A conflicting transaction must not erase an excess in an independent one.
+ t,e=c['base']();a=copy.deepcopy(e['observations'][0]);r,p,_,_=c['parts'](e);next(o for o in a['response']['result']['receipts_outcome'] if o['id']==p['receipt_id'])['outcome']['logs']=[c['builder']['event']('ft_transfer','99','payer.testnet','payee.testnet')];e['observations'].append(a);extra,_,_,_,tx,p=c['plain']('independent-excess',150);e['observations'].extend(extra['observations']);t['bindings'].append({'id':'independent-excess','intent':'A','tx_hash':tx,'receipt_id':p});add('independent-known-excess-survives-conflict',t,e,1)
+ return out
+def evaluate(module,directory):
+ api=runpy.run_path(str(module));directory.mkdir(exist_ok=False);rows=[]
+ for case in cases():
+  t,e=c['reseal'](case['task'],case['evidence']);report=None;error=None
+  try:report=api['assess'](t,e)
+  except Exception as ex:error={'type':type(ex).__name__,'message':str(ex),'structured':isinstance(ex,(ValueError,KeyError,TypeError))}
+  matched=bool(error and error['structured']) if case['error'] else error is None and report['gate']==case['gate'];row={'id':case['id'],'expectedGate':case['gate'],'expectsStructuredError':case['error'],'matched':matched,'actualGate':report.get('gate') if report else None,'error':error};rows.append(row);(directory/(case['id']+'.json')).write_text(json.dumps({'check':row,'report':report},indent=2)+'\n','utf-8')
+ result={'atUtc':datetime.now(timezone.utc).isoformat(),'sourceSha256':sha256(module.read_bytes()).hexdigest(),'postResultNotBlind':True,'matched':sum(x['matched'] for x in rows),'total':len(rows),'cases':rows};(directory/'results.json').write_text(json.dumps(result,indent=2)+'\n','utf-8');print(json.dumps({'matched':result['matched'],'total':result['total'],'failures':[r for r in rows if not r['matched']]}));return result
+if __name__=='__main__':
+ p=argparse.ArgumentParser();p.add_argument('module',type=Path);p.add_argument('output',type=Path);a=p.parse_args();evaluate(a.module,a.output)

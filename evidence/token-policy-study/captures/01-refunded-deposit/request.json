@@ -1,0 +1,1 @@
+{"jsonrpc":"2.0","id":"token-policy-read-1","method":"tx_status","params":{"tx_hash":"7rXGLn3rADXytVqQvXHUJyR1XjmxY3yPdCw3SuBRKxK9","sender_account_id":"user.wclmw0f26ghx8db.wclmw01u4t5g33g.testnet","wait_until":"FINAL"}}

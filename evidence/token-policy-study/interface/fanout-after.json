@@ -1,0 +1,27 @@
+{
+  "cases": [
+    {
+      "id": "small",
+      "events": 64,
+      "observed": {
+        "eagerSourceCharacters": 0,
+        "openSourcePanels": 0,
+        "sourcePanels": 2
+      }
+    },
+    {
+      "id": "large",
+      "events": 8192,
+      "observed": {
+        "eagerSourceCharacters": 0,
+        "openSourcePanels": 0,
+        "sourcePanels": 17
+      }
+    }
+  ],
+  "openedLarge": {
+    "openSourcePanels": 1,
+    "sourceCharacters": 40529,
+    "sourcePanels": 17
+  }
+}

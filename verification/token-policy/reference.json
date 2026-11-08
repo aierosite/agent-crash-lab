@@ -1,0 +1,1014 @@
+{
+  "format": "agent-crash-lab/token-policy-study-v1",
+  "preparedAtUtc": "2026-11-08T05:51:51.984157+00:00",
+  "cases": [
+    {
+      "id": "used-all",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "0",
+          "burn": "0",
+          "used": "100",
+          "cost": "100",
+          "settled": "100"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/used-all/task.json",
+      "evidence": "verification/token-policy/inputs/used-all/evidence.json",
+      "taskSha256": "86c636def24c104d5b9e2568a1ea5a8ef7c6cd78878a30c35ef2c96a6696c1ed",
+      "evidenceSha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
+    },
+    {
+      "id": "partial-refund",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "30",
+          "burn": "0",
+          "used": "70",
+          "cost": "70",
+          "settled": "70"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/partial-refund/task.json",
+      "evidence": "verification/token-policy/inputs/partial-refund/evidence.json",
+      "taskSha256": "da7dc4345a0271ac429715ed71f761a17c98c9b38b12e6a978a87460ad2d3c72",
+      "evidenceSha256": "5a94f4c29f1ac8c8b5a3f15e0c491bc9b582c45ffe9803a2f603a62545449cce"
+    },
+    {
+      "id": "unused-capped",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "100",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/unused-capped/task.json",
+      "evidence": "verification/token-policy/inputs/unused-capped/evidence.json",
+      "taskSha256": "4290735cd55797e99605b8ac1ac8cc0a9dfbec7eda123b1fb5ba33518b882678",
+      "evidenceSha256": "9061014416ea4e6452323bad5387e10dc7e890ae631c2b66dc835d819368cd58"
+    },
+    {
+      "id": "balance-limited",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "20",
+          "burn": "0",
+          "used": "80",
+          "cost": "80",
+          "settled": "80"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/balance-limited/task.json",
+      "evidence": "verification/token-policy/inputs/balance-limited/evidence.json",
+      "taskSha256": "0d7399de22f051e7d0e0a9f85d4c106bc985226da19eeb017dbf5ae7ebb72969",
+      "evidenceSha256": "d9faeda5d2466be6af77daf43c7cbe2669bbd8da3a53a538fcce03d7c33a5f75"
+    },
+    {
+      "id": "receiver-spent-all",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "0",
+          "burn": "0",
+          "used": "100",
+          "cost": "100",
+          "settled": "100"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/receiver-spent-all/task.json",
+      "evidence": "verification/token-policy/inputs/receiver-spent-all/evidence.json",
+      "taskSha256": "c275f2d89e23ed5e54776ceae78e33dd7ea54cd85b5055d9387e8fc5701b7034",
+      "evidenceSha256": "0193f47fccfbc5461eecfd3d3b487fb3cda8626eb06f3d1617d44242a7e1bf59"
+    },
+    {
+      "id": "sender-deleted-burn",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 1,
+        "quantities": {
+          "amount": "100",
+          "refund": "0",
+          "burn": "80",
+          "used": "100",
+          "cost": "100",
+          "settled": "20"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/sender-deleted-burn/task.json",
+      "evidence": "verification/token-policy/inputs/sender-deleted-burn/evidence.json",
+      "taskSha256": "0be083fbe91d659e68d77101056de33d1d66e77165f52692b142475ba4fc7a75",
+      "evidenceSha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
+    },
+    {
+      "id": "sender-deleted-balance-limited",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 1,
+        "quantities": {
+          "amount": "100",
+          "refund": "0",
+          "burn": "20",
+          "used": "100",
+          "cost": "100",
+          "settled": "80"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/sender-deleted-balance-limited/task.json",
+      "evidence": "verification/token-policy/inputs/sender-deleted-balance-limited/evidence.json",
+      "taskSha256": "ff774a6bdebacf23442539bd37e1af09e0e80cd54913a2708b503d3cd383b5b3",
+      "evidenceSha256": "5289e77de3cf04806163632d39585769aa6e42f2cd42b81b7eca84944b431118"
+    },
+    {
+      "id": "sender-deleted-used-all",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "0",
+          "burn": "0",
+          "used": "100",
+          "cost": "100",
+          "settled": "100"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/sender-deleted-used-all/task.json",
+      "evidence": "verification/token-policy/inputs/sender-deleted-used-all/evidence.json",
+      "taskSha256": "0040d00200c1b7d2ab7c0c7f0bc03e2ab25fbec45df853a16e800c3b455b9b6d",
+      "evidenceSha256": "adda0c2807a4e7645a48594530a0302372a81b5da21e82fc547d3dd295655d5c"
+    },
+    {
+      "id": "hook-failed",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "100",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-failed/task.json",
+      "evidence": "verification/token-policy/inputs/hook-failed/evidence.json",
+      "taskSha256": "06306056268ea517aaae4a864b37a63275586fc77c32ce25f5610b00a91865a1",
+      "evidenceSha256": "66dbc3e22ac2d043108aca08ce6d364820a5aa991dc4ffa9b889495741fb570f"
+    },
+    {
+      "id": "hook-invalid-json",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "50",
+          "burn": "0",
+          "used": "50",
+          "cost": "50",
+          "settled": "50"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-invalid-json/task.json",
+      "evidence": "verification/token-policy/inputs/hook-invalid-json/evidence.json",
+      "taskSha256": "7021c691d8771bd5ad5d6d2a9898e4022ea5c5bb89f4749b410132294c572912",
+      "evidenceSha256": "5096ee2a6846504dbb0434c3a55550323a1a0df37c3a8988f73ffb3a457eec87"
+    },
+    {
+      "id": "hook-oversized-valid-u128",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "100",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-oversized-valid-u128/task.json",
+      "evidence": "verification/token-policy/inputs/hook-oversized-valid-u128/evidence.json",
+      "taskSha256": "5522d9dcd9f618cd9fa770478f6a35ff640db84032b7aa3660dc3b5c1281fb35",
+      "evidenceSha256": "a0fdaab29ba845d8afe82dc9b13d0f26b57db65a0ba61c30300ee79b8034ab91"
+    },
+    {
+      "id": "hook-plus-leading-zero",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "30",
+          "burn": "0",
+          "used": "70",
+          "cost": "70",
+          "settled": "70"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-plus-leading-zero/task.json",
+      "evidence": "verification/token-policy/inputs/hook-plus-leading-zero/evidence.json",
+      "taskSha256": "935b63ad0ae105f07ad49a3620ffd22cc2917c6a5303a76390f98b78de75d774",
+      "evidenceSha256": "0559c6f4d269180eddfd2adaf566188ad5aa6072ec71b8b77013fd2350e81507"
+    },
+    {
+      "id": "hook-number-not-u128-string",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "100",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-number-not-u128-string/task.json",
+      "evidence": "verification/token-policy/inputs/hook-number-not-u128-string/evidence.json",
+      "taskSha256": "d795659233b5f49a204fee8a3308ef49c0760105a9d93ab77413a9dbb1e97fc8",
+      "evidenceSha256": "f471e5b05158cf87b0f5f4d07a5a1da7d03caaf0db1e26eaf001d8fade9354a7"
+    },
+    {
+      "id": "hook-negative-string",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "100",
+          "refund": "100",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/hook-negative-string/task.json",
+      "evidence": "verification/token-policy/inputs/hook-negative-string/evidence.json",
+      "taskSha256": "4ca70f3a98f28fc05dbd599571b1c1758b8c79e1fd0d768fa0967015dcd9dd8b",
+      "evidenceSha256": "9188eeb8150ac6aa0daba4fcfdb0bbd8898eb721093073961a0ee92640f049b8"
+    },
+    {
+      "id": "tiny-burn",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 1,
+        "quantities": {
+          "amount": "1",
+          "refund": "0",
+          "burn": "1",
+          "used": "1",
+          "cost": "1",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/tiny-burn/task.json",
+      "evidence": "verification/token-policy/inputs/tiny-burn/evidence.json",
+      "taskSha256": "991ecfd1ecbc435480e7a97377cbb4a9d010287ce6bb104581de34d051806b43",
+      "evidenceSha256": "d8281d8d8c85221f55e82a5000f9bb39a10f7d5de55a156f4e87181a79aceed7"
+    },
+    {
+      "id": "u128-max-refund",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "340282366920938463463374607431768211455",
+          "refund": "340282366920938463463374607431768211455",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/u128-max-refund/task.json",
+      "evidence": "verification/token-policy/inputs/u128-max-refund/evidence.json",
+      "taskSha256": "dcdc4e702c04e0f0d132709ec409f674fde76db33e29c1680ebf496169663ff1",
+      "evidenceSha256": "8a7eb2806ceee799ca6d1eb71088f15e844e33dfccf633c4b4dea9e83b8c8681"
+    },
+    {
+      "id": "refunded-deposit",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "10000000",
+          "refund": "10000000",
+          "burn": "0",
+          "used": "0",
+          "cost": "0",
+          "settled": "0"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/refunded-deposit/task.json",
+      "evidence": "verification/token-policy/inputs/refunded-deposit/evidence.json",
+      "taskSha256": "8fd119f896962963f6295445fe4ba18ec0becdd2ce1235f0c8d8dbd21d0e6761",
+      "evidenceSha256": "8481c402e139e824f3d74935973222b3fb681fbb9c2c634aecd58a3507af8fa0"
+    },
+    {
+      "id": "accepted-deposit",
+      "group": "registered-source-informed",
+      "expected": {
+        "gate": 0,
+        "quantities": {
+          "amount": "1000",
+          "refund": "0",
+          "burn": "0",
+          "used": "1000",
+          "cost": "1000",
+          "settled": "1000"
+        },
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/accepted-deposit/task.json",
+      "evidence": "verification/token-policy/inputs/accepted-deposit/evidence.json",
+      "taskSha256": "52995eb76272476228239b711644a883a1e2d9a36014533ab7afbdb0255d652d",
+      "evidenceSha256": "fbca0fb2fefcc5b2d22a7461ed6bba10940d114aa03e3128929bf85647a3131d"
+    },
+    {
+      "id": "missing-resolver-body",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/missing-resolver-body/task.json",
+      "evidence": "verification/token-policy/inputs/missing-resolver-body/evidence.json",
+      "taskSha256": "59fa97e089d86f2954a804c1ea99ae84df9fa3b2d7f7a64de0ae703aac1e91bf",
+      "evidenceSha256": "59542381a45c2d562fed85b8456e5e2ff80b92bfc1d1bd9bec0203a9d9e8d406"
+    },
+    {
+      "id": "missing-hook-body",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/missing-hook-body/task.json",
+      "evidence": "verification/token-policy/inputs/missing-hook-body/evidence.json",
+      "taskSha256": "6fa9804762917ffc37da0c80012da5417f56b25688ca9dcf0bc06a6cc3878117",
+      "evidenceSha256": "435ecdd25b869684cbd844db87d8612492eb97c85645e1e5c2aafde3371ae1a2"
+    },
+    {
+      "id": "data-id-mismatch",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/data-id-mismatch/task.json",
+      "evidence": "verification/token-policy/inputs/data-id-mismatch/evidence.json",
+      "taskSha256": "09b72c594e90cd81fabd6d1700b3b18345741f88d53f1b9abc28ddcd76ed05e0",
+      "evidenceSha256": "f406ea05fb3261b03d35df92036ced8d4af153bacc0ed01b54620a534e9241e6"
+    },
+    {
+      "id": "duplicate-data-producer",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/duplicate-data-producer/task.json",
+      "evidence": "verification/token-policy/inputs/duplicate-data-producer/evidence.json",
+      "taskSha256": "263d6898c85ee3e40389cab8e929cb73d8925e9e83f3167681d4404bc402d02f",
+      "evidenceSha256": "b3a309e69771ecb20004aa79d59b58ae9236b2d5a4cbe193c159d06bf1c107fb"
+    },
+    {
+      "id": "resolver-wrong-sender_id",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/resolver-wrong-sender_id/task.json",
+      "evidence": "verification/token-policy/inputs/resolver-wrong-sender_id/evidence.json",
+      "taskSha256": "29888e5eae37cab0358d8674ce6241007b73fabf78b86cbb09fa29af29aa9c5c",
+      "evidenceSha256": "5cd1488de625ce13451e1546f2e6621965f8316d5dc7087651ffee47c5db0bfc"
+    },
+    {
+      "id": "resolver-wrong-receiver_id",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/resolver-wrong-receiver_id/task.json",
+      "evidence": "verification/token-policy/inputs/resolver-wrong-receiver_id/evidence.json",
+      "taskSha256": "96ed13d4a6dd5017274eeff5aede4a1068e91ac969c912b1666bab45b692139e",
+      "evidenceSha256": "d562f107e9ea7e079828e9716d1df43f33a19ed9ca93f012d7e5a934e425f5fc"
+    },
+    {
+      "id": "resolver-wrong-amount",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/resolver-wrong-amount/task.json",
+      "evidence": "verification/token-policy/inputs/resolver-wrong-amount/evidence.json",
+      "taskSha256": "1b7d04b53e03c5fd8915f28dbab9e573b99d732400798fc5c0a133c728943873",
+      "evidenceSha256": "edac9b6358ed3fe8a41062a3d0cd11af0cef957dce05f290147c85e5b8737283"
+    },
+    {
+      "id": "forged-outcome-executor",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/forged-outcome-executor/task.json",
+      "evidence": "verification/token-policy/inputs/forged-outcome-executor/evidence.json",
+      "taskSha256": "9d08cfc14c73104b5c373372b7fde0e548b4ecd99d74b294e89eb1ed31a2c9a6",
+      "evidenceSha256": "608854ddffd5cc0f7d4a5b72fc0666fdf42e0655ea2946c47661ff65456b0549"
+    },
+    {
+      "id": "identical-observation-idempotence",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/identical-observation-idempotence/task.json",
+      "evidence": "verification/token-policy/inputs/identical-observation-idempotence/evidence.json",
+      "taskSha256": "a427cb85f13cde4a34589dc2d2cedc807dee088ebe8ff15b6cfd01dabb28c9ae",
+      "evidenceSha256": "c07077539bf20792f4aa3af84c4e54b8cc981523b1bdbb224383272313dba0fc"
+    },
+    {
+      "id": "compatible-final-partial-union",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/compatible-final-partial-union/task.json",
+      "evidence": "verification/token-policy/inputs/compatible-final-partial-union/evidence.json",
+      "taskSha256": "ae1e0ba4dfa1c1c3650a17d31f9ae58c6e0ebfc39942c5d58f716c640e912669",
+      "evidenceSha256": "6a187b3e23ecc45f1c1b1052d2d2edaa6813c4499c40ab82f2f9699b5ed75bc6"
+    },
+    {
+      "id": "conflicting-final-outcomes",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/conflicting-final-outcomes/task.json",
+      "evidence": "verification/token-policy/inputs/conflicting-final-outcomes/evidence.json",
+      "taskSha256": "56a41eeaa63b7ad664478e9a028c5621a770250365eb4504f2f4e64b060acb8c",
+      "evidenceSha256": "c89351e768bb7372206cb40713fbc569901daf7a8d9f0c58163e4291e17f4fef"
+    },
+    {
+      "id": "known-excess-missing-callback",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/known-excess-missing-callback/task.json",
+      "evidence": "verification/token-policy/inputs/known-excess-missing-callback/evidence.json",
+      "taskSha256": "4b99db9667fd93524ee6288539e796f103339da21d488e0ea2c47dafcb2f1326",
+      "evidenceSha256": "59542381a45c2d562fed85b8456e5e2ff80b92bfc1d1bd9bec0203a9d9e8d406"
+    },
+    {
+      "id": "allowed-split-payments",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/allowed-split-payments/task.json",
+      "evidence": "verification/token-policy/inputs/allowed-split-payments/evidence.json",
+      "taskSha256": "c313f5b9930585d182982b92f18cb97a3bba4fcdfa425ad1101a0b2c6b17b1ea",
+      "evidenceSha256": "0314a74df7ca645379078e40ce3a3d5ba4aecc5382a94bd72e30018f5a2f61eb"
+    },
+    {
+      "id": "independent-equal-price-intents",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/independent-equal-price-intents/task.json",
+      "evidence": "verification/token-policy/inputs/independent-equal-price-intents/evidence.json",
+      "taskSha256": "a670db05de8051a25f4bccb1df29ffd1e653563c1bc408b1348f9886cdd57059",
+      "evidenceSha256": "748335b2716718505f16b0bdf40349b59cafef2f0ccb2b30e2097b219b1fc130"
+    },
+    {
+      "id": "repeated-payment-breaches-cap",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/repeated-payment-breaches-cap/task.json",
+      "evidence": "verification/token-policy/inputs/repeated-payment-breaches-cap/evidence.json",
+      "taskSha256": "40e579956a512702a67900c30700c3cac4af6fecee3f4e52aa70cb6f181c65d4",
+      "evidenceSha256": "d3fb51752b016747b0bb54f00031901f5baa47112574522390ed63d9d9e41c06"
+    },
+    {
+      "id": "unrelated-topup-cannot-offset-gross",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/unrelated-topup-cannot-offset-gross/task.json",
+      "evidence": "verification/token-policy/inputs/unrelated-topup-cannot-offset-gross/evidence.json",
+      "taskSha256": "f125393b844c7af963ac7696c4bd855b20fde6b96c84ec594ae187fe8ca0de8d",
+      "evidenceSha256": "9d8dbb805343d09b5772ab860df83d7509acfa077adb0ac40011204544e5793f"
+    },
+    {
+      "id": "legitimate-capital-not-a-loss",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/legitimate-capital-not-a-loss/task.json",
+      "evidence": "verification/token-policy/inputs/legitimate-capital-not-a-loss/evidence.json",
+      "taskSha256": "5d190675d9c59473c25cfed3554cbcbdb99c908bf5f5f58e1e54dc4af84a76b0",
+      "evidenceSha256": "c8ea2720d610c08d89b2df2697c030740390da2937f48b68db9f2be11b7f4b18"
+    },
+    {
+      "id": "atomic-plain-batch",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/atomic-plain-batch/task.json",
+      "evidence": "verification/token-policy/inputs/atomic-plain-batch/evidence.json",
+      "taskSha256": "0a6f8a1c69c0a7bfc1c6ec5f55952d918db9d85925429fb8f52d2e21224a18fe",
+      "evidenceSha256": "124929cac7f2bdc32a7eef976b1cba036835c1998cd364b7d32cdc353b999575"
+    },
+    {
+      "id": "mixed-async-batch-unknown",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/mixed-async-batch-unknown/task.json",
+      "evidence": "verification/token-policy/inputs/mixed-async-batch-unknown/evidence.json",
+      "taskSha256": "b36e0311d17af053aacb2cb15ae5024d6d2d1f6730f9a0e81d452af1ca376701",
+      "evidenceSha256": "29df2f30b8caa074ff99160029406d8ce0c2d4473c40ec481ad08e3ab6b372ed"
+    },
+    {
+      "id": "reverse-outside-resolver-unknown",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown"
+      },
+      "task": "verification/token-policy/inputs/reverse-outside-resolver-unknown/task.json",
+      "evidence": "verification/token-policy/inputs/reverse-outside-resolver-unknown/evidence.json",
+      "taskSha256": "d0d6f4e393cdb1ae51c4ccec370cf235ce4299e6458cf397aa227dd07d27b6c9",
+      "evidenceSha256": "caf367494ff1efed8d4072f728c17271154956a1a0cc15e1838c49c40e3c1b6f"
+    },
+    {
+      "id": "unrelated-same-pair-return-not-callback",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/unrelated-same-pair-return-not-callback/task.json",
+      "evidence": "verification/token-policy/inputs/unrelated-same-pair-return-not-callback/evidence.json",
+      "taskSha256": "6e6bf3f433ddfd66888a4527b2561f5e981f064c9afce4e8157e6bc30b06caef",
+      "evidenceSha256": "7434eb759bcc6ba409d3393b810358da6db4b3f9e479a13dd0d157f303c94381"
+    },
+    {
+      "id": "overlapping-owner-bindings-rejected",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": true,
+        "gate": null,
+        "settlement": null
+      },
+      "task": "verification/token-policy/inputs/overlapping-owner-bindings-rejected/task.json",
+      "evidence": "verification/token-policy/inputs/overlapping-owner-bindings-rejected/evidence.json",
+      "taskSha256": "25150f60c87c40c7b1cc75e51a31b92ee7cc6c223c688e4896d8c92cdf44e764",
+      "evidenceSha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
+    },
+    {
+      "id": "explicitly-allowed-burn",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/explicitly-allowed-burn/task.json",
+      "evidence": "verification/token-policy/inputs/explicitly-allowed-burn/evidence.json",
+      "taskSha256": "705514faa6c98976a07b77da34ce3e94139323d2099508a62f539111abb21800",
+      "evidenceSha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
+    },
+    {
+      "id": "reported-used-is-not-delivered",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/reported-used-is-not-delivered/task.json",
+      "evidence": "verification/token-policy/inputs/reported-used-is-not-delivered/evidence.json",
+      "taskSha256": "83ec87ce7b8ae4f8a44d035db15731bbc4cdfdddebc8f6f75a6af6faeb97786c",
+      "evidenceSha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
+    },
+    {
+      "id": "gross-event-is-not-settled",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/gross-event-is-not-settled/task.json",
+      "evidence": "verification/token-policy/inputs/gross-event-is-not-settled/evidence.json",
+      "taskSha256": "a628714a599d2d1481d7eb2144a014ec5d6992d4b180efbdf33ce4ef9cb634e1",
+      "evidenceSha256": "5a94f4c29f1ac8c8b5a3f15e0c491bc9b582c45ffe9803a2f603a62545449cce"
+    },
+    {
+      "id": "observed-root-success-full-refund-underpays",
+      "group": "post-baseline-protocol-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "known"
+      },
+      "task": "verification/token-policy/inputs/observed-root-success-full-refund-underpays/task.json",
+      "evidence": "verification/token-policy/inputs/observed-root-success-full-refund-underpays/evidence.json",
+      "taskSha256": "86ad7ba3b715454696733e733158288f0885aa99083f577692e16944774c56a6",
+      "evidenceSha256": "8481c402e139e824f3d74935973222b3fb681fbb9c2c634aecd58a3507af8fa0"
+    },
+    {
+      "id": "transient-rpc-error-before-final",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": false,
+        "gate": 0
+      },
+      "task": "verification/token-policy/inputs/transient-rpc-error-before-final/task.json",
+      "evidence": "verification/token-policy/inputs/transient-rpc-error-before-final/evidence.json",
+      "taskSha256": "4686536ae4b1c4cf35d408055e00fbb6c8c1f632fa57cc4b5d970bee4c75718d",
+      "evidenceSha256": "4e4c64e720d33a6564403a786bd0e2e67729c87a7a996dcdb19323c34af1d7cf"
+    },
+    {
+      "id": "pending-before-compatible-final",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": false,
+        "gate": 0
+      },
+      "task": "verification/token-policy/inputs/pending-before-compatible-final/task.json",
+      "evidence": "verification/token-policy/inputs/pending-before-compatible-final/evidence.json",
+      "taskSha256": "d525fba02bc97fd6e3da5cec49150d674f5f9ff17993719194d88d072e45472a",
+      "evidenceSha256": "3ae14c7e7996063d1f66d6e63f0ce34bc5ec599a017a462d4bc153c22ec9679d"
+    },
+    {
+      "id": "overlap-with-missing-descendant",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/overlap-with-missing-descendant/task.json",
+      "evidence": "verification/token-policy/inputs/overlap-with-missing-descendant/evidence.json",
+      "taskSha256": "6c60ff795da76e10be79fff65e326a4b4f715e3ea14c990144c6ac84223dd264",
+      "evidenceSha256": "b3f2e29318aa6d5ded63721effdf556a114f2922032218d4f8c208ce33334838"
+    },
+    {
+      "id": "source-type-structured-rejection",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/source-type-structured-rejection/task.json",
+      "evidence": "verification/token-policy/inputs/source-type-structured-rejection/evidence.json",
+      "taskSha256": "b4eb7f7c5cf51ee5750ab3d0fe7c182806b78be80efc8900e509318a31802074",
+      "evidenceSha256": "4dc09ffb0eef8e85f97934176cbae6625ff0b4402dee9eebf0b6db83ba06d015"
+    },
+    {
+      "id": "network-enum-rejection",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/network-enum-rejection/task.json",
+      "evidence": "verification/token-policy/inputs/network-enum-rejection/evidence.json",
+      "taskSha256": "5c7e43630a028c71246020d2548a3a1ad0cbf933137dac33b599879e010d25e8",
+      "evidenceSha256": "749a576005618342dcad4cec5cce197f9add8faa3d8f22e2a0017126ab78bf2f"
+    },
+    {
+      "id": "source-kind-cannot-claim-authentication",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/source-kind-cannot-claim-authentication/task.json",
+      "evidence": "verification/token-policy/inputs/source-kind-cannot-claim-authentication/evidence.json",
+      "taskSha256": "6f04c53cb9755a7d6297ea83a5c163236d9e6a01e62c922e0662168b4595b54a",
+      "evidenceSha256": "9c3ed2740dfab1de6194cffcff9ddbb4d720eb6a46e944d60f9f000347df176c"
+    },
+    {
+      "id": "binding-empty-id-rejection",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/binding-empty-id-rejection/task.json",
+      "evidence": "verification/token-policy/inputs/binding-empty-id-rejection/evidence.json",
+      "taskSha256": "d4682eae15bb7123fb8704826297439fc56a7e3a5b69f641bb79ef2e1771d345",
+      "evidenceSha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
+    },
+    {
+      "id": "duplicate-missing-physical-binding",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": true,
+        "gate": null
+      },
+      "task": "verification/token-policy/inputs/duplicate-missing-physical-binding/task.json",
+      "evidence": "verification/token-policy/inputs/duplicate-missing-physical-binding/evidence.json",
+      "taskSha256": "416f040aa992fc6bd72e7084c90b3a8185de53ac266cbaccdd80bee185e06455",
+      "evidenceSha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
+    },
+    {
+      "id": "independent-known-excess-survives-conflict",
+      "group": "post-result-prototype-controls",
+      "expected": {
+        "error": false,
+        "gate": 1
+      },
+      "task": "verification/token-policy/inputs/independent-known-excess-survives-conflict/task.json",
+      "evidence": "verification/token-policy/inputs/independent-known-excess-survives-conflict/evidence.json",
+      "taskSha256": "69dcf206cd30f119a17db4abb05143cb65dd6c708129ffecc2cc815521963729",
+      "evidenceSha256": "0e80b54aa4bc6c2273b3080507c2d9c9a3665209c5c432547e835dd1bfdc3945"
+    },
+    {
+      "id": "missing-causal-descendant-100",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown",
+        "settledKnownMinimum": "0"
+      },
+      "task": "verification/token-policy/inputs/missing-causal-descendant-100/task.json",
+      "evidence": "verification/token-policy/inputs/missing-causal-descendant-100/evidence.json",
+      "taskSha256": "3a4b4e73eddc3d9134abb03ee2b440fab96f82397716069d78ef842009306f43",
+      "evidenceSha256": "a945fa8308467012472dbab1561b147866fe8a6c5d96ea612c2bd9c05746e2eb"
+    },
+    {
+      "id": "missing-causal-descendant-50",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": false,
+        "gate": 1,
+        "settlement": "unknown",
+        "settledKnownMinimum": "0"
+      },
+      "task": "verification/token-policy/inputs/missing-causal-descendant-50/task.json",
+      "evidence": "verification/token-policy/inputs/missing-causal-descendant-50/evidence.json",
+      "taskSha256": "37144e932fe980d167ffc5be2ba35f27b3a8aac23c60895aa2dbc52d2f1ef814",
+      "evidenceSha256": "a945fa8308467012472dbab1561b147866fe8a6c5d96ea612c2bd9c05746e2eb"
+    },
+    {
+      "id": "uninterpretable-causal-token-log",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "unknown",
+        "settledKnownMinimum": "0"
+      },
+      "task": "verification/token-policy/inputs/uninterpretable-causal-token-log/task.json",
+      "evidence": "verification/token-policy/inputs/uninterpretable-causal-token-log/evidence.json",
+      "taskSha256": "2067788a803bab1e53c0d6af5a3cabee770cf8053090fc0d6f38cade5ccff92f",
+      "evidenceSha256": "b5ad58fb9698d5adf640d519e3fccecd5bef87bfc25ca826ce059e9062bf1124"
+    },
+    {
+      "id": "unrelated-missing-sibling-preserves-known-payment",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": false,
+        "gate": 2,
+        "settlement": "known",
+        "settledKnownMinimum": "100"
+      },
+      "task": "verification/token-policy/inputs/unrelated-missing-sibling-preserves-known-payment/task.json",
+      "evidence": "verification/token-policy/inputs/unrelated-missing-sibling-preserves-known-payment/evidence.json",
+      "taskSha256": "f33c09063db4aecf9f046819bddfaaa11fea12e5876217c4d0ee5cef323fb755",
+      "evidenceSha256": "92b74c5fd8bd584f99831c44d4f81fd2224e2594d411d091980ccb7aaf62f504"
+    },
+    {
+      "id": "hook-returned-promise-supported",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": false,
+        "gate": 0,
+        "settlement": "known",
+        "settledKnownMinimum": "100"
+      },
+      "task": "verification/token-policy/inputs/hook-returned-promise-supported/task.json",
+      "evidence": "verification/token-policy/inputs/hook-returned-promise-supported/evidence.json",
+      "taskSha256": "9b199f929c792a7a2a1bf8e4029e9338601af11cfcc41f851d2392b8aa69408e",
+      "evidenceSha256": "09a98f479852c0ead74a8d2ca24476bfc01a54f9cc8e860ea5052456dc474fb4"
+    },
+    {
+      "id": "transaction-root-is-not-payment-receipt",
+      "group": "post-result-integration-controls",
+      "expected": {
+        "error": true,
+        "gate": null,
+        "settlement": null,
+        "settledKnownMinimum": null
+      },
+      "task": "verification/token-policy/inputs/transaction-root-is-not-payment-receipt/task.json",
+      "evidence": "verification/token-policy/inputs/transaction-root-is-not-payment-receipt/evidence.json",
+      "taskSha256": "7bb592ef99c26a545aca598503d7b4249fe5af86123eaab02495afd2808366c3",
+      "evidenceSha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
+    },
+    {
+      "id": "response-list",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/response-list/task.json",
+      "evidence": "verification/token-policy/inputs/response-list/evidence.json",
+      "taskSha256": "5314a87b560170c46a80b522ce22e0ea85123bb439b1acb89834c490a839a1df",
+      "evidenceSha256": "d5139018e57a89f9c167ab2590d4cbde2b5d11604d9f240c6a3b676a381a6954"
+    },
+    {
+      "id": "request-list",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/request-list/task.json",
+      "evidence": "verification/token-policy/inputs/request-list/evidence.json",
+      "taskSha256": "09826ccabc4c0aa625a811b76fd27a5266396e35ebc06e7595afb3b6e87626ac",
+      "evidenceSha256": "4fb019e75703fdf6155917a8000865749610b38e147fefc95a9a8a5471047e15"
+    },
+    {
+      "id": "params-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/params-null/task.json",
+      "evidence": "verification/token-policy/inputs/params-null/evidence.json",
+      "taskSha256": "fa7508ca90e1a9873d3e09a72358e54feca5527c853e17a645c960478be36194",
+      "evidenceSha256": "6c6ab419f6ace89d2d44c42ad8de2ee46739df84f210c9d537b7c2f11565ede2"
+    },
+    {
+      "id": "body-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/body-null/task.json",
+      "evidence": "verification/token-policy/inputs/body-null/evidence.json",
+      "taskSha256": "a2da3e0db210b87089ccef155fbdc1f8955510f3fbbdab4212ae40a01ec1a72d",
+      "evidenceSha256": "f51159d7c0993475e6ee8b94a79129d652843cd16b4eb46dafc8a1359824fb87"
+    },
+    {
+      "id": "receipt-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/receipt-null/task.json",
+      "evidence": "verification/token-policy/inputs/receipt-null/evidence.json",
+      "taskSha256": "6c781edf21676d406b42089916a7acf76d267da8182e1cd079e9efe4a10cae6d",
+      "evidenceSha256": "37b7422a5149f2e944481725d442d33781b8ef562cc05c6f132a3392f879a42c"
+    },
+    {
+      "id": "output-edge-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/output-edge-null/task.json",
+      "evidence": "verification/token-policy/inputs/output-edge-null/evidence.json",
+      "taskSha256": "9c6bf0e07872de03771d50ff9097e522507a751bb951f6f4bf705f020d01ca63",
+      "evidenceSha256": "5867e1435e95fff531de95f6c218dac3f3509d41b70a4d3014aa4a9f2dc5d2c3"
+    },
+    {
+      "id": "hook-actions-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/hook-actions-null/task.json",
+      "evidence": "verification/token-policy/inputs/hook-actions-null/evidence.json",
+      "taskSha256": "80922a66c9741572c996a221d38337bce9bdcd4d5efcd0dfc45bb2b834b4827a",
+      "evidenceSha256": "a08615823f70172afb0849fa5d8e1e67fd3c51908b81af4f0a6be5a507d83e7e"
+    },
+    {
+      "id": "action-null",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/action-null/task.json",
+      "evidence": "verification/token-policy/inputs/action-null/evidence.json",
+      "taskSha256": "13f90f80ed7a323a826609455aeb4897b763443c2a38b1807186d3467d9de16c",
+      "evidenceSha256": "a6a879231c9479b55bf4c36f63370ee59a463cc207e6df756ec59af4cf2d852a"
+    },
+    {
+      "id": "body-id-list",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2
+      },
+      "task": "verification/token-policy/inputs/body-id-list/task.json",
+      "evidence": "verification/token-policy/inputs/body-id-list/evidence.json",
+      "taskSha256": "3b8dd798876cfa86a3676d21509f4e2c6c47d27cf9a4db1286575646081646c2",
+      "evidenceSha256": "d7ff606c1b6defd297bc9d50ac851503508f3e3d86385798eee2c9a4714b76ed"
+    },
+    {
+      "id": "malformed-final-does-not-merge-poisoned-effects",
+      "group": "post-result-envelope-controls",
+      "expected": {
+        "structuredErrorOrGate": 2,
+        "grossKnown": "100"
+      },
+      "task": "verification/token-policy/inputs/malformed-final-does-not-merge-poisoned-effects/task.json",
+      "evidence": "verification/token-policy/inputs/malformed-final-does-not-merge-poisoned-effects/evidence.json",
+      "taskSha256": "87970f9edbb428262c83b34ae8462cd46af566c4bc10622dba658051edfc7d49",
+      "evidenceSha256": "1ac68e29dcd7893b59de8122182a27c3c871708dc549e69f7c7e0681f7900745"
+    }
+  ],
+  "independentBlindEvaluation": false,
+  "sourceInformed": true,
+  "newTransactions": 0,
+  "newModelCalls": 0,
+  "newReadRequestsDuringPackaging": 0,
+  "previousCapturedReadRequests": 2,
+  "meaning": "18 previously registered cases plus 51 labeled post-result controls. References, corpus wrappers and grading are ours. Two cases wrap our previously captured public-node historical responses; the other 67 are constructed or mutated. The SDK source and Workcell code were not executed."
+}
