@@ -1,6 +1,6 @@
 # Competitive review · v0.4.0 snapshot
 
-**Historical comparison.** The statements below describe the v0.4.0 review. v0.5.0 subsequently added the bounded live-agent experiment; v0.6.0 adds [Scenario Lab](SCENARIO_LAB.md), an original offline search/reduction/replay workflow for task-level native payment and useful-output checks. Workcell still covers broader contract adapters and fresh testnet execution. The pinned heads of Workcell, HoldUp, Quittance and Tripwire were rechecked on 8 November 2026 (Tehran) and matched the revisions below. No competitor suite was executed.
+**Historical comparison.** The statements below describe the v0.4.0 review. v0.5.0 subsequently added the bounded live-agent experiment; v0.6.0 added [Scenario Lab](SCENARIO_LAB.md), v0.7.0 made search/reduction/CI interactive, and v0.8.0 adds a [raw-proposal study](PROPOSAL_STUDY.md) without calculator correction. These are original task-level implementations inspired by Workcell’s workflow. Workcell still covers broader contract adapters and fresh testnet execution. The pinned heads of Workcell, HoldUp, Quittance and Tripwire were rechecked on 8 November 2026 (Tehran) and matched the revisions below. No competitor suite was executed.
 
 [The v0.5.0 live-agent experiment and separate reference address the model and evidence gaps documented below.](LIVE_AGENT.md)
 
@@ -31,10 +31,10 @@ This is a narrow contribution alongside existing financial invariants, receipt r
 
 ## Remaining gaps
 
-- **Live-agent/generalization evidence:** no live-model trials, independent blind evaluation or external adopter study. Source-informed regressions are not an unseen benchmark. Downloading a model alone would not resolve this.
+- **Broader live-agent/generalization evidence:** the archived native/model trials and fresh inference-only study cover bounded local cases. The latter found 1/16 successful raw outputs, retained failures and observed no financial violation; its payment projections are synthetic. Independent authorship, an external blind evaluation and an external adopter study remain unproven. Source-informed regressions are not an unseen benchmark.
 - **Network scope:** our actual payment evidence is owned local NEAR execution, not a fresh public-network deployment. The assessor does not authenticate consensus or signatures and does not accept arbitrary chain/contract profiles.
 - **Prevention:** the tool diagnoses an episode; it cannot intercept a signer or enforce a vault rule. That is a complementary system, not a missing switch in this inspector.
 - **Browser runtime trust:** the optional browser version downloads pinned Pyodide from jsDelivr and needs a modern WebAssembly-capable browser. Assessment inputs are not posted to a server by our code. For a runtime without CDN execution, use the offline ZIP and local Python.
 - **Outcome:** there is no evidence-based way to promise first place, estimate win probability or infer judges' scores from repository test counts.
 
-We made no competitor-directed transactions, registrations, messages or payments, and no new live-model claims. No production audit is implied.
+We made no competitor-directed transactions, registrations, messages or payments. The later raw-proposal study records local inference only, with no new native execution. No production audit is implied.

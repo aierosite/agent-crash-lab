@@ -351,7 +351,7 @@ function showCase(s,filename){
  setTab('overview');
 }
 const findCase=id=>catalog?.scenarios.find(s=>s.id===id);
-const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox'}[kind]??'Owned sandbox');
+const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox','model-proposals':'Recorded Qwen · synthetic payments'}[kind]??'Owned sandbox');
 nav.onclick=({target})=>{
  const button=target.closest('.scenario');
  if(button)select(findCase(button.dataset.id));

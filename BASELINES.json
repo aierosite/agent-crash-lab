@@ -1,218 +1,378 @@
 [
   {
     "name": "agent-leash-artifact",
-    "task": "tasks/agent-leash-artifact.json",
     "sources": {
-      "recording": "evidence/agent-leash-artifact-observation.json",
-      "basis": "evidence/agent-leash-artifact-precommit.json"
-    }
+      "basis": "evidence/agent-leash-artifact-precommit.json",
+      "recording": "evidence/agent-leash-artifact-observation.json"
+    },
+    "task": "tasks/agent-leash-artifact.json"
   },
   {
     "name": "balance-attribution",
-    "task": "tasks/balance-attribution.json",
     "sources": {
-      "recording": "evidence/balance-attribution-observation.json",
-      "basis": "evidence/balance-attribution-precommit.json"
-    }
+      "basis": "evidence/balance-attribution-precommit.json",
+      "recording": "evidence/balance-attribution-observation.json"
+    },
+    "task": "tasks/balance-attribution.json"
   },
   {
     "name": "deleted-signer-refund",
-    "task": "tasks/deleted-signer-refund.json",
     "sources": {
-      "recording": "evidence/deleted-signer-refund-observation.json",
-      "basis": "evidence/deleted-signer-refund-precommit.json"
-    }
+      "basis": "evidence/deleted-signer-refund-precommit.json",
+      "recording": "evidence/deleted-signer-refund-observation.json"
+    },
+    "task": "tasks/deleted-signer-refund.json"
   },
   {
     "name": "function-deposit",
-    "task": "tasks/function-deposit.json",
     "sources": {
-      "recording": "evidence/function-deposit-observation.json",
-      "basis": "evidence/function-deposit-precommit.json"
-    }
+      "basis": "evidence/function-deposit-precommit.json",
+      "recording": "evidence/function-deposit-observation.json"
+    },
+    "task": "tasks/function-deposit.json"
   },
   {
     "name": "gas-key-refund",
-    "task": "tasks/gas-key-refund.json",
     "sources": {
-      "recording": "evidence/gas-key-refund-observation.json",
-      "basis": "evidence/gas-key-refund-precommit.json"
-    }
+      "basis": "evidence/gas-key-refund-precommit.json",
+      "recording": "evidence/gas-key-refund-observation.json"
+    },
+    "task": "tasks/gas-key-refund.json"
   },
   {
     "name": "intent-duplicate-0",
-    "task": "tasks/intent-duplicate-0.json",
     "sources": {
-      "recording": "evidence/intent-duplicate-observation.json",
-      "basis": "evidence/intent-duplicate-precommit.json"
-    }
+      "basis": "evidence/intent-duplicate-precommit.json",
+      "recording": "evidence/intent-duplicate-observation.json"
+    },
+    "task": "tasks/intent-duplicate-0.json"
   },
   {
     "name": "intent-duplicate-1",
-    "task": "tasks/intent-duplicate-1.json",
     "sources": {
-      "recording": "evidence/intent-duplicate-observation.json",
-      "basis": "evidence/intent-duplicate-precommit.json"
-    }
+      "basis": "evidence/intent-duplicate-precommit.json",
+      "recording": "evidence/intent-duplicate-observation.json"
+    },
+    "task": "tasks/intent-duplicate-1.json"
   },
   {
     "name": "merchant-utility-0",
-    "task": "tasks/merchant-utility-0.json",
     "sources": {
-      "recording": "evidence/merchant-utility-observation.json",
-      "basis": "evidence/merchant-utility-precommit.json"
-    }
+      "basis": "evidence/merchant-utility-precommit.json",
+      "recording": "evidence/merchant-utility-observation.json"
+    },
+    "task": "tasks/merchant-utility-0.json"
   },
   {
     "name": "merchant-utility-1",
-    "task": "tasks/merchant-utility-1.json",
     "sources": {
-      "recording": "evidence/merchant-utility-observation.json",
-      "basis": "evidence/merchant-utility-precommit.json"
-    }
+      "basis": "evidence/merchant-utility-precommit.json",
+      "recording": "evidence/merchant-utility-observation.json"
+    },
+    "task": "tasks/merchant-utility-1.json"
   },
   {
     "name": "monetary-yield",
-    "task": "tasks/monetary-yield.json",
     "sources": {
-      "recording": "evidence/monetary-yield-observation.json",
-      "basis": "evidence/monetary-yield-precommit.json"
-    }
+      "basis": "evidence/monetary-yield-precommit.json",
+      "recording": "evidence/monetary-yield-observation.json"
+    },
+    "task": "tasks/monetary-yield.json"
   },
   {
     "name": "none-ack",
-    "task": "tasks/none-ack.json",
     "sources": {
-      "recording": "evidence/none-ack-observation.json",
-      "basis": "evidence/none-ack-precommit.json"
-    }
+      "basis": "evidence/none-ack-precommit.json",
+      "recording": "evidence/none-ack-observation.json"
+    },
+    "task": "tasks/none-ack.json"
   },
   {
     "name": "self-function-deposit",
-    "task": "tasks/self-function-deposit.json",
     "sources": {
-      "recording": "evidence/self-function-deposit-observation.json",
-      "basis": "evidence/self-function-deposit-precommit.json"
-    }
+      "basis": "evidence/self-function-deposit-precommit.json",
+      "recording": "evidence/self-function-deposit-observation.json"
+    },
+    "task": "tasks/self-function-deposit.json"
   },
   {
     "name": "split-settlement",
-    "task": "tasks/split-settlement.json",
     "sources": {
-      "recording": "evidence/split-settlement-observation.json",
-      "basis": "evidence/split-settlement-precommit.json"
-    }
+      "basis": "evidence/split-settlement-precommit.json",
+      "recording": "evidence/split-settlement-observation.json"
+    },
+    "task": "tasks/split-settlement.json"
   },
   {
     "name": "success-receipt-id",
-    "task": "tasks/success-receipt-id.json",
     "sources": {
-      "recording": "evidence/success-receipt-id-observation.json",
-      "basis": "evidence/success-receipt-id-precommit.json"
-    }
+      "basis": "evidence/success-receipt-id-precommit.json",
+      "recording": "evidence/success-receipt-id-observation.json"
+    },
+    "task": "tasks/success-receipt-id.json"
   },
   {
     "name": "zero-principal",
-    "task": "tasks/zero-principal.json",
     "sources": {
-      "recording": "evidence/zero-principal-observation.json",
-      "basis": "evidence/zero-principal-precommit.json"
-    }
+      "basis": "evidence/zero-principal-precommit.json",
+      "recording": "evidence/zero-principal-observation.json"
+    },
+    "task": "tasks/zero-principal.json"
   },
   {
     "name": "failed-refund",
-    "task": "tasks/failed-refund.json",
     "sources": {
-      "recording": "evidence/failed-refund-observation.json",
-      "basis": "evidence/failed-refund-precommit.json"
-    }
+      "basis": "evidence/failed-refund-precommit.json",
+      "recording": "evidence/failed-refund-observation.json"
+    },
+    "task": "tasks/failed-refund.json"
   },
   {
     "name": "refund-override",
-    "task": "tasks/refund-override.json",
     "sources": {
-      "recording": "evidence/refund-override-observation.json",
-      "basis": "evidence/refund-override-precommit.json"
-    }
+      "basis": "evidence/refund-override-precommit.json",
+      "recording": "evidence/refund-override-observation.json"
+    },
+    "task": "tasks/refund-override.json"
   },
   {
     "name": "native-naive",
-    "task": "tasks/native-naive.json",
     "sources": {
-      "recording": "evidence/native-observation.json",
-      "basis": "evidence/native-precommit.json"
-    }
+      "basis": "evidence/native-precommit.json",
+      "recording": "evidence/native-observation.json"
+    },
+    "task": "tasks/native-naive.json"
   },
   {
     "name": "native-durable",
-    "task": "tasks/native-durable.json",
     "sources": {
-      "recording": "evidence/native-observation.json",
-      "basis": "evidence/native-precommit.json"
-    }
+      "basis": "evidence/native-precommit.json",
+      "recording": "evidence/native-observation.json"
+    },
+    "task": "tasks/native-durable.json"
   },
   {
     "name": "live-normal-naive",
-    "task": "tasks/live-normal-naive.json",
     "sources": {
-      "recording": "evidence/live-agent/normal/native-observation.json",
-      "basis": "evidence/live-agent/normal/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/normal/native-precommit.json",
+      "recording": "evidence/live-agent/normal/native-observation.json"
+    },
+    "task": "tasks/live-normal-naive.json"
   },
   {
     "name": "live-normal-durable",
-    "task": "tasks/live-normal-durable.json",
     "sources": {
-      "recording": "evidence/live-agent/normal/native-observation.json",
-      "basis": "evidence/live-agent/normal/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/normal/native-precommit.json",
+      "recording": "evidence/live-agent/normal/native-observation.json"
+    },
+    "task": "tasks/live-normal-durable.json"
   },
   {
     "name": "live-reordered-naive",
-    "task": "tasks/live-reordered-naive.json",
     "sources": {
-      "recording": "evidence/live-agent/reordered/native-observation.json",
-      "basis": "evidence/live-agent/reordered/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/reordered/native-precommit.json",
+      "recording": "evidence/live-agent/reordered/native-observation.json"
+    },
+    "task": "tasks/live-reordered-naive.json"
   },
   {
     "name": "live-reordered-durable",
-    "task": "tasks/live-reordered-durable.json",
     "sources": {
-      "recording": "evidence/live-agent/reordered/native-observation.json",
-      "basis": "evidence/live-agent/reordered/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/reordered/native-precommit.json",
+      "recording": "evidence/live-agent/reordered/native-observation.json"
+    },
+    "task": "tasks/live-reordered-durable.json"
   },
   {
     "name": "live-corrupt-naive",
-    "task": "tasks/live-corrupt-naive.json",
     "sources": {
-      "recording": "evidence/live-agent/corrupt/native-observation.json",
-      "basis": "evidence/live-agent/corrupt/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/corrupt/native-precommit.json",
+      "recording": "evidence/live-agent/corrupt/native-observation.json"
+    },
+    "task": "tasks/live-corrupt-naive.json"
   },
   {
     "name": "live-corrupt-durable",
-    "task": "tasks/live-corrupt-durable.json",
     "sources": {
-      "recording": "evidence/live-agent/corrupt/native-observation.json",
-      "basis": "evidence/live-agent/corrupt/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/corrupt/native-precommit.json",
+      "recording": "evidence/live-agent/corrupt/native-observation.json"
+    },
+    "task": "tasks/live-corrupt-durable.json"
   },
   {
     "name": "live-reduced-naive",
-    "task": "tasks/live-reduced-naive.json",
     "sources": {
-      "recording": "evidence/live-agent/reduced/native-observation.json",
-      "basis": "evidence/live-agent/reduced/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/reduced/native-precommit.json",
+      "recording": "evidence/live-agent/reduced/native-observation.json"
+    },
+    "task": "tasks/live-reduced-naive.json"
   },
   {
     "name": "live-single-naive",
-    "task": "tasks/live-single-naive.json",
     "sources": {
-      "recording": "evidence/live-agent/single/native-observation.json",
-      "basis": "evidence/live-agent/single/native-precommit.json"
-    }
+      "basis": "evidence/live-agent/single/native-precommit.json",
+      "recording": "evidence/live-agent/single/native-observation.json"
+    },
+    "task": "tasks/live-single-naive.json"
+  },
+  {
+    "name": "proposal-0-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-0-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-0-unprotected.task.json"
+  },
+  {
+    "name": "proposal-0-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-0-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-0-guarded.task.json"
+  },
+  {
+    "name": "proposal-1-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-1-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-1-unprotected.task.json"
+  },
+  {
+    "name": "proposal-1-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-1-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-1-guarded.task.json"
+  },
+  {
+    "name": "proposal-2-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-2-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-2-unprotected.task.json"
+  },
+  {
+    "name": "proposal-2-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-2-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-2-guarded.task.json"
+  },
+  {
+    "name": "proposal-3-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-3-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-3-unprotected.task.json"
+  },
+  {
+    "name": "proposal-3-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-3-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-3-guarded.task.json"
+  },
+  {
+    "name": "proposal-4-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-4-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-4-unprotected.task.json"
+  },
+  {
+    "name": "proposal-4-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-4-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-4-guarded.task.json"
+  },
+  {
+    "name": "proposal-5-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-5-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-5-unprotected.task.json"
+  },
+  {
+    "name": "proposal-5-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-5-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-5-guarded.task.json"
+  },
+  {
+    "name": "proposal-6-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-6-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-6-unprotected.task.json"
+  },
+  {
+    "name": "proposal-6-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-6-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-6-guarded.task.json"
+  },
+  {
+    "name": "proposal-7-unprotected",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-7-unprotected.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-7-unprotected.task.json"
+  },
+  {
+    "name": "proposal-7-guarded",
+    "sources": {
+      "basis": "evidence/proposal-study/locked-plan.json",
+      "execution": "evidence/proposal-study/actual/execution.json",
+      "model-calls": "evidence/proposal-study/actual/calls.json",
+      "recording": "evidence/proposal-study/cases/proposal-7-guarded.recording.json"
+    },
+    "task": "evidence/proposal-study/cases/proposal-7-guarded.task.json"
   }
 ]

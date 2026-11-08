@@ -499,5 +499,293 @@
     "required_utility_statuses": [
       "passed"
     ]
+  },
+  "proposal-0-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-0-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "90000000000000000000000",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "90000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-1-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "130000000000000000000000",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-1-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "130000000000000000000000",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-2-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "70000000000000000000000",
+        "cap": "70000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "70000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-2-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "70000000000000000000000",
+        "cap": "70000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "70000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "failed",
+      "unknown"
+    ]
+  },
+  "proposal-3-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "130000000000000000000000",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "unknown"
+    ]
+  },
+  "proposal-3-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "130000000000000000000000",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "0",
+        "cap": "130000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "passed",
+      "unknown"
+    ]
+  },
+  "proposal-4-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "160000000000000000000000",
+        "cap": "160000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "160000000000000000000000",
+        "cap": "160000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-4-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "160000000000000000000000",
+        "cap": "160000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "160000000000000000000000",
+        "cap": "160000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-5-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "220000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "220000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-5-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "220000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "220000000000000000000000",
+        "cap": "220000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-6-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "240000000000000000000000",
+        "cap": "240000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "240000000000000000000000",
+        "cap": "240000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-6-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "240000000000000000000000",
+        "cap": "240000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "240000000000000000000000",
+        "cap": "240000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-7-unprotected": {
+    "intents": {
+      "A": {
+        "merchant_gross": "230000000000000000000000",
+        "cap": "230000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "230000000000000000000000",
+        "cap": "230000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
+  },
+  "proposal-7-guarded": {
+    "intents": {
+      "A": {
+        "merchant_gross": "230000000000000000000000",
+        "cap": "230000000000000000000000",
+        "merchant_status": "within"
+      },
+      "B": {
+        "merchant_gross": "230000000000000000000000",
+        "cap": "230000000000000000000000",
+        "merchant_status": "within"
+      }
+    },
+    "required_utility_statuses": [
+      "unknown",
+      "failed"
+    ]
   }
 }

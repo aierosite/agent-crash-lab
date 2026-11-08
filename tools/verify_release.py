@@ -16,7 +16,7 @@ def main():
         files=m['files'];bad=[];runs=[]
         if m['format']!='agent-crash-lab/release-v1' or type(files) is not dict:raise ValueError('Invalid manifest')
         names=json.dumps(sorted(files),separators=(',',':')).encode()
-        if sha256(names).hexdigest()!='7f3222eba0aee27bd39318d89da9af348c973af5ce0811a4d0644853758277a3':
+        if sha256(names).hexdigest()!='368842728287fe8e9312a5b47baddaf94a8269244c4b736488ec6c14745745ab':
             raise ValueError('Release inventory mismatch')
         for name,expected in files.items():
             path=ROOT/name
@@ -25,7 +25,7 @@ def main():
             raw=path.read_bytes()
             if len(raw)!=expected['bytes'] or sha256(raw).hexdigest()!=expected['sha256']:bad.append({'file':name,'error':'hash-or-size'})
         if sys.argv[1:] and not bad:
-            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',)):
+            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',)):
                 r=subprocess.run([sys.executable,'-I','-S',script,*args],cwd=ROOT,capture_output=True,timeout=60)
                 runs.append({'suite':script,'exitCode':r.returncode,'error':r.stderr.decode(errors='replace')[-1200:] if r.returncode else ''})
         ok=not bad and all(r['exitCode']==0 for r in runs)

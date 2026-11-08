@@ -6,9 +6,9 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Fresh generation and reduction in the browser workbench](docs/workflow-desktop.jpg)
 
-## Interactive workflow · v0.7.0
+## Interactive workflow · v0.8.0
 
-**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.7.0)
+**[Open the browser workbench](https://aierosite.github.io/agent-crash-lab/web/?browser=1)** · [Download the local release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.8.0)
 
 Open **Scenario Lab** to generate, inspect and reduce new synthetic episodes directly in the local or browser workbench. **Keep this run in CI** downloads the exact current input as `episode.json` with its explained 0/1/2 gate. Local reference checks use an isolated Python process; browser reference checks use a separate module in the same WebAssembly runtime, explicitly disclosed in the interface. [Walk through the workflow](docs/WORKFLOW.md).
 
@@ -21,6 +21,18 @@ Across eight owned sandbox chains, Qwen 1.5B made 41 inference calls. The experi
 A separate process measured finalized merchant balance changes in each serial attempt window and graded the delivered content and answer. Crash Lab agreed on **54 of 54** per-intent principal, settlement-count and utility comparisons. See the [trial design and replay instructions](docs/LIVE_AGENT.md) and [recorded results](verification/live-agent.json).
 
 The workbench assesses recorded evidence. **Local assessment** and **browser assessment** time the inspector. The historical model calls and transfers belong to the archived trials. Browser replay uses pinned Pyodide 0.29.5 and verifies staged files against the refreshed catalog. The desktop judge checks use standard-library Python.
+
+## Raw model proposals, including failed work
+
+The new eight-trajectory study records **40 evaluation calls plus one declared warmup** from local Qwen 1.5B. No wrong answer was repaired: of 16 required outputs, **1 passed, 7 failed and 8 were missing/unknown**. No trajectory finished both tasks. The sampled model proposed neither over-budget nor repeat-journal BUYs, so this batch does **not** establish sensitivity to financial violations or a guard advantage.
+
+Open **Raw model answer**, **Missing independent work** or **Independent task B**. Their model outputs were observed; their native payment effects are explicitly **synthetic projections**, not new transfers. The two projections reuse one guarded trajectory per seed and are correlated. All eight trajectories and their raw prompts/responses are retained, including the failures. [Design, complete results and limits](docs/PROPOSAL_STUDY.md).
+
+```sh
+python -I -S tools/verify_proposal_study.py
+```
+
+Expected exit 0 means evidence and assessor agree with a separate reference process. It does **not** mean the agent succeeded. Replay checks 16 full report hashes, 64 financial and 32 output assertions over eight trajectories; these are not 96 independent test cases. It runs no model, network, wallet or native transaction. The reference has the same author, not an external blind evaluator.
 
 ## Reduce a generated finding
 
@@ -51,9 +63,9 @@ Requires **Python 3.12+**, with no third-party packages or credentials. From the
 python -I -S tools/verify_release.py --judge
 ```
 
-Expected: exit **0**, `verified: true`, and five entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, 12 workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay and 17 Scenario Lab tests. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
+Expected: exit **0**, `verified: true`, and six entries in `judgeSuites`, each with `exitCode: 0`. The command verifies the release files **before** executing 28 core tests, 12 workbench/HTTP/CLI tests, eight reserved verifier invocations, the separate live-agent oracle replay, 17 Scenario Lab tests and 14 raw-proposal study controls. A changed or missing release file, or a different release file list, prevents suite execution. The verifier pins the SHA-256 of the compact JSON array of sorted paths (excluding the manifest itself). Intentional membership changes require updating that pin and the verifier hash in the manifest. The verifier rejects duplicate JSON keys before running suites. The core and reserved suites compile the same source bytes they hash in their optional reports, bypassing adjacent bytecode caches for the assessment engine. This checks package consistency under a trusted verifier; publication authenticity requires a trusted copy or digest. The workbench suite compares the staged browser catalog with the scenarios, baselines and dependency hashes regenerated from the package. This check ignores JSON formatting. Verification establishes consistency within the release. Default checks replay the committed recordings and use local HTTP/process tests; they start no NEAR node, live model, wallet or public-chain transaction.
 
-The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the five Python judge suites.
+The browser validates an evaluator response before rendering verdicts or deferred panels. It checks financial arithmetic against referenced action facts, recovery totals and refund classes, output evidence and presence flags, intermediate observations, diagnostic links, and coverage counters. Invalid owner declarations may still produce genuine **unknown** rows and remain inspectable. Invalid response data clears the prior result and allows a retry. This is a consistency boundary, not authentication or a replacement for the independent task reference. Development and CI additionally run `node test_report_contract.js` (Node 22+) against genuine reports and deterministic malformed-response cases; Node is not required to run the product or the six Python judge suites.
 
 **Why task-level verification?** A payment can settle correctly while violating the task's total spending authority, and a correctly priced purchase can return the wrong answer. Crash Lab binds the declared task to native effects and recorded output. It is a regression inspector for developers integrating agents, not a new wallet or an enforcement contract.
 

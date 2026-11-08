@@ -1,0 +1,8 @@
+{
+  "atUtc": "2026-11-08T00:16:03.888506+00:00",
+  "reason": "Add explicit owned process identity and graceful SIGTERM cleanup before any real inference",
+  "actualModelCallsBeforeAmendment": 0,
+  "selectionAndPromptsUnchanged": true,
+  "previousPlanSha256": "3741c37e2ba2457cf5ceba4583237c1060ce7f3a35672f38b0c476a95c41b41c",
+  "newPlanSha256": "341dcba29ee869b46c7987d4dfce665b734a38162b95a1f99fb9a3e6b6e1ab2e"
+}
