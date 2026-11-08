@@ -1,10 +1,13 @@
 # Agent Crash Lab
 
-Private research candidate **0.20.0.dev1**. The public competition snapshot stays
-v0.19.1. This branch adds a separately source-bound reported-ledger diagnostic
-while preserving the v2 primitive, original API and historical study reports.
-See [candidate scope and limits](docs/TOKEN_LEDGER.md). No independent blind
-accuracy or competitor ranking is established.
+**v0.20.0 · competition review update.** A separately source-bound ledger
+diagnostic makes inconsistent supplied balances visible without claiming a
+payment loss. The browser rejects forged explanations. A portable, source-informed
+policy/utility study preserves both successful work and meaningful failures.
+[Judge walkthrough](docs/JUDGES.md) · [Download](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.20.0)
+
+The existing competition entry and immutable v0.19.1 snapshot remain available.
+No independent blind accuracy or competitor superiority is established.
 
 **Follow the money. Verify the work.** Inspect an agent's supplied NEAR payment
 receipts against explicit owner intent, and check recorded task output separately.
@@ -13,6 +16,25 @@ A correct answer can still cost two payments. A successful transaction can retur
 too little, burn a refund or leave the user's rights unpaid. Crash Lab follows
 receipt identities and declared obligations rather than a `paid` flag, matching
 prices or root-transaction success.
+
+## Latest: inconsistent ledger, honest uncertainty
+
+[Review the constructed ledger conflict](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=declared-ledger-conflict).
+Credit is 10 but reported total liabilities are 7 under an explicit single-owner
+scope: the difference is 3. The inspector shows the contradiction while payment
+delivery remains unknown. This is a constructed control, not a live-chain loss.
+[Exact schema, legacy compatibility and reproduced fix](docs/TOKEN_LEDGER.md).
+
+[Permission and useful work](docs/POLICY_COMPARISON.md) compares 12 scripted
+sequences using pinned Workcell policy source, our archived invoice guard and
+the original externally authored AgentDojo bill criterion. Nine common-domain
+effects agree; three different-policy cases stay unscored. These are simulated
+admissions, not fresh model/SDK execution or a head-to-head win rate.
+
+```sh
+python -I -S tools/verify_policy_utility.py
+python -I -S token_ledger.py verification/token-ledger-study/example-conflict.json
+```
 
 ## Native receipt journals · v0.19.0
 
@@ -33,10 +55,10 @@ authenticated-chain capture, disk recovery or a head-to-head result.
 
 ![Native payment and principal refund review](docs/native-journal-desktop.png)
 
-## Final competition package · v0.19.1
+## Preserved competition snapshot · v0.19.1
 
 [Download the final v0.19.1 package](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1) · [Judge walkthrough](docs/JUDGES.md) · [84-second current UI demo](docs/agent-crash-lab-demo.mp4).
-This is the final review handoff for the existing NEAR HACKATHON application.
+This preserved review handoff belongs to the existing NEAR HACKATHON application.
 It aligns the journal, metadata and recorded-agent walkthrough and package links.
 The v0.19.0 inspectors and study results are unchanged. Earlier tags, including
 v0.18.1, remain available; there is no duplicate competition application.
@@ -88,7 +110,7 @@ screen recording or a new agent or chain execution. [Watch the hosted MP4](https
 NEAR HACKATHON · AI Security & Defense. The existing application remains the
 same project. The submitted X video shows the original v0.2.0; this repository and hosted
 workbench continue to improve. The v0.17.1 final snapshot is preserved, while
-v0.19.1 is the current final review package; all earlier snapshots remain unchanged. [Entry and rule notes](docs/SUBMISSION.md).
+v0.20.0 is the current review update; all earlier snapshots remain unchanged. [Entry and rule notes](docs/SUBMISSION.md).
 
 ## Try the workbench
 

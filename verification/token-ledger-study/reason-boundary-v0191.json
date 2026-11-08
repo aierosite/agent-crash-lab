@@ -1,0 +1,54 @@
+{
+  "atUtc": "2026-11-08T22:49:12.394Z",
+  "sourceCommit": "97ddc442f489166f283f3feb21389050890a837b",
+  "sourceSha256": "78af24139aac34c315448965334cdb7754d558033063bddef77e6c85747a5a83",
+  "eventHelperSha256": "9adcdd82c1fb7b01ce4874f8a58a0b3c8985c58cffccfe433a83efa9fabae9f2",
+  "casesSha256": "cd285ebf907c1d82e265a1074b83794afc5f18c8aec3be020a393ddd837c4a13",
+  "mode": "post-discovery-reproduction-of-public-v0191-not-a-holdout",
+  "validReportsAcceptedByEach": 8,
+  "rows": [
+    {
+      "id": "partial-refund-overcredit",
+      "inputSha256": "31b734c40cd9df6519237b3a561f9327141f61f7b25d81f2fcf9b550791e737a",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    },
+    {
+      "id": "pending-callback",
+      "inputSha256": "ee6f0ce2f888b97a3151c98962a0afb769a4d9d169f0a57b927a7961e1f6ac25",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    },
+    {
+      "id": "unauthorized-rejected-credit-change",
+      "inputSha256": "3e74f00461a359c87b63630eb0ba0755362769d833ee7bdf877763253f3f1ee3",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    },
+    {
+      "id": "scope-not-declared",
+      "inputSha256": "822aba62e1b457dca36ff053dabe4b42828d3166878e0feef633a6e608be100e",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    },
+    {
+      "id": "missing-receipt-and-known-disagreement",
+      "inputSha256": "2be4fa11e495ffda8bbea0ed6ada05b4cfa7b02c9eb200e142b332c06686a182",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    },
+    {
+      "id": "sum-beyond-u128",
+      "inputSha256": "eaa5f73052fc0b52934bc2730e9095243c47e43ac7be1adcfefce72251b4ed9c",
+      "originalFinancialConclusion": "inconclusive",
+      "originalAcceptedMisleadingReason": true,
+      "currentAcceptedMisleadingReason": false
+    }
+  ],
+  "meaning": "Original v0.19.1 validator/source and unchanged v2 primitive re-executed on eight fixed projections. Six forged explanations reproduced; current v3 rejects them. Not real model/payment attacks or independent accuracy."
+}

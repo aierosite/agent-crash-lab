@@ -1,10 +1,23 @@
-# Judge walkthrough · final v0.19.1
+# Judge walkthrough · v0.20.0 review update
 
-This is the current final package for the existing competition application.
-The native journal, metadata, payment and recorded-agent inspectors are unchanged
-from v0.19.0. Earlier tags remain available. Follow the two journal examples,
-then the recorded-agent/metadata examples below. The original X demo remains
-the submitted post unless an organizer confirms a replacement.
+This update uses the existing application and repository. The immutable v0.19.1
+snapshot and 84-second video remain available. Their original journal, metadata
+and recorded-agent evidence is preserved. The submitted X post remains the
+original; receipt of a manual correction is not confirmation that it was applied.
+
+## New: spot a contradiction without inventing a loss
+
+Open the [constructed ledger conflict](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=declared-ledger-conflict)
+and click **Review recording**. Under declared single-owner scope, credit 10
+versus liability 7 yields a known difference of 3. The ledger disagrees, while
+the payment conclusion stays inconclusive. This control is synthetic, not a
+live-chain incident. [Schema and reproduced explanation fix](TOKEN_LEDGER.md).
+
+Run `python -I -S tools/verify_policy_utility.py` for the [policy/utility study](POLICY_COMPARISON.md).
+It retains all 12 scripted cases, including nine common-domain cases and three
+different-policy cases outside a shared score. The external bill criterion is
+unmodified, but adapters/case selection are ours; this is not blind evaluation,
+a fresh model/SDK run or competitor superiority.
 
 ## Start here: payment can outlive the process
 
@@ -79,7 +92,7 @@ are shipped in `verification/demo-video.json`.
 
 ## Reproduce without an account, wallet or API key
 
-Download and extract the [v0.19.1 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1).
+Download and extract the [v0.20.0 release](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.20.0).
 Python 3.12+ and its standard library are enough for the local inspector.
 
 ```sh
@@ -91,10 +104,10 @@ python -I -S agent_review.py fee-protected --portable
 python -I -S launch.py
 ```
 
-The judge command checks the release's manifest, exact bytes and 21 offline
+The judge command checks the release's manifest, exact bytes and 23 offline
 Python suites. It exits zero if those declared checks pass. A report JSON's
 payment/review verdict is separate from this verifier-process exit status.
-Eleven Node commands in README test browser response boundaries. Current source,
+Twelve Node commands in README test browser response boundaries. Current source,
 extracted ZIP, GitHub Windows/Linux jobs and public-browser parity are recorded
 separately in the release validation asset; no counts imply real-world accuracy.
 
@@ -131,8 +144,10 @@ Receipt envelopes around SDK mock effects are constructed and explicitly labelle
 The original contribution is the integrated task-authority/useful-work evidence
 workflow and its finite exact-input inspectors. Financial invariants, generated
 sequence search and replay have prior art. [Workcell and other source-reviewed
-projects](COMPETITIVE_REVIEW.md) are credited; competitor suites were not executed,
-and there is no head-to-head superiority or guaranteed award claim.
+projects](COMPETITIVE_REVIEW.md) are credited. The later pinned Workcell offline
+unit baseline and scripted policy study are documented in
+[POLICY_COMPARISON.md](POLICY_COMPARISON.md); they establish no end-to-end
+competitor accuracy, head-to-head superiority or guaranteed award.
 
 AI-assisted implementation is allowed by the event. [MIT license](../LICENSE),
 [source/provenance map](PRIOR_ART.json), external license notices, original

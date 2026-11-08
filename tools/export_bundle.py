@@ -11,7 +11,8 @@ def browser_catalog():
     labels=[('upstream-failed-withdrawal','Rights lost after a failed withdrawal'),('ai-payment','An allowed agent payment'),('upstream-refund','A fully returned deposit'),('upstream-healthy','Two successful withdrawals'),('upstream-auth','An unauthorized withdrawal fails')]
     recordings=[{'id':key,'title':title,'path':'verification/token-study/'+key+'.json'} for key,title in labels]
     recordings.extend({'id':key,'title':title,'path':'verification/event-study/inputs/'+key+'.json'} for key,title in [('sdk-1-bob','Official mint event · constructed envelope'),('sdk-3-alice','Official burn event · constructed envelope'),('sdk-5-bob','Official batch transfer · constructed envelope')])
-    names.update(r['path'] for r in recordings)
+    ledger_recordings=[*recordings,{'id':'declared-ledger-conflict','title':'Constructed ledger conflict · credit10 / liability7','path':'verification/token-ledger-study/example-conflict.json'}]
+    names.update(r['path'] for r in ledger_recordings)
     captures=ROOT/'verification/rpc-study';source_files=['verification/rpc-study/EXPECTED-FROM-PUBLISHED.json']
     for request in sorted(captures.rglob('request.json')):
         source_files.extend((request.parent/file).relative_to(ROOT).as_posix() for file in ['request.json','response.json','observation.json'])
@@ -45,7 +46,7 @@ def browser_catalog():
         result=journal_api['assess_bundle'](*[(ROOT/row[k]).read_bytes().decode('utf-8') for k in ['journal','policy']])
         row['reportSha256']=hashlib.sha256(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     names.update([journal['module'],journal['mathModule'],*[r[k] for r in journal['samples'] for k in ['journal','policy']]])
-    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'metadataReview':metadata,'nativeJournal':journal,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
+    return {'format':'agent-crash-lab/browser-v1','scenarios':app.CURATED,'baselines':list(app.BASELINES.values()),'tokenRecordings':recordings,'tokenLedgerRecordings':ledger_recordings,'sourceCorroboration':source,'tokenPolicy':policy,'agentRuns':agents,'metadataReview':metadata,'nativeJournal':journal,'files':{n:{'bytes':(ROOT/n).stat().st_size,'sha256':hashlib.sha256((ROOT/n).read_bytes()).hexdigest()} for n in sorted(names)}}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('scenario',choices=[*app.CATALOG,'browser-catalog']);p.add_argument('output',type=Path);a=p.parse_args()

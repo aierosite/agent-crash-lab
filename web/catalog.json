@@ -742,6 +742,53 @@
       "path": "verification/event-study/inputs/sdk-5-bob.json"
     }
   ],
+  "tokenLedgerRecordings": [
+    {
+      "id": "upstream-failed-withdrawal",
+      "title": "Rights lost after a failed withdrawal",
+      "path": "verification/token-study/upstream-failed-withdrawal.json"
+    },
+    {
+      "id": "ai-payment",
+      "title": "An allowed agent payment",
+      "path": "verification/token-study/ai-payment.json"
+    },
+    {
+      "id": "upstream-refund",
+      "title": "A fully returned deposit",
+      "path": "verification/token-study/upstream-refund.json"
+    },
+    {
+      "id": "upstream-healthy",
+      "title": "Two successful withdrawals",
+      "path": "verification/token-study/upstream-healthy.json"
+    },
+    {
+      "id": "upstream-auth",
+      "title": "An unauthorized withdrawal fails",
+      "path": "verification/token-study/upstream-auth.json"
+    },
+    {
+      "id": "sdk-1-bob",
+      "title": "Official mint event · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-1-bob.json"
+    },
+    {
+      "id": "sdk-3-alice",
+      "title": "Official burn event · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-3-alice.json"
+    },
+    {
+      "id": "sdk-5-bob",
+      "title": "Official batch transfer · constructed envelope",
+      "path": "verification/event-study/inputs/sdk-5-bob.json"
+    },
+    {
+      "id": "declared-ledger-conflict",
+      "title": "Constructed ledger conflict · credit10 / liability7",
+      "path": "verification/token-ledger-study/example-conflict.json"
+    }
+  ],
   "sourceCorroboration": {
     "module": "tools/verify_token_rpc.py",
     "files": [
@@ -3061,6 +3108,10 @@
       "bytes": 14757,
       "sha256": "29555ace87615789da687c99e1f7844e4ff1dd94232da41e8e99ee84e69ded79"
     },
+    "verification/token-ledger-study/example-conflict.json": {
+      "bytes": 3792,
+      "sha256": "07ec64dfa7a11a70e07e30d568325839cab71f50ac905afcc2ee436ef6b0d77a"
+    },
     "verification/token-policy/inputs/accepted-deposit/evidence.json": {
       "bytes": 15647,
       "sha256": "fbca0fb2fefcc5b2d22a7461ed6bba10940d114aa03e3128929bf85647a3131d"
@@ -3226,8 +3277,8 @@
       "sha256": "aa6eace3deb320bc9363f58747ae5d28bb753629e6ddffc2ded90095d21c1511"
     },
     "workbench.py": {
-      "bytes": 27581,
-      "sha256": "d67ef46d163c46db3a18b297ad1c3493f7ac46122b96ef7d6f7e0a33b47d4fdc"
+      "bytes": 27717,
+      "sha256": "d46812a944fd8a65e21fac61262a57fe4e571a6e634ff78fe3881fddae4c4d27"
     }
   }
 }

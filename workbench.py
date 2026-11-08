@@ -172,7 +172,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=='/api/catalog':return self.send(200,{'scenarios':CURATED,'baselines':list(BASELINES),'sessionToken':self.server.token,'native':self.native_status()})
         if path=='/api/native-result':
             return self.send(200,json.loads(NATIVE_RESULT.read_bytes())) if NATIVE_RESULT.exists() else self.send(404,{'error':'Fresh native comparison has not been recorded'})
-        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.20.0.dev1','coreVersion':core.VERSION})
+        if path=='/api/health':return self.send(200,{'ok':True,'version':'0.20.0','coreVersion':core.VERSION})
         if path=='/api/agent-catalog':return self.send(200,json.loads((ROOT/'web/catalog.json').read_bytes())['agentRuns'])
         if path=='/api/metadata-catalog':return self.send(200,metadata_catalog())
         if path=='/api/native-journal-catalog':return self.send(200,journal_catalog())
@@ -189,7 +189,7 @@ class Handler(BaseHTTPRequestHandler):
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
             source=catalog['sourceCorroboration']
             ledger=path=='/api/token-ledger-catalog'
-            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenRecordings']],'assessorSha256':catalog['files']['token_ledger.py' if ledger else 'token_review.py']['sha256'],**({'baseAssessorSha256':catalog['files']['token_review.py']['sha256']} if ledger else {}),
+            return self.send(200,{'recordings':[{**r,**catalog['files'][r['path']]} for r in catalog['tokenLedgerRecordings' if ledger else 'tokenRecordings']],'assessorSha256':catalog['files']['token_ledger.py' if ledger else 'token_review.py']['sha256'],**({'baseAssessorSha256':catalog['files']['token_review.py']['sha256']} if ledger else {}),
                                  'sourceCorroboration':{**source,'verifierSha256':catalog['files'][source['module']]['sha256'],'hashes':{p:catalog['files'][p]['sha256'] for p in source['files']}}})
         if path=='/api/token-policy-catalog':
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes());policy=catalog['tokenPolicy']
@@ -198,11 +198,11 @@ class Handler(BaseHTTPRequestHandler):
             from urllib.parse import parse_qs
             cid=parse_qs(urlsplit(self.path).query).get('case',[''])[0];catalog=json.loads((ROOT/'web/catalog.json').read_bytes());entry=next((r for r in catalog['tokenPolicy']['cases'] if r['id']==cid),None)
             return self.send(200,{'format':'agent-crash-lab/token-policy-bundle-v1','task_utf8':(ROOT/entry['task']).read_bytes().decode('utf-8'),'evidence_utf8':(ROOT/entry['evidence']).read_bytes().decode('utf-8')}) if entry else self.send(404,{'error':'Unknown token payment example'})
-        if path=='/api/token-recording':
+        if path in ['/api/token-recording','/api/token-ledger-recording']:
             from urllib.parse import parse_qs
             sid=parse_qs(urlsplit(self.path).query).get('case',[''])[0]
             catalog=json.loads((ROOT/'web/catalog.json').read_bytes())
-            entry=next((r for r in catalog['tokenRecordings'] if r['id']==sid),None)
+            entry=next((r for r in catalog['tokenLedgerRecordings' if path=='/api/token-ledger-recording' else 'tokenRecordings'] if r['id']==sid),None)
             return self.send(200,(ROOT/entry['path']).read_bytes()) if entry else self.send(404,{'error':'Unknown token recording'})
         if path=='/api/token-source-file':
             from urllib.parse import parse_qs

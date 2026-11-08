@@ -1,4 +1,4 @@
-# Final competition entry · v0.19.1
+# Existing competition entry · v0.20.0 update
 
 Agent Crash Lab · **AI Security & Defense** (`security`) · solo entry.
 
@@ -8,21 +8,19 @@ project directory lists Agent Crash Lab in AI Security & Defense. This is the
 same project and public repository; a new release needs no duplicate application.
 
 - Public repository: https://github.com/aierosite/agent-crash-lab
-- Final review package: https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1
+- Latest review package: https://github.com/aierosite/agent-crash-lab/releases/tag/v0.20.0
 - Judge instructions: [JUDGES.md](JUDGES.md)
 - Start the hosted demo: https://aierosite.github.io/agent-crash-lab/web/journal.html?browser=1&case=after-payment-before-ack
 - Current video: [84-second captioned UI walkthrough](agent-crash-lab-demo.mp4)
 - Original submitted X post: https://x.com/Amiinjalili/status/2117754340073230518
 
-## What this final package changes
+## What this update changes
 
-The v0.19.0 inspectors, payment mathematics, recorded research, browser response
-contracts and executable examples are unchanged. Version metadata, the judge
-route and current video are aligned for final review. Original v0.18.1 and
-v0.19.0 tags remain immutable. The video uses seven preserved actual UI frames;
-it is not continuous screen recording, fresh inference or a new chain execution.
-One restored-password example is a constructed control. Provenance and original
-capture hashes are in `verification/demo-video.json`.
+Version 0.20.0 adds a separate reported-ledger diagnostic, exact explanation
+validation and a source-informed policy/utility study. The original v2 financial
+primitive, historical study reports, v0.19.1 snapshot and 84-second video remain
+unchanged. The new constructed ledger example is labelled separately. No new
+application, social post, wallet change or organizer confirmation is claimed.
 
 ## Submission and correction status
 

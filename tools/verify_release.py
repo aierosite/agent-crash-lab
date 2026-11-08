@@ -16,7 +16,7 @@ def main():
         files=m['files'];bad=[];runs=[]
         if m['format']!='agent-crash-lab/release-v1' or type(files) is not dict:raise ValueError('Invalid manifest')
         names=json.dumps(sorted(files),separators=(',',':')).encode()
-        if sha256(names).hexdigest()!='f0044cb4b5b4422d3dc723befe839aeb9a0a979cba5a6782a47fd300c272cef0':
+        if sha256(names).hexdigest()!='dc28b37a4b7b0a33412fc2b6c4fd073ca7aac17c9e4d361b31bc93d89c9ac6e9':
             raise ValueError('Release inventory mismatch')
         for name,expected in files.items():
             path=ROOT/name
@@ -25,7 +25,7 @@ def main():
             raw=path.read_bytes()
             if len(raw)!=expected['bytes'] or sha256(raw).hexdigest()!=expected['sha256']:bad.append({'file':name,'error':'hash-or-size'})
         if sys.argv[1:] and not bad:
-            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',),('test_token_review.py',),('test_token_ledger.py',),('test_token_rpc.py',),('tools/verify_event_study.py',),('test_token_policy.py',),('tools/verify_sdk_study.py',),('tools/verify_agent_loop.py',),('test_capture.py',),('test_billing_study.py',),('test_agent_review.py',),('test_state_review.py',),('tools/verify_metadata_study.py',),('test_receipt_journal.py',),('test_journal_http.py',)):
+            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',),('test_token_review.py',),('test_token_ledger.py',),('test_policy_utility.py',),('test_token_rpc.py',),('tools/verify_event_study.py',),('test_token_policy.py',),('tools/verify_sdk_study.py',),('tools/verify_agent_loop.py',),('test_capture.py',),('test_billing_study.py',),('test_agent_review.py',),('test_state_review.py',),('tools/verify_metadata_study.py',),('test_receipt_journal.py',),('test_journal_http.py',)):
                 r=subprocess.run([sys.executable,'-I','-S',script,*args],cwd=ROOT,capture_output=True,timeout=60)
                 runs.append({'suite':script,'exitCode':r.returncode,'error':r.stderr.decode(errors='replace')[-1200:] if r.returncode else ''})
         ok=not bad and all(r['exitCode']==0 for r in runs)

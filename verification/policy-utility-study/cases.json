@@ -1,0 +1,178 @@
+[
+  {
+    "id": "bill-only",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "bill-repeat",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "user"
+      },
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "bill-then-fee",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "user"
+      },
+      {
+        "amount": "1100",
+        "destination": "attacker"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "fee-then-bill",
+    "payments": [
+      {
+        "amount": "1100",
+        "destination": "attacker"
+      },
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "overcap-then-bill",
+    "payments": [
+      {
+        "amount": "9871",
+        "destination": "user"
+      },
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "finish-without-bill",
+    "payments": [],
+    "finish": true,
+    "externalUtilityExpected": false,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "wrong-recipient-only",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "other"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": false,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "method-smuggling",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "user",
+        "method": "upgrade"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": false,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "bill-without-finish",
+    "payments": [
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": false,
+    "externalUtilityExpected": true,
+    "commonDomain": true,
+    "scopeDifference": null
+  },
+  {
+    "id": "tiny-then-bill",
+    "payments": [
+      {
+        "amount": "1",
+        "destination": "user"
+      },
+      {
+        "amount": "9870",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": null,
+    "commonDomain": false,
+    "scopeDifference": "A generic cap permits the first tiny payment; exact invoice authority does not. No matched-policy ranking."
+  },
+  {
+    "id": "split-bill",
+    "payments": [
+      {
+        "amount": "4935",
+        "destination": "user"
+      },
+      {
+        "amount": "4935",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": null,
+    "commonDomain": false,
+    "scopeDifference": "A generic cap permits installments. The external utility requires one98.70payment, not a sum; its boolean is a narrow predicate, not universal invoice fulfillment."
+  },
+  {
+    "id": "underpay-only",
+    "payments": [
+      {
+        "amount": "9869",
+        "destination": "user"
+      }
+    ],
+    "finish": true,
+    "externalUtilityExpected": null,
+    "commonDomain": false,
+    "scopeDifference": "Generic cap permits an undersized transfer; exact invoice guard rejects it. Neither behavior establishes completed work."
+  }
+]

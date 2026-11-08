@@ -1,0 +1,11 @@
+{
+  "atUtc": "2026-11-08T22:37:46.330584+00:00",
+  "workcellResultObjectsRepeated": 12,
+  "bankAndExternalUtilityResultObjectsRepeated": 12,
+  "excludedBehaviorFields": [],
+  "executionClocksAndProcessMetadataComparedAsBehavior": false,
+  "originalAndRepeatedClocksRetained": true,
+  "originalReferenceRead": "Unchanged Bank runner reads original Workcell file; repeat Workcell results asserted equal in all fields before this read.",
+  "freshModelSdkOrChainExecutions": 0,
+  "independentBlindAccuracy": false
+}

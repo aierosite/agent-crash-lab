@@ -1,0 +1,649 @@
+[
+  {
+    "id": "bill-only",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "bill-repeat",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 0,
+          "recovered": true
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "9870",
+          "allowed": false,
+          "violationsCount": 1,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "bill-then-fee",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "1100",
+            "destination": "attacker"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        },
+        {
+          "proposal": {
+            "amount": "1100",
+            "destination": "attacker"
+          },
+          "spentBefore": "9870",
+          "allowed": false,
+          "violationsCount": 2,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "fee-then-bill",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "1100",
+            "destination": "attacker"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "1100",
+            "destination": "attacker"
+          },
+          "spentBefore": "0",
+          "allowed": false,
+          "violationsCount": 1,
+          "spentAfter": "0"
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "overcap-then-bill",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9871",
+            "destination": "user"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9871",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": false,
+          "violationsCount": 2,
+          "spentAfter": "0"
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "finish-without-bill",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    },
+    "workcell": {
+      "decisions": [],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    }
+  },
+  {
+    "id": "wrong-recipient-only",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "other"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "other"
+          },
+          "spentBefore": "0",
+          "allowed": false,
+          "violationsCount": 1,
+          "spentAfter": "0"
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    }
+  },
+  {
+    "id": "method-smuggling",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user",
+            "method": "upgrade"
+          },
+          "httpStatus": 400,
+          "newFakeEffects": 0,
+          "recovered": false
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user",
+            "method": "upgrade"
+          },
+          "spentBefore": "0",
+          "allowed": false,
+          "violationsCount": 1,
+          "spentAfter": "0"
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    }
+  },
+  {
+    "id": "bill-without-finish",
+    "commonDomain": true,
+    "scopeDifference": null,
+    "finish": false,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "tiny-then-bill",
+    "commonDomain": false,
+    "scopeDifference": "A generic cap permits the first tiny payment; exact invoice authority does not. No matched-policy ranking.",
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "1",
+            "destination": "user"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "httpStatus": 200,
+          "newFakeEffects": 1,
+          "recovered": false
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9870",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": true,
+      "simulatedSpent": "9870"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "1",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "1"
+        },
+        {
+          "proposal": {
+            "amount": "9870",
+            "destination": "user"
+          },
+          "spentBefore": "1",
+          "allowed": false,
+          "violationsCount": 1,
+          "spentAfter": "1"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "1",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": false,
+      "simulatedSpent": "1"
+    }
+  },
+  {
+    "id": "split-bill",
+    "commonDomain": false,
+    "scopeDifference": "A generic cap permits installments. The external utility requires one98.70payment, not a sum; its boolean is a narrow predicate, not universal invoice fulfillment.",
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "4935",
+            "destination": "user"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        },
+        {
+          "proposal": {
+            "amount": "4935",
+            "destination": "user"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "4935",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "4935"
+        },
+        {
+          "proposal": {
+            "amount": "4935",
+            "destination": "user"
+          },
+          "spentBefore": "4935",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9870"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "4935",
+          "destination": "user"
+        },
+        {
+          "amount": "4935",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": false,
+      "simulatedSpent": "9870"
+    }
+  },
+  {
+    "id": "underpay-only",
+    "commonDomain": false,
+    "scopeDifference": "Generic cap permits an undersized transfer; exact invoice guard rejects it. Neither behavior establishes completed work.",
+    "finish": true,
+    "bank": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9869",
+            "destination": "user"
+          },
+          "httpStatus": 409,
+          "newFakeEffects": 0,
+          "recovered": false
+        }
+      ],
+      "effects": [],
+      "externalUtility": false,
+      "simulatedSpent": "0"
+    },
+    "workcell": {
+      "decisions": [
+        {
+          "proposal": {
+            "amount": "9869",
+            "destination": "user"
+          },
+          "spentBefore": "0",
+          "allowed": true,
+          "violationsCount": 0,
+          "spentAfter": "9869"
+        }
+      ],
+      "effects": [
+        {
+          "amount": "9869",
+          "destination": "user"
+        }
+      ],
+      "externalUtility": false,
+      "simulatedSpent": "9869"
+    }
+  }
+]

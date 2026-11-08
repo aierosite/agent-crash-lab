@@ -1,6 +1,6 @@
-# Reported ledger diagnostic · private v0.20.0 candidate
+# Reported ledger diagnostic · v0.20.0
 
-This candidate does not change the frozen v0.19.1 competition package.
+The immutable v0.19.1 competition snapshot remains available.
 The separate `token_ledger.py` wrapper leaves `token_review.py` and its v2
 financial reports byte-identical. The custody UI/API and `python -I -S
 token_ledger.py recording.json` use v3. Both wrapper `assessor_sha256` and
@@ -28,8 +28,8 @@ when the supplied single-owner numbers already contradict each other.
 
 The study's eight registered controls preserve exact numeric endpoint facts from
 Workcell's pinned public unit tests plus explicitly labelled constructed controls.
-They include a partial-refund credit of10 with reported liability7, undeclared
-scope, missing receipts, pending evidence and sums beyondU128. Synthetic wrapper
+They include a partial-refund credit of 10 with reported liability 7, undeclared
+scope, missing receipts, pending evidence and sums beyond U128. Synthetic wrapper
 heights, token identity and net-only receipt events are **not** actual Workcell
 transactions or chain captures. No upstream source code is copied into this study.
 The original tests are at
@@ -46,5 +46,25 @@ remain unchanged.
 The original `/api/token-review` and `/api/token-catalog` remain v2.
 The new UI uses the separate `/api/token-ledger-review` and
 `/api/token-ledger-catalog` routes. The new POST route rejects inputs larger
-than2MiB before parsing; the worker enforces the same bound. Source/fingerprint
+than 2 MiB before parsing; the worker enforces the same bound. Source/fingerprint
 changes do not overwrite archived reports or their original expectations.
+
+## Reproduce the explanation-boundary fix
+
+The original published v0.19.1 browser validator accepted a forged nonempty
+explanation while leaving its financial conclusion inconclusive. The exact old
+source is preserved as text with its commit/hash. Eight valid reports still
+validate; six fixed forged-explanation controls reproduce the old acceptance
+and are rejected by the current validator. This is post-discovery reproduction,
+not unseen attacks or independent accuracy. The new boundary reconstructs every
+expected reason from the exact supplied input and declared finite semantics.
+
+```sh
+node test_token_ledger_contract.js
+python -I -S test_token_ledger.py
+```
+
+Open the [constructed example](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=declared-ledger-conflict)
+and click **Review recording**. The separate new GET route is
+`/api/token-ledger-recording`; its catalog adds this ninth labelled example.
+The legacy catalog and recording route retain their original eight cases.

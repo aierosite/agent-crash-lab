@@ -1,0 +1,95 @@
+{
+  "asset": {
+    "code_hash": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+    "contract": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+    "deployed_after": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+    "deployed_before": "FWaoschJ3vhK3Tg3rzhTpv5WBdF8MX1RKDT3AasU7EeQ",
+    "sha256": "d797affb5549a8be5a6019510b9ecab7d05a4291f146499e305e320643b25ced",
+    "standard": "nep141"
+  },
+  "format": "agent-crash-lab/token-recording-v1",
+  "id": "declared-ledger-conflict",
+  "network": "sandbox",
+  "scope": {
+    "closed_intervals": true,
+    "meaning": "Source-informed constructed financial projection of exact upstream numeric endpoint facts. Ordered heights, code identity and minimal net-event receipt wrapper are synthetic; not an actual Workcell transaction, trace, closed capture, authentication or blind benchmark.",
+    "single_owner_whole_vault": true
+  },
+  "source": {
+    "kind": "synthetic-control",
+    "url": "https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/tests/economics.test.ts",
+    "sha256": "aaa7e8423458dac5484bb0b61209e951b0fd3fdae52edf10ce0b483747b5cc81",
+    "case_pointer": "a partial refund limits credit to net externally measured funding",
+    "created_at": "2026-11-08T21:59:29.622527+00:00"
+  },
+  "vault": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+  "steps": [
+    {
+      "id": "partial-refund-overcredit",
+      "operation": "deposit",
+      "source_pointer": "/external-cases/partial-refund-overcredit",
+      "before": {
+        "block_hash": "8phvTi1EydS5qHcJiJZXsjhkvZ4guNThXZcTDBsUXZhG",
+        "block_height": 1,
+        "held": "0",
+        "credit": "0",
+        "pending": "0",
+        "reserved": "0",
+        "liabilities": "0"
+      },
+      "after": {
+        "block_hash": "9GSFd9cS559GCVV9wbHi4YrXjMfmZcHjvNTjQp1rXxai",
+        "block_height": 2,
+        "held": "7",
+        "credit": "10",
+        "pending": "0",
+        "reserved": "0",
+        "liabilities": "7"
+      },
+      "transactions": [
+        {
+          "source_pointer": "/synthetic-minimal-net-wrapper",
+          "result": {
+            "transaction": {
+              "hash": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw"
+            },
+            "transaction_outcome": {
+              "id": "DgbJVywbs7Mh4jdrE6z7KHEv9PZ7RJbTiWbPq6D5zzCw",
+              "block_hash": "HAJzsoBvKmb3CN6D7eGbMvKvvEFYjw1GsyosySznrh9Q",
+              "outcome": {
+                "executor_id": "vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                "receipt_ids": [
+                  "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq"
+                ],
+                "logs": [],
+                "status": {
+                  "SuccessValue": ""
+                }
+              }
+            },
+            "receipts_outcome": [
+              {
+                "id": "DmAGf9Ynb23qzyKs5ZXZwVjcpcBwursTWhKjhGS25ssq",
+                "block_hash": "HWkAWYLZyRdZYwE9arNeoVjcsRL3RXsEm55anTRh5Q6z",
+                "outcome": {
+                  "executor_id": "token.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet",
+                  "receipt_ids": [],
+                  "logs": [
+                    "EVENT_JSON:{\"standard\":\"nep141\",\"version\":\"1.0.0\",\"event\":\"ft_transfer\",\"data\":[{\"amount\":\"7\",\"old_owner_id\":\"owner.fixture\",\"new_owner_id\":\"vault.wclmw0hwd34a7zz.wclmw01u4t5g33g.testnet\"}]}"
+                  ],
+                  "status": {
+                    "SuccessValue": ""
+                  }
+                }
+              }
+            ],
+            "status": {
+              "SuccessValue": ""
+            },
+            "final_execution_status": "FINAL"
+          }
+        }
+      ]
+    }
+  ]
+}

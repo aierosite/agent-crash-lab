@@ -1,0 +1,11 @@
+// Optional fresh pure-source side. No upstream source is bundled or downloaded.
+import fs from 'node:fs';import {createHash} from 'node:crypto';import {fileURLToPath,pathToFileURL} from 'node:url';import {dirname,resolve} from 'node:path';
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),data=resolve(root,'verification/policy-utility-study');
+if(process.version!=='v24.21.0')throw Error('This recorded study used Node24.21.0. Use that pinned runtime to reproduce it.');
+if(process.argv.length!==3)throw Error('Pass the reviewed pinned checkout path to src/agent-policy.ts. Nothing is downloaded.');
+const spec=JSON.parse(fs.readFileSync(resolve(data,'registration.json'),'utf8')),modulePath=resolve(process.argv[2]),raw=fs.readFileSync(modulePath);
+if(createHash('sha256').update(raw).digest('hex')!==spec.workcell.sha256)throw Error('The supplied policy source differs from the pinned Workcell study. Review the source revision before running it.');
+const {evaluateProposal}=await import(pathToFileURL(modulePath).href),cases=JSON.parse(fs.readFileSync(resolve(data,'cases.json'),'utf8'));
+const rows=cases.map(c=>{let spent=0n;const effects=[],decisions=[];for(const proposal of c.payments){const before=String(spent),value=evaluateProposal(proposal,spec.policy,before);if(value.allowed){effects.push({amount:proposal.amount,destination:proposal.destination});spent+=BigInt(proposal.amount);}decisions.push({proposal,spentBefore:before,allowed:value.allowed,violationsCount:value.violations.length,spentAfter:String(spent)});}return {id:c.id,decisions,effects,simulatedSpent:String(spent)};});
+const recorded=JSON.parse(fs.readFileSync(resolve(data,'observations.json'),'utf8'));for(const row of rows){const wanted=recorded.find(c=>c.id===row.id)?.workcell;if(!wanted||JSON.stringify(row.decisions)!==JSON.stringify(wanted.decisions)||JSON.stringify(row.effects)!==JSON.stringify(wanted.effects)||row.simulatedSpent!==wanted.simulatedSpent)throw Error('Fresh source admissions differ from the recorded projection: '+row.id);}
+console.log(JSON.stringify({mode:'fresh-pinned-pure-function-with-simulated-admission-ledger',sourceSha256:spec.workcell.sha256,cases:rows.length,allRecordedAdmissionProjectionsMatched:true,rows,newModelSdkWalletOrChainExecutions:0}));

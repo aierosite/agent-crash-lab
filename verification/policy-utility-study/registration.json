@@ -1,0 +1,54 @@
+{
+  "format": "agent-crash-lab/policy-utility-calibration-v1",
+  "registeredAtUtc": "2026-11-08T22:35:52.672017+00:00",
+  "originalPrivateRegistrationSha256": "e1527152958a09ced4e6bbb0309ec5c13668e68cbe12d29d24d092aa3b7a1005",
+  "releaseProjection": "12full case/admission/effect/utility records. Repeated fixture history and human error messages are omitted; no result/unsupported case is omitted. This projection is not a claim of raw process-output identity.",
+  "sourceFiles": {
+    "bank": {
+      "path": "evidence/exposure-study/bank_tools.py",
+      "sha256": "5aba5022b111d281f177b0e8a590ebd1fbc03b26a2ad4e9e8d1ed60aeb29e99e"
+    },
+    "context": {
+      "path": "evidence/exposure-study/banking-context.json",
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "utility": {
+      "path": "evidence/exposure-study/reference/user_tasks.py",
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    }
+  },
+  "workcell": {
+    "repository": "https://github.com/dotmantissa/workcell",
+    "revision": "b80bcecc1d30263662b985fc025b83233e07a173",
+    "path": "src/agent-policy.ts",
+    "sha256": "fffd28ce3e4bb04e5a87cc8282c555509068ec12450d24b0beedccbaecd01455",
+    "sourceNotDistributed": true,
+    "mode": "Recorded unmodified pure-function admissions, not full competitor runtime or chain execution."
+  },
+  "utilitySource": {
+    "repository": "https://github.com/ethz-spylab/agentdojo",
+    "revision": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "version": "v1.2.2 resolves v1.UserTask0.utility",
+    "methodAstSha256": "b33bcdce1486a539f4f96042ed28f7ee4e6b3e7e15752b55b08ee5fa2a3254af",
+    "executedUnmodifiedAst": true,
+    "scope": "Externally authored matching-transaction predicate. It accepts an extra fee if the bill is also present; it is not a general safety gold. Mapping, cases and simulation adapter are ours."
+  },
+  "cases": 12,
+  "commonCases": 9,
+  "differentPolicyCases": 3,
+  "policy": {
+    "maxSpend": "9870",
+    "maxPerPayment": "9870",
+    "destination": "user"
+  },
+  "dataFiles": {
+    "cases.json": "dfe564d75160fb29f63a8bfe06e49122ec5bd2cbc5d3a9c390f4b6b31fb5ad97",
+    "observations.json": "08179a7650b5fef8e9296b8e21bad7de2848d52bcb55f43cf21d4d67fcc0d88c",
+    "reproduction.json": "d1ff8dc57a18f5dfabb6efb59931eb03826deb70303cd11b84f3afeed274f8f0"
+  },
+  "mapping": "Logicaluser->the fixed external bill recipient; attacker/other->explicit fictional fixture map. Canonical positive atomic strings below9872 are mapped to at most2decimal fixture numbers for Bank only. Unknown proposal keys are retained and must be rejected. No arbitrary model/signing/tool program is executed.",
+  "effects": "Bank.dispatch executes unchanged source using an explicitly fake in-memory SDK recorder. Workcell.evaluateProposal executes unchanged pure source in its pinned Node/isolated network namespace, with a simulated admission ledger. These are not real model actions, SDK calls, receipts, wallet operations, contract executions or chain transactions.",
+  "independentBlindOrRanking": false,
+  "rawPrivateWorkcellResultSha256": "682888636e67765c2043c0f056eeef661d0d6bcb57eadae4b216268ffc793bd4",
+  "rawPrivateBankResultSha256": "a11d5ccb5fcb362eccf7bdb1c503bcbd5461493a46078952785e7c97c8fe1ad5"
+}
