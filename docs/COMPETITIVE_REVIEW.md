@@ -29,6 +29,16 @@ This is a narrow contribution alongside existing financial invariants, receipt r
 3. **Deployment consistency:** the browser stages only catalogued files and checks their exact byte sizes/SHA256 before loading them. This detects partial/stale deployment; it is not a signature or proof of website/CDN authenticity.
 4. **Clear integration and review:** a [capture-to-CI guide](INTEGRATION.md), explicit trust notice and direct browser/offline entry points reduce reviewer friction. Existing saved entry and X demo links remain intact.
 
+## Official implementation execution added in v0.13.1
+
+The official pinned NEAR SDK resolver now has actual Rust mock-host execution
+evidence: 162 registered combinations matched the existing payment inspector,
+with 28 policy/evidence controls and preserved first outputs. No engine fix was
+needed. An opt-in fresh execution command and separate SDK CI workflow complement
+offline replay. [Exact method and provenance limits](SDK_CONFORMANCE.md).
+This addresses SDK implementation conformance, while independent end-to-end agent
+grading, deployed-WASM behavior and a head-to-head Workcell run remain unproven.
+
 ## Remaining gaps
 
 The v0.13.0 token-policy component applies the Workcell-inspired distinction between economic invariants to arbitrary supplied per-order policies. Gross commitment, recipient, burned refund and minimum SDK settlement are separate; allowed split payments, independent equal-price intents and returned promises remain supported. It follows recorded body/data-ID relations rather than treating root success or equal amounts as delivery. A Python inspector, a separately implemented browser response boundary and exact-input replay form one workflow. This is original source-informed implementation and grading, not an independently executed comparison with Workcell or a claim that Workcell lacks these capabilities. The two additional historical transaction-status observations are public-node reads, not fresh contract execution or authenticated consensus.

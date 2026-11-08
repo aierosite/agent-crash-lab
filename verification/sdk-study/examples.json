@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sdk-mock-accepted",
+    "sdkCase": "100-zero-full-sender-1",
+    "expected": {
+      "amount": "100",
+      "refund": "0",
+      "burn": "0",
+      "used": "100",
+      "cost": "100",
+      "settled": "100"
+    },
+    "expectedGate": 0,
+    "policy": "Study policy; burn forbidden in the public burn example."
+  },
+  {
+    "id": "sdk-mock-burn",
+    "sdkCase": "100-full-half-sender-0",
+    "expected": {
+      "amount": "100",
+      "refund": "0",
+      "burn": "50",
+      "used": "100",
+      "cost": "100",
+      "settled": "50"
+    },
+    "expectedGate": 1,
+    "policy": "Study policy; burn forbidden in the public burn example."
+  }
+]

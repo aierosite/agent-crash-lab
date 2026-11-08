@@ -93,7 +93,10 @@ six malformed-envelope/atomic-merge failures and semantic ablation plans
 are retained. Three encoding controls exposed Python's incorrect byte-encoding
 autodetection for SDK hook output; UTF-16/32 and UTF-8 BOM data now follow the
 SDK invalid-output branch. A separate non-UTF8 resolver control stays unknown.
-These are source-informed parser/profile checks; the Rust SDK was not executed.
+These are source-informed parser/profile checks; the Rust SDK was not executed
+in that initial v0.13.0 study. The separate [v0.13.1 SDK conformance study](SDK_CONFORMANCE.md)
+subsequently executed the unchanged official resolver in a mock host and preserves
+its original outputs, injected-state assumptions and constructed-adapter limits.
 Pre-publication boundary checks also preserve five financial counterfeits
 accepted by an initial browser guard. Explicit null receipt fields no longer
 inherit defaults for omitted fields. RPC response IDs require presence,

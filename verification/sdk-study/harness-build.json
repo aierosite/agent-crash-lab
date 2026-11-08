@@ -1,0 +1,6 @@
+{
+  "startedAtUtc": "2026-11-08T07:34:44.389902+00:00",
+  "elapsedSeconds": 5.184445499966387,
+  "buildExitCode": 0,
+  "command": "set -eu\nexport RUSTUP_HOME=/tmp/agent-crash-lab-sdk-v013-tools/rustup\nexport CARGO_HOME=/tmp/agent-crash-lab-sdk-v013-tools/cargo\nexport CARGO_TARGET_DIR=/tmp/agent-crash-lab-sdk-v013-tools/target\nexport CARGO_BUILD_JOBS=2\nexport PATH=\"$CARGO_HOME/bin:$PATH\"\ncargo build --offline --manifest-path /tmp/agent-crash-lab-sdk-v013-study/harness/Cargo.toml\n"
+}

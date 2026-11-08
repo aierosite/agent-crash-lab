@@ -1,0 +1,11 @@
+   Compiling near-sys v0.4.1 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-sys)
+   Compiling near-crypto-hash v0.2.0 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-crypto-hash)
+   Compiling near-sdk-env v0.1.9 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-sdk-env)
+   Compiling near-sdk-macros v5.30.1 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-sdk-macros)
+   Compiling near-sdk-core v4.4.2 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-sdk-core)
+   Compiling near-digest v0.1.5 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-digest)
+   Compiling near-global-contracts v0.3.3 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-global-contracts)
+   Compiling near-sdk v5.30.1 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-sdk)
+   Compiling near-contract-standards v5.30.1 (/tmp/agent-crash-lab-sdk-v013-study/upstream/near-contract-standards)
+   Compiling crash-lab-sdk-resolver-study v0.1.0 (/tmp/agent-crash-lab-sdk-v013-study/harness)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.05s

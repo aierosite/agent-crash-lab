@@ -1,0 +1,7 @@
+{
+  "atUtc": "2026-11-08T07:34:03.873538+00:00",
+  "beforeHarnessExecution": true,
+  "cases": 162,
+  "sha256": "d6207434f878c030788f07d567da69349807f5c37b8821874efaa3f5218fca15",
+  "note": "At u128::MAX above is capped to MAX and is a deliberate duplicate boundary control; partial/zero balance values also coincide for amount1. Counts are registered executions, not distinct behaviors or independent samples."
+}

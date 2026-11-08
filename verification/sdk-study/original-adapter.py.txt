@@ -1,0 +1,118 @@
+"""Compare owned receipt projection with actual pinned SDK mock-host observations."""
+from pathlib import Path
+from hashlib import sha256
+import base64, copy, json, runpy
+
+H = Path(__file__).resolve().parent
+P = H.parent / 'policy-v0.13.0/release-checkout'
+pack = lambda value: json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(',', ':')).encode()
+encode = lambda raw: base64.b64encode(raw).decode()
+identity = lambda text: sha256(text.encode()).hexdigest()[:44]
+
+def reference(row):
+    before, after = row['ledger_before'], row['ledger_after']
+    amount = int(row['case']['amount'])
+    refund = int(after['payer'] or 0) - int(before['payer'] or 0)
+    burn = int(before['supply']) - int(after['supply'])
+    assert amount == int(before['supply'])
+    assert before['sink'] == after['sink']
+    assert int(before['receiver']) - int(after['receiver']) == refund + burn
+    for state in (before, after):
+        assert sum(int(state[key] or 0) for key in ('payer', 'receiver', 'sink')) == int(state['supply'])
+    assert int(row['resolver_return']) == amount - refund
+    return {key: str(value) for key, value in dict(amount=amount, refund=refund, burn=burn,
+        used=int(row['resolver_return']), cost=amount-refund, settled=amount-refund-burn).items()}
+
+def fixture(row):
+    case = row['case']; cid = case['id']
+    tx, payment, hook, resolver, data, block = [identity(cid + key) for key in ('tx', 'payment', 'hook', 'resolver', 'data', 'block')]
+    payer, payee, token = 'payer.testnet', 'payee.testnet', 'token.testnet'
+    created = row['created_mock_receipts']
+    assert len(created) == 2 and created[0]['receiver_id'] == payee and created[1]['receiver_id'] == token
+    hook_action = created[0]['actions'][0]['FunctionCallWeight']
+    resolver_action = created[1]['actions'][0]['FunctionCallWeight']
+    assert created[1]['receipt_indices'] == [hook_action['receipt_index']]
+    assert created[0]['receipt_indices'] == []
+    def action(method, raw, deposit, gas):
+        return {'FunctionCall': {'method_name': method, 'args': encode(raw), 'deposit': deposit, 'gas': int(gas)}}
+    initial = action('ft_transfer_call', pack({'receiver_id': payee, 'amount': case['amount'], 'msg': 'study'}), '1', 300000000000000)
+    def actual_action(raw):
+        return action(bytes(raw['method_name']).decode(), bytes(raw['args']), raw['attached_deposit'], raw['prepaid_gas'])
+    def body(rid, pred, receiver, act, inputs=None, outputs=None):
+        return {'receipt_id': rid, 'predecessor_id': pred, 'receiver_id': receiver, 'receipt': {'Action': {
+            'signer_id': payer, 'actions': [act], 'input_data_ids': inputs or [], 'output_data_receivers': outputs or []}}}
+    bodies = [body(payment, payer, token, initial), body(hook, token, payee, actual_action(hook_action),
+        outputs=[{'data_id': data, 'receiver_id': token}]), body(resolver, token, token, actual_action(resolver_action), inputs=[data])]
+    def outcome(rid, executor, children, status, logs=None):
+        return {'id': rid, 'block_hash': block, 'outcome': {'executor_id': executor, 'receipt_ids': children,
+            'status': status, 'logs': logs or [], 'gas_burnt': 1, 'tokens_burnt': '0'}}
+    hook_status = {'SuccessValue': encode(bytes(case['hook_result']))} if case['hook_result'] is not None else {
+        'Failure': {'ActionError': {'index': 0, 'kind': {'FunctionCallError': {'ExecutionError': 'Mocked failed receiver promise'}}}}}
+    returned = {'SuccessValue': encode(pack(row['resolver_return']))}
+    result = {'final_execution_status': 'FINAL', 'status': returned,
+        'transaction': {'hash': tx, 'signer_id': payer, 'receiver_id': token, 'actions': [initial]},
+        'transaction_outcome': outcome(tx, payer, [payment], {'SuccessReceiptId': payment}),
+        'receipts_outcome': [outcome(payment, token, [hook, resolver], {'SuccessReceiptId': resolver}, row['initial_logs']),
+            outcome(hook, payee, [], hook_status), outcome(resolver, token, [], returned, row['resolver_logs'])], 'receipts': bodies}
+    request = {'jsonrpc': '2.0', 'id': cid, 'method': 'tx_status', 'params': {'tx_hash': tx, 'sender_account_id': payer, 'wait_until': 'FINAL'}}
+    evidence = {'format': 'agent-crash-lab/token-execution-v1', 'network': 'sandbox',
+        'source': {'kind': 'synthetic', 'note': 'Owned constructed receipt topology around exact executed official Rust SDK mock-host event strings and callback bytes. IDs, FINAL envelope, block/gas metadata and callback data-ID assignment are constructed; not an RPC, deployed WASM or consensus observation.'},
+        'observations': [{'id': cid, 'request': request, 'response': {'jsonrpc': '2.0', 'id': cid, 'result': result}}]}
+    expected = reference(row)
+    task = {'format': 'agent-crash-lab/token-task-v1', 'profile': 'near-nep141-sdk-receipts/v1',
+        'authority': {'kind': 'reconstructed', 'note': 'Study policy, not signed customer authority.'},
+        'evidence_sha256': sha256(pack(evidence)).hexdigest(), 'network': 'sandbox', 'token_contract': token, 'payer': payer,
+        'closed_horizon': True, 'horizon_note': 'Only this constructed SDK host-mock episode is supplied; no outside history claim.',
+        'intents': [{'id': 'A', 'recipient': payee, 'max_gross': case['amount'], 'min_settled': expected['settled'], 'max_burn': expected['burn']}],
+        'bindings': [{'id': 'payment-1', 'intent': 'A', 'tx_hash': tx, 'receipt_id': payment}]}
+    return task, evidence, expected
+
+def run(root=P):
+    assess = runpy.run_path(str(root / 'token_policy.py'))['assess']
+    rows = json.loads((H / 'sdk-original.json').read_bytes())
+    assert [row['case'] for row in rows] == json.loads((H / 'cases.json').read_bytes())
+    primary, reports, controls = [], [], []
+    for row in rows:
+        task, evidence, expected = fixture(row)
+        report = assess(pack(task), pack(evidence))
+        actual = {key: report['payments'][0].get(key) for key in expected}
+        primary.append({'id': row['case']['id'], 'expected': expected, 'actual': actual,
+            'gate': report['gate'], 'matched': expected == actual and report['gate'] == 0})
+        reports.append({'id': row['case']['id'], 'report': report})
+    selected = ['100-zero-full-sender-1', '100-partial-full-sender-1', '100-full-full-sender-1',
+        '100-full-half-sender-0', '100-number-full-sender-0', '100-full-zero-sender-1']
+    for cid in selected:
+        row = next(x for x in rows if x['case']['id'] == cid)
+        base, evidence, expected = fixture(row)
+        variants = [('allowed', base, evidence, 0)]
+        cap = copy.deepcopy(base); cap['intents'][0]['max_gross'] = '99'; variants.append(('gross-cap', cap, evidence, 1))
+        minimum = copy.deepcopy(base); minimum['intents'][0]['min_settled'] = str(int(expected['settled']) + 1); variants.append(('under-settlement', minimum, evidence, 1))
+        if int(expected['burn']):
+            burn = copy.deepcopy(base); burn['intents'][0]['max_burn'] = '0'; variants.append(('burn-forbidden', burn, evidence, 1))
+        missing = copy.deepcopy(evidence); result = missing['observations'][0]['response']['result']; rid = base['bindings'][0]['receipt_id']
+        result['receipts_outcome'] = [x for x in result['receipts_outcome'] if x['id'] != result['receipts_outcome'][0]['outcome']['status']['SuccessReceiptId']]
+        task_missing = copy.deepcopy(base); task_missing['evidence_sha256'] = sha256(pack(missing)).hexdigest(); variants.append(('missing-resolver', task_missing, missing, 2))
+        for label, task, source, gate in variants:
+            report = assess(pack(task), pack(source))
+            controls.append({'id': cid + '/' + label, 'expectedGate': gate, 'gate': report['gate'], 'matched': gate == report['gate']})
+    # Equal-price independent orders use different SDK executions, not amount matching.
+    first, second = [fixture(next(r for r in rows if r['case']['id'] == cid)) for cid in (selected[0], selected[2])]
+    task = copy.deepcopy(first[0]); evidence = copy.deepcopy(first[1]); evidence['observations'] += second[1]['observations']
+    task['evidence_sha256'] = sha256(pack(evidence)).hexdigest(); intent = copy.deepcopy(second[0]['intents'][0]); intent['id'] = 'B'; task['intents'].append(intent)
+    binding = copy.deepcopy(second[0]['bindings'][0]); binding.update(id='payment-2', intent='B'); task['bindings'].append(binding)
+    report = assess(pack(task), pack(evidence)); controls.append({'id': 'independent-equal-price-orders', 'expectedGate': 0, 'gate': report['gate'], 'matched': report['gate'] == 0 and len(report['intents']) == 2})
+    # Exact input binding must reject an edited original SDK log under the old policy.
+    base, evidence, _ = first; changed = copy.deepcopy(evidence); changed['observations'][0]['response']['result']['receipts_outcome'][0]['outcome']['logs'][0] += ' '
+    try:
+        assess(pack(base), pack(changed)); rejected = False
+    except ValueError:
+        rejected = True
+    controls.append({'id': 'changed-sdk-log-rejects-old-task-binding', 'matched': rejected})
+    return {'primary': primary, 'controls': controls, 'reports': reports}
+
+if __name__ == '__main__':
+    result = run()
+    (H / 'first-comparison.json').write_text(json.dumps(result, indent=2) + '\n')
+    print(json.dumps({'primaryMatched': sum(r['matched'] for r in result['primary']), 'primaryTotal': len(result['primary']),
+        'controlsMatched': sum(r['matched'] for r in result['controls']), 'controlsTotal': len(result['controls']),
+        'disagreements': [r for r in result['primary'] + result['controls'] if not r['matched']]}))

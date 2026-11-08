@@ -102,7 +102,7 @@ class PaymentPolicy(unittest.TestCase):
    req=urllib.request.Request(origin+'/api/token-policy',data=raw,headers={'Content-Type':'application/json','X-CrashLab-Token':token or server.token})
    with urllib.request.urlopen(req,timeout=10) as r:return json.loads(r.read())
   try:
-   catalog=get('/api/token-policy-catalog');self.assertEqual(len(catalog['cases']),9);self.assertEqual(catalog['assessorSha256'],sha256((ROOT/'token_policy.py').read_bytes()).hexdigest())
+   catalog=get('/api/token-policy-catalog');self.assertEqual(len(catalog['cases']),11);self.assertEqual(catalog['assessorSha256'],sha256((ROOT/'token_policy.py').read_bytes()).hexdigest())
    for c in catalog['cases']:
     b=get('/api/token-policy-input?case='+c['id']);self.assertEqual(post(pack(b)),assess(b['task_utf8'].encode(),b['evidence_utf8'].encode()))
    for raw in [b'{}',b'{bad',pack({'task_path':'private.txt'}),b'[]']:

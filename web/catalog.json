@@ -902,6 +902,20 @@
         "kind": "observed-historical",
         "task": "verification/token-policy/inputs/accepted-deposit/task.json",
         "evidence": "verification/token-policy/inputs/accepted-deposit/evidence.json"
+      },
+      {
+        "id": "sdk-mock-accepted",
+        "title": "Rust SDK mock · accepted payment",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/sdk-mock-accepted/task.json",
+        "evidence": "verification/token-policy/inputs/sdk-mock-accepted/evidence.json"
+      },
+      {
+        "id": "sdk-mock-burn",
+        "title": "Rust SDK mock · refund burn",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/sdk-mock-burn/task.json",
+        "evidence": "verification/token-policy/inputs/sdk-mock-burn/evidence.json"
       }
     ]
   },
@@ -1870,6 +1884,22 @@
       "bytes": 780,
       "sha256": "83ec87ce7b8ae4f8a44d035db15731bbc4cdfdddebc8f6f75a6af6faeb97786c"
     },
+    "verification/token-policy/inputs/sdk-mock-accepted/evidence.json": {
+      "bytes": 3926,
+      "sha256": "788dd108b17af54a85747fda4cf9c286f6a988ac478a761619e81ba0a495549b"
+    },
+    "verification/token-policy/inputs/sdk-mock-accepted/task.json": {
+      "bytes": 723,
+      "sha256": "5992349c69ec176774ac19196ec2c509d94accee653e331a3adeaec5d6c6fcd3"
+    },
+    "verification/token-policy/inputs/sdk-mock-burn/evidence.json": {
+      "bytes": 4134,
+      "sha256": "551d33a786a992cd0571367984084d12f7dfe5bb0dcd7d17459eabb6c7457fcf"
+    },
+    "verification/token-policy/inputs/sdk-mock-burn/task.json": {
+      "bytes": 722,
+      "sha256": "762f7d3c47cfff8a3505a3f9b74a409148df8ff7bed52fbfa097edc754316bac"
+    },
     "verification/token-policy/inputs/sender-deleted-burn/evidence.json": {
       "bytes": 3951,
       "sha256": "d47dbd3fdbbd64f8440520231500f785305b6c80431a6885a28392742f7a9b85"
@@ -1900,7 +1930,7 @@
     },
     "workbench.py": {
       "bytes": 22661,
-      "sha256": "feaae2f1fc0aa13bb337d66be3607e28eadc199c9fe1bb92f8052c6e9aca5a92"
+      "sha256": "b767adfa6bbe7bb370ea8c020d6407b99fcbea86f8392e5fddfb2ef555ee6794"
     }
   }
 }

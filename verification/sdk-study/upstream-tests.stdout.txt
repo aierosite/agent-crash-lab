@@ -1,0 +1,17 @@
+
+running 12 tests
+test non_fungible_token::events::tests::nft_burn ... ok
+test fungible_token::events::tests::ft_mints ... ok
+test non_fungible_token::events::tests::nft_mint ... ok
+test fungible_token::events::tests::ft_transfer ... ok
+test fungible_token::events::tests::ft_burn ... ok
+test non_fungible_token::events::tests::nft_transfer ... ok
+test fungible_token::events::tests::ft_burns ... ok
+test fungible_token::events::tests::ft_mint ... ok
+test non_fungible_token::events::tests::nft_burns ... ok
+test fungible_token::events::tests::ft_transfers ... ok
+test non_fungible_token::events::tests::nft_mints ... ok
+test non_fungible_token::events::tests::nft_transfers ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

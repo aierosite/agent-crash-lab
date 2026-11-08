@@ -1,0 +1,76 @@
+{
+  "format": "agent-crash-lab/sdk-execution-registration-v1",
+  "registeredAtUtc": "2026-11-08T07:30:47.247934+00:00",
+  "status": "registered-before-SDK-execution",
+  "baselineRelease": "v0.13.0",
+  "baselineCommit": "625988294d88fcd4e94f1e3cb18c04af815fdc38",
+  "question": "Does the receipt-profile inspector agree with execution of the pinned official NEAR SDK transfer resolver in an owned local mocked environment?",
+  "officialSource": {
+    "repository": "https://github.com/near/near-sdk-rs",
+    "revision": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+    "package": "near-contract-standards",
+    "version": "5.30.1",
+    "minimumRust": "1.95"
+  },
+  "phases": [
+    "Provision an isolated official Rust toolchain without changing user/system defaults; preserve exact compiler version and lockfile.",
+    "Inspect source/build scripts, then run externally authored fungible-token unit tests on an unchanged pinned checkout; preserve full output and source integrity.",
+    "Implement a separate owned harness calling the actual unmodified resolver against mocked host state and promise result bytes.",
+    "Compare original SDK return values, ledger deltas and emitted event strings with the current frozen inspector through an explicitly constructed receipt adapter. Preserve every first result and disagreement before fixes."
+  ],
+  "registeredDimensions": {
+    "initialTransfer": [
+      "1",
+      "100",
+      "340282366920938463463374607431768211455"
+    ],
+    "hookResult": [
+      "valid zero unused",
+      "valid partial unused",
+      "valid full unused",
+      "valid unused above transfer",
+      "failed promise",
+      "malformed JSON",
+      "JSON number rather than U128 string",
+      "UTF-16 JSON",
+      "UTF-8 BOM JSON"
+    ],
+    "receiverBalance": [
+      "sufficient for requested refund",
+      "partially spent",
+      "zero"
+    ],
+    "senderLedgerEntry": [
+      "present",
+      "absent"
+    ],
+    "positiveControls": [
+      "legitimate accepted payment",
+      "permitted full refund",
+      "partial refund within gross/burn limits",
+      "same-price independent intents"
+    ],
+    "negativeControls": [
+      "gross cap below original transfer despite refund",
+      "refund burn forbidden",
+      "minimum settlement above actual non-refunded non-burned allocation"
+    ],
+    "evidenceControls": [
+      "actual SDK event strings preserved exactly",
+      "missing resolver remains unknown",
+      "changed original log text cannot silently keep the old exact-input report"
+    ]
+  },
+  "failureCriteria": [
+    "Any disagreement between supported known inspector payment amounts and SDK ledger-derived refund/burn/return value is a defect or an explicitly unsupported profile; it cannot be omitted to improve counts.",
+    "A registered permitted fully evidenced payment cannot be labelled breached merely because it shares a price or uses an allowed refund.",
+    "Incomplete causal evidence cannot be promoted to exact settlement.",
+    "Upstream test/build failure is recorded as failure, not independent evidence of correctness."
+  ],
+  "limits": [
+    "SDK mock-host execution is not a NEAR network transaction, a deployed-WASM run, consensus authentication or an agent execution.",
+    "Our parameter choices, receipt adapter and grading remain same-author and source-informed. External implementation authorship does not make the complete study an independent blind evaluation.",
+    "No new model, paid API, RPC, wallet, mainnet, registration, message or financial transaction is permitted."
+  ],
+  "timestampNote": "Initial manually typed future timestamp corrected to filesystem creation/write time before SDK execution."
+}

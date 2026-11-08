@@ -1,0 +1,8 @@
+{
+  "startedAtUtc": "2026-11-08T07:32:25.971718+00:00",
+  "endedAtUtc": "2026-11-08T07:33:45.890385+00:00",
+  "elapsedSeconds": 79.91866749996552,
+  "exitCode": 0,
+  "command": "set -eu\nexport RUSTUP_HOME=/tmp/agent-crash-lab-sdk-v013-tools/rustup\nexport CARGO_HOME=/tmp/agent-crash-lab-sdk-v013-tools/cargo\nexport CARGO_TARGET_DIR=/tmp/agent-crash-lab-sdk-v013-tools/target\nexport CARGO_BUILD_JOBS=2\nexport PATH=\"$CARGO_HOME/bin:$PATH\"\ncd /tmp/agent-crash-lab-sdk-v013-study/upstream\ncargo test -p near-contract-standards --lib fungible_token -- --nocapture\n",
+  "scope": "Unchanged upstream Rust unit tests using mocked host; no node, transaction or network RPC."
+}

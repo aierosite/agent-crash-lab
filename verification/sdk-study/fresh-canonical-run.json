@@ -1,0 +1,99 @@
+{
+  "format": "agent-crash-lab/sdk-fresh-result-v1",
+  "startedAtUtc": "2026-11-08T07:45:12.411900+00:00",
+  "endedAtUtc": "2026-11-08T07:46:26.722379+00:00",
+  "sdkRevision": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+  "compiler": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 22.1.2",
+  "sourceFilesChecked": 407,
+  "freshSdkExecutions": 162,
+  "currentProjectionMatches": 162,
+  "originalSdkObjectsMatched": true,
+  "sdkOutputSha256": "597cdafc6967562a35d1717279a7823e7bdf962607f7902415ce7c4c0e4ddff1",
+  "newTransactions": 0,
+  "newModelCalls": 0,
+  "workspace": "/tmp/agent-crash-lab-sdk-v013-ported-run2",
+  "commands": [
+    {
+      "label": "clone",
+      "command": [
+        "git",
+        "clone",
+        "-c",
+        "core.autocrlf=false",
+        "--no-checkout",
+        "--filter=blob:none",
+        "https://github.com/near/near-sdk-rs.git",
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/upstream"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "checkout",
+      "command": [
+        "git",
+        "-C",
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/upstream",
+        "checkout",
+        "--detach",
+        "bacd081a0bd648d840b814dab7677e1f3330afbb"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "revision",
+      "command": [
+        "git",
+        "-C",
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/upstream",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "compiler",
+      "command": [
+        "rustc",
+        "--version",
+        "--verbose"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "upstream-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/upstream/Cargo.toml",
+        "-p",
+        "near-contract-standards",
+        "--lib",
+        "fungible_token",
+        "--",
+        "--nocapture"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "build",
+      "command": [
+        "cargo",
+        "build",
+        "--locked",
+        "--manifest-path",
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/harness/Cargo.toml"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "sdk-execution",
+      "command": [
+        "/tmp/agent-crash-lab-sdk-v013-ported-run2/target/debug/crash-lab-sdk-resolver-study"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "meaning": "Fresh unmodified upstream SDK mock-host execution and own receipt projection. Not deployed WASM, an agent run, external blind evaluation or authenticated consensus."
+}

@@ -6,6 +6,14 @@ An agent can return the correct answer and still pay twice for the same task. A 
 
 ![Proven excess with incomplete synthetic evidence](docs/async-evidence.jpg)
 
+## Executed against the official Rust SDK · v0.13.1
+
+**[Inspect the SDK mock-host refund-burn example](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=sdk-mock-burn)**
+
+The payment inspector now has implementation-execution evidence alongside source review. An unchanged, pinned NEAR SDK resolver ran for 162 registered combinations of hook bytes, balance and sender registration. Its actual return values, ledger changes and original event strings agree with the inspector's six payment amounts. Twenty-eight policy/evidence controls preserve allowed payments, breaches and missing-receipt uncertainty. These are correlated conformance cases, not an accuracy sample.
+
+The Rust harness, locked dependencies, first outputs, frozen original reports, offline replay and an opt-in fresh execution command are shipped. Receipt topology is our constructed adapter around actual SDK host-mock outputs; this is neither deployed-WASM/agent execution nor independent blind grading. Native core and payment inspector logic are unchanged. [Reproduce the study and inspect its limits](docs/SDK_CONFORMANCE.md).
+
 ## Check each order's token payment terms · v0.13.0
 
 **[Inspect an order that pays twice](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=repeated-payment-breaches-cap)**
@@ -16,7 +24,7 @@ A payment of 100 with a burned refund of 80 can cost the payer 100 while allocat
 
 ![Constructed SDK-style example: cost100, settlement20, refund burn80](docs/token-payment-terms.png)
 
-The portable checks retain prior reports and reproduced mistakes. References and grading remain our source-informed work; no new SDK/contract execution, cryptographic consensus proof or external blind accuracy claim is made. [Format, CLI, evidence and limits](docs/TOKEN_POLICY.md).
+The initial v0.13.0 checks retain prior reports and reproduced mistakes. References and grading remain our source-informed work; that initial study did not execute the SDK. The separate v0.13.1 host-mock study above adds actual SDK execution without a cryptographic consensus proof or external blind accuracy claim. [Format, CLI, evidence and limits](docs/TOKEN_POLICY.md).
 
 ## Read the canonical event owner · v0.12.1
 

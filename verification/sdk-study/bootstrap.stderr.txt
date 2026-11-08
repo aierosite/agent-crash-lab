@@ -1,0 +1,12 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  6 20.3M    6 1260k    0     0  1077k      0  0:00:19  0:00:01  0:00:18 1077k 58 20.3M   58 11.9M    0     0  5236k      0  0:00:03  0:00:02  0:00:01 5236k100 20.3M  100 20.3M    0     0  7180k      0  0:00:02  0:00:02 --:--:-- 7178k
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    80  100    80    0     0    272      0 --:--:-- --:--:-- --:--:--   273
+info: profile set to minimal
+info: default host tuple is x86_64-unknown-linux-gnu
+info: syncing channel updates for 1.95.0-x86_64-unknown-linux-gnu
+info: latest update on 2026-04-16 for version 1.95.0 (59807616e 2026-04-14)
+info: downloading 3 components
+info: default toolchain set to 1.95.0-x86_64-unknown-linux-gnu

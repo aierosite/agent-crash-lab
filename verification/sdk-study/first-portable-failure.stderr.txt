@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/tmp/agent-crash-lab-sdk-v013-portable/tools/run_sdk_study.py", line 72, in <module>
+    main()
+  File "/tmp/agent-crash-lab-sdk-v013-portable/tools/run_sdk_study.py", line 45, in main
+    source_check()
+  File "/tmp/agent-crash-lab-sdk-v013-portable/tools/run_sdk_study.py", line 44, in source_check
+    assert len(raw) == meta['bytes'] and sha256(raw).hexdigest() == meta['sha256'], name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: .cargo/audit.toml

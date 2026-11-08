@@ -1,0 +1,9 @@
+{
+  "atUtc": "2026-11-08T07:37:57.325251+00:00",
+  "sdkSourceUnchanged": true,
+  "sourceFilesChecked": 407,
+  "exactSdkOutputReproduced": true,
+  "bytes": 338357,
+  "sha256": "597cdafc6967562a35d1717279a7823e7bdf962607f7902415ce7c4c0e4ddff1",
+  "scope": "Fresh same-binary mocked-state executions, not a fresh build or an independent author."
+}
