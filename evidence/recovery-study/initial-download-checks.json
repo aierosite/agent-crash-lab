@@ -1,0 +1,48 @@
+{
+  "atUtc": "2026-11-08T02:37:35.300533+00:00",
+  "actualDownloadedCliChecks": [
+    {
+      "file": "python-sibling-refund-diverted-episode.json",
+      "inputSha256": "f1cf431c60981a700131838c051e73c7b50ec451c3240234a39f59022493318a",
+      "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+      "gate": 1,
+      "matched": true
+    },
+    {
+      "file": "python-sibling-refund-partial-episode.json",
+      "inputSha256": "1ff50b28f02ab8c51223f3567e7cd66f5bcfb0d5e5a4f3ca7ff5234148bf6e41",
+      "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "python-sibling-refunds-returned-episode.json",
+      "inputSha256": "1e6a9248913c7d028ad6f17e1975d61bd6c571d29185f47a3e14e74f0714fd09",
+      "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+      "gate": 0,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refund-diverted-episode.json",
+      "inputSha256": "f1cf431c60981a700131838c051e73c7b50ec451c3240234a39f59022493318a",
+      "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+      "gate": 1,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refund-partial-episode.json",
+      "inputSha256": "1ff50b28f02ab8c51223f3567e7cd66f5bcfb0d5e5a4f3ca7ff5234148bf6e41",
+      "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refunds-returned-episode.json",
+      "inputSha256": "1e6a9248913c7d028ad6f17e1975d61bd6c571d29185f47a3e14e74f0714fd09",
+      "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+      "gate": 0,
+      "matched": true
+    }
+  ],
+  "scope": "Actual UI downloads from local and WebAssembly paths, then real CLI gate executions; no model, signing or native transaction."
+}

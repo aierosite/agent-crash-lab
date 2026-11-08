@@ -1,0 +1,81 @@
+"""Original source-bound reconstruction and explicit visibility projections; never executes a transaction."""
+from pathlib import Path
+from hashlib import sha256
+from copy import deepcopy
+import base64,json
+HERE=Path(__file__).resolve().parent
+pack=lambda value:json.dumps(value,ensure_ascii=True,sort_keys=True,separators=(',',':')).encode()
+CASES=[
+ {'id':'original-both','mode':'original','scope':['RF01','RF02']},
+ {'id':'original-allowed-scope','mode':'original','scope':['RF01']},
+ {'id':'original-diverted-scope','mode':'original','scope':['RF02']},
+ {'id':'A-outcomes-without-bodies','mode':'no-bodies','target':'RF01','scope':['RF01','RF02']},
+ {'id':'B-outcomes-without-bodies','mode':'no-bodies','target':'RF02','scope':['RF01','RF02']},
+ {'id':'A-complementary-anchored','mode':'partition','target':'RF01','visibleRefunds':[0,1],'anchored':True,'scope':['RF01','RF02']},
+ {'id':'B-complementary-anchored','mode':'partition','target':'RF02','visibleRefunds':[0,1],'anchored':True,'scope':['RF01','RF02']},
+ {'id':'B-only-allowed-refund','mode':'partition','target':'RF02','visibleRefunds':[0],'anchored':True,'scope':['RF01','RF02']},
+ {'id':'B-only-diverted-refund','mode':'partition','target':'RF02','visibleRefunds':[1],'anchored':True,'scope':['RF01','RF02']},
+ {'id':'B-unanchored-partials','mode':'partition','target':'RF02','visibleRefunds':[0,1],'anchored':False,'scope':['RF01','RF02']},
+ {'id':'B-conflicting-refund-identity','mode':'conflict','target':'RF02','scope':['RF01','RF02']},
+ {'id':'B-well-formed-conflict','mode':'valid-conflict','target':'RF02','scope':['RF01','RF02']},
+]
+def original():return json.loads((HERE/'archive/observation.json').read_bytes())
+def reread():return json.loads((HERE/'archive/reread.json').read_bytes())
+def build(case):
+ data=original();rpcs=deepcopy(data['rpcObservations']);anchors=[]
+ positions={row['id']:index for row,index in zip(data['cases'],[8,17])}
+ if case['mode']=='no-bodies':rpcs[positions[case['target']]]['response']['result'].pop('receipts')
+ elif case['mode']=='partition':
+  index=positions[case['target']];complete=deepcopy(rpcs[index]);full=complete['response']['result']
+  parent_rows=next(row for row in reread()['cases'] if row['id']==case['target'])['parents']
+  refunds={row['principalRefunds'][0]['refund'] for row in parent_rows}
+  groups=[]
+  for visible in case['visibleRefunds']:
+   view=deepcopy(complete);result=view['response']['result'];selected=parent_rows[visible]['principalRefunds'][0]['refund']
+   result['receipts']=[body for body in result['receipts'] if body['receipt_id'] not in refunds or body['receipt_id']==selected]
+   result['receipts_outcome']=[outcome for outcome in result['receipts_outcome'] if outcome['id'] not in refunds or outcome['id']==selected]
+   result['final_execution_status']='INCLUDED_FINAL';view['request']['params']['wait_until']='NONE';groups.append(view)
+  rpcs[index]=groups[0];rpcs.extend(groups[1:])
+  if case['anchored']:
+   wanted={row['failedParent'] for row in parent_rows}
+   wanted.update(parent_rows[i]['principalRefunds'][0]['refund'] for i in case['visibleRefunds'])
+   for block in sorted({row['block_hash'] for row in full['receipts_outcome'] if row['id'] in wanted}):
+    tag='constructed-anchor-'+str(len(rpcs));anchors.append({'source':'recording','pointer':'/rpcObservations/'+str(len(rpcs))})
+    rpcs.append({'request':{'jsonrpc':'2.0','id':tag,'method':'block','params':{'finality':'final'}},
+                 'response':{'jsonrpc':'2.0','id':tag,'result':{'header':{'hash':block}}}})
+ elif case['mode'] in ['conflict','valid-conflict']:
+  view=deepcopy(rpcs[positions[case['target']]]);view['response']['result']['final_execution_status']='INCLUDED_FINAL';view['request']['params']['wait_until']='NONE'
+  target=next(row for row in reread()['cases'] if row['id']==case['target'])['parents'][1]['principalRefunds'][0]['refund']
+  body=next(body for body in view['response']['result']['receipts'] if body['receipt_id']==target)
+  body['receiver_id']='vault.callbacklab.near'
+  if case['mode']=='valid-conflict':
+   outcome=next(row for row in view['response']['result']['receipts_outcome'] if row['id']==target)
+   outcome['outcome']['executor_id']=body['receiver_id']
+  rpcs.append(view)
+ recording=(HERE/'archive/observation.json').read_bytes() if case['mode']=='original' else pack({**data,'rpcObservations':rpcs,
+  'projectionNotice':'Constructed observation projection of an archived native run, not a response actually observed from a node.'})
+ basis=(HERE/'archive/precommit.json').read_bytes();source={'recording':recording,'basis':basis}
+ intents=[];attempts=[];constraints=[]
+ for row,status_index,send_index in zip(data['cases'],[8,17],[7,16]):
+  cid=row['id'];in_scope=cid in case['scope'];tx=data['rpcObservations'][status_index]['response']['result']['transaction']
+  if in_scope:
+   intents.append({'id':cid,'protected_accounts':['vault.callbacklab.near'],'merchant':'absent-one.siblingrefund.near'})
+   constraints.extend([{'id':cid+'-recovery-'+mode,'intent':cid,'metric':'principal_recovery','mode':mode,
+                        'allowed_accounts':['vault.callbacklab.near']} for mode in ['full','destinations']])
+   constraints.append({'id':cid+'-external','intent':cid,'metric':'protected_external_disbursement','cap':'0'})
+  sub={'ref':{'source':'recording','pointer':'/rpcObservations/'+str(send_index)},
+       'packet_sha256':sha256(base64.b64decode(data['rpcObservations'][send_index]['request']['params']['signed_tx_base64'])).hexdigest()}
+  attempt={'id':cid+'-attempt','tx_hash':row['txHash'],'role':'task' if in_scope else 'unrelated','intent':cid if in_scope else None,'submissions':[sub]}
+  if not in_scope:attempt['reason']='Other archived experiment condition; declared outside this policy scope, not asserted safe.'
+  attempts.append(attempt)
+ task={'format':'agent-crash-lab/task-v1','profile':'near-sandbox-2.14/native-v1',
+  'authority':{'kind':'reconstructed' if case['mode']=='original' else 'counterfactual','basis':[{'source':'basis','pointer':''}],
+   'note':'Original pre-product plan permits only vault recovery. Policy/task reconstruction is not a historic customer promise. Visibility projections and block anchors are explicitly constructed; no new node/model execution or authenticated history.'},
+  'sources':{name:sha256(raw).hexdigest() for name,raw in source.items()},
+  'run':{'id':'sibling-recovery-'+case['id'],'chain_id':data['chainId'],'protocol_version':88,
+   'capture':{'source':'recording','pointer':''},'closed_horizon':True,'final_block_refs':anchors,
+   'horizon_note':'Finite original two-attempt owned experiment; scope and missing evidence remain explicit. No future-run guarantee.'},
+  'intents':intents,'attempts':attempts,'constraints':constraints,'utility':{'required':[],'intermediate':[]}}
+ return {'format':'agent-crash-lab/bundle-v1','task_utf8':pack(task).decode(),
+         'sources_utf8':{name:raw.decode() for name,raw in source.items()},
+         'classification':'archived-native-reconstruction' if case['mode']=='original' else 'synthetic-archive-projection'}

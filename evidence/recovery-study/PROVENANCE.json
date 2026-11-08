@@ -1,0 +1,26 @@
+{
+  "atUtc": "2026-11-08T02:22:48.209469+00:00",
+  "baseCommit": "be17b23a294419c256308de2564a67da6e3ace7b",
+  "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+  "nearcoreSourcePin": "bc4e9e8cfb03d9e82f027883055624e18576993e",
+  "sourceReview": {
+    "url": "https://github.com/near/nearcore/blob/bc4e9e8cfb03d9e82f027883055624e18576993e/core/primitives/src/receipt.rs",
+    "sha256": "7744b80e4ec7e265a92f28ceb83be14ff611debe8cc8161ed6725419840ced8c",
+    "included": false,
+    "meaning": "Source was reviewed locally; full upstream file is not bundled. Constructors separate deposit and gas refunds; explicit refund_to overrides predecessor."
+  },
+  "originalArchiveSha256": "57b809be458121f459668d3b06ed7573b9863ae6ca67c927107c852aed684ac0",
+  "originalNativeConditions": 2,
+  "originalSignedRootAttempts": 2,
+  "originalChains": 1,
+  "newNativeExecutions": 0,
+  "newInferenceCalls": 0,
+  "nativeArtifact": "a2ad8d2da73576d23f3104c6c5d789569534de517678b8b3842e8668764a5082",
+  "limits": [
+    "Original same-operator deliberately unrestricted official fixture, not a competitor exploit.",
+    "Policy reconstruction and constructed visibility/anchor projections are explicit; no model output exists in this archive.",
+    "Independent reference implementation is not independent authorship or external audit.",
+    "The first study had one reference/fixture error. Both exact first results and the corrected reference are replayable.",
+    "The optional local admin scripts are archived as text and are not invoked by the verifier."
+  ]
+}

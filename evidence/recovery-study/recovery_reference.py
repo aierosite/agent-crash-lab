@@ -1,0 +1,63 @@
+"""Original plan/reread arithmetic reference. No assessor or builder imports."""
+from pathlib import Path
+import json,sys
+HERE=Path(__file__).resolve().parent
+AMOUNT=100000000000000000000000
+def reference(case):
+ rows={};states=[]
+ for intent in case['scope']:
+  affected=case.get('target')==intent
+  invalid_extra=affected and case['mode']=='conflict'
+  full=not affected or case['mode']=='original'
+  conflict=affected and case['mode']=='valid-conflict'
+  known=[0,1] if full or invalid_extra else case.get('visibleRefunds',[]) if case.get('anchored') else []
+  if conflict:known=[]
+  returned=sum(AMOUNT for i in known if intent=='RF01' or i==0)
+  diverted=sum(AMOUNT for i in known if intent=='RF02' and i==1)
+  status='conflict' if conflict else 'breached' if diverted else 'within' if full else 'unknown'
+  for mode in ['full','destinations']:rows[intent+'-recovery-'+mode]={'status':status}
+  rows[intent+'-external']={'status':'conflict' if conflict else 'within' if full else 'unknown',
+                           'known_subtotal':'0','exact_total':'0' if full and not conflict else None}
+  rows[intent+'-projection']={'returned':str(returned),'diverted':str(diverted)}
+  states.append(status)
+ gate=1 if 'breached' in states else 2 if any(s!='within' for s in states) else 0
+ return {'constraints':rows,'gate':gate}
+def archive_controls():
+ raw=json.loads((HERE/'archive/observation.json').read_bytes());reread=json.loads((HERE/'archive/reread.json').read_bytes())
+ rpcs=raw['rpcObservations']
+ def balance(index,account):
+  row=rpcs[index];assert row['request']['method']=='query' and row['request']['params']['request_type']=='view_account'
+  assert row['request']['params']['account_id']==account
+  return int(row['response']['result']['amount'])
+ vault='vault.callbacklab.near';outsider='receiver.callbacklab.near'
+ assert balance(9,vault)-balance(3,vault)==0
+ assert balance(10,outsider)-balance(4,outsider)==0
+ assert balance(18,vault)-balance(12,vault)==-AMOUNT
+ assert balance(19,outsider)-balance(13,outsider)==AMOUNT
+ for index,condition in [(8,reread['cases'][0]),(17,reread['cases'][1])]:
+  result=rpcs[index]['response']['result'];assert result['final_execution_status']=='FINAL'
+  body={r['receipt_id']:r for r in result['receipts']};out={r['id']:r for r in result['receipts_outcome']}
+  for parent in condition['parents']:
+   pid=parent['failedParent'];rid=parent['principalRefunds'][0]['refund'];b=body[pid];refund=body[rid]
+   assert 'Failure' in out[pid]['outcome']['status'] and rid in out[pid]['outcome']['receipt_ids']
+   assert b['predecessor_id']==vault and sum(int(next(iter(a.values()))['deposit']) for a in b['receipt']['Action']['actions'])==AMOUNT
+   assert refund['predecessor_id']==refund['receipt']['Action']['signer_id']=='system'
+   assert refund['receipt']['Action']['signer_public_key']=='ed25519:'+'1'*32
+   assert refund['receiver_id']==(b['receipt']['Action'].get('refund_to') or b['predecessor_id'])
+   assert refund['receiver_id']==parent['principalRefunds'][0]['receiver']
+   assert refund['receipt']['Action']['actions']==[{'Transfer':{'deposit':str(AMOUNT)}}]
+   assert 'SuccessValue' in out[rid]['outcome']['status']
+ assert raw['cases'][0]['vaultDelta']=='0' and raw['cases'][0]['outsiderDelta']=='0'
+ assert raw['cases'][1]['vaultDelta']==str(-AMOUNT) and raw['cases'][1]['outsiderDelta']==str(AMOUNT)
+ assert [r['authorizedRecoveredPrincipal'] for r in reread['cases']]==[str(2*AMOUNT),str(AMOUNT)]
+ assert [r['divertedPrincipal'] for r in reread['cases']]==['0',str(AMOUNT)]
+ assert len({p['failedParent'] for c in reread['cases'] for p in c['parents']})==4
+ assert len({p['principalRefunds'][0]['refund'] for c in reread['cases'] for p in c['parents']})==4
+ assert reference({'id':'manual-A','mode':'original','scope':['RF01']})['gate']==0
+ assert reference({'id':'manual-B','mode':'original','scope':['RF02']})['gate']==1
+ assert reference({'mode':'partition','target':'RF02','visibleRefunds':[0],'anchored':True,'scope':['RF01','RF02']})['gate']==2
+ assert reference({'mode':'partition','target':'RF02','visibleRefunds':[1],'anchored':True,'scope':['RF01','RF02']})['gate']==1
+ return {'originalConditions':2,'signedRootAttempts':2,'archivedChains':1,'newExecutions':0,'rawDeltaChecks':4,'uniqueFailedParents':4,'uniquePrincipalRefunds':4,'manualProjectionControls':4}
+if __name__=='__main__':
+ if sys.argv[1:] == ['--controls']:print(json.dumps(archive_controls()))
+ else:print(json.dumps(reference(json.loads(Path(sys.argv[1]).read_bytes()))))

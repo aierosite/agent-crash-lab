@@ -22,6 +22,7 @@ for scenario in w['CURATED']:
 # The engine may return unknown rows for invalid owner declarations.
 task,sources=w['data_for'](w['CATALOG']['legitimate-installments'])
 for name,change in [('invalid-constraint',lambda t:t['constraints'].append(None)),
+                    ('invalid-recovery',lambda t:t['constraints'].append({'id':'bad-recovery','intent':t['intents'][0]['id'],'metric':'principal_recovery','mode':'full','allowed_accounts':False})),
                     ('invalid-required',lambda t:t['utility']['required'].append(None)),
                     ('invalid-intermediate',lambda t:t['utility']['intermediate'].append(None)),
                     ('unsupported-constraint',lambda t:t['constraints'].append({'id':'future','intent':t['intents'][0]['id'],'metric':'future'})),
@@ -137,6 +138,7 @@ rejects('duplicate resolved output',d=>{
  d.report.utility.required.push(clone(d.report.utility.required[0]));d.report.inventory.selected_required_utility++;
 });
 rejects('passed without recorded answer',d=>{d.report.utility.required[0].observed_answer_present=false;});
+rejects('duplicate recovery parent',d=>{const row=d.report.constraints.find(c=>c.metric==='principal_recovery'&&c.parents.length);row.parents.push(clone(row.parents[0]));},recovery);
 rejects('recovery missing parents',d=>{delete d.report.constraints.find(c=>c.metric==='principal_recovery').parents;},recovery);
 rejects('recovery false recovered total',d=>{d.report.constraints.find(c=>c.metric==='principal_recovery'&&c.parents.length).parents[0].successful_allowed_yocto='7';},recovery);
 rejects('recovery false failed refund',d=>{

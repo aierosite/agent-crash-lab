@@ -1,0 +1,205 @@
+{
+  "format": "agent-crash-lab/recovery-replay-v1",
+  "atUtc": "2026-11-08T02:20:55.368124+00:00",
+  "verified": true,
+  "coreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+  "stages": [
+    {
+      "stage": "initial",
+      "bundlesReconstructed": 11,
+      "actualEngineReportsChecked": [],
+      "originalDisagreements": null,
+      "mutations": []
+    },
+    {
+      "stage": "amended",
+      "bundlesReconstructed": 11,
+      "actualEngineReportsChecked": [
+        {
+          "case": "original-both",
+          "reportSha256": "017b11bced6eaeb3d63fe8409e332b203afafeacc40a35ffccca3d594b56e529",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "original-allowed-scope",
+          "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+          "agreesWithReference": true,
+          "gate": 0
+        },
+        {
+          "case": "original-diverted-scope",
+          "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "reportSha256": "97ce07c0f238cbe2b9fa07d926078a17a0cbe1989e07f3923bed2ebc77e18f75",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "reportSha256": "b9ffd53a3789d1167695f41be8db507b1ceb8ac43757ad3a1e701aa6826f0432",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "A-complementary-anchored",
+          "reportSha256": "76a0fecab0fb467810ecc97d0227f42d52f3cd256efb9404291a11285470f434",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-complementary-anchored",
+          "reportSha256": "827caa3ca0961fd58e950bfb59d7163e4e1529dfce2b3edfcb8e759a51fabb2c",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "reportSha256": "491d69a7f87a90c44bc16773b938309ad9760af30cb6523cf21553afaaa3fb85",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-unanchored-partials",
+          "reportSha256": "a9c125f8a441ba5ec7484cb41f65621cad556f4f6dc4fff0076eac9b36b40315",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "reportSha256": "ab76ba5ea0a85c152b49ac24ed0228bfa6271f90301f6362e4f501f80dafa5a9",
+          "agreesWithReference": false,
+          "gate": 1
+        }
+      ],
+      "originalDisagreements": 1,
+      "mutations": [
+        {
+          "mutation": "ignore-parent",
+          "reproducedDisagreements": 11
+        },
+        {
+          "mutation": "ignore-refund-destination",
+          "reproducedDisagreements": 7
+        },
+        {
+          "mutation": "blanket-unknown-partial",
+          "reproducedDisagreements": 3
+        }
+      ]
+    },
+    {
+      "stage": "corrected",
+      "bundlesReconstructed": 12,
+      "actualEngineReportsChecked": [
+        {
+          "case": "original-both",
+          "reportSha256": "017b11bced6eaeb3d63fe8409e332b203afafeacc40a35ffccca3d594b56e529",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "original-allowed-scope",
+          "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+          "agreesWithReference": true,
+          "gate": 0
+        },
+        {
+          "case": "original-diverted-scope",
+          "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "reportSha256": "97ce07c0f238cbe2b9fa07d926078a17a0cbe1989e07f3923bed2ebc77e18f75",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "reportSha256": "b9ffd53a3789d1167695f41be8db507b1ceb8ac43757ad3a1e701aa6826f0432",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "A-complementary-anchored",
+          "reportSha256": "76a0fecab0fb467810ecc97d0227f42d52f3cd256efb9404291a11285470f434",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-complementary-anchored",
+          "reportSha256": "827caa3ca0961fd58e950bfb59d7163e4e1529dfce2b3edfcb8e759a51fabb2c",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "reportSha256": "491d69a7f87a90c44bc16773b938309ad9760af30cb6523cf21553afaaa3fb85",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-unanchored-partials",
+          "reportSha256": "a9c125f8a441ba5ec7484cb41f65621cad556f4f6dc4fff0076eac9b36b40315",
+          "agreesWithReference": true,
+          "gate": 2
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "reportSha256": "ab76ba5ea0a85c152b49ac24ed0228bfa6271f90301f6362e4f501f80dafa5a9",
+          "agreesWithReference": true,
+          "gate": 1
+        },
+        {
+          "case": "B-well-formed-conflict",
+          "reportSha256": "81429cac8e03d3c03dc4380353b82f8e240bbf77ba94a007c54f09ade7026c7c",
+          "agreesWithReference": true,
+          "gate": 2
+        }
+      ],
+      "originalDisagreements": 0,
+      "mutations": [
+        {
+          "mutation": "ignore-parent",
+          "reproducedDisagreements": 12
+        },
+        {
+          "mutation": "ignore-refund-destination",
+          "reproducedDisagreements": 7
+        },
+        {
+          "mutation": "blanket-unknown-partial",
+          "reproducedDisagreements": 3
+        }
+      ]
+    }
+  ],
+  "sourceBoundSystemRoleChecks": 10,
+  "rawAccountDeltaChecks": 4,
+  "originalReferenceErrorReproduced": true,
+  "correctedReferenceDisagreements": 0,
+  "originalNativeConditions": 2,
+  "originalSignedRootAttempts": 2,
+  "originalChains": 1,
+  "newNativeExecutions": 0,
+  "newInferenceCalls": 0,
+  "scope": "Same-author archive/projection replay. Separate original reference implementation; not independent authorship, fresh native execution, external blind accuracy or consensus authentication."
+}

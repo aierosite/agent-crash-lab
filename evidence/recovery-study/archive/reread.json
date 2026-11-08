@@ -1,0 +1,92 @@
+{
+  "at": "2026-11-03T00:36:57.451890+00:00",
+  "kind": "Independentrawgraph/parentlink/accountre-read, notnewnativeorfinalevaluator",
+  "sourceSha256": "57b809be458121f459668d3b06ed7573b9863ae6ca67c927107c852aed684ac0",
+  "cases": [
+    {
+      "id": "RF01",
+      "txHash": "21Mi2WyxNjc2bqV8eyVCLRZu79BxaTT6AcbEcLmYwkgp",
+      "parents": [
+        {
+          "failedParent": "2WNXDVd5dQdvAzJW94wNBGNNo847LhfLV1gqRq1DctjQ",
+          "receiver": "absent-one.siblingrefund.near",
+          "principalRefunds": [
+            {
+              "refund": "DeWArGn1ZAUqdoTW4TS7uXeGnAFseEbE5LQAHVuzy4Lk",
+              "receiver": "vault.callbacklab.near",
+              "amount": "100000000000000000000000",
+              "approvedRecovery": true,
+              "parentBodyPointer": "/rpcObservations/8/response/result/receipts/1",
+              "parentOutcomePointer": "/rpcObservations/8/response/result/receipts_outcome/1",
+              "refundBodyPointer": "/rpcObservations/8/response/result/receipts/2",
+              "refundOutcomePointer": "/rpcObservations/8/response/result/receipts_outcome/2"
+            }
+          ]
+        },
+        {
+          "failedParent": "7YDCE4sgKExBnh7XN6KYf3Xv539tFQS4fbnxVsEbQSxG",
+          "receiver": "absent-two.siblingrefund.near",
+          "principalRefunds": [
+            {
+              "refund": "8X5P4kKsccCchru2JmTjUb5U9ekb8XoCtYvPhnty8gSC",
+              "receiver": "vault.callbacklab.near",
+              "amount": "100000000000000000000000",
+              "approvedRecovery": true,
+              "parentBodyPointer": "/rpcObservations/8/response/result/receipts/4",
+              "parentOutcomePointer": "/rpcObservations/8/response/result/receipts_outcome/4",
+              "refundBodyPointer": "/rpcObservations/8/response/result/receipts/5",
+              "refundOutcomePointer": "/rpcObservations/8/response/result/receipts_outcome/5"
+            }
+          ]
+        }
+      ],
+      "authorizedRecoveredPrincipal": "200000000000000000000000",
+      "divertedPrincipal": "0",
+      "allPrincipalRefundCredits": "200000000000000000000000"
+    },
+    {
+      "id": "RF02",
+      "txHash": "9aiAgoEUQ5UGR5j1UiBCJQVwW22aVdEuAyqqXWC4vKMn",
+      "parents": [
+        {
+          "failedParent": "8qV5yRECZxKgSioVeZzeDgJPKhtdFPBxLjMZoEM3M3oC",
+          "receiver": "absent-one.siblingrefund.near",
+          "principalRefunds": [
+            {
+              "refund": "GoDMDE6JgreCXDJMTgCcD89stug3X2YmksSBuUnoaHCW",
+              "receiver": "vault.callbacklab.near",
+              "amount": "100000000000000000000000",
+              "approvedRecovery": true,
+              "parentBodyPointer": "/rpcObservations/17/response/result/receipts/1",
+              "parentOutcomePointer": "/rpcObservations/17/response/result/receipts_outcome/1",
+              "refundBodyPointer": "/rpcObservations/17/response/result/receipts/2",
+              "refundOutcomePointer": "/rpcObservations/17/response/result/receipts_outcome/2"
+            }
+          ]
+        },
+        {
+          "failedParent": "Ep5axyrTSLMTG1iu67wTYvh9y3qDLnJCEkm9NT8wD6Aj",
+          "receiver": "absent-two.siblingrefund.near",
+          "principalRefunds": [
+            {
+              "refund": "CbPBM2bmPkEW5wZuL9jd4tB4cxMEmcCaDgx9D6nDRf16",
+              "receiver": "receiver.callbacklab.near",
+              "amount": "100000000000000000000000",
+              "approvedRecovery": false,
+              "parentBodyPointer": "/rpcObservations/17/response/result/receipts/4",
+              "parentOutcomePointer": "/rpcObservations/17/response/result/receipts_outcome/4",
+              "refundBodyPointer": "/rpcObservations/17/response/result/receipts/5",
+              "refundOutcomePointer": "/rpcObservations/17/response/result/receipts_outcome/5"
+            }
+          ]
+        }
+      ],
+      "authorizedRecoveredPrincipal": "100000000000000000000000",
+      "divertedPrincipal": "100000000000000000000000",
+      "allPrincipalRefundCredits": "200000000000000000000000"
+    }
+  ],
+  "allPostReadChecksPassed": true,
+  "newTransactions": 0,
+  "limits": "Trustedownednode/source/version; identifiersnotMerkleproof/dishonestRPCauthentication. Native2rootattempts/1sharedchain; not4independentmodeltrials."
+}

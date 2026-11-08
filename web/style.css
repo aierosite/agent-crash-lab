@@ -359,3 +359,5 @@ dialog dd{font-family:var(--mono);}
 .ci-guide{margin-top:16px}
 .ci-guide pre{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;padding:10px;margin:10px 0}
 @media(max-width:560px){.side-bottom{flex-wrap:wrap}.lab-panel,.ci-guide{padding:12px}.lab-panel input{font-size:16px}}
+
+.recovery-policy{margin:18px 0 24px}.recovery-policy h3{font:600 13px/1.5 var(--sans);margin:0}.recovery-policy header{margin-bottom:3px}.recovery-scroll{overflow-x:auto;scrollbar-width:thin;border-top:var(--rule);border-bottom:var(--rule)}.recovery-scroll table{min-width:520px}.recovery-scroll thead{background:var(--panel)}.recovery-scroll :is(th,td){padding:12px;vertical-align:top}.recovery-scroll th{font-weight:400}.recovery-scroll .cell-note{display:block}.recovery-scroll tbody tr+tr{border-top:var(--rule)}

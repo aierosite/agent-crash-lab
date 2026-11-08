@@ -847,5 +847,53 @@
       "passed",
       "passed"
     ]
+  },
+  "recovery-original-both": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-original-allowed-scope": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-original-diverted-scope": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-A-outcomes-without-bodies": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-outcomes-without-bodies": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-A-complementary-anchored": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-complementary-anchored": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-only-allowed-refund": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-only-diverted-refund": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-unanchored-partials": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-conflicting-refund-identity": {
+    "intents": {},
+    "required_utility_statuses": []
+  },
+  "recovery-B-well-formed-conflict": {
+    "intents": {},
+    "required_utility_statuses": []
   }
 }

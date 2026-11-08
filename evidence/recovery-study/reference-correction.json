@@ -1,0 +1,560 @@
+{
+  "atUtc": "2026-11-08T02:18:13.450338+00:00",
+  "parentRegistrationSha256": "9832ac4266f563da2efc674e55bb95088bfb4f51934007b2496b94c32ae9f5b7",
+  "sourceHashes": {
+    "recovery_builder.py": "de89c1b5ce3978183ffefa6b32e650b7caf58dbf73b36e2a7cfedd27ef303f02",
+    "recovery_reference.py": "dca2f2d344ea8d9d408099d5f6241ee801c078dcef07b714b90638cdad5c7d4d",
+    "correct-reference.py": "d4d28febfc2e787c10fce7473806e186d75dd769340fb8903574260d8ae79c74"
+  },
+  "baseCoreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+  "bundles": {
+    "bundles-corrected/original-both.json": "c7ddd9ec94d37f32d5716f3ebe06d2bd9f9dbdf6fe2213b5567fbba0e20130d1",
+    "bundles-corrected/original-allowed-scope.json": "4255a0e1ab0b114674435de3fe825326c49be127e3c2ba2a97d39096de9b6808",
+    "bundles-corrected/original-diverted-scope.json": "cffabc3620356fdaadd0a6c35c5379c440130592d90d28c3e8c7dd9a11e8583b",
+    "bundles-corrected/A-outcomes-without-bodies.json": "cf2b72c30c63f8b2402446ef31bff2ccff3dd45edfc7b1dafa65c1cb5cbd2952",
+    "bundles-corrected/B-outcomes-without-bodies.json": "b5e190933620e742ca8b9def2a3b15b6119e6af64b407447aa69a831773b0181",
+    "bundles-corrected/A-complementary-anchored.json": "679da03f49a6008c9b4bc715cb68df7c42e24c958b88871dc5692f57796624d7",
+    "bundles-corrected/B-complementary-anchored.json": "7a45afe8dbc14b7012a343dc888e306ba6cbe0b2243a19722200da21e282ac83",
+    "bundles-corrected/B-only-allowed-refund.json": "fb67b9671ad3f59879fe72862b6cc4f2b8fe085a0a031ba0e743b76c29cf6675",
+    "bundles-corrected/B-only-diverted-refund.json": "20dd35e0fab61952ed0bda2508d242bf461524311a3dee36c71dc63103de4abf",
+    "bundles-corrected/B-unanchored-partials.json": "d9ebed68869ee0cccd12cdeabf073d0149a100b40b3a0932f0c6e358c4dbeffb",
+    "bundles-corrected/B-conflicting-refund-identity.json": "f6901bc45dbcdc09b9d370f6acfb0f91da3053196ba0deb2de056ec5861d47db",
+    "bundles-corrected/B-well-formed-conflict.json": "ac08bc46b77c1b1ffb6746fc980f7f9c8c98e442249e3854db9d7015bd994241"
+  },
+  "expected": {
+    "original-both": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "original-allowed-scope": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        }
+      },
+      "gate": 0
+    },
+    "original-diverted-scope": {
+      "constraints": {
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "A-outcomes-without-bodies": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "unknown"
+        },
+        "RF01-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF01-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF01-projection": {
+          "returned": "0",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-outcomes-without-bodies": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "A-complementary-anchored": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "unknown"
+        },
+        "RF01-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF01-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-complementary-anchored": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-only-allowed-refund": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "B-only-diverted-refund": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-unanchored-partials": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "B-conflicting-refund-identity": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-well-formed-conflict": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "conflict"
+        },
+        "RF02-recovery-destinations": {
+          "status": "conflict"
+        },
+        "RF02-external": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    }
+  },
+  "plans": [
+    {
+      "id": "original-both",
+      "mode": "original",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "original-allowed-scope",
+      "mode": "original",
+      "scope": [
+        "RF01"
+      ]
+    },
+    {
+      "id": "original-diverted-scope",
+      "mode": "original",
+      "scope": [
+        "RF02"
+      ]
+    },
+    {
+      "id": "A-outcomes-without-bodies",
+      "mode": "no-bodies",
+      "target": "RF01",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-outcomes-without-bodies",
+      "mode": "no-bodies",
+      "target": "RF02",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "A-complementary-anchored",
+      "mode": "partition",
+      "target": "RF01",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-complementary-anchored",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-only-allowed-refund",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-only-diverted-refund",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-unanchored-partials",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": false,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-conflicting-refund-identity",
+      "mode": "conflict",
+      "target": "RF02",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-well-formed-conflict",
+      "mode": "valid-conflict",
+      "target": "RF02",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    }
+  ],
+  "referenceControls": {
+    "originalConditions": 2,
+    "signedRootAttempts": 2,
+    "archivedChains": 1,
+    "newExecutions": 0,
+    "rawDeltaChecks": 4,
+    "uniqueFailedParents": 4,
+    "uniquePrincipalRefunds": 4,
+    "manualProjectionControls": 4
+  },
+  "originalCoreDisagreements": 1,
+  "originalResultPreserved": true,
+  "coreCodeChanged": false,
+  "reason": "The original extra view changed a refund receiver but retained the old outcome executor, so it is structurally invalid. A rejected extra view does not refute a valid conclusive historical breach, although complete coverage is lost. The reference now models this distinction; an additional prospective control changes both fields so the graph is structurally consistent before testing immutable-identity disagreement. This is a reference/fixture correction, not an engine accuracy improvement.",
+  "newControlEvaluatedBeforeThisRegistration": false,
+  "scope": "12 correlated reconstructions/projections over two archived conditions, same author; original 10/11 agreement and reference error remain recorded. No external audit or new chain/model execution."
+}

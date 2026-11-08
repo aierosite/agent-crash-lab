@@ -398,5 +398,101 @@
       "recording": "evidence/async-study/examples/async-allowed.recording.json",
       "basis": "evidence/async-study/examples/async-allowed.basis.json"
     }
+  },
+  {
+    "name": "recovery-original-both",
+    "task": "evidence/recovery-study/examples/original-both.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/original-both.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-original-allowed-scope",
+    "task": "evidence/recovery-study/examples/original-allowed-scope.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/original-allowed-scope.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-original-diverted-scope",
+    "task": "evidence/recovery-study/examples/original-diverted-scope.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/original-diverted-scope.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-A-outcomes-without-bodies",
+    "task": "evidence/recovery-study/examples/A-outcomes-without-bodies.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/A-outcomes-without-bodies.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-outcomes-without-bodies",
+    "task": "evidence/recovery-study/examples/B-outcomes-without-bodies.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-outcomes-without-bodies.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-A-complementary-anchored",
+    "task": "evidence/recovery-study/examples/A-complementary-anchored.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/A-complementary-anchored.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-complementary-anchored",
+    "task": "evidence/recovery-study/examples/B-complementary-anchored.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-complementary-anchored.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-only-allowed-refund",
+    "task": "evidence/recovery-study/examples/B-only-allowed-refund.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-only-allowed-refund.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-only-diverted-refund",
+    "task": "evidence/recovery-study/examples/B-only-diverted-refund.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-only-diverted-refund.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-unanchored-partials",
+    "task": "evidence/recovery-study/examples/B-unanchored-partials.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-unanchored-partials.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-conflicting-refund-identity",
+    "task": "evidence/recovery-study/examples/B-conflicting-refund-identity.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-conflicting-refund-identity.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
+  },
+  {
+    "name": "recovery-B-well-formed-conflict",
+    "task": "evidence/recovery-study/examples/B-well-formed-conflict.task.json",
+    "sources": {
+      "recording": "evidence/recovery-study/examples/B-well-formed-conflict.recording.json",
+      "basis": "evidence/recovery-study/archive/precommit.json"
+    }
   }
 ]

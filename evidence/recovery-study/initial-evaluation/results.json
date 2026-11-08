@@ -1,0 +1,3120 @@
+{
+  "atUtc": "2026-11-08T02:17:01.378554+00:00",
+  "registrationSha256": "9832ac4266f563da2efc674e55bb95088bfb4f51934007b2496b94c32ae9f5b7",
+  "engines": [
+    {
+      "engine": "original",
+      "sourceSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+      "cases": [
+        {
+          "case": "original-both",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "017b11bced6eaeb3d63fe8409e332b203afafeacc40a35ffccca3d594b56e529"
+        },
+        {
+          "case": "original-allowed-scope",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923"
+        },
+        {
+          "case": "original-diverted-scope",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10"
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "97ce07c0f238cbe2b9fa07d926078a17a0cbe1989e07f3923bed2ebc77e18f75"
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "b9ffd53a3789d1167695f41be8db507b1ceb8ac43757ad3a1e701aa6826f0432"
+        },
+        {
+          "case": "A-complementary-anchored",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "76a0fecab0fb467810ecc97d0227f42d52f3cd256efb9404291a11285470f434"
+        },
+        {
+          "case": "B-complementary-anchored",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "827caa3ca0961fd58e950bfb59d7163e4e1529dfce2b3edfcb8e759a51fabb2c"
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c"
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "491d69a7f87a90c44bc16773b938309ad9760af30cb6523cf21553afaaa3fb85"
+        },
+        {
+          "case": "B-unanchored-partials",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "a9c125f8a441ba5ec7484cb41f65621cad556f4f6dc4fff0076eac9b36b40315"
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "conflict"
+              },
+              "RF02-recovery-destinations": {
+                "status": "conflict"
+              },
+              "RF02-external": {
+                "status": "conflict",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "ab76ba5ea0a85c152b49ac24ed0228bfa6271f90301f6362e4f501f80dafa5a9"
+        }
+      ],
+      "disagreements": 1
+    },
+    {
+      "engine": "ignore-parent",
+      "sourceSha256": "f79bd1d00e0088aa752dbdd9c024a82029dc2a321ddec63c21fa9dbd5b8c9dc1",
+      "cases": [
+        {
+          "case": "original-both",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "4bd13d2d2dcecc50cb032a01d27035060210716026d08f574f4990531cef668b"
+        },
+        {
+          "case": "original-allowed-scope",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "reportSha256": "5caf9b19eff8dc047a63df57080458ebdf96d4116b70784e30f28b2f9d5893e0"
+        },
+        {
+          "case": "original-diverted-scope",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "a5829181dabc1cf45223e4d92d0cc5833c13945f07020c1a62d3791761dddf61"
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "d713b6b76dbb21b79e0441e44e82151f886b017245e39514f84ebb7df942cfbb"
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "469816bdb61aa43e2808d0bec0ac7636f3ad62cdf59c2156fc4e98bb0872a99e"
+        },
+        {
+          "case": "A-complementary-anchored",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "3b177b8c6ae51b02ec698f478fc44f41bf8dfa5740e83f700af41dfd7cca46f1"
+        },
+        {
+          "case": "B-complementary-anchored",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "c7537c28b0c10fce5b1a5b539cab2fc184604f2793c8a5c74ae3fa3da11a3efa"
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "88831e72501721c95b758786fce0d4f8df7d40875fc457add9e23ccfb86781d8"
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "43278addc55281714330e0637398fb00cf1c4f2da340dbe443d06496c5970bc6"
+        },
+        {
+          "case": "B-unanchored-partials",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "bd13521c9ff94706d34590c3dcdebf62ee8ab3a3394f5643e9996f383b6b2262"
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "400000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "conflict"
+              },
+              "RF02-recovery-destinations": {
+                "status": "conflict"
+              },
+              "RF02-external": {
+                "status": "conflict",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "51b167fd06f750a78386e6db409d4c22067d775c0493b2c086fe17fcec7328a5"
+        }
+      ],
+      "disagreements": 11
+    },
+    {
+      "engine": "ignore-refund-destination",
+      "sourceSha256": "e0ae3b70acad0463e7638408a294d613581c344f4c89e5996d634afb8987a879",
+      "cases": [
+        {
+          "case": "original-both",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "within"
+              },
+              "RF02-recovery-destinations": {
+                "status": "within"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "6cf910435ed876f02c0018f4fb72bae2cd5dd98a2e3b23739892340b9e00c427"
+        },
+        {
+          "case": "original-allowed-scope",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923"
+        },
+        {
+          "case": "original-diverted-scope",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "within"
+              },
+              "RF02-recovery-destinations": {
+                "status": "within"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "expected": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "a8c033075dcc5f84e9af6bf16ea6b2edb2ea0fe652dae88b2079be2869c3a9ea"
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "within"
+              },
+              "RF02-recovery-destinations": {
+                "status": "within"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "39071967e5648193c3544ace9b2c67527a39a9d12dd577842321a6b945b72e83"
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "b9ffd53a3789d1167695f41be8db507b1ceb8ac43757ad3a1e701aa6826f0432"
+        },
+        {
+          "case": "A-complementary-anchored",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "within"
+              },
+              "RF02-recovery-destinations": {
+                "status": "within"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "39f80b47981e305aa132e6e0dddc823a7ed1ddfc800492a1ec3b4aae8a667614"
+        },
+        {
+          "case": "B-complementary-anchored",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "f785d53a32424eefd9354fe04dd7a23e343de888020688422f592f41eb8c3d3f"
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c"
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "1ea41bc3e06de8ddd9322810be85ad30265c3c38ddb49a115a4b54c224b54c05"
+        },
+        {
+          "case": "B-unanchored-partials",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "a9c125f8a441ba5ec7484cb41f65621cad556f4f6dc4fff0076eac9b36b40315"
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "conflict"
+              },
+              "RF02-recovery-destinations": {
+                "status": "conflict"
+              },
+              "RF02-external": {
+                "status": "conflict",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "69cd3e63b5927cd74303f09bed8ed164fde99f40ce8c573ba55d434851ba5723"
+        }
+      ],
+      "disagreements": 7
+    },
+    {
+      "engine": "blanket-unknown-partial",
+      "sourceSha256": "34576ab723b054fa685d9368f5e1e800bfd9a9213812d3c6d2aa9378f7c41362",
+      "cases": [
+        {
+          "case": "original-both",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "017b11bced6eaeb3d63fe8409e332b203afafeacc40a35ffccca3d594b56e529"
+        },
+        {
+          "case": "original-allowed-scope",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 0
+          },
+          "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923"
+        },
+        {
+          "case": "original-diverted-scope",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10"
+        },
+        {
+          "case": "A-outcomes-without-bodies",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "0",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "97ce07c0f238cbe2b9fa07d926078a17a0cbe1989e07f3923bed2ebc77e18f75"
+        },
+        {
+          "case": "B-outcomes-without-bodies",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "b9ffd53a3789d1167695f41be8db507b1ceb8ac43757ad3a1e701aa6826f0432"
+        },
+        {
+          "case": "A-complementary-anchored",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "unknown"
+              },
+              "RF01-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF01-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "76a0fecab0fb467810ecc97d0227f42d52f3cd256efb9404291a11285470f434"
+        },
+        {
+          "case": "B-complementary-anchored",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "e6698acbf3ea83a7f615fbbf771a7296552672cd8a8e6bf5c7d08fe744f20602"
+        },
+        {
+          "case": "B-only-allowed-refund",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c"
+        },
+        {
+          "case": "B-only-diverted-refund",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "breached"
+              },
+              "RF02-recovery-destinations": {
+                "status": "breached"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 1
+          },
+          "reportSha256": "45e766a4b0eeeafb3e3b007a481b4d50e415b24757f271b61cdabfb089cb20f4"
+        },
+        {
+          "case": "B-unanchored-partials",
+          "matches": true,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "a9c125f8a441ba5ec7484cb41f65621cad556f4f6dc4fff0076eac9b36b40315"
+        },
+        {
+          "case": "B-conflicting-refund-identity",
+          "matches": false,
+          "actual": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "unknown"
+              },
+              "RF02-recovery-destinations": {
+                "status": "unknown"
+              },
+              "RF02-external": {
+                "status": "unknown",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "100000000000000000000000",
+                "diverted": "100000000000000000000000"
+              }
+            },
+            "gate": 2
+          },
+          "expected": {
+            "constraints": {
+              "RF01-recovery-full": {
+                "status": "within"
+              },
+              "RF01-recovery-destinations": {
+                "status": "within"
+              },
+              "RF01-external": {
+                "status": "within",
+                "known_subtotal": "0",
+                "exact_total": "0"
+              },
+              "RF01-projection": {
+                "returned": "200000000000000000000000",
+                "diverted": "0"
+              },
+              "RF02-recovery-full": {
+                "status": "conflict"
+              },
+              "RF02-recovery-destinations": {
+                "status": "conflict"
+              },
+              "RF02-external": {
+                "status": "conflict",
+                "known_subtotal": "0",
+                "exact_total": null
+              },
+              "RF02-projection": {
+                "returned": "0",
+                "diverted": "0"
+              }
+            },
+            "gate": 2
+          },
+          "reportSha256": "238239e236d03d4e974833fbef0fbaeb6106ecf37e677a27f1a9ee99f224de61"
+        }
+      ],
+      "disagreements": 3
+    }
+  ],
+  "summary": {
+    "original": {
+      "disagreements": 1,
+      "assessed": 11
+    },
+    "ignore-parent": {
+      "disagreements": 11,
+      "assessed": 11
+    },
+    "ignore-refund-destination": {
+      "disagreements": 7,
+      "assessed": 11
+    },
+    "blanket-unknown-partial": {
+      "disagreements": 3,
+      "assessed": 11
+    }
+  },
+  "originalNativeConditions": 2,
+  "originalSignedRootAttempts": 2,
+  "originalChains": 1,
+  "projectedInputs": 11,
+  "newNativeExecutions": 0,
+  "newInferenceCalls": 0,
+  "sameAuthor": true,
+  "externalBlindAudit": false
+}

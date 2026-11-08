@@ -5,8 +5,8 @@
 <meta name="description" content="Inspect recorded NEAR payments and responses.">
 <title>Agent Crash Lab · NEAR receipt workbench</title>
 <link rel="icon" href="icon.svg">
-<link rel="stylesheet" href="style.css?v=25">
-<script defer src="app.js?v=40"></script>
+<link rel="stylesheet" href="style.css?v=26">
+<script defer src="app.js?v=41"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to inspection</a>
@@ -51,11 +51,12 @@
 <p id="browser-note" hidden>Python via jsDelivr.</p>
 <section id="results" hidden>
 <div class="results-bar"><div class="results-meta"><span id="run-state"></span><span id="timing"></span></div><div class="results-actions"><button id="download">Download report</button><button id="export">Export bundle</button></div></div>
-<div class="verdict-grid" id="verdicts"></div><details id="ci-guide" class="ci-guide"><summary>Keep this run in CI</summary><p>Place episode.json beside gate.py in the Crash Lab release directory, then run this command there.</p><div class="lab-actions"><button id="ci-download">Download episode.json</button><button id="ci-copy">Copy command</button></div><pre id="ci-command" tabindex="0" aria-label="CI command">python -I -S gate.py --bundle episode.json</pre><p id="ci-expectation"></p><p>Exit 0: within declared scope and required work passed. Exit 1: observed breach or failed output. Exit 2: inconclusive or rejected. A saved bundle verifies only that recorded episode; capture a changed agent again. Hashes bind bytes; they do not authenticate a recording.</p></details>
+<div class="verdict-grid" id="verdicts"></div><details id="ci-guide" class="ci-guide"><summary>Keep this run in CI</summary><p>Place episode.json beside gate.py in the Crash Lab release directory, then run this command there.</p><div class="lab-actions"><button id="ci-download">Download episode.json</button><button id="ci-copy">Copy command</button></div><pre id="ci-command" tabindex="0" aria-label="CI command">python -I -S gate.py --bundle episode.json</pre><p id="ci-expectation"></p><p>Exit 0: all declared checks conclude within scope. Exit 1: observed breach or failed output. Exit 2: inconclusive or rejected. A saved bundle verifies only that recorded episode; capture a changed agent again. Hashes bind bytes; they do not authenticate a recording.</p></details>
 <div class="tab-row" role="tablist" aria-label="Inspection details"><button class="tab" id="tab-overview">Overview</button><button class="tab" id="tab-evidence">Causal evidence <span id="evidence-count"></span></button><button class="tab" id="tab-raw">Raw report</button><button class="tab" id="tab-scope">Trust &amp; scope</button></div>
 <section id="panel-overview">
-<header><h2>Payments by intent</h2><span>Native NEAR · gas excluded</span></header>
+<header id="payment-heading"><h2>Payments by intent</h2><span>Native NEAR · gas excluded</span></header>
 <div id="intents"></div>
+<section id="recovery-section" hidden><header><h2>Recovery by failed payment</h2><span>Principal only · gas excluded</span></header><p class="empty">Equal amounts can belong to different payments. Proven values are lower bounds when evidence is incomplete; missing evidence is not zero.</p><div id="recovery-policies"></div></section>
 <header><h2>Task outputs</h2><a href="#finding">Back to finding</a></header><div id="utility-list"></div>
 <details class="constraints"><summary>Declared constraints</summary><div id="constraint-list"></div></details>
 </section>

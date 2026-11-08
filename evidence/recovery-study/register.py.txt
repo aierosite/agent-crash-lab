@@ -1,0 +1,28 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import json,runpy,subprocess,sys
+HERE=Path(__file__).resolve().parent;assert not (HERE/'registration.json').exists()
+builder=runpy.run_path(str(HERE/'recovery_builder.py'))
+controls=subprocess.run([sys.executable,'-I','-S',str(HERE/'recovery_reference.py'),'--controls'],capture_output=True,check=True,timeout=5)
+controls=json.loads(controls.stdout)
+(HERE/'bundles').mkdir();(HERE/'plans').mkdir();expected={};bundles={}
+for case in builder['CASES']:
+ name=case['id'];plan=HERE/'plans'/(name+'.json');plan.write_bytes(builder['pack'](case))
+ result=subprocess.run([sys.executable,'-I','-S',str(HERE/'recovery_reference.py'),str(plan)],capture_output=True,check=True,timeout=5)
+ expected[name]=json.loads(result.stdout);bundle=builder['pack'](builder['build'](case));path=HERE/'bundles'/(name+'.json')
+ path.write_bytes(bundle);bundles[path.relative_to(HERE).as_posix()]=sha256(bundle).hexdigest()
+record={'registeredAtUtc':datetime.now(timezone.utc).isoformat(),'baseline':'v0.9.1',
+ 'baseCoreSha256':sha256((HERE/'frozen-core.py.txt').read_bytes()).hexdigest(),
+ 'sourceHashes':{name:sha256((HERE/name).read_bytes()).hexdigest() for name in ['recovery_builder.py','recovery_reference.py','register.py']},
+ 'bundles':bundles,'plans':builder['CASES'],'expected':expected,'referenceControls':controls,
+ 'coreEvaluatedBeforeRegistration':False,
+ 'requirements':['Causal failed-parent recovery, no amount/recipient deduplication across siblings',
+  'Gas refunds do not satisfy principal recovery','Allowed-return and diverted credit remain separate',
+  'Missing receipt bodies cannot yield a clean recovery decision','Known disallowed refund remains a breach without full coverage',
+  'Unanchored partial outcomes do not prove recovery or diversion','Conflicting B preserves independently declared A',
+  'Exact original archive bytes and pre-product authority remain preserved','No required-output success claimed: this archive has no model/task-output observation'],
+ 'mutationsPlanned':['Ignore generating-parent binding for refund association','Treat all committed refunds as allowed and none as forbidden','Suppress known recovery breach when coverage is incomplete'],
+ 'scope':'11 source-informed inputs over two archived native conditions/one chain, including authority scopes and correlated constructed visibility projections. Same author; not 11 fresh trials, external blind review, authenticated chain proof or accuracy estimate.'}
+(HERE/'registration.json').write_text(json.dumps(record,indent=2)+'\n')
+print(json.dumps({'registered':len(bundles),'referenceControls':controls,'registrationSha256':sha256((HERE/'registration.json').read_bytes()).hexdigest()}))

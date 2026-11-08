@@ -1,0 +1,25 @@
+{
+  "at": "2026-11-03T00:35:56.678667+00:00",
+  "classification": "Research-only2nativeconditions/1freshownedprotocol88chain, no core/guard/model",
+  "question": "Can two failedsiblings withsame0.1refund amount/destination be distinguished causally, and howdoesone refund_to diversion affectauthorizedrecovery?",
+  "sourceScope": "Pinned official testcontractcall_promise934-1026/1097-1105/1181-1186read forpromiseid/create/transfer/refund/return. No modifiedfixtureWASM.",
+  "cases": [
+    {
+      "id": "RF01",
+      "request": "twoindependent0.1Transferchildrentoabsentnamedtargets",
+      "expected": "bothfail,twodistinctsystemprincipalrefunds0.1eachfromuniqueparentsreturnvault. Authorizedrecovery0.2,vaultdelta0,naive(receiver,amount)dedupwouldretainonekey."
+    },
+    {
+      "id": "RF02",
+      "request": "sameexceptsecondchildrefund_to=existingdeclaredunrelatedreceiver",
+      "expected": "bothfail/refundssucceed,one0.1vaultauthorized,one0.1outsiderdiverted; vaultdelta-0.1/outsider+0.1. Not0.2authorizedrecovery."
+    }
+  ],
+  "frozenAuthority": "Onlyvaultauthorizedrecovery; physicalownershipofalltoykeysdoesnotmakeunrelatedbeneficiaryprotected. Agentpaysgas,vaultfundsprincipal.",
+  "method": "Usegeneratedreceipt_ids parentrelationship, actualbody/refund_to/outcome andexactaccountdeltas; no amount-only correlation/favorablearrayorder. Keepfirstfailure/noretrytoforceoutcomes.",
+  "bounds": "Ownedfreshgenesis/loopback/ephemeralkeys; noforeignaccount/publicRPC/provider/model/merchant. Node stoppedfinally.",
+  "baseSha256": "f7ab6726d15d1293834950496fd8f3ec025175ef2d7c5841af1be0ee8f5a7ca3",
+  "stepsSha256": "fd8b37ad43db9fd697595d0d009540bf4e3e684cccd968dd463d193762b2dedf",
+  "composedSavedAndStreamedSha256": "b66e172d4c3ce311fd543fcc85a181ca74e579c7be7d0ea396a15b8d57fb62fe",
+  "expectedCounts": "2nativeconditiongroups/2root-signedattempts/1freshchain;4failedchildactions/refunds are not4signedattempts."
+}

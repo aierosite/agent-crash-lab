@@ -15,7 +15,7 @@ let catalog,selected,last,cache,bundle,facts,receiptRows,merchants,busy=false,re
 const params=new URLSearchParams(location.search);
 const browserMode=params.get('browser')==='1';
 let worker,pending,requestId=0;
-let labCases=[],labCurrent=null,labReduction=null;
+let labCases=[],labCurrent=null,labReduction=null,recoveryPolicies=[];
 function resetWorker(message){
  const job=pending;
  worker?.terminate();
@@ -25,7 +25,7 @@ function resetWorker(message){
 function browserRequest(path,body){
  if(pending)throw Error('Inspection running');
  if(!worker){
-  worker=new Worker('browser-worker.js?bundle=lab-v6');
+  worker=new Worker('browser-worker.js?bundle=lab-v7');
   worker.onmessage=({data:{id,progress,error,result}})=>{
    const job=pending;
    if(!job||id!==job.id)return;
@@ -83,7 +83,7 @@ function intentRow(c,[count=0,rank=0]=[],hasReceipt){
  return `<tr><th scope="row">${intent}<span class="policy-state ${c.status}">${policyLabels[c.status]}</span></th><td>${amount(c.cap)}</td><td>${committed}</td><td><span class="output-state ${state}">${outputLabel}</span>${count?`<span class="cell-note">${count} output${count===1?'':'s'}</span>`:''}</td></tr>`;
 }
 function intentLedger(merchants,byIntent,facts){
- if(!merchants.length)return '<p class="empty">No principal limits.</p>';
+ if(!merchants.length)return '<p class="empty">No merchant-payment limits declared.</p>';
  const withReceipts=new Set(facts.filter(isPrincipal).map(f=>f.intent));
  const rows=merchants.map(c=>intentRow(c,byIntent.get(c.intent),withReceipts.has(c.intent))).join('');
  return reportTable('<caption class="sr-only">Payment and output by intent.</caption>',
@@ -94,12 +94,22 @@ function reportTable(caption,headers,rows){
 }
 
 function recoveryFinding(report){
- const row=report.constraints.find(c=>c.metric==='principal_recovery'&&c.status==='breached');
+ const rows=report.constraints.filter(c=>c.metric==='principal_recovery'&&Array.isArray(c.parents));
+ const row=rows.find(c=>c.status==='breached')??rows.find(c=>c.mode==='full'&&c.status!=='within')??rows.find(c=>c.mode==='full');
  if(!row)return null;
  const forbidden=row.parents.find(p=>p.forbidden_refund_facts.length);
  if(forbidden){
   return {tone:'exception',intent:row.intent,label:'refund destination breach',total:'Wrong recipient',
    caption:'Disallowed refund recipient.',refs:forbidden.forbidden_refund_facts};
+ }
+ if(row.status!=='breached'){
+  const recovered=row.parents.reduce((sum,p)=>sum+BigInt(p.successful_allowed_yocto),0n).toString();
+  const [number,unit]=moneyParts(recovered),within=row.status==='within';
+  return {tone:within?'measured':'unknown',intent:row.intent,label:within?'principal returned':'recovery unresolved',
+   total:within?number:'Unknown',unit:within&&unit,
+   caption:within?row.parents.length+' failed payment'+(row.parents.length===1?'':'s')+' · returned to allowed recipients'
+    :'Known return '+moneyText(recovered)+' · complete recovery evidence is missing',
+   refs:row.parents.flatMap(p=>p.refund_facts)};
  }
  const failed=row.parents.find(p=>p.failed_refund_facts.length&&p.expected_yocto!=null
   &&p.finalized&&p.expected_yocto!==p.successful_allowed_yocto);
@@ -107,6 +117,26 @@ function recoveryFinding(report){
   total:near(failed.successful_allowed_yocto),unit:true,
   caption:'Recovered to allowed recipients · '+moneyText(failed.expected_yocto)+' required',
   refs:failed.failed_refund_facts};
+}
+
+function recoveryLedger(report){
+ const rows=report.constraints.filter(c=>c.metric==='principal_recovery'&&Array.isArray(c.parents));
+ recoveryPolicies=rows.filter(c=>c.mode==='full'||!rows.some(f=>f.mode==='full'&&f.intent===c.intent
+  &&JSON.stringify(f.allowed_accounts)===JSON.stringify(c.allowed_accounts)));
+ return recoveryPolicies.map((policy,index)=>{
+  const parents=policy.parents.map((parent,number)=>{
+   const forbidden=parent.forbidden_refund_facts.reduce((sum,id)=>sum+BigInt(report.native_facts.find(f=>f.id===id).committed_yocto),0n).toString();
+   const state=parent.forbidden_refund_facts.length?'Wrong recipient':parent.failed_refund_facts.length&&parent.finalized?'Refund failed'
+    :parent.finalized&&parent.expected_yocto!==null&&parent.expected_yocto===parent.successful_allowed_yocto
+     ?parent.expected_yocto==='0'?'No deposit due':'Recovered':'Unresolved';
+   const proof=parent.refund_facts.length||report.native_facts.some(f=>f.receipt_id===parent.receipt_id);
+   const name='Payment '+(number+1);
+   const title=proof?`<button class="intent-id" data-recovery-policy="${index}" data-recovery-parent="${number}">${name} →</button>`:name;
+   return `<tr><th scope="row">${title}<span class="cell-note">${esc(state)}</span></th><td>${parent.expected_yocto===null?'Unknown':esc(moneyText(parent.expected_yocto))}${parent.finalized?'':'<span class="cell-note">Finality unconfirmed</span>'}</td><td>${esc(moneyText(parent.successful_allowed_yocto))}</td><td>${esc(moneyText(forbidden))}</td></tr>`;
+  }).join('');
+  const label='Intent '+policy.intent+' · '+(policy.mode==='full'?'Full recovery':'Destination policy');
+  return `<section class="recovery-policy"><header><h3>${esc(label)}</h3><span class="row-state ${policy.status}">${esc(policy.status==='breached'?'Policy breached':policyLabels[policy.status])}</span></header><p class="cell-note">${esc(policy.id)} · allowed: ${esc(policy.allowed_accounts.join(', '))}</p>${parents?`<div class="recovery-scroll" tabindex="0" role="region" aria-label="${esc(label)}">${reportTable('<caption class="sr-only">Required principal and proven refunds for each failed payment.</caption>',['Failed payment','Required','Proven return','Proven elsewhere'],parents)}</div>`:'<p class="empty">No bound failed-payment context in this recording.</p>'}</section>`;
+ }).join('');
 }
 
 function renderFinding(merchants, failedOutputs, report){
@@ -137,6 +167,7 @@ function renderFinding(merchants, failedOutputs, report){
    refs:row.witnesses.length?row.witnesses:report.native_facts.filter(f=>f.intent===row.intent
     &&positivePrincipal(f)).map(f=>f.id)};
  }
+ if(!view&&!row)view=recoveryFinding(report);
  if(!view&&failed){
   view={tone:'exception',intent:failed.intent,label:'required output failed',total:'Output failed',
    caption:'Output check failed.',output:failed};
@@ -359,7 +390,7 @@ function showCase(s,filename){
  setTab('overview');
 }
 const findCase=id=>catalog?.scenarios.find(s=>s.id===id);
-const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox','model-proposals':'Recorded Qwen · synthetic payments','synthetic-async':'Synthetic partial evidence'}[kind]??'Owned sandbox');
+const caseOrigin=kind=>({synthetic:'Synthetic mutation','live-model':'Recorded Qwen · owned sandbox','model-proposals':'Recorded Qwen · synthetic payments','synthetic-async':'Synthetic partial evidence','recovery-native':'Archived native recovery','recovery-projection':'Synthetic archive projection'}[kind]??'Owned sandbox');
 nav.onclick=({target})=>{
  const button=target.closest('.scenario');
  if(button)select(findCase(button.dataset.id));
@@ -440,10 +471,10 @@ function setTab(id){
  renderActivePanel();
 }
 function clearResults(){
- last=cache=facts=receiptRows=merchants=null;
+ last=cache=facts=receiptRows=merchants=null;recoveryPolicies=[];$('recovery-section').hidden=true;
  $('results').hidden=true;
  find.reset();
- for(const id of ['raw','evidence-list','scope-facts','intents','utility-list','constraint-list','verdicts'])$(id).replaceChildren();
+ for(const id of ['raw','evidence-list','scope-facts','intents','recovery-policies','utility-list','constraint-list','verdicts'])$(id).replaceChildren();
  $('finding').hidden=true;
  setEvidenceOrigin(null);
 }
@@ -629,6 +660,7 @@ function validateInspection(data){
   }else if(c.metric==='principal_recovery'){
    require(['destinations','full'].includes(c.mode)&&strings(c.allowed_accounts)
     &&unique(c.allowed_accounts)&&Array.isArray(c.parents),'recovery policy');
+   require(new Set(c.parents.map(p=>p?.receipt_id)).size===c.parents.length,'duplicate recovery parent');
    let breached=false,missing=false;
    for(const parent of c.parents){
     require(object(parent)&&text(parent.receipt_id)&&text(parent.from)&&boolean(parent.finalized)
@@ -802,7 +834,10 @@ function render(data){
   if(!busy)focusResult($('utility-'+unresolved),'overview');
  };
  merchants=cs.filter(c=>c.metric==='merchant_gross_principal');
- renderFinding(merchants,bad,r);$('intents').innerHTML=intentLedger(merchants,byIntent,r.native_facts);
+ renderFinding(merchants,bad,r);$('intents').hidden=$('payment-heading').hidden=!merchants.length;
+ $('intents').innerHTML=intentLedger(merchants,byIntent,r.native_facts);
+ const recovery=recoveryLedger(r);$('recovery-section').hidden=!recovery;
+ $('recovery-policies').innerHTML=recovery;
  $('utility-list').innerHTML=(outputRows||'<div class="empty">No required outputs.</div>')+
   (permitted?`<div class="empty">${permitted} permitted intermediate observations.</div>`:'');
  return announcement;
@@ -813,6 +848,14 @@ $('intents').onclick=({target})=>{
  if(busy||!button)return;
  const {intent}=merchants[button.closest('tr').sectionRowIndex];
  const refs=last.report.native_facts.filter(f=>f.intent===intent&&isPrincipal(f)).map(f=>f.id);
+ showEvidence(new Set(refs),button);
+};
+$('recovery-policies').onclick=({target})=>{
+ const button=target.closest('button[data-recovery-parent]');
+ if(busy||!button)return;
+ const policy=recoveryPolicies[Number(button.dataset.recoveryPolicy)],parent=policy?.parents[Number(button.dataset.recoveryParent)];
+ if(!parent||!last)return;
+ const refs=[...parent.refund_facts,...last.report.native_facts.filter(f=>f.receipt_id===parent.receipt_id).map(f=>f.id)];
  showEvidence(new Set(refs),button);
 };
 picker.onchange=event=>select(findCase(event.currentTarget.value));
@@ -917,7 +960,7 @@ function reportGate(report){
 // End CI gate.
 function renderCI(){
  const code=reportGate(last.report);
- setText('ci-expectation',`This input currently exits ${code}: ${['within declared scope, with required work passed','observed policy breach or failed output','inconclusive or rejected; never treat as success'][code]}.`);
+ setText('ci-expectation',`This input currently exits ${code}: ${['within declared scope; '+(last.report.utility?.required?.length?'required work passed':'no required outputs were declared'),'observed policy breach or failed output','inconclusive or rejected; never treat as success'][code]}.`);
 }
 async function bindBytes(bytes){
  const digest=await crypto.subtle.digest('SHA-256',bytes);

@@ -1,0 +1,38 @@
+"""Original plan/reread arithmetic reference. No assessor or builder imports."""
+from pathlib import Path
+import json,sys
+HERE=Path(__file__).resolve().parent
+AMOUNT=100000000000000000000000
+def reference(case):
+ rows={};states=[]
+ for intent in case['scope']:
+  affected=case.get('target')==intent;full=not affected or case['mode']=='original'
+  conflict=affected and case['mode']=='conflict'
+  known=[0,1] if full else case.get('visibleRefunds',[]) if case.get('anchored') else []
+  if conflict:known=[]
+  returned=sum(AMOUNT for i in known if intent=='RF01' or i==0)
+  diverted=sum(AMOUNT for i in known if intent=='RF02' and i==1)
+  status='conflict' if conflict else 'breached' if diverted else 'within' if full else 'unknown'
+  for mode in ['full','destinations']:rows[intent+'-recovery-'+mode]={'status':status}
+  rows[intent+'-external']={'status':'conflict' if conflict else 'within' if full else 'unknown',
+                           'known_subtotal':'0','exact_total':'0' if full and not conflict else None}
+  rows[intent+'-projection']={'returned':str(returned),'diverted':str(diverted)}
+  states.append(status)
+ gate=1 if 'breached' in states else 2 if any(s!='within' for s in states) else 0
+ return {'constraints':rows,'gate':gate}
+def archive_controls():
+ raw=json.loads((HERE/'archive/observation.json').read_bytes());reread=json.loads((HERE/'archive/reread.json').read_bytes())
+ assert raw['cases'][0]['vaultDelta']=='0' and raw['cases'][0]['outsiderDelta']=='0'
+ assert raw['cases'][1]['vaultDelta']==str(-AMOUNT) and raw['cases'][1]['outsiderDelta']==str(AMOUNT)
+ assert [r['authorizedRecoveredPrincipal'] for r in reread['cases']]==[str(2*AMOUNT),str(AMOUNT)]
+ assert [r['divertedPrincipal'] for r in reread['cases']]==['0',str(AMOUNT)]
+ assert len({p['failedParent'] for c in reread['cases'] for p in c['parents']})==4
+ assert len({p['principalRefunds'][0]['refund'] for c in reread['cases'] for p in c['parents']})==4
+ assert reference({'id':'manual-A','mode':'original','scope':['RF01']})['gate']==0
+ assert reference({'id':'manual-B','mode':'original','scope':['RF02']})['gate']==1
+ assert reference({'mode':'partition','target':'RF02','visibleRefunds':[0],'anchored':True,'scope':['RF01','RF02']})['gate']==2
+ assert reference({'mode':'partition','target':'RF02','visibleRefunds':[1],'anchored':True,'scope':['RF01','RF02']})['gate']==1
+ return {'originalConditions':2,'signedRootAttempts':2,'archivedChains':1,'newExecutions':0,'rawDeltaChecks':4,'uniqueFailedParents':4,'uniquePrincipalRefunds':4,'manualProjectionControls':4}
+if __name__=='__main__':
+ if sys.argv[1:] == ['--controls']:print(json.dumps(archive_controls()))
+ else:print(json.dumps(reference(json.loads(Path(sys.argv[1]).read_bytes()))))

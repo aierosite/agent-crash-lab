@@ -1,0 +1,527 @@
+{
+  "registeredAtUtc": "2026-11-08T02:15:06.019325+00:00",
+  "baseline": "v0.9.1",
+  "baseCoreSha256": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+  "sourceHashes": {
+    "recovery_builder.py": "dedda355ff12878d96049c1039211929824a9290b446e69855a417168cd3ef74",
+    "recovery_reference.py": "aca8f5e9d0f5f7cb0d061ac1f386279e58fd642a0d6c8269e206a141a438ae35",
+    "register.py": "9d512a98524d011db47cc556d630e54de7694f030a00c16d6d0d066a437be8d3"
+  },
+  "bundles": {
+    "bundles/original-both.json": "c7ddd9ec94d37f32d5716f3ebe06d2bd9f9dbdf6fe2213b5567fbba0e20130d1",
+    "bundles/original-allowed-scope.json": "4255a0e1ab0b114674435de3fe825326c49be127e3c2ba2a97d39096de9b6808",
+    "bundles/original-diverted-scope.json": "cffabc3620356fdaadd0a6c35c5379c440130592d90d28c3e8c7dd9a11e8583b",
+    "bundles/A-outcomes-without-bodies.json": "cf2b72c30c63f8b2402446ef31bff2ccff3dd45edfc7b1dafa65c1cb5cbd2952",
+    "bundles/B-outcomes-without-bodies.json": "b5e190933620e742ca8b9def2a3b15b6119e6af64b407447aa69a831773b0181",
+    "bundles/A-complementary-anchored.json": "73352fcf6378398c28a3b5308cd6e5464c95c16f05d420c74d8fc1182de4de18",
+    "bundles/B-complementary-anchored.json": "8a9823b4257a01cd2e175b3ec158cb4c6508fc585dd2d5a068fd4a79621915e5",
+    "bundles/B-only-allowed-refund.json": "824f7b000b787783d2e5588eaa0440d16a62767163faf769a92e88cc01810442",
+    "bundles/B-only-diverted-refund.json": "e06ac461c749da25fd17f8eb5198164f0226b71a6b9973353333946d60b566c8",
+    "bundles/B-unanchored-partials.json": "2fa4f8ffbd13fdceb2685ede83d50ac83bc2c07de2867625d949a32b32841b1e",
+    "bundles/B-conflicting-refund-identity.json": "2725826c928a47657255e3444ce9d35ebc5f305ccf8c7a899367cf08ab47a12e"
+  },
+  "plans": [
+    {
+      "id": "original-both",
+      "mode": "original",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "original-allowed-scope",
+      "mode": "original",
+      "scope": [
+        "RF01"
+      ]
+    },
+    {
+      "id": "original-diverted-scope",
+      "mode": "original",
+      "scope": [
+        "RF02"
+      ]
+    },
+    {
+      "id": "A-outcomes-without-bodies",
+      "mode": "no-bodies",
+      "target": "RF01",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-outcomes-without-bodies",
+      "mode": "no-bodies",
+      "target": "RF02",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "A-complementary-anchored",
+      "mode": "partition",
+      "target": "RF01",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-complementary-anchored",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-only-allowed-refund",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-only-diverted-refund",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        1
+      ],
+      "anchored": true,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-unanchored-partials",
+      "mode": "partition",
+      "target": "RF02",
+      "visibleRefunds": [
+        0,
+        1
+      ],
+      "anchored": false,
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    },
+    {
+      "id": "B-conflicting-refund-identity",
+      "mode": "conflict",
+      "target": "RF02",
+      "scope": [
+        "RF01",
+        "RF02"
+      ]
+    }
+  ],
+  "expected": {
+    "original-both": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "original-allowed-scope": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        }
+      },
+      "gate": 0
+    },
+    "original-diverted-scope": {
+      "constraints": {
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "A-outcomes-without-bodies": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "unknown"
+        },
+        "RF01-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF01-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF01-projection": {
+          "returned": "0",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-outcomes-without-bodies": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "A-complementary-anchored": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "unknown"
+        },
+        "RF01-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF01-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-complementary-anchored": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-only-allowed-refund": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "100000000000000000000000",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "B-only-diverted-refund": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "breached"
+        },
+        "RF02-recovery-destinations": {
+          "status": "breached"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "100000000000000000000000"
+        }
+      },
+      "gate": 1
+    },
+    "B-unanchored-partials": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "unknown"
+        },
+        "RF02-recovery-destinations": {
+          "status": "unknown"
+        },
+        "RF02-external": {
+          "status": "unknown",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    },
+    "B-conflicting-refund-identity": {
+      "constraints": {
+        "RF01-recovery-full": {
+          "status": "within"
+        },
+        "RF01-recovery-destinations": {
+          "status": "within"
+        },
+        "RF01-external": {
+          "status": "within",
+          "known_subtotal": "0",
+          "exact_total": "0"
+        },
+        "RF01-projection": {
+          "returned": "200000000000000000000000",
+          "diverted": "0"
+        },
+        "RF02-recovery-full": {
+          "status": "conflict"
+        },
+        "RF02-recovery-destinations": {
+          "status": "conflict"
+        },
+        "RF02-external": {
+          "status": "conflict",
+          "known_subtotal": "0",
+          "exact_total": null
+        },
+        "RF02-projection": {
+          "returned": "0",
+          "diverted": "0"
+        }
+      },
+      "gate": 2
+    }
+  },
+  "referenceControls": {
+    "originalConditions": 2,
+    "signedRootAttempts": 2,
+    "archivedChains": 1,
+    "newExecutions": 0,
+    "rawDeltaChecks": 4,
+    "uniqueFailedParents": 4,
+    "uniquePrincipalRefunds": 4,
+    "manualProjectionControls": 4
+  },
+  "coreEvaluatedBeforeRegistration": false,
+  "requirements": [
+    "Causal failed-parent recovery, no amount/recipient deduplication across siblings",
+    "Gas refunds do not satisfy principal recovery",
+    "Allowed-return and diverted credit remain separate",
+    "Missing receipt bodies cannot yield a clean recovery decision",
+    "Known disallowed refund remains a breach without full coverage",
+    "Unanchored partial outcomes do not prove recovery or diversion",
+    "Conflicting B preserves independently declared A",
+    "Exact original archive bytes and pre-product authority remain preserved",
+    "No required-output success claimed: this archive has no model/task-output observation"
+  ],
+  "mutationsPlanned": [
+    "Ignore generating-parent binding for refund association",
+    "Treat all committed refunds as allowed and none as forbidden",
+    "Suppress known recovery breach when coverage is incomplete"
+  ],
+  "scope": "11 source-informed inputs over two archived native conditions/one chain, including authority scopes and correlated constructed visibility projections. Same author; not 11 fresh trials, external blind review, authenticated chain proof or accuracy estimate."
+}

@@ -1,0 +1,73 @@
+{
+  "atUtc": "2026-11-08T02:34:20.931016+00:00",
+  "actualUiReports": [
+    {
+      "file": "python-invalid-recovery-owner.json",
+      "case": "invalid-recovery-owner",
+      "mode": "actual-local-assessment",
+      "reportSha256": "02e448467a5e7a85cc4587d932e1035b0d8f5c5913b8e7a7cfeba43a0c478ba0",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "python-sibling-refund-diverted.json",
+      "case": "sibling-refund-diverted",
+      "mode": "actual-local-assessment",
+      "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+      "gate": 1,
+      "matched": true
+    },
+    {
+      "file": "python-sibling-refund-partial.json",
+      "case": "sibling-refund-partial",
+      "mode": "actual-local-assessment",
+      "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "python-sibling-refunds-returned.json",
+      "case": "sibling-refunds-returned",
+      "mode": "actual-local-assessment",
+      "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+      "gate": 0,
+      "matched": true
+    },
+    {
+      "file": "wasm-invalid-recovery-owner.json",
+      "case": "invalid-recovery-owner",
+      "mode": "actual-browser-python-assessment",
+      "reportSha256": "02e448467a5e7a85cc4587d932e1035b0d8f5c5913b8e7a7cfeba43a0c478ba0",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refund-diverted.json",
+      "case": "sibling-refund-diverted",
+      "mode": "actual-browser-python-assessment",
+      "reportSha256": "ca28e7a5d2d3c19a2ba48535a4bd7d9e383a31c462f0597ea261b067c8346d10",
+      "gate": 1,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refund-partial.json",
+      "case": "sibling-refund-partial",
+      "mode": "actual-browser-python-assessment",
+      "reportSha256": "92c310c0eaee09c2a4fd3e4f93d87f2f360b51909bacade567f3dafe93f1771c",
+      "gate": 2,
+      "matched": true
+    },
+    {
+      "file": "wasm-sibling-refunds-returned.json",
+      "case": "sibling-refunds-returned",
+      "mode": "actual-browser-python-assessment",
+      "reportSha256": "4fb2f465a90dcdb6fb35d7c011f81e44ad2f94adca6572ff798f8f8c81a96923",
+      "gate": 0,
+      "matched": true
+    }
+  ],
+  "proofLinkedToCorrectFailedPayment": true,
+  "newNativeExecutions": 0,
+  "newInferenceCalls": 0,
+  "scope": "Actual local/Wasm UI replay of archived and explicitly synthetic data; no external audit or new native/model execution."
+}

@@ -1,0 +1,39 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import json,shutil,runpy,subprocess,sys
+HERE=Path(__file__).resolve().parent;assert (HERE/'initial-evaluation/results.json').exists()
+assert not (HERE/'reference-correction.json').exists()
+initial=json.loads((HERE/'initial-evaluation/results.json').read_bytes())
+bad=[row for row in initial['engines'][0]['cases'] if not row['matches']]
+assert len(bad)==1 and bad[0]['case']=='B-conflicting-refund-identity'
+old=HERE/'sources-before-reference-correction';old.mkdir()
+for name in ['recovery_builder.py','recovery_reference.py']:shutil.copyfile(HERE/name,old/name)
+path=HERE/'recovery_builder.py';text=path.read_text()
+needle=" {'id':'B-conflicting-refund-identity','mode':'conflict','target':'RF02','scope':['RF01','RF02']},"
+assert text.count(needle)==1
+text=text.replace(needle,needle+"\n {'id':'B-well-formed-conflict','mode':'valid-conflict','target':'RF02','scope':['RF01','RF02']},")
+text=text.replace("elif case['mode']=='conflict':", "elif case['mode'] in ['conflict','valid-conflict']:")
+needle="  body['receiver_id']='vault.callbacklab.near'"
+assert text.count(needle)==1
+text=text.replace(needle,needle+"\n  if case['mode']=='valid-conflict':\n   outcome=next(row for row in view['response']['result']['receipts_outcome'] if row['id']==target)\n   outcome['outcome']['executor_id']=body['receiver_id']")
+path.write_text(text,encoding='utf-8')
+path=HERE/'recovery_reference.py';text=path.read_text()
+text=text.replace("  affected=case.get('target')==intent;full=not affected or case['mode']=='original'\n  conflict=affected and case['mode']=='conflict'\n  known=[0,1] if full", "  affected=case.get('target')==intent\n  invalid_extra=affected and case['mode']=='conflict'\n  full=not affected or case['mode']=='original'\n  conflict=affected and case['mode']=='valid-conflict'\n  known=[0,1] if full or invalid_extra")
+path.write_text(text,encoding='utf-8')
+builder=runpy.run_path(str(HERE/'recovery_builder.py'))
+controls=json.loads(subprocess.check_output([sys.executable,'-I','-S',str(HERE/'recovery_reference.py'),'--controls'],timeout=5))
+(HERE/'bundles-corrected').mkdir();(HERE/'plans-corrected').mkdir();bundles={};expected={}
+for case in builder['CASES']:
+ name=case['id'];plan=HERE/'plans-corrected'/(name+'.json');plan.write_bytes(builder['pack'](case))
+ raw=builder['pack'](builder['build'](case));filename='bundles-corrected/'+name+'.json';(HERE/filename).write_bytes(raw);bundles[filename]=sha256(raw).hexdigest()
+ expected[name]=json.loads(subprocess.check_output([sys.executable,'-I','-S',str(HERE/'recovery_reference.py'),str(plan)],timeout=5))
+record={'atUtc':datetime.now(timezone.utc).isoformat(),'parentRegistrationSha256':sha256((HERE/'registration-amended.json').read_bytes()).hexdigest(),
+ 'sourceHashes':{name:sha256((HERE/name).read_bytes()).hexdigest() for name in ['recovery_builder.py','recovery_reference.py','correct-reference.py']},
+ 'baseCoreSha256':initial['engines'][0]['sourceSha256'],'bundles':bundles,'expected':expected,'plans':builder['CASES'],
+ 'referenceControls':controls,'originalCoreDisagreements':1,'originalResultPreserved':True,'coreCodeChanged':False,
+ 'reason':'The original extra view changed a refund receiver but retained the old outcome executor, so it is structurally invalid. A rejected extra view does not refute a valid conclusive historical breach, although complete coverage is lost. The reference now models this distinction; an additional prospective control changes both fields so the graph is structurally consistent before testing immutable-identity disagreement. This is a reference/fixture correction, not an engine accuracy improvement.',
+ 'newControlEvaluatedBeforeThisRegistration':False,
+ 'scope':'12 correlated reconstructions/projections over two archived conditions, same author; original 10/11 agreement and reference error remain recorded. No external audit or new chain/model execution.'}
+(HERE/'reference-correction.json').write_text(json.dumps(record,indent=2)+'\n')
+print(json.dumps({'preservedOriginalDisagreements':1,'registeredInputs':12,'newProspectiveControl':1,'coreChanged':False,'expectedCorrection':'reference, not engine'}))

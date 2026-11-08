@@ -1,0 +1,52 @@
+from pathlib import Path
+from hashlib import sha256
+from datetime import datetime,timezone
+import json,shutil,runpy,subprocess,sys
+HERE=Path(__file__).resolve().parent;assert not (HERE/'registration-amended.json').exists()
+initial=json.loads((HERE/'registration.json').read_bytes())
+old=HERE/'sources-before-amendment';old.mkdir()
+for name in ['recovery_builder.py','recovery_reference.py']:shutil.copyfile(HERE/name,old/name)
+path=HERE/'recovery_builder.py';text=path.read_text()
+text=text.replace("result['final_execution_status']='INCLUDED_FINAL';groups.append(view)","result['final_execution_status']='INCLUDED_FINAL';view['request']['params']['wait_until']='NONE';groups.append(view)")
+text=text.replace("view['response']['result']['final_execution_status']='INCLUDED_FINAL'", "view['response']['result']['final_execution_status']='INCLUDED_FINAL';view['request']['params']['wait_until']='NONE'")
+path.write_text(text,encoding='utf-8')
+path=HERE/'recovery_reference.py';text=path.read_text()
+needle=" assert raw['cases'][0]['vaultDelta']=='0'"
+assert text.count(needle)==1
+addition=""" rpcs=raw['rpcObservations']
+ def balance(index,account):
+  row=rpcs[index];assert row['request']['method']=='query' and row['request']['params']['request_type']=='view_account'
+  assert row['request']['params']['account_id']==account
+  return int(row['response']['result']['amount'])
+ vault='vault.callbacklab.near';outsider='receiver.callbacklab.near'
+ assert balance(9,vault)-balance(3,vault)==0
+ assert balance(10,outsider)-balance(4,outsider)==0
+ assert balance(18,vault)-balance(12,vault)==-AMOUNT
+ assert balance(19,outsider)-balance(13,outsider)==AMOUNT
+ for index,condition in [(8,reread['cases'][0]),(17,reread['cases'][1])]:
+  result=rpcs[index]['response']['result'];assert result['final_execution_status']=='FINAL'
+  body={r['receipt_id']:r for r in result['receipts']};out={r['id']:r for r in result['receipts_outcome']}
+  for parent in condition['parents']:
+   pid=parent['failedParent'];rid=parent['principalRefunds'][0]['refund'];b=body[pid];refund=body[rid]
+   assert 'Failure' in out[pid]['outcome']['status'] and rid in out[pid]['outcome']['receipt_ids']
+   assert b['predecessor_id']==vault and sum(int(next(iter(a.values()))['deposit']) for a in b['receipt']['Action']['actions'])==AMOUNT
+   assert refund['predecessor_id']==refund['receipt']['Action']['signer_id']=='system'
+   assert refund['receipt']['Action']['signer_public_key']=='ed25519:'+'1'*32
+   assert refund['receiver_id']==(b['receipt']['Action'].get('refund_to') or b['predecessor_id'])
+   assert refund['receiver_id']==parent['principalRefunds'][0]['receiver']
+   assert refund['receipt']['Action']['actions']==[{'Transfer':{'deposit':str(AMOUNT)}}]
+   assert 'SuccessValue' in out[rid]['outcome']['status']
+"""
+text=text.replace(needle,addition+needle)
+path.write_text(text,encoding='utf-8')
+builder=runpy.run_path(str(HERE/'recovery_builder.py'))
+controls=json.loads(subprocess.check_output([sys.executable,'-I','-S',str(HERE/'recovery_reference.py'),'--controls'],timeout=5))
+(HERE/'bundles-amended').mkdir();bundles={}
+for case in builder['CASES']:
+ raw=builder['pack'](builder['build'](case));name='bundles-amended/'+case['id']+'.json';(HERE/name).write_bytes(raw);bundles[name]=sha256(raw).hexdigest()
+record={**initial,'registeredAtUtc':datetime.now(timezone.utc).isoformat(),'bundles':bundles,
+ 'sourceHashes':{name:sha256((HERE/name).read_bytes()).hexdigest() for name in ['recovery_builder.py','recovery_reference.py','register.py','amend-before-evaluation.py']},
+ 'referenceControls':controls,'parentRegistrationSha256':sha256((HERE/'registration.json').read_bytes()).hexdigest(),
+ 'amendmentBeforeAnyCoreEvaluation':True,'reason':'Synthetic partial requests now use wait_until NONE, avoiding a requested-FINAL/result-INCLUDED contradiction. Reference checks raw account-query deltas and raw failed-parent/refund identities directly, not only archived derived summaries. Expectations and original archive bytes unchanged.'}
+(HERE/'registration-amended.json').write_text(json.dumps(record,indent=2)+'\n')
+print(json.dumps({'registered':len(bundles),'beforeAnyCoreEvaluation':True,'expectedChanged':False,'archiveChanged':False,'sha256':sha256((HERE/'registration-amended.json').read_bytes()).hexdigest()}))

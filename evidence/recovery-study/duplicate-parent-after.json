@@ -1,0 +1,8 @@
+{
+  "source": "candidate v41 browser contract",
+  "originalParentRows": 2,
+  "mutatedParentRows": 3,
+  "duplicateIdentityAccepted": false,
+  "financialEngineInvolved": false,
+  "meaning": "Response-boundary counterexample; no native payment or claim that the genuine engine emits this shape."
+}
