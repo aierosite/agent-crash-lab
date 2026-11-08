@@ -1,0 +1,150 @@
+{
+  "lockedAtUtc": "2026-11-08T11:21:17.718798+00:00",
+  "registrationSha256": "465e11d8478536eeae7066dd2dd31e4cce4b6e555dfdd2b5a60db6e850f8adb0",
+  "sources": {
+    "ACTOR-ADAPTATION.json": {
+      "bytes": 1071,
+      "sha256": "5dd65a1d34956b757a7c8da68b8e6f41e89865b0b6b55807dc44db722d4a4361"
+    },
+    "actor.py": {
+      "bytes": 8009,
+      "sha256": "0029a6b012aaa1199731e7668615cfbb064a7c8b6877a352cc601dc5f1c04254"
+    },
+    "agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "bank_loop.py": {
+      "bytes": 5918,
+      "sha256": "0aea0f10406a2eabd92a716f661f3a2ea16e65aed5357ff2f1f9c96148eca80a"
+    },
+    "bank_tools.py": {
+      "bytes": 4646,
+      "sha256": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6"
+    },
+    "banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "build-precheck.json": {
+      "bytes": 69,
+      "sha256": "7c995bf8b14574c1195ab6ce7e60dbf70cf4268132bf9ce9c017ab7e9561f46e"
+    },
+    "BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "build.stderr.txt": {
+      "bytes": 157,
+      "sha256": "7c97a8283a46dccf85ff9706bc108d619bec96a62fb902e2942e7d942b600090"
+    },
+    "build.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_worker.py": {
+      "bytes": 4229,
+      "sha256": "4cecc1bb8cb18525c62835997b7e2141ef2fd79421f42ff710e1182e08bc5505"
+    },
+    "controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "35200a48f72abbbee41ccc1d035ee1c0081e06450e8d8384ec89d83bc11ee268"
+    },
+    "controls-sdk.log": {
+      "bytes": 2361,
+      "sha256": "28fa70e0b711d2741f85576398d13daaa2b382230b1a39571cf7d706de2a3c08"
+    },
+    "CONTROLS.json": {
+      "bytes": 194,
+      "sha256": "3c224f24769fbc0f09a4d15fdff7dd588c069dbda26ed42efecb1e61ddefe53e"
+    },
+    "controls.py": {
+      "bytes": 8691,
+      "sha256": "84b177ea70db9c711aad06ebc28bb2873e0223432bd8a8a7adc33384135def89"
+    },
+    "controls.stderr.txt": {
+      "bytes": 1076,
+      "sha256": "fdc81ba1ca369f9b52c205d7e68673c71a91599c1e65ca446c86b65e1d423caf"
+    },
+    "controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "prepare.py": {
+      "bytes": 8340,
+      "sha256": "47e2222d9695f645b409e7325ae5e25c1c113bb2444e204ad97b65603e5a3acc"
+    },
+    "prepare_actor.py": {
+      "bytes": 1578,
+      "sha256": "2abf4e1b3ff6dd7eb04e28fd85e7e720c395d754b50768550cf00a9911dfe062"
+    },
+    "projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "REGISTRATION.json": {
+      "bytes": 7827,
+      "sha256": "465e11d8478536eeae7066dd2dd31e4cce4b6e555dfdd2b5a60db6e850f8adb0"
+    },
+    "sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "transport.py": {
+      "bytes": 6018,
+      "sha256": "8eaec0fd19f9b606c2419b3f5bad55159e2c266b6e10b37026feb985cb3e51db"
+    },
+    "worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
+    }
+  }
+}

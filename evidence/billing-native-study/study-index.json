@@ -1,0 +1,220 @@
+{
+  "format": "agent-crash-lab/public-billing-study-v1",
+  "atUtc": "2026-11-08T11:56:27.725900+00:00",
+  "originalPrivateIndexSha256": "3a3b4e9bcc948b8354a9564feb15eb3c3333f3344e526de4d59d98e24729fa62",
+  "scope": "Exact public subset: every pre-inference locked file, every collected actual file, original full audit/grade/report objects, integrity controls, postcheck and exposure coverage where present. Excludes post-run private housekeeping scripts and model/runtime binaries. Original bytes are unchanged.",
+  "files": {
+    "ACTOR-ADAPTATION.json": {
+      "bytes": 1071,
+      "sha256": "5dd65a1d34956b757a7c8da68b8e6f41e89865b0b6b55807dc44db722d4a4361"
+    },
+    "AUDIT.json": {
+      "bytes": 1667,
+      "sha256": "2408bc786dd3af61c8d28b058c6382429d6e9ccc71c6f42f8cb4e6c481875cdf"
+    },
+    "BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "CONTROLS.json": {
+      "bytes": 194,
+      "sha256": "3c224f24769fbc0f09a4d15fdff7dd588c069dbda26ed42efecb1e61ddefe53e"
+    },
+    "INTEGRITY-CONTROLS.json": {
+      "bytes": 220,
+      "sha256": "ab6bc18213c25d3fff66fb69414db1d143ad5035f8c56d9cf983f4cfacc818b7"
+    },
+    "LOCK.json": {
+      "bytes": 5331,
+      "sha256": "7c0969f4f3b2765ae5f0244a98be617481fefe984b156b0bb3aaf590f36cd762"
+    },
+    "POSTCHECK-CLEANUP.json": {
+      "bytes": 1485,
+      "sha256": "94b16561020356eded2f6993dcec8877ef8ef6b75669534c664a12ef34473827"
+    },
+    "REGISTRATION.json": {
+      "bytes": 7827,
+      "sha256": "465e11d8478536eeae7066dd2dd31e4cce4b6e555dfdd2b5a60db6e850f8adb0"
+    },
+    "actor.py": {
+      "bytes": 8009,
+      "sha256": "0029a6b012aaa1199731e7668615cfbb064a7c8b6877a352cc601dc5f1c04254"
+    },
+    "actual/calls.json": {
+      "bytes": 9697,
+      "sha256": "0419d7c040e7ff8ac552708d0f13d9f0a584bb5d4014142e98239d2f3904a077"
+    },
+    "actual/episodes.json": {
+      "bytes": 3590,
+      "sha256": "075a2b0a4db41640765729853986b0f088619cd7c0424cc90e401558dc100934"
+    },
+    "actual/execution.json": {
+      "bytes": 470,
+      "sha256": "51b04e8578bb1fbc0bd11aafd37ad33930a605f343f98ae0e5b390cb269807af"
+    },
+    "actual/model-properties.json": {
+      "bytes": 4534,
+      "sha256": "4ee98207b8d4442c15cb2ece6daaf3f36221b84bda3a6d44899429252dc4f0b7"
+    },
+    "actual/run.json": {
+      "bytes": 239,
+      "sha256": "af4d6cc50afc66f815bed7aede2464fa85b71a7dfce2c6d5dd7407c11b85bb7a"
+    },
+    "actual/runtime.log": {
+      "bytes": 3039,
+      "sha256": "c4b3066a2c5228bc20cd165b90b09c5a44acf9a8324079fb25027dceea5050fd"
+    },
+    "actual/sdk-wire.json": {
+      "bytes": 275,
+      "sha256": "75ec83a441cb89b78a736b42e0d0c5995d4127faaf3ba4ed16b7c626c57d9ebe"
+    },
+    "actual/sdk.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual/server.json": {
+      "bytes": 544,
+      "sha256": "c788cf9645de3d7f976f40cb12e6db34ecaac2dee16f95893c78170852b5ce54"
+    },
+    "agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "bank_loop.py": {
+      "bytes": 5918,
+      "sha256": "0aea0f10406a2eabd92a716f661f3a2ea16e65aed5357ff2f1f9c96148eca80a"
+    },
+    "bank_tools.py": {
+      "bytes": 4646,
+      "sha256": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6"
+    },
+    "banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "build-precheck.json": {
+      "bytes": 69,
+      "sha256": "7c995bf8b14574c1195ab6ce7e60dbf70cf4268132bf9ce9c017ab7e9561f46e"
+    },
+    "build.stderr.txt": {
+      "bytes": 157,
+      "sha256": "7c97a8283a46dccf85ff9706bc108d619bec96a62fb902e2942e7d942b600090"
+    },
+    "build.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_worker.py": {
+      "bytes": 4229,
+      "sha256": "4cecc1bb8cb18525c62835997b7e2141ef2fd79421f42ff710e1182e08bc5505"
+    },
+    "controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "35200a48f72abbbee41ccc1d035ee1c0081e06450e8d8384ec89d83bc11ee268"
+    },
+    "controls-sdk.log": {
+      "bytes": 2361,
+      "sha256": "28fa70e0b711d2741f85576398d13daaa2b382230b1a39571cf7d706de2a3c08"
+    },
+    "controls.py": {
+      "bytes": 8691,
+      "sha256": "84b177ea70db9c711aad06ebc28bb2873e0223432bd8a8a7adc33384135def89"
+    },
+    "controls.stderr.txt": {
+      "bytes": 1076,
+      "sha256": "fdc81ba1ca369f9b52c205d7e68673c71a91599c1e65ca446c86b65e1d423caf"
+    },
+    "controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "original-external-grades.json": {
+      "bytes": 639,
+      "sha256": "52308c7bf71809945a22321cb7af153a61808d29c7f7c9add1c8a5757cf0c480"
+    },
+    "original-financial-reports.json": {
+      "bytes": 3186,
+      "sha256": "febcdb75d8cdd39e4c0231fce512240828549f3025efa3c9f7df30d3b70585cd"
+    },
+    "prepare.py": {
+      "bytes": 8340,
+      "sha256": "47e2222d9695f645b409e7325ae5e25c1c113bb2444e204ad97b65603e5a3acc"
+    },
+    "prepare_actor.py": {
+      "bytes": 1578,
+      "sha256": "2abf4e1b3ff6dd7eb04e28fd85e7e720c395d754b50768550cf00a9911dfe062"
+    },
+    "projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "test_integrity.py": {
+      "bytes": 2992,
+      "sha256": "ca45afa52cafb2d4064a2ff0b0d6b5d30cc88b728da59bf22034f5d4a73d0a22"
+    },
+    "transport.py": {
+      "bytes": 6018,
+      "sha256": "8eaec0fd19f9b606c2419b3f5bad55159e2c266b6e10b37026feb985cb3e51db"
+    },
+    "worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
+    },
+    "audit.py": {
+      "bytes": 13556,
+      "sha256": "0303a4430cce036e401b8e07fc0232a7808bf95eadd2158964bafdd50e048395"
+    }
+  }
+}

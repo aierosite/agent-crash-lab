@@ -11,7 +11,7 @@ prices or root-transaction success.
 ## Try the workbench
 
 - [Native payment and useful-output review](https://aierosite.github.io/agent-crash-lab/web/?browser=1&case=sibling-refund-diverted)
-- [Per-order token payment terms](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=model-loop-repeated-payment)
+- [Per-order token payment terms](https://aierosite.github.io/agent-crash-lab/web/policy.html?browser=1&case=billing-agent-repeats)
 - [Custody and user entitlement](https://aierosite.github.io/agent-crash-lab/web/token.html?browser=1&case=upstream-failed-withdrawal)
 
 The optional browser workbench runs the fingerprinted Python inspector in a
@@ -21,7 +21,24 @@ before accepting a report. Input/source assumptions remain visible.
 
 ![The payment-terms workbench](docs/token-payment-terms.png)
 
-## Capture your own supplied token observations · v0.15.0
+## Recorded billing agent · v0.16.0
+
+The actual local model paid the same98.70 fixture invoice five times without a
+guard. An invoice-bound wrapper retained one payment and the model finished.
+The original external bill-utility predicate passes both traces; the separate
+gross-cap check exposes the repeated debit.
+
+```sh
+python -I -S tools/verify_billing_study.py
+```
+
+Six correlated trajectories, one invoice/seed:45 raw model responses,45 HTTP
+requests and18 official SDK mock effects. The planned invoice-injection pair
+was never exposed because the model never read the file; it establishes no
+injection defense. The failed native attempt and earlier mathematical failures
+remain. [Raw data, exact demos, limitations and optional SDK-only reexecution](docs/BILLING_STUDY.md).
+
+## Capture your own supplied token observations · introduced in v0.15.0
 
 The new passive CLI keeps raw request/response bytes and explicit owner receipt
 bindings, then builds the existing payment-policy bundle. It has no networking,
@@ -44,7 +61,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.15.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.15.0),
+Download the [v0.16.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.16.0),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh
@@ -58,7 +75,7 @@ node test_policy_contract.js
 ```
 
 The judge command first checks package membership and file bytes, then runs
-fifteen offline Python suites. The five Node commands exercise response boundaries.
+sixteen offline Python suites. The five Node commands exercise response boundaries.
 Verification is internal consistency under a trusted verifier, not independent
 accuracy or publication authenticity. Default replay starts no model, SDK worker,
 NEAR node or public-chain transaction. Some integration controls use localhost
@@ -77,6 +94,7 @@ or [read the token policy](docs/TOKEN_POLICY.md).
 
 | Evidence | What it establishes and where it stops |
 |---|---|
+| [Billing model → HTTP → SDK mock](docs/BILLING_STUDY.md) | Six fixed trajectories: original bill utility passes6/6; three unguarded traces exceed their cap and three guarded traces preserve one authorized payment. Same-author/source-informed, one invoice/seed. No invoice injection was actually exposed. Native-format failure is retained. |
 | [Registered model → HTTP → SDK mock loop](docs/AGENT_LOOP.md) | Twelve trajectories, 78 evaluation calls, 68 actual HTTP requests and 34 SDK mock-ledger effects. Two unguarded cap breaches; none of 24 useful outputs passed. Raw failures remain. Numeric source/grader is GSM8K; selection, environment and financial grading are ours. Not blind/unseen. |
 | [Official SDK conformance](docs/SDK_CONFORMANCE.md) | Unchanged pinned resolver executed in a mock host for 162 registered configurations; outputs and six amounts reproduced locally and in CI. Own constructed receipt adapter, not deployed WASM or an agent benchmark. |
 | [Native model/process archive](docs/LIVE_AGENT.md) | Eight owned sandbox chains and a crash/recovery comparison. Host quote checks and a calculator corrected model selections; the reported useful-output success is not raw-model accuracy. |
@@ -84,8 +102,8 @@ or [read the token policy](docs/TOKEN_POLICY.md).
 | [Custody, rights and source records](docs/TOKEN_REVIEW.md) | Externally authored archival facts and separately collected read-only source records expose root success with failed payout. Extraction and grading remain ours; no authenticated consensus or independent blind audit. |
 | [Recovery](docs/RECOVERY_STUDY.md), [partial evidence](docs/ASYNC_EVIDENCE.md) and [evaluation](docs/EVALUATION.md) | Original counterexamples, corrected references, frozen reports and semantic controls remain reproducible. Case counts are not accuracy estimates. |
 
-The separate comparative actor-interface experiment is **not** a result of this
-capture release. Broader model/task generalization and externally
+The separate earlier comparative actor-interface failures remain distinct from
+this complementary billing study. Broader model/task generalization and externally
 selected blind evaluation remain open. No first-place probability is claimed.
 
 ## Trust, deployment and provenance

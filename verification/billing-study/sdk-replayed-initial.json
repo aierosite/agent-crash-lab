@@ -1,0 +1,57 @@
+{
+  "format": "agent-crash-lab/billing-sdk-replay-v1",
+  "startedAtUtc": "2026-11-08T11:58:58.981415+00:00",
+  "endedAtUtc": "2026-11-08T11:59:02.946087+00:00",
+  "sdkRevision": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+  "canonicalSourceFilesChecked": 407,
+  "compiler": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 22.1.2",
+  "sdkCommandsExecuted": 30,
+  "sdkPaymentMethodsExecuted": 18,
+  "fullSdkResponseBytesMatched": true,
+  "sdkResponseSha256": "f18c4fc466cc43f04985ac2427a651c3370d1d8761ba18a9d79acd4777d2b001",
+  "binarySha256": "b2180e50ab6c5819679faed74f9abbb2cb1da69ffd1203a7132c6614509f54ab",
+  "originalRustHarnessSourceSha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213",
+  "portableBuildAdaptations": [
+    "Only dependency path strings point to the selected canonical tree.",
+    "Only the OWN root package name changes to crash-lab-billing-replay in Cargo.toml/Cargo.lock, preventing overwrite of the original recorded banking worker.",
+    "Original Rust source and every upstream SDK source file remain byte-identical."
+  ],
+  "newModelCalls": 0,
+  "newTransactions": 0,
+  "newChainRpc": 0,
+  "existingSdkTreeUsed": true,
+  "cargoOffline": true,
+  "sharedBuildCacheUsed": true,
+  "workspace": "/tmp/agent-crash-lab-billing-sdk-replay-v016/actual",
+  "commands": [
+    {
+      "label": "compiler",
+      "command": [
+        "rustc",
+        "--version",
+        "--verbose"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "build",
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "/tmp/agent-crash-lab-billing-sdk-replay-v016/actual/harness/Cargo.toml"
+      ],
+      "exitCode": 0
+    },
+    {
+      "label": "sdk-replay",
+      "command": [
+        "/tmp/agent-crash-lab-sdk-v013-tools/target/debug/crash-lab-billing-replay"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "meaning": "Actual official SDK mock-host methods freshly reexecuted for recorded model-selected arguments; exact full stdout response stream matches. This reruns neither the model nor HTTP merchant, deploys no WASM and authenticates no consensus. Not independent blind evaluation."
+}

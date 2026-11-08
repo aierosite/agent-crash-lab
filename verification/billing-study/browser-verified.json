@@ -1,0 +1,67 @@
+{
+  "atUtc": "2026-11-08T12:11:34.878324+00:00",
+  "localPython": [
+    {
+      "case": "billing-agent-repeats",
+      "selected": "billing-agent-repeats",
+      "status": "Check complete \u00b7 exact input and receipt projection verified.",
+      "gate": 1,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-agent-protected",
+      "selected": "billing-agent-protected",
+      "status": "Check complete \u00b7 exact input and receipt projection verified.",
+      "gate": 0,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-two-debit-witness",
+      "selected": "billing-two-debit-witness",
+      "status": "Check complete \u00b7 exact input and receipt projection verified.",
+      "gate": 1,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-native-incomplete",
+      "selected": "billing-native-incomplete",
+      "status": "Check complete \u00b7 exact input and receipt projection verified.",
+      "gate": 2,
+      "wholeReportMatched": true
+    }
+  ],
+  "browserPyodide": [
+    {
+      "case": "billing-agent-repeats",
+      "gate": 1,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-agent-protected",
+      "gate": 0,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-two-debit-witness",
+      "gate": 1,
+      "wholeReportMatched": true
+    },
+    {
+      "case": "billing-native-incomplete",
+      "gate": 2,
+      "wholeReportMatched": true
+    }
+  ],
+  "sourceFingerprints": {
+    "agent_crash_lab.py": "1bdbba77f10251ca9a4bb83a623177e33b23dec6105b9a6221b35c7fbce0f441",
+    "token_policy.py": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935",
+    "token_review.py": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0",
+    "web/policy-contract.js": "2bf31e753d62b19ba76aaf3217408ec3cf4bc641a211d74e9d069bc96461e132",
+    "web/policy.js": "d37c75a46946a50616422ce38ef48f60e3de525a79b88cd8ec0501a0270a2a7a",
+    "web/token-events.js": "9adcdd82c1fb7b01ce4874f8a58a0b3c8985c58cffccfe433a83efa9fabae9f2"
+  },
+  "fullReportComparison": true,
+  "newModelCalls": 0,
+  "newTransactions": 0,
+  "meaning": "Actual visible UI execution of four exact derived bundles; reports match complete Python objects. This replays recorded evidence, not the model or a blockchain."
+}

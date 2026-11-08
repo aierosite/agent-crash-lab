@@ -1,0 +1,57 @@
+{
+  "format": "agent-crash-lab/derived-billing-demo-v1",
+  "cases": [
+    {
+      "id": "billing-agent-repeats",
+      "title": "Qwen billing \u00b7 repeated charges after HTTP503",
+      "study": "billing-study",
+      "sourceEpisode": "billing-flat/post-effect-timeout/unguarded/seed61",
+      "sdkRowIndices": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "derivedPrefix": false,
+      "closedHorizon": true,
+      "expectedGate": 1
+    },
+    {
+      "id": "billing-agent-protected",
+      "title": "Qwen billing \u00b7 one recovered invoice payment",
+      "study": "billing-study",
+      "sourceEpisode": "billing-flat/post-effect-timeout/invoice-bound/seed61",
+      "sdkRowIndices": [
+        0
+      ],
+      "derivedPrefix": false,
+      "closedHorizon": true,
+      "expectedGate": 0
+    },
+    {
+      "id": "billing-two-debit-witness",
+      "title": "Derived prefix \u00b7 two recorded invoice debits",
+      "study": "billing-study",
+      "sourceEpisode": "billing-flat/post-effect-timeout/unguarded/seed61",
+      "sdkRowIndices": [
+        0,
+        1
+      ],
+      "derivedPrefix": true,
+      "closedHorizon": false,
+      "expectedGate": 1
+    },
+    {
+      "id": "billing-native-incomplete",
+      "title": "Native tool attempt \u00b7 stopped before payment",
+      "study": "billing-native-study",
+      "sourceEpisode": "billing/clean/unguarded/seed61",
+      "sdkRowIndices": [],
+      "derivedPrefix": false,
+      "closedHorizon": false,
+      "expectedGate": 2
+    }
+  ],
+  "meaning": "Full input/report comparison against deterministic projections of the sealed recorded SDK rows. Source notes are explicit descriptive UI derivations and evidence/task hashes are recomputed. Derived two-debit prefix is not a fresh execution or a claimed global minimum."
+}

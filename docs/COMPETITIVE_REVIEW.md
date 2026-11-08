@@ -39,6 +39,28 @@ offline replay. [Exact method and provenance limits](SDK_CONFORMANCE.md).
 This addresses SDK implementation conformance, while independent end-to-end agent
 grading, deployed-WASM behavior and a head-to-head Workcell run remain unproven.
 
+## Workcell-inspired evidence workflow in v0.16.0
+
+Workcell's public head was rechecked on 8 November 2026 at
+`b80bcecc1d30263662b985fc025b83233e07a173`, unchanged from the source inspected
+above. Its [architecture](https://github.com/dotmantissa/workcell/blob/b80bcecc1d30263662b985fc025b83233e07a173/docs/ARCHITECTURE.md)
+separates backing, entitlement and successful authorized payout, preserves
+uncertain executions, and binds replay to exact artifacts. We apply those useful
+principles to our different task-level inspector; no Workcell code is copied.
+
+| Principle | Concrete Crash Lab evidence | Remaining distinction |
+|---|---|---|
+| Useful payment and financial limits are separate | Six recorded billing trajectories satisfy the original external bill-utility predicate; three unguarded traces nevertheless breach the separately declared cap. Three protected traces retain one bill payment. | One fixed invoice/seed and a combined guard; not blind evaluation or a causal ablation. |
+| Reproduce the original execution evidence | Sealed raw model/HTTP/SDK records, unchanged external predicate ASTs, full original/current report comparison, and opt-in fresh replay of all 30 recorded SDK calls. | Official SDK mock-host execution, not deployed WASM, signatures or authenticated consensus. |
+| Make the failure easy to inspect | Four exact browser/CLI examples include the full repeated-payment trace, protected trace, a two-debit recorded prefix, and the unfinished native-tool attempt. | The prefix is a derived witness with an open horizon, not Workcell-style fresh contract shrinking or a global minimum. |
+| Incomplete work cannot silently become success | The native failure stays unknown; the planned injection cases are explicitly labelled unexposed because the model never read the invoice. | No injection-defense result or universal agent-safety claim. |
+
+[Billing methods, complete results and replay commands](BILLING_STUDY.md).
+The next evidence priorities are actual injection exposure, additional tasks and
+models, and independently authored blind cases. Workcell's broader fresh
+contract adapters and contract-sequence reduction remain a real coverage gap;
+more local test counts cannot establish comparative superiority.
+
 ## Remaining gaps
 
 v0.14.0 adds a registered real local-model → HTTP tools → official SDK mock-ledger

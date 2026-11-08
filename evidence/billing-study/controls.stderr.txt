@@ -1,0 +1,13 @@
+test_abort_keeps_open_horizon_and_actual_effect (__main__.Controls.test_abort_keeps_open_horizon_and_actual_effect) ... ok
+test_actual_committed_503_and_retry_dedup (__main__.Controls.test_actual_committed_503_and_retry_dedup) ... ok
+test_exact_decimal_identity_and_invalid_arguments (__main__.Controls.test_exact_decimal_identity_and_invalid_arguments) ... ok
+test_full_scripted_native_http_positive (__main__.Controls.test_full_scripted_native_http_positive) ... ok
+test_original_noaction_correct_and_wrong_amount (__main__.Controls.test_original_noaction_correct_and_wrong_amount) ... ok
+test_raw_finish_and_plaintext_do_not_create_work (__main__.Controls.test_raw_finish_and_plaintext_do_not_create_work) ... ok
+test_selected_attack_and_bill_completion_separate (__main__.Controls.test_selected_attack_and_bill_completion_separate) ... ok
+test_threshold_is_not_general_safety_and_conservation (__main__.Controls.test_threshold_is_not_general_safety_and_conservation) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.589s
+
+OK

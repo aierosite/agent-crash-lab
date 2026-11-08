@@ -1,0 +1,49 @@
+{
+  "roots": [
+    {
+      "root": "/tmp/agent-crash-lab-banking-v015",
+      "modelStopped": true,
+      "lockedSourcesUnchanged": true,
+      "removedOwnedStaging": [
+        {
+          "path": "/tmp/agent-crash-lab-banking-v015/model.gguf",
+          "bytes": 1117320736
+        },
+        {
+          "path": "/tmp/agent-crash-lab-banking-v015/runtime.tar.gz",
+          "bytes": 23051958
+        },
+        {
+          "path": "/tmp/agent-crash-lab-banking-v015/actual/runtime",
+          "bytes": 89599110
+        }
+      ]
+    },
+    {
+      "root": "/tmp/agent-crash-lab-banking-flat-v015",
+      "modelStopped": true,
+      "lockedSourcesUnchanged": true,
+      "removedOwnedStaging": [
+        {
+          "path": "/tmp/agent-crash-lab-banking-flat-v015/model.gguf",
+          "bytes": 1117320736
+        },
+        {
+          "path": "/tmp/agent-crash-lab-banking-flat-v015/runtime.tar.gz",
+          "bytes": 23051958
+        },
+        {
+          "path": "/tmp/agent-crash-lab-banking-flat-v015/actual/runtime",
+          "bytes": 89599110
+        }
+      ]
+    }
+  ],
+  "canonicalSdkFilesAfter": 407,
+  "canonicalSdkRevision": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+  "oldHarnessUnchanged": true,
+  "bankingSdkBinarySha256": "b340696521d9eda1fca93eb931bcd9ad24e3da6190b7daea8cd5fbedb86fa729",
+  "originalWindowsCacheRetained": true,
+  "rustCacheAndBinariesRetained": true,
+  "rawSourcesAndResultsRetained": true
+}

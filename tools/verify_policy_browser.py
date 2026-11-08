@@ -32,7 +32,14 @@ def replay(record,source_root,raws):
  return {'format':'agent-crash-lab/policy-browser-replay-v1','actualUiInputs':len(seen),'completeReportsMatched':reports,'rejectedInputsClearedPriorResult':rejections,'sourceFingerprints':source,'newModelCalls':0,'newTransactions':0,'networkRequests':0,'independentBlindEvaluation':False,'meaning':'Offline equality replay of same-author observed browser imports and source fingerprints. This does not launch a browser or independently grade financial correctness.'}
 
 def verify():
- raws=inputs();record=json.loads((ROOT/'verification/token-policy/browser-verified.json').read_bytes());result=replay(record,ROOT,raws)
+ raws=inputs();record=json.loads((ROOT/'verification/token-policy/browser-verified.json').read_bytes());recorded=[r['id'] for r in record['rows']]
+ assert len(recorded)==98 and len(set(recorded))==98
+ result=replay(record,ROOT,{cid:raws[cid] for cid in recorded})
+ billing=json.loads((ROOT/'verification/billing-study/browser-inputs.json').read_bytes());added=[r['id'] for r in billing['rows']]
+ assert len(added)==4 and len(set(added))==4 and not set(added)&set(recorded)
+ assert set(added)|set(recorded)==set(raws)
+ result['billingBrowserStudy']=replay(billing,ROOT,{cid:raws[cid] for cid in added})
+ result['allCurrentInputsCovered']=len(raws)
  history=ROOT/'evidence/token-policy-study/browser-v013';old=json.loads((history/'browser-verified.json').read_bytes());ids=[r['id'] for r in old['rows']]
  assert len(ids)==91 and len(set(ids))==91
  result['historicalBrowserStudy']=replay(old,history,{cid:raws[cid] for cid in ids})

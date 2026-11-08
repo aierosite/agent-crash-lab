@@ -937,6 +937,34 @@
         "kind": "synthetic",
         "task": "verification/token-policy/inputs/model-loop-no-payments/task.json",
         "evidence": "verification/token-policy/inputs/model-loop-no-payments/evidence.json"
+      },
+      {
+        "id": "billing-agent-repeats",
+        "title": "Qwen billing · repeated charges after HTTP503",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/billing-agent-repeats/task.json",
+        "evidence": "verification/token-policy/inputs/billing-agent-repeats/evidence.json"
+      },
+      {
+        "id": "billing-agent-protected",
+        "title": "Qwen billing · one recovered invoice payment",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/billing-agent-protected/task.json",
+        "evidence": "verification/token-policy/inputs/billing-agent-protected/evidence.json"
+      },
+      {
+        "id": "billing-two-debit-witness",
+        "title": "Derived prefix · two recorded invoice debits",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/billing-two-debit-witness/task.json",
+        "evidence": "verification/token-policy/inputs/billing-two-debit-witness/evidence.json"
+      },
+      {
+        "id": "billing-native-incomplete",
+        "title": "Native tool attempt · stopped before payment",
+        "kind": "synthetic",
+        "task": "verification/token-policy/inputs/billing-native-incomplete/task.json",
+        "evidence": "verification/token-policy/inputs/billing-native-incomplete/evidence.json"
       }
     ]
   },
@@ -1857,6 +1885,38 @@
       "bytes": 925,
       "sha256": "c313f5b9930585d182982b92f18cb97a3bba4fcdfa425ad1101a0b2c6b17b1ea"
     },
+    "verification/token-policy/inputs/billing-agent-protected/evidence.json": {
+      "bytes": 2591,
+      "sha256": "d6cb316e8446aaf20306089556622af6ae3582e9d208d0adb7c40702cb0b8153"
+    },
+    "verification/token-policy/inputs/billing-agent-protected/task.json": {
+      "bytes": 804,
+      "sha256": "fc3e817b1b961f7b4cfe46af24ddc757a153054d030c747f424ed74422a51b98"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/evidence.json": {
+      "bytes": 10614,
+      "sha256": "767c1282c28fd129c4af7d5f62141f5267eb027802f55a10dd471445aaa2780d"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/task.json": {
+      "bytes": 1444,
+      "sha256": "0a1a44e7530db5f92b89aae509ac173c22075448ba8edab4f2744de762c498d1"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/evidence.json": {
+      "bytes": 560,
+      "sha256": "0fea3569e262460743b7c6636b303d5af238548afd879b58805b257f167a2e4a"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/task.json": {
+      "bytes": 646,
+      "sha256": "cbe7771db9a313baa2df6c15a88148bc22d9fd16998bdbb156d04bd1b470e260"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/evidence.json": {
+      "bytes": 4600,
+      "sha256": "e7f98ca61b6a687cea12f860af1512affd3d026c52dbeae0d86be384d67f68c5"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/task.json": {
+      "bytes": 965,
+      "sha256": "746f7e726de2e9b3279a8c62bd9a54806cc3804ceab76ce15ca97d722f60c600"
+    },
     "verification/token-policy/inputs/hook-returned-promise-supported/evidence.json": {
       "bytes": 4529,
       "sha256": "09a98f479852c0ead74a8d2ca24476bfc01a54f9cc8e860ea5052456dc474fb4"
@@ -1975,7 +2035,7 @@
     },
     "workbench.py": {
       "bytes": 22892,
-      "sha256": "f6f418980718dcceefd8d21dd16b1a523cd6cdab04b17612c7e1b964147191c0"
+      "sha256": "96fb3e25edf2614115febe1123493e0e6d55844b461ff05295bd04d1e65f35c1"
     }
   }
 }

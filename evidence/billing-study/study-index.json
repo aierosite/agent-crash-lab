@@ -1,0 +1,236 @@
+{
+  "format": "agent-crash-lab/public-billing-study-v1",
+  "atUtc": "2026-11-08T11:56:27.535871+00:00",
+  "originalPrivateIndexSha256": "cc2ded95048a504a10542474c6a196d7af0ebca9f8d5d76cda5d194d782124fc",
+  "scope": "Exact public subset: every pre-inference locked file, every collected actual file, original full audit/grade/report objects, integrity controls, postcheck and exposure coverage where present. Excludes post-run private housekeeping scripts and model/runtime binaries. Original bytes are unchanged.",
+  "files": {
+    "ACTOR-ADAPTATION.json": {
+      "bytes": 605,
+      "sha256": "bf2da130cd4e539810846099137ba2c8072800aed7e2d39a3fb0aabe8553374f"
+    },
+    "AUDIT.json": {
+      "bytes": 1721,
+      "sha256": "e286b2d6d0cb452360a3da133fc5a8e21e09c2989174be3111d75ee082af0671"
+    },
+    "BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "CONTROLS.initial.json": {
+      "bytes": 194,
+      "sha256": "33a82ab2fbb830fa102cabe804606ca5a1b732c40ed1df3794e8f25d114bb91f"
+    },
+    "CONTROLS.json": {
+      "bytes": 194,
+      "sha256": "3c224f24769fbc0f09a4d15fdff7dd588c069dbda26ed42efecb1e61ddefe53e"
+    },
+    "COVERAGE.json": {
+      "bytes": 3268,
+      "sha256": "8d346ba225cd3b0edb57535ab71b3ac6c2c9d0e17fd5b6863fe37df23d5e2216"
+    },
+    "INTEGRITY-CONTROLS.json": {
+      "bytes": 231,
+      "sha256": "d67ae9d49f7ca9b84794665f05d9956e464464533ae145f7d70aea01092d8ffc"
+    },
+    "LOCK.json": {
+      "bytes": 5808,
+      "sha256": "907e5f28330bcf7af31426914668c35c3702744a281155ce25af1d47e2a48177"
+    },
+    "POSTCHECK-CLEANUP.json": {
+      "bytes": 1485,
+      "sha256": "94b16561020356eded2f6993dcec8877ef8ef6b75669534c664a12ef34473827"
+    },
+    "PREINFERENCE-CORRECTION.json": {
+      "bytes": 611,
+      "sha256": "7c681c1bbd47c9c8907b3d2dc5851de6c099b3e5b283e4be273581aea1970a9a"
+    },
+    "REGISTRATION.json": {
+      "bytes": 8803,
+      "sha256": "4b081d873af79bdc27be1eb4fe51b170f473580726f25a2d943718917741b7af"
+    },
+    "SOURCE-ADAPTATION.json": {
+      "bytes": 2272,
+      "sha256": "12d050c6b1f59ebf1c0cfe801294a830ab91d56d62aea1516dbb27ff8e76a350"
+    },
+    "actor.py": {
+      "bytes": 8442,
+      "sha256": "38217d79f1ee5f2db7a25f070cdd4cb2057f5337b3d31da4cfc9b0ff06f50ced"
+    },
+    "actual/calls.json": {
+      "bytes": 656467,
+      "sha256": "ac71d3c6bc096c5fa8c445a0484e3fc108da7d5ec74cae747794773a88b7de9f"
+    },
+    "actual/episodes.json": {
+      "bytes": 127902,
+      "sha256": "59722747667ffab2c648e84a7cca4cc9686d0bc42df1e569f44fc840e656affd"
+    },
+    "actual/execution.json": {
+      "bytes": 419,
+      "sha256": "7762dd1e9c78ce8202453f616260dec6f0ba17bc2d2be6fa17c6bccd0560aaa0"
+    },
+    "actual/model-properties.json": {
+      "bytes": 4544,
+      "sha256": "7d6b770b289bda01a655946eeb9dc4dca36d1c16fa400e70bff8994ac0d067cf"
+    },
+    "actual/run.json": {
+      "bytes": 239,
+      "sha256": "4a468dd1bdde6efa8299c0ac2267e311968cf213bda818d05bfd6f2bca6e0547"
+    },
+    "actual/runtime.log": {
+      "bytes": 43672,
+      "sha256": "8a8de3f6fb536659a1aabf09dc74fef426738243479a3a111c8282f7f77398b6"
+    },
+    "actual/sdk-wire.json": {
+      "bytes": 26968,
+      "sha256": "68a1221729083508613169ab21bcc620b2dd15476fcb23cc986521ef6a83b3f2"
+    },
+    "actual/sdk.log": {
+      "bytes": 3798,
+      "sha256": "32826b7c82f5ccc0372968d89acc02e2e4b9def377ea7106c6a114aca6bc3224"
+    },
+    "actual/server.json": {
+      "bytes": 554,
+      "sha256": "608dcf1f37caa07334e9c7163f9ccdb9c67dbce7a6d394cb23a2680ddf12c66d"
+    },
+    "agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "audit.py": {
+      "bytes": 13556,
+      "sha256": "0303a4430cce036e401b8e07fc0232a7808bf95eadd2158964bafdd50e048395"
+    },
+    "bank_loop.py": {
+      "bytes": 5261,
+      "sha256": "c19a442731ee0df1268d8edfb6ee1439a9a2c1e5f7bca4a662b95bb9a56f60e3"
+    },
+    "bank_tools.py": {
+      "bytes": 4646,
+      "sha256": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6"
+    },
+    "banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "f9f2c91c7b7148da43aa635eb502e0afa4f575febc6d5fef1e5a3c4850c8e929"
+    },
+    "controls-sdk.log": {
+      "bytes": 3998,
+      "sha256": "d8a86fec205b9267d265553268bf79571dba5a0383900d3023718e8c48dd14a4"
+    },
+    "controls.py": {
+      "bytes": 8386,
+      "sha256": "398b536e4371da269d8829725729f0d116ce048e4b402fdfb6dff88f6f4b4a5d"
+    },
+    "controls.stderr.initial.txt": {
+      "bytes": 12013,
+      "sha256": "bc103c9171195276d582e720e3feaac9c41bee42a8d3d2c0a2fe5ac23619feda"
+    },
+    "controls.stderr.txt": {
+      "bytes": 1076,
+      "sha256": "35b42f53cef395ed803a539a053978f918c48d45da14dec17151d07cbbb7add5"
+    },
+    "controls.stdout.initial.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "original-external-grades.json": {
+      "bytes": 3904,
+      "sha256": "0395a7bdbaa18281270e9fa34ca86756104f22029078c888b3659d46a3d64f9b"
+    },
+    "original-financial-reports.json": {
+      "bytes": 56809,
+      "sha256": "16032a16ad37721f0b64851c7734891afdfb701df81d544ef3ec525ec49c2a52"
+    },
+    "prepare.py": {
+      "bytes": 5486,
+      "sha256": "8128b16624596d871a0042ffca5242c8d03361d787b3ff0a9c852197ccf02296"
+    },
+    "prepare_actor.py": {
+      "bytes": 3938,
+      "sha256": "5f2f41ea403fbf45d771b6360f61deb31e4fc2f7e4dcebaa03ee45d3a6bb9383"
+    },
+    "projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "reference/LLAMA-LICENSE.txt": {
+      "bytes": 1078,
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d"
+    },
+    "reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "reference/json-grammar-vendor.gbnf": {
+      "bytes": 601,
+      "sha256": "1a3e3469892957861029adcd24ad0c886b778a942dd4a18cc146238ad56474dd"
+    },
+    "reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "test_integrity.py": {
+      "bytes": 4229,
+      "sha256": "610d72c91cb77898f476e6a703270dcf71901b3116a766e45bd189ddbe4c4566"
+    },
+    "transport.py": {
+      "bytes": 6089,
+      "sha256": "6d97f7fe534a339930ca650ff996ed74ca743d47729fe57d8c7bf0bb1b621222"
+    },
+    "worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
+    }
+  }
+}

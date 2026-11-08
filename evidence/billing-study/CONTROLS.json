@@ -1,0 +1,10 @@
+{
+  "executedTests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "scriptedNotModel": true,
+  "actualCanonicalSdkMock": true,
+  "actualLocalHttp": true,
+  "originalReferenceAst": true
+}

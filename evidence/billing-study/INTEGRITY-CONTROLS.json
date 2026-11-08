@@ -1,0 +1,8 @@
+{
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "tamperingRejected": 6,
+  "sameAuthor": true,
+  "basis": "Actual frozen full model/HTTP/SDK data copied into verified disposable directories; no model/SDK/network action"
+}

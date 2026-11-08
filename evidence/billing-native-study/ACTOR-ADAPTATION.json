@@ -1,0 +1,26 @@
+{
+  "atUtc": "2026-11-08T11:19:01.041858+00:00",
+  "baseSource": "native-required-study-v015/actor.py",
+  "baseSha256": "0b8c069eb80010961aeceeac5ad8d00fbbb8fc63a4fe12afc14ccc6f145e40d3",
+  "edits": [
+    {
+      "before": "from native_loop import Sdk,Merchant,serve,pack,decode,drive,TOOLS",
+      "after": "from bank_loop import Sdk,Merchant,serve,pack,decode,drive,TOOLS"
+    },
+    {
+      "before": "crash-lab-agent-loop-sdk",
+      "after": "crash-lab-banking-sdk"
+    },
+    {
+      "before": "digest(sdk_binary)==plan['sdk']['binarySha256']",
+      "after": "digest(sdk_binary)==decode((H/'BUILD.json').read_bytes())['sdkBinarySha256']"
+    },
+    {
+      "before": "sdk=Sdk(sdk_binary,sdk_log);questions=decode((H/'questions.json').read_bytes());assert all(set(x)=={'question'} for x in questions) and len(questions)==6\n  merchant=Merchant(sdk,questions)",
+      "after": "sdk=Sdk(sdk_binary,sdk_log)\n  merchant=Merchant(sdk)"
+    }
+  ],
+  "requestMode": "required",
+  "fullPromptPreserved": true,
+  "modelResponsesRepaired": false
+}

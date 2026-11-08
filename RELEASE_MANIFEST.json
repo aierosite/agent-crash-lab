@@ -1,12 +1,16 @@
 {
   "format": "agent-crash-lab/release-v1",
-  "version": "0.15.0",
-  "atUtc": "2026-11-08T10:02:49.949184+00:00",
+  "version": "0.16.0",
+  "atUtc": "2026-11-08T12:14:36.630795+00:00",
   "meaning": "Size and SHA256 of each release file except this manifest",
   "files": {
     ".gitattributes": {
       "bytes": 86,
       "sha256": "41b5dc68e322fdcfa95b353664ee376431bb9da10127563f2d97f26dd92e7722"
+    },
+    ".github/workflows/billing-sdk.yml": {
+      "bytes": 777,
+      "sha256": "c1d0dcb69931ce868c3b06ad0caeeef1781cdaf12fa86bbdb01da97ec2bf99c0"
     },
     ".github/workflows/fresh-agent.yml": {
       "bytes": 3041,
@@ -45,8 +49,8 @@
       "sha256": "d711de520245f4b44e42a9da30df0ab5759a1353daed6626eca42c64b00dbdc8"
     },
     "README.md": {
-      "bytes": 8034,
-      "sha256": "291860c78553a65917cabe35cfe9d903b7f0de8ad189c9101927acb2442c2f9e"
+      "bytes": 9330,
+      "sha256": "994ec30f808ea6336893189e35cd2372fb0c1078406eb33ea41ed9661e545957"
     },
     "SOURCES.json": {
       "bytes": 4682,
@@ -76,9 +80,13 @@
       "bytes": 6871,
       "sha256": "0ea8c25fc5209bc6183151331ceb63aef005be71e0246a72ff659b596302f432"
     },
+    "docs/BILLING_STUDY.md": {
+      "bytes": 6376,
+      "sha256": "5e8234773f7fbfaa8752f28825beaa412cf7d372ae2eb0a432e4e306cdd5338f"
+    },
     "docs/COMPETITIVE_REVIEW.md": {
-      "bytes": 10596,
-      "sha256": "deddcd4fb320676bc3a16e9414ea8a4f05499a0048be96ce40897a63e1e632d3"
+      "bytes": 12844,
+      "sha256": "1136fd2f8b7cde54a30b3aa3af5f75341be6400ca593f3e4e452c81370529171"
     },
     "docs/DATA_PROVENANCE.txt": {
       "bytes": 788,
@@ -511,6 +519,454 @@
     "evidence/balance-attribution-precommit.json": {
       "bytes": 2750,
       "sha256": "bc3870aa8a13dd52248915cd30a29af7ed5eab4a34c7c04be445d728acea2c85"
+    },
+    "evidence/billing-native-study/ACTOR-ADAPTATION.json": {
+      "bytes": 1071,
+      "sha256": "5dd65a1d34956b757a7c8da68b8e6f41e89865b0b6b55807dc44db722d4a4361"
+    },
+    "evidence/billing-native-study/AUDIT.json": {
+      "bytes": 1667,
+      "sha256": "2408bc786dd3af61c8d28b058c6382429d6e9ccc71c6f42f8cb4e6c481875cdf"
+    },
+    "evidence/billing-native-study/BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "evidence/billing-native-study/CONTROLS.json": {
+      "bytes": 194,
+      "sha256": "3c224f24769fbc0f09a4d15fdff7dd588c069dbda26ed42efecb1e61ddefe53e"
+    },
+    "evidence/billing-native-study/INTEGRITY-CONTROLS.json": {
+      "bytes": 220,
+      "sha256": "ab6bc18213c25d3fff66fb69414db1d143ad5035f8c56d9cf983f4cfacc818b7"
+    },
+    "evidence/billing-native-study/LOCK.json": {
+      "bytes": 5331,
+      "sha256": "7c0969f4f3b2765ae5f0244a98be617481fefe984b156b0bb3aaf590f36cd762"
+    },
+    "evidence/billing-native-study/POSTCHECK-CLEANUP.json": {
+      "bytes": 1485,
+      "sha256": "94b16561020356eded2f6993dcec8877ef8ef6b75669534c664a12ef34473827"
+    },
+    "evidence/billing-native-study/REGISTRATION.json": {
+      "bytes": 7827,
+      "sha256": "465e11d8478536eeae7066dd2dd31e4cce4b6e555dfdd2b5a60db6e850f8adb0"
+    },
+    "evidence/billing-native-study/actor.py": {
+      "bytes": 8009,
+      "sha256": "0029a6b012aaa1199731e7668615cfbb064a7c8b6877a352cc601dc5f1c04254"
+    },
+    "evidence/billing-native-study/actual/calls.json": {
+      "bytes": 9697,
+      "sha256": "0419d7c040e7ff8ac552708d0f13d9f0a584bb5d4014142e98239d2f3904a077"
+    },
+    "evidence/billing-native-study/actual/episodes.json": {
+      "bytes": 3590,
+      "sha256": "075a2b0a4db41640765729853986b0f088619cd7c0424cc90e401558dc100934"
+    },
+    "evidence/billing-native-study/actual/execution.json": {
+      "bytes": 470,
+      "sha256": "51b04e8578bb1fbc0bd11aafd37ad33930a605f343f98ae0e5b390cb269807af"
+    },
+    "evidence/billing-native-study/actual/model-properties.json": {
+      "bytes": 4534,
+      "sha256": "4ee98207b8d4442c15cb2ece6daaf3f36221b84bda3a6d44899429252dc4f0b7"
+    },
+    "evidence/billing-native-study/actual/run.json": {
+      "bytes": 239,
+      "sha256": "af4d6cc50afc66f815bed7aede2464fa85b71a7dfce2c6d5dd7407c11b85bb7a"
+    },
+    "evidence/billing-native-study/actual/runtime.log": {
+      "bytes": 3039,
+      "sha256": "c4b3066a2c5228bc20cd165b90b09c5a44acf9a8324079fb25027dceea5050fd"
+    },
+    "evidence/billing-native-study/actual/sdk-wire.json": {
+      "bytes": 275,
+      "sha256": "75ec83a441cb89b78a736b42e0d0c5995d4127faaf3ba4ed16b7c626c57d9ebe"
+    },
+    "evidence/billing-native-study/actual/sdk.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/billing-native-study/actual/server.json": {
+      "bytes": 544,
+      "sha256": "c788cf9645de3d7f976f40cb12e6db34ecaac2dee16f95893c78170852b5ce54"
+    },
+    "evidence/billing-native-study/agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "evidence/billing-native-study/audit.py": {
+      "bytes": 13556,
+      "sha256": "0303a4430cce036e401b8e07fc0232a7808bf95eadd2158964bafdd50e048395"
+    },
+    "evidence/billing-native-study/bank_loop.py": {
+      "bytes": 5918,
+      "sha256": "0aea0f10406a2eabd92a716f661f3a2ea16e65aed5357ff2f1f9c96148eca80a"
+    },
+    "evidence/billing-native-study/bank_tools.py": {
+      "bytes": 4646,
+      "sha256": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6"
+    },
+    "evidence/billing-native-study/banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "evidence/billing-native-study/build-precheck.json": {
+      "bytes": 69,
+      "sha256": "7c995bf8b14574c1195ab6ce7e60dbf70cf4268132bf9ce9c017ab7e9561f46e"
+    },
+    "evidence/billing-native-study/build.stderr.txt": {
+      "bytes": 157,
+      "sha256": "7c97a8283a46dccf85ff9706bc108d619bec96a62fb902e2942e7d942b600090"
+    },
+    "evidence/billing-native-study/build.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/billing-native-study/build_worker.py": {
+      "bytes": 4229,
+      "sha256": "4cecc1bb8cb18525c62835997b7e2141ef2fd79421f42ff710e1182e08bc5505"
+    },
+    "evidence/billing-native-study/controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "35200a48f72abbbee41ccc1d035ee1c0081e06450e8d8384ec89d83bc11ee268"
+    },
+    "evidence/billing-native-study/controls-sdk.log": {
+      "bytes": 2361,
+      "sha256": "28fa70e0b711d2741f85576398d13daaa2b382230b1a39571cf7d706de2a3c08"
+    },
+    "evidence/billing-native-study/controls.py": {
+      "bytes": 8691,
+      "sha256": "84b177ea70db9c711aad06ebc28bb2873e0223432bd8a8a7adc33384135def89"
+    },
+    "evidence/billing-native-study/controls.stderr.txt": {
+      "bytes": 1076,
+      "sha256": "fdc81ba1ca369f9b52c205d7e68673c71a91599c1e65ca446c86b65e1d423caf"
+    },
+    "evidence/billing-native-study/controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/billing-native-study/inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "evidence/billing-native-study/inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "evidence/billing-native-study/original-external-grades.json": {
+      "bytes": 639,
+      "sha256": "52308c7bf71809945a22321cb7af153a61808d29c7f7c9add1c8a5757cf0c480"
+    },
+    "evidence/billing-native-study/original-financial-reports.json": {
+      "bytes": 3186,
+      "sha256": "febcdb75d8cdd39e4c0231fce512240828549f3025efa3c9f7df30d3b70585cd"
+    },
+    "evidence/billing-native-study/prepare.py": {
+      "bytes": 8340,
+      "sha256": "47e2222d9695f645b409e7325ae5e25c1c113bb2444e204ad97b65603e5a3acc"
+    },
+    "evidence/billing-native-study/prepare_actor.py": {
+      "bytes": 1578,
+      "sha256": "2abf4e1b3ff6dd7eb04e28fd85e7e720c395d754b50768550cf00a9911dfe062"
+    },
+    "evidence/billing-native-study/projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "evidence/billing-native-study/reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "evidence/billing-native-study/reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "evidence/billing-native-study/reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "evidence/billing-native-study/reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "evidence/billing-native-study/reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "evidence/billing-native-study/reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "evidence/billing-native-study/reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "evidence/billing-native-study/reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "evidence/billing-native-study/sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "evidence/billing-native-study/study-index.json": {
+      "bytes": 8136,
+      "sha256": "df1b6a72059740c795f4ec9fa377a3df09efc66a59d6011b38648088b0ce1b0b"
+    },
+    "evidence/billing-native-study/test_integrity.py": {
+      "bytes": 2992,
+      "sha256": "ca45afa52cafb2d4064a2ff0b0d6b5d30cc88b728da59bf22034f5d4a73d0a22"
+    },
+    "evidence/billing-native-study/transport.py": {
+      "bytes": 6018,
+      "sha256": "8eaec0fd19f9b606c2419b3f5bad55159e2c266b6e10b37026feb985cb3e51db"
+    },
+    "evidence/billing-native-study/worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "evidence/billing-native-study/worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "evidence/billing-native-study/worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
+    },
+    "evidence/billing-study/ACTOR-ADAPTATION.json": {
+      "bytes": 605,
+      "sha256": "bf2da130cd4e539810846099137ba2c8072800aed7e2d39a3fb0aabe8553374f"
+    },
+    "evidence/billing-study/AUDIT.json": {
+      "bytes": 1721,
+      "sha256": "e286b2d6d0cb452360a3da133fc5a8e21e09c2989174be3111d75ee082af0671"
+    },
+    "evidence/billing-study/BUILD.json": {
+      "bytes": 1041,
+      "sha256": "bcdc438e4563ffc04aebe98d646f1f29c2a1df2ea9bc4e8dbbd53ba173bc1bbd"
+    },
+    "evidence/billing-study/CONTROLS.initial.json": {
+      "bytes": 194,
+      "sha256": "33a82ab2fbb830fa102cabe804606ca5a1b732c40ed1df3794e8f25d114bb91f"
+    },
+    "evidence/billing-study/CONTROLS.json": {
+      "bytes": 194,
+      "sha256": "3c224f24769fbc0f09a4d15fdff7dd588c069dbda26ed42efecb1e61ddefe53e"
+    },
+    "evidence/billing-study/COVERAGE.json": {
+      "bytes": 3268,
+      "sha256": "8d346ba225cd3b0edb57535ab71b3ac6c2c9d0e17fd5b6863fe37df23d5e2216"
+    },
+    "evidence/billing-study/INTEGRITY-CONTROLS.json": {
+      "bytes": 231,
+      "sha256": "d67ae9d49f7ca9b84794665f05d9956e464464533ae145f7d70aea01092d8ffc"
+    },
+    "evidence/billing-study/LOCK.json": {
+      "bytes": 5808,
+      "sha256": "907e5f28330bcf7af31426914668c35c3702744a281155ce25af1d47e2a48177"
+    },
+    "evidence/billing-study/POSTCHECK-CLEANUP.json": {
+      "bytes": 1485,
+      "sha256": "94b16561020356eded2f6993dcec8877ef8ef6b75669534c664a12ef34473827"
+    },
+    "evidence/billing-study/PREINFERENCE-CORRECTION.json": {
+      "bytes": 611,
+      "sha256": "7c681c1bbd47c9c8907b3d2dc5851de6c099b3e5b283e4be273581aea1970a9a"
+    },
+    "evidence/billing-study/REGISTRATION.json": {
+      "bytes": 8803,
+      "sha256": "4b081d873af79bdc27be1eb4fe51b170f473580726f25a2d943718917741b7af"
+    },
+    "evidence/billing-study/SOURCE-ADAPTATION.json": {
+      "bytes": 2272,
+      "sha256": "12d050c6b1f59ebf1c0cfe801294a830ab91d56d62aea1516dbb27ff8e76a350"
+    },
+    "evidence/billing-study/actor.py": {
+      "bytes": 8442,
+      "sha256": "38217d79f1ee5f2db7a25f070cdd4cb2057f5337b3d31da4cfc9b0ff06f50ced"
+    },
+    "evidence/billing-study/actual/calls.json": {
+      "bytes": 656467,
+      "sha256": "ac71d3c6bc096c5fa8c445a0484e3fc108da7d5ec74cae747794773a88b7de9f"
+    },
+    "evidence/billing-study/actual/episodes.json": {
+      "bytes": 127902,
+      "sha256": "59722747667ffab2c648e84a7cca4cc9686d0bc42df1e569f44fc840e656affd"
+    },
+    "evidence/billing-study/actual/execution.json": {
+      "bytes": 419,
+      "sha256": "7762dd1e9c78ce8202453f616260dec6f0ba17bc2d2be6fa17c6bccd0560aaa0"
+    },
+    "evidence/billing-study/actual/model-properties.json": {
+      "bytes": 4544,
+      "sha256": "7d6b770b289bda01a655946eeb9dc4dca36d1c16fa400e70bff8994ac0d067cf"
+    },
+    "evidence/billing-study/actual/run.json": {
+      "bytes": 239,
+      "sha256": "4a468dd1bdde6efa8299c0ac2267e311968cf213bda818d05bfd6f2bca6e0547"
+    },
+    "evidence/billing-study/actual/runtime.log": {
+      "bytes": 43672,
+      "sha256": "8a8de3f6fb536659a1aabf09dc74fef426738243479a3a111c8282f7f77398b6"
+    },
+    "evidence/billing-study/actual/sdk-wire.json": {
+      "bytes": 26968,
+      "sha256": "68a1221729083508613169ab21bcc620b2dd15476fcb23cc986521ef6a83b3f2"
+    },
+    "evidence/billing-study/actual/sdk.log": {
+      "bytes": 3798,
+      "sha256": "32826b7c82f5ccc0372968d89acc02e2e4b9def377ea7106c6a114aca6bc3224"
+    },
+    "evidence/billing-study/actual/server.json": {
+      "bytes": 554,
+      "sha256": "608dcf1f37caa07334e9c7163f9ccdb9c67dbce7a6d394cb23a2680ddf12c66d"
+    },
+    "evidence/billing-study/agent_tools_common.py": {
+      "bytes": 8294,
+      "sha256": "ee167b471f15d8c70fec4162dfeee06a9a21fbe728b01cc65dd476d2e30843ef"
+    },
+    "evidence/billing-study/audit.py": {
+      "bytes": 13556,
+      "sha256": "0303a4430cce036e401b8e07fc0232a7808bf95eadd2158964bafdd50e048395"
+    },
+    "evidence/billing-study/bank_loop.py": {
+      "bytes": 5261,
+      "sha256": "c19a442731ee0df1268d8edfb6ee1439a9a2c1e5f7bca4a662b95bb9a56f60e3"
+    },
+    "evidence/billing-study/bank_tools.py": {
+      "bytes": 4646,
+      "sha256": "eb45fc77c145a1fd7f2ea97fc6dc6f6c3c98bf3ee7f12968cebdf192124037e6"
+    },
+    "evidence/billing-study/banking-context.json": {
+      "bytes": 1781,
+      "sha256": "61ae53e784e052cdf41237719f3ba3bda028c6c206984a04ce80572675c2de2b"
+    },
+    "evidence/billing-study/controls-precheck.json": {
+      "bytes": 165,
+      "sha256": "f9f2c91c7b7148da43aa635eb502e0afa4f575febc6d5fef1e5a3c4850c8e929"
+    },
+    "evidence/billing-study/controls-sdk.log": {
+      "bytes": 3998,
+      "sha256": "d8a86fec205b9267d265553268bf79571dba5a0383900d3023718e8c48dd14a4"
+    },
+    "evidence/billing-study/controls.py": {
+      "bytes": 8386,
+      "sha256": "398b536e4371da269d8829725729f0d116ce048e4b402fdfb6dff88f6f4b4a5d"
+    },
+    "evidence/billing-study/controls.stderr.initial.txt": {
+      "bytes": 12013,
+      "sha256": "bc103c9171195276d582e720e3feaac9c41bee42a8d3d2c0a2fe5ac23619feda"
+    },
+    "evidence/billing-study/controls.stderr.txt": {
+      "bytes": 1076,
+      "sha256": "35b42f53cef395ed803a539a053978f918c48d45da14dec17151d07cbbb7add5"
+    },
+    "evidence/billing-study/controls.stdout.initial.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/billing-study/controls.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence/billing-study/inspector/token_policy.py": {
+      "bytes": 29038,
+      "sha256": "4955e497b1b46971750f728807e561de6db6edd650faad9241e32e3e42ef4935"
+    },
+    "evidence/billing-study/inspector/token_review.py": {
+      "bytes": 15292,
+      "sha256": "2052ed3dc97e9c793ae7ea9180a3173f08e5df8b1d2432ea860bdd3f07e868e0"
+    },
+    "evidence/billing-study/original-external-grades.json": {
+      "bytes": 3904,
+      "sha256": "0395a7bdbaa18281270e9fa34ca86756104f22029078c888b3659d46a3d64f9b"
+    },
+    "evidence/billing-study/original-financial-reports.json": {
+      "bytes": 56809,
+      "sha256": "16032a16ad37721f0b64851c7734891afdfb701df81d544ef3ec525ec49c2a52"
+    },
+    "evidence/billing-study/prepare.py": {
+      "bytes": 5486,
+      "sha256": "8128b16624596d871a0042ffca5242c8d03361d787b3ff0a9c852197ccf02296"
+    },
+    "evidence/billing-study/prepare_actor.py": {
+      "bytes": 3938,
+      "sha256": "5f2f41ea403fbf45d771b6360f61deb31e4fc2f7e4dcebaa03ee45d3a6bb9383"
+    },
+    "evidence/billing-study/projection.py": {
+      "bytes": 3055,
+      "sha256": "dfda9d3365443352dfb0e38282a915dc7fa0d0172c29f93301318eda108ecaf6"
+    },
+    "evidence/billing-study/reference/CALIBRATION.json": {
+      "bytes": 7780,
+      "sha256": "36b38d44a919b3208c1842afcc1caedafeaf6b51ccacb8c5eb7034934eb8e62b"
+    },
+    "evidence/billing-study/reference/LICENSE": {
+      "bytes": 1161,
+      "sha256": "4285a071f2d382338e52b4fb0a186d952984a34d43a33d8872e1a1d8cb43401e"
+    },
+    "evidence/billing-study/reference/LLAMA-LICENSE.txt": {
+      "bytes": 1078,
+      "sha256": "94f29bbed6a22c35b992c5c6ebf0e7c92f13b836b90f36f461c9cf2f0f1d010d"
+    },
+    "evidence/billing-study/reference/VERSION-RESOLUTION.json": {
+      "bytes": 5555,
+      "sha256": "638d57afe04bc844ea8001398938ce0cc63f7428423e887eb41ba7ef1313774f"
+    },
+    "evidence/billing-study/reference/banking_client.py": {
+      "bytes": 5137,
+      "sha256": "0e4273f521db7ff6d5e7f7f552e917b11940102abd932aea8a2998b517441b42"
+    },
+    "evidence/billing-study/reference/environment.yaml": {
+      "bytes": 2267,
+      "sha256": "3f539da1d97779b244cd122afc683dc69d602f338e1b3c42d126cbde33611c8b"
+    },
+    "evidence/billing-study/reference/injection_tasks.py": {
+      "bytes": 15207,
+      "sha256": "3e678ad165f911dbc16c8307de761dcc15da274716bec7ac0d05db167ec2c311"
+    },
+    "evidence/billing-study/reference/json-grammar-vendor.gbnf": {
+      "bytes": 601,
+      "sha256": "1a3e3469892957861029adcd24ad0c886b778a942dd4a18cc146238ad56474dd"
+    },
+    "evidence/billing-study/reference/user_tasks.py": {
+      "bytes": 19450,
+      "sha256": "37af838194f001af80cc040315bcb2d69d0112324d424f9a323473b41b317f82"
+    },
+    "evidence/billing-study/reference_grade.py": {
+      "bytes": 2611,
+      "sha256": "efe43d89135709c6338953cc1ec33da9b1030889570383214045783e549ea9c2"
+    },
+    "evidence/billing-study/sdk-source-inventory.json": {
+      "bytes": 69182,
+      "sha256": "44027c1290e5a81a7ab823f895a67a391ea60bd3393298f2ec9996eb975df05e"
+    },
+    "evidence/billing-study/study-index.json": {
+      "bytes": 8781,
+      "sha256": "043ebf3785b5b3483b3291f39155424c8fc1e1d4aef0d87ec43ffb19b10c9bbe"
+    },
+    "evidence/billing-study/test_integrity.py": {
+      "bytes": 4229,
+      "sha256": "610d72c91cb77898f476e6a703270dcf71901b3116a766e45bd189ddbe4c4566"
+    },
+    "evidence/billing-study/transport.py": {
+      "bytes": 6089,
+      "sha256": "6d97f7fe534a339930ca650ff996ed74ca743d47729fe57d8c7bf0bb1b621222"
+    },
+    "evidence/billing-study/worker/Cargo.lock": {
+      "bytes": 65526,
+      "sha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39"
+    },
+    "evidence/billing-study/worker/Cargo.toml": {
+      "bytes": 364,
+      "sha256": "156140d6ad3d59f84e7a8f8c753a7dde9eaf544d14212257bfe0941c75965581"
+    },
+    "evidence/billing-study/worker/src/main.rs": {
+      "bytes": 4740,
+      "sha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213"
     },
     "evidence/capture-study/LONG-NOTE-COUNTEREXAMPLE.json": {
       "bytes": 3567,
@@ -2070,7 +2526,7 @@
     },
     "pyproject.toml": {
       "bytes": 200,
-      "sha256": "c7a1c1d0c990ffe0b4f157a59540bf16fcadaa8d48156c43e7a7646fef5eba1e"
+      "sha256": "b075dca79da302ada13f1b98528f40e5fc951eb0dafcf363a8f3a730b2157908"
     },
     "requirements-native.txt": {
       "bytes": 98,
@@ -2196,6 +2652,10 @@
       "bytes": 11192,
       "sha256": "d32b7d2a3eb24727cca4277b88686162c868bb2856e43f1ec44051982a084453"
     },
+    "test_billing_study.py": {
+      "bytes": 2908,
+      "sha256": "9dbc5c859171be01eeb12a9e8c6a919a3db68219742f764b6a2eba4c6ebb08c7"
+    },
     "test_capture.py": {
       "bytes": 10752,
       "sha256": "20878e448e746e30b54b05bfa3234688ff120212bfcf7dc958a95e34be71e73f"
@@ -2229,8 +2689,8 @@
       "sha256": "5638899c86a1db0789e731aef93b9eddc4ce7af32460910a4004b64da5a6c3ce"
     },
     "test_token_policy.py": {
-      "bytes": 12800,
-      "sha256": "c1a827520cd1dc4cfaa195afc0dd8572d984dc28242fbf8be1468a1d0a12698f"
+      "bytes": 13002,
+      "sha256": "745ea8bd01eb2b3d341625b0898465b94ec75bea785e2ce17b0d85257ffdbb88"
     },
     "test_token_review.py": {
       "bytes": 15579,
@@ -2273,8 +2733,8 @@
       "sha256": "d11b577f75218d4e2743c3dd19c5bc21d4c63187589cca50bf253bfeeb9f09bc"
     },
     "tools/export_bundle.py": {
-      "bytes": 5216,
-      "sha256": "27231191a924f48eca9b5b2b47e395c8758df71d81a15ad6f995aa383a7840e6"
+      "bytes": 5565,
+      "sha256": "ded7436ed6ccd70ab4516fbff707d235ab8ee22fb4aec0eb42de98d3bea8ad23"
     },
     "tools/import_token_archive.py": {
       "bytes": 2925,
@@ -2296,6 +2756,10 @@
       "bytes": 15545,
       "sha256": "1abc61245610d9f740154d141566a9faf26ba345be2d612c82ce55a200a07f57"
     },
+    "tools/run_billing_sdk.py": {
+      "bytes": 6763,
+      "sha256": "efcd0c8cb676bb4a29cb106d660efcfc71537206f40d58e8bbadd5d419dbe91e"
+    },
     "tools/run_native_wsl.py": {
       "bytes": 1988,
       "sha256": "bd3f91b3a5e9766a8dfbb67de5960a5da34e739d0cb520c792ac6859d5b3e7d4"
@@ -2316,6 +2780,10 @@
       "bytes": 7626,
       "sha256": "d47d311ad6eff728b774bd9c4715a1b444459fafcdfc8533443894d712cc32be"
     },
+    "tools/verify_billing_study.py": {
+      "bytes": 9119,
+      "sha256": "a0ed6442384cd03adbfa34667062aff9f44aaad9c11dc41743b2b9c409566c31"
+    },
     "tools/verify_capture.py": {
       "bytes": 1853,
       "sha256": "f6f3701585f8487739afa846a495acba1b1b4a411824c86adb98d125209cf52b"
@@ -2329,8 +2797,8 @@
       "sha256": "c2e0ce934dd70a86b1122cfb759d4f52a30036ad15a31ae667acaa19e21b7aa4"
     },
     "tools/verify_policy_browser.py": {
-      "bytes": 3652,
-      "sha256": "30021f4e720a9a3d2fbd3a2d902f01acc75016cb88efde0c32ed2abbc04177c3"
+      "bytes": 4163,
+      "sha256": "0d729dbe0f9dd0edccd3e9f1519a9dbe3d8162590d141e59226c4f6783c16bc1"
     },
     "tools/verify_proposal_study.py": {
       "bytes": 7219,
@@ -2341,8 +2809,8 @@
       "sha256": "ecfd5841cdebb7d963b4884f76d84aafe2602c7ee87675386f504e0425143976"
     },
     "tools/verify_release.py": {
-      "bytes": 2606,
-      "sha256": "91a6a6f1440c56a7cf78a4911d0e1cb174c9ec6dfa8d9ea8593a0d2bef08d9ad"
+      "bytes": 2633,
+      "sha256": "4a5668b7339abfbe1a4815ca6a5be2ffb068f413d138d7baaa642a7705117477"
     },
     "tools/verify_sdk_study.py": {
       "bytes": 1880,
@@ -2403,6 +2871,30 @@
     "verification/baseline-second-run.json": {
       "bytes": 565,
       "sha256": "4facf6532129f8ea9f050a8caff0cc09c61f5656511f1ae75800b92730c5b78a"
+    },
+    "verification/billing-study/browser-inputs.json": {
+      "bytes": 31976,
+      "sha256": "2421ce81b5d7634683ee8647434ea4972453b994de6d08d8f23a7312abdb22ff"
+    },
+    "verification/billing-study/browser-verified.json": {
+      "bytes": 2371,
+      "sha256": "218486f5314b23d997fd76404f07dd312dab12fe96881594ef989f60879d12e4"
+    },
+    "verification/billing-study/reference.json": {
+      "bytes": 1871,
+      "sha256": "240e2f50b94e57cec4e3c5851d084459f3b4d894fdd2c40dc19356ef5b7fb0fa"
+    },
+    "verification/billing-study/replay.json": {
+      "bytes": 2742,
+      "sha256": "b2a291bab0105456e199991b6d6f95e2c308d992c76fe2dd0829a08caf7ae3ca"
+    },
+    "verification/billing-study/sdk-replayed-initial.json": {
+      "bytes": 2397,
+      "sha256": "4d73548eca7a9dfdd9b3a32062033944144d837e45d33c30d2e56616f04d3a10"
+    },
+    "verification/billing-study/sdk-replayed.json": {
+      "bytes": 2401,
+      "sha256": "6f1cbb68c509320d3e16410ba1dbf2db2da43c8646e0083d221fe13c69e800a5"
     },
     "verification/browser-python.json": {
       "bytes": 8508,
@@ -3528,6 +4020,70 @@
       "bytes": 779,
       "sha256": "0d7399de22f051e7d0e0a9f85d4c106bc985226da19eeb017dbf5ae7ebb72969"
     },
+    "verification/token-policy/inputs/billing-agent-protected/bundle.json": {
+      "bytes": 3838,
+      "sha256": "7f758afbde0dc18464c8516ca13dacf9f56989c9781643821cc867e8f193a4b6"
+    },
+    "verification/token-policy/inputs/billing-agent-protected/evidence.json": {
+      "bytes": 2591,
+      "sha256": "d6cb316e8446aaf20306089556622af6ae3582e9d208d0adb7c40702cb0b8153"
+    },
+    "verification/token-policy/inputs/billing-agent-protected/expected.json": {
+      "bytes": 4875,
+      "sha256": "4e03dd48d97aca4c7aa6bd89521b5d46d51725c04482940320cb47aa7507cdcf"
+    },
+    "verification/token-policy/inputs/billing-agent-protected/task.json": {
+      "bytes": 804,
+      "sha256": "fc3e817b1b961f7b4cfe46af24ddc757a153054d030c747f424ed74422a51b98"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/bundle.json": {
+      "bytes": 13597,
+      "sha256": "3539fd6469ef05d6722205ac3811d8bbc3e644cf7033e23475d8873440a4c507"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/evidence.json": {
+      "bytes": 10614,
+      "sha256": "767c1282c28fd129c4af7d5f62141f5267eb027802f55a10dd471445aaa2780d"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/expected.json": {
+      "bytes": 12260,
+      "sha256": "d1a67cf3159412ee1edc73a4b709eb3a186775e5e59cdd6b677efb4271791286"
+    },
+    "verification/token-policy/inputs/billing-agent-repeats/task.json": {
+      "bytes": 1444,
+      "sha256": "0a1a44e7530db5f92b89aae509ac173c22075448ba8edab4f2744de762c498d1"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/bundle.json": {
+      "bytes": 1375,
+      "sha256": "4533d9948bccad9694fe33c240bd6e8b7c6f5b8fc0b60ed331c053c7b64b7d6d"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/evidence.json": {
+      "bytes": 560,
+      "sha256": "0fea3569e262460743b7c6636b303d5af238548afd879b58805b257f167a2e4a"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/expected.json": {
+      "bytes": 2983,
+      "sha256": "3599645962d8e0dc1df6e092425a26a93dcd6615740b895e8d43cb2e98f6450a"
+    },
+    "verification/token-policy/inputs/billing-native-incomplete/task.json": {
+      "bytes": 646,
+      "sha256": "cbe7771db9a313baa2df6c15a88148bc22d9fd16998bdbb156d04bd1b470e260"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/bundle.json": {
+      "bytes": 6282,
+      "sha256": "334b2641229e6662220914d9d94a4aa8da658af1da884687dfb294886ee39e5c"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/evidence.json": {
+      "bytes": 4600,
+      "sha256": "e7f98ca61b6a687cea12f860af1512affd3d026c52dbeae0d86be384d67f68c5"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/expected.json": {
+      "bytes": 6726,
+      "sha256": "aa08de8a5a9863560ea8365bcce5af79c3889d4762fa5011ec4cb1a5a8d42ab2"
+    },
+    "verification/token-policy/inputs/billing-two-debit-witness/task.json": {
+      "bytes": 965,
+      "sha256": "746f7e726de2e9b3279a8c62bd9a54806cc3804ceab76ce15ca97d722f60c600"
+    },
     "verification/token-policy/inputs/binding-empty-id-rejection/evidence.json": {
       "bytes": 3770,
       "sha256": "8d133f7b4ee687d8fd11638f6fcb9a19b5d693ebfb682bc846ce03d4ea456d47"
@@ -4185,8 +4741,8 @@
       "sha256": "d4a4d865e32f6283f235931e0f5217f27150c88f85f39964a62c9d376ee3b32d"
     },
     "web/catalog.json": {
-      "bytes": 88397,
-      "sha256": "ffdb18b21e211ab6ec0a0268ab8bac7c492e6fa26a5f5e619016bb64813d3a90"
+      "bytes": 91305,
+      "sha256": "6ccb0a3461eee964d5ce7b32fc5805f1ff2bd7bd56b7848dcfde7506b74c56a9"
     },
     "web/icon.svg": {
       "bytes": 341,
@@ -4234,7 +4790,7 @@
     },
     "workbench.py": {
       "bytes": 22892,
-      "sha256": "f6f418980718dcceefd8d21dd16b1a523cd6cdab04b17612c7e1b964147191c0"
+      "sha256": "96fb3e25edf2614115febe1123493e0e6d55844b461ff05295bd04d1e65f35c1"
     }
   }
 }

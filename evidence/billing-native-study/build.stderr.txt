@@ -1,0 +1,2 @@
+   Compiling crash-lab-banking-sdk v0.1.0 (/tmp/agent-crash-lab-banking-v015/worker)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.03s

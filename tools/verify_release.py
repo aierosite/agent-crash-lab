@@ -16,7 +16,7 @@ def main():
         files=m['files'];bad=[];runs=[]
         if m['format']!='agent-crash-lab/release-v1' or type(files) is not dict:raise ValueError('Invalid manifest')
         names=json.dumps(sorted(files),separators=(',',':')).encode()
-        if sha256(names).hexdigest()!='94b42a557a26018cda5e655ee5049ed54d5b9850d0ba6fea02f8399cbae43a7f':
+        if sha256(names).hexdigest()!='ac56aa371aa423318094d753a82b86992200ab986164a4bc5021cc3813f26280':
             raise ValueError('Release inventory mismatch')
         for name,expected in files.items():
             path=ROOT/name
@@ -25,7 +25,7 @@ def main():
             raw=path.read_bytes()
             if len(raw)!=expected['bytes'] or sha256(raw).hexdigest()!=expected['sha256']:bad.append({'file':name,'error':'hash-or-size'})
         if sys.argv[1:] and not bad:
-            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',),('test_token_review.py',),('test_token_rpc.py',),('tools/verify_event_study.py',),('test_token_policy.py',),('tools/verify_sdk_study.py',),('tools/verify_agent_loop.py',),('test_capture.py',)):
+            for script, *args in (('test_agent_crash_lab.py',),('test_workbench.py',),('verify_reserved.py',),('tools/verify_live_agent.py','--replay'),('test_scenario_lab.py',),('test_proposal_study.py',),('test_async_evidence.py',),('tools/verify_recovery_study.py',),('test_token_review.py',),('test_token_rpc.py',),('tools/verify_event_study.py',),('test_token_policy.py',),('tools/verify_sdk_study.py',),('tools/verify_agent_loop.py',),('test_capture.py',),('test_billing_study.py',)):
                 r=subprocess.run([sys.executable,'-I','-S',script,*args],cwd=ROOT,capture_output=True,timeout=60)
                 runs.append({'suite':script,'exitCode':r.returncode,'error':r.stderr.decode(errors='replace')[-1200:] if r.returncode else ''})
         ok=not bad and all(r['exitCode']==0 for r in runs)

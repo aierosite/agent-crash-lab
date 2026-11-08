@@ -1,0 +1,15 @@
+{
+  "atUtc": "2026-11-08T11:16:22.501742+00:00",
+  "exitCode": 0,
+  "command": "set -eu\nexport RUSTUP_HOME=/tmp/agent-crash-lab-sdk-v013-tools/rustup\nexport CARGO_HOME=/tmp/agent-crash-lab-sdk-v013-tools/cargo\nexport CARGO_TARGET_DIR=/tmp/agent-crash-lab-sdk-v013-tools/target\nexport CARGO_BUILD_JOBS=2\nexport RUSTUP_TOOLCHAIN=1.95.0\nexport RUSTUP_AUTO_INSTALL=0\nexport PATH=\"$CARGO_HOME/bin:$PATH\"\ncargo build --offline --locked --manifest-path /tmp/agent-crash-lab-banking-v015/worker/Cargo.toml\n",
+  "workerSourceSha256": "2e5595053e26498a0c48070003edcaafe2d1c63679943b17d487e8dc87ee6213",
+  "cargoLockSha256": "3f037b962ca961f0b9a0f57d869ac362ec5fe393f096c3182e0a2c350a436d39",
+  "canonicalSdkRevision": "bacd081a0bd648d840b814dab7677e1f3330afbb",
+  "newHarness": true,
+  "oldHarnessModified": false,
+  "offline": true,
+  "canonicalFilesAfterBuild": 407,
+  "originalHarnessUnchanged": true,
+  "sdkBinarySha256": "b340696521d9eda1fca93eb931bcd9ad24e3da6190b7daea8cd5fbedb86fa729",
+  "sdkBinaryBytes": 67719192
+}

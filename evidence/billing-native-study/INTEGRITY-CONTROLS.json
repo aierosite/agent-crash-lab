@@ -1,0 +1,8 @@
+{
+  "tests": 6,
+  "failures": 0,
+  "errors": 0,
+  "tamperingRejected": 5,
+  "sameAuthor": true,
+  "basis": "Actual raw collected prefix copied to verified owned disposable directories; no model or SDK effects"
+}

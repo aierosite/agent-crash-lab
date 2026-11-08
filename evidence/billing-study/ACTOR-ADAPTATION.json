@@ -1,0 +1,8 @@
+{
+  "atUtc": "2026-11-08T11:29:41.411674+00:00",
+  "baseSource": "banking-agent-study-v015/actor.py",
+  "baseSha256": "0029a6b012aaa1199731e7668615cfbb064a7c8b6877a352cc601dc5f1c04254",
+  "oldCompleteFunctionSha256": "f76e487d7e1999953cec8ddcbf8bbff56cc94bde987e7e09bad4e026cb44a672",
+  "newCompleteFunctionSha256": "2ca33a477499103e8bc9faead36080ced3a9d4f2a176add702af2058e8ed09f2",
+  "change": "Full ChatML prompt, generic JSON grammar, exact raw completion/tokens/stop state; same runtime/model/SDK lifecycle and independent-reference-free actor. No output repair or business-value filling."
+}

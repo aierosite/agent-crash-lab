@@ -1,0 +1,9 @@
+{
+  "phase": "Scripted preflight controls, before any model call or source lock",
+  "originalResult": "8 tests, 7 errors: copied projection lacked inspector/token_policy.py and token_review.py",
+  "sourceFailurePreserved": ["CONTROLS.initial.json", "controls.stderr.initial.txt", "controls.stdout.initial.txt", "controls-artifacts.initial.zip"],
+  "correction": "Copy the exact unchanged published inspector files from the native billing study and include them in the preparation inventory.",
+  "businessLogicOrReferenceChanged": false,
+  "realModelCallsBeforeCorrection": 0,
+  "registrationRestarted": false
+}
