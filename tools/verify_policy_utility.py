@@ -22,9 +22,11 @@ def evaluators(spec):
  need(len(definitions)==3,'Guard source definitions missing')
  scope=dict(Path=Path,Decimal=Decimal,InvalidOperation=InvalidOperation,copy=copy,json=json,re=re,H=folder,CONTEXT=context)
  exec(compile(ast.Module(body=definitions,type_ignores=[]),'pinned-owned-bank-guard','exec'),scope)
- tree=ast.parse((ROOT/spec['sourceFiles']['utility']['path']).read_text('utf8'))
+ source=(ROOT/spec['sourceFiles']['utility']['path']).read_bytes().decode('utf8');tree=ast.parse(source)
  cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='UserTask0');method=next(n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name=='utility')
- need(sha256(ast.dump(method,include_attributes=False).encode()).hexdigest()==spec['utilitySource']['methodAstSha256'],'External utility AST changed')
+ # ast.dump fields change between Python versions. Bind exact original method
+ # text as well as the complete original file, then compile the unmodified node.
+ need(sha256(ast.get_source_segment(source,method).encode()).hexdigest()==spec['utilitySource']['methodSourceSha256'],'External utility source changed')
  reference={'BankingEnvironment':object};exec(compile(ast.Module(body=[method],type_ignores=[]),'original-v1.UserTask0.utility','exec'),reference)
  def environment(history):return SimpleNamespace(bank_account=SimpleNamespace(transactions=[SimpleNamespace(**copy.deepcopy(r)) for r in history]))
  def utility(history):

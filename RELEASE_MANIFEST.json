@@ -1,7 +1,7 @@
 {
   "format": "agent-crash-lab/release-v1",
   "version": "0.20.0",
-  "atUtc": "2026-11-08T22:56:47.586369+00:00",
+  "atUtc": "2026-11-08T23:02:27.887602+00:00",
   "files": {
     ".gitattributes": {
       "bytes": 86,
@@ -48,8 +48,8 @@
       "sha256": "d711de520245f4b44e42a9da30df0ab5759a1353daed6626eca42c64b00dbdc8"
     },
     "README.md": {
-      "bytes": 17522,
-      "sha256": "bde8fac1b323a6552e06a89323d849f00565d86e5bead9c417006f89332a7454"
+      "bytes": 17558,
+      "sha256": "00255e3c9e9624d606238bacb977d12afce736e4d5acb9efef68ee8b6d81f0c2"
     },
     "SOURCES.json": {
       "bytes": 4682,
@@ -3284,8 +3284,8 @@
       "sha256": "65805294b0099a80d98c62becbdc3ea067d815884b21209f7c9edd9913216c12"
     },
     "test_policy_utility.py": {
-      "bytes": 1697,
-      "sha256": "89d2a13fdee6f43d91123e4722b7d8b2ce62dd3bcde70500c146fde8f9e22d8c"
+      "bytes": 1955,
+      "sha256": "8a8d53b0887864d164b15e7917b137c9166d52e547c61a6608f1be9865e2c6d3"
     },
     "test_proposal_study.py": {
       "bytes": 5458,
@@ -3464,8 +3464,8 @@
       "sha256": "0d729dbe0f9dd0edccd3e9f1519a9dbe3d8162590d141e59226c4f6783c16bc1"
     },
     "tools/verify_policy_utility.py": {
-      "bytes": 8101,
-      "sha256": "ea76aa7e794e6866915250c944fbe2858e5b247d2b6de26c7d993a3c02f259f2"
+      "bytes": 8286,
+      "sha256": "7683eece3dfdab62d7ea3e976cc9e323c7717c7dd7ae5857ac928de9f537234f"
     },
     "tools/verify_proposal_study.py": {
       "bytes": 7219,
@@ -4244,8 +4244,8 @@
       "sha256": "08179a7650b5fef8e9296b8e21bad7de2848d52bcb55f43cf21d4d67fcc0d88c"
     },
     "verification/policy-utility-study/registration.json": {
-      "bytes": 3358,
-      "sha256": "7db0b5ef2e1f27d8b800731b9de72aff4825fe19207e321d1eeb1759472579a7"
+      "bytes": 3790,
+      "sha256": "65c820391cd4ae7f73052dc07ab969faae33c73dea294392f880c198d4079173"
     },
     "verification/policy-utility-study/reproduction.json": {
       "bytes": 523,

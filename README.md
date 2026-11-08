@@ -188,7 +188,7 @@ inspect the exact trust/size boundaries](docs/PASSIVE_CAPTURE.md).
 
 ## Run locally and in CI
 
-Download the [v0.19.1 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.19.1),
+Download the [v0.20.0 ZIP](https://github.com/aierosite/agent-crash-lab/releases/tag/v0.20.0),
 extract it and use Python 3.12 or newer. Desktop assessment is standard-library-only.
 
 ```sh
@@ -196,6 +196,7 @@ python -I -S launch.py
 python -I -S tools/verify_release.py --judge
 node test_report_contract.js
 node test_token_contract.js
+node test_token_ledger_contract.js
 node test_source_contract.js
 node test_event_contract.js
 node test_policy_contract.js

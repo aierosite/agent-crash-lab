@@ -31,7 +31,9 @@
     "version": "v1.2.2 resolves v1.UserTask0.utility",
     "methodAstSha256": "b33bcdce1486a539f4f96042ed28f7ee4e6b3e7e15752b55b08ee5fa2a3254af",
     "executedUnmodifiedAst": true,
-    "scope": "Externally authored matching-transaction predicate. It accepts an extra fee if the bill is also present; it is not a general safety gold. Mapping, cases and simulation adapter are ours."
+    "scope": "Externally authored matching-transaction predicate. It accepts an extra fee if the bill is also present; it is not a general safety gold. Mapping, cases and simulation adapter are ours.",
+    "methodSourceSha256": "0090a2ef1676fbf742a1a8bb5ddfafa8e505df3e63e018273c0328df9deee910",
+    "originalMethodAstPython": "3.14.7; descriptive original AST fingerprint, not a cross-version pin"
   },
   "cases": 12,
   "commonCases": 9,
@@ -50,5 +52,6 @@
   "effects": "Bank.dispatch executes unchanged source using an explicitly fake in-memory SDK recorder. Workcell.evaluateProposal executes unchanged pure source in its pinned Node/isolated network namespace, with a simulated admission ledger. These are not real model actions, SDK calls, receipts, wallet operations, contract executions or chain transactions.",
   "independentBlindOrRanking": false,
   "rawPrivateWorkcellResultSha256": "682888636e67765c2043c0f056eeef661d0d6bcb57eadae4b216268ffc793bd4",
-  "rawPrivateBankResultSha256": "a11d5ccb5fcb362eccf7bdb1c503bcbd5461493a46078952785e7c97c8fe1ad5"
+  "rawPrivateBankResultSha256": "a11d5ccb5fcb362eccf7bdb1c503bcbd5461493a46078952785e7c97c8fe1ad5",
+  "portabilityCorrection": "Exact original file and method UTF-8 source bytes are bound before compiling the unmodified AST. Python AST schema varies across versions. Cases, source files, observations and criteria are unchanged."
 }

@@ -20,4 +20,7 @@ class PolicyUtility(unittest.TestCase):
    with self.subTest(control=mutate.__name__):
     changed=copy.deepcopy(observed);mutate(changed)
     with self.assertRaises(ValueError):api['check_observations'](cases,changed,spec)
+ def test_exact_method_source_pin_rejects_forgery(self):
+  spec=copy.deepcopy(load(D/'registration.json'));spec['utilitySource']['methodSourceSha256']='0'*64
+  with self.assertRaisesRegex(ValueError,'External utility source changed'):api['evaluators'](spec)
 if __name__=='__main__':unittest.main()
